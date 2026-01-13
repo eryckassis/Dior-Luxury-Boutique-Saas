@@ -104,7 +104,8 @@ export class ModaNavigation extends HTMLElement {
     const accessibilityToggle = this.querySelector(".moda-menu-checkbox");
     if (accessibilityToggle) {
       // Restaura estado salvo
-      const highContrast = localStorage.getItem("dior-high-contrast") === "true";
+      const highContrast =
+        localStorage.getItem("dior-high-contrast") === "true";
       accessibilityToggle.checked = highContrast;
       if (highContrast) {
         document.body.classList.add("high-contrast");
