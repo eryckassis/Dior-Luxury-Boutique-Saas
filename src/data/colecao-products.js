@@ -372,6 +372,207 @@ export const colecaoProducts = [
     care: "Lavar à mão ou lavagem a seco",
     isHighlight: true,
   },
+  // ============================================================================
+  // NOVOS PRODUTOS
+  // ============================================================================
+  {
+    id: "colecao-saia-1",
+    name: "Saia Midi Plissada Dior Oblique",
+    price: "R$ 19.500,00",
+    description: "Seda técnica com estampa Dior Oblique",
+    fullDescription:
+      "A saia midi plissada Dior Oblique é uma peça statement que combina tradição e modernidade. Confeccionada em seda técnica com a icônica estampa Dior Oblique, apresenta plissado delicado e cintura alta. Perfeita para looks sofisticados do dia à noite.",
+    reference: "151S22A8901_X0100",
+    category: "saia",
+    images: [
+      "/images/vestido1.avif",
+      "/images/vestido2.webp",
+      "/images/vestido3.webp",
+    ],
+    colors: [
+      { name: "navy", label: "Azul Marinho", image: "/images/logoPreto.webp" },
+      { name: "beige", label: "Bege", image: "/images/logo.webp" },
+    ],
+    sizes: ["34", "36", "38", "40", "42"],
+    material: "100% Seda técnica",
+    care: "Lavagem a seco",
+  },
+  {
+    id: "colecao-calca-1",
+    name: "Calça de Alfaiataria Dior",
+    price: "R$ 15.800,00",
+    description: "Lã fria italiana com corte reto",
+    fullDescription:
+      "Esta calça de alfaiataria Dior apresenta um corte impecável em lã fria italiana. Com cintura alta, pernas retas e vincos frontais precisos, é uma peça essencial para o guarda-roupa moderno. O acabamento interno em seda garante conforto durante todo o dia.",
+    reference: "143P45A6789_C300",
+    category: "calca",
+    images: [
+      "/images/calca1.avif",
+      "/images/calca2.webp",
+      "/images/calca3.webp",
+    ],
+    colors: [
+      { name: "black", label: "Preto", image: "/images/logoPreto.webp" },
+      { name: "gray", label: "Cinza", image: "/images/logo.webp" },
+    ],
+    sizes: ["34", "36", "38", "40", "42", "44"],
+    material: "98% Lã, 2% Elastano",
+    care: "Lavagem a seco",
+  },
+  {
+    id: "colecao-camisa-1",
+    name: "Camisa de Seda CD Icon",
+    price: "R$ 12.200,00",
+    description: "Seda pura com bordado CD",
+    fullDescription:
+      "A camisa de seda CD Icon é uma peça atemporal com detalhes refinados. Confeccionada em seda pura francesa, apresenta o bordado CD discreto no bolso frontal. O corte oversized e os punhos abotoados conferem elegância descontraída.",
+    reference: "213C78B4567_X0500",
+    category: "camisa",
+    images: [
+      "/images/camisa1.avif",
+      "/images/camisa2.webp",
+      "/images/camisa3.webp",
+    ],
+    colors: [
+      { name: "white", label: "Branco", image: "/images/logo.webp" },
+      { name: "black", label: "Preto", image: "/images/logoPreto.webp" },
+      { name: "pink", label: "Rosa", image: "/images/logo.webp" },
+    ],
+    sizes: ["34", "36", "38", "40", "42"],
+    material: "100% Seda",
+    care: "Lavagem a seco ou à mão com água fria",
+  },
+  {
+    id: "colecao-bolsa-2",
+    name: "Bolsa Lady Dior Mini",
+    price: "R$ 32.000,00",
+    description: "Couro cannage com acabamento em ouro",
+    fullDescription:
+      "A icônica bolsa Lady Dior Mini é um símbolo de elegância atemporal. O padrão cannage é meticulosamente trabalhado em couro de cordeiro, complementado por ferragens em metal dourado e os charms D.I.O.R. que adornam a alça. Uma peça de colecionador.",
+    reference: "M0505ONMJ_M323",
+    category: "bolsa",
+    images: [
+      "/images/bolsa1.avif",
+      "/images/bolsa22.webp",
+      "/images/bolsa3.webp",
+    ],
+    colors: [
+      { name: "black", label: "Preto", image: "/images/logoPreto.webp" },
+      { name: "red", label: "Vermelho", image: "/images/logo.webp" },
+      { name: "pink", label: "Rosa", image: "/images/logo.webp" },
+    ],
+    moreColors: 5,
+    sizes: ["Único"],
+    material: "Couro de cordeiro",
+    care: "Armazenar em saco de proteção, evitar luz solar direta",
+  },
+  {
+    id: "colecao-sapato-2",
+    name: "Tênis Dior-ID",
+    price: "R$ 7.900,00",
+    description: "Couro branco com detalhes Oblique",
+    fullDescription:
+      "O tênis Dior-ID combina esportividade e luxo em um design contemporâneo. Confeccionado em couro de bezerro branco com detalhes em jacquard Dior Oblique, apresenta sola ergonômica e palmilha acolchoada. O logo CD é discretamente posicionado na lateral.",
+    reference: "3SN272ZJJ_H065",
+    category: "sapato",
+    images: [
+      "/images/blusinha1.avif",
+      "/images/blusinha2.webp",
+      "/images/blusinha3.webp",
+    ],
+    colors: [
+      { name: "white", label: "Branco", image: "/images/logo.webp" },
+      { name: "black", label: "Preto", image: "/images/logoPreto.webp" },
+    ],
+    sizes: ["35", "36", "37", "38", "39", "40", "41", "42"],
+    material: "Couro de bezerro e jacquard técnico",
+    care: "Limpar com pano úmido",
+  },
+  {
+    id: "colecao-joia-2",
+    name: "Brincos Tribales Dior",
+    price: "R$ 5.800,00",
+    description: "Metal dourado com pérolas de resina",
+    fullDescription:
+      "Os brincos Tribales Dior são um ícone da joalheria fantasia da Maison. Com design assimétrico, combinam uma pérola de resina frontal com uma esfera CD na parte posterior. O acabamento em metal dourado confere sofisticação a qualquer look.",
+    reference: "E1045TRICY_D301",
+    category: "joias",
+    images: [
+      "/images/trevo1.avif",
+      "/images/trevo2.webp",
+      "/images/trevo3.webp",
+    ],
+    colors: [
+      { name: "gold", label: "Dourado", image: "/images/joias.avif" },
+      { name: "silver", label: "Prateado", image: "/images/relogio.avif" },
+    ],
+    sizes: ["Único"],
+    material: "Metal banhado a ouro e resina",
+    care: "Evitar contato com perfumes e água",
+  },
+  {
+    id: "colecao-vestido-2",
+    name: "Vestido Midi em Renda Dior",
+    price: "R$ 52.000,00",
+    description: "Renda francesa com forro de seda",
+    fullDescription:
+      "Este vestido midi em renda é uma obra de arte da costura Dior. A renda francesa é delicadamente aplicada sobre um forro de seda pura, criando uma silhueta etérea. Com mangas três-quartos e decote em V, é perfeito para eventos especiais.",
+    reference: "151R88A9012_X0800",
+    category: "vestido",
+    images: [
+      "/images/vestido1.avif",
+      "/images/vestido2.webp",
+      "/images/vestido3.webp",
+    ],
+    colors: [
+      { name: "black", label: "Preto", image: "/images/logoPreto.webp" },
+      { name: "nude", label: "Nude", image: "/images/logo.webp" },
+    ],
+    sizes: ["34", "36", "38", "40", "42"],
+    material: "Renda: 65% Algodão, 35% Poliamida / Forro: 100% Seda",
+    care: "Lavagem a seco exclusivamente",
+  },
+  {
+    id: "colecao-oculos-2",
+    name: "Óculos DiorSoStellaire",
+    price: "R$ 4.200,00",
+    description: "Armação metálica com lentes espelhadas",
+    fullDescription:
+      "Os óculos DiorSoStellaire apresentam um design futurista com armação ultraleve em metal. As lentes espelhadas em degradê oferecem proteção UV total enquanto conferem um visual contemporâneo. As hastes finas exibem o logotipo Dior gravado.",
+    reference: "DIORSOSTELLAIRE_O1I",
+    category: "oculos",
+    images: [
+      "/images/camisa1.avif",
+      "/images/camisa2.webp",
+      "/images/camisa3.webp",
+    ],
+    colors: [
+      { name: "gold", label: "Dourado", image: "/images/logo.webp" },
+      { name: "silver", label: "Prateado", image: "/images/logoPreto.webp" },
+      { name: "rosegold", label: "Rosé", image: "/images/logo.webp" },
+    ],
+    sizes: ["Único"],
+    material: "Metal e lentes de policarbonato",
+    care: "Guardar em estojo, limpar com pano de microfibra",
+  },
+  {
+    id: "colecao-highlight-2",
+    name: "Bolsas",
+    price: "A partir de R$ 15.000,00",
+    description:
+      "Descubra a coleção de bolsas icônicas da Maison Dior. Do clássico Lady Dior ao moderno Saddle, cada peça é um testemunho da excelência artesanal.",
+    fullDescription:
+      "A coleção de bolsas Dior representa o auge do savoir-faire da Maison. Cada modelo é criado por artesãos especializados usando os melhores couros e materiais. Das silhuetas atemporais às criações contemporâneas, encontre a bolsa perfeita para completar seu estilo.",
+    reference: "HIGHLIGHT_BOL_002",
+    category: "bolsa",
+    images: ["/images/bolsa.avif"],
+    colors: [],
+    sizes: ["Único"],
+    material: "Diversos couros premium",
+    care: "Consulte as instruções específicas de cada modelo",
+    isHighlight: true,
+  },
+  
 ];
 
 /**
