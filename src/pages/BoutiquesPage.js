@@ -21,10 +21,10 @@ const DIOR_BOUTIQUES = [
     phone: "+55 11 3081-8686",
     hours: {
       open: "10:00",
-      close: "22:00"
+      close: "22:00",
     },
     categories: ["Moda feminina", "Moda masculina", "Joalheria"],
-    services: ["Boutique Dior"]
+    services: ["Boutique Dior"],
   },
   {
     id: 2,
@@ -38,11 +38,11 @@ const DIOR_BOUTIQUES = [
     phone: "+55 11 3552-7000",
     hours: {
       open: "10:00",
-      close: "22:00"
+      close: "22:00",
     },
     categories: ["Moda feminina", "Moda masculina", "Joalheria"],
-    services: ["Boutique Dior"]
-  }
+    services: ["Boutique Dior"],
+  },
 ];
 
 // Tipos de filtros
@@ -51,7 +51,7 @@ const FILTER_TYPES = [
   { id: "restaurante", name: "Restaurante e Café Dior", icon: "CD" },
   { id: "galeria", name: "Galeria Dior", icon: "⊕" },
   { id: "spa", name: "Spa Dior", icon: "◎" },
-  { id: "varejista", name: "Varejista Dior", icon: "◯" }
+  { id: "varejista", name: "Varejista Dior", icon: "◯" },
 ];
 
 export class BoutiquesPage extends HTMLElement {
@@ -110,18 +110,24 @@ export class BoutiquesPage extends HTMLElement {
               </button>
               <span class="boutiques-filter-divider">|</span>
               <div class="boutiques-filter-tags">
-                ${FILTER_TYPES.map(filter => `
-                  <button class="boutiques-filter-tag ${filter.id === 'boutique' ? 'active' : ''}" data-filter="${filter.id}">
+                ${FILTER_TYPES.map(
+                  (filter) => `
+                  <button class="boutiques-filter-tag ${
+                    filter.id === "boutique" ? "active" : ""
+                  }" data-filter="${filter.id}">
                     <span class="filter-icon">${filter.icon}</span>
                     <span>${filter.name}</span>
                   </button>
-                `).join('')}
+                `
+                ).join("")}
               </div>
             </div>
             
             <!-- Contador de Endereços -->
             <div class="boutiques-count">
-              <span id="boutiques-count-number">${DIOR_BOUTIQUES.length}</span> ENDEREÇOS PRÓXIMOS
+              <span id="boutiques-count-number">${
+                DIOR_BOUTIQUES.length
+              }</span> ENDEREÇOS PRÓXIMOS
             </div>
             
             <!-- Lista de Boutiques -->
@@ -156,7 +162,9 @@ export class BoutiquesPage extends HTMLElement {
       `;
     }
 
-    return boutiques.map(boutique => `
+    return boutiques
+      .map(
+        (boutique) => `
       <article class="boutique-card" data-boutique-id="${boutique.id}">
         <div class="boutique-card-header">
           <div class="boutique-info">
@@ -165,7 +173,9 @@ export class BoutiquesPage extends HTMLElement {
           </div>
           <div class="boutique-status">
             <span class="status-dot"></span>
-            <span class="status-text">Aberto agora - Fecha às ${boutique.hours.close}</span>
+            <span class="status-text">Aberto agora - Fecha às ${
+              boutique.hours.close
+            }</span>
           </div>
         </div>
         
@@ -174,14 +184,28 @@ export class BoutiquesPage extends HTMLElement {
         </div>
         
         <div class="boutique-categories">
-          ${boutique.categories.map((cat, index) => `
+          ${boutique.categories
+            .map(
+              (cat, index) => `
             <span class="boutique-category">${cat}</span>
-            ${index < boutique.categories.length - 1 ? '<span class="category-separator">·</span>' : ''}
-          `).join('')}
-          ${boutique.categories.length > 3 ? `<a href="#" class="boutique-more-link">Mais 1</a>` : ''}
+            ${
+              index < boutique.categories.length - 1
+                ? '<span class="category-separator">·</span>'
+                : ""
+            }
+          `
+            )
+            .join("")}
+          ${
+            boutique.categories.length > 3
+              ? `<a href="#" class="boutique-more-link">Mais 1</a>`
+              : ""
+          }
         </div>
       </article>
-    `).join('');
+    `
+      )
+      .join("");
   }
 
   async loadGoogleMaps() {
@@ -192,7 +216,7 @@ export class BoutiquesPage extends HTMLElement {
     }
 
     // Cria o script do Google Maps
-    const script = document.createElement('script');
+    const script = document.createElement("script");
     script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyBVJWaOUZWfNI1T5BqxQqCTz4e4rJLVeJY&callback=initBoutiquesMap`;
     script.async = true;
     script.defer = true;
@@ -206,11 +230,11 @@ export class BoutiquesPage extends HTMLElement {
   }
 
   initMap() {
-    const mapContainer = document.getElementById('boutiques-map');
+    const mapContainer = document.getElementById("boutiques-map");
     if (!mapContainer) return;
 
     // Remove loading
-    const loading = mapContainer.querySelector('.map-loading');
+    const loading = mapContainer.querySelector(".map-loading");
     if (loading) loading.remove();
 
     // Centro em São Paulo
@@ -226,8 +250,8 @@ export class BoutiquesPage extends HTMLElement {
       fullscreenControl: true,
       zoomControl: true,
       zoomControlOptions: {
-        position: google.maps.ControlPosition.RIGHT_TOP
-      }
+        position: google.maps.ControlPosition.RIGHT_TOP,
+      },
     });
 
     // Adiciona marcadores
@@ -240,107 +264,107 @@ export class BoutiquesPage extends HTMLElement {
       {
         featureType: "all",
         elementType: "geometry",
-        stylers: [{ color: "#f5f5f5" }]
+        stylers: [{ color: "#f5f5f5" }],
       },
       {
         featureType: "all",
         elementType: "labels.text.fill",
-        stylers: [{ color: "#616161" }]
+        stylers: [{ color: "#616161" }],
       },
       {
         featureType: "all",
         elementType: "labels.text.stroke",
-        stylers: [{ color: "#f5f5f5" }]
+        stylers: [{ color: "#f5f5f5" }],
       },
       {
         featureType: "administrative.land_parcel",
         elementType: "labels.text.fill",
-        stylers: [{ color: "#bdbdbd" }]
+        stylers: [{ color: "#bdbdbd" }],
       },
       {
         featureType: "poi",
         elementType: "geometry",
-        stylers: [{ color: "#eeeeee" }]
+        stylers: [{ color: "#eeeeee" }],
       },
       {
         featureType: "poi",
         elementType: "labels.text.fill",
-        stylers: [{ color: "#757575" }]
+        stylers: [{ color: "#757575" }],
       },
       {
         featureType: "poi.park",
         elementType: "geometry",
-        stylers: [{ color: "#e5e5e5" }]
+        stylers: [{ color: "#e5e5e5" }],
       },
       {
         featureType: "poi.park",
         elementType: "labels.text.fill",
-        stylers: [{ color: "#9e9e9e" }]
+        stylers: [{ color: "#9e9e9e" }],
       },
       {
         featureType: "road",
         elementType: "geometry",
-        stylers: [{ color: "#ffffff" }]
+        stylers: [{ color: "#ffffff" }],
       },
       {
         featureType: "road.arterial",
         elementType: "labels.text.fill",
-        stylers: [{ color: "#757575" }]
+        stylers: [{ color: "#757575" }],
       },
       {
         featureType: "road.highway",
         elementType: "geometry",
-        stylers: [{ color: "#dadada" }]
+        stylers: [{ color: "#dadada" }],
       },
       {
         featureType: "road.highway",
         elementType: "labels.text.fill",
-        stylers: [{ color: "#616161" }]
+        stylers: [{ color: "#616161" }],
       },
       {
         featureType: "road.local",
         elementType: "labels.text.fill",
-        stylers: [{ color: "#9e9e9e" }]
+        stylers: [{ color: "#9e9e9e" }],
       },
       {
         featureType: "transit.line",
         elementType: "geometry",
-        stylers: [{ color: "#e5e5e5" }]
+        stylers: [{ color: "#e5e5e5" }],
       },
       {
         featureType: "transit.station",
         elementType: "geometry",
-        stylers: [{ color: "#eeeeee" }]
+        stylers: [{ color: "#eeeeee" }],
       },
       {
         featureType: "water",
         elementType: "geometry",
-        stylers: [{ color: "#c9c9c9" }]
+        stylers: [{ color: "#c9c9c9" }],
       },
       {
         featureType: "water",
         elementType: "labels.text.fill",
-        stylers: [{ color: "#9e9e9e" }]
-      }
+        stylers: [{ color: "#9e9e9e" }],
+      },
     ];
   }
 
   addMarkers() {
     // Remove marcadores existentes
-    this.markers.forEach(marker => marker.setMap(null));
+    this.markers.forEach((marker) => marker.setMap(null));
     this.markers = [];
 
     // Cria marcador customizado Dior
     const markerIcon = {
       path: google.maps.SymbolPath.CIRCLE,
-      fillColor: '#1a1a1a',
+      fillColor: "#1a1a1a",
       fillOpacity: 1,
-      strokeColor: '#ffffff',
+      strokeColor: "#ffffff",
       strokeWeight: 2,
-      scale: 12
+      scale: 12,
     };
 
-    DIOR_BOUTIQUES.forEach(boutique => {
+    DIOR_BOUTIQUES.forEach((boutique) => {
       // Cria marcador com label "CD"
       const marker = new google.maps.Marker({
         position: { lat: boutique.lat, lng: boutique.lng },
@@ -348,12 +372,12 @@ export class BoutiquesPage extends HTMLElement {
         title: boutique.name,
         icon: markerIcon,
         label: {
-          text: 'CD',
-          color: '#ffffff',
-          fontSize: '9px',
-          fontWeight: 'bold',
-          fontFamily: 'Hellix, sans-serif'
-        }
+          text: "CD",
+          color: "#ffffff",
+          fontSize: "9px",
+          fontWeight: "bold",
+          fontFamily: "Hellix, sans-serif",
+        },
       });
 
       // InfoWindow ao clicar
@@ -364,10 +388,10 @@ export class BoutiquesPage extends HTMLElement {
             <p style="margin: 0; color: #666; font-size: 12px;">${boutique.address}</p>
             <p style="margin: 5px 0 0; color: #666; font-size: 12px;">${boutique.city} ${boutique.cep}</p>
           </div>
-        `
+        `,
       });
 
-      marker.addListener('click', () => {
+      marker.addListener("click", () => {
         infoWindow.open(this.map, marker);
       });
 
@@ -377,48 +401,48 @@ export class BoutiquesPage extends HTMLElement {
     // Ajusta o zoom para mostrar todos os marcadores
     if (this.markers.length > 1) {
       const bounds = new google.maps.LatLngBounds();
-      this.markers.forEach(marker => bounds.extend(marker.getPosition()));
+      this.markers.forEach((marker) => bounds.extend(marker.getPosition()));
       this.map.fitBounds(bounds, { padding: 50 });
     }
   }
 
   initEventListeners() {
     // Busca
-    const searchInput = document.getElementById('boutiques-search');
+    const searchInput = document.getElementById("boutiques-search");
     if (searchInput) {
-      searchInput.addEventListener('input', (e) => {
+      searchInput.addEventListener("input", (e) => {
         this.searchQuery = e.target.value.toLowerCase();
         this.filterBoutiques();
       });
     }
 
     // Filtros
-    const filterTags = this.querySelectorAll('.boutiques-filter-tag');
-    filterTags.forEach(tag => {
-      tag.addEventListener('click', () => {
-        tag.classList.toggle('active');
+    const filterTags = this.querySelectorAll(".boutiques-filter-tag");
+    filterTags.forEach((tag) => {
+      tag.addEventListener("click", () => {
+        tag.classList.toggle("active");
         const filterId = tag.dataset.filter;
-        
+
         if (this.activeFilters.includes(filterId)) {
-          this.activeFilters = this.activeFilters.filter(f => f !== filterId);
+          this.activeFilters = this.activeFilters.filter((f) => f !== filterId);
         } else {
           this.activeFilters.push(filterId);
         }
-        
+
         this.filterBoutiques();
       });
     });
 
     // Botão de localização
-    const locationBtn = this.querySelector('.boutiques-location-btn');
+    const locationBtn = this.querySelector(".boutiques-location-btn");
     if (locationBtn) {
-      locationBtn.addEventListener('click', () => this.getUserLocation());
+      locationBtn.addEventListener("click", () => this.getUserLocation());
     }
 
     // Clique nos cards das boutiques
-    const boutiqueCards = this.querySelectorAll('.boutique-card');
-    boutiqueCards.forEach(card => {
-      card.addEventListener('click', () => {
+    const boutiqueCards = this.querySelectorAll(".boutique-card");
+    boutiqueCards.forEach((card) => {
+      card.addEventListener("click", () => {
         const boutiqueId = parseInt(card.dataset.boutiqueId);
         this.focusBoutique(boutiqueId);
       });
@@ -430,38 +454,39 @@ export class BoutiquesPage extends HTMLElement {
 
     // Filtra por busca
     if (this.searchQuery) {
-      filtered = filtered.filter(b => 
-        b.name.toLowerCase().includes(this.searchQuery) ||
-        b.address.toLowerCase().includes(this.searchQuery) ||
-        b.city.toLowerCase().includes(this.searchQuery) ||
-        b.cep.includes(this.searchQuery)
+      filtered = filtered.filter(
+        (b) =>
+          b.name.toLowerCase().includes(this.searchQuery) ||
+          b.address.toLowerCase().includes(this.searchQuery) ||
+          b.city.toLowerCase().includes(this.searchQuery) ||
+          b.cep.includes(this.searchQuery)
       );
     }
 
     // Atualiza a lista
-    const listContainer = document.getElementById('boutiques-list');
-    const countElement = document.getElementById('boutiques-count-number');
-    
+    const listContainer = document.getElementById("boutiques-list");
+    const countElement = document.getElementById("boutiques-count-number");
+
     if (listContainer) {
       listContainer.innerHTML = this.renderBoutiquesList(filtered);
-      
+
       // Re-adiciona event listeners nos novos cards
-      const newCards = listContainer.querySelectorAll('.boutique-card');
-      newCards.forEach(card => {
-        card.addEventListener('click', () => {
+      const newCards = listContainer.querySelectorAll(".boutique-card");
+      newCards.forEach((card) => {
+        card.addEventListener("click", () => {
           const boutiqueId = parseInt(card.dataset.boutiqueId);
           this.focusBoutique(boutiqueId);
         });
       });
     }
-    
+
     if (countElement) {
       countElement.textContent = filtered.length;
     }
   }
 
   focusBoutique(boutiqueId) {
-    const boutique = DIOR_BOUTIQUES.find(b => b.id === boutiqueId);
+    const boutique = DIOR_BOUTIQUES.find((b) => b.id === boutiqueId);
     if (!boutique || !this.map) return;
 
     // Centraliza o mapa na boutique
@@ -469,24 +494,24 @@ export class BoutiquesPage extends HTMLElement {
     this.map.setZoom(16);
 
     // Encontra e abre o InfoWindow do marcador correspondente
-    const markerIndex = DIOR_BOUTIQUES.findIndex(b => b.id === boutiqueId);
+    const markerIndex = DIOR_BOUTIQUES.findIndex((b) => b.id === boutiqueId);
     if (markerIndex >= 0 && this.markers[markerIndex]) {
-      google.maps.event.trigger(this.markers[markerIndex], 'click');
+      google.maps.event.trigger(this.markers[markerIndex], "click");
     }
 
     // Destaca o card
-    const cards = this.querySelectorAll('.boutique-card');
-    cards.forEach(card => card.classList.remove('active'));
-    
+    const cards = this.querySelectorAll(".boutique-card");
+    cards.forEach((card) => card.classList.remove("active"));
+
     const activeCard = this.querySelector(`[data-boutique-id="${boutiqueId}"]`);
     if (activeCard) {
-      activeCard.classList.add('active');
+      activeCard.classList.add("active");
     }
   }
 
   getUserLocation() {
     if (!navigator.geolocation) {
-      alert('Geolocalização não é suportada pelo seu navegador.');
+      alert("Geolocalização não é suportada pelo seu navegador.");
       return;
     }
 
@@ -494,7 +519,7 @@ export class BoutiquesPage extends HTMLElement {
       (position) => {
         const userLocation = {
           lat: position.coords.latitude,
-          lng: position.coords.longitude
+          lng: position.coords.longitude,
         };
 
         if (this.map) {
@@ -505,28 +530,28 @@ export class BoutiquesPage extends HTMLElement {
           new google.maps.Marker({
             position: userLocation,
             map: this.map,
-            title: 'Sua localização',
+            title: "Sua localização",
             icon: {
               path: google.maps.SymbolPath.CIRCLE,
-              fillColor: '#4285f4',
+              fillColor: "#4285f4",
               fillOpacity: 1,
-              strokeColor: '#ffffff',
+              strokeColor: "#ffffff",
               strokeWeight: 2,
-              scale: 8
-            }
+              scale: 8,
+            },
           });
         }
       },
       (error) => {
-        console.error('Erro ao obter localização:', error);
-        alert('Não foi possível obter sua localização.');
+        console.error("Erro ao obter localização:", error);
+        alert("Não foi possível obter sua localização.");
       }
     );
   }
 
   disconnectedCallback() {
     // Cleanup
-    this.markers.forEach(marker => marker.setMap(null));
+    this.markers.forEach((marker) => marker.setMap(null));
     this.markers = [];
   }
 }
