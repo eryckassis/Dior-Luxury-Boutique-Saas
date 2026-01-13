@@ -106,9 +106,13 @@ export class FilterSidebar extends HTMLElement {
     const filters = filterService.getActiveFilters();
 
     // Atualiza indicador de ordenação
-    const sortIndicator = this.querySelector('[data-panel="sort"] .filter-option-value');
+    const sortIndicator = this.querySelector(
+      '[data-panel="sort"] .filter-option-value'
+    );
     if (sortIndicator) {
-      const sortOption = FILTER_CONFIG.sortOptions.find(s => s.id === filters.sort);
+      const sortOption = FILTER_CONFIG.sortOptions.find(
+        (s) => s.id === filters.sort
+      );
       sortIndicator.textContent = sortOption ? sortOption.label : "Recomendado";
     }
 
@@ -124,7 +128,9 @@ export class FilterSidebar extends HTMLElement {
    * Atualiza contador de um tipo de filtro
    */
   updateFilterCount(type, count) {
-    const indicator = this.querySelector(`[data-panel="${type}"] .filter-count`);
+    const indicator = this.querySelector(
+      `[data-panel="${type}"] .filter-count`
+    );
     if (indicator) {
       indicator.textContent = count > 0 ? `(${count})` : "";
       indicator.style.display = count > 0 ? "inline" : "none";
@@ -213,14 +219,18 @@ export class FilterSidebar extends HTMLElement {
    */
   renderMainPanel() {
     const filters = filterService.getActiveFilters();
-    const sortOption = FILTER_CONFIG.sortOptions.find(s => s.id === filters.sort);
+    const sortOption = FILTER_CONFIG.sortOptions.find(
+      (s) => s.id === filters.sort
+    );
 
     return `
       <div class="filter-options-list">
         <div class="filter-option" data-panel="sort">
           <span class="filter-option-label">Ordenar por</span>
           <div class="filter-option-right">
-            <span class="filter-option-value">${sortOption ? sortOption.label : "Recomendado"}</span>
+            <span class="filter-option-value">${
+              sortOption ? sortOption.label : "Recomendado"
+            }</span>
             <svg class="filter-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none">
               <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
@@ -228,35 +238,45 @@ export class FilterSidebar extends HTMLElement {
         </div>
 
         <div class="filter-option" data-panel="category">
-          <span class="filter-option-label">Categoria <span class="filter-count" style="display:${filters.categories.length > 0 ? 'inline' : 'none'}">(${filters.categories.length})</span></span>
+          <span class="filter-option-label">Categoria <span class="filter-count" style="display:${
+            filters.categories.length > 0 ? "inline" : "none"
+          }">(${filters.categories.length})</span></span>
           <svg class="filter-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none">
             <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
 
         <div class="filter-option" data-panel="line">
-          <span class="filter-option-label">Linha <span class="filter-count" style="display:${filters.lines.length > 0 ? 'inline' : 'none'}">(${filters.lines.length})</span></span>
+          <span class="filter-option-label">Linha <span class="filter-count" style="display:${
+            filters.lines.length > 0 ? "inline" : "none"
+          }">(${filters.lines.length})</span></span>
           <svg class="filter-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none">
             <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
 
         <div class="filter-option" data-panel="color">
-          <span class="filter-option-label">Cor <span class="filter-count" style="display:${filters.colors.length > 0 ? 'inline' : 'none'}">(${filters.colors.length})</span></span>
+          <span class="filter-option-label">Cor <span class="filter-count" style="display:${
+            filters.colors.length > 0 ? "inline" : "none"
+          }">(${filters.colors.length})</span></span>
           <svg class="filter-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none">
             <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
 
         <div class="filter-option" data-panel="material">
-          <span class="filter-option-label">Material <span class="filter-count" style="display:${filters.materials.length > 0 ? 'inline' : 'none'}">(${filters.materials.length})</span></span>
+          <span class="filter-option-label">Material <span class="filter-count" style="display:${
+            filters.materials.length > 0 ? "inline" : "none"
+          }">(${filters.materials.length})</span></span>
           <svg class="filter-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none">
             <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
 
         <div class="filter-option" data-panel="size">
-          <span class="filter-option-label">Tamanho <span class="filter-count" style="display:${filters.sizes.length > 0 ? 'inline' : 'none'}">(${filters.sizes.length})</span></span>
+          <span class="filter-option-label">Tamanho <span class="filter-count" style="display:${
+            filters.sizes.length > 0 ? "inline" : "none"
+          }">(${filters.sizes.length})</span></span>
           <svg class="filter-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none">
             <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
@@ -273,7 +293,9 @@ export class FilterSidebar extends HTMLElement {
 
     return `
       <div class="filter-radio-list">
-        ${FILTER_CONFIG.sortOptions.map(option => `
+        ${FILTER_CONFIG.sortOptions
+          .map(
+            (option) => `
           <label class="filter-radio-option">
             <span class="filter-radio-label">${option.label}</span>
             <input 
@@ -283,9 +305,13 @@ export class FilterSidebar extends HTMLElement {
               ${currentSort === option.id ? "checked" : ""}
               class="filter-radio-input"
             />
-            <span class="filter-radio-custom ${currentSort === option.id ? "checked" : ""}"></span>
+            <span class="filter-radio-custom ${
+              currentSort === option.id ? "checked" : ""
+            }"></span>
           </label>
-        `).join("")}
+        `
+          )
+          .join("")}
       </div>
     `;
   }
@@ -298,7 +324,9 @@ export class FilterSidebar extends HTMLElement {
 
     return `
       <div class="filter-checkbox-list">
-        ${FILTER_CONFIG.categories.map(category => `
+        ${FILTER_CONFIG.categories
+          .map(
+            (category) => `
           <label class="filter-checkbox-option">
             <span class="filter-checkbox-label">${category.label}</span>
             <input 
@@ -308,9 +336,13 @@ export class FilterSidebar extends HTMLElement {
               ${activeCategories.includes(category.id) ? "checked" : ""}
               class="filter-checkbox-input"
             />
-            <span class="filter-checkbox-custom ${activeCategories.includes(category.id) ? "checked" : ""}"></span>
+            <span class="filter-checkbox-custom ${
+              activeCategories.includes(category.id) ? "checked" : ""
+            }"></span>
           </label>
-        `).join("")}
+        `
+          )
+          .join("")}
       </div>
     `;
   }
@@ -323,7 +355,9 @@ export class FilterSidebar extends HTMLElement {
 
     return `
       <div class="filter-checkbox-list">
-        ${FILTER_CONFIG.lines.map(line => `
+        ${FILTER_CONFIG.lines
+          .map(
+            (line) => `
           <label class="filter-checkbox-option">
             <span class="filter-checkbox-label">${line.label}</span>
             <input 
@@ -333,9 +367,13 @@ export class FilterSidebar extends HTMLElement {
               ${activeLines.includes(line.id) ? "checked" : ""}
               class="filter-checkbox-input"
             />
-            <span class="filter-checkbox-custom ${activeLines.includes(line.id) ? "checked" : ""}"></span>
+            <span class="filter-checkbox-custom ${
+              activeLines.includes(line.id) ? "checked" : ""
+            }"></span>
           </label>
-        `).join("")}
+        `
+          )
+          .join("")}
       </div>
     `;
   }
@@ -348,9 +386,15 @@ export class FilterSidebar extends HTMLElement {
 
     return `
       <div class="filter-color-list">
-        ${FILTER_CONFIG.colors.map(color => `
+        ${FILTER_CONFIG.colors
+          .map(
+            (color) => `
           <label class="filter-color-option">
-            <span class="filter-color-swatch" style="background: ${color.hex === 'multicolor' ? 'linear-gradient(135deg, #ff6b6b, #4ecdc4, #ffe66d, #95e1d3)' : color.hex}"></span>
+            <span class="filter-color-swatch" style="background: ${
+              color.hex === "multicolor"
+                ? "linear-gradient(135deg, #ff6b6b, #4ecdc4, #ffe66d, #95e1d3)"
+                : color.hex
+            }"></span>
             <span class="filter-color-label">${color.label}</span>
             <input 
               type="checkbox" 
@@ -359,9 +403,13 @@ export class FilterSidebar extends HTMLElement {
               ${activeColors.includes(color.id) ? "checked" : ""}
               class="filter-checkbox-input"
             />
-            <span class="filter-checkbox-custom ${activeColors.includes(color.id) ? "checked" : ""}"></span>
+            <span class="filter-checkbox-custom ${
+              activeColors.includes(color.id) ? "checked" : ""
+            }"></span>
           </label>
-        `).join("")}
+        `
+          )
+          .join("")}
       </div>
     `;
   }
@@ -374,7 +422,9 @@ export class FilterSidebar extends HTMLElement {
 
     return `
       <div class="filter-checkbox-list">
-        ${FILTER_CONFIG.materials.map(material => `
+        ${FILTER_CONFIG.materials
+          .map(
+            (material) => `
           <label class="filter-checkbox-option">
             <span class="filter-checkbox-label">${material.label}</span>
             <input 
@@ -384,9 +434,13 @@ export class FilterSidebar extends HTMLElement {
               ${activeMaterials.includes(material.id) ? "checked" : ""}
               class="filter-checkbox-input"
             />
-            <span class="filter-checkbox-custom ${activeMaterials.includes(material.id) ? "checked" : ""}"></span>
+            <span class="filter-checkbox-custom ${
+              activeMaterials.includes(material.id) ? "checked" : ""
+            }"></span>
           </label>
-        `).join("")}
+        `
+          )
+          .join("")}
       </div>
     `;
   }
@@ -399,7 +453,9 @@ export class FilterSidebar extends HTMLElement {
 
     return `
       <div class="filter-size-groups">
-        ${FILTER_CONFIG.sizeGroups.map(group => `
+        ${FILTER_CONFIG.sizeGroups
+          .map(
+            (group) => `
           <div class="filter-size-group">
             <button class="filter-size-group-header" data-group="${group.id}">
               <span>${group.label}</span>
@@ -407,8 +463,12 @@ export class FilterSidebar extends HTMLElement {
                 <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </button>
-            <div class="filter-size-group-content" data-group-content="${group.id}" style="display: none;">
-              ${group.sizes.map(size => `
+            <div class="filter-size-group-content" data-group-content="${
+              group.id
+            }" style="display: none;">
+              ${group.sizes
+                .map(
+                  (size) => `
                 <label class="filter-checkbox-option">
                   <span class="filter-checkbox-label">${size}</span>
                   <input 
@@ -418,12 +478,18 @@ export class FilterSidebar extends HTMLElement {
                     ${activeSizes.includes(size) ? "checked" : ""}
                     class="filter-checkbox-input"
                   />
-                  <span class="filter-checkbox-custom ${activeSizes.includes(size) ? "checked" : ""}"></span>
+                  <span class="filter-checkbox-custom ${
+                    activeSizes.includes(size) ? "checked" : ""
+                  }"></span>
                 </label>
-              `).join("")}
+              `
+                )
+                .join("")}
             </div>
           </div>
-        `).join("")}
+        `
+          )
+          .join("")}
       </div>
     `;
   }
@@ -433,8 +499,8 @@ export class FilterSidebar extends HTMLElement {
    */
   initPanelEventListeners() {
     // Radio buttons para ordenação
-    const radioInputs = this.querySelectorAll('.filter-radio-input');
-    radioInputs.forEach(input => {
+    const radioInputs = this.querySelectorAll(".filter-radio-input");
+    radioInputs.forEach((input) => {
       input.addEventListener("change", (e) => {
         filterService.setSort(e.target.value);
         this.renderPanelContent();
@@ -442,13 +508,13 @@ export class FilterSidebar extends HTMLElement {
     });
 
     // Checkboxes para filtros
-    const checkboxInputs = this.querySelectorAll('.filter-checkbox-input');
-    checkboxInputs.forEach(input => {
+    const checkboxInputs = this.querySelectorAll(".filter-checkbox-input");
+    checkboxInputs.forEach((input) => {
       input.addEventListener("change", (e) => {
         const filterType = e.target.dataset.filterType;
         const value = e.target.value;
         filterService.toggleFilter(filterType, value);
-        
+
         // Atualiza visual do checkbox
         const customCheckbox = e.target.nextElementSibling;
         if (customCheckbox) {
@@ -458,13 +524,13 @@ export class FilterSidebar extends HTMLElement {
     });
 
     // Accordion para tamanhos
-    const groupHeaders = this.querySelectorAll('.filter-size-group-header');
-    groupHeaders.forEach(header => {
+    const groupHeaders = this.querySelectorAll(".filter-size-group-header");
+    groupHeaders.forEach((header) => {
       header.addEventListener("click", () => {
         const groupId = header.dataset.group;
         const content = this.querySelector(`[data-group-content="${groupId}"]`);
-        const chevron = header.querySelector('.filter-chevron-down');
-        
+        const chevron = header.querySelector(".filter-chevron-down");
+
         if (content) {
           const isOpen = content.style.display !== "none";
           content.style.display = isOpen ? "none" : "block";
@@ -474,8 +540,8 @@ export class FilterSidebar extends HTMLElement {
     });
 
     // Navegação para sub-painéis
-    const panelOptions = this.querySelectorAll('.filter-option[data-panel]');
-    panelOptions.forEach(option => {
+    const panelOptions = this.querySelectorAll(".filter-option[data-panel]");
+    panelOptions.forEach((option) => {
       option.addEventListener("click", () => {
         const panel = option.dataset.panel;
         this.navigateToPanel(panel);
@@ -511,10 +577,12 @@ export class FilterSidebar extends HTMLElement {
     viewBtn?.addEventListener("click", () => {
       this.close();
       // Dispara evento para atualizar produtos
-      this.dispatchEvent(new CustomEvent("filters-applied", {
-        bubbles: true,
-        detail: filterService.getActiveFilters()
-      }));
+      this.dispatchEvent(
+        new CustomEvent("filters-applied", {
+          bubbles: true,
+          detail: filterService.getActiveFilters(),
+        })
+      );
     });
 
     // Event listeners do painel inicial
@@ -523,7 +591,9 @@ export class FilterSidebar extends HTMLElement {
 
   render() {
     const filters = filterService.getActiveFilters();
-    const sortOption = FILTER_CONFIG.sortOptions.find(s => s.id === filters.sort);
+    const sortOption = FILTER_CONFIG.sortOptions.find(
+      (s) => s.id === filters.sort
+    );
 
     this.innerHTML = `
       <!-- Overlay -->
@@ -554,7 +624,9 @@ export class FilterSidebar extends HTMLElement {
         <!-- Footer -->
         <footer class="filter-footer">
           <button class="filter-clear-btn">apagar todos os filtros</button>
-          <button class="filter-view-btn">Ver os ${this.productCount} produto(s)</button>
+          <button class="filter-view-btn">Ver os ${
+            this.productCount
+          } produto(s)</button>
         </footer>
       </aside>
     `;
