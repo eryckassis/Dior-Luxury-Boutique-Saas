@@ -486,7 +486,7 @@ export class AppNavigation extends HTMLElement {
 
             <div class="moda-menu-contact">
               <h3 class="moda-menu-contact-title">CONTATO</h3>
-              <a href="#encontrar-boutique" class="moda-menu-contact-link">Encontrar uma boutique</a>
+              <a href="/boutiques" class="moda-menu-contact-link" data-route="/boutiques">Encontrar uma boutique</a>
               <a href="#pais-regiao" class="moda-menu-contact-link">País/Região: Brasil (Português)</a>
             </div>
 
@@ -701,7 +701,7 @@ export class AppNavigation extends HTMLElement {
                 <a href="#historia" class="submenu-link">História da Maison</a>
                 <a href="#savoir-faire" class="submenu-link">Savoir-Faire</a>
                 <a href="#compromissos" class="submenu-link">Nossos Compromissos</a>
-                <a href="#boutiques" class="submenu-link">Encontrar uma Boutique</a>
+                <a href="/boutiques" class="submenu-link" data-route="/boutiques">Encontrar uma Boutique</a>
               </nav>
             </div>
           </div>

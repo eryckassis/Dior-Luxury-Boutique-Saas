@@ -11,6 +11,7 @@ import "./styles/moda-acessorios.css";
 import "./styles/presente-para-ela.css";
 import "./styles/product-detail.css";
 import "./styles/register.css";
+import "./styles/boutiques.css";
 import { router } from "./router/router.js";
 import "./pages/HomePage.js";
 import "./pages/DiorHolidayPage.js";
@@ -27,6 +28,7 @@ import "./pages/PresenteParaElaPage.js";
 import "./pages/ColecaoPage.js";
 import "./pages/ProductDetailPage.js";
 import "./pages/ColecaoProductDetailPage.js";
+import "./pages/BoutiquesPage.js";
 import "./components/ProfileMenu.js";
 import "./components/FragrancesModal.js";
 import "./components/AppNavigation.js";
@@ -53,6 +55,7 @@ router.register("/para-ela", "presente-para-ela-page");
 router.register("/colecao", "colecao-page");
 router.register("/produto/:id", "product-detail-page");
 router.register("/colecao/product/:id", "colecao-product-detail-page");
+router.register("/boutiques", "boutiques-page");
 
 // ============================================================================
 // BUTTON ANIMATION - Efeito Hover com Flair
