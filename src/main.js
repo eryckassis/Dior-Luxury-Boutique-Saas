@@ -12,6 +12,7 @@ import "./styles/presente-para-ela.css";
 import "./styles/product-detail.css";
 import "./styles/register.css";
 import "./styles/boutiques.css";
+import "./styles/filter-sidebar.css";
 import { router } from "./router/router.js";
 import "./pages/HomePage.js";
 import "./pages/DiorHolidayPage.js";

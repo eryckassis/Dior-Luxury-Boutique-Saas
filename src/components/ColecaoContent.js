@@ -1,5 +1,7 @@
 import { colecaoProducts } from "../data/colecao-products.js";
 import { router } from "../router/router.js";
+import { filterService } from "../services/FilterService.js";
+import "./FilterSidebar.js";
 
 export class ColecaoContent extends HTMLElement {
   constructor() {
@@ -10,15 +12,24 @@ export class ColecaoContent extends HTMLElement {
     this.resizeHandler = null;
     this.intersectionObserver = null;
     this.renderedProducts = new Set(); // Track produtos já renderizados
+    this.filteredProducts = [...colecaoProducts]; // Produtos filtrados
+    this.unsubscribeFilter = null;
   }
 
   connectedCallback() {
     this.render();
+    this.initFilterButton();
+    this.initFilterListeners();
     this.initVirtualScrolling(); // Virtual Scrolling PRIMEIRO
     this.initDraggableCards();
   }
 
   disconnectedCallback() {
+    // Cleanup filter subscription
+    if (this.unsubscribeFilter) {
+      this.unsubscribeFilter();
+    }
+
     // Cleanup intersection observer
     if (this.intersectionObserver) {
       this.intersectionObserver.disconnect();
@@ -572,8 +583,90 @@ export class ColecaoContent extends HTMLElement {
     // SEM ANIMAÇÕES - Virtual Scrolling otimizado
   }
 
+  // ============================================================================
+  // FILTER SYSTEM
+  // ============================================================================
+
+  initFilterButton() {
+    const filterBtn = this.querySelector(".filter-trigger-btn");
+    if (filterBtn) {
+      filterBtn.addEventListener("click", () => this.openFilterSidebar());
+    }
+  }
+
+  initFilterListeners() {
+    // Subscribe para mudanças nos filtros
+    this.unsubscribeFilter = filterService.subscribe(() => {
+      this.applyFilters();
+    });
+
+    // Listener para quando o sidebar aplicar filtros
+    this.addEventListener("filters-applied", () => {
+      this.applyFilters();
+    });
+  }
+
+  openFilterSidebar() {
+    const sidebar = this.querySelector("filter-sidebar");
+    if (sidebar) {
+      sidebar.setProductCount(this.filteredProducts.length);
+      sidebar.open();
+    }
+  }
+
+  applyFilters() {
+    // Aplica filtros e ordenação
+    this.filteredProducts = filterService.applyFilters(colecaoProducts);
+
+    // Atualiza a contagem no sidebar
+    const sidebar = this.querySelector("filter-sidebar");
+    if (sidebar) {
+      sidebar.setProductCount(this.filteredProducts.length);
+    }
+
+    // Atualiza o contador na página
+    this.updateProductCount();
+
+    // Re-renderiza os produtos
+    this.updateProductsGrid();
+  }
+
+  updateProductCount() {
+    const countElement = document.querySelector(".colecao-hero-count");
+    if (countElement) {
+      countElement.textContent = `${this.filteredProducts.length} Artigos`;
+    }
+
+    // Atualiza também o botão de filtro
+    const filterCount = filterService.getActiveFilterCount();
+    const filterBtnCount = this.querySelector(".filter-trigger-count");
+    if (filterBtnCount) {
+      filterBtnCount.style.display = filterCount > 0 ? "inline-flex" : "none";
+      filterBtnCount.textContent = filterCount;
+    }
+  }
+
+  updateProductsGrid() {
+    const grid = this.querySelector(".products-showcase-grid");
+    if (!grid) return;
+
+    // Limpa observadores existentes
+    if (this.intersectionObserver) {
+      this.intersectionObserver.disconnect();
+    }
+    this.renderedProducts.clear();
+
+    // Re-renderiza grid
+    grid.innerHTML = this.generateProducts();
+
+    // Re-inicializa virtual scrolling
+    this.initVirtualScrolling();
+  }
+
   render() {
+    const filterCount = filterService.getActiveFilterCount();
     this.innerHTML = `
+      <div class="colecao-page-content">
       <section class="presente-ela-section">
         <div class="presente-ela-intro">
           <h2 class="presente-ela-section-title">Seleção Exclusiva</h2>
@@ -581,6 +674,22 @@ export class ColecaoContent extends HTMLElement {
             Uma curadoria especial que celebra o savoir-faire da Maison Dior. Peças icônicas que combinam tradição e modernidade.
           </p>
         </div>
+
+        <!-- Filter Button -->
+        <div class="filter-bar">
+          <button class="filter-trigger-btn">
+            <svg width="35" height="35" viewBox="0 0 24 24" fill="none">
+              <path fill="currentColor" fill-rule="evenodd" d="M8.2 6a.7.7 0 0 0-1.4 0v.3H5.497a.7.7 0 0 0 0 1.4H6.8V8a.7.7 0 1 0 1.4 0v-.3h9.297a.7.7 0 1 0 0-1.4H8.2zm-2.703 5.3a.7.7 0 0 0 0 1.4H14.8v.3a.7.7 0 1 0 1.4 0v-.3h1.297a.7.7 0 1 0 0-1.4H16.2V11a.7.7 0 1 0-1.4 0v.3zm0 5a.7.7 0 0 0 0 1.4H10.8v.3a.7.7 0 1 0 1.4 0v-.3h5.297a.7.7 0 1 0 0-1.4H12.2V16a.7.7 0 1 0-1.4 0v.3z" clip-rule="evenodd"></path>
+            </svg>
+            <span>Filtrar e ordenar</span>
+            <span class="filter-trigger-count" style="display: ${
+              filterCount > 0 ? "inline-flex" : "none"
+            }">${filterCount}</span>
+          </button>
+        </div>
+
+        <!-- Filter Sidebar Component -->
+        <filter-sidebar></filter-sidebar>
 
         <!-- Drag Cards Section -->
         <div class="drag-cards-section">
@@ -650,11 +759,12 @@ export class ColecaoContent extends HTMLElement {
         </section>
        
       </section>
+      </div>
     `;
   }
 
   generateProducts() {
-    return colecaoProducts
+    return this.filteredProducts
       .map((product) => {
         // Se for um card destacado (highlight)
         if (product.isHighlight) {
