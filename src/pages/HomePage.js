@@ -13,6 +13,7 @@ import "../styles/arte-de-presentear.css";
 import "../styles/category-interactive.css";
 import "../styles/services-dior.css";
 import "../styles/miss-dior-essence.css";
+import "../styles/diorivera-morph.css";
 import { router } from "../router/router.js";
 import { cartService } from "../services/CartService.js";
 
@@ -23,6 +24,7 @@ export class HomePage extends HTMLElement {
 
   connectedCallback() {
     this.render();
+    this.initDioriveraScrollMorph(); // Nova animação morph
     this.initHeroVideosHover();
     this.initHeroScrollAnimations();
     this.initHeroButtons();
@@ -35,6 +37,59 @@ export class HomePage extends HTMLElement {
     this.initParallaxBagButtons();
     this.initProductsReveal();
     this.initCategoryBagButtons();
+  }
+
+  // ============================================================================
+  // DIORIVERA SCROLL MORPH - Animação estilo Dior.com
+  // 1 imagem central → scroll → laterais diminuem + 2 imagens sobem dos lados
+  // ============================================================================
+  initDioriveraScrollMorph() {
+    if (!window.gsap || !window.ScrollTrigger) return;
+
+    requestAnimationFrame(() => {
+      const section = this.querySelector(".diorivera-morph-section");
+      const centerImage = this.querySelector(".diorivera-center");
+      const leftImage = this.querySelector(".diorivera-left");
+      const rightImage = this.querySelector(".diorivera-right");
+
+      if (!section || !centerImage) return;
+
+      // Timeline principal com ScrollTrigger
+      const tl = window.gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: "top top",
+          end: "+=200%",
+          pin: true,
+          scrub: 0.6,
+          anticipatePin: 1,
+        },
+      });
+
+      // Fase 1: Imagem central diminui (laterais contraem) - 0 a 1
+      tl.to(
+        centerImage,
+        {
+          width: "33.33%",
+          borderRadius: "12px",
+          duration: 1,
+          ease: "power2.inOut",
+        },
+        0
+      );
+
+      // Fase 2: APÓS morph completo, imagens laterais sobem SINCRONIZADAS
+      tl.to(
+        [leftImage, rightImage],
+        {
+          y: "0%",
+          opacity: 1,
+          duration: 0.8,
+          ease: "power3.out",
+        },
+        1
+      );
+    });
   }
 
   initServicesButtonsAnimation() {
@@ -958,27 +1013,39 @@ export class HomePage extends HTMLElement {
 
         <!-- Main Content Area -->
         <main class="content" id="content">
-          <div class="grid-container">
-            <!-- Hero Section with Video -->
-            <hero-section
-              video="/videos/VideoSection1.mp4"
-              label="Dior Holiday"
-              title="Bem-vindo ao Circo dos Sonhos Dior"
-              button-text="Chegue mais perto"
-            ></hero-section>
+          
+          <!-- ============================================================
+               DIORIVERA MORPH SECTION - Animação estilo Dior.com
+               1 imagem central → scroll → diminui + 2 imagens sobem dos lados
+               ============================================================ -->
+          <section class="diorivera-morph-section">
+            <div class="diorivera-morph-container">
+              
+              <!-- Imagem Esquerda (sobe de baixo) -->
+              <div class="diorivera-side diorivera-left">
+                <img src="/images/summerFest2.jpg" alt="Diorivera Left" class="diorivera-image" />
+              </div>
+              
+              <!-- Imagem Central (começa 100%, diminui para 33%) -->
+              <div class="diorivera-center">
+                <img src="/images/summerfest.jpg" alt="Diorivera Center" class="diorivera-image" />
+                
+                <!-- Texto sobreposto na imagem central -->
+                <div class="diorivera-text-content">
+                  <span class="diorivera-label">La Collection Privée</span>
+                  <h2 class="diorivera-title">O espírito da alta costura de verão</h2>
+                  <a href="/dior-verao" class="diorivera-button" data-route="/dior-verao">Descubra</a>
+                </div>
+              </div>
+              
+              <!-- Imagem Direita (sobe de baixo) -->
+              <div class="diorivera-side diorivera-right">
+                <img src="/images/summerFest3.jpg" alt="Diorivera Right" class="diorivera-image" />
+              </div>
+              
+            </div>
+          </section>
 
-            <!-- Text Content Section -->
-            <text-content
-              heading="Dior Holiday — Embracing the Extraordinary"
-              text="O encanto das suas festas é iluminado pelas novas criações festivas Dior.<br />A verdadeira elegância se revela nos momentos de celebração, quando a Dior transforma cada detalhe em uma expressão radiante de alegria."
-            ></text-content>
-
-            <!-- Second Video Section -->
-            <video-section
-              video="/videos/videosection1.2.mp4"
-              section-id="depth-meaning"
-            ></video-section>
-          </div>
         </main>
       </div>
 

@@ -1,0 +1,223 @@
+/* ============================================================================
+   DIORIVERA MORPH SECTION - Animação ScrollTrigger estilo Dior.com
+   1 imagem central → scroll → laterais diminuem + 2 imagens sobem dos lados
+   ============================================================================ */
+
+.diorivera-morph-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: #fff;
+}
+
+.diorivera-morph-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+/* Imagem Central - Começa ocupando 100%, vai para 33% */
+.diorivera-center {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 0;
+  will-change: width, border-radius;
+  z-index: 2;
+}
+
+.diorivera-center .diorivera-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  filter: brightness(0.8);
+}
+
+/* Imagens Laterais */
+.diorivera-side {
+  position: absolute;
+  width: 33%;
+  height: calc(100% - 4rem);
+  overflow: hidden;
+  border-radius: 5px;
+  opacity: 0;
+  will-change: transform, opacity;
+  z-index: 1;
+}
+
+.diorivera-left {
+  left: 0rem;
+  transform: translateY(120%);
+}
+
+.diorivera-right {
+  right: 0rem;
+  transform: translateY(120%);
+}
+
+.diorivera-side .diorivera-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* Texto sobreposto na imagem central - já visível */
+.diorivera-text-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.diorivera-text-content.visible {
+  pointer-events: auto;
+}
+
+.diorivera-label {
+  font-family: "Hellix", sans-serif;
+  font-size: clamp(0.75rem, 1.2vw, 0.875rem);
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+
+.diorivera-title {
+  font-family: "Hellix", sans-serif;
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  font-weight: 300;
+  color: #fff;
+  margin: 0;
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+  max-width: 500px;
+}
+
+.diorivera-button {
+  display: inline-block;
+  font-family: "Hellix", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  text-decoration: none;
+  padding: 0;
+  margin-top: 1rem;
+  position: relative;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  transition: opacity 0.3s ease;
+}
+
+.diorivera-button::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #fff;
+  transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.diorivera-button:hover {
+  opacity: 0.8;
+}
+
+.diorivera-button:hover::after {
+  width: 0;
+}
+
+/* ============================================================================
+   RESPONSIVO
+   ============================================================================ */
+
+@media (max-width: 1024px) {
+  .diorivera-morph-container {
+    padding: 1.5rem;
+  }
+
+  .diorivera-side {
+    height: calc(100% - 3rem);
+  }
+
+  .diorivera-left {
+    left: 1.5rem;
+  }
+
+  .diorivera-right {
+    right: 1.5rem;
+  }
+
+  .diorivera-title {
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  }
+}
+
+@media (max-width: 768px) {
+  .diorivera-morph-section {
+    height: 80vh;
+  }
+
+  .diorivera-morph-container {
+    padding: 1rem;
+    flex-direction: column;
+  }
+
+  .diorivera-side {
+    width: calc(100% - 2rem);
+    height: 30%;
+  }
+
+  .diorivera-left {
+    left: 1rem;
+    top: auto;
+    bottom: 1rem;
+  }
+
+  .diorivera-right {
+    right: 1rem;
+    display: none;
+  }
+
+  .diorivera-title {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+  }
+
+  .diorivera-label {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .diorivera-morph-section {
+    height: 70vh;
+  }
+
+  .diorivera-title {
+    font-size: clamp(1.25rem, 5vw, 1.75rem);
+  }
+
+  .diorivera-button {
+    font-size: 13px;
+  }
+}
