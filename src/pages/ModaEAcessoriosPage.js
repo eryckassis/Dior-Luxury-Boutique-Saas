@@ -442,7 +442,7 @@ export class ModaEAcessoriosPage extends HTMLElement {
               <p class="moda-hero-subtitle">
                 Descubra a seleção de presentes da Maison: um convite para celebrar a arte de presentear, desde já, no espírito das festas de fim de ano
               </p>
-              <a href="#" class="moda-discover-button">Descubra a  coleção</a>
+              <a href="/colecao" data-route="/colecao" class="moda-discover-button">Descubra a  coleção</a>
             </div>
           </section>
 

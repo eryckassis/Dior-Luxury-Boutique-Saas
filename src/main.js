@@ -24,6 +24,7 @@ import "./pages/FinalizarCompraPage.js";
 import "./pages/DiorVeraoPage.js";
 import "./pages/ModaEAcessoriosPage.js";
 import "./pages/PresenteParaElaPage.js";
+import "./pages/ColecaoPage.js";
 import "./pages/ProductDetailPage.js";
 import "./components/ProfileMenu.js";
 import "./components/FragrancesModal.js";
@@ -48,6 +49,7 @@ router.register("/finalizar-compra", "finalizar-compra-page");
 router.register("/dior-verao", "dior-verao-page");
 router.register("/moda-acessorios", "moda-acessorios-page");
 router.register("/para-ela", "presente-para-ela-page");
+router.register("/colecao", "colecao-page");
 router.register("/produto/:id", "product-detail-page");
 
 // ============================================================================

@@ -1,0 +1,493 @@
+/* ============================================================================
+   COLEÇÃO PAGE - Estilos minimalistas com Virtual Scrolling
+   ============================================================================ */
+
+/* Hero Text Section - Estilo minimalista */
+.colecao-hero-text-section {
+  background-color: #f5f5f5;
+  padding: 120px 40px 80px;
+  text-align: center;
+}
+
+.colecao-hero-text-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.colecao-hero-title {
+  font-family: "MinhaFonte", serif;
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 400;
+  color: #1a1a1a;
+  margin: 0 0 32px;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.colecao-hero-description {
+  font-family: "Hellix", sans-serif;
+  font-size: clamp(16px, 2vw, 18px);
+  font-weight: 400;
+  color: #666;
+  line-height: 1.7;
+  margin: 0 0 24px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.colecao-hero-count {
+  font-family: "Hellix", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .colecao-hero-text-section {
+    padding: 80px 24px 60px;
+  }
+
+  .colecao-hero-title {
+    font-size: 32px;
+    margin-bottom: 24px;
+  }
+
+  .colecao-hero-description {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+}
+
+/* Virtual Scroll Optimizations */
+.virtual-scroll-container {
+  position: relative;
+  overflow-y: auto;
+  will-change: transform;
+}
+
+.virtual-scroll-spacer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  pointer-events: none;
+}
+
+.virtual-scroll-content {
+  position: relative;
+  will-change: transform;
+}
+
+/* Product Item - Sem animações hover */
+.product-showcase-item {
+  transition: none;
+  cursor: pointer;
+}
+
+.product-showcase-item:hover {
+  transform: none;
+}
+
+/* Products Grid Base - Centralização */
+.products-showcase-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.products-showcase-grid {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Remove animações de hover nos produtos */
+.product-showcase-image-wrapper:hover .product-showcase-image {
+  transform: none;
+}
+
+/* ============================================================================
+   HIGHLIGHT CARD - Card destacado a cada 8 produtos
+   ============================================================================ */
+
+.product-highlight-card {
+  grid-column: 1 / -1;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 10 / 7;
+  overflow: hidden;
+  border-radius: 9px;
+  cursor: pointer;
+  margin: 2rem 0;
+  transition: transform 0.3s ease;
+}
+
+.product-highlight-image-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.product-highlight-image {
+  width: 100%;
+
+  height: 100%;
+  object-fit: none;
+  object-position: center;
+  transition: transform 0.6s ease;
+}
+
+.product-highlight-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 3rem;
+  z-index: 2;
+}
+
+.product-highlight-name {
+  font-family: "MinhaFonte", serif;
+  font-size: 3rem;
+  font-weight: 400;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.product-highlight-description {
+  display: none;
+}
+
+.product-highlight-price {
+  display: none;
+}
+
+.product-highlight-button {
+  font-family: "Hellix", sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: transparent;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+  padding: 0.875rem 2.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.product-highlight-button:hover {
+  background: #ffffff;
+  color: #1a1a1a;
+}
+
+/* Drag cards - Sem animações */
+.drag-card {
+  transition: none;
+}
+
+.drag-card:hover {
+  transform: none;
+}
+
+.drag-card-image {
+  transition: none;
+}
+
+.drag-card:hover .drag-card-image {
+  transform: none;
+}
+
+/* ============================================================================
+   RESPONSIVE - Mobile First
+   ============================================================================ */
+
+/* Tablet - 768px */
+@media (max-width: 768px) {
+  .colecao-hero-text-section {
+    padding: 80px 24px 60px;
+  }
+
+  .colecao-hero-title {
+    font-size: 32px;
+    margin-bottom: 24px;
+  }
+
+  .colecao-hero-description {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+
+  /* Drag Cards Mobile */
+  .drag-cards-container {
+    padding: 0;
+    margin-bottom: 1.5rem;
+  }
+
+  .drag-cards-track {
+    padding: 0 1rem;
+    gap: 1.5rem;
+  }
+
+  .drag-card {
+    width: 320px;
+    height: 450px;
+  }
+
+  .drag-card-title {
+    font-size: 1.3rem;
+  }
+
+  .drag-progress-bar {
+    max-width: 90%;
+    margin: 0 auto;
+  }
+
+  /* Products Grid - 2 colunas em tablet */
+  .products-showcase-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1rem !important;
+    padding: 0;
+    justify-items: center;
+    width: 100%;
+  }
+
+  .products-showcase-section {
+    padding: 2rem 0 !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .product-showcase-item {
+    margin-bottom: 1rem;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto 1rem auto;
+  }
+
+  .product-showcase-name {
+    font-size: 0.85rem !important;
+    line-height: 1.3;
+  }
+
+  .product-showcase-price {
+    font-size: 0.75rem !important;
+  }
+
+  .color-dot {
+    width: 7px;
+    height: 7px;
+  }
+
+  .color-dot-more {
+    font-size: 0.65rem;
+  }
+}
+
+/* Mobile Small - 480px */
+@media (max-width: 480px) {
+  .colecao-hero-text-section {
+    padding: 60px 20px 40px;
+  }
+
+  .colecao-hero-title {
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+
+  .colecao-hero-description {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .colecao-hero-count {
+    font-size: 12px;
+  }
+
+  /* Drag Cards Mobile Small */
+  .drag-cards-track {
+    padding: 0 0.75rem;
+    gap: 1rem;
+  }
+
+  .drag-card {
+    width: 280px;
+    height: 400px;
+  }
+
+  .drag-card-title {
+    font-size: 1.1rem;
+    padding: 0 1rem;
+  }
+
+  /* Products Grid - 2 colunas em mobile */
+  .products-showcase-section {
+    padding: 2rem 1rem !important;
+  }
+
+  .products-showcase-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1rem !important;
+    padding: 0 !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+  }
+
+  .product-showcase-item {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+  }
+
+  .product-showcase-image-wrapper {
+    width: 100% !important;
+  }
+
+  .product-showcase-info {
+    padding: 0.75rem 0.25rem;
+  }
+
+  .product-showcase-name {
+    font-size: 0.9rem !important;
+  }
+
+  .product-showcase-price {
+    font-size: 0.8rem !important;
+  }
+
+  /* Product Arrows - Menor em mobile */
+  .product-arrow {
+    width: 32px !important;
+    height: 32px !important;
+  }
+
+  .product-arrow svg {
+    width: 18px !important;
+    height: 18px !important;
+  }
+
+  /* Highlight Card - Mobile */
+  .product-highlight-card {
+    aspect-ratio: 4 / 5;
+    margin: 1rem 0;
+  }
+
+  .product-highlight-content {
+    padding: 2rem 1.5rem;
+  }
+
+  .product-highlight-name {
+    font-size: 2rem;
+  }
+
+  .product-highlight-button {
+    padding: 0.75rem 2rem;
+    font-size: 0.8rem;
+  }
+
+  /* Progress bar menor */
+  .product-carousel-progress {
+    height: 2px !important;
+  }
+}
+
+/* Mobile Extra Small - 375px (iPhone SE, etc) */
+@media (max-width: 375px) {
+  .colecao-hero-title {
+    font-size: 24px;
+  }
+
+  .colecao-hero-description {
+    font-size: 13px;
+  }
+
+  .drag-card {
+    width: 260px;
+    height: 380px;
+  }
+
+  .drag-card-title {
+    font-size: 1rem;
+  }
+
+  .product-showcase-item {
+    width: 100% !important;
+  }
+
+  .product-showcase-name {
+    font-size: 0.85rem !important;
+  }
+
+  .product-showcase-price {
+    font-size: 0.75rem !important;
+  }
+}
+
+/* Landscape Mobile - 568px */
+@media (max-width: 768px) and (orientation: landscape) {
+  .colecao-hero-text-section {
+    padding: 40px 20px 30px;
+  }
+
+  .colecao-hero-title {
+    font-size: 24px;
+    margin-bottom: 16px;
+  }
+
+  .colecao-hero-description {
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+
+  .drag-card {
+    height: 350px;
+  }
+}
+
+/* Touch Improvements */
+@media (hover: none) and (pointer: coarse) {
+  /* Remove hover states em touch devices */
+  .product-showcase-item:hover {
+    transform: none !important;
+  }
+
+  .drag-card:hover .drag-card-image {
+    transform: none !important;
+  }
+
+  /* Aumenta área de toque */
+  .product-arrow {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .color-dot {
+    min-width: 10px;
+    min-height: 10px;
+  }
+
+  /* Melhora feedback visual */
+  .product-showcase-item:active {
+    opacity: 0.7;
+  }
+
+  .drag-card:active {
+    opacity: 0.9;
+  }
+}
