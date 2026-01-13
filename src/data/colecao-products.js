@@ -572,7 +572,6 @@ export const colecaoProducts = [
     care: "Consulte as instruções específicas de cada modelo",
     isHighlight: true,
   },
-  
 ];
 
 /**
