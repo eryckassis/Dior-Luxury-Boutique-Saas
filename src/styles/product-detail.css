@@ -5,17 +5,17 @@
 /* Container Principal */
 .product-detail-section {
   min-height: 100vh;
-  padding-top: 120px;
-  background: #f8f8f8;
+  padding-top: 60px;
+  background: #fff;
 }
 
 .product-detail-container {
-  max-width: 1400px;
+  max-width: 100%;
   margin: 0 auto;
-  padding: 40px 60px;
+  padding: 0;
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 60px;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
   background: #fff;
 }
 
@@ -24,13 +24,16 @@
    ============================================================================ */
 
 .product-gallery {
-  position: relative;
+  position: sticky;
+  top: 80px;
+  height: calc(100vh - 80px);
   overflow: hidden;
 }
 
 .product-gallery-wrapper {
   position: relative;
   width: 100%;
+  height: 100%;
   overflow: hidden;
   cursor: grab;
   -webkit-user-select: none;
@@ -45,6 +48,7 @@
 
 .product-gallery-track {
   display: flex;
+  height: 100%;
   will-change: transform;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
@@ -54,14 +58,22 @@
 .product-gallery-slide {
   flex-shrink: 0;
   width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
   -webkit-user-select: none;
   user-select: none;
 }
 
 .product-gallery-slide img {
-  width: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
   height: auto;
-  object-fit: cover;
+  object-fit: contain;
   display: block;
   pointer-events: none;
   -webkit-user-drag: none;
@@ -83,6 +95,8 @@
   justify-content: center;
   z-index: 10;
   transition: all 0.3s ease;
+  opacity: 1;
+  visibility: visible;
 }
 
 .gallery-nav:hover {
@@ -102,19 +116,23 @@
 }
 
 .gallery-nav-prev {
-  left: 15px;
+  left: 20px;
 }
 
 .gallery-nav-next {
-  right: 15px;
+  right: 20px;
 }
 
 /* Indicadores de Paginação */
 .gallery-pagination {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   justify-content: center;
   gap: 8px;
-  margin-top: 20px;
+  z-index: 10;
 }
 
 .gallery-dot {
@@ -133,11 +151,14 @@
 
 /* Progress Bar da Galeria */
 .gallery-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
   width: 100%;
-  height: 2px;
+  height: 1px;
   background: #e5e5e5;
-  margin-top: 15px;
   overflow: hidden;
+  z-index: 10;
 }
 
 .gallery-progress-bar {
@@ -153,86 +174,67 @@
 .product-info {
   display: flex;
   flex-direction: column;
-  padding: 20px 0;
+  padding: 60px 80px;
+  max-width: 800px;
 }
 
 /* Breadcrumb */
 .product-breadcrumb {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 30px;
-  font-size: 12px;
-  color: #757575;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.product-breadcrumb a {
-  color: #757575;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.product-breadcrumb a:hover {
-  color: #000;
-}
-
-.product-breadcrumb span {
-  color: #000;
+  display: none;
 }
 
 /* Cabeçalho do Produto */
 .product-header {
-  margin-bottom: 30px;
+  margin-bottom: 32px;
 }
 
 .product-name {
-  font-family: "MinhaFonte", sans-serif;
-  font-size: 28px;
+  font-family: "Hellix", sans-serif;
+  font-size: 32px;
   font-weight: 400;
   color: #000;
-  margin: 0 0 10px 0;
-  line-height: 1.3;
-  letter-spacing: 0.5px;
+  margin: 0 0 16px 0;
+  line-height: 1.2;
+  letter-spacing: 0.3px;
 }
 
 .product-description {
+  font-family: "Hellix", sans-serif;
   font-size: 14px;
-  color: #757575;
-  margin: 0 0 15px 0;
-  line-height: 1.6;
+  color: #707070;
+  margin: 0 0 24px 0;
+  line-height: 1.5;
+  font-weight: 400;
 }
 
 .product-price {
-  font-size: 18px;
-  color: #000;
-  font-weight: 500;
-  letter-spacing: 0.5px;
+  display: none;
 }
 
 .product-reference {
+  font-family: "Hellix", sans-serif;
   font-size: 12px;
   color: #999;
-  margin-top: 8px;
+  margin: 0;
   letter-spacing: 0.5px;
+  font-weight: 400;
 }
 
 /* Seleção de Cores */
 .product-colors {
-  margin: 30px 0;
-  padding: 25px 0;
-  border-top: 1px solid #e5e5e5;
-  border-bottom: 1px solid #e5e5e5;
+  margin: 0 0 32px 0;
+  padding: 0;
+  border: none;
 }
 
 .product-colors-title {
-  font-size: 13px;
-  color: #000;
-  margin-bottom: 15px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: 500;
+  font-family: "Hellix", sans-serif;
+  font-size: 14px;
+  color: #707070;
+  margin-bottom: 12px;
+  text-transform: none;
+  letter-spacing: 0.3px;
+  font-weight: 400;
 }
 
 .product-colors-list {
@@ -242,12 +244,13 @@
 }
 
 .product-color-item {
-  width: 60px;
-  height: 60px;
-  border: 1px solid #e5e5e5;
+  width: 48px;
+  height: 48px;
+  border: 1px solid #d0d0d0;
   cursor: pointer;
   transition: all 0.3s ease;
   overflow: hidden;
+  border-radius: 0;
 }
 
 .product-color-item:hover {
@@ -284,22 +287,21 @@
 
 /* Seleção de Tamanho */
 .product-sizes {
-  margin: 25px 0;
+  margin: 0 0 32px 0;
 }
 
 .product-sizes-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 15px;
+  display: none;
 }
 
 .product-sizes-title {
-  font-size: 13px;
-  color: #000;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: 500;
+  font-family: "Hellix", sans-serif;
+  font-size: 11px;
+  color: #707070;
+  margin-bottom: 12px;
+  text-transform: none;
+  letter-spacing: 0.3px;
+  font-weight: 400;
 }
 
 .product-size-guide {
@@ -352,18 +354,19 @@
 
 /* Botões de Ação */
 .product-actions {
-  margin: 30px 0;
+  margin: 0 0 40px 0;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
 }
 
 .product-btn {
   width: 100%;
-  height: 50px;
-  font-size: 12px;
+  height: 56px;
+  font-family: "Hellix", sans-serif;
+  font-size: 13px;
   text-transform: none;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
   font-weight: 400;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -371,27 +374,28 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
-  font-family: "Hellix", sans-serif;
+  border-radius: 5px;
 }
 
 .product-btn-primary {
-  background: #333;
+  background: #000;
   color: #fff;
-  border: none;
+  border: 1px solid #000;
 }
 
 .product-btn-primary:hover {
-  background: #000;
+  background: #333;
+  border-color: #333;
 }
 
 .product-btn-secondary {
   background: #fff;
-  color: #333;
-  border: 1px solid #333;
+  color: #000;
+  border: 1px solid #d0d0d0;
 }
 
 .product-btn-secondary:hover {
-  background: #f5f5f5;
+  border-color: #000;
 }
 
 .product-btn svg {
@@ -431,28 +435,38 @@
    ============================================================================ */
 
 .product-tabs {
-  margin-top: 30px;
+  margin-top: 0;
   border-top: 1px solid #e5e5e5;
 }
 
 .product-tabs-nav {
   display: flex;
   border-bottom: 1px solid #e5e5e5;
+  gap: 0;
 }
 
 .product-tab-btn {
-  padding: 18px 20px;
+  padding: 20px 0;
+  margin-right: 40px;
   background: none;
   border: none;
+  font-family: "Hellix", sans-serif;
   font-size: 13px;
   text-transform: none;
   letter-spacing: 0.3px;
-  color: #757575;
+  color: #707070;
   cursor: pointer;
   position: relative;
   transition: color 0.3s ease;
-  font-family: "Hellix", sans-serif;
   white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  border-bottom: 2px solid transparent;
+}
+
+.product-tab-btn i {
+  display: none;
 }
 
 .product-tab-btn:hover {
@@ -461,25 +475,21 @@
 
 .product-tab-btn.active {
   color: #000;
-  font-weight: 500;
+  font-weight: 400;
+  border-bottom-color: #000;
 }
 
 .product-tab-btn.active::after {
-  content: "";
-  position: absolute;
-  bottom: -1px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: #000;
+  display: none;
 }
 
 .product-tabs-content {
-  padding: 25px 0;
+  padding: 32px 0;
 }
 
 .product-tab-panel {
   display: none;
+  font-family: "Hellix", sans-serif;
 }
 
 .product-tab-panel.active {
@@ -538,9 +548,9 @@
 .product-tab-panel h4 {
   font-size: 13px;
   font-weight: 500;
-  text-transform: uppercase;
   letter-spacing: 1px;
   margin: 20px 0 10px 0;
+  text-align: left;
   color: #000;
 }
 
@@ -566,6 +576,219 @@
   color: #999;
 }
 
+/* Estilos específicos para aba de Descrição */
+.description-content {
+  position: relative;
+}
+
+.product-description-text {
+  font-family: "Hellix", sans-serif;
+  font-size: 13px;
+  color: #000;
+  line-height: 1.8;
+  margin: 0 0 20px 0;
+  transition: max-height 0.3s ease;
+  overflow: hidden;
+}
+
+.product-description-text.collapsed {
+  max-height: 80px;
+  position: relative;
+}
+
+.product-description-text.collapsed::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: linear-gradient(transparent, white);
+  pointer-events: none;
+}
+
+.product-ver-mais {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: "Hellix", sans-serif;
+  font-size: 13px;
+  color: #000;
+  cursor: pointer;
+  text-decoration: underline;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 20px;
+  transition: opacity 0.3s ease;
+}
+
+.product-ver-mais:hover {
+  opacity: 0.7;
+}
+
+.product-ver-mais i {
+  font-size: 11px;
+  transition: transform 0.3s ease;
+}
+
+.product-detail-info {
+  margin: 20px 0;
+  padding: 15px 0;
+  border-top: 1px solid #f0f0f0;
+}
+
+.product-detail-info h4 {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  margin: 0 0 10px 0;
+  color: #000;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.product-detail-info h4 i {
+  font-size: 14px;
+  color: #666;
+}
+
+.product-detail-info p {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Estilos específicos para aba de Tamanho e Corte */
+.size-info-section {
+  padding: 10px 0;
+}
+
+.size-info-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.size-info-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 15px 0;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 13px;
+  color: #333;
+  line-height: 1.6;
+}
+
+.size-info-list li:last-child {
+  border-bottom: none;
+}
+
+.size-info-list li i {
+  font-size: 16px;
+  color: #666;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.size-info-list li::before {
+  display: none;
+}
+
+/* Estilos específicos para aba de Contato e Disponibilidade */
+.store-info-section {
+  padding: 10px 0;
+}
+
+.store-option-link {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 20px 0;
+  border-bottom: 1px solid #f0f0f0;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.store-option-link:hover {
+  background-color: #fafafa;
+}
+
+.store-option-link:last-of-type {
+  border-bottom: none;
+  margin-bottom: 20px;
+}
+
+.store-option-link > i:first-child {
+  font-size: 20px;
+  color: #000;
+  flex-shrink: 0;
+  width: 24px;
+  text-align: center;
+}
+
+.store-option-link > svg.store-icon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  color: #000;
+}
+
+.store-option-link > i:last-child {
+  font-size: 14px;
+  color: #666;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.store-option-link .store-option-content {
+  flex: 1;
+}
+
+.store-option-link .store-option-content h4 {
+  font-size: 13px;
+  font-weight: 400;
+  margin: 0;
+  color: #000;
+  letter-spacing: 0.3px;
+}
+
+.store-contact-info {
+  padding: 20px 0 10px 0;
+  border-top: 1px solid #f0f0f0;
+}
+
+.store-contact-info p {
+  font-size: 12px;
+  color: #666;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.store-contact-info a {
+  color: #000;
+  font-size: 1rem;
+  text-decoration: underline;
+  transition: opacity 0.3s ease;
+  padding: 15px;
+}
+
+.store-contact-info a:hover {
+  opacity: 0.7;
+}
+
+/* Remove estilos antigos */
+.store-option {
+  display: none;
+}
+
+.store-btn {
+  display: none;
+}
+
 /* ============================================================================
    SEÇÃO DE PRODUTOS RELACIONADOS
    ============================================================================ */
@@ -577,7 +800,7 @@
 }
 
 .related-products-title {
-  font-family: "MinhaFonte", sans-serif;
+  font-family: "Hellix", sans-serif;
   font-size: 24px;
   font-weight: 400;
   text-align: center;

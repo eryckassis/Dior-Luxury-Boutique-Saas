@@ -26,6 +26,7 @@ import "./pages/ModaEAcessoriosPage.js";
 import "./pages/PresenteParaElaPage.js";
 import "./pages/ColecaoPage.js";
 import "./pages/ProductDetailPage.js";
+import "./pages/ColecaoProductDetailPage.js";
 import "./components/ProfileMenu.js";
 import "./components/FragrancesModal.js";
 import "./components/AppNavigation.js";
@@ -51,6 +52,7 @@ router.register("/moda-acessorios", "moda-acessorios-page");
 router.register("/para-ela", "presente-para-ela-page");
 router.register("/colecao", "colecao-page");
 router.register("/produto/:id", "product-detail-page");
+router.register("/colecao/product/:id", "colecao-product-detail-page");
 
 // ============================================================================
 // BUTTON ANIMATION - Efeito Hover com Flair

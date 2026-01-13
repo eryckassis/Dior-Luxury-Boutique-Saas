@@ -281,31 +281,6 @@ export class ModaEAcessoriosPage extends HTMLElement {
         iconUnmute.style.display = "block";
       }
     });
-
-    // Liquid glass button effect (opcional)
-    [playPauseBtn, muteBtn].forEach((button) => {
-      button.addEventListener("mouseenter", (e) => {
-        const flair = button.querySelector(".button__flair");
-        if (flair && window.gsap) {
-          window.gsap.to(flair, {
-            scale: 1,
-            duration: 0.6,
-            ease: "power2.out",
-          });
-        }
-      });
-
-      button.addEventListener("mouseleave", () => {
-        const flair = button.querySelector(".button__flair");
-        if (flair && window.gsap) {
-          window.gsap.to(flair, {
-            scale: 0,
-            duration: 0.4,
-            ease: "power2.in",
-          });
-        }
-      });
-    });
   }
 
   initDragCards() {

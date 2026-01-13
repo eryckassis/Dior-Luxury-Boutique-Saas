@@ -337,7 +337,7 @@ export class ColecaoContent extends HTMLElement {
 
           if (isArrow || isProgressBar) return;
 
-          router.navigate(`/produto/${productId}`);
+          router.navigate(`/colecao/product/${productId}`);
         });
 
         item.style.cursor = "pointer";
@@ -562,7 +562,7 @@ export class ColecaoContent extends HTMLElement {
 
       if (isArrow || isProgressBar) return;
 
-      router.navigate(`/produto/${productId}`);
+      router.navigate(`/colecao/product/${productId}`);
     });
 
     item.style.cursor = "pointer";

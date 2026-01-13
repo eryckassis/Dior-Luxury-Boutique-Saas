@@ -1,12 +1,14 @@
 // ============================================================================
-// PRODUCT DETAIL CONTENT - Conteúdo da página de detalhes do produto
+// COLECAO PRODUCT DETAIL CONTENT - Conteúdo da página de detalhes do produto da coleção
 // Galeria com drag horizontal + Informações do produto com tabs
 // ============================================================================
 
-import { getProductById, getRelatedProducts } from "../data/products.js";
-import { router } from "../router/router.js";
+import {
+  getColecaoProductById,
+  getRelatedColecaoProducts,
+} from "../data/colecao-products.js";
 
-export class ProductDetailContent extends HTMLElement {
+export class ColecaoProductDetailContent extends HTMLElement {
   constructor() {
     super();
     this.product = null;
@@ -79,7 +81,7 @@ export class ProductDetailContent extends HTMLElement {
 
   connectedCallback() {
     const productId = this.getAttribute("data-product-id");
-    this.product = getProductById(productId);
+    this.product = getColecaoProductById(productId);
 
     if (!this.product) {
       this.innerHTML = `<div class="product-not-found">Produto não encontrado</div>`;
@@ -171,14 +173,14 @@ export class ProductDetailContent extends HTMLElement {
       // Função para snap ao slide mais próximo
       const snapToNearestSlide = () => {
         const wrapperWidth = wrapper.offsetWidth;
-        const currentX = gsap.getProperty(track, "x") || 0;
+        const currentX = window.gsap.getProperty(track, "x") || 0;
         const slideIndex = Math.round(Math.abs(currentX) / wrapperWidth);
         this.currentSlide = Math.max(
           0,
           Math.min(slideIndex, slides.length - 1)
         );
 
-        gsap.to(track, {
+        window.gsap.to(track, {
           x: -(this.currentSlide * wrapperWidth),
           duration: 0.4,
           ease: "power2.out",
@@ -191,7 +193,7 @@ export class ProductDetailContent extends HTMLElement {
       };
 
       // Criar Draggable
-      this.draggable = Draggable.create(track, {
+      this.draggable = window.Draggable.create(track, {
         type: "x",
         bounds: bounds,
         inertia: true,
@@ -203,7 +205,7 @@ export class ProductDetailContent extends HTMLElement {
         force3D: true,
         onPress: function () {
           // Parar qualquer animação em andamento para evitar conflito
-          gsap.killTweensOf(track);
+          window.gsap.killTweensOf(track);
         },
         onDrag: () => {
           this.updateProgress();
@@ -219,84 +221,38 @@ export class ProductDetailContent extends HTMLElement {
         },
       })[0];
 
-      // Handler de resize com debounce
-      let resizeTimeout;
-      this.handleResize = () => {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(() => {
-          setupDimensions();
-          bounds = calculateBounds();
-
-          if (this.draggable) {
-            this.draggable.applyBounds(bounds);
-
-            // Reposiciona no slide atual
-            const wrapperWidth = wrapper.offsetWidth;
-            gsap.set(track, { x: -(this.currentSlide * wrapperWidth) });
-          }
-
-          this.updateProgress();
-        }, 100);
-      };
-
-      window.addEventListener("resize", this.handleResize);
-
-      // Aguarda imagens carregarem para recalcular
-      const images = track.querySelectorAll("img");
-      let loadedCount = 0;
-      const totalImages = images.length;
-
-      const onImageLoad = () => {
-        loadedCount++;
-        if (loadedCount === totalImages) {
-          setupDimensions();
-          bounds = calculateBounds();
-          if (this.draggable) {
-            this.draggable.applyBounds(bounds);
-          }
+      // Atualiza bounds no resize
+      const handleResize = () => {
+        setupDimensions();
+        bounds = calculateBounds();
+        if (this.draggable) {
+          this.draggable.applyBounds(bounds);
+          // Reposiciona para o slide atual
+          const wrapperWidth = wrapper.offsetWidth;
+          window.gsap.set(track, { x: -(this.currentSlide * wrapperWidth) });
           this.updateProgress();
         }
       };
 
-      images.forEach((img) => {
-        if (img.complete) {
-          onImageLoad();
-        } else {
-          img.addEventListener("load", onImageLoad);
-          img.addEventListener("error", onImageLoad);
+      this.handleResize = handleResize;
+      window.addEventListener("resize", this.handleResize);
+
+      // ResizeObserver para detectar mudanças no wrapper
+      this.resizeObserver = new ResizeObserver(() => {
+        setupDimensions();
+        bounds = calculateBounds();
+        if (this.draggable) {
+          this.draggable.applyBounds(bounds);
+          const wrapperWidth = wrapper.offsetWidth;
+          window.gsap.set(track, { x: -(this.currentSlide * wrapperWidth) });
+          this.updateProgress();
         }
       });
 
-      // Inicializa progresso
+      this.resizeObserver.observe(wrapper);
+
+      // Initial progress update
       this.updateProgress();
-
-      console.log("✅ Galeria de produto inicializada");
-    });
-  }
-
-  snapToSlide() {
-    const track = this.querySelector(".product-gallery-track");
-    const wrapper = this.querySelector(".product-gallery-wrapper");
-    if (!track || !wrapper) return;
-
-    const wrapperWidth = wrapper.offsetWidth;
-    const slides = track.querySelectorAll(".product-gallery-slide");
-    const currentX = gsap.getProperty(track, "x") || 0;
-
-    // Calcula o slide mais próximo
-    const slideIndex = Math.round(Math.abs(currentX) / wrapperWidth);
-    this.currentSlide = Math.max(0, Math.min(slideIndex, slides.length - 1));
-
-    // Anima para o slide
-    gsap.to(track, {
-      x: -(this.currentSlide * wrapperWidth),
-      duration: 0.4,
-      ease: "power2.out",
-      overwrite: true,
-      onComplete: () => {
-        this.updateProgress();
-        this.updateDots();
-      },
     });
   }
 
@@ -314,7 +270,7 @@ export class ProductDetailContent extends HTMLElement {
 
     const wrapperWidth = wrapper.offsetWidth;
     const maxScroll = wrapperWidth * (slides.length - 1);
-    const currentX = Math.abs(gsap.getProperty(track, "x") || 0);
+    const currentX = Math.abs(window.gsap.getProperty(track, "x") || 0);
 
     const progress = maxScroll > 0 ? (currentX / maxScroll) * 100 : 0;
     progressBar.style.width = `${Math.min(100, Math.max(0, progress))}%`;
@@ -337,7 +293,7 @@ export class ProductDetailContent extends HTMLElement {
 
     this.currentSlide = Math.max(0, Math.min(index, slides.length - 1));
 
-    gsap.to(track, {
+    window.gsap.to(track, {
       x: -(this.currentSlide * wrapperWidth),
       duration: 0.5,
       ease: "power2.out",
@@ -352,11 +308,13 @@ export class ProductDetailContent extends HTMLElement {
   initEventListeners() {
     // Navegação da galeria
     this.querySelector(".gallery-nav-prev")?.addEventListener("click", () => {
-      this.goToSlide(this.currentSlide - 1);
+      if (this.currentSlide > 0) this.goToSlide(this.currentSlide - 1);
     });
 
     this.querySelector(".gallery-nav-next")?.addEventListener("click", () => {
-      this.goToSlide(this.currentSlide + 1);
+      const slides = this.querySelectorAll(".product-gallery-slide");
+      if (this.currentSlide < slides.length - 1)
+        this.goToSlide(this.currentSlide + 1);
     });
 
     // Dots da galeria
@@ -402,7 +360,7 @@ export class ProductDetailContent extends HTMLElement {
     const descriptionText = this.querySelector(".product-description-text");
     const verMaisBtn = this.querySelector(".product-ver-mais");
     const verMaisText = verMaisBtn?.querySelector(".ver-mais-text");
-    const chevron = verMaisBtn?.querySelector(".fa-chevron-down");
+    const chevron = verMaisBtn?.querySelector(".fa-chevron-down, .fa-chevron-up");
     
     if (descriptionText && verMaisBtn) {
       const isCollapsed = descriptionText.classList.contains("collapsed");
@@ -462,7 +420,7 @@ export class ProductDetailContent extends HTMLElement {
     this.selectedSize = size;
 
     this.querySelectorAll(".product-size-item").forEach((s) => {
-      s.classList.toggle("active", s.getAttribute("data-size") === size);
+      s.classList.toggle("active", s === item);
     });
   }
 
@@ -550,129 +508,136 @@ export class ProductDetailContent extends HTMLElement {
       sapato: "Sapatos",
       bolsa: "Bolsas",
       oculos: "Óculos",
+      vestido: "Vestidos",
+      joias: "Joias",
+      relojoaria: "Relojoaria",
+      casaco: "Casacos",
+      fragrancia: "Fragrâncias",
     };
     return labels[category] || "Produtos";
   }
 
   initRelatedProductsDrag() {
     setTimeout(() => {
-      if (!window.gsap || !window.Draggable) {
+      const container = this.querySelector(".related-drag-container");
+      const grid = this.querySelector(".related-products-grid");
+      const progressFill = this.querySelector(".related-drag-progress-fill");
+
+      if (
+        !container ||
+        !grid ||
+        !progressFill ||
+        !window.gsap ||
+        !window.Draggable
+      ) {
         console.warn(
-          "GSAP ou Draggable não disponível para produtos relacionados"
+          "Elementos relacionados não encontrados ou GSAP não carregado"
         );
         return;
       }
 
-      const container = this.querySelector(".related-drag-container");
-      const slider = this.querySelector(".related-products-grid");
-      const progressFill = this.querySelector(".related-drag-progress-fill");
-      const cards = this.querySelectorAll(".related-product-card");
+      const cards = grid.querySelectorAll(".related-product-card");
+      if (cards.length === 0) return;
 
-      if (!container || !slider || cards.length === 0) {
-        return;
-      }
-
-      // Função para calcular bounds
+      // Calcula largura total do grid
       const calculateBounds = () => {
         const containerWidth = container.offsetWidth;
-        const firstCard = cards[0].getBoundingClientRect();
-        const lastCard = cards[cards.length - 1].getBoundingClientRect();
-        const contentWidth = lastCard.right - firstCard.left;
-        const padding =
-          parseFloat(getComputedStyle(container).paddingLeft) || 0;
-        const totalWidth = contentWidth + padding;
-        const maxDrag = Math.min(0, -(totalWidth - containerWidth + padding));
+        const gridWidth = grid.scrollWidth;
+        const maxX = 0;
+        const minX = -(gridWidth - containerWidth);
 
-        return { minX: maxDrag, maxX: 0 };
+        return {
+          minX: Math.min(minX, 0),
+          maxX,
+        };
       };
 
-      let bounds = calculateBounds();
-
-      // Atualizar progress bar
-      const updateProgress = (x) => {
-        if (!progressFill || bounds.minX >= 0) return;
-        const progress = Math.abs(x) / Math.abs(bounds.minX);
-        const clampedProgress = Math.min(Math.max(progress, 0), 1);
-        window.gsap.to(progressFill, {
-          scaleX: Math.max(clampedProgress, 0.15),
-          duration: 0.1,
-          ease: "none",
-        });
-      };
-
-      // Criar Draggable
-      this.relatedDraggable = window.Draggable.create(slider, {
+      // Cria o Draggable para produtos relacionados
+      this.relatedDraggable = window.Draggable.create(grid, {
         type: "x",
-        bounds: bounds,
+        bounds: calculateBounds(),
         inertia: true,
         edgeResistance: 0.65,
-        dragResistance: 0,
         throwResistance: 2000,
         cursor: "grab",
         activeCursor: "grabbing",
         allowNativeTouchScrolling: false,
-        onClick: function (e) {
-          // Previne click durante drag
-          if (this.isDragging) return;
-
-          const card = e.target.closest(".related-product-card");
-          if (card) {
-            e.preventDefault();
-            e.stopPropagation();
-            const productId = card.getAttribute("data-product-id");
-            if (productId) {
-              // Scroll suave para o topo antes de navegar
-              window.scrollTo({ top: 0, behavior: "smooth" });
-              setTimeout(() => {
-                router.navigate(`/produto/${productId}`);
-              }, 300);
-            }
-          }
-        },
+        force3D: true,
         onPress: function () {
-          window.gsap.killTweensOf(slider);
-          this.isDragging = false;
+          window.gsap.killTweensOf(grid);
         },
-        onDragStart: function () {
-          this.isDragging = true;
-        },
-        onDrag: function () {
-          updateProgress(this.x);
-        },
-        onThrowUpdate: function () {
-          updateProgress(this.x);
-        },
-        onDragEnd: function () {
-          // Reseta flag após um pequeno delay
-          setTimeout(() => {
-            this.isDragging = false;
-          }, 100);
-        },
+        onDrag: () => this.updateRelatedProgress(),
+        onThrowUpdate: () => this.updateRelatedProgress(),
+        onThrowComplete: () => this.updateRelatedProgress(),
       })[0];
 
-      // Recalcular bounds on resize
-      window.addEventListener("resize", () => {
-        bounds = calculateBounds();
-        if (this.relatedDraggable) {
-          this.relatedDraggable.applyBounds(bounds);
-          const currentX = this.relatedDraggable.x;
-          if (currentX < bounds.minX) {
-            window.gsap.to(slider, { x: bounds.minX, duration: 0.3 });
+      // Event listeners para clicks nos cards
+      cards.forEach((card) => {
+        card.addEventListener("click", (e) => {
+          // Se foi um drag, não navega
+          if (this.relatedDraggable && this.relatedDraggable.isDragging) {
+            e.preventDefault();
+            return;
           }
+
+          const productId = card.getAttribute("data-product-id");
+          if (productId) {
+            // Navega para o produto da coleção
+            window.router.navigate(`/colecao/product/${productId}`);
+          }
+        });
+      });
+
+      // Atualiza bounds no resize
+      const resizeHandler = () => {
+        if (this.relatedDraggable) {
+          this.relatedDraggable.applyBounds(calculateBounds());
+          this.updateRelatedProgress();
+        }
+      };
+
+      window.addEventListener("resize", resizeHandler);
+
+      // ResizeObserver
+      const resizeObserver = new ResizeObserver(() => {
+        if (this.relatedDraggable) {
+          this.relatedDraggable.applyBounds(calculateBounds());
+          this.updateRelatedProgress();
         }
       });
 
-      // Initial progress
-      updateProgress(0);
+      resizeObserver.observe(container);
 
-      console.log("✅ Drag de produtos relacionados inicializado");
+      // Initial progress update
+      this.updateRelatedProgress();
     }, 300);
+  }
+
+  updateRelatedProgress() {
+    const grid = this.querySelector(".related-products-grid");
+    const container = this.querySelector(".related-drag-container");
+    const progressFill = this.querySelector(".related-drag-progress-fill");
+
+    if (!grid || !container || !progressFill) return;
+
+    const containerWidth = container.offsetWidth;
+    const gridWidth = grid.scrollWidth;
+    const maxScroll = gridWidth - containerWidth;
+
+    if (maxScroll <= 0) {
+      progressFill.style.width = "100%";
+      return;
+    }
+
+    const currentX = Math.abs(window.gsap.getProperty(grid, "x") || 0);
+    const progress = (currentX / maxScroll) * 100;
+    progressFill.style.width = `${Math.min(100, Math.max(0, progress))}%`;
   }
 
   render() {
     const { product } = this;
     // Pega produtos relacionados misturando categorias quando necessário
-    const relatedProducts = getRelatedProducts(product.id, 8, true);
+    const relatedProducts = getRelatedColecaoProducts(product.id, 8, true);
 
     this.innerHTML = `
       <!-- Font Awesome para ícones -->
@@ -734,9 +699,7 @@ export class ProductDetailContent extends HTMLElement {
           <nav class="product-breadcrumb">
             <a href="/" data-route="/">Home</a>
             <span>/</span>
-            <a href="/para-ela" data-route="/para-ela">${this.getCategoryLabel(
-              product.category
-            )}</a>
+            <a href="/colecao" data-route="/colecao">Coleção</a>
             <span>/</span>
             <span>${product.name}</span>
           </nav>
@@ -978,4 +941,7 @@ export class ProductDetailContent extends HTMLElement {
   }
 }
 
-customElements.define("product-detail-content", ProductDetailContent);
+customElements.define(
+  "colecao-product-detail-content",
+  ColecaoProductDetailContent
+);
