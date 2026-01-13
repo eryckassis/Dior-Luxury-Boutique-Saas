@@ -99,6 +99,27 @@ export class ModaNavigation extends HTMLElement {
         console.log("Search clicked");
       });
     }
+
+    // Acessibilidade - Alto Contraste
+    const accessibilityToggle = this.querySelector(".moda-menu-checkbox");
+    if (accessibilityToggle) {
+      // Restaura estado salvo
+      const highContrast = localStorage.getItem("dior-high-contrast") === "true";
+      accessibilityToggle.checked = highContrast;
+      if (highContrast) {
+        document.body.classList.add("high-contrast");
+      }
+
+      accessibilityToggle.addEventListener("change", (e) => {
+        if (e.target.checked) {
+          document.body.classList.add("high-contrast");
+          localStorage.setItem("dior-high-contrast", "true");
+        } else {
+          document.body.classList.remove("high-contrast");
+          localStorage.setItem("dior-high-contrast", "false");
+        }
+      });
+    }
   }
 
   toggleMenu() {
