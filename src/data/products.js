@@ -9,105 +9,105 @@
 export const PRODUCT_CATEGORIES = {
   // Roupas - Mostram cores E tamanhos
   BLAZER: {
-    key: 'blazer',
-    label: 'Blazers',
+    key: "blazer",
+    label: "Blazers",
     showColors: true,
     showSizes: true,
-    sizeType: 'alpha', // 34, 36, 38, 40...
-    description: 'Peças de alfaiataria que requerem tamanho específico'
+    sizeType: "alpha", // 34, 36, 38, 40...
+    description: "Peças de alfaiataria que requerem tamanho específico",
   },
   VESTIDO: {
-    key: 'vestido',
-    label: 'Vestidos',
+    key: "vestido",
+    label: "Vestidos",
     showColors: true,
     showSizes: true,
-    sizeType: 'alpha',
-    description: 'Vestidos que requerem tamanho específico'
+    sizeType: "alpha",
+    description: "Vestidos que requerem tamanho específico",
   },
   CASACO: {
-    key: 'casaco',
-    label: 'Casacos',
+    key: "casaco",
+    label: "Casacos",
     showColors: true,
     showSizes: true,
-    sizeType: 'alpha',
-    description: 'Casacos e jaquetas que requerem tamanho específico'
+    sizeType: "alpha",
+    description: "Casacos e jaquetas que requerem tamanho específico",
   },
   CAMISA: {
-    key: 'camisa',
-    label: 'Camisas',
+    key: "camisa",
+    label: "Camisas",
     showColors: true,
     showSizes: true,
-    sizeType: 'alpha',
-    description: 'Camisas que requerem tamanho específico'
+    sizeType: "alpha",
+    description: "Camisas que requerem tamanho específico",
   },
   CALCA: {
-    key: 'calca',
-    label: 'Calças',
+    key: "calca",
+    label: "Calças",
     showColors: true,
     showSizes: true,
-    sizeType: 'alpha',
-    description: 'Calças que requerem tamanho específico'
+    sizeType: "alpha",
+    description: "Calças que requerem tamanho específico",
   },
   SAIA: {
-    key: 'saia',
-    label: 'Saias',
+    key: "saia",
+    label: "Saias",
     showColors: true,
     showSizes: true,
-    sizeType: 'alpha',
-    description: 'Saias que requerem tamanho específico'
+    sizeType: "alpha",
+    description: "Saias que requerem tamanho específico",
   },
-  
+
   // Sapatos - Mostram cores E tamanhos numéricos
   SAPATO: {
-    key: 'sapato',
-    label: 'Sapatos',
+    key: "sapato",
+    label: "Sapatos",
     showColors: true,
     showSizes: true,
-    sizeType: 'numeric', // 35, 36, 37...
-    description: 'Calçados que requerem tamanho específico'
+    sizeType: "numeric", // 35, 36, 37...
+    description: "Calçados que requerem tamanho específico",
   },
-  
+
   // Acessórios - Apenas cores, SEM tamanhos
   BOLSA: {
-    key: 'bolsa',
-    label: 'Bolsas',
+    key: "bolsa",
+    label: "Bolsas",
     showColors: true,
     showSizes: false,
-    sizeType: 'none',
-    description: 'Bolsas disponíveis em cores, tamanho único'
+    sizeType: "none",
+    description: "Bolsas disponíveis em cores, tamanho único",
   },
   OCULOS: {
-    key: 'oculos',
-    label: 'Óculos',
+    key: "oculos",
+    label: "Óculos",
     showColors: true,
     showSizes: false,
-    sizeType: 'none',
-    description: 'Óculos disponíveis em cores, tamanho único'
+    sizeType: "none",
+    description: "Óculos disponíveis em cores, tamanho único",
   },
   JOIAS: {
-    key: 'joias',
-    label: 'Joias',
+    key: "joias",
+    label: "Joias",
     showColors: true,
     showSizes: false,
-    sizeType: 'none',
-    description: 'Joias disponíveis em diferentes acabamentos'
+    sizeType: "none",
+    description: "Joias disponíveis em diferentes acabamentos",
   },
   RELOJOARIA: {
-    key: 'relojoaria',
-    label: 'Relógios',
+    key: "relojoaria",
+    label: "Relógios",
     showColors: true,
     showSizes: false,
-    sizeType: 'none',
-    description: 'Relógios de pulso, tamanho ajustável'
+    sizeType: "none",
+    description: "Relógios de pulso, tamanho ajustável",
   },
   FRAGRANCIA: {
-    key: 'fragrancia',
-    label: 'Fragrâncias',
+    key: "fragrancia",
+    label: "Fragrâncias",
     showColors: false,
     showSizes: false,
-    sizeType: 'none',
-    description: 'Perfumes e fragrâncias'
-  }
+    sizeType: "none",
+    description: "Perfumes e fragrâncias",
+  },
 };
 
 /**
@@ -117,7 +117,11 @@ export const PRODUCT_CATEGORIES = {
  */
 export function getCategoryConfig(categoryKey) {
   const normalizedKey = categoryKey?.toLowerCase();
-  return Object.values(PRODUCT_CATEGORIES).find(cat => cat.key === normalizedKey) || null;
+  return (
+    Object.values(PRODUCT_CATEGORIES).find(
+      (cat) => cat.key === normalizedKey
+    ) || null
+  );
 }
 
 /**
@@ -134,7 +138,7 @@ export function isValidCategory(categoryKey) {
  * @returns {Array<string>}
  */
 export function getValidCategories() {
-  return Object.values(PRODUCT_CATEGORIES).map(cat => cat.key);
+  return Object.values(PRODUCT_CATEGORIES).map((cat) => cat.key);
 }
 
 /**
@@ -144,37 +148,39 @@ export function getValidCategories() {
  * @returns {Object} Resultado da operação
  */
 export function updateProductCategory(productId, newCategory) {
-  const product = products.find(p => p.id === productId);
-  
+  const product = products.find((p) => p.id === productId);
+
   if (!product) {
     return {
       success: false,
-      error: `Produto com ID '${productId}' não encontrado`
+      error: `Produto com ID '${productId}' não encontrado`,
     };
   }
-  
+
   if (!isValidCategory(newCategory)) {
     return {
       success: false,
-      error: `Categoria '${newCategory}' inválida. Categorias válidas: ${getValidCategories().join(', ')}`
+      error: `Categoria '${newCategory}' inválida. Categorias válidas: ${getValidCategories().join(
+        ", "
+      )}`,
     };
   }
-  
+
   const oldCategory = product.category;
   product.category = newCategory;
-  
+
   const categoryConfig = getCategoryConfig(newCategory);
-  
+
   // Ajusta sizes baseado na nova categoria
   if (!categoryConfig.showSizes) {
-    product.sizes = ['Único'];
+    product.sizes = ["Único"];
   }
-  
+
   return {
     success: true,
     message: `Categoria do produto '${product.name}' alterada de '${oldCategory}' para '${newCategory}'`,
     product,
-    categoryConfig
+    categoryConfig,
   };
 }
 

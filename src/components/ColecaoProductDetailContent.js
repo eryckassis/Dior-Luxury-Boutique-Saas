@@ -31,22 +31,22 @@ export class ColecaoProductDetailContent extends HTMLElement {
    */
   shouldShowSizeSelector() {
     if (!this.product) return false;
-    
+
     const category = this.product.category?.toLowerCase();
-    
+
     // Produtos com seleção de tamanho
     const categoriesWithSize = [
-      'sapato',
-      'blazer',
-      'vestido',
-      'casaco',
-      'camisa',
-      'calca',
-      'saia',
-      'jaqueta',
-      'roupa'
+      "sapato",
+      "blazer",
+      "vestido",
+      "casaco",
+      "camisa",
+      "calca",
+      "saia",
+      "jaqueta",
+      "roupa",
     ];
-    
+
     return categoriesWithSize.includes(category);
   }
 
@@ -55,7 +55,11 @@ export class ColecaoProductDetailContent extends HTMLElement {
    * @returns {boolean}
    */
   shouldShowColorSelector() {
-    if (!this.product || !this.product.colors || this.product.colors.length === 0) {
+    if (
+      !this.product ||
+      !this.product.colors ||
+      this.product.colors.length === 0
+    ) {
       return false;
     }
     return true;
@@ -66,17 +70,28 @@ export class ColecaoProductDetailContent extends HTMLElement {
    * @returns {string} 'numeric' | 'alpha' | 'none'
    */
   getSizeType() {
-    if (!this.product) return 'none';
-    
+    if (!this.product) return "none";
+
     const category = this.product.category?.toLowerCase();
-    
-    if (category === 'sapato') {
-      return 'numeric'; // 35, 36, 37...
-    } else if (['blazer', 'vestido', 'casaco', 'camisa', 'calca', 'saia', 'jaqueta', 'roupa'].includes(category)) {
-      return 'alpha'; // P, M, G, GG ou 34, 36, 38...
+
+    if (category === "sapato") {
+      return "numeric"; // 35, 36, 37...
+    } else if (
+      [
+        "blazer",
+        "vestido",
+        "casaco",
+        "camisa",
+        "calca",
+        "saia",
+        "jaqueta",
+        "roupa",
+      ].includes(category)
+    ) {
+      return "alpha"; // P, M, G, GG ou 34, 36, 38...
     }
-    
-    return 'none';
+
+    return "none";
   }
 
   connectedCallback() {
@@ -90,7 +105,8 @@ export class ColecaoProductDetailContent extends HTMLElement {
 
     // Inicializa preço e imagens com a primeira cor (ou valores base)
     this.currentPrice = this.product.colors?.[0]?.price || this.product.price;
-    this.currentImages = this.product.colors?.[0]?.images || this.product.images;
+    this.currentImages =
+      this.product.colors?.[0]?.images || this.product.images;
 
     this.render();
     this.initGalleryDrag();
@@ -360,11 +376,13 @@ export class ColecaoProductDetailContent extends HTMLElement {
     const descriptionText = this.querySelector(".product-description-text");
     const verMaisBtn = this.querySelector(".product-ver-mais");
     const verMaisText = verMaisBtn?.querySelector(".ver-mais-text");
-    const chevron = verMaisBtn?.querySelector(".fa-chevron-down, .fa-chevron-up");
-    
+    const chevron = verMaisBtn?.querySelector(
+      ".fa-chevron-down, .fa-chevron-up"
+    );
+
     if (descriptionText && verMaisBtn) {
       const isCollapsed = descriptionText.classList.contains("collapsed");
-      
+
       if (isCollapsed) {
         descriptionText.classList.remove("collapsed");
         if (verMaisText) verMaisText.textContent = "Ver menos";
@@ -427,7 +445,7 @@ export class ColecaoProductDetailContent extends HTMLElement {
   updateGallery() {
     const track = this.querySelector(".product-gallery-track");
     const pagination = this.querySelector(".gallery-pagination");
-    
+
     if (!track || !this.currentImages) return;
 
     // Destrói o draggable existente
@@ -438,19 +456,25 @@ export class ColecaoProductDetailContent extends HTMLElement {
 
     // Atualiza o HTML dos slides
     track.innerHTML = this.currentImages
-      .map((img, index) => `
+      .map(
+        (img, index) => `
         <div class="product-gallery-slide">
           <img src="${img}" alt="${this.product.name} - Imagem ${index + 1}" />
         </div>
-      `)
+      `
+      )
       .join("");
 
     // Atualiza dots de paginação
     if (pagination) {
       pagination.innerHTML = this.currentImages
-        .map((_, index) => `
-          <div class="gallery-dot ${index === 0 ? "active" : ""}" data-index="${index}"></div>
-        `)
+        .map(
+          (_, index) => `
+          <div class="gallery-dot ${
+            index === 0 ? "active" : ""
+          }" data-index="${index}"></div>
+        `
+        )
         .join("");
     }
 
@@ -479,13 +503,22 @@ export class ColecaoProductDetailContent extends HTMLElement {
 
   addToCart() {
     // Valida tamanho apenas se o produto requer seleção de tamanho
-    if (this.shouldShowSizeSelector() && !this.selectedSize && this.product.sizes && this.product.sizes.length > 1 && this.product.sizes[0] !== "Único") {
+    if (
+      this.shouldShowSizeSelector() &&
+      !this.selectedSize &&
+      this.product.sizes &&
+      this.product.sizes.length > 1 &&
+      this.product.sizes[0] !== "Único"
+    ) {
       alert("Por favor, selecione um tamanho");
       return;
     }
 
     // Valida cor apenas se o produto tem cores disponíveis
-    if (this.shouldShowColorSelector() && !this.product.colors[this.selectedColor]) {
+    if (
+      this.shouldShowColorSelector() &&
+      !this.product.colors[this.selectedColor]
+    ) {
       alert("Por favor, selecione uma cor");
       return;
     }
@@ -493,8 +526,12 @@ export class ColecaoProductDetailContent extends HTMLElement {
     // Adiciona ao carrinho
     const cartItem = {
       product: this.product,
-      color: this.shouldShowColorSelector() ? this.product.colors[this.selectedColor] : null,
-      size: this.shouldShowSizeSelector() ? (this.selectedSize || this.product.sizes[0]) : null,
+      color: this.shouldShowColorSelector()
+        ? this.product.colors[this.selectedColor]
+        : null,
+      size: this.shouldShowSizeSelector()
+        ? this.selectedSize || this.product.sizes[0]
+        : null,
     };
 
     console.log("Adicionando ao carrinho:", cartItem);
@@ -749,7 +786,10 @@ export class ColecaoProductDetailContent extends HTMLElement {
 
           <!-- Seleção de Tamanho -->
           ${
-            this.shouldShowSizeSelector() && product.sizes && product.sizes.length > 0 && product.sizes[0] !== "Único"
+            this.shouldShowSizeSelector() &&
+            product.sizes &&
+            product.sizes.length > 0 &&
+            product.sizes[0] !== "Único"
               ? `
             <div class="product-sizes">
               <div class="product-sizes-header">
@@ -808,56 +848,84 @@ export class ColecaoProductDetailContent extends HTMLElement {
                     <i class="fas fa-chevron-down"></i>
                   </button>
                 </div>
-                ${product.material ? `
+                ${
+                  product.material
+                    ? `
                 <div class="product-detail-info">
                   <h4><i class="fas fa-tag"></i> Material</h4>
                   <p>${product.material}</p>
                 </div>
-                ` : ''}
-                ${product.care ? `
+                `
+                    : ""
+                }
+                ${
+                  product.care
+                    ? `
                 <div class="product-detail-info">
                   <h4><i class="fas fa-heart"></i> Cuidados</h4>
                   <p>${product.care}</p>
                 </div>
-                ` : ''}
+                `
+                    : ""
+                }
               </div>
               
               <!-- Tab Tamanho e Corte -->
               <div class="product-tab-panel" data-panel="1">
-                ${product.sizeInfo ? `
+                ${
+                  product.sizeInfo
+                    ? `
                   <div class="size-info-section">
                     <ul class="size-info-list">
-                      ${product.sizeInfo.fit ? `
+                      ${
+                        product.sizeInfo.fit
+                          ? `
                         <li>
                           <i class="fas fa-tshirt"></i>
                           <span>${product.sizeInfo.fit}</span>
                         </li>
-                      ` : ''}
-                      ${product.sizeInfo.sleeves ? `
+                      `
+                          : ""
+                      }
+                      ${
+                        product.sizeInfo.sleeves
+                          ? `
                         <li>
                           <i class="fas fa-ruler-horizontal"></i>
                           <span>${product.sizeInfo.sleeves}</span>
                         </li>
-                      ` : ''}
-                      ${product.sizeInfo.model ? `
+                      `
+                          : ""
+                      }
+                      ${
+                        product.sizeInfo.model
+                          ? `
                         <li>
                           <i class="fas fa-user"></i>
                           <span>${product.sizeInfo.model}</span>
                         </li>
-                      ` : ''}
-                      ${product.sizeInfo.guide ? `
+                      `
+                          : ""
+                      }
+                      ${
+                        product.sizeInfo.guide
+                          ? `
                         <li>
                           <i class="fas fa-info-circle"></i>
                           <span>${product.sizeInfo.guide}</span>
                         </li>
-                      ` : ''}
+                      `
+                          : ""
+                      }
                     </ul>
                   </div>
-                ` : `
+                `
+                    : `
                   <div class="size-info-section">
                     <p><i class="fas fa-info-circle"></i> Informações de tamanho não disponíveis para este produto.</p>
                   </div>
-                `}
+                `
+                }
               </div>
               
               <!-- Tab Contato e disponibilidade -->
