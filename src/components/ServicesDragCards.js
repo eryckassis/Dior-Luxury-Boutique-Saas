@@ -33,24 +33,25 @@ export function initServicesDrag(options) {
       // Usar getBoundingClientRect para pegar a largura VISÍVEL real do container
       const containerRect = container.getBoundingClientRect();
       const containerWidth = containerRect.width;
-      
+
       // Ler gap do CSS
       const trackStyles = getComputedStyle(track);
       const gap = parseFloat(trackStyles.gap) || 20;
       const paddingLeft = parseFloat(trackStyles.paddingLeft) || 0;
       const paddingRight = parseFloat(trackStyles.paddingRight) || 0;
-      
+
       // Somar largura de todos os cards
       let totalCardsWidth = 0;
-      cards.forEach(card => {
+      cards.forEach((card) => {
         totalCardsWidth += card.offsetWidth;
       });
-      
+
       // Adicionar gaps entre cards
       const totalGaps = (cards.length - 1) * gap;
-      
+
       // Largura total do conteúdo do track
-      const contentWidth = totalCardsWidth + totalGaps + paddingLeft + paddingRight;
+      const contentWidth =
+        totalCardsWidth + totalGaps + paddingLeft + paddingRight;
 
       // MaxDrag: quanto precisa mover para ver o último card completamente
       // Negativo = quanto pode arrastar para a esquerda
@@ -65,14 +66,14 @@ export function initServicesDrag(options) {
         paddingRight,
         maxDrag,
         cardCount: cards.length,
-        firstCardWidth: cards[0]?.offsetWidth
+        firstCardWidth: cards[0]?.offsetWidth,
       });
 
       return { minX: Math.min(0, maxDrag), maxX: 0 };
     };
 
     let bounds = calculateBounds();
-    
+
     // Forçar que haja sempre espaço para arrastar se tiver mais de 1 card
     if (bounds.minX >= 0 && cards.length > 1) {
       console.warn("⚠️ Forçando bounds negativos para permitir drag");
@@ -118,7 +119,12 @@ export function initServicesDrag(options) {
         updateIndicator(this.x);
       },
       onDragEnd: function () {
-        console.log("🎯 Services Drag finalizado em:", this.x, "/ minX:", bounds.minX);
+        console.log(
+          "🎯 Services Drag finalizado em:",
+          this.x,
+          "/ minX:",
+          bounds.minX
+        );
         updateIndicator(this.x);
       },
       onThrowUpdate: function () {
@@ -142,12 +148,14 @@ export function initServicesDrag(options) {
 
   // Retornar cleanup function
   return {
-    get instance() { return draggableInstance; },
+    get instance() {
+      return draggableInstance;
+    },
     destroy: () => {
       if (draggableInstance) {
         draggableInstance.kill();
       }
-    }
+    },
   };
 }
 
