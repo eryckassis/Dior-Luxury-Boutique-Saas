@@ -299,10 +299,9 @@
 }
 
 .jadore-title {
-  font-family: "MinhaFonte", serif;
-  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-family: "Hellix", sans-serif;
+  font-size: clamp(2rem, 4vw, 2.5rem);
   font-weight: 300;
-  font-style: italic;
   color: #fff;
   margin: 0;
   letter-spacing: 0.01em;
