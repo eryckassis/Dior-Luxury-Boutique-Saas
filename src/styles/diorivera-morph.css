@@ -268,11 +268,11 @@
   object-fit: cover;
   object-position: center;
   display: block;
-  /* Evita tremor - força GPU layer */
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   will-change: auto;
   flex-shrink: 0;
+  filter: brightness(0.8);
 }
 
 /* Texto sobreposto */
