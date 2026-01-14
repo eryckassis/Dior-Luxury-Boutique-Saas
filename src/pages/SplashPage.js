@@ -55,7 +55,7 @@ function hidePreloaderGlobal() {
 
   const tl = gsap.timeline({
     onComplete: () => {
-      gsap.set(preloader, { 
+      gsap.set(preloader, {
         display: "none",
         height: "100vh", // Reset para próximo uso
         opacity: 1,
