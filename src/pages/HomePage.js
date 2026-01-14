@@ -25,6 +25,7 @@ export class HomePage extends HTMLElement {
   connectedCallback() {
     this.render();
     this.initDioriveraScrollMorph(); // Nova animação morph
+    this.initJadoreExpandMorph(); // Morph expand (inverso)
     this.initHeroVideosHover();
     this.initHeroScrollAnimations();
     this.initHeroButtons();
@@ -88,6 +89,46 @@ export class HomePage extends HTMLElement {
           ease: "power3.out",
         },
         1
+      );
+    });
+  }
+
+  // ============================================================================
+  // J'ADORE EXPAND MORPH - Efeito inverso: inicia com padding, expande para full
+  // Mesma lógica do Diorivera, mas animando de pequeno → full-width
+  // ============================================================================
+  initJadoreExpandMorph() {
+    if (!window.gsap || !window.ScrollTrigger) return;
+
+    requestAnimationFrame(() => {
+      const section = this.querySelector(".jadore-expand-section");
+      const imageWrapper = this.querySelector(".jadore-image-wrapper");
+
+      if (!section || !imageWrapper) return;
+
+      // Timeline principal com ScrollTrigger (mesma lógica do Diorivera)
+      const tl = window.gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: "top top",
+          end: "+=150%",
+          pin: true,
+          scrub: 0.6,
+          anticipatePin: 1,
+        },
+      });
+
+      // Expande os 4 lados: width e height (imagem fica fixa, só o wrapper expande)
+      tl.to(
+        imageWrapper,
+        {
+          width: "100%",
+          height: "100%",
+          borderRadius: "0px",
+          duration: 1,
+          ease: "power2.inOut",
+        },
+        0
       );
     });
   }
@@ -304,31 +345,27 @@ export class HomePage extends HTMLElement {
   initKeyholeScrollAnimations() {
     if (!window.gsap || !window.ScrollTrigger) return;
 
-    // Aguardar o web component keyhole-section renderizar
-    setTimeout(() => {
-      const keyholeImage = this.querySelector(
-        "keyhole-section .keyhole-image img"
-      );
-      const keyholeOverlay = this.querySelector(
-        "keyhole-section .keyhole-overlay"
-      );
-      const keyholeSubtitle = this.querySelector(
-        "keyhole-section .keyhole-subtitle"
-      );
-      const keyholeTitle = this.querySelector("keyhole-section .keyhole-title");
-      const keyholeButton = this.querySelector(
-        "keyhole-section .keyhole-button"
-      );
-      const keyholeSection = this.querySelector(
-        "keyhole-section .keyhole-section"
-      );
-      const keyholeContainer = this.querySelector(
-        "keyhole-section .keyhole-container"
-      );
+    // Função para inicializar as animações
+    const initAnimations = () => {
+      const keyholeComponent = this.querySelector("keyhole-section");
+      if (!keyholeComponent) {
+        console.warn("Keyhole component não encontrado");
+        return false;
+      }
+
+      const keyholeImage = keyholeComponent.querySelector(".keyhole-image img");
+      const keyholeOverlay = keyholeComponent.querySelector(".keyhole-overlay");
+      const keyholeSubtitle =
+        keyholeComponent.querySelector(".keyhole-subtitle");
+      const keyholeTitle = keyholeComponent.querySelector(".keyhole-title");
+      const keyholeButton = keyholeComponent.querySelector(".keyhole-button");
+      const keyholeSection = keyholeComponent.querySelector(".keyhole-section");
+      const keyholeContainer =
+        keyholeComponent.querySelector(".keyhole-container");
 
       if (!keyholeImage || !keyholeSection) {
-        console.warn("Keyhole section não encontrada");
-        return;
+        console.warn("Keyhole elements não encontrados, aguardando...");
+        return false;
       }
 
       console.log("Inicializando ScrollTrigger do Keyhole");
@@ -406,7 +443,23 @@ export class HomePage extends HTMLElement {
       }
 
       console.log("ScrollTrigger do Keyhole inicializado com sucesso");
-    }, 200);
+      return true;
+    };
+
+    // Aguardar o web component keyhole-section renderizar com retry
+    const tryInit = (attempts = 0) => {
+      if (attempts > 10) {
+        console.error("Keyhole section não renderizou após 10 tentativas");
+        return;
+      }
+
+      if (!initAnimations()) {
+        setTimeout(() => tryInit(attempts + 1), 100);
+      }
+    };
+
+    // Iniciar após um pequeno delay para garantir que o DOM está pronto
+    setTimeout(() => tryInit(), 100);
   }
 
   initServicesDiorAnimations() {
@@ -1636,6 +1689,24 @@ export class HomePage extends HTMLElement {
         </div>
       </section>
 
+      <!-- ============================================================
+           J'ADORE EXPAND SECTION - Morph inverso (expande para full)
+           ============================================================ -->
+      <section class="jadore-expand-section">
+        <div class="jadore-expand-container">
+          <div class="jadore-image-wrapper">
+            <img src="/images/JadoreFull.jpg" alt="J'adore Eau de Parfum" class="jadore-expand-image" />
+            
+            <!-- Texto sobreposto -->
+            <div class="jadore-text-content">
+              <span class="jadore-label">J'adore Eau de Parfum</span>
+              <h2 class="jadore-title">A flor dos sonhos de J'adore</h2>
+              <a href="/miss-dior" class="jadore-button" data-route="/miss-dior">Descubra</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- Keyhole Reveal Section -->
       <keyhole-section
         image="/images/Image 2 Dior.jpg"
@@ -1643,6 +1714,7 @@ export class HomePage extends HTMLElement {
         title="Uma nova visão da icônica paleta de iluminadores"
         button-text="Descubra"
       ></keyhole-section>
+
 
       <!-- Services Dior Section -->
       <section class="services-dior-section" id="services-dior">

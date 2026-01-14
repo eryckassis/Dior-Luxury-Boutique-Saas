@@ -1,0 +1,240 @@
+/* ============================================================================
+   SPLASH PAGE STYLES
+   ============================================================================
+   Estilos dedicados para a Splash Page (SPA)
+   Separado do style.css principal para melhor organização
+   ============================================================================ */
+
+/* ============================================================================
+   CONTAINER PRINCIPAL
+   ============================================================================ */
+
+.splash-page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 10000;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ============================================================================
+   LOGO CENTRAL
+   ============================================================================ */
+
+.splash-page .splash-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10003;
+  width: 500px;
+  height: auto;
+  pointer-events: none;
+}
+
+.splash-page .splash-logo img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ============================================================================
+   CONTAINER DAS OPÇÕES
+   ============================================================================ */
+
+.splash-page .splash-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  overflow: hidden;
+}
+
+/* ============================================================================
+   OPÇÕES (Moda & Beauty)
+   ============================================================================ */
+
+.splash-page .splash-option {
+  position: relative;
+  flex: 1;
+  height: 100%;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+/* Background (vídeo) */
+.splash-page .splash-option-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+/* Overlay gradiente */
+.splash-page .splash-option-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.9) 0%,
+    rgba(0, 0, 0, 0.6) 40%,
+    rgba(0, 0, 0, 0.3) 70%,
+    transparent 100%
+  );
+  z-index: 1;
+}
+
+/* Camada de escurecimento para efeito hover */
+.splash-page .splash-option-darkening {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 1;
+  opacity: 1;
+}
+
+/* ============================================================================
+   CONTEÚDO (Título + Botão)
+   ============================================================================ */
+
+.splash-page .splash-option-content {
+  position: absolute;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  text-align: center;
+  width: 100%;
+  padding: 0 20px;
+}
+
+.splash-page .splash-option-title {
+  font-family: "MinhaFonte", sans-serif;
+  font-size: 40px;
+  font-weight: 600;
+  color: #ededed;
+  margin-bottom: 24px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+/* ============================================================================
+   BOTÃO COM EFEITO FLAIR
+   ============================================================================ */
+
+.splash-page .splash-option-button {
+  display: inline-block;
+  font-family: var(--font-primary);
+  font-size: 14px;
+  font-weight: 500;
+  color: #ffffff;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 14px 40px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  background: transparent;
+  backdrop-filter: blur(4px);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: color 0.15s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.splash-page .splash-option-button:hover {
+  color: #000000;
+  border-color: #fff;
+}
+
+/* Label do botão */
+.splash-page .button__label {
+  position: relative;
+  text-align: center;
+  z-index: 2;
+  transition: color 50ms cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.splash-page .splash-option-button:hover .button__label {
+  transition: color 0.15s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+/* Flair (efeito que segue o mouse) */
+.splash-page .button__flair {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  transform: scale(0);
+  transform-origin: 0 0;
+  will-change: transform;
+  z-index: 1;
+}
+
+.splash-page .button__flair::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 170%;
+  aspect-ratio: 1/1;
+  background-color: #ededed;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  display: block;
+}
+
+/* ============================================================================
+   RESPONSIVE - Mobile
+   ============================================================================ */
+
+@media (max-width: 768px) {
+  .splash-page .splash-container {
+    flex-direction: column;
+  }
+
+  .splash-page .splash-option-title {
+    font-size: 32px;
+  }
+
+  .splash-page .splash-option-content {
+    bottom: 60px;
+  }
+
+  .splash-page .splash-logo {
+    width: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  .splash-page .splash-option-title {
+    font-size: 26px;
+  }
+
+  .splash-page .splash-option-button {
+    padding: 12px 32px;
+    font-size: 12px;
+  }
+
+  .splash-page .splash-option-content {
+    bottom: 40px;
+  }
+}

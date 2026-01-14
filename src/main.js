@@ -30,6 +30,7 @@ import "./pages/ColecaoPage.js";
 import "./pages/ProductDetailPage.js";
 import "./pages/ColecaoProductDetailPage.js";
 import "./pages/BoutiquesPage.js";
+import "./pages/SplashPage.js";
 import "./components/ProfileMenu.js";
 import "./components/FragrancesModal.js";
 import "./components/AppNavigation.js";
@@ -41,7 +42,8 @@ import "./components/ModaAcessoriosContent.js";
 // ============================================================================
 
 // Registra as rotas
-router.register("/", "home-page");
+router.register("/", "splash-page");
+router.register("/home", "home-page");
 router.register("/dior-holiday", "dior-holiday-page");
 router.register("/arte-de-presentear", "arte-de-presentear-page");
 router.register("/miss-dior", "miss-dior-page");
@@ -202,177 +204,6 @@ class VideoHoverController {
     // Volta o vídeo para o início
     this.video.currentTime = 0;
   }
-}
-
-// ============================================================================
-// SPLASH SCREEN - Navegação com Duas Opções
-// ============================================================================
-
-class SplashScreen {
-  constructor() {
-    this.splashElement = document.getElementById("splash-screen");
-    this.options = document.querySelectorAll(".splash-option");
-    this.init();
-  }
-
-  init() {
-    if (!this.splashElement || !this.options.length) {
-      return;
-    }
-
-    this.addEventListeners();
-    this.initHoverEffects();
-  }
-
-  initHoverEffects() {
-    this.options.forEach((option) => {
-      const darkening = option.querySelector(".splash-option-darkening");
-      const bg = option.querySelector(".splash-option-bg");
-
-      if (!darkening || !bg) {
-        return;
-      }
-
-      // Mouse enter - clareia a imagem e aumenta
-      option.addEventListener("mouseenter", () => {
-        gsap.to(darkening, {
-          duration: 0.6,
-          opacity: 0,
-          ease: "power2.out",
-        });
-
-        gsap.to(bg, {
-          duration: 0.8,
-          scale: 1.05,
-          ease: "power2.out",
-        });
-
-        gsap.to(option, {
-          duration: 0.5,
-          flex: 1.1,
-          ease: "power2.out",
-        });
-      });
-
-      // Mouse leave - escurece a imagem e volta ao normal
-      option.addEventListener("mouseleave", () => {
-        gsap.to(darkening, {
-          duration: 0.6,
-          opacity: 1,
-          ease: "power2.out",
-        });
-
-        gsap.to(bg, {
-          duration: 0.8,
-          scale: 1,
-          ease: "power2.out",
-        });
-
-        gsap.to(option, {
-          duration: 0.5,
-          flex: 1,
-          ease: "power2.out",
-        });
-      });
-    });
-  }
-
-  addEventListeners() {
-    this.options.forEach((option) => {
-      const button = option.querySelector(".splash-option-button");
-      const category = option.getAttribute("data-category");
-
-      if (button) {
-        button.addEventListener("click", (e) => {
-          e.preventDefault();
-          this.handleOptionClick(category);
-        });
-      }
-    });
-  }
-
-  handleOptionClick(category) {
-    // Anima saída do splash screen
-    gsap.to(this.splashElement, {
-      duration: 0.8,
-      opacity: 0,
-      ease: "power2.inOut",
-      onComplete: () => {
-        this.splashElement.classList.add("hidden");
-        this.startPreloader(category);
-      },
-    });
-  }
-
-  startPreloader(category) {
-    // Aguarda um frame para garantir que splash foi escondido
-    requestAnimationFrame(() => {
-      initPreloader(category);
-    });
-  }
-}
-
-// ============================================================================
-// PRELOADER ANIMATION (Layer sobe sem animar logo)
-// ============================================================================
-
-function initPreloader(category) {
-  // Inicia o router ANTES da animação
-  router.init();
-
-  const tl = gsap.timeline();
-
-  tl
-    // Torna o container e logo visíveis imediatamente
-    .to(".preloader .text-container", {
-      duration: 0,
-      visibility: "visible",
-      ease: "Power3.easeOut",
-    })
-    .to(".preloader .imagem-logo img", {
-      duration: 0,
-      opacity: 1,
-      ease: "Power3.easeOut",
-    })
-
-    // Pausa mostrando a logo estática
-    .to(
-      {},
-      {
-        duration: 2,
-      }
-    )
-
-    // Preloader sobe (layer subindo)
-    .to(".preloader", {
-      duration: 1.5,
-      height: "0vh",
-      ease: "Power3.easeOut",
-      onComplete: () => {
-        // Navega para a rota APÓS o preloader subir completamente
-        if (category === "fashion") {
-          router.navigateFromSplash("/moda-acessorios");
-        } else if (category === "beauty") {
-          router.navigateFromSplash("/");
-        } else {
-          router.navigateFromSplash("/");
-        }
-      },
-    })
-
-    // Libera scroll do body
-    .to(
-      "body",
-      {
-        overflow: "auto",
-      },
-      "-=1.5"
-    )
-
-    // Esconde preloader
-    .to(".preloader", {
-      display: "none",
-    });
 }
 
 // ============================================================================
@@ -846,94 +677,15 @@ class Application {
 }
 
 // ============================================================================
-// SCROLL TRIGGER ANIMATIONS (Keyhole Effect)
+// SCROLL TRIGGER ANIMATIONS (Gallery Effects)
+// ============================================================================
+// NOTA: Keyhole animations foram movidas para HomePage.js para evitar conflito
+// com Web Components e garantir timing correto de inicialização
 // ============================================================================
 
 function initScrollAnimations() {
   // Registra os plugins ScrollTrigger e ScrollToPlugin
   gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
-
-  // ====== KEYHOLE REVEAL EFFECT ======
-  const keyholeImage = document.querySelector(".keyhole-image img");
-  const keyholeOverlay = document.querySelector(".keyhole-overlay");
-
-  if (keyholeImage) {
-    // Animação da imagem - expande o retângulo do centro até preencher tela
-    gsap.to(keyholeImage, {
-      clipPath: "inset(0% 0% 0% 0% round 0px)", // Expande até cobrir tela toda
-      ease: "none",
-      scrollTrigger: {
-        trigger: ".keyhole-section",
-        start: "top top",
-        end: "bottom center",
-        scrub: 1.5,
-        pin: ".keyhole-container",
-        // markers: true, // Descomente para debug
-      },
-    });
-
-    // Animação do overlay - desaparece conforme expande
-    gsap.to(keyholeOverlay, {
-      opacity: 0,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: ".keyhole-section",
-        start: "top top",
-        end: "center center",
-        scrub: 1,
-      },
-    });
-
-    // Animação do conteúdo de texto - APARECE ao fazer scroll
-    const keyholeSubtitle = document.querySelector(".keyhole-subtitle");
-    const keyholeTitle = document.querySelector(".keyhole-title");
-    const keyholeButton = document.querySelector(".keyhole-button");
-
-    // Anima o subtitle
-    if (keyholeSubtitle) {
-      gsap.to(keyholeSubtitle, {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        scrollTrigger: {
-          trigger: ".keyhole-section",
-          start: "top center",
-          end: "center center",
-          scrub: 1,
-        },
-      });
-    }
-
-    // Anima o título
-    if (keyholeTitle) {
-      gsap.to(keyholeTitle, {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        scrollTrigger: {
-          trigger: ".keyhole-section",
-          start: "top center",
-          end: "center center",
-          scrub: 1,
-        },
-      });
-    }
-
-    // Anima o botão
-    if (keyholeButton) {
-      gsap.to(keyholeButton, {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        scrollTrigger: {
-          trigger: ".keyhole-section",
-          start: "20% center",
-          end: "center center",
-          scrub: 1,
-        },
-      });
-    }
-  }
 
   // Seleciona todos os wrappers da galeria (para aplicar clip-path no container)
   const galleryWrappers = document.querySelectorAll(".grid-item__wrapper");
@@ -997,17 +749,14 @@ function initScrollAnimations() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Verifica se existe splash screen
-  const splashScreen = document.getElementById("splash-screen");
+  // ============================================================================
+  // SPA INITIALIZATION - Router inicia automaticamente
+  // ============================================================================
+  // Splash Screen agora é uma página SPA (/), não mais hardcoded no HTML
+  // O router carrega automaticamente a rota correta baseado na URL
+  // ============================================================================
 
-  if (splashScreen) {
-    // Inicializa splash screen primeiro (usuário escolhe a categoria)
-    new SplashScreen();
-  } else {
-    // Se não tem splash, inicia preloader direto e router
-    initPreloader();
-    router.init();
-  }
+  router.init();
 
   // Função para inicializar features após cada mudança de página
   const initializePageFeatures = () => {

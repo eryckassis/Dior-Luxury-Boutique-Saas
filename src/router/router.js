@@ -146,6 +146,10 @@ class Router {
     const tl = gsap.timeline({
       onComplete: () => {
         gsap.set(".preloader", { display: "none" });
+        // Libera o scroll do body
+        document.body.style.overflow = "visible";
+        document.body.style.overflowX = "hidden";
+        document.body.style.overflowY = "auto";
       },
     });
 
@@ -218,6 +222,14 @@ class Router {
 
     // Scroll to top
     window.scrollTo(0, 0);
+
+    // Libera o scroll do body (importante para reload/F5 em páginas que não são splash)
+    // Splash page tem seu próprio controle de scroll
+    if (componentName !== "splash-page") {
+      document.body.style.overflow = "visible";
+      document.body.style.overflowX = "hidden";
+      document.body.style.overflowY = "auto";
+    }
 
     // Reinicializa funcionalidades após carregar página
     this.reinitializeFeatures();

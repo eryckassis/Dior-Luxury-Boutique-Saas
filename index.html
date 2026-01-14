@@ -24,60 +24,14 @@
   </head>
 
   <body>
-    <!-- Splash Screen - Escolha de Categoria -->
-    <div class="splash-screen" id="splash-screen">
-      <div class="splash-logo">
-        <img src="/images/DiorWhite.png" alt="Logo" />
-      </div>
+    <!-- =========================================================================
+         SPA ROOT CONTAINER
+         =========================================================================
+         Toda a aplicação é renderizada aqui pelo router SPA.
+         A Splash Page é a rota "/" e é renderizada automaticamente.
+         ========================================================================= -->
 
-      <div class="splash-container">
-        <!-- Opção 1: Moda & Acessórios -->
-        <div class="splash-option splash-option-left" data-category="fashion">
-          <div class="splash-option-darkening"></div>
-          <div class="splash-option-overlay"></div>
-          <video
-            src="/videos/diorama.mp4"
-            class="splash-option-bg"
-            autoplay
-            muted
-            loop
-            playsinline
-          ></video>
-          <div class="splash-option-content">
-            <h2 class="splash-option-title">Moda & Acessórios</h2>
-            <a href="#" class="splash-option-button" data-block="button">
-              <span class="button__label">Descobrir</span>
-              <span class="button__flair"></span>
-            </a>
-          </div>
-        </div>
-
-        <!-- Opção 2: Perfume & Cosméticos -->
-        <div class="splash-option splash-option-right" data-category="beauty">
-          <div class="splash-option-darkening"></div>
-          <div class="splash-option-overlay"></div>
-          <video
-            src="/videos/videoLips.mp4"
-            class="splash-option-bg"
-            autoplay
-            muted
-            loop
-            playsinline
-            preload="auto"
-            poster="/images/diorImage.png"
-          ></video>
-          <div class="splash-option-content">
-            <h2 class="splash-option-title">Perfume & Cosméticos</h2>
-            <a href="#" class="splash-option-button" data-block="button">
-              <span class="button__label">Descobrir</span>
-              <span class="button__flair"></span>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Preloader -->
+    <!-- Preloader (usado nas transições entre páginas) -->
     <div class="preloader">
       <div class="text-container">
         <div class="imagem-logo">
@@ -92,10 +46,8 @@
     <!-- SPA Root Container -->
     <div id="app-root"></div>
 
-    <!-- Profile Menu -->
+    <!-- Global Components -->
     <profile-menu></profile-menu>
-
-    <!-- Fragrances Modal -->
     <fragrances-modal></fragrances-modal>
 
     <!-- External Scripts -->

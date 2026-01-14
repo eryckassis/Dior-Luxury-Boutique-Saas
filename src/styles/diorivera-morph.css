@@ -221,3 +221,185 @@
     font-size: 13px;
   }
 }
+
+/* ============================================================================
+   J'ADORE EXPAND SECTION - Morph inverso (expande de padding para full-width)
+   ============================================================================ */
+
+.jadore-expand-section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  padding: 0;
+  overflow: hidden;
+}
+
+.jadore-expand-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.jadore-image-wrapper {
+  position: relative;
+  width: 65%;
+  height: 75%;
+  overflow: hidden;
+  border-radius: 20px;
+  will-change: width, height, border-radius;
+  /* Centraliza o conteúdo para a imagem ficar no meio */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.jadore-expand-image {
+  /* Imagem já começa full width/height - fixa */
+  width: 100vw;
+  height: 100vh;
+  min-width: 100vw;
+  min-height: 100vh;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  /* Evita tremor - força GPU layer */
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: auto;
+  flex-shrink: 0;
+}
+
+/* Texto sobreposto */
+.jadore-text-content {
+  position: absolute;
+  bottom: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.jadore-label {
+  font-family: "Hellix", sans-serif;
+  font-size: clamp(0.7rem, 1vw, 0.85rem);
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: none;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.jadore-title {
+  font-family: "MinhaFonte", serif;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 300;
+  font-style: italic;
+  color: #fff;
+  margin: 0;
+  letter-spacing: 0.01em;
+  line-height: 1.15;
+  max-width: 700px;
+}
+
+.jadore-button {
+  display: inline-block;
+  font-family: "Hellix", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  text-decoration: none;
+  padding: 0;
+  margin-top: 0.75rem;
+  position: relative;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  transition: opacity 0.3s ease;
+}
+
+.jadore-button::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #fff;
+  transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.jadore-button:hover {
+  opacity: 0.8;
+}
+
+.jadore-button:hover::after {
+  width: 0;
+}
+
+/* Responsivo J'adore */
+@media (max-width: 1024px) {
+  .jadore-image-wrapper {
+    width: 90%;
+    height: 85%;
+  }
+
+  .jadore-title {
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  }
+}
+
+@media (max-width: 768px) {
+  .jadore-expand-section {
+    min-height: 80vh;
+  }
+
+  .jadore-expand-container {
+    height: 80vh;
+  }
+
+  .jadore-image-wrapper {
+    width: 92%;
+    height: 80%;
+    border-radius: 12px;
+  }
+
+  .jadore-title {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+  }
+
+  .jadore-text-content {
+    bottom: 10%;
+  }
+}
+
+@media (max-width: 480px) {
+  .jadore-expand-section {
+    min-height: 70vh;
+  }
+
+  .jadore-expand-container {
+    height: 70vh;
+  }
+
+  .jadore-image-wrapper {
+    width: 95%;
+    height: 75%;
+    border-radius: 8px;
+  }
+
+  .jadore-title {
+    font-size: clamp(1.25rem, 5vw, 1.75rem);
+  }
+
+  .jadore-button {
+    font-size: 13px;
+  }
+}
