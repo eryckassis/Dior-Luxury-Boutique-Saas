@@ -8,15 +8,29 @@
 /* Import Sitemap Styles */
 @import "./sitemap.css";
 
+/* Footer Wrapper - Background Cannage */
+.footer-wrapper {
+  background-color: #ebddcd;
+  background-image: url("/cannage-background.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 40px;
+  padding-bottom: 0;
+  margin-top: 80px;
+}
+
 /* Footer Container */
 .dior-footer {
   background-color: #ffffff;
   color: #000;
   font-family: "Inter";
   padding: 0;
-  margin-top: 80px;
+  margin-top: 0px;
   position: relative;
-  z-index: 10; /* Garante que o footer fique acima das outras seções */
+  z-index: 10;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 /* ============================================================================

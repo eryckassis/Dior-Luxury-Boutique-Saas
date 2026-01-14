@@ -14,9 +14,10 @@ export class FooterSection extends HTMLElement {
 
   render() {
     this.innerHTML = `
-      <footer class="dior-footer" id="footercontent" data-gtm-event="footer_click">
-        <!-- Reassurance Section -->
-        <ul class="r-reassurance">
+      <div class="footer-wrapper">
+        <footer class="dior-footer" id="footercontent" data-gtm-event="footer_click">
+          <!-- Reassurance Section -->
+          <ul class="r-reassurance">
           <li class="r-reassurance__item">
             <a class="r-reassurance__cta" href="#" title="Amostra Grátis">
               <span class="r-reassurance__content">
@@ -350,7 +351,8 @@ export class FooterSection extends HTMLElement {
             </button>
           </div>
         </div>
-      </footer>
+        </footer>
+      </div>
     `;
   }
 
