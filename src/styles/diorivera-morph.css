@@ -239,8 +239,8 @@
 }
 
 .jadore-expand-container {
-  width: 100%;
-  height: 100vh;
+  width: 110%;
+  height: 110vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -251,16 +251,13 @@
   width: 65%;
   height: 75%;
   overflow: hidden;
-  border-radius: 20px;
-  will-change: width, height, border-radius;
-  /* Centraliza o conteúdo para a imagem ficar no meio */
+  border-radius: none;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .jadore-expand-image {
-  /* Imagem já começa full width/height - fixa */
   width: 100vw;
   height: 100vh;
   min-width: 100vw;

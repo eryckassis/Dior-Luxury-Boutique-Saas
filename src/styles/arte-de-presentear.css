@@ -38,30 +38,27 @@
   max-width: 1200px;
   padding: 0 40px;
 
-  /* Usar flexbox para controle limpo de espaçamento */
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: clamp(1.25rem, 3vw, 2rem); /* Espaçamento responsivo entre elementos */
+  gap: clamp(1.25rem, 3vw, 2rem);
 }
 
 .arte-video-title {
   font-family: "MinhaFonte", sans-serif;
-  font-size: clamp(40px, 8vw, 100px);
-  font-weight: 500;
+  font-size: clamp(40px, 80vw, 40px);
+  font-weight: 400;
   letter-spacing: 0.02em;
   margin: 0;
-  /* Removido position: relative e top - não é necessário com flexbox */
 }
 
 .arte-video-description {
   font-family: "Hellix", sans-serif;
   font-size: clamp(16px, 2vw, 24px);
   font-weight: 300;
-  margin: 0; /* Espaçamento controlado pelo gap do pai */
+  margin: 0;
   opacity: 0.9;
-  max-width: 90%; /* Limita largura para melhor legibilidade */
-  /* Removido position: relative e top - não é necessário com flexbox */
+  max-width: 90%;
 }
 
 /* ============================================================================

@@ -38,6 +38,7 @@ export class HomePage extends HTMLElement {
     this.initParallaxBagButtons();
     this.initProductsReveal();
     this.initCategoryBagButtons();
+    this.initLaMousseParallax();
   }
 
   // ============================================================================
@@ -124,7 +125,6 @@ export class HomePage extends HTMLElement {
         {
           width: "100%",
           height: "100%",
-          borderRadius: "0px",
           duration: 1,
           ease: "power2.inOut",
         },
@@ -983,6 +983,78 @@ export class HomePage extends HTMLElement {
     });
   }
 
+  // ============================================================================
+  // LA MOUSSE PARALLAX - Efeito parallax na imagem fullscreen
+  // ============================================================================
+  initLaMousseParallax() {
+    if (!window.gsap || !window.ScrollTrigger) return;
+
+    requestAnimationFrame(() => {
+      const section = this.querySelector(".lamousse-section");
+      const image = this.querySelector(".lamousse-parallax-image");
+      const content = this.querySelector(".lamousse-content");
+
+      if (!section || !image) return;
+
+      // Parallax na imagem - move mais lento que o scroll
+      window.gsap.to(image, {
+        yPercent: 20,
+        ease: "none",
+        scrollTrigger: {
+          trigger: section,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 1,
+        },
+      });
+
+      // Animação do conteúdo ao entrar na viewport
+      if (content) {
+        const label = content.querySelector(".lamousse-label");
+        const title = content.querySelector(".lamousse-title");
+        const button = content.querySelector(".lamousse-button");
+
+        // Estado inicial - invisível
+        gsap.set([label, title, button], { opacity: 0, y: 30 });
+
+        const tl = window.gsap.timeline({
+          scrollTrigger: {
+            trigger: section,
+            start: "top 60%",
+            toggleActions: "play none none reverse",
+          },
+        });
+
+        tl.to(label, {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power3.out",
+        })
+          .to(
+            title,
+            {
+              opacity: 1,
+              y: 0,
+              duration: 1,
+              ease: "power3.out",
+            },
+            "-=0.5"
+          )
+          .to(
+            button,
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.8,
+              ease: "power3.out",
+            },
+            "-=0.6"
+          );
+      }
+    });
+  }
+
   animateButtonFeedback(button) {
     if (!window.gsap) return;
 
@@ -1707,6 +1779,19 @@ export class HomePage extends HTMLElement {
         </div>
       </section>
 
+       <!-- La Mousse Section - Full Width Parallax -->
+      <section class="lamousse-section" id="lamousse">
+        <div class="lamousse-parallax-container">
+          <img src="/images/lamousse.jpg" alt="La Mousse OFF/ON" class="lamousse-parallax-image" />
+          <div class="lamousse-overlay"></div>
+        </div>
+        <div class="lamousse-content">
+          <span class="lamousse-label">La Mousse OFF/ON</span>
+          <h2 class="lamousse-title">Mais do que um produto de limpeza, um cuidado nutritivo para a pele</h2>
+          <a href="#" class="lamousse-button">Descubra</a>
+        </div>
+      </section>
+
       <!-- Keyhole Reveal Section -->
       <keyhole-section
         image="/images/Image 2 Dior.jpg"
@@ -1753,6 +1838,8 @@ export class HomePage extends HTMLElement {
           </div>
         </div>
       </section>
+
+     
 
       <footer-section></footer-section>
       
