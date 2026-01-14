@@ -16,6 +16,10 @@ import "../styles/miss-dior-essence.css";
 import "../styles/diorivera-morph.css";
 import { router } from "../router/router.js";
 import { cartService } from "../services/CartService.js";
+import {
+  initServicesDrag,
+  initButtonUnderlineAnimation,
+} from "../components/ServicesDragCards.js";
 
 export class HomePage extends HTMLElement {
   constructor() {
@@ -32,9 +36,7 @@ export class HomePage extends HTMLElement {
     this.initKeyholeScrollAnimations();
     this.initVideoControls();
     this.initCategoryTabs();
-    this.initServicesDiorAnimations();
-    this.initServicesButtonsAnimation();
-    this.initServicesImageTitles();
+    this.initServicesDiorSection();
     this.initParallaxBagButtons();
     this.initProductsReveal();
     this.initCategoryBagButtons();
@@ -133,68 +135,88 @@ export class HomePage extends HTMLElement {
     });
   }
 
-  initServicesButtonsAnimation() {
-    if (!window.gsap) return;
+  // ============================================================================
+  // SERVICES DIOR SECTION - Inicialização do drag cards + animações
+  // ============================================================================
+  initServicesDiorSection() {
+    setTimeout(() => {
+      const section = this.querySelector(".services-dior-section");
+      if (!section) return;
 
-    requestAnimationFrame(() => {
-      const buttons = this.querySelectorAll(".services-button");
+      // Inicializar drag nos cards
+      const container = section.querySelector(".services-drag-container");
+      const track = section.querySelector(".services-drag-track");
+      const cards = section.querySelectorAll(".services-drag-card");
+      const navIndicator = section.querySelector(".services-nav-indicator");
 
-      buttons.forEach((button) => {
-        const underline = window.getComputedStyle(button, "::after");
+      if (container && track && cards.length > 0) {
+        this.servicesDragInstance = initServicesDrag({
+          container,
+          track,
+          cards,
+          onUpdate: navIndicator
+            ? (currentIndex, totalCards) => {
+                navIndicator.textContent = `${currentIndex}/${totalCards}`;
+              }
+            : null,
+        });
+      }
 
-        // Mouseenter - linha diminui para 0
-        button.addEventListener("mouseenter", () => {
-          window.gsap.to(button, {
-            "--underline-width": "0%",
-            duration: 0.35,
-            ease: "power2.inOut",
+      // Inicializar animação dos botões
+      const buttons = section.querySelectorAll(".services-card-button");
+      initButtonUnderlineAnimation(buttons);
+
+      // Animação de entrada do título
+      if (window.gsap && window.ScrollTrigger) {
+        const title = section.querySelector(".services-title");
+
+        if (title) {
+          window.gsap.from(title, {
+            scrollTrigger: {
+              trigger: title,
+              start: "top 85%",
+              toggleActions: "play none none none",
+            },
+            opacity: 0,
+            y: 40,
+            duration: 0.8,
+            ease: "power3.out",
+          });
+        }
+
+        // Animação de entrada dos cards
+        cards.forEach((card, index) => {
+          window.gsap.from(card, {
+            scrollTrigger: {
+              trigger: container,
+              start: "top 80%",
+              toggleActions: "play none none none",
+            },
+            opacity: 0,
+            y: 50,
+            duration: 0.7,
+            delay: index * 0.1,
+            ease: "power3.out",
           });
         });
+      }
 
-        // Mouseleave - linha volta a 100%
-        button.addEventListener("mouseleave", () => {
-          window.gsap.to(button, {
-            "--underline-width": "100%",
-            duration: 0.35,
-            ease: "power2.inOut",
-          });
-        });
-      });
-    });
-  }
-
-  initServicesImageTitles() {
-    requestAnimationFrame(() => {
-      const imageTitles = this.querySelectorAll(".services-image-title");
-
-      imageTitles.forEach((title) => {
-        // Adicionar event listener para redirecionar
-        title.addEventListener("click", () => {
-          router.navigate("/arte-de-presentear");
-        });
-
-        // Adicionar animação GSAP da risca (igual aos botões)
-        if (window.gsap) {
-          // Mouseenter - linha diminui para 0
-          title.addEventListener("mouseenter", () => {
-            window.gsap.to(title, {
-              "--underline-width": "0%",
-              duration: 0.35,
-              ease: "power2.inOut",
-            });
-          });
-
-          // Mouseleave - linha volta a 100%
-          title.addEventListener("mouseleave", () => {
-            window.gsap.to(title, {
-              "--underline-width": "100%",
-              duration: 0.35,
-              ease: "power2.inOut",
-            });
+      // Navegação ao clicar nos cards
+      cards.forEach((card) => {
+        const link = card.querySelector(".services-card-button");
+        if (link) {
+          link.addEventListener("click", (e) => {
+            e.preventDefault();
+            const route = link.getAttribute("data-route");
+            if (route) {
+              router.navigate(route);
+            }
           });
         }
       });
-    });
+
+      console.log("✅ Services Dior Section inicializada!");
+    }, 300);
   }
 
   initHeroVideosHover() {
@@ -460,120 +482,6 @@ export class HomePage extends HTMLElement {
 
     // Iniciar após um pequeno delay para garantir que o DOM está pronto
     setTimeout(() => tryInit(), 100);
-  }
-
-  initServicesDiorAnimations() {
-    if (!window.gsap || !window.ScrollTrigger) return;
-
-    requestAnimationFrame(() => {
-      const section = this.querySelector(".services-dior-section");
-      if (!section) return;
-
-      // Animação do texto
-      const title = section.querySelector(".services-title");
-      const description = section.querySelector(".services-description");
-
-      if (title) {
-        window.gsap.from(title, {
-          scrollTrigger: {
-            trigger: title,
-            start: "top 80%",
-            end: "bottom 20%",
-            toggleActions: "play none none none",
-          },
-          opacity: 0,
-          y: 50,
-          duration: 0.8,
-          ease: "power3.out",
-        });
-      }
-
-      if (description) {
-        window.gsap.from(description, {
-          scrollTrigger: {
-            trigger: description,
-            start: "top 80%",
-            end: "bottom 20%",
-            toggleActions: "play none none none",
-          },
-          opacity: 0,
-          y: 30,
-          duration: 0.8,
-          delay: 0.2,
-          ease: "power3.out",
-        });
-      }
-
-      // Animação das imagens com reveal
-      const imageItems = section.querySelectorAll(".services-image-item");
-
-      imageItems.forEach((item, index) => {
-        const wrap = item.querySelector(".services-image-wrap");
-        const overlay = wrap.querySelector(".services-reveal-overlay");
-        const image = wrap.querySelector(".services-image");
-        const info = item.querySelector(".services-image-info");
-
-        // Set initial states
-        window.gsap.set(overlay, {
-          scaleX: 1,
-          transformOrigin: "left center",
-        });
-
-        window.gsap.set(image, {
-          scale: 1.2,
-          opacity: 0,
-        });
-
-        window.gsap.set(info, {
-          opacity: 0,
-          y: 20,
-        });
-
-        // Create timeline with ScrollTrigger
-        const tl = window.gsap.timeline({
-          scrollTrigger: {
-            trigger: item,
-            start: "top 75%",
-            end: "bottom 25%",
-            toggleActions: "play none none none",
-          },
-          delay: index * 0.2,
-        });
-
-        tl.to(image, {
-          opacity: 1,
-          duration: 0.01,
-        })
-          .to(
-            overlay,
-            {
-              scaleX: 0,
-              duration: 1,
-              ease: "power3.inOut",
-            },
-            0.1
-          )
-          .to(
-            image,
-            {
-              scale: 1,
-              duration: 1,
-              ease: "power3.out",
-            },
-            0.1
-          )
-          .to(
-            info,
-            {
-              opacity: 1,
-              y: 0,
-              duration: 0.6,
-              ease: "power3.out",
-            },
-            0.5
-          );
-      });
-    });
   }
 
   initCategoryTabs() {
@@ -1801,41 +1709,69 @@ export class HomePage extends HTMLElement {
       ></keyhole-section>
 
 
-      <!-- Services Dior Section -->
+      <!-- Services Dior Section - Drag Cards -->
       <section class="services-dior-section" id="services-dior">
-        <div class="services-container">
+        <div class="services-dior-container">
           <!-- Left Content - Text -->
           <div class="services-text-content">
-            <h2 class="services-title">Os serviços Dior sob os holofotes</h2>
-            <p class="services-description">
-              A Dior revela seus serviços extraordinários que darão um toque final aos seus presentes para uma temporada de festas memorável e mágica.
-            </p>
+            <h2 class="services-title">Os serviços da Dior</h2>
           </div>
 
-          <!-- Right Content - Images -->
-          <div class="services-images-grid">
-            <div class="services-image-item services-image-large">
-              <div class="services-image-wrap">
-                <div class="services-reveal-overlay"></div>
-                <img src="/images/cofre.jpg" alt="A Arte de Presentear" class="services-image" />
-              </div>
-              <div class="services-image-info">
-                <p class="services-image-title">A Arte de Presentear</p>
-                <a href="/arte-de-presentear" class="services-button" data-route="/arte-de-presentear">Descubra</a>
-              </div>
-            </div>
+          <!-- Right Content - Drag Cards -->
+          <div class="services-drag-container">
+            <div class="services-drag-track">
+              <!-- Card 1 - A arte de presentear -->
+              <article class="services-drag-card">
+                <div class="services-card-image-wrap">
+                  <img src="/images/Presentes.webp" alt="A arte de presentear" class="services-card-image" />
+                  <div class="services-card-overlay"></div>
+                  <div class="services-card-info">
+                    <h3 class="services-card-title">A arte de presentear</h3>
+                    <a href="/arte-de-presentear" class="services-card-button" data-route="/arte-de-presentear">Descubra</a>
+                  </div>
+                </div>
+              </article>
 
-            <div class="services-image-item services-image-small">
-              <div class="services-image-wrap">
-                <div class="services-reveal-overlay"></div>
-                <img src="/images/diorhomme.jpg" alt="O Atelier de Personalização" class="services-image" />
-              </div>
-              <div class="services-image-info">
-                <p class="services-image-title">O Atelier de Personalização</p>
-                <a href="/arte-de-presentear" class="services-button" data-route="/arte-de-presentear">Descubra</a>
-              </div>
+              <!-- Card 2 - O Atelier de Personalização -->
+              <article class="services-drag-card">
+                <div class="services-card-image-wrap">
+                  <img src="/images/casitas.jpg" alt="O Atelier de Personalização" class="services-card-image" />
+                  <div class="services-card-overlay"></div>
+                  <div class="services-card-info">
+                    <h3 class="services-card-title">O Atelier de Personalização</h3>
+                    <a href="/arte-de-presentear" class="services-card-button" data-route="/arte-de-presentear">Descubra</a>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Card 3 - Amostras, e miniaturas -->
+              <article class="services-drag-card">
+                <div class="services-card-image-wrap">
+                  <img src="/images/inspect.webp" alt="Amostras, e miniaturas" class="services-card-image" />
+                  <div class="services-card-overlay"></div>
+                  <div class="services-card-info">
+                    <h3 class="services-card-title">Amostras, e miniaturas</h3>
+                    <a href="/arte-de-presentear" class="services-card-button" data-route="/arte-de-presentear">Descubra</a>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Card 4 - Free shipping -->
+              <article class="services-drag-card">
+                <div class="services-card-image-wrap">
+                  <img src="/images/shipping.jpg" alt="Free shipping" class="services-card-image" />
+                  <div class="services-card-overlay"></div>
+                  <div class="services-card-info">
+                    <h3 class="services-card-title">Free shipping</h3>
+                    <a href="/arte-de-presentear" class="services-card-button" data-route="/arte-de-presentear">Discover</a>
+                  </div>
+                </div>
+              </article>
             </div>
           </div>
+          
+          <!-- Navigation Indicator -->
+          <span class="services-nav-indicator">1/4</span>
         </div>
       </section>
 

@@ -32,6 +32,11 @@ export class AppNavigation extends HTMLElement {
   disconnectedCallback() {
     // Remove listener do carrinho
     cartService.removeListener(this.cartListener);
+
+    // Remove listener do scroll
+    if (this._scrollCleanup) {
+      this._scrollCleanup();
+    }
   }
 
   initScrollBehavior() {
@@ -40,6 +45,54 @@ export class AppNavigation extends HTMLElement {
 
     // Perfume e Cosméticos sempre com fundo branco
     nav.classList.add("scrolled");
+
+    // =========================================================================
+    // SMART NAVBAR - Hide on Scroll Down, Show on Scroll Up
+    // =========================================================================
+    let lastScrollY = window.scrollY;
+    let ticking = false;
+    const scrollThreshold = 80; // Mínimo de scroll para ativar hide/show
+    const topThreshold = 100; // Sempre visível quando próximo do topo
+
+    const updateNavVisibility = () => {
+      const currentScrollY = window.scrollY;
+      const scrollDelta = currentScrollY - lastScrollY;
+
+      // Sempre visível no topo da página
+      if (currentScrollY < topThreshold) {
+        nav.classList.remove("nav-hidden");
+        lastScrollY = currentScrollY;
+        ticking = false;
+        return;
+      }
+
+      // Scroll para baixo - esconde (apenas se passou do threshold)
+      if (scrollDelta > 0 && currentScrollY > scrollThreshold) {
+        nav.classList.add("nav-hidden");
+      }
+      // Scroll para cima - mostra
+      else if (scrollDelta < -5) {
+        nav.classList.remove("nav-hidden");
+      }
+
+      lastScrollY = currentScrollY;
+      ticking = false;
+    };
+
+    // Usar requestAnimationFrame para performance
+    const onScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(updateNavVisibility);
+        ticking = true;
+      }
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    // Cleanup ao desconectar
+    this._scrollCleanup = () => {
+      window.removeEventListener("scroll", onScroll);
+    };
   }
 
   initMenuLinksAnimation() {

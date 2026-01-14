@@ -48,7 +48,14 @@ moda-acessorios-page main {
   backdrop-filter: none;
   z-index: 1000;
   border-bottom: 0px solid rgba(0, 0, 0, 0);
-  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+}
+
+/* Smart Navbar - Hide on Scroll Down */
+.moda-navigation.nav-hidden {
+  transform: translateY(-100%);
 }
 
 /* Estado quando scrollado */
