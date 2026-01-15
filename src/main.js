@@ -33,6 +33,7 @@ import "./pages/BoutiquesPage.js";
 import "./pages/SplashPage.js";
 import "./pages/PerfumeProductDetailPage.js";
 import "./pages/GrisDiorPage.js";
+import "./pages/DiorivieraPage.js";
 import "./components/ProfileMenu.js";
 import "./components/FragrancesModal.js";
 import "./components/AppNavigation.js";
@@ -62,6 +63,7 @@ router.register("/produto/:id", "product-detail-page");
 router.register("/colecao/product/:id", "colecao-product-detail-page");
 router.register("/perfume/:id", "perfume-product-detail-page");
 router.register("/gris-dior", "gris-dior-page");
+router.register("/dioriviera", "dioriviera-page");
 router.register("/boutiques", "boutiques-page");
 
 // ============================================================================

@@ -105,12 +105,12 @@ export class HomePage extends HTMLElement {
       const leftImage = this.querySelector(".diorivera-left");
       const rightImage = this.querySelector(".diorivera-right");
 
-      // Clique na imagem esquerda → navega para perfume miss-dior
+      // Clique na imagem esquerda → navega para Dioriviera
       if (leftImage) {
         leftImage.style.cursor = "pointer";
         leftImage.addEventListener("click", () => {
           import("../router/router.js").then(({ router }) => {
-            router.navigate("/perfume/miss-dior-parfum");
+            router.navigate("/dioriviera");
           });
         });
       }
