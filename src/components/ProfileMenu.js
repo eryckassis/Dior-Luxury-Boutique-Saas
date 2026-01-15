@@ -424,6 +424,7 @@ export class ProfileMenu extends HTMLElement {
 
     if (!window.gsap) {
       menu.style.transform = "translateX(0)";
+      menu.style.visibility = "visible";
       backdrop.style.display = "block";
       backdrop.style.opacity = "1";
       backdrop.classList.add("active");
@@ -432,6 +433,9 @@ export class ProfileMenu extends HTMLElement {
 
     // Previne scroll do body
     document.body.style.overflow = "hidden";
+
+    // Torna visível antes de animar
+    menu.style.visibility = "visible";
 
     backdrop.style.display = "block";
     backdrop.classList.add("active");
@@ -512,6 +516,7 @@ export class ProfileMenu extends HTMLElement {
 
     if (!window.gsap) {
       menu.style.transform = "translateX(100%)";
+      menu.style.visibility = "hidden";
       backdrop.style.display = "none";
       backdrop.style.opacity = "0";
       return;
@@ -521,6 +526,7 @@ export class ProfileMenu extends HTMLElement {
       defaults: { ease: "power2.in" },
       onComplete: () => {
         backdrop.style.display = "none";
+        menu.style.visibility = "hidden";
       },
     });
 

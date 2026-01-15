@@ -1,0 +1,471 @@
+/* ============================================================================
+   GRIS DIOR PAGE - Estilos exclusivos
+   ============================================================================ */
+
+.gris-dior-page {
+  background: #faf9f7;
+  min-height: 100vh;
+}
+
+/* ============================================================================
+   HERO SECTION
+   ============================================================================ */
+
+.gris-hero-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f5f3f0 0%, #e8e4df 100%);
+  overflow: hidden;
+}
+
+.gris-hero-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  max-width: 1400px;
+  padding: 0 60px;
+  align-items: center;
+}
+
+.gris-hero-image-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gris-hero-image {
+  max-width: 100%;
+  height: auto;
+  max-height: 80vh;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.1));
+  transition: transform 0.6s ease;
+}
+
+.gris-hero-image:hover {
+  transform: scale(1.02);
+}
+
+.gris-hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.gris-label {
+  font-family: "Hellix", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #8b7355;
+}
+
+.gris-title {
+  font-family: "Hellix", sans-serif;
+  font-size: clamp(48px, 6vw, 72px);
+  font-weight: 400;
+  color: #1a1a1a;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.gris-subtitle {
+  font-family: "Hellix", sans-serif;
+  font-size: 18px;
+  color: #666;
+  line-height: 1.6;
+  max-width: 400px;
+}
+
+.gris-price {
+  font-family: "Hellix", sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+.gris-cta-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: #1a1a1a;
+  color: #fff;
+  padding: 18px 40px;
+  border: none;
+  border-radius: 0;
+  font-family: "Hellix", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: fit-content;
+}
+
+.gris-cta-button:hover {
+  background: #8b7355;
+  transform: translateY(-2px);
+}
+
+/* ============================================================================
+   PRODUCT DETAIL SECTION
+   ============================================================================ */
+
+.gris-product-section {
+  padding: 120px 60px;
+  background: #fff;
+}
+
+.gris-product-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.gris-product-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.gris-product-gallery {
+  position: sticky;
+  top: 120px;
+}
+
+.gris-main-image {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.gris-thumbnail-row {
+  display: flex;
+  gap: 12px;
+}
+
+.gris-thumbnail {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.gris-thumbnail:hover,
+.gris-thumbnail.active {
+  border-color: #8b7355;
+}
+
+.gris-product-info {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.gris-product-title {
+  font-family: "Hellix", sans-serif;
+  font-size: 42px;
+  font-weight: 400;
+  color: #1a1a1a;
+}
+
+.gris-product-description {
+  font-family: "Hellix", sans-serif;
+  font-size: 16px;
+  line-height: 1.8;
+  color: #555;
+}
+
+/* Size Selector */
+.gris-size-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.gris-size-label {
+  font-family: "Hellix", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1a1a;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.gris-size-options {
+  display: flex;
+  gap: 12px;
+}
+
+.gris-size-btn {
+  padding: 16px 32px;
+  border: 1px solid #ddd;
+  background: #fff;
+  font-family: "Hellix", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #1a1a1a;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.gris-size-btn:hover {
+  border-color: #8b7355;
+}
+
+.gris-size-btn.active {
+  background: #8b7355;
+  color: #fff;
+  border-color: #8b7355;
+}
+
+/* Purchase Button */
+.gris-purchase-button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 20px 32px;
+  background: #1a1a1a;
+  color: #fff;
+  border: none;
+  font-family: "Hellix", sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.gris-purchase-button:hover {
+  background: #8b7355;
+}
+
+.gris-purchase-price {
+  font-weight: 700;
+}
+
+/* Accordion */
+.gris-accordion {
+  border-top: 1px solid #e5e5e5;
+}
+
+.gris-accordion-item {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.gris-accordion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 20px 0;
+  background: none;
+  border: none;
+  font-family: "Hellix", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1a1a;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.gris-accordion-icon {
+  font-size: 20px;
+  transition: transform 0.3s ease;
+}
+
+.gris-accordion-item.open .gris-accordion-icon {
+  transform: rotate(45deg);
+}
+
+.gris-accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+
+.gris-accordion-item.open .gris-accordion-content {
+  max-height: 500px;
+}
+
+.gris-accordion-text {
+  padding: 0 0 20px 0;
+  font-family: "Hellix", sans-serif;
+  font-size: 15px;
+  line-height: 1.8;
+  color: #555;
+}
+
+/* ============================================================================
+   VIDEO SECTION
+   ============================================================================ */
+
+.gris-video-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: #000;
+}
+
+.gris-video-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+}
+
+.gris-video-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gris-video-text {
+  text-align: center;
+  color: #fff;
+}
+
+.gris-video-title {
+  font-family: "MinhaFonte", serif;
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+
+.gris-video-subtitle {
+  font-family: "Hellix", sans-serif;
+  font-size: 18px;
+  opacity: 0.9;
+}
+
+/* ============================================================================
+   NOTES SECTION
+   ============================================================================ */
+
+.gris-notes-section {
+  padding: 120px 60px;
+  background: #faf9f7;
+}
+
+.gris-notes-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.gris-notes-title {
+  font-family: "MinhaFonte", serif;
+  font-size: 42px;
+  font-weight: 400;
+  color: #1a1a1a;
+  margin-bottom: 60px;
+}
+
+.gris-notes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+
+.gris-note-card {
+  padding: 40px 30px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.gris-note-icon {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.gris-note-type {
+  font-family: "Hellix", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #8b7355;
+  margin-bottom: 16px;
+}
+
+.gris-note-list {
+  font-family: "Hellix", sans-serif;
+  font-size: 15px;
+  line-height: 1.8;
+  color: #555;
+}
+
+/* ============================================================================
+   RESPONSIVE
+   ============================================================================ */
+
+@media (max-width: 1024px) {
+  .gris-hero-content {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    text-align: center;
+  }
+
+  .gris-hero-text {
+    align-items: center;
+  }
+
+  .gris-product-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .gris-product-gallery {
+    position: relative;
+    top: 0;
+  }
+
+  .gris-notes-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .gris-hero-section {
+    height: auto;
+    padding: 120px 20px 60px;
+  }
+
+  .gris-hero-content {
+    padding: 0;
+  }
+
+  .gris-product-section {
+    padding: 60px 20px;
+  }
+
+  .gris-notes-section {
+    padding: 60px 20px;
+  }
+
+  .gris-size-options {
+    flex-wrap: wrap;
+  }
+
+  .gris-size-btn {
+    flex: 1;
+    min-width: 100px;
+  }
+}

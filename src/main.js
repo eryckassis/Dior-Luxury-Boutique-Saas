@@ -31,6 +31,8 @@ import "./pages/ProductDetailPage.js";
 import "./pages/ColecaoProductDetailPage.js";
 import "./pages/BoutiquesPage.js";
 import "./pages/SplashPage.js";
+import "./pages/PerfumeProductDetailPage.js";
+import "./pages/GrisDiorPage.js";
 import "./components/ProfileMenu.js";
 import "./components/FragrancesModal.js";
 import "./components/AppNavigation.js";
@@ -58,6 +60,8 @@ router.register("/para-ela", "presente-para-ela-page");
 router.register("/colecao", "colecao-page");
 router.register("/produto/:id", "product-detail-page");
 router.register("/colecao/product/:id", "colecao-product-detail-page");
+router.register("/perfume/:id", "perfume-product-detail-page");
+router.register("/gris-dior", "gris-dior-page");
 router.register("/boutiques", "boutiques-page");
 
 // ============================================================================

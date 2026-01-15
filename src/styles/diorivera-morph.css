@@ -53,6 +53,17 @@
   opacity: 0;
   will-change: transform, opacity;
   z-index: 1;
+  cursor: pointer;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Hover effect for clickable side images */
+.diorivera-side:hover .diorivera-image {
+  transform: scale(1.05);
+}
+
+.diorivera-side .diorivera-image {
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .diorivera-left {

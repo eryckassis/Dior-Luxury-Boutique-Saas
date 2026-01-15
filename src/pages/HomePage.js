@@ -29,6 +29,7 @@ export class HomePage extends HTMLElement {
   connectedCallback() {
     this.render();
     this.initDioriveraScrollMorph(); // Nova animação morph
+    this.initDioriveraClickNavigation(); // Navegação ao clicar nas imagens
     this.initJadoreExpandMorph(); // Morph expand (inverso)
     this.initHeroVideosHover();
     this.initHeroScrollAnimations();
@@ -93,6 +94,36 @@ export class HomePage extends HTMLElement {
         },
         1
       );
+    });
+  }
+
+  // ============================================================================
+  // DIORIVERA CLICK NAVIGATION - Navegação ao clicar nas imagens laterais
+  // ============================================================================
+  initDioriveraClickNavigation() {
+    requestAnimationFrame(() => {
+      const leftImage = this.querySelector(".diorivera-left");
+      const rightImage = this.querySelector(".diorivera-right");
+
+      // Clique na imagem esquerda → navega para perfume miss-dior
+      if (leftImage) {
+        leftImage.style.cursor = "pointer";
+        leftImage.addEventListener("click", () => {
+          import("../router/router.js").then(({ router }) => {
+            router.navigate("/perfume/miss-dior-parfum");
+          });
+        });
+      }
+
+      // Clique na imagem direita → navega para página Gris Dior
+      if (rightImage) {
+        rightImage.style.cursor = "pointer";
+        rightImage.addEventListener("click", () => {
+          import("../router/router.js").then(({ router }) => {
+            router.navigate("/gris-dior");
+          });
+        });
+      }
     });
   }
 
