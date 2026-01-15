@@ -13,7 +13,7 @@ export class PerfumeProductDetailContent extends HTMLElement {
 
   connectedCallback() {
     const productId = this.getAttribute("data-product-id");
-    
+
     if (productId) {
       this.product = getPerfumeById(productId);
     }
@@ -25,7 +25,7 @@ export class PerfumeProductDetailContent extends HTMLElement {
 
     // Define o tamanho default
     this.currentSize = this.product.defaultSize;
-    
+
     this.render();
     this.initInteractions();
   }
@@ -68,7 +68,9 @@ export class PerfumeProductDetailContent extends HTMLElement {
     return this.product.sizes
       .map(
         (size) => `
-        <button class="size-option ${size.size === this.currentSize ? "active" : ""}" data-size="${size.size}">
+        <button class="size-option ${
+          size.size === this.currentSize ? "active" : ""
+        }" data-size="${size.size}">
           ${size.size}
         </button>
       `
@@ -86,7 +88,9 @@ export class PerfumeProductDetailContent extends HTMLElement {
           </div>
           <p class="review-date">${review.date}</p>
           <p class="review-text">${review.text}</p>
-          <p class="review-recommendation">Você recomendaria esse produto a um amigo?<br><strong>${review.recommend ? "Sim" : "Não"}</strong></p>
+          <p class="review-recommendation">Você recomendaria esse produto a um amigo?<br><strong>${
+            review.recommend ? "Sim" : "Não"
+          }</strong></p>
           <p class="review-author">Por ${review.author}</p>
         </div>
       `
@@ -137,7 +141,9 @@ export class PerfumeProductDetailContent extends HTMLElement {
           tabContents.forEach((content) => content.classList.remove("active"));
 
           button.classList.add("active");
-          const targetContent = this.querySelector(`.tab-content[data-tab="${tabId}"]`);
+          const targetContent = this.querySelector(
+            `.tab-content[data-tab="${tabId}"]`
+          );
           if (targetContent) {
             targetContent.classList.add("active");
           }
@@ -146,9 +152,13 @@ export class PerfumeProductDetailContent extends HTMLElement {
 
       // Image Reveal Animation
       if (window.gsap && window.ScrollTrigger) {
-        const imageRevealWrapper = this.querySelector(".image-reveal-wrapper-full");
+        const imageRevealWrapper = this.querySelector(
+          ".image-reveal-wrapper-full"
+        );
         if (imageRevealWrapper) {
-          const overlay = imageRevealWrapper.querySelector(".reveal-overlay-full");
+          const overlay = imageRevealWrapper.querySelector(
+            ".reveal-overlay-full"
+          );
           const image = imageRevealWrapper.querySelector(".reveal-image-full");
 
           const revealTl = window.gsap.timeline({
@@ -226,7 +236,9 @@ export class PerfumeProductDetailContent extends HTMLElement {
           e.preventDefault();
 
           const formData = new FormData(reviewForm);
-          const rating = this.querySelectorAll(".star-rating-input.selected").length;
+          const rating = this.querySelectorAll(
+            ".star-rating-input.selected"
+          ).length;
           const reviewText = formData.get("review-text");
           const recommend = formData.get("recommend");
           const name = formData.get("reviewer-name");
@@ -279,8 +291,12 @@ export class PerfumeProductDetailContent extends HTMLElement {
                 <div class="stars">
                   ${this.generateStars(this.product.rating)}
                 </div>
-                <span class="rating-score">${this.product.rating.toFixed(1)}</span>
-                <a href="#reviews-section" class="rating-reviews">${this.product.reviewCount} avaliações</a>
+                <span class="rating-score">${this.product.rating.toFixed(
+                  1
+                )}</span>
+                <a href="#reviews-section" class="rating-reviews">${
+                  this.product.reviewCount
+                } avaliações</a>
               </div>
 
               <!-- Learn More Link -->
@@ -288,7 +304,9 @@ export class PerfumeProductDetailContent extends HTMLElement {
 
               <!-- Size Options -->
               <div class="product-sizes">
-                <p class="sizes-label">Este produto existe em ${this.product.sizes.length} tamanhos</p>
+                <p class="sizes-label">Este produto existe em ${
+                  this.product.sizes.length
+                } tamanhos</p>
                 <div class="size-options">
                   ${this.generateSizeOptions()}
                 </div>
@@ -337,7 +355,9 @@ export class PerfumeProductDetailContent extends HTMLElement {
           <div class="love-quote-container">
             <p class="quote-author">Com ${this.product.ambassador}</p>
             <h2 class="quote-title">${this.product.ambassadorQuote}*</h2>
-            <p class="quote-subtitle">*${this.product.ambassadorQuoteTranslation}</p>
+            <p class="quote-subtitle">*${
+              this.product.ambassadorQuoteTranslation
+            }</p>
           </div>
         </section>
 
@@ -351,14 +371,19 @@ export class PerfumeProductDetailContent extends HTMLElement {
         <!-- Image Reveal Section -->
         <section class="love-quote-section">
           <div class="love-quote-container">
-            <h2 class="quote-title">Encontre seu perfume ${this.product.family.split("-").map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ")}*</h2>
+            <h2 class="quote-title">Encontre seu perfume ${this.product.family
+              .split("-")
+              .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+              .join(" ")}*</h2>
           </div>
         </section>
 
         <section class="image-reveal-full-section">
           <div class="image-reveal-wrapper-full">
             <div class="reveal-overlay-full"></div>
-            <img src="${this.product.galleryImage}" alt="${this.product.name}" class="reveal-image-full" />
+            <img src="${this.product.galleryImage}" alt="${
+      this.product.name
+    }" class="reveal-image-full" />
           </div>
         </section>
 
@@ -366,7 +391,10 @@ export class PerfumeProductDetailContent extends HTMLElement {
         <section class="reviews-section-product" id="reviews-section">
           <div class="reviews-container">
             <div class="reviews-header-product">
-              <p class="reviews-gama-text">A gama <span class="miss-dior-highlight">${this.product.family.split("-").map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ")}</span> por intensidade</p>
+              <p class="reviews-gama-text">A gama <span class="miss-dior-highlight">${this.product.family
+                .split("-")
+                .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+                .join(" ")}</span> por intensidade</p>
               <a href="#" class="reviews-discover-link">Descubra</a>
             </div>
 
@@ -380,7 +408,9 @@ export class PerfumeProductDetailContent extends HTMLElement {
                 <div class="reviews-stars-display">
                   ${this.generateReviewStars(Math.round(this.product.rating))}
                 </div>
-                <p class="reviews-count">${this.product.reviewCount} avaliações</p>
+                <p class="reviews-count">${
+                  this.product.reviewCount
+                } avaliações</p>
               </div>
 
               <div class="reviews-list">
@@ -388,7 +418,10 @@ export class PerfumeProductDetailContent extends HTMLElement {
               </div>
 
               <div class="reviews-pagination">
-                <span class="pagination-info">1-${Math.min(5, this.product.reviews.length)} de ${this.product.reviewCount}</span>
+                <span class="pagination-info">1-${Math.min(
+                  5,
+                  this.product.reviews.length
+                )} de ${this.product.reviewCount}</span>
                 <div class="pagination-arrows">
                   <button class="pagination-btn" aria-label="Anterior">‹</button>
                   <button class="pagination-btn" aria-label="Próximo">›</button>
@@ -469,4 +502,7 @@ export class PerfumeProductDetailContent extends HTMLElement {
   }
 }
 
-customElements.define("perfume-product-detail-content", PerfumeProductDetailContent);
+customElements.define(
+  "perfume-product-detail-content",
+  PerfumeProductDetailContent
+);
