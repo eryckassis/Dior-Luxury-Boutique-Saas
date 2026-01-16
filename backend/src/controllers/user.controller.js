@@ -1,5 +1,5 @@
-import { UserService } from "../services/user.service";
-import { ApiResponse } from "../utils/response";
+import { UserService } from "../services/user.service.js";
+import { ApiResponse } from "../utils/response.js";
 
 export class UserController {
   static async getProfile(req, res) {

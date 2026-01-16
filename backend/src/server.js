@@ -6,6 +6,7 @@ import { config } from "./config/env.js";
 import { generalLimiter } from "./middlewares/rateLimiter.middleware.js";
 import { ErrorMiddleware } from "./middlewares/error.middleware.js";
 import authRoutes from "./routes/auth.routes.js";
+import userRoutes from "./routes/user.routes.js";
 
 const app = express();
 
@@ -82,6 +83,7 @@ app.get("/health", (req, res) => {
 // ============================================================================
 
 app.use("/api/auth", authRoutes);
+app.use("/api/user", userRoutes);
 
 // ============================================================================
 // TRATAMENTO DE ERROS

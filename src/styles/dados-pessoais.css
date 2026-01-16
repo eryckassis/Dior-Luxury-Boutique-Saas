@@ -1,0 +1,392 @@
+/* ============================================================================
+   DADOS PESSOAIS PAGE - Página de Gestão de Dados
+   ============================================================================ */
+
+.dados-pessoais-page {
+  min-height: 100vh;
+  background-color: #ffffff;
+}
+
+.dados-pessoais-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 40px 100px;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 80px;
+}
+
+/* ============================================================================
+   SIDEBAR - Menu Lateral
+   ============================================================================ */
+
+.dados-sidebar {
+  position: sticky;
+  top: 120px;
+  height: fit-content;
+}
+
+.sidebar-greeting {
+  margin-bottom: 40px;
+}
+
+.sidebar-greeting-label {
+  font-family: "Hellix", sans-serif;
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 4px;
+}
+
+.sidebar-greeting-name {
+  font-family: "Didot", "Times New Roman", serif;
+  font-size: 24px;
+  font-weight: 400;
+  color: #000;
+}
+
+.sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid #e8e8e8;
+  margin-bottom: 40px;
+}
+
+.sidebar-menu-link {
+  font-family: "Hellix", sans-serif;
+  font-size: 14px;
+  color: #333;
+  text-decoration: none;
+  padding: 8px 0;
+  transition: color 0.2s ease;
+  cursor: pointer;
+}
+
+.sidebar-menu-link:hover {
+  color: #000;
+}
+
+.sidebar-menu-link.active {
+  font-weight: 600;
+  color: #000;
+}
+
+.sidebar-logout {
+  font-family: "Hellix", sans-serif;
+  font-size: 14px;
+  color: #333;
+  text-decoration: underline;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.sidebar-logout:hover {
+  color: #000;
+}
+
+/* ============================================================================
+   CONTENT - Conteúdo Principal
+   ============================================================================ */
+
+.dados-content {
+  flex: 1;
+}
+
+.dados-header {
+  margin-bottom: 40px;
+}
+
+.dados-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.dados-breadcrumb-link {
+  font-family: "Hellix", sans-serif;
+  font-size: 13px;
+  color: #666;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dados-breadcrumb-link:hover {
+  color: #000;
+}
+
+.dados-title {
+  font-family: "Didot", "Times New Roman", serif;
+  font-size: 36px;
+  font-weight: 400;
+  color: #000;
+  margin: 0;
+}
+
+.dados-divider {
+  width: 100%;
+  height: 1px;
+  background-color: #e8e8e8;
+  margin: 30px 0;
+}
+
+/* ============================================================================
+   FORM GRID - Grid de Campos
+   ============================================================================ */
+
+.dados-form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.dados-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+.dados-form-row.single {
+  grid-template-columns: 1fr;
+}
+
+.dados-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.dados-field-label {
+  font-family: "Hellix", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #333;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ============================================================================
+   VIEW MODE - Modo de Visualização
+   ============================================================================ */
+
+.dados-field-value {
+  font-family: "Hellix", sans-serif;
+  font-size: 16px;
+  color: #000;
+  padding: 12px 0;
+  border-bottom: 1px solid #e8e8e8;
+  min-height: 45px;
+}
+
+.dados-field-value.empty {
+  color: #999;
+  font-style: italic;
+}
+
+/* ============================================================================
+   EDIT MODE - Modo de Edição
+   ============================================================================ */
+
+.dados-field-input {
+  font-family: "Hellix", sans-serif;
+  font-size: 16px;
+  color: #000;
+  padding: 12px 0;
+  border: none;
+  border-bottom: 1px solid #e8e8e8;
+  background: transparent;
+  outline: none;
+  transition: border-color 0.2s ease;
+  width: 100%;
+}
+
+.dados-field-input:focus {
+  border-bottom-color: #000;
+}
+
+.dados-field-input::placeholder {
+  color: #999;
+}
+
+.dados-field-input:disabled {
+  background-color: #f5f5f5;
+  color: #666;
+  cursor: not-allowed;
+}
+
+.dados-field-select {
+  font-family: "Hellix", sans-serif;
+  font-size: 16px;
+  color: #000;
+  padding: 12px 0;
+  border: none;
+  border-bottom: 1px solid #e8e8e8;
+  background: transparent;
+  outline: none;
+  cursor: pointer;
+  width: 100%;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0 center;
+}
+
+.dados-field-select:focus {
+  border-bottom-color: #000;
+}
+
+.dados-field-error {
+  font-family: "Hellix", sans-serif;
+  font-size: 12px;
+  color: #e74c3c;
+  margin-top: 4px;
+}
+
+/* ============================================================================
+   BUTTONS - Botões de Ação
+   ============================================================================ */
+
+.dados-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.dados-btn {
+  font-family: "Hellix", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 14px 32px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dados-btn-edit {
+  background: none;
+  border: none;
+  color: #000;
+  text-decoration: underline;
+  padding: 8px 0;
+}
+
+.dados-btn-edit:hover {
+  color: #333;
+}
+
+.dados-btn-cancel {
+  background: transparent;
+  border: 1px solid #e8e8e8;
+  color: #333;
+}
+
+.dados-btn-cancel:hover {
+  border-color: #333;
+}
+
+.dados-btn-save {
+  background: #1a1a1a;
+  border: none;
+  color: #fff;
+}
+
+.dados-btn-save:hover {
+  background: #333;
+}
+
+.dados-btn-save:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.dados-btn-save.loading {
+  position: relative;
+  color: transparent;
+}
+
+.dados-btn-save.loading::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 18px;
+  height: 18px;
+  border: 2px solid #fff;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* ============================================================================
+   PESSOA JURÍDICA - Botão Extra
+   ============================================================================ */
+
+.dados-pj-section {
+  margin-top: 20px;
+}
+
+.dados-pj-btn {
+  font-family: "Hellix", sans-serif;
+  font-size: 14px;
+  color: #333;
+  background: transparent;
+  border: 1px solid #e8e8e8;
+  padding: 12px 24px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dados-pj-btn:hover {
+  border-color: #333;
+}
+
+/* ============================================================================
+   RESPONSIVE
+   ============================================================================ */
+
+@media (max-width: 1024px) {
+  .dados-pessoais-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 40px 24px 80px;
+  }
+
+  .dados-sidebar {
+    position: static;
+  }
+}
+
+@media (max-width: 768px) {
+  .dados-form-row {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .dados-title {
+    font-size: 28px;
+  }
+
+  .dados-actions {
+    flex-direction: column;
+  }
+
+  .dados-btn {
+    width: 100%;
+    text-align: center;
+  }
+}

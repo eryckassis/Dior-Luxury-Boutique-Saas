@@ -715,29 +715,29 @@ export class ProfileMenu extends HTMLElement {
     const userName = this.user?.name || "Usuário";
 
     return `
-      <div class="profile-user-welcome">
-        <span class="profile-welcome-label">Welcome</span>
-        <h2 class="profile-user-name">${userName}</h2>
+    <div class="profile-user-welcome">
+      <span class="profile-welcome-label">Welcome</span>
+      <h2 class="profile-user-name">${userName}</h2>
+    </div>
+
+    <div class="profile-menu-sections">
+      <div class="profile-menu-group">
+        <h3 class="profile-group-title">Profile</h3>
+        <a href="/minha-conta/dados" class="profile-menu-link" data-route="/minha-conta/dados">Meus dados pessoais</a>
+        <a href="/minha-conta/enderecos" class="profile-menu-link" data-route="/minha-conta/enderecos">Meus endereços</a>
       </div>
 
-      <div class="profile-menu-sections">
-        <div class="profile-menu-group">
-          <h3 class="profile-group-title">Profile</h3>
-          <a href="/meus-dados" class="profile-menu-link">Meus dados pessoais</a>
-          <a href="/meus-enderecos" class="profile-menu-link">Meus endereços</a>
-        </div>
-
-        <div class="profile-menu-group">
-          <h3 class="profile-group-title">Orders</h3>
-          <a href="/meus-pedidos" class="profile-menu-link">Meus Pedidos</a>
-          <a href="/meus-cartoes" class="profile-menu-link">Meus Cartões</a>
-        </div>
+      <div class="profile-menu-group">
+        <h3 class="profile-group-title">Orders</h3>
+        <a href="/minha-conta/pedidos" class="profile-menu-link" data-route="/minha-conta/pedidos">Meus Pedidos</a>
+        <a href="/minha-conta/cartoes" class="profile-menu-link" data-route="/minha-conta/cartoes">Meus Cartões</a>
       </div>
+    </div>
 
-      <div class="profile-logout-section">
-        <button class="profile-logout-btn">Logout</button>
-      </div>
-    `;
+    <div class="profile-logout-section">
+      <button class="profile-logout-btn">Logout</button>
+    </div>
+  `;
   }
 
   updateAccountContent() {

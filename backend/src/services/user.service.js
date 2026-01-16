@@ -1,4 +1,4 @@
-import { prisma } from "../config/database";
+import prisma from "../config/database.js";
 
 export class UserService {
   static async getProfile(userId) {
@@ -15,7 +15,7 @@ export class UserService {
         birthDate: true,
         isEmailVerified: true,
         createdAt: true,
-        update: true,
+        updateAt: true,
       },
     });
     if (!user) {

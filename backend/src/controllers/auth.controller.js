@@ -5,10 +5,10 @@ export class AuthController {
   static async register(req, res) {
     try {
       const { name, email, password } = req.body;
-      const user = await AuthService.register({ name, email, password });
+      const result = await AuthService.register({ name, email, password });
       return ApiResponse.created(
         res,
-        { user },
+        result,
         "Conta criada com sucesso! Bem vindo(a) ao Dior."
       );
     } catch (error) {

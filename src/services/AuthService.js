@@ -36,10 +36,12 @@ class AuthService {
         throw new Error(data.message || "Erro ao criar conta");
       }
 
-      // Armazena tokens e dados do usuário
-      this.setTokens(data.data.accessToken, data.data.refreshToken);
-      this.setUser(data.data.user);
-      this.notifyListeners();
+      // Nota: O backend de register não retorna tokens automaticamente
+      // O usuário precisará fazer login após registrar
+      // Se o backend retornar tokens no futuro, descomentar as linhas abaixo:
+      // this.setTokens(data.data.tokens.accessToken, data.data.tokens.refreshToken);
+      // this.setUser(data.data.user);
+      // this.notifyListeners();
 
       return data;
     } catch (error) {
@@ -69,8 +71,10 @@ class AuthService {
         throw new Error(data.message || "Erro ao fazer login");
       }
 
-      // Armazena tokens e dados do usuário
-      this.setTokens(data.data.accessToken, data.data.refreshToken);
+      this.setTokens(
+        data.data.tokens.accessToken,
+        data.data.tokens.refreshToken
+      );
       this.setUser(data.data.user);
       this.notifyListeners();
 

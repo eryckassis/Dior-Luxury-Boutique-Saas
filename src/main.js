@@ -14,6 +14,7 @@ import "./styles/register.css";
 import "./styles/boutiques.css";
 import "./styles/filter-sidebar.css";
 import "./styles/dior-spa.css";
+import "./styles/dados-pessoais.css";
 import { router } from "./router/router.js";
 import "./pages/HomePage.js";
 import "./pages/DiorHolidayPage.js";
@@ -23,6 +24,7 @@ import "./pages/ComprasMissDiorParfumPage.js";
 import "./pages/MissDiorEssencePage.js";
 import "./pages/LoginPage.js";
 import "./pages/RegisterPage.js";
+import "./pages/DadosPessoaisPage.js";
 import "./pages/FinalizarCompraPage.js";
 import "./pages/DiorVeraoPage.js";
 import "./pages/ModaEAcessoriosPage.js";
@@ -40,6 +42,7 @@ import "./components/ProfileMenu.js";
 import "./components/FragrancesModal.js";
 import "./components/AppNavigation.js";
 import "./components/FooterSection.js";
+import "./components/Toast.js";
 import "./components/ModaAcessoriosContent.js";
 
 // ============================================================================
@@ -68,6 +71,7 @@ router.register("/gris-dior", "gris-dior-page");
 router.register("/dioriviera", "dioriviera-page");
 router.register("/dior-spa", "dior-spa-page");
 router.register("/boutiques", "boutiques-page");
+router.register("/minha-conta/dados", "dados-pessoais-page");
 
 // ============================================================================
 // BUTTON ANIMATION - Efeito Hover com Flair
