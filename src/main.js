@@ -13,6 +13,7 @@ import "./styles/product-detail.css";
 import "./styles/register.css";
 import "./styles/boutiques.css";
 import "./styles/filter-sidebar.css";
+import "./styles/dior-spa.css";
 import { router } from "./router/router.js";
 import "./pages/HomePage.js";
 import "./pages/DiorHolidayPage.js";
@@ -34,6 +35,7 @@ import "./pages/SplashPage.js";
 import "./pages/PerfumeProductDetailPage.js";
 import "./pages/GrisDiorPage.js";
 import "./pages/DiorivieraPage.js";
+import "./pages/DiorSpaPage.js";
 import "./components/ProfileMenu.js";
 import "./components/FragrancesModal.js";
 import "./components/AppNavigation.js";
@@ -64,6 +66,7 @@ router.register("/colecao/product/:id", "colecao-product-detail-page");
 router.register("/perfume/:id", "perfume-product-detail-page");
 router.register("/gris-dior", "gris-dior-page");
 router.register("/dioriviera", "dioriviera-page");
+router.register("/dior-spa", "dior-spa-page");
 router.register("/boutiques", "boutiques-page");
 
 // ============================================================================

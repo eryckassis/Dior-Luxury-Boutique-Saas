@@ -9,6 +9,7 @@ export class AppNavigation extends HTMLElement {
     super();
     this.menuOpen = false;
     this.currentSubmenu = null;
+    this.spaExpanded = false;
 
     // Listener para atualizar o badge quando o carrinho mudar
     this.cartListener = () => {
@@ -36,6 +37,11 @@ export class AppNavigation extends HTMLElement {
     // Remove listener do scroll
     if (this._scrollCleanup) {
       this._scrollCleanup();
+    }
+
+    // Cleanup do painel Spa
+    if (this.spaExpanded) {
+      this.closeSpaPanel();
     }
   }
 
@@ -237,11 +243,19 @@ export class AppNavigation extends HTMLElement {
       });
     });
 
-    // Botões de voltar nos submenus
-    const backButtons = this.querySelectorAll(".submenu-back-btn");
+    // Botões de voltar nos submenus (exceto o botão Spa)
+    const backButtons = this.querySelectorAll(
+      ".submenu-back-btn[data-tratamento-back], .submenu-back-btn:not([data-spa-back]):not([data-tratamento-back])"
+    );
     backButtons.forEach((btn) => {
       btn.addEventListener("click", () => this.closeSubmenu());
     });
+
+    // Botão de voltar do Spa (fecha apenas o painel Spa)
+    const spaBackBtn = this.querySelector("[data-spa-back]");
+    if (spaBackBtn) {
+      spaBackBtn.addEventListener("click", () => this.closeSpaPanel());
+    }
 
     // Navegação dos links do menu (sem submenu)
     const menuLinks = this.querySelectorAll(
@@ -257,6 +271,107 @@ export class AppNavigation extends HTMLElement {
         }, 400);
       });
     });
+
+    // Dior Spa expansion trigger
+    const spaTrigger = this.querySelector("[data-spa-trigger]");
+    if (spaTrigger) {
+      spaTrigger.addEventListener("click", (e) => {
+        e.preventDefault();
+        this.openSpaPanel();
+      });
+    }
+  }
+
+  // ============================================================================
+  // DIOR SPA PANEL - Expansão do painel dentro do menu
+  // ============================================================================
+  openSpaPanel() {
+    const sideMenu = this.querySelector(".moda-side-menu");
+    const spaPanel = this.querySelector("[data-spa-panel]");
+    const tratamentoPanel = this.querySelector(
+      '[data-submenu-id="tratamento"]'
+    );
+    const spaBackBtn = this.querySelector("[data-spa-back]");
+    const tratamentoBackBtn = this.querySelector("[data-tratamento-back]");
+
+    if (!sideMenu || !spaPanel) return;
+
+    this.spaExpanded = true;
+
+    // Atualiza os botões de voltar
+    if (spaBackBtn) spaBackBtn.style.display = "flex";
+    if (tratamentoBackBtn) tratamentoBackBtn.style.display = "none";
+
+    if (window.gsap) {
+      // Expande o menu lateral
+      sideMenu.classList.add("spa-expanded");
+      if (tratamentoPanel) tratamentoPanel.classList.add("spa-open");
+
+      // Anima o painel Spa entrando da direita
+      window.gsap.to(spaPanel, {
+        left: "380px",
+        opacity: 1,
+        visibility: "visible",
+        duration: 0.4,
+        ease: "power2.out",
+        onStart: () => {
+          spaPanel.classList.add("active");
+        },
+      });
+
+      // Anima os links do Spa com stagger
+      const spaLinks = spaPanel.querySelectorAll(".spa-location-link");
+      window.gsap.fromTo(
+        spaLinks,
+        { opacity: 0, x: 20 },
+        {
+          opacity: 1,
+          x: 0,
+          duration: 0.3,
+          stagger: 0.05,
+          delay: 0.2,
+          ease: "power2.out",
+        }
+      );
+    }
+  }
+
+  closeSpaPanel() {
+    const sideMenu = this.querySelector(".moda-side-menu");
+    const spaPanel = this.querySelector("[data-spa-panel]");
+    const tratamentoPanel = this.querySelector(
+      '[data-submenu-id="tratamento"]'
+    );
+    const spaBackBtn = this.querySelector("[data-spa-back]");
+    const tratamentoBackBtn = this.querySelector("[data-tratamento-back]");
+
+    if (!spaPanel) return;
+
+    this.spaExpanded = false;
+
+    // Restaura os botões de voltar
+    if (spaBackBtn) spaBackBtn.style.display = "none";
+    if (tratamentoBackBtn) tratamentoBackBtn.style.display = "flex";
+
+    if (window.gsap) {
+      // Anima o painel Spa saindo
+      window.gsap.to(spaPanel, {
+        left: "100%",
+        opacity: 0,
+        duration: 0.3,
+        ease: "power2.in",
+        onComplete: () => {
+          spaPanel.style.visibility = "hidden";
+          spaPanel.classList.remove("active");
+          if (sideMenu) {
+            sideMenu.classList.remove("spa-expanded");
+          }
+          if (tratamentoPanel) {
+            tratamentoPanel.classList.remove("spa-open");
+          }
+        },
+      });
+    }
   }
 
   openSubmenu(submenuId) {
@@ -286,6 +401,11 @@ export class AppNavigation extends HTMLElement {
 
   closeSubmenu() {
     if (!this.currentSubmenu) return;
+
+    // Fecha o painel Spa se estiver aberto
+    if (this.spaExpanded) {
+      this.closeSpaPanel();
+    }
 
     const mainMenu = this.querySelector(".main-menu-content");
     const submenu = this.querySelector(
@@ -404,6 +524,11 @@ export class AppNavigation extends HTMLElement {
     const backdrop = this.querySelector(".moda-side-menu-backdrop");
     const hamburger = this.querySelector(".moda-nav-hamburger");
     const lines = hamburger.querySelectorAll("line");
+
+    // Fecha o painel Spa se estiver aberto
+    if (this.spaExpanded) {
+      this.closeSpaPanel();
+    }
 
     // Se tem submenu aberto, fecha primeiro
     if (this.currentSubmenu) {
@@ -681,20 +806,42 @@ export class AppNavigation extends HTMLElement {
           <!-- Submenu: Tratamento -->
           <div class="submenu-panel" data-submenu-id="tratamento" style="display: none;">
             <div class="submenu-header">
-              <button class="submenu-back-btn">
+              <button class="submenu-back-btn" data-spa-back style="display: none;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M15 18l-6-6 6-6"/>
+                </svg>
+                <span>Spa</span>
+              </button>
+              <button class="submenu-back-btn" data-tratamento-back>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M15 18l-6-6 6-6"/>
                 </svg>
                 <span>Tratamento</span>
               </button>
             </div>
-            <div class="submenu-content">
-              <nav class="submenu-links">
-                <a href="#novidades" class="submenu-link">Novidades</a>
-                <a href="#rosto" class="submenu-link">Tratamento Rosto</a>
-                <a href="#corpo" class="submenu-link">Tratamento Corpo</a>
-                <a href="#solar" class="submenu-link">Proteção Solar</a>
-              </nav>
+            <div class="submenu-content-wrapper">
+              <!-- Lado esquerdo: Menu Tratamento/Spa -->
+              <div class="submenu-left-content">
+                <nav class="submenu-links">
+                  <a href="#novidades" class="submenu-link">O que há de novo</a>
+                  <a href="#spa" class="submenu-link has-spa-submenu" data-spa-trigger>Dior Spa</a>
+                </nav>
+              </div>
+              
+              <!-- Lado direito: Locais do Spa (aparece ao clicar em Dior Spa) -->
+              <div class="spa-locations-panel" data-spa-panel>
+                <nav class="spa-locations-list">
+                  <a href="#spa-new-york" class="spa-location-link">Dior Spa New York</a>
+                  <a href="#spa-cheval-blanc" class="spa-location-link">Dior Spa Cheval Blanc - Paris</a>
+                  <a href="#spa-harrods" class="spa-location-link">Dior la Suite At Harrods - London</a>
+                  <a href="#spa-plaza" class="spa-location-link">Dior Spa Plaza Athénée - Paris</a>
+                  <a href="#spa-lana" class="spa-location-link">Dior Spa The Lana - Dubaï</a>
+                  <a href="#spa-timeo" class="spa-location-link">Dior Spa Timeo - Sicily</a>
+                  <a href="#spa-doha" class="spa-location-link">Dior Luxury Beauty Retreat - Doha</a>
+                  <a href="#spa-scotsman" class="spa-location-link">Dior Spa Royal Scotsman</a>
+                  <a href="/dior-spa" class="spa-location-link spa-view-all" data-route="/dior-spa">Ver tudo</a>
+                </nav>
+              </div>
             </div>
           </div>
 
