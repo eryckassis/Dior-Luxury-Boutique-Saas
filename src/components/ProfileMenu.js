@@ -438,6 +438,20 @@ export class ProfileMenu extends HTMLElement {
   open(initialTab = "account") {
     if (this.isOpen) return;
 
+    // Sincroniza estado real ao abrir (Safety Check)
+    const currentAuth = authService.isAuthenticated();
+    const currentUser = authService.getUser();
+
+    // Se o estado local estiver diferente do real, atualiza!
+    if (
+      this.isAuthenticated !== currentAuth ||
+      JSON.stringify(this.user) !== JSON.stringify(currentUser)
+    ) {
+      this.isAuthenticated = currentAuth;
+      this.user = currentUser;
+      this.updateAccountContent();
+    }
+
     this.isOpen = true;
     const menu = this.querySelector(".profile-menu-container");
     const backdrop = this.querySelector(".profile-menu-backdrop");

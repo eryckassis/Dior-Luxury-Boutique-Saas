@@ -53,6 +53,14 @@ export class LoginPage extends HTMLElement {
         this.togglePasswordVisibility()
       );
     }
+
+    // Botão Cadastre-se
+    const signupButton = this.querySelector(".signup-button");
+    if (signupButton) {
+      signupButton.addEventListener("click", () => {
+        router.navigate("/register");
+      });
+    }
   }
 
   initLoginForm() {
@@ -331,11 +339,8 @@ export class LoginPage extends HTMLElement {
                 <button class="form__button" type="submit">Entrar</button>
 
                 <div class="login-footer">
-                  <p class="login-footer-text">
-                    Não tem uma conta? 
-                    <a href="#" class="signup-link-footer" data-route="/register">Cadastre-se</a>
-                  </p>
-                  <button type="button" class="email-code-button">Receber código de acesso por email</button>
+                  <p class="login-footer-text">Não tem uma conta?</p>
+                  <button type="button" class="signup-button" data-route="/register">Cadastre-se</button>
                 </div>
               </form>
             </div>
@@ -343,7 +348,7 @@ export class LoginPage extends HTMLElement {
             <div class="switch" id="switch-cnt">
               <div class="switch__video">
                 <video autoplay muted loop playsinline>
-                  <source src="/videos/get.mp4" type="video/mp4">
+                  <source src="/videos/Anya.mp4" type="video/mp4">
                 </video>
               </div>
 

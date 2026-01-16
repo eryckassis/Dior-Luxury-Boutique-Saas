@@ -9,6 +9,8 @@ class AuthService {
     this.REFRESH_TOKEN_KEY = "dior_refresh_token";
     this.USER_KEY = "dior_user";
     this.listeners = [];
+    this.expirationCheckInterval = null;
+    this.startExpirationCheck();
   }
 
   // ========================================================================
@@ -78,6 +80,9 @@ class AuthService {
       this.setUser(data.data.user);
       this.notifyListeners();
 
+      // Inicia verificação de expiração
+      this.startExpirationCheck();
+
       return data;
     } catch (error) {
       console.error("❌ Erro no login:", error);
@@ -106,6 +111,8 @@ class AuthService {
     } catch (error) {
       console.error("❌ Erro no logout:", error);
     } finally {
+      // Para o timer de verificação
+      this.stopExpirationCheck();
       // Limpa dados locais independente do resultado da API
       this.clearAuth();
       this.notifyListeners();
@@ -336,6 +343,97 @@ class AuthService {
     const user = this.getUser();
     const isAuthenticated = this.isAuthenticated();
     this.listeners.forEach((callback) => callback({ user, isAuthenticated }));
+  }
+
+  // ========================================================================
+  // SESSION EXPIRATION MONITORING
+  // ========================================================================
+
+  /**
+   * Inicia verificação periódica de expiração do token
+   */
+  startExpirationCheck() {
+    // Limpa interval anterior se existir
+    if (this.expirationCheckInterval) {
+      clearInterval(this.expirationCheckInterval);
+    }
+
+    // Verifica a cada 30 segundos
+    this.expirationCheckInterval = setInterval(() => {
+      this.checkAndHandleExpiration();
+    }, 30000);
+
+    // Verifica imediatamente também
+    this.checkAndHandleExpiration();
+  }
+
+  /**
+   * Para a verificação de expiração
+   */
+  stopExpirationCheck() {
+    if (this.expirationCheckInterval) {
+      clearInterval(this.expirationCheckInterval);
+      this.expirationCheckInterval = null;
+    }
+  }
+
+  /**
+   * Verifica se token expirou e tenta renovar ou dispara evento
+   */
+  async checkAndHandleExpiration() {
+    const accessToken = this.getAccessToken();
+    const refreshToken = this.getRefreshToken();
+
+    // Se não há tokens, não precisa verificar
+    if (!accessToken || !refreshToken) {
+      this.stopExpirationCheck();
+      return;
+    }
+
+    // Se access token expirou
+    if (this.isTokenExpired(accessToken)) {
+      console.log("⏰ Access token expirado, tentando renovar...");
+      
+      // Tenta renovar
+      try {
+        await this.refreshAccessToken();
+        console.log("✅ Token renovado com sucesso");
+      } catch (error) {
+        console.log("❌ Falha ao renovar token, sessão expirada");
+        this.handleSessionExpired();
+      }
+    } else {
+      // Verifica se vai expirar em breve (1 minuto)
+      try {
+        const payload = JSON.parse(atob(accessToken.split(".")[1]));
+        const exp = payload.exp * 1000;
+        const timeUntilExpiry = exp - Date.now();
+        
+        // Se expira em menos de 1 minuto, tenta renovar preventivamente
+        if (timeUntilExpiry < 60000 && timeUntilExpiry > 0) {
+          console.log("⚠️ Token expira em breve, renovando preventivamente...");
+          try {
+            await this.refreshAccessToken();
+          } catch (error) {
+            // Ignora erro, tentará novamente na próxima verificação
+          }
+        }
+      } catch (e) {
+        // Erro ao decodificar token, ignora
+      }
+    }
+  }
+
+  /**
+   * Dispara evento de sessão expirada e limpa dados
+   */
+  handleSessionExpired() {
+    this.stopExpirationCheck();
+    this.clearAuth();
+    this.notifyListeners();
+    
+    // Dispara evento customizado para o modal
+    window.dispatchEvent(new CustomEvent("session-expired"));
   }
 }
 

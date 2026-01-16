@@ -1,4 +1,5 @@
 import "./style.css";
+import "./styles/session-modal.css";
 import "./styles/app-navigation.css";
 import "./styles/fragrances-modal.css";
 import "./styles/miss-dior.css";
@@ -32,6 +33,7 @@ import "./pages/PresenteParaElaPage.js";
 import "./pages/ColecaoPage.js";
 import "./pages/ProductDetailPage.js";
 import "./pages/ColecaoProductDetailPage.js";
+import "./components/SessionExpiredModal.js";
 import "./pages/BoutiquesPage.js";
 import "./pages/SplashPage.js";
 import "./pages/PerfumeProductDetailPage.js";

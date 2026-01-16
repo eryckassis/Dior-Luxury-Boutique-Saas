@@ -14,6 +14,16 @@ export class RegisterPage extends HTMLElement {
     this.render();
     this.initRegisterForm();
     this.initPasswordToggles();
+    this.initLoginButton();
+  }
+
+  initLoginButton() {
+    const loginButton = this.querySelector(".login-button");
+    if (loginButton) {
+      loginButton.addEventListener("click", () => {
+        router.navigate("/login");
+      });
+    }
   }
 
   initPasswordToggles() {
@@ -303,10 +313,8 @@ export class RegisterPage extends HTMLElement {
                 <button class="form__button" type="submit">Criar Conta</button>
 
                 <div class="register-footer">
-                  <p class="register-footer-text">
-                    Já tem uma conta? 
-                    <a href="#" class="login-link" data-route="/login">Fazer login</a>
-                  </p>
+                  <p class="register-footer-text">Já tem uma conta?</p>
+                  <button type="button" class="login-button" data-route="/login">Fazer login</button>
                 </div>
               </form>
             </div>
@@ -314,7 +322,7 @@ export class RegisterPage extends HTMLElement {
             <div class="switch">
               <div class="switch__video">
                 <video autoplay muted loop playsinline>
-                  <source src="/videos/get.mp4" type="video/mp4">
+                  <source src="/videos/Letter.mp4" type="video/mp4">
                 </video>
               </div>
 

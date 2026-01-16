@@ -31,14 +31,15 @@
   position: relative;
   width: 900px;
   min-width: 900px;
-  min-height: 600px;
-  height: 600px;
+  min-height: 700px;
+  height: auto;
   padding: 0;
   margin: 40px auto;
   background: #ffffff;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
   border-radius: 16px;
   overflow: hidden;
+  display: flex;
 }
 
 /* Containers */
@@ -46,12 +47,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  position: absolute;
-  top: 0;
-  left: 0;
+  position: relative;
   width: 50%;
-  height: 100%;
-  padding: 40px;
+  min-height: 700px;
+  padding: 50px 40px;
   background: #ffffff;
   transition: all 0.6s ease-in-out;
 }
@@ -83,7 +82,7 @@
 .register-page .form_subtitle {
   font-size: 13px;
   color: var(--register-gray);
-  margin: 0 0 28px 0;
+  margin: 0 0 20px 0;
   text-align: center;
   font-weight: 400;
 }
@@ -92,7 +91,7 @@
 .register-page .register-input-wrapper {
   position: relative;
   width: 100%;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 .register-page .form__input {
@@ -190,8 +189,8 @@
   background: #f8f9fa;
   border: 1px solid var(--register-border);
   border-radius: 6px;
-  padding: 12px 16px;
-  margin-bottom: 20px;
+  padding: 10px 14px;
+  margin-bottom: 16px;
 }
 
 .register-page .requirements-title {
@@ -216,7 +215,7 @@
 /* Button */
 .register-page .form__button {
   width: 100%;
-  padding: 16px;
+  padding: 14px;
   background: #222;
   color: white;
   border: none;
@@ -225,7 +224,7 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   font-family: "Manrope", sans-serif;
   letter-spacing: 0.3px;
 }
@@ -284,33 +283,45 @@
 .register-page .register-footer {
   width: 100%;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
 }
 
 .register-page .register-footer-text {
   font-size: 13px;
   color: var(--register-gray);
   margin: 0;
+  font-family: "Hellix", sans-serif;
+  font-weight: 500;
 }
 
-.register-page .login-link {
-  color: var(--register-link);
-  text-decoration: none;
+.register-page .login-button {
+  width: 100%;
+  padding: 16px;
+  background: transparent;
+  color: #222;
+  border: 1px solid #222;
+  border-radius: 6px;
+  font-size: 14px;
   font-weight: 600;
-  transition: color 0.2s;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-family: "Hellix", sans-serif;
+  letter-spacing: 0.3px;
 }
 
-.register-page .login-link:hover {
-  color: #666;
-  text-decoration: underline;
+.register-page .login-button:hover {
+  background: #222;
+  color: #fff;
 }
 
 /* Switch (Video Side) */
 .register-page .switch {
-  position: absolute;
-  top: 0;
-  right: 0;
+  position: relative;
   width: 50%;
-  height: 100%;
+  min-height: 700px;
   overflow: hidden;
 }
 

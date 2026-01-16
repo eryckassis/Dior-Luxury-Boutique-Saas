@@ -248,27 +248,30 @@
 .login-page .login-footer-text {
   font-size: 13px;
   color: var(--login-text);
-  margin-bottom: 0;
-  font-family: "Manrope", sans-serif;
-  position: relative;
-  bottom: 15px;
+  margin-bottom: 4px;
+  font-family: "Hellix", sans-serif;
   font-weight: 500;
+  text-align: center;
 }
 
-.login-page .signup-link-footer {
-  color: var(--login-link);
-  text-decoration: none;
-  position: relative;
-  bottom: 15px;
+.login-page .signup-button {
+  width: 100%;
+  padding: 16px;
+  background: #222;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
   font-weight: 600;
-  font-size: 13px;
-  font-family: "Manrope", sans-serif;
-  transition: text-decoration 0.3s;
-  margin-bottom: 12px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-family: "Hellix", sans-serif;
+  letter-spacing: 0.3px;
 }
 
-.login-page .signup-link-footer:hover {
-  text-decoration: underline;
+.login-page .signup-button:hover {
+  background: #666;
+  box-shadow: 0 4px 12px rgba(61, 71, 80, 0.3);
 }
 
 .login-page .signup-link {
@@ -282,32 +285,7 @@
   text-decoration: underline;
 }
 
-.login-page .email-code-button {
-  width: 100%;
-  position: relative;
-  bottom: 15px;
-  padding: 16px;
-  background: #222;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s;
-  font-family: "Manrope", sans-serif;
-  letter-spacing: 0.3px;
-}
-
-.login-page .email-code-button:hover {
-  background: #666;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(61, 71, 80, 0.3);
-}
-
-.login-page .email-code-button:active {
-  transform: translateY(0);
-}
+/* Botão email-code removido - substituído por signup-button */
 
 /* Switch Panel */
 .login-page .switch {
@@ -336,14 +314,8 @@
 }
 
 .login-page .switch__video video {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  min-width: 100%;
-  min-height: 100%;
-  width: auto;
-  height: auto;
-  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
   object-fit: cover;
 }
 
@@ -456,7 +428,7 @@
   cursor: pointer;
   font-weight: 600;
   transition: all 0.3s;
-  font-family: "Manrope", sans-serif;
+  font-family: "Hellix", sans-serif;
 }
 
 .forgot-send-btn:hover {
