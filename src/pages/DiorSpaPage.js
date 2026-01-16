@@ -334,6 +334,80 @@ export class DiorSpaPage extends HTMLElement {
 
         <!-- Sections 5-13: Spa Locations (using reusable component) -->
         ${this.renderSpaSections()}
+
+        <!-- Section: High Tech Tools -->
+        <section class="dior-spa-tech-section">
+          <div class="dior-spa-tech-header">
+            <h2 class="dior-spa-tech-title">FERRAMENTAS DE ALTA TECNOLOGIA</h2>
+            <p class="dior-spa-tech-description">
+              Para aumentar a eficácia dos cuidados com a pele nos Spas Dior, a Maison Dior 
+              utiliza ferramentas tecnológicas de última geração e segue protocolos de beleza 
+              desenvolvidos em colaboração com especialistas de beauté.
+            </p>
+          </div>
+          
+          <div class="dior-spa-tech-cards">
+            <div class="dior-spa-tech-card">
+              <div class="dior-spa-tech-card-image-wrapper">
+                <img src="/images/hidra.jpg" alt="Dior Hydrafacial" class="dior-spa-tech-card-image" />
+              </div>
+              <h3 class="dior-spa-tech-card-title">DIOR POWERED BY HYDRAFACIAL</h3>
+              <p class="dior-spa-tech-card-description">
+                Um protocolo de skincare feito sob medida usando a inovadora ferramenta 
+                Syndeo da Hydrafacial. Este tratamento combina a Loção Peeling Floral, com 
+                sua alta dose de princípios ativos, e as técnicas dos especialistas em bem-estar 
+                da Dior com a mais recente tecnologia Hydrafacial.
+              </p>
+              <a href="#" class="spa-btn-line">
+                <span class="spa-btn-text">Descubra</span>
+              </a>
+            </div>
+
+            <div class="dior-spa-tech-card">
+              <div class="dior-spa-tech-card-image-wrapper">
+                <img src="/images/hidra2.webp" alt="Dior Microdermabrasion" class="dior-spa-tech-card-image" />
+              </div>
+              <h3 class="dior-spa-tech-card-title">DIOR MICRODERMABRASION</h3>
+              <p class="dior-spa-tech-card-description">
+                A microdermoabrasão é a técnica icônica do spa Dior para um efeito de pele 
+                nova. Este método de regeneração da pele utiliza uma ferramenta de alta 
+                tecnologia que combina esfoliação e drenagem linfática. Mais suave que um 
+                peeling e mais profunda que uma esfoliação, a microdermoabrasão Dior 
+                proporciona à pele um brilho renovado.
+              </p>
+              <a href="#" class="spa-btn-line">
+                <span class="spa-btn-text">Descubra</span>
+              </a>
+            </div>
+
+            <div class="dior-spa-tech-card">
+              <div class="dior-spa-tech-card-image-wrapper">
+                <img src="/images/hidra3.jpg" alt="Dior Frequencies" class="dior-spa-tech-card-image" />
+              </div>
+              <h3 class="dior-spa-tech-card-title">Dior Frequencies By Indiba</h3>
+              <p class="dior-spa-tech-card-description">
+                O Dior Frequencies é um tratamento exclusivo do spa da Dior para o corpo ou 
+                para o rosto. A radiofrequência estimula determinadas células do tecido 
+                adiposo, o que aumenta a produção de colágeno para uma silhueta esculpida e 
+                uma pele rejuvenescida.
+              </p>
+              <a href="#" class="spa-btn-line">
+                <span class="spa-btn-text">Descubra</span>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section: Final Spa Location -->
+        <spa-section-card
+          image="/images/suite.webp"
+          title="Dior Spa Expertise"
+          description="Descubra a arte do bem-estar Dior, onde cada tratamento é uma experiência única de luxo e sofisticação."
+          button-text="Descubra"
+          button-style="line"
+          image-position="left"
+          section-index="final"
+        ></spa-section-card>
       </main>
 
       <footer-section></footer-section>

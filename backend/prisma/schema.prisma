@@ -13,6 +13,11 @@ model User {
   email                String @unique
   password             String
   name                 String
+  lastName             String?
+  cpf                  String? @unique
+  phone                String?
+  gender               String?
+  birthDate            DateTime?
 
   // verificação de e-mail
 

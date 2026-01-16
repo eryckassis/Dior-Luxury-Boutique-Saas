@@ -1,21 +1,30 @@
 // ============================================================================
 // PROFILE MENU COMPONENT - Menu lateral de perfil
 // ============================================================================
+
 import { router } from "../router/router.js";
 import { cartService } from "../services/CartService.js";
+import { authService } from "../services/AuthService.js";
 
 export class ProfileMenu extends HTMLElement {
   constructor() {
     super();
     this.isOpen = false;
-    this.activeTab = "account"; // 'account' or 'bag'
+    this.activeTab = "account";
     this.isSignupModalOpen = false;
 
-    // Inicializa com itens padrão se o carrinho estiver vazio
+    this.isAuthenticated = authService.isAuthenticated();
+    this.user = authService.getUser();
+
+    this.authListener = ({ user, isAuthenticated }) => {
+      this.user = user;
+      this.isAuthenticated = isAuthenticated;
+      this.updateAccountContent();
+    };
+
     cartService.initializeDefaultItems();
     this.cartItems = cartService.getItems();
 
-    // Listener para atualizar quando o carrinho mudar
     this.cartListener = (items) => {
       this.cartItems = items;
       this.updateCart();
@@ -29,11 +38,14 @@ export class ProfileMenu extends HTMLElement {
 
     // Adiciona listener para mudanças no carrinho
     cartService.addListener(this.cartListener);
+    authService.addListener(this.authListener);
   }
 
   disconnectedCallback() {
     // Remove listener do carrinho
     cartService.removeListener(this.cartListener);
+    // Removce listener de auth
+    authService.removeListener(this.authListener);
   }
 
   initEventListeners() {
@@ -333,22 +345,43 @@ export class ProfileMenu extends HTMLElement {
     }
   }
 
-  handleSignup(e) {
+  async handleSignup(e) {
     e.preventDefault();
 
     const form = e.target;
-    const name = form.querySelector('input[name="name"]').value;
-    const email = form.querySelector('input[name="email"]').value;
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const name = form.querySelector('input[name="name"]').value.trim();
+    const email = form.querySelector('input[name="email"]').value.trim();
     const password = form.querySelector('input[name="password"]').value;
+    const confirmPassword = form.querySelector(
+      'input[name="password-confirm"]'
+    ).value;
 
-    // Aqui você pode adicionar a lógica de cadastro
-    console.log("Cadastro:", { name, email, password });
+    if (password !== confirmPassword) {
+      alert("As senhas não se coincidem");
+      return;
+    }
 
-    // Fecha o modal após cadastro
-    this.closeSignupModal();
+    try {
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Criando conta...";
 
-    // Mostra mensagem de sucesso (opcional)
-    alert("Conta criada com sucesso!");
+      await authService.register({ name, email, password, confirmPassword });
+
+      this.closeSignupModal();
+    } catch (error) {
+      alert(error.message || "Erro ao criar conta");
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Criar conta";
+    }
+  }
+  async handleLogout() {
+    try {
+      await authService.logout();
+    } catch (error) {
+      console.error("Erro no logout:", error);
+    }
   }
 
   validateCoupon() {
@@ -365,8 +398,6 @@ export class ProfileMenu extends HTMLElement {
       return;
     }
 
-    // Simulação de validação
-    // Aqui você adicionaria a lógica real de validação
     errorMsg.textContent = "Cupom aplicado com sucesso!";
     errorMsg.style.color = "#27ae60";
     errorMsg.style.display = "block";
@@ -664,6 +695,86 @@ export class ProfileMenu extends HTMLElement {
     `;
   }
 
+  renderLoginContent() {
+    return `
+      <div class="profile-login-section">
+        <h2 class="profile-login-title">Login</h2>
+        <p class="profile-login-subtitle">Para acessar a sua conta</p>
+        <button class="profile-login-btn">Acessar</button>
+      </div>
+      
+      <div class="profile-signup-section">
+        <h3 class="profile-signup-title">Sem conta ?</h3>
+        <p class="profile-signup-subtitle">Para fazer login em sua conta</p>
+        <button class="profile-signup-btn">Crie a sua conta aqui</button>
+      </div>
+    `;
+  }
+
+  renderLoggedInContent() {
+    const userName = this.user?.name || "Usuário";
+
+    return `
+      <div class="profile-user-welcome">
+        <span class="profile-welcome-label">Welcome</span>
+        <h2 class="profile-user-name">${userName}</h2>
+      </div>
+
+      <div class="profile-menu-sections">
+        <div class="profile-menu-group">
+          <h3 class="profile-group-title">Profile</h3>
+          <a href="/meus-dados" class="profile-menu-link">Meus dados pessoais</a>
+          <a href="/meus-enderecos" class="profile-menu-link">Meus endereços</a>
+        </div>
+
+        <div class="profile-menu-group">
+          <h3 class="profile-group-title">Orders</h3>
+          <a href="/meus-pedidos" class="profile-menu-link">Meus Pedidos</a>
+          <a href="/meus-cartoes" class="profile-menu-link">Meus Cartões</a>
+        </div>
+      </div>
+
+      <div class="profile-logout-section">
+        <button class="profile-logout-btn">Logout</button>
+      </div>
+    `;
+  }
+
+  updateAccountContent() {
+    const accountContent = this.querySelector(".profile-account-content");
+    if (accountContent) {
+      accountContent.innerHTML = this.isAuthenticated
+        ? this.renderLoggedInContent()
+        : this.renderLoginContent();
+
+      this.initAccountButtons();
+    }
+  }
+
+  initAccountButtons() {
+    const loginBtn = this.querySelector(".profile-login-btn");
+    const signupBtn = this.querySelector(".profile-signup-btn");
+    const logoutBtn = this.querySelector(".profile-logout-btn");
+
+    if (loginBtn) {
+      loginBtn.addEventListener("click", () => {
+        this.close();
+        setTimeout(() => router.navigate("/login"), 650);
+      });
+    }
+
+    if (signupBtn) {
+      signupBtn.addEventListener("click", () => {
+        this.close();
+        setTimeout(() => router.navigate("/register"), 650);
+      });
+    }
+
+    if (logoutBtn) {
+      logoutBtn.addEventListener("click", () => this.handleLogout());
+    }
+  }
+
   render() {
     this.innerHTML = `
       <!-- Backdrop -->
@@ -690,21 +801,11 @@ export class ProfileMenu extends HTMLElement {
 
         <!-- Account Content -->
         <div class="profile-menu-content profile-account-content">
-          <div class="profile-login-section">
-            <h2 class="profile-login-title">Login</h2>
-            <p class="profile-login-subtitle">Para acessar a sua conta</p>
-            <button class="profile-login-btn">
-              Acessar
-            </button>
-          </div>
-
-          <div class="profile-signup-section">
-            <h3 class="profile-signup-title">Sem conta ?</h3>
-            <p class="profile-signup-subtitle">Para fazer login em sua conta</p>
-            <button class="profile-signup-btn">
-              Crie a sua conta aqui
-            </button>
-          </div>
+          ${
+            this.isAuthenticated
+              ? this.renderLoggedInContent()
+              : this.renderLoginContent()
+          }
         </div>
 
         <!-- Bag Content -->
@@ -819,6 +920,7 @@ export class ProfileMenu extends HTMLElement {
       this.initCartEventListeners();
       this.initCouponModalListeners();
       this.initSignupModalListeners();
+      this.initAccountButtons();
     }, 0);
   }
 

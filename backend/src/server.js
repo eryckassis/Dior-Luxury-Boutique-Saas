@@ -7,32 +7,33 @@ import { generalLimiter } from "./middlewares/rateLimiter.middleware.js";
 import { ErrorMiddleware } from "./middlewares/error.middleware.js";
 import authRoutes from "./routes/auth.routes.js";
 
-/**
- * Configuração do servidor Express
- * Princípios aplicados:
- * - Security First
- * - Clean Architecture
- * - Separation of Concerns
- */
-
 const app = express();
 
-// ============================================================================
-// MIDDLEWARES DE SEGURANÇA
-// ============================================================================
+const allowedOrigins = [
+  "http://localhost:3000",
+  "http://localhost:5173",
+  "http://127.0.0.1:3000",
+  "http://127.0.0.1:5173",
+];
 
-// CORS: Permite requisições do frontend (DEVE VIR ANTES DO HELMET)
 app.use(
   cors({
-    origin: config.clientUrl,
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Não permitido pelo CORS"));
+      }
+    },
     credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+    methods: ["GET", "POST", "PUT", "DELETE", "PATH", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
-    exposedHeaders: ["Content-Type", "Authorization"],
-    maxAge: 86400, // 24 horas
+    exposedHeader: ["Content-Type", "Authorization"],
+    maxAge: 86400,
   })
 );
-
 // Helmet: Protege contra vulnerabilidades conhecidas
 app.use(
   helmet({

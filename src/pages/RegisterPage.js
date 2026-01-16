@@ -318,9 +318,7 @@ export class RegisterPage extends HTMLElement {
                 </video>
               </div>
 
-              <div class="switch__container">
-                <h2 class="switch__title title">Bem-vindo à Dior</h2>
-              </div>
+              
             </div>
           </main>
         </div>

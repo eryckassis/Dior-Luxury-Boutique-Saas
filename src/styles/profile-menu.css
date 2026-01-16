@@ -221,6 +221,82 @@ z-index: 1;
   background: #999999;
 }
 
+/* ============================================
+   PROFILE MENU - LOGGED IN STATE
+   ============================================ */
+
+.profile-user-welcome {
+  padding: 20px 0;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 30px;
+}
+
+.profile-welcome-label {
+  font-size: 12px;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.profile-user-name {
+  font-family: "Didot", "Times New Roman", serif;
+  font-size: 28px;
+  font-weight: 400;
+  color: #000;
+  margin-top: 5px;
+}
+
+.profile-menu-sections {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.profile-menu-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.profile-group-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #000;
+  margin-bottom: 5px;
+}
+
+.profile-menu-link {
+  font-size: 14px;
+  color: #444;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.profile-menu-link:hover {
+  color: #000;
+}
+
+.profile-logout-section {
+  margin-top: auto;
+  padding-top: 30px;
+  border-top: 1px solid #eee;
+}
+
+.profile-logout-btn {
+  background: none;
+  border: none;
+  font-size: 14px;
+  color: #000;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+}
+
+.profile-logout-btn:hover {
+  color: #333;
+}
+
 /* ============================================================================
    BAG CONTENT - Conteúdo da Sacola
    ============================================================================ */

@@ -433,3 +433,123 @@
     font-size: 0.9rem;
   }
 }
+
+/* ============================================================================
+   HIGH TECH TOOLS SECTION
+   ============================================================================ */
+
+.dior-spa-tech-section {
+  padding: 6rem 0;
+  background: #f9f8f6;
+}
+
+.dior-spa-tech-header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 4rem;
+  padding: 0 2rem;
+}
+
+.dior-spa-tech-title {
+  font-family: "Hellix", sans-serif;
+  font-size: 1.8rem;
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  color: #1a1a1a;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+}
+
+.dior-spa-tech-description {
+  font-family: "Hellix", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 400;
+  line-height: 1.8;
+  color: #888;
+}
+
+/* Tech Cards Grid */
+.dior-spa-tech-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  padding: 0 1.5rem;
+}
+
+.dior-spa-tech-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.dior-spa-tech-card-image-wrapper {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.dior-spa-tech-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.dior-spa-tech-card:hover .dior-spa-tech-card-image {
+  transform: scale(1.05);
+}
+
+.dior-spa-tech-card-title {
+  font-family: "Hellix", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: #1a1a1a;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+.dior-spa-tech-card-description {
+  font-family: "Hellix", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 400;
+  line-height: 1.7;
+  color: #888;
+  margin-bottom: 1.5rem;
+  padding: 0 1rem;
+  max-width: 380px;
+}
+
+.dior-spa-tech-card .spa-btn-line {
+  margin-top: auto;
+}
+
+/* Responsive Tech Cards */
+@media (max-width: 992px) {
+  .dior-spa-tech-cards {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .dior-spa-tech-card-image-wrapper {
+    aspect-ratio: 4 / 5;
+  }
+}
+
+@media (max-width: 576px) {
+  .dior-spa-tech-section {
+    padding: 4rem 0;
+  }
+
+  .dior-spa-tech-title {
+    font-size: 1.4rem;
+  }
+
+  .dior-spa-tech-cards {
+    padding: 0 1rem;
+  }
+}
