@@ -150,7 +150,7 @@ export class DadosPessoaisPage extends HTMLElement {
 
     // Coleta dados do formulário
     const formData = new FormData(e.target);
-    
+
     // Trata os valores - envia null para campos vazios
     const name = formData.get("name")?.trim() || "";
     const lastName = formData.get("lastName")?.trim() || "";
