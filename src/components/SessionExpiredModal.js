@@ -49,9 +49,9 @@ class SessionExpiredModal {
 
     document.body.appendChild(backdrop);
     this.modal = backdrop;
-    
+
     // addStyles removido - estilos agora em src/styles/session-modal.css
-    
+
     this.initEventListeners();
   }
 
@@ -72,25 +72,25 @@ class SessionExpiredModal {
       // GSAP hover animation (Lógica do DiorSpaPage / SpaSectionCard)
       if (window.gsap) {
         const flair = btn.querySelector(".session-expired-btn-flair");
-        
+
         if (flair) {
           const xSet = window.gsap.quickSetter(flair, "xPercent");
           const ySet = window.gsap.quickSetter(flair, "yPercent");
 
           const getXY = (e) => {
             const { left, top, width, height } = btn.getBoundingClientRect();
-            
+
             // Map transforms mouse position to percentage (0-100)
             const xTransformer = window.gsap.utils.pipe(
               window.gsap.utils.mapRange(0, width, 0, 100),
               window.gsap.utils.clamp(0, 100)
             );
-            
+
             const yTransformer = window.gsap.utils.pipe(
               window.gsap.utils.mapRange(0, height, 0, 100),
               window.gsap.utils.clamp(0, 100)
             );
-            
+
             return {
               x: xTransformer(e.clientX - left),
               y: yTransformer(e.clientY - top),
@@ -122,14 +122,14 @@ class SessionExpiredModal {
 
           btn.addEventListener("mousemove", (e) => {
             const { x, y } = getXY(e);
-            
+
             // Usando to() para suavizar o movimento, similar ao SpaSectionCard
             window.gsap.to(flair, {
               xPercent: x,
               yPercent: y,
               duration: 0.4,
               ease: "power2",
-              overwrite: "auto" 
+              overwrite: "auto",
             });
           });
         }

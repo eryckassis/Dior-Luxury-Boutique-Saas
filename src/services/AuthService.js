@@ -393,7 +393,7 @@ class AuthService {
     // Se access token expirou
     if (this.isTokenExpired(accessToken)) {
       console.log("⏰ Access token expirado, tentando renovar...");
-      
+
       // Tenta renovar
       try {
         await this.refreshAccessToken();
@@ -408,7 +408,7 @@ class AuthService {
         const payload = JSON.parse(atob(accessToken.split(".")[1]));
         const exp = payload.exp * 1000;
         const timeUntilExpiry = exp - Date.now();
-        
+
         // Se expira em menos de 1 minuto, tenta renovar preventivamente
         if (timeUntilExpiry < 60000 && timeUntilExpiry > 0) {
           console.log("⚠️ Token expira em breve, renovando preventivamente...");
@@ -431,7 +431,7 @@ class AuthService {
     this.stopExpirationCheck();
     this.clearAuth();
     this.notifyListeners();
-    
+
     // Dispara evento customizado para o modal
     window.dispatchEvent(new CustomEvent("session-expired"));
   }
