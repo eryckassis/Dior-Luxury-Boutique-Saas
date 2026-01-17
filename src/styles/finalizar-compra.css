@@ -145,9 +145,12 @@
 }
 
 .form-group select.valid {
-  background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%23000000' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E"),
+  background-image:
+    url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%23000000' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E"),
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%2328a745' d='M13.5 2L6 9.5 2.5 6 1 7.5l5 5 9-9z'/%3E%3C/svg%3E");
-  background-position: right 16px center, right 45px center;
+  background-position:
+    right 16px center,
+    right 45px center;
   background-size: 12px, 16px;
   padding-right: 70px;
 }
@@ -163,9 +166,12 @@
 }
 
 .form-group select.invalid {
-  background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%23000000' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E"),
+  background-image:
+    url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%23000000' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E"),
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23dc3545' d='M2 2l12 12m0-12L2 14' stroke='%23dc3545' stroke-width='2'/%3E%3C/svg%3E");
-  background-position: right 16px center, right 45px center;
+  background-position:
+    right 16px center,
+    right 45px center;
   background-size: 12px, 16px;
   padding-right: 70px;
 }
@@ -635,7 +641,7 @@
   color: #ffffff;
   border: none;
   border-radius: 5px;
-  font-family: "Hellix", "Helvetica Neue", Arial, sans-serif;
+  font-family: "Hellix", sans-serif;
   font-size: 0.95rem;
   font-weight: 600;
   letter-spacing: 0.15em;
@@ -854,7 +860,9 @@
   border-radius: 10px;
   opacity: var(--scrollbar-opacity);
   transform: scaleY(var(--scrollbar-scale));
-  transition: background 0.3s ease, transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition:
+    background 0.3s ease,
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .payment-modal::-webkit-scrollbar-thumb:hover {

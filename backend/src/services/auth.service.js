@@ -134,12 +134,27 @@ export class AuthService {
     return { message: "Logout realizado com sucesso" };
   }
   static async refreshToken(refreshToken) {
+    console.log("🔄 Tentando refresh token...");
+    
     const decoded = JwtUtil.verifyRefreshToken(refreshToken);
+    console.log("✅ Token decodificado, userId:", decoded.userId);
+    
     const user = await prisma.user.findUnique({
       where: { id: decoded.userId },
     });
 
-    if (!user || user.refreshToken !== refreshToken) {
+    if (!user) {
+      console.log("❌ Usuário não encontrado");
+      throw new Error("Refresh token inválido ou expirado. Por favor, faça login novamente.");
+    }
+
+    console.log("📊 Comparação de tokens:");
+    console.log("   - Token recebido (primeiros 20 chars):", refreshToken?.substring(0, 20) + "...");
+    console.log("   - Token no banco (primeiros 20 chars):", user.refreshToken?.substring(0, 20) + "...");
+    console.log("   - São iguais?", user.refreshToken === refreshToken);
+
+    if (!user.refreshToken || user.refreshToken !== refreshToken) {
+      console.log("❌ Tokens não coincidem! Possível logout anterior ou login em outro dispositivo.");
       throw new Error(
         "Refresh token inválido ou expirado. Por favor, faça login novamente."
       );
@@ -150,6 +165,8 @@ export class AuthService {
       where: { id: user.id },
       data: { refreshToken: newTokens.refreshToken },
     });
+
+    console.log("✅ Novo refresh token gerado e salvo");
 
     return {
       tokens: newTokens,
