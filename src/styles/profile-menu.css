@@ -4,7 +4,6 @@
 
 /* Button Styles - Botões com fundo preto */
 .profile-login-btn,
-.profile-signup-btn,
 .bag-checkout-btn {
   position: relative;
   background: #222;
@@ -19,9 +18,30 @@
   text-transform: none;
   border-radius: 5px;
 }
+.profile-signup-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 2rem;
+  font-family: "Hellix", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: #1a1a1a;
+  background: transparent;
+  border: 1px solid #1a1a1a;
+  border-radius: 5px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+.profile-signup-btn:hover {
+  background: #1a1a1a;
+  color: #fff;
+}
 
 .profile-login-btn:hover,
-.profile-signup-btn:hover,
 .bag-checkout-btn:hover {
   background-color: #666;
 }
@@ -61,7 +81,8 @@ z-index: 1;
   flex-direction: column;
   border-radius: 5px;
   overflow: hidden;
-  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+  transition:
+    transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
     visibility 0s linear 0.4s;
   visibility: hidden;
 }
@@ -284,17 +305,27 @@ z-index: 1;
 }
 
 .profile-logout-btn {
-  background: none;
-  border: none;
-  font-size: 14px;
-  color: #000;
-  text-decoration: underline;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 2rem;
+  font-family: "Hellix", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: #1a1a1a;
+  background: transparent;
+  border: 1px solid #1a1a1a;
+  border-radius: 5px;
   cursor: pointer;
-  padding: 0;
+  overflow: hidden;
+  transition: all 0.3s ease;
 }
 
 .profile-logout-btn:hover {
-  color: #333;
+  background: #1a1a1a;
+  color: #fff;
 }
 
 /* ============================================================================
