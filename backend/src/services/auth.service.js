@@ -12,7 +12,7 @@ export class AuthService {
 
     if (existingUser) {
       throw new Error(
-        "Email já está cadastrado, por favor, use outro e-mail ou faça login com sua conta"
+        "Email já está cadastrado, por favor, use outro e-mail ou faça login com sua conta",
       );
     }
 
@@ -60,10 +60,10 @@ export class AuthService {
 
     if (user.accountLockedUntil && user.accountLockedUntil > new Date()) {
       const unlockTime = new Date(user.accountLockedUntil).toLocaleString(
-        "pt-BR"
+        "pt-BR",
       );
       throw new Error(
-        `Conta bloqueada até ${unlockTime} devido a múltiplas tentativas de login`
+        `Conta bloqueada até ${unlockTime} devido a múltiplas tentativas de login`,
       );
     }
 
@@ -85,7 +85,7 @@ export class AuthService {
         });
 
         throw new Error(
-          "Muitas tentativas de login. Conta bloqueada por 15 minutos."
+          "Muitas tentativas de login. Conta bloqueada por 15 minutos.",
         );
       }
 
@@ -96,7 +96,7 @@ export class AuthService {
 
       const remainingAttempts = maxAttempts - failedAttempts;
       throw new Error(
-        `E-mail ou senha incorretos. Você tem mais ${remainingAttempts} tentativa(s).`
+        `E-mail ou senha incorretos. Você tem mais ${remainingAttempts} tentativa(s).`,
       );
     }
     await prisma.user.update({
@@ -135,28 +135,38 @@ export class AuthService {
   }
   static async refreshToken(refreshToken) {
     console.log("🔄 Tentando refresh token...");
-    
+
     const decoded = JwtUtil.verifyRefreshToken(refreshToken);
     console.log("✅ Token decodificado, userId:", decoded.userId);
-    
+
     const user = await prisma.user.findUnique({
       where: { id: decoded.userId },
     });
 
     if (!user) {
       console.log("❌ Usuário não encontrado");
-      throw new Error("Refresh token inválido ou expirado. Por favor, faça login novamente.");
+      throw new Error(
+        "Refresh token inválido ou expirado. Por favor, faça login novamente.",
+      );
     }
 
     console.log("📊 Comparação de tokens:");
-    console.log("   - Token recebido (primeiros 20 chars):", refreshToken?.substring(0, 20) + "...");
-    console.log("   - Token no banco (primeiros 20 chars):", user.refreshToken?.substring(0, 20) + "...");
+    console.log(
+      "   - Token recebido (primeiros 20 chars):",
+      refreshToken?.substring(0, 20) + "...",
+    );
+    console.log(
+      "   - Token no banco (primeiros 20 chars):",
+      user.refreshToken?.substring(0, 20) + "...",
+    );
     console.log("   - São iguais?", user.refreshToken === refreshToken);
 
     if (!user.refreshToken || user.refreshToken !== refreshToken) {
-      console.log("❌ Tokens não coincidem! Possível logout anterior ou login em outro dispositivo.");
+      console.log(
+        "❌ Tokens não coincidem! Possível logout anterior ou login em outro dispositivo.",
+      );
       throw new Error(
-        "Refresh token inválido ou expirado. Por favor, faça login novamente."
+        "Refresh token inválido ou expirado. Por favor, faça login novamente.",
       );
     }
 
@@ -244,7 +254,7 @@ export class AuthService {
 
     const hashedPassword = await bcrypt.hash(
       newPassword,
-      config.bcryptSaltRounds
+      config.bcryptSaltRounds,
     );
     await prisma.user.update({
       where: { id: user.id },

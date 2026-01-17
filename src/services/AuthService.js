@@ -10,7 +10,7 @@ class AuthService {
     this.USER_KEY = "dior_user";
     this.listeners = [];
     this.expirationCheckInterval = null;
-    
+
     // Só inicia verificação se já houver tokens (usuário já logado)
     if (this.getAccessToken() && this.getRefreshToken()) {
       this.startExpirationCheck();
@@ -79,7 +79,7 @@ class AuthService {
 
       this.setTokens(
         data.data.tokens.accessToken,
-        data.data.tokens.refreshToken
+        data.data.tokens.refreshToken,
       );
       this.setUser(data.data.user);
       this.notifyListeners();
@@ -135,7 +135,10 @@ class AuthService {
         throw new Error("Refresh token não encontrado");
       }
 
-      console.log("🔄 Tentando refresh com token:", refreshToken.substring(0, 30) + "...");
+      console.log(
+        "🔄 Tentando refresh com token:",
+        refreshToken.substring(0, 30) + "...",
+      );
 
       const response = await fetch(`${this.API_URL}/refresh`, {
         method: "POST",
@@ -146,7 +149,7 @@ class AuthService {
       });
 
       const data = await response.json();
-      
+
       console.log("📡 Resposta do refresh:", response.status, data);
 
       if (!response.ok) {
@@ -156,12 +159,15 @@ class AuthService {
       // Atualiza os tokens (backend retorna data.tokens.accessToken)
       this.setTokens(
         data.data.tokens.accessToken,
-        data.data.tokens.refreshToken
+        data.data.tokens.refreshToken,
       );
-      
+
       console.log("✅ Tokens atualizados com sucesso!");
-      console.log("   Novo refresh token:", data.data.tokens.refreshToken.substring(0, 30) + "...");
-      
+      console.log(
+        "   Novo refresh token:",
+        data.data.tokens.refreshToken.substring(0, 30) + "...",
+      );
+
       this.notifyListeners();
 
       return data.data.tokens.accessToken;
