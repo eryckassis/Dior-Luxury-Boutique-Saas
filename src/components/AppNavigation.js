@@ -105,11 +105,31 @@ export class AppNavigation extends HTMLElement {
     requestAnimationFrame(() => {
       if (!window.gsap) return;
 
-      const menuLinks = this.querySelectorAll(
-        ".moda-menu-link:not(.has-submenu)"
-      );
+      // Todos os links do menu principal (com e sem submenu)
+      const menuLinks = this.querySelectorAll(".moda-menu-link");
 
       menuLinks.forEach((link) => {
+        link.addEventListener("mouseenter", () => {
+          window.gsap.to(link, {
+            "--underline-width": "100%",
+            duration: 0.35,
+            ease: "power2.inOut",
+          });
+        });
+
+        link.addEventListener("mouseleave", () => {
+          window.gsap.to(link, {
+            "--underline-width": "0%",
+            duration: 0.35,
+            ease: "power2.inOut",
+          });
+        });
+      });
+
+      // Links dos submenus também
+      const submenuLinks = this.querySelectorAll(".submenu-link");
+
+      submenuLinks.forEach((link) => {
         link.addEventListener("mouseenter", () => {
           window.gsap.to(link, {
             "--underline-width": "100%",
@@ -233,7 +253,7 @@ export class AppNavigation extends HTMLElement {
 
     // Links com submenu
     const submenuTriggers = this.querySelectorAll(
-      ".moda-menu-link.has-submenu"
+      ".moda-menu-link.has-submenu",
     );
     submenuTriggers.forEach((trigger) => {
       trigger.addEventListener("click", (e) => {
@@ -245,7 +265,7 @@ export class AppNavigation extends HTMLElement {
 
     // Botões de voltar nos submenus (exceto o botão Spa)
     const backButtons = this.querySelectorAll(
-      ".submenu-back-btn[data-tratamento-back], .submenu-back-btn:not([data-spa-back]):not([data-tratamento-back])"
+      ".submenu-back-btn[data-tratamento-back], .submenu-back-btn:not([data-spa-back]):not([data-tratamento-back])",
     );
     backButtons.forEach((btn) => {
       btn.addEventListener("click", () => this.closeSubmenu());
@@ -259,7 +279,7 @@ export class AppNavigation extends HTMLElement {
 
     // Navegação dos links do menu (sem submenu)
     const menuLinks = this.querySelectorAll(
-      ".moda-menu-link[data-route]:not(.has-submenu), .submenu-link[data-route]"
+      ".moda-menu-link[data-route]:not(.has-submenu), .submenu-link[data-route]",
     );
     menuLinks.forEach((link) => {
       link.addEventListener("click", (e) => {
@@ -280,6 +300,28 @@ export class AppNavigation extends HTMLElement {
         this.openSpaPanel();
       });
     }
+
+    // Acessibilidade - Alto Contraste
+    const accessibilityToggle = this.querySelector(".moda-menu-checkbox");
+    if (accessibilityToggle) {
+      // Restaura estado salvo
+      const highContrast =
+        localStorage.getItem("dior-high-contrast") === "true";
+      accessibilityToggle.checked = highContrast;
+      if (highContrast) {
+        document.body.classList.add("high-contrast");
+      }
+
+      accessibilityToggle.addEventListener("change", (e) => {
+        if (e.target.checked) {
+          document.body.classList.add("high-contrast");
+          localStorage.setItem("dior-high-contrast", "true");
+        } else {
+          document.body.classList.remove("high-contrast");
+          localStorage.setItem("dior-high-contrast", "false");
+        }
+      });
+    }
   }
 
   // ============================================================================
@@ -289,7 +331,7 @@ export class AppNavigation extends HTMLElement {
     const sideMenu = this.querySelector(".moda-side-menu");
     const spaPanel = this.querySelector("[data-spa-panel]");
     const tratamentoPanel = this.querySelector(
-      '[data-submenu-id="tratamento"]'
+      '[data-submenu-id="tratamento"]',
     );
     const spaBackBtn = this.querySelector("[data-spa-back]");
     const tratamentoBackBtn = this.querySelector("[data-tratamento-back]");
@@ -331,7 +373,7 @@ export class AppNavigation extends HTMLElement {
           stagger: 0.05,
           delay: 0.2,
           ease: "power2.out",
-        }
+        },
       );
     }
   }
@@ -340,7 +382,7 @@ export class AppNavigation extends HTMLElement {
     const sideMenu = this.querySelector(".moda-side-menu");
     const spaPanel = this.querySelector("[data-spa-panel]");
     const tratamentoPanel = this.querySelector(
-      '[data-submenu-id="tratamento"]'
+      '[data-submenu-id="tratamento"]',
     );
     const spaBackBtn = this.querySelector("[data-spa-back]");
     const tratamentoBackBtn = this.querySelector("[data-tratamento-back]");
@@ -394,7 +436,7 @@ export class AppNavigation extends HTMLElement {
       window.gsap.fromTo(
         submenu,
         { x: "100%", display: "block" },
-        { x: "0%", duration: 0.4, ease: "power2.inOut" }
+        { x: "0%", duration: 0.4, ease: "power2.inOut" },
       );
     }
   }
@@ -409,7 +451,7 @@ export class AppNavigation extends HTMLElement {
 
     const mainMenu = this.querySelector(".main-menu-content");
     const submenu = this.querySelector(
-      `[data-submenu-id="${this.currentSubmenu}"]`
+      `[data-submenu-id="${this.currentSubmenu}"]`,
     );
 
     if (!mainMenu || !submenu) return;
@@ -448,7 +490,7 @@ export class AppNavigation extends HTMLElement {
       backdrop.classList.add("active");
       sideMenu.classList.add("active");
 
-      // Anima hamburguer para X com GSAP
+      // Anima hamburguer para X com GSAP (2 linhas)
       if (window.gsap) {
         window.gsap.to(lines[0], {
           attr: { y1: 12, y2: 12, x1: 3, x2: 21 },
@@ -459,12 +501,6 @@ export class AppNavigation extends HTMLElement {
         });
 
         window.gsap.to(lines[1], {
-          opacity: 0,
-          duration: 0.2,
-          ease: "power2.inOut",
-        });
-
-        window.gsap.to(lines[2], {
           attr: { y1: 12, y2: 12, x1: 3, x2: 21 },
           rotation: -45,
           transformOrigin: "center",
@@ -486,30 +522,24 @@ export class AppNavigation extends HTMLElement {
             stagger: 0.05,
             ease: "power2.out",
             delay: 0.2,
-          }
+          },
         );
       }
     } else {
       backdrop.classList.remove("active");
       sideMenu.classList.remove("active");
 
-      // Volta hamburguer ao estado normal
+      // Volta hamburguer ao estado normal (2 linhas)
       if (window.gsap) {
         window.gsap.to(lines[0], {
-          attr: { y1: 12, y2: 12, x1: 3, x2: 21 },
+          attr: { y1: 8, y2: 8, x1: 3, x2: 21 },
           rotation: 0,
           duration: 0.3,
           ease: "power2.inOut",
         });
 
         window.gsap.to(lines[1], {
-          opacity: 1,
-          duration: 0.2,
-          ease: "power2.inOut",
-        });
-
-        window.gsap.to(lines[2], {
-          attr: { y1: 12, y2: 12, x1: 3, x2: 21 },
+          attr: { y1: 16, y2: 16, x1: 3, x2: 21 },
           rotation: 0,
           duration: 0.3,
           ease: "power2.inOut",
@@ -538,23 +568,17 @@ export class AppNavigation extends HTMLElement {
     backdrop.classList.remove("active");
     sideMenu.classList.remove("active");
 
-    // Volta hamburguer ao estado normal
+    // Volta hamburguer ao estado normal (2 linhas)
     if (window.gsap) {
       window.gsap.to(lines[0], {
-        attr: { y1: 12, y2: 12, x1: 3, x2: 21 },
+        attr: { y1: 8, y2: 8, x1: 3, x2: 21 },
         rotation: 0,
         duration: 0.3,
         ease: "power2.inOut",
       });
 
       window.gsap.to(lines[1], {
-        opacity: 1,
-        duration: 0.2,
-        ease: "power2.inOut",
-      });
-
-      window.gsap.to(lines[2], {
-        attr: { y1: 12, y2: 12, x1: 3, x2: 21 },
+        attr: { y1: 16, y2: 16, x1: 3, x2: 21 },
         rotation: 0,
         duration: 0.3,
         ease: "power2.inOut",
@@ -578,9 +602,8 @@ export class AppNavigation extends HTMLElement {
         <!-- Hamburger Menu (Esquerda) -->
         <button class="moda-nav-hamburger" aria-label="Menu">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="3" y1="12" x2="21" y2="12"></line>
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <line x1="3" y1="18" x2="21" y2="18"></line>
+            <line x1="3" y1="8" x2="21" y2="8"></line>
+            <line x1="3" y1="16" x2="21" y2="16"></line>
           </svg>
         </button>
 

@@ -11,7 +11,7 @@
   padding: 60px 0;
   width: 100%;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .services-dior-container {
@@ -20,6 +20,7 @@
   align-items: center;
   gap: 0;
   position: relative;
+  overflow: visible;
 }
 
 /* ============================================================================
@@ -66,6 +67,7 @@
   will-change: transform;
   user-select: none;
   -webkit-user-select: none;
+  -webkit-user-drag: none;
   cursor: grab;
 }
 
@@ -247,6 +249,10 @@
     align-items: center;
   }
 
+  .services-drag-container {
+    width: 100%;
+  }
+
   .services-drag-track {
     padding-left: 40px;
     padding-right: 40px;
@@ -278,6 +284,10 @@
 @media (max-width: 640px) {
   .services-text-content {
     padding: 0 24px;
+  }
+
+  .services-drag-container {
+    width: 100%;
   }
 
   .services-drag-track {

@@ -73,13 +73,6 @@ strong {
 }
 
 /* ============================================================================
-   SPLASH PAGE STYLES - MOVIDOS PARA src/styles/splash-page.css
-   ============================================================================
-   Os estilos do splash foram movidos para um arquivo dedicado
-   para melhor organização e separação de concerns.
-   ============================================================================ */
-
-/* ============================================================================
    PRELOADER STYLES
    ============================================================================ */
 
@@ -261,7 +254,9 @@ p {
   min-height: 100vh;
   width: 100%;
   max-width: 100%;
-  transition: transform 0.3s ease, border-radius 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    border-radius 0.3s ease;
   will-change: border-radius; /* REMOVIDO transform do will-change para não interferir com ScrollTrigger pin */
   border-radius: 0;
   overflow-x: hidden; /* Apenas horizontal - permite scroll vertical */
@@ -315,7 +310,9 @@ p {
   display: inline-flex;
   align-items: center;
   text-decoration: none;
-  transition: opacity 0.3s ease, transform 0.2s ease;
+  transition:
+    opacity 0.3s ease,
+    transform 0.2s ease;
 }
 
 .logo-link:hover {
@@ -541,7 +538,9 @@ p {
   z-index: 999; /* Um pouco menor que a navigation */
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
   border-radius: var(--border-radius);
   box-shadow: none; /* No shadow */
   height: auto; /* Auto height based on content */
@@ -591,7 +590,9 @@ p {
     --border-radius
   ); /* Ensure image container has rounded corners */
   will-change: opacity, transform; /* Optimize for animations */
-  transition: opacity 0.3s ease, transform 0.3s ease; /* Add transition for smoother animation */
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease; /* Add transition for smoother animation */
 }
 
 .dropdown__image img {
@@ -722,7 +723,9 @@ p {
   -o-object-fit: cover;
   object-fit: cover;
   border-radius: var(--border-radius);
-  transition: transform 0.3s ease, filter 0.3s ease; /* Mantém apenas transições de hover */
+  transition:
+    transform 0.3s ease,
+    filter 0.3s ease; /* Mantém apenas transições de hover */
   cursor: pointer;
   display: block;
 }
@@ -927,7 +930,8 @@ p {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
+  background:
+    linear-gradient(
       to top,
       rgba(0, 0, 0, 0.9) 0%,
       rgba(0, 0, 0, 0.6) 70%,
@@ -1147,11 +1151,8 @@ p {
 }
 
 .animated-sections-wrapper .second .bg {
-  background-image: linear-gradient(
-      180deg,
-      rgba(0, 0, 0, 0.6) 0%,
-      rgba(0, 0, 0, 0.3) 100%
-    ),
+  background-image:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.3) 100%),
     url("/images/ImageSectionView.png");
 }
 
@@ -1278,29 +1279,20 @@ p {
 }
 
 .animated-sections-wrapper .third .bg {
-  background-image: linear-gradient(
-      180deg,
-      rgba(0, 0, 0, 0.6) 0%,
-      rgba(0, 0, 0, 0.3) 100%
-    ),
+  background-image:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.3) 100%),
     url(https://images.unsplash.com/photo-1617438817509-70e91ad264a5?crop=entropy&cs=srgb&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTYxNzU2MDk4Mg&ixlib=rb-1.2.1&q=75&w=1920);
 }
 
 .animated-sections-wrapper .fourth .bg {
-  background-image: linear-gradient(
-      180deg,
-      rgba(0, 0, 0, 0.6) 0%,
-      rgba(0, 0, 0, 0.3) 100%
-    ),
+  background-image:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.3) 100%),
     url(https://images.unsplash.com/photo-1617412327653-c29093585207?crop=entropy&cs=srgb&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTYxNzU2MDgzMQ&ixlib=rb-1.2.1&q=75&w=1920);
 }
 
 .animated-sections-wrapper .fifth .bg {
-  background-image: linear-gradient(
-      180deg,
-      rgba(0, 0, 0, 0.6) 0%,
-      rgba(0, 0, 0, 0.3) 100%
-    ),
+  background-image:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.3) 100%),
     url("https://images.unsplash.com/photo-1617141636403-f511e2d5dc17?crop=entropy&cs=srgb&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTYxODAzMjc4Mw&ixlib=rb-1.2.1&q=75w=1920");
   background-position: 50% 45%;
 }
@@ -1377,7 +1369,9 @@ p {
 .glass-button svg {
   position: absolute;
   pointer-events: none;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
 }
 
 /* Responsivo */

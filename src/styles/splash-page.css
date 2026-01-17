@@ -203,7 +203,7 @@
 }
 
 /* ============================================================================
-   RESPONSIVE - Mobile
+   RESPONSIVE - Tablets
    ============================================================================ */
 
 @media (max-width: 768px) {
@@ -220,13 +220,22 @@
   }
 
   .splash-page .splash-logo {
-    width: 150px;
+    width: 200px;
   }
 }
 
+/* ============================================================================
+   RESPONSIVE - iPhone 16 Pro Max e similares (440px)
+   ============================================================================ */
+
 @media (max-width: 480px) {
+  .splash-page .splash-logo {
+    width: 160px;
+  }
+
   .splash-page .splash-option-title {
     font-size: 26px;
+    margin-bottom: 20px;
   }
 
   .splash-page .splash-option-button {
@@ -235,6 +244,108 @@
   }
 
   .splash-page .splash-option-content {
+    bottom: 50px;
+    padding: 0 16px;
+  }
+
+  .splash-page .splash-option-overlay {
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.95) 0%,
+      rgba(0, 0, 0, 0.7) 35%,
+      rgba(0, 0, 0, 0.4) 60%,
+      transparent 100%
+    );
+  }
+}
+
+/* ============================================================================
+   RESPONSIVE - iPhone SE e dispositivos pequenos (375px)
+   ============================================================================ */
+
+@media (max-width: 390px) {
+  .splash-page .splash-logo {
+    width: 140px;
+  }
+
+  .splash-page .splash-option-title {
+    font-size: 22px;
+    margin-bottom: 16px;
+    letter-spacing: 0.01em;
+  }
+
+  .splash-page .splash-option-button {
+    padding: 10px 28px;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+  }
+
+  .splash-page .splash-option-content {
     bottom: 40px;
+    padding: 0 12px;
+  }
+}
+
+/* ============================================================================
+   RESPONSIVE - Dispositivos muito pequenos (320px)
+   ============================================================================ */
+
+@media (max-width: 360px) {
+  .splash-page .splash-logo {
+    width: 120px;
+  }
+
+  .splash-page .splash-option-title {
+    font-size: 20px;
+    margin-bottom: 14px;
+  }
+
+  .splash-page .splash-option-button {
+    padding: 10px 24px;
+    font-size: 10px;
+  }
+
+  .splash-page .splash-option-content {
+    bottom: 35px;
+  }
+}
+
+/* ============================================================================
+   RESPONSIVE - Landscape mode em mobile
+   ============================================================================ */
+
+@media (max-height: 500px) and (orientation: landscape) {
+  .splash-page .splash-container {
+    flex-direction: row;
+  }
+
+  .splash-page .splash-logo {
+    width: 120px;
+  }
+
+  .splash-page .splash-option-title {
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+
+  .splash-page .splash-option-button {
+    padding: 8px 24px;
+    font-size: 11px;
+  }
+
+  .splash-page .splash-option-content {
+    bottom: 20px;
+  }
+}
+
+/* ============================================================================
+   RESPONSIVE - Safe area para notch (iPhone X+)
+   ============================================================================ */
+
+@supports (padding: max(0px)) {
+  @media (max-width: 480px) {
+    .splash-page .splash-option-content {
+      bottom: max(40px, env(safe-area-inset-bottom) + 20px);
+    }
   }
 }

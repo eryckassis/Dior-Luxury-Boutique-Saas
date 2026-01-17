@@ -51,6 +51,37 @@ export class HomePage extends HTMLElement {
   initDioriveraScrollMorph() {
     if (!window.gsap || !window.ScrollTrigger) return;
 
+    // Não rodar animação em mobile - cards ficam empilhados via CSS
+    const isMobile = window.innerWidth <= 768;
+
+    if (isMobile) {
+      // Garantir que elementos estejam com estilos corretos para mobile
+      const section = this.querySelector(".diorivera-morph-section");
+      const centerImage = this.querySelector(".diorivera-center");
+      const leftImage = this.querySelector(".diorivera-left");
+      const rightImage = this.querySelector(".diorivera-right");
+
+      if (centerImage) {
+        window.gsap.set(centerImage, { clearProps: "all" });
+      }
+      if (leftImage) {
+        window.gsap.set(leftImage, { clearProps: "all" });
+      }
+      if (rightImage) {
+        window.gsap.set(rightImage, { clearProps: "all" });
+      }
+
+      // Matar qualquer ScrollTrigger existente nesta seção
+      if (section) {
+        window.ScrollTrigger.getAll().forEach((trigger) => {
+          if (trigger.trigger === section) {
+            trigger.kill();
+          }
+        });
+      }
+      return;
+    }
+
     requestAnimationFrame(() => {
       const section = this.querySelector(".diorivera-morph-section");
       const centerImage = this.querySelector(".diorivera-center");
@@ -80,7 +111,7 @@ export class HomePage extends HTMLElement {
           duration: 1,
           ease: "power2.inOut",
         },
-        0
+        0,
       );
 
       // Fase 2: APÓS morph completo, imagens laterais sobem SINCRONIZADAS
@@ -92,7 +123,7 @@ export class HomePage extends HTMLElement {
           duration: 0.8,
           ease: "power3.out",
         },
-        1
+        1,
       );
     });
   }
@@ -161,7 +192,7 @@ export class HomePage extends HTMLElement {
           duration: 1,
           ease: "power2.inOut",
         },
-        0
+        0,
       );
     });
   }
@@ -290,7 +321,7 @@ export class HomePage extends HTMLElement {
           wrapper.addEventListener("mouseenter", playVideo);
           wrapper.addEventListener("mouseleave", pauseVideo);
           console.log(
-            `Event listeners adicionados ao wrapper do vídeo ${index + 1}`
+            `Event listeners adicionados ao wrapper do vídeo ${index + 1}`,
           );
         }
 
@@ -330,7 +361,7 @@ export class HomePage extends HTMLElement {
               },
             });
           }
-        }
+        },
       );
 
       // Animação do texto que aparece entre os vídeos
@@ -373,7 +404,7 @@ export class HomePage extends HTMLElement {
       // 1. Botões dentro de web components (hero-section, video-section, keyhole-section)
       // 2. Botões glass-button dos controles de vídeo
       const allButtons = this.querySelectorAll(
-        'hero-section [data-block="button"], video-section [data-block="button"], keyhole-section [data-block="button"], .glass-button[data-block="button"]'
+        'hero-section [data-block="button"], video-section [data-block="button"], keyhole-section [data-block="button"], .glass-button[data-block="button"]',
       );
 
       if (!allButtons.length) {
@@ -536,7 +567,7 @@ export class HomePage extends HTMLElement {
 
               // Show new content
               const newContent = this.querySelector(
-                `[data-content="${category}"]`
+                `[data-content="${category}"]`,
               );
               if (newContent) {
                 newContent.classList.add("active");
@@ -637,7 +668,7 @@ export class HomePage extends HTMLElement {
             duration: 0.8,
             ease: "power3.inOut",
           },
-          0.1
+          0.1,
         )
         .to(
           image,
@@ -646,7 +677,7 @@ export class HomePage extends HTMLElement {
             duration: 0.8,
             ease: "power3.out",
           },
-          0.1
+          0.1,
         );
     });
   }
@@ -656,12 +687,12 @@ export class HomePage extends HTMLElement {
 
     requestAnimationFrame(() => {
       const productCards = this.querySelectorAll(
-        ".essence-products-section .essence-product-card"
+        ".essence-products-section .essence-product-card",
       );
 
       productCards.forEach((card, index) => {
         const imageWrapper = card.querySelector(
-          ".essence-product-image-wrapper"
+          ".essence-product-image-wrapper",
         );
         const overlay = card.querySelector(".essence-image-reveal-overlay");
         const image = card.querySelector(".essence-product-image");
@@ -707,7 +738,7 @@ export class HomePage extends HTMLElement {
               duration: 1.2,
               ease: "power3.inOut",
             },
-            0.1
+            0.1,
           )
           .to(
             image,
@@ -716,7 +747,7 @@ export class HomePage extends HTMLElement {
               duration: 1.2,
               ease: "power3.out",
             },
-            0.1
+            0.1,
           )
           .to(
             info,
@@ -726,7 +757,7 @@ export class HomePage extends HTMLElement {
               duration: 0.8,
               ease: "power3.out",
             },
-            0.6
+            0.6,
           );
       });
     });
@@ -915,7 +946,7 @@ export class HomePage extends HTMLElement {
           console.log("✅ Produto adicionado ao carrinho:", productData.name);
           console.log(
             "🛒 Total de itens no carrinho:",
-            cartService.getTotalItems()
+            cartService.getTotalItems(),
           );
         });
       });
@@ -978,7 +1009,7 @@ export class HomePage extends HTMLElement {
               duration: 1,
               ease: "power3.out",
             },
-            "-=0.5"
+            "-=0.5",
           )
           .to(
             button,
@@ -988,7 +1019,7 @@ export class HomePage extends HTMLElement {
               duration: 0.8,
               ease: "power3.out",
             },
-            "-=0.6"
+            "-=0.6",
           );
       }
     });
@@ -1030,19 +1061,29 @@ export class HomePage extends HTMLElement {
   initVideoControls() {
     // Aguardar um frame para garantir que o DOM está pronto
     requestAnimationFrame(() => {
-      const video = this.querySelector("#arte-section-video");
+      const videoDesktop = this.querySelector("#arte-section-video");
+      const videoMobile = this.querySelector("#arte-section-video-mobile");
       const playPauseBtn = this.querySelector("#arte-play-pause-btn");
       const muteUnmuteBtn = this.querySelector("#arte-mute-unmute-btn");
 
-      if (!video || !playPauseBtn || !muteUnmuteBtn) return;
+      if (!playPauseBtn || !muteUnmuteBtn) return;
 
       const iconPlay = playPauseBtn.querySelector(".icon-play");
       const iconPause = playPauseBtn.querySelector(".icon-pause");
       const iconMute = muteUnmuteBtn.querySelector(".icon-mute");
       const iconUnmute = muteUnmuteBtn.querySelector(".icon-unmute");
 
-      // Play/Pause Toggle
+      // Função para obter o vídeo ativo (baseado no tamanho da tela)
+      const getActiveVideo = () => {
+        const isMobile = window.innerWidth <= 768;
+        return isMobile ? videoMobile : videoDesktop;
+      };
+
+      // Play/Pause Toggle - controla o vídeo ativo
       playPauseBtn.addEventListener("click", () => {
+        const video = getActiveVideo();
+        if (!video) return;
+
         if (video.paused) {
           video.play();
           iconPlay.style.display = "none";
@@ -1054,16 +1095,23 @@ export class HomePage extends HTMLElement {
         }
       });
 
-      // Mute/Unmute Toggle
+      // Mute/Unmute Toggle - controla ambos os vídeos para sincronizar
       muteUnmuteBtn.addEventListener("click", () => {
-        if (video.muted) {
-          video.muted = false;
-          iconMute.style.display = "none";
-          iconUnmute.style.display = "block";
-        } else {
-          video.muted = true;
+        const video = getActiveVideo();
+        if (!video) return;
+
+        const newMutedState = !video.muted;
+
+        // Sincroniza o estado de mudo em ambos os vídeos
+        if (videoDesktop) videoDesktop.muted = newMutedState;
+        if (videoMobile) videoMobile.muted = newMutedState;
+
+        if (newMutedState) {
           iconMute.style.display = "block";
           iconUnmute.style.display = "none";
+        } else {
+          iconMute.style.display = "none";
+          iconUnmute.style.display = "block";
         }
       });
     });
@@ -1115,8 +1163,9 @@ export class HomePage extends HTMLElement {
 
       <!-- Arte de Presentear Video Section -->
       <section class="arte-presentear-video-section">
+        <!-- Vídeo Desktop -->
         <video
-          class="arte-video-bg"
+          class="arte-video-bg arte-video-desktop"
           id="arte-section-video"
           autoplay
           muted
@@ -1125,11 +1174,23 @@ export class HomePage extends HTMLElement {
         >
           <source src="/videos/videoLips.mp4" type="video/mp4" />
         </video>
+        
+        <!-- Vídeo Mobile - Formato vertical ideal para smartphones -->
+        <video
+          class="arte-video-bg arte-video-mobile"
+          id="arte-section-video-mobile"
+          autoplay
+          muted
+          loop
+          playsinline
+        >
+          <source src="/videos/Anya.mp4" type="video/mp4" />
+        </video>
 
         <!-- Conteúdo de texto sobre o vídeo -->
         <div class="arte-video-content">
           <h1 class="arte-video-title">Dior Forever para uma pele perfeita.</h1>
-          <p class="arte-video-description">Experimente online os produtos de maquiagem Dior para encontrar seu look ideal.   </p>
+          <p class="arte-video-description">Experimente online os produtos de maquiagem Dior para encontrar seu look ideal.</p>
         </div>
 
         <!-- Video Controls - Liquid Glass -->

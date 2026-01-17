@@ -72,6 +72,7 @@ moda-acessorios-page main {
   padding: 8px;
   color: #ffffff;
   transition: opacity 0.3s ease, color 0.4s ease;
+  margin-top: 3px;
 }
 
 /* Cor dos ícones quando scrollado */
@@ -381,28 +382,168 @@ moda-acessorios-page main {
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
 }
 
-/* Responsive */
+/* Responsive - Tablets */
+@media (max-width: 768px) {
+  .moda-navigation {
+    padding: 0 1.25rem;
+    height: 80px;
+  }
+
+  .moda-logo-link img {
+    width: 120px;
+    height: auto;
+  }
+}
+
+/* Responsive - iPhone 16 Pro Max e similares (480px) */
 @media (max-width: 480px) {
   .moda-navigation {
     padding: 0 1rem;
+    height: 70px;
   }
 
+  /* Side Menu - Full width no mobile */
   .moda-side-menu {
-    width: 100%;
-    left: -100%;
-    border-radius: 0;
+    width: calc(100vw - 16px);
+    left: calc(-100vw + 8px);
+    top: 8px;
+    height: calc(100vh - 16px);
+    border-radius: 12px;
+  }
+
+  .moda-side-menu.active {
+    left: 8px;
+  }
+
+  .moda-side-menu-header {
+    padding: 1.25rem 1.5rem;
   }
 
   .moda-menu-content {
-    padding: 0 1.5rem 2rem 1.5rem;
+    height: calc(100vh - 70px);
+    padding: 0 1.25rem 1.5rem 1.25rem;
+  }
+
+  .moda-menu-nav {
+    gap: 0.15rem;
+    margin-bottom: 1.5rem;
+    padding-top: 0.5rem;
+  }
+
+  .moda-menu-link {
+    font-size: 1rem;
+    padding: 0.65rem 0;
+  }
+
+  .moda-menu-contact {
+    padding-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .moda-menu-contact-title {
+    font-size: 0.7rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .moda-menu-contact-link {
+    font-size: 0.85rem;
+    padding: 0.35rem 0;
+  }
+
+  .moda-menu-footer {
+    padding-top: 1rem;
+  }
+
+  .moda-menu-accessibility {
+    font-size: 0.85rem;
+    margin-bottom: 1.25rem;
+    padding: 0.4rem 0;
+  }
+
+  .moda-menu-checkbox {
+    width: 40px;
+    height: 22px;
+  }
+
+  .moda-menu-checkbox::before {
+    width: 18px;
+    height: 18px;
+  }
+
+  .moda-menu-checkbox:checked::before {
+    transform: translateX(18px);
+  }
+
+  .moda-menu-tabs {
+    gap: 0.5rem;
+  }
+
+  .moda-menu-tab {
+    font-size: 0.8rem;
+    padding: 0.7rem 0.5rem;
+    border-radius: 8px;
   }
 
   .moda-logo-link img {
     width: 100px;
   }
+}
+
+/* Responsive - iPhone SE e dispositivos pequenos (390px) */
+@media (max-width: 390px) {
+  .moda-side-menu {
+    width: 100vw;
+    left: -100vw;
+    top: 0;
+    height: 100vh;
+    border-radius: 0;
+  }
+
+  .moda-side-menu.active {
+    left: 0;
+  }
+
+  .moda-menu-content {
+    padding: 0 1rem 1.25rem 1rem;
+  }
 
   .moda-menu-link {
-    font-size: 1rem;
+    font-size: 0.95rem;
+    padding: 0.6rem 0;
+  }
+
+  .moda-menu-tab {
+    font-size: 0.75rem;
+    padding: 0.6rem 0.4rem;
+  }
+
+  .moda-logo-link img {
+    width: 90px;
+  }
+}
+
+/* Responsive - Landscape mode em mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+  .moda-menu-content {
+    height: calc(100vh - 50px);
+    padding: 0 1.5rem 1rem 1.5rem;
+  }
+
+  .moda-menu-link {
+    padding: 0.5rem 0;
+  }
+
+  .moda-menu-contact {
+    padding-top: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .moda-menu-footer {
+    padding-top: 0.75rem;
+  }
+
+  .moda-menu-accessibility {
+    margin-bottom: 0.75rem;
   }
 }
 
@@ -633,7 +774,7 @@ moda-acessorios-page main {
 }
 
 .moda-card-title {
-  font-family: "MinhaFonte", sans-serif;
+  font-family: "Hellix", sans-serif;
   font-size: clamp(1.75rem, 3vw, 2.5rem);
   text-align: center;
   font-weight: 300;
@@ -720,8 +861,31 @@ moda-acessorios-page main {
 }
 
 @media (max-width: 768px) {
+  /* Hero Section - Tablets */
   .moda-hero-content {
     padding: 0 1.5rem;
+    padding-bottom: 6rem;
+  }
+
+  .moda-hero-label {
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.75rem;
+  }
+
+  .moda-hero-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin-bottom: 1rem;
+  }
+
+  .moda-hero-subtitle {
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+    max-width: 90%;
+  }
+
+  .moda-discover-button {
+    font-size: 13px;
   }
 
   .moda-content-wrapper {
@@ -748,6 +912,15 @@ moda-acessorios-page main {
     font-size: 1.75rem;
   }
 
+  .moda-card-content {
+    align-items: center;
+  }
+
+  .moda-card-button {
+    align-self: center;
+    left: 0;
+  }
+
   .moda-placeholder-section {
     padding: 3rem 0;
   }
@@ -758,8 +931,38 @@ moda-acessorios-page main {
 }
 
 @media (max-width: 480px) {
+  /* Hero Section - iPhone 16 Pro Max */
+  .moda-hero-content {
+    padding: 0 1.25rem;
+    padding-bottom: 5rem;
+  }
+
+  .moda-hero-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.5rem;
+  }
+
   .moda-hero-title {
-    margin-bottom: 1rem;
+    font-size: clamp(2rem, 8vw, 3rem);
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.03em;
+  }
+
+  .moda-hero-subtitle {
+    font-size: 0.875rem;
+    margin-bottom: 1.5rem;
+    max-width: 95%;
+    line-height: 1.5;
+  }
+
+  .moda-discover-button {
+    font-size: 12px;
+    letter-spacing: 0.2px;
+  }
+
+  .moda-discover-button::after {
+    bottom: -3px;
   }
 
   .moda-content-wrapper {
@@ -787,12 +990,99 @@ moda-acessorios-page main {
     font-size: 1.5rem;
   }
 
+  .moda-card-content {
+    align-items: center;
+  }
+
+  .moda-card-button {
+    align-self: center;
+    left: 0;
+    font-size: 12px;
+  }
+
   .moda-placeholder-section {
     padding: 2rem 0;
   }
 
   .moda-drag-progress {
     width: 120px;
+  }
+}
+
+/* Responsive - iPhone SE e dispositivos pequenos */
+@media (max-width: 390px) {
+  .moda-hero-content {
+    padding: 0 1rem;
+    padding-bottom: 4rem;
+  }
+
+  .moda-hero-label {
+    font-size: 0.7rem;
+  }
+
+  .moda-hero-title {
+    font-size: clamp(1.75rem, 7vw, 2.5rem);
+  }
+
+  .moda-hero-subtitle {
+    font-size: 0.8rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .moda-discover-button {
+    font-size: 11px;
+  }
+
+  .moda-gift-card {
+    width: 220px;
+  }
+
+  .moda-card-content {
+    align-items: center;
+  }
+
+  .moda-card-button {
+    align-self: center;
+    left: 0;
+    font-size: 11px;
+  }
+
+  .moda-card-title {
+    font-size: 1.35rem;
+  }
+
+  .moda-card-button {
+    font-size: 12px;
+  }
+}
+
+/* Responsive - Landscape em mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+  .moda-hero-content {
+    padding-bottom: 3rem;
+  }
+
+  .moda-hero-label {
+    margin-bottom: 0.5rem;
+  }
+
+  .moda-hero-title {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    margin-bottom: 0.5rem;
+  }
+
+  .moda-hero-subtitle {
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+  }
+}
+
+/* Safe area para notch (iPhone X+) */
+@supports (padding: max(0px)) {
+  @media (max-width: 480px) {
+    .moda-hero-content {
+      padding-bottom: max(5rem, env(safe-area-inset-bottom) + 3rem);
+    }
   }
 }
 
