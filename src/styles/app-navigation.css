@@ -410,7 +410,7 @@
   .search-container {
     position: fixed !important;
     left: 55px !important;
-    top: 22px !important;
+    top: 20px !important;
     transform: none !important;
     height: auto !important;
     z-index: 1001 !important;
@@ -585,7 +585,7 @@
   /* Search icon - ajuste para telas pequenas */
   .search-container {
     left: 45px !important;
-    top: 16px !important;
+    top: 18px !important;
   }
 
   .moda-side-menu {
