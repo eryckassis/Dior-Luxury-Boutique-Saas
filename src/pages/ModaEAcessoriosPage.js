@@ -261,6 +261,53 @@ export class ModaEAcessoriosPage extends HTMLElement {
   }
 
   initVideoControls() {
+    // Controle para os 3 vídeos principais com botão liquid glass
+    const videoControls = [
+      { videoId: "moda-video-1", btnId: "moda-video-1-btn" },
+      { videoId: "moda-video-3", btnId: "moda-video-3-btn" },
+      { videoId: "moda-video-4", btnId: "moda-video-4-btn" },
+    ];
+
+    videoControls.forEach(({ videoId, btnId }) => {
+      const video = this.querySelector(`#${videoId}`);
+      const btn = this.querySelector(`#${btnId}`);
+
+      if (!video || !btn) return;
+
+      const playIcon = btn.querySelector(".play-icon");
+      const pauseIcon = btn.querySelector(".pause-icon");
+
+      btn.addEventListener("click", () => {
+        if (video.paused) {
+          video.play();
+          btn.classList.add("playing");
+          playIcon.style.display = "none";
+          pauseIcon.style.display = "block";
+        } else {
+          video.pause();
+          btn.classList.remove("playing");
+          playIcon.style.display = "block";
+          pauseIcon.style.display = "none";
+        }
+      });
+
+      // Inicialmente, vídeo está tocando, então mostra o ícone de pause
+      video
+        .play()
+        .then(() => {
+          btn.classList.add("playing");
+          playIcon.style.display = "none";
+          pauseIcon.style.display = "block";
+        })
+        .catch(() => {
+          // Se autoplay falhar, mantém ícone de play
+          btn.classList.remove("playing");
+          playIcon.style.display = "block";
+          pauseIcon.style.display = "none";
+        });
+    });
+
+    // Controle legacy para video com botões de mute
     const video = this.querySelector("#miss-dior-section-video");
     const playPauseBtn = this.querySelector("#miss-dior-play-pause-btn");
     const muteBtn = this.querySelector("#miss-dior-mute-unmute-btn");
@@ -418,6 +465,7 @@ export class ModaEAcessoriosPage extends HTMLElement {
       <div class="moda-hero-overlay"></div>
       <video
       class="moda-hero-bg-video"
+      id="moda-video-1"
       autoplay
       muted
       loop
@@ -425,6 +473,20 @@ export class ModaEAcessoriosPage extends HTMLElement {
       >
       <source src="/videos/book.webm" type="video/mp4" />
       </video>
+      
+      <!-- Video Control Button -->
+      <button class="moda-video-control-btn" id="moda-video-1-btn" aria-label="Play/Pause">
+        <svg class="play-icon" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M8.2 6.902a.5.5 0 0 1 .765-.424l8.157 5.098a.5.5 0 0 1 0 .848l-8.157 5.098a.5.5 0 0 1-.765-.424z"></path>
+        </svg>
+        <svg class="pause-icon" width="24" height="24" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" style="display: none;">
+          <g>
+            <path d="m182.4,385.5c-6.6,0-12-5.4-12-12v-218.2c0-6.6 5.4-12 12-12 6.6,0 12,5.4 12,12v218.2c0,6.6-5.4,12-12,12z"/>
+            <path d="m329.6,385.5c-6.6,0-12-5.4-12-12v-218.2c0-6.6 5.4-12 12-12s12,5.4 12,12v218.2c0,6.6-5.4,12-12,12z"/>
+          </g>
+        </svg>
+      </button>
+      
       <div class="moda-hero-content">
       <p class="moda-hero-label"></p>
       <h1 class="moda-hero-title"></h1>
@@ -456,6 +518,44 @@ export class ModaEAcessoriosPage extends HTMLElement {
               <a href="/colecao" data-route="/colecao" class="moda-discover-button">Descubra a  coleção</a>
             </div>
           </section>
+          
+
+          <section class="moda-hero-video-section">
+      <div class="moda-hero-overlay"></div>
+      <video
+      class="moda-hero-bg-video"
+      id="moda-video-3"
+      autoplay
+      muted
+      loop
+      playsinline
+      >
+      <source src="/videos/desfile.webm" type="video/mp4" />
+      </video>
+      
+      <!-- Video Control Button -->
+      <button class="moda-video-control-btn" id="moda-video-3-btn" aria-label="Play/Pause">
+        <svg class="play-icon" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M8.2 6.902a.5.5 0 0 1 .765-.424l8.157 5.098a.5.5 0 0 1 0 .848l-8.157 5.098a.5.5 0 0 1-.765-.424z"></path>
+        </svg>
+        <svg class="pause-icon" width="24" height="24" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" style="display: none;">
+          <g>
+            <path d="m182.4,385.5c-6.6,0-12-5.4-12-12v-218.2c0-6.6 5.4-12 12-12 6.6,0 12,5.4 12,12v218.2c0,6.6-5.4,12-12,12z"/>
+            <path d="m329.6,385.5c-6.6,0-12-5.4-12-12v-218.2c0-6.6 5.4-12 12-12s12,5.4 12,12v218.2c0,6.6-5.4,12-12,12z"/>
+          </g>
+        </svg>
+      </button>
+      
+      <div class="moda-hero-content">
+      <p class="moda-hero-label"></p>
+      <h1 class="moda-hero-title"></h1>
+      <p class="moda-hero-title-video">
+      A arte de se vestir
+      </p>
+      <a href="/colecao" data-route="/colecao" class="moda-discover-button">Descubra a coleção
+      </a>
+      </div>
+      </section>
 
           <!-- Content Wrapper -->
           <div class="moda-content-wrapper">
@@ -662,7 +762,7 @@ export class ModaEAcessoriosPage extends HTMLElement {
            <section class="miss-dior-video-section">
             <video
               class="miss-dior-video-bg"
-              id="miss-dior-section-video"
+              id="moda-video-4"
               autoplay
               muted
               loop
@@ -671,6 +771,20 @@ export class ModaEAcessoriosPage extends HTMLElement {
               <source src="/videos/bolsinhas.mp4" type="video/mp4" />
               
             </video>
+            
+            <!-- Video Control Button -->
+            <button class="moda-video-control-btn" id="moda-video-4-btn" aria-label="Play/Pause">
+              <svg class="play-icon" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M8.2 6.902a.5.5 0 0 1 .765-.424l8.157 5.098a.5.5 0 0 1 0 .848l-8.157 5.098a.5.5 0 0 1-.765-.424z"></path>
+              </svg>
+              <svg class="pause-icon" width="24" height="24" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                <g>
+                  <path d="m182.4,385.5c-6.6,0-12-5.4-12-12v-218.2c0-6.6 5.4-12 12-12 6.6,0 12,5.4 12,12v218.2c0,6.6-5.4,12-12,12z"/>
+                  <path d="m329.6,385.5c-6.6,0-12-5.4-12-12v-218.2c0-6.6 5.4-12 12-12s12,5.4 12,12v218.2c0,6.6-5.4,12-12,12z"/>
+                </g>
+              </svg>
+            </button>
+            
             <div class="moda-hero-content-second">
               <p class="moda-hero-label-second">Savoir-faire</p>
               <h1 class="moda-hero-title-second">A bolsa Dior Bow</h1>

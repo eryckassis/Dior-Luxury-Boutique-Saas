@@ -6,6 +6,7 @@ export class ModaNavigation extends HTMLElement {
   constructor() {
     super();
     this.menuOpen = false;
+    this.currentSubmenu = null;
   }
 
   connectedCallback() {
@@ -88,6 +89,78 @@ export class ModaNavigation extends HTMLElement {
     };
   }
 
+  // =========================================================================
+  // SUBMENU FUNCTIONS - Dior World e Desfiles
+  // =========================================================================
+  openSubmenu(submenuId) {
+    const mainMenu = this.querySelector(".moda-menu-content");
+    const submenu = this.querySelector(`[data-submenu-id="${submenuId}"]`);
+    const sideMenu = this.querySelector(".moda-side-menu");
+
+    if (!mainMenu || !submenu) return;
+
+    this.currentSubmenu = submenuId;
+
+    // Expande o menu lateral para mostrar os cards
+    if (sideMenu) {
+      sideMenu.classList.add("submenu-expanded");
+    }
+
+    if (window.gsap) {
+      // Desliza menu principal para esquerda
+      window.gsap.to(mainMenu, {
+        x: "-100%",
+        duration: 0.4,
+        ease: "power2.inOut",
+      });
+
+      // Desliza submenu da direita
+      window.gsap.fromTo(
+        submenu,
+        { x: "100%", display: "flex" },
+        { x: "0%", duration: 0.4, ease: "power2.inOut" },
+      );
+    }
+  }
+
+  closeSubmenu() {
+    if (!this.currentSubmenu) return;
+
+    const mainMenu = this.querySelector(".moda-menu-content");
+    const submenu = this.querySelector(
+      `[data-submenu-id="${this.currentSubmenu}"]`,
+    );
+    const sideMenu = this.querySelector(".moda-side-menu");
+
+    if (!mainMenu || !submenu) return;
+
+    // Recolhe o menu lateral
+    if (sideMenu) {
+      sideMenu.classList.remove("submenu-expanded");
+    }
+
+    if (window.gsap) {
+      // Volta menu principal
+      window.gsap.to(mainMenu, {
+        x: "0%",
+        duration: 0.4,
+        ease: "power2.inOut",
+      });
+
+      // Esconde submenu para direita
+      window.gsap.to(submenu, {
+        x: "100%",
+        duration: 0.4,
+        ease: "power2.inOut",
+        onComplete: () => {
+          submenu.style.display = "none";
+        },
+      });
+    }
+
+    this.currentSubmenu = null;
+  }
+
   initMenuLinksAnimation() {
     requestAnimationFrame(() => {
       if (!window.gsap) return;
@@ -112,6 +185,60 @@ export class ModaNavigation extends HTMLElement {
             ease: "power2.inOut",
           });
         });
+      });
+
+      // Animação para links do submenu
+      const submenuLinks = this.querySelectorAll(
+        ".submenu-link, .submenu-sublink",
+      );
+      submenuLinks.forEach((link) => {
+        // Não animar links ativos
+        if (
+          link.classList.contains("submenu-link-active") ||
+          link.classList.contains("submenu-sublink-active")
+        ) {
+          return;
+        }
+
+        link.addEventListener("mouseenter", () => {
+          window.gsap.to(link, {
+            "--underline-width": "100%",
+            duration: 0.35,
+            ease: "power2.inOut",
+          });
+        });
+
+        link.addEventListener("mouseleave", () => {
+          window.gsap.to(link, {
+            "--underline-width": "0%",
+            duration: 0.35,
+            ease: "power2.inOut",
+          });
+        });
+      });
+
+      // Animação para labels dos cards
+      const cardLabels = this.querySelectorAll(".submenu-card-label");
+      cardLabels.forEach((label) => {
+        const card = label.closest(".submenu-card");
+
+        if (card) {
+          card.addEventListener("mouseenter", () => {
+            window.gsap.to(label, {
+              "--underline-width": "100%",
+              duration: 0.35,
+              ease: "power2.inOut",
+            });
+          });
+
+          card.addEventListener("mouseleave", () => {
+            window.gsap.to(label, {
+              "--underline-width": "0%",
+              duration: 0.35,
+              ease: "power2.inOut",
+            });
+          });
+        }
       });
     });
   }
@@ -142,6 +269,30 @@ export class ModaNavigation extends HTMLElement {
       searchBtn.addEventListener("click", () => {
         console.log("Search clicked");
       });
+    }
+
+    // Links com submenu
+    const submenuTriggers = this.querySelectorAll(
+      ".moda-menu-link.has-submenu",
+    );
+    submenuTriggers.forEach((trigger) => {
+      trigger.addEventListener("click", (e) => {
+        e.preventDefault();
+        const submenuId = trigger.getAttribute("data-submenu");
+        this.openSubmenu(submenuId);
+      });
+    });
+
+    // Botões de voltar nos submenus
+    const backButtons = this.querySelectorAll(".submenu-back-btn");
+    backButtons.forEach((btn) => {
+      btn.addEventListener("click", () => this.closeSubmenu());
+    });
+
+    // Botão fechar do submenu (fecha menu inteiro)
+    const submenuCloseBtn = this.querySelector(".submenu-close-btn");
+    if (submenuCloseBtn) {
+      submenuCloseBtn.addEventListener("click", () => this.closeMenu());
     }
 
     // Acessibilidade - Alto Contraste
@@ -176,6 +327,10 @@ export class ModaNavigation extends HTMLElement {
     const menuLinks = this.querySelectorAll(".moda-menu-link");
 
     if (this.menuOpen) {
+      // Remove display none antes de abrir
+      sideMenu.style.display = "block";
+      backdrop.style.display = "block";
+
       backdrop.classList.add("active");
       sideMenu.classList.add("active");
 
@@ -223,6 +378,15 @@ export class ModaNavigation extends HTMLElement {
     } else {
       backdrop.classList.remove("active");
       sideMenu.classList.remove("active");
+      sideMenu.classList.remove("submenu-expanded");
+
+      // Cleanup após transição
+      setTimeout(() => {
+        if (!this.menuOpen) {
+          sideMenu.style.display = "none";
+          backdrop.style.display = "none";
+        }
+      }, 400);
 
       // Volta hamburguer ao estado normal
       if (window.gsap) {
@@ -251,6 +415,12 @@ export class ModaNavigation extends HTMLElement {
 
   closeMenu() {
     this.menuOpen = false;
+
+    // Fecha submenu se aberto
+    if (this.currentSubmenu) {
+      this.closeSubmenu();
+    }
+
     const sideMenu = this.querySelector(".moda-side-menu");
     const backdrop = this.querySelector(".moda-side-menu-backdrop");
     const hamburger = this.querySelector(".moda-nav-hamburger");
@@ -258,6 +428,15 @@ export class ModaNavigation extends HTMLElement {
 
     backdrop.classList.remove("active");
     sideMenu.classList.remove("active");
+    sideMenu.classList.remove("submenu-expanded");
+
+    // Cleanup: Remove do DOM após transição (tech lead best practice)
+    setTimeout(() => {
+      if (!this.menuOpen) {
+        sideMenu.style.display = "none";
+        backdrop.style.display = "none";
+      }
+    }, 400); // Match transition duration
 
     // Volta hamburguer ao estado normal
     if (window.gsap) {
@@ -340,7 +519,7 @@ export class ModaNavigation extends HTMLElement {
             <a href="#bolsas" class="moda-menu-link">Bolsas</a>
             <a href="#joalheria" class="moda-menu-link">Joalheria e relojoaria</a>
             <a href="#alta-costura" class="moda-menu-link">Alta-costura</a>
-            <a href="#dior-world" class="moda-menu-link">Dior World e desfiles</a>
+            <a href="#dior-world" class="moda-menu-link has-submenu" data-submenu="dior-world">Dior World e desfiles</a>
           </nav>
 
           <div class="moda-menu-contact">
@@ -358,6 +537,78 @@ export class ModaNavigation extends HTMLElement {
             <div class="moda-menu-tabs">
               <a href="/moda-acessorios" class="moda-menu-tab moda-menu-tab-active">Moda & Acessórios</a>
               <a href="/" class="moda-menu-tab">Perfume & Cosméticos</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Submenu: Dior World e Desfiles -->
+        <div class="submenu-panel submenu-dior-world" data-submenu-id="dior-world" style="display: none;">
+          <div class="submenu-dior-world-content">
+            <!-- Coluna Esquerda: X Fechar + Breadcrumb + Links -->
+            <div class="submenu-left-column">
+              <!-- Header com X Fechar -->
+              <div class="submenu-top-header">
+                <button class="submenu-close-btn">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                  </svg>
+                  <span>Fechar</span>
+                </button>
+              </div>
+              
+              <!-- Breadcrumb -->
+              <div class="submenu-breadcrumb">
+                <button class="submenu-back-btn">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M15 18l-6-6 6-6"/>
+                  </svg>
+                </button>
+                <span class="breadcrumb-text">
+                  <span class="breadcrumb-parent">Dior World e desfiles</span>
+                  <span class="breadcrumb-separator">/</span>
+                  <span class="breadcrumb-current">Desfiles</span>
+                </span>
+              </div>
+              
+              <nav class="submenu-links">
+                <a href="#novidades-eventos" class="submenu-link">Novidades e eventos</a>
+                <a href="#desfiles" class="submenu-link submenu-link-active">Desfiles</a>
+                <a href="#historia" class="submenu-link">História</a>
+                <a href="#compromissos" class="submenu-link">Nossos compromissos</a>
+              </nav>
+            </div>
+            
+            <!-- Coluna Centro: Sub-links -->
+            <div class="submenu-center-column">
+              <nav class="submenu-sublinks">
+                <a href="#primavera-verao-2026" class="submenu-sublink submenu-sublink-active">Primavera-Verão 2026</a>
+                <a href="#verao-2026" class="submenu-sublink">Verão 2026</a>
+                <a href="#croisiere-2026" class="submenu-sublink">Croisière 2026</a>
+                <a href="#outono-2025" class="submenu-sublink">Outono 2025</a>
+              </nav>
+            </div>
+            
+            <!-- Coluna Direita: Cards Grid - Ocupa altura total -->
+            <div class="submenu-right-column">
+              <div class="submenu-cards-grid">
+                <a href="#primavera-verao-2026" class="submenu-card">
+                  <img src="/images/2026.avif" alt="Primavera-Verão 2026" />
+                  <span class="submenu-card-label">Primavera-Verão 2026</span>
+                </a>
+                <a href="#verao-2026" class="submenu-card">
+                  <img src="/images/2026.2.avif" alt="Verão 2026" />
+                  <span class="submenu-card-label">Verão 2026</span>
+                </a>
+                <a href="#croisiere-2026" class="submenu-card">
+                  <img src="/images/2026.3.avif" alt="Croisière 2026" />
+                  <span class="submenu-card-label">Croisière 2026</span>
+                </a>
+                <a href="#outono-2025" class="submenu-card">
+                  <img src="/images/2026.4.avif" alt="Outono 2025" />
+                  <span class="submenu-card-label">Outono 2025</span>
+                </a>
+              </div>
             </div>
           </div>
         </div>

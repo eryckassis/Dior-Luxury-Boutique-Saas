@@ -19,6 +19,9 @@ moda-acessorios-page .all-content {
   margin: 0 !important;
   padding: 0 !important;
   background: transparent !important;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem; /* Espaçamento entre sections */
 }
 
 moda-acessorios-page .content,
@@ -122,9 +125,11 @@ moda-acessorios-page main {
   right: 0;
   bottom: 0;
   background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
+  transition: opacity 0.4s ease, visibility 0.4s ease, backdrop-filter 0.4s ease;
   z-index: 1100;
 }
 
@@ -162,6 +167,14 @@ moda-acessorios-page main {
 
 .moda-side-menu.active {
   left: 16px;
+}
+
+/* Estado expandido - quando submenu com cards está aberto */
+.moda-side-menu.submenu-expanded {
+  width: calc(100vw - 32px);
+  max-width: 1600px;
+  transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              left 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .moda-side-menu-header {
@@ -387,6 +400,319 @@ moda-acessorios-page main {
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
 }
 
+/* ============================================================================
+   SUBMENU PANEL - Dior World e Desfiles
+   ============================================================================ */
+
+.moda-side-menu .submenu-panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #f5f5f5;
+  overflow: hidden;
+  transform: translateX(100%);
+  z-index: 10;
+  display: none;
+  flex-direction: row;
+}
+
+.moda-side-menu .submenu-panel::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+/* Submenu Top Header - X Fechar - Agora dentro da coluna esquerda */
+.submenu-top-header {
+  padding: 0 0 1.25rem 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.25rem;
+}
+
+.submenu-close-btn {
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: "Hellix", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #333;
+  cursor: pointer;
+  padding: 0;
+  transition: opacity 0.3s ease;
+}
+
+.submenu-close-btn:hover {
+  opacity: 0.6;
+}
+
+/* Submenu Breadcrumb - Agora dentro da coluna esquerda */
+.submenu-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 0 1.25rem 0;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Texto do breadcrumb */
+.breadcrumb-text {
+  font-family: "Hellix", sans-serif;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.submenu-breadcrumb .submenu-back-btn {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  color: #333;
+  transition: opacity 0.3s ease;
+}
+
+.submenu-breadcrumb .submenu-back-btn:hover {
+  opacity: 0.6;
+}
+
+.breadcrumb-parent {
+  color: #999;
+  font-weight: 400;
+}
+
+.breadcrumb-separator {
+  color: #999;
+}
+
+.breadcrumb-current {
+  color: #000;
+  font-weight: 500;
+}
+
+.moda-side-menu .submenu-header {
+  padding: 2rem 2.5rem 1.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+}
+
+.moda-side-menu .submenu-back-btn {
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: "Hellix", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: #000;
+  cursor: pointer;
+  padding: 0;
+  transition: opacity 0.3s ease;
+}
+
+.moda-side-menu .submenu-back-btn:hover {
+  opacity: 0.6;
+}
+
+/* Layout do Submenu Dior World (Desktop) */
+.submenu-dior-world-content {
+  display: flex;
+  flex: 1;
+  padding: 0;
+  overflow: hidden;
+  gap: 0;
+  height: 100%;
+}
+
+.submenu-left-column {
+  width: 320px;
+  min-width: 300px;
+  padding: 1.5rem 2rem;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.submenu-center-column {
+  width: 250px;
+  padding: 6.9rem 2rem;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.submenu-right-column {
+  flex: 1;
+  padding: 0.9rem 0.7rem 0rem 0rem;
+  overflow: hidden;
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-end;
+}
+
+/* Links do Submenu */
+.submenu-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.submenu-sublinks {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.submenu-link {
+  font-family: "Hellix", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #333;
+  text-decoration: none;
+  position: relative;
+  --underline-width: 0%;
+  transition: opacity 0.3s ease;
+  display: inline-block;
+  width: fit-content;
+}
+
+.submenu-sublink {
+  font-family: "Hellix", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: #555;
+  text-decoration: none;
+  position: relative;
+  --underline-width: 0%;
+  transition: color 0.3s ease, opacity 0.3s ease;
+  display: inline-block;
+  width: fit-content;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+.submenu-sublink:hover {
+  color: #000;
+}
+
+.submenu-link::after,
+.submenu-sublink::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: var(--underline-width, 0%);
+  height: 1px;
+  background-color: #000;
+  transition: width 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.submenu-link-active {
+  font-weight: 400;
+  --underline-width: 100%;
+}
+
+.submenu-sublink-active {
+  font-weight: 500;
+  --underline-width: 100%;
+}
+
+.submenu-link-active::after,
+.submenu-sublink-active::after {
+  width: 100%;
+}
+
+/* Indicador de ponto para item ativo */
+.submenu-link-active::before {
+  content: "•";
+  position: absolute;
+  right: -1.2rem;
+  color: #000;
+  font-size: 0.6rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Cards Grid */
+.submenu-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 0.5rem;
+  height: 99%;
+  width: 75%;
+}
+
+.submenu-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 4px;
+  text-decoration: none;
+  display: block;
+}
+
+.submenu-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.submenu-card:hover img {
+  transform: scale(1.05);
+}
+
+.submenu-card-label {
+  position: absolute;
+  bottom: 20%;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  font-family: "Hellix", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+  text-align: center;
+  width: 80%;
+  --underline-width: 0%;
+  position: relative;
+  display: inline-block;
+}
+
+.submenu-card-label::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: var(--underline-width, 0%);
+  height: 2px;
+  background-color: #fff;
+  transition: width 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.submenu-card-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  text-align: center;
+}
+
 /* Responsive - Tablets */
 @media (max-width: 768px) {
   .moda-navigation {
@@ -404,6 +730,48 @@ moda-acessorios-page main {
     width: 100px;
     height: auto;
     filter: none;
+  }
+
+  /* Submenu Mobile - Stack Layout */
+  .submenu-dior-world-content {
+    flex-direction: column;
+    padding: 1rem 0;
+    overflow-y: auto;
+  }
+
+  .submenu-left-column,
+  .submenu-center-column {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 1rem 1.5rem;
+  }
+
+  .submenu-right-column {
+    padding: 1rem 1.5rem;
+    overflow: visible;
+  }
+
+  .submenu-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 0.75rem;
+    width: 100%;
+    height: auto;
+    min-height: 400px;
+  }
+
+  .submenu-card {
+    min-height: 180px;
+  }
+
+  .submenu-card-label {
+    font-size: 0.8rem;
+    width: 85%;
+  }
+
+  .moda-side-menu .submenu-header {
+    padding: 1.5rem;
   }
 }
 
@@ -532,6 +900,44 @@ moda-acessorios-page main {
   .moda-logo-link .logo-vector {
     width: 80px;
   }
+
+  /* Submenu Cards para telas pequenas */
+  .submenu-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 0.4rem;
+    width: 100%;
+    height: auto;
+    min-height: 320px;
+  }
+
+  .submenu-card {
+    min-height: 150px;
+    border-radius: 6px;
+  }
+
+  .submenu-card-label {
+    font-size: 0.7rem;
+    width: 90%;
+    bottom: 10%;
+  }
+
+  .submenu-right-column {
+    padding: 0.75rem 0.75rem;
+  }
+
+  /* Video Control Button - iPhone SE */
+  .moda-video-control-btn {
+    left: 0.75rem;
+    bottom: 0.75rem;
+    width: 40px;
+    height: 40px;
+  }
+
+  .moda-video-control-btn svg {
+    width: 16px;
+    height: 16px;
+  }
 }
 
 /* Responsive - Landscape mode em mobile */
@@ -645,11 +1051,58 @@ moda-acessorios-page main {
   .moda-hero-video-section .moda-hero-content {
     padding: 1.5rem;
   }
+
+  /* Video Control Button - Tablet */
+  .moda-video-control-btn {
+    left: 1.5rem;
+    bottom: 1.5rem;
+    width: 50px;
+    height: 50px;
+  }
+
+  .moda-video-control-btn svg {
+    width: 20px;
+    height: 20px;
+  }
 }
 
-@media (max-width: 480px) {
+/* iPhone 14 Pro Max / 15 Pro Max / 16 Pro Max / 17 Pro Max (430px) */
+@media (max-width: 430px) {
   .moda-hero-video-section {
     height: 70vh;
+  }
+
+  /* Video Control Button - iPhone Pro Max */
+  .moda-video-control-btn {
+    left: 1rem;
+    bottom: 1rem;
+    width: 45px;
+    height: 45px;
+  }
+
+  .moda-video-control-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+/* iPhone 14 Pro / 15 Pro / 16 Pro / 17 Pro (393px) */
+@media (max-width: 393px) {
+  .moda-hero-video-section {
+    height: 70vh;
+  }
+
+  /* Video Control Button - iPhone Pro */
+  .moda-video-control-btn {
+    left: 0.9rem;
+    bottom: 0.9rem;
+    width: 35px;
+    height: 35px;
+  }
+
+  .moda-video-control-btn svg {
+    width: 17px;
+    height: 17px;
   }
 }
 
@@ -662,6 +1115,127 @@ moda-acessorios-page main {
   object-fit: cover;
   object-position: center;
   z-index: 1;
+}
+
+/* ============================================================================
+   VIDEO CONTROL BUTTON - Liquid Glass Effect
+   ============================================================================ */
+
+.moda-video-control-btn {
+  position: absolute;
+  left: 2.5rem;
+  bottom: 2.5rem;
+  width: 30px;
+  height: 30px;
+  border-radius: 20%;
+  border: none;
+  background: rgba(255, 255, 255, 0.0);
+  backdrop-filter: blur(50px);
+  -webkit-backdrop-filter: blur(50px);
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  color: #ffffff;
+}
+
+
+
+.moda-video-control-btn:active {
+  transform: scale(0.98);
+}
+
+.moda-video-control-btn svg {
+  width: 20px;
+  height: 20px;
+  transition: opacity 0.3s ease;
+}
+
+/* Play icon - preenchido */
+.moda-video-control-btn .play-icon {
+  fill: currentColor;
+  stroke: none;
+}
+
+/* Pause Icon - linhas finas brancas */
+.moda-video-control-btn .pause-icon {
+  fill: #ffffff;
+  stroke: none;
+  display: none;
+}
+
+.moda-video-control-btn.playing .play-icon {
+  display: none;
+}
+
+.moda-video-control-btn.playing .pause-icon {
+  display: block;
+}
+
+/* ============================================================================
+   VIDEO CONTROL BUTTON - Responsive (Media Queries)
+   ============================================================================ */
+
+/* iPhone 14 Pro Max / 15 Pro Max / 16 Pro Max / 17 Pro Max (430px) */
+@media (max-width: 430px) {
+  .moda-video-control-btn {
+    left: 1rem !important;
+    bottom: 1rem !important;
+    width: 35px !important;
+    height: 35px !important;
+  }
+
+  .moda-video-control-btn svg {
+    width: 18px !important;
+    height: 18px !important;
+  }
+
+  /* Mover texto e botão mais para cima na primeira section */
+  .moda-hero-content {
+    padding-bottom: 4.5rem !important;
+  }
+}
+
+/* iPhone 14 Pro / 15 Pro / 16 Pro / 17 Pro (393px) */
+@media (max-width: 393px) {
+  .moda-video-control-btn {
+    left: 0.9rem !important;
+    bottom: 0.9rem !important;
+    width: 35px !important;
+    height: 35px !important;
+  }
+
+  .moda-video-control-btn svg {
+    width: 17px !important;
+    height: 17px !important;
+  }
+
+  /* Mover texto e botão mais para cima na primeira section */
+  .moda-hero-content {
+    padding-bottom: 4rem !important;
+  }
+}
+
+/* iPhone 14 / 15 / 16 / 17 (390px) e iPhone SE */
+@media (max-width: 390px) {
+  .moda-video-control-btn {
+    left: 0.75rem !important;
+    bottom: 0.75rem !important;
+    width: 35px !important;
+    height: 35px !important;
+  }
+
+  .moda-video-control-btn svg {
+    width: 16px !important;
+    height: 16px !important;
+  }
+
+  /* Mover texto e botão mais para cima na primeira section */
+  .moda-hero-content {
+    padding-bottom: 4rem !important;
+  }
 }
 
 
@@ -835,7 +1409,7 @@ moda-acessorios-page main {
   width: 100%;
   height: 100%;
   background: rgba(246, 243, 247, 0.25);
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(20px);
   z-index: 2;
   transform-origin: left center;
