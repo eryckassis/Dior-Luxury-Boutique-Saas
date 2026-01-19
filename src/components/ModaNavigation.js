@@ -15,33 +15,77 @@ export class ModaNavigation extends HTMLElement {
     this.initScrollBehavior();
   }
 
+  disconnectedCallback() {
+    // Remove listener do scroll
+    if (this._scrollCleanup) {
+      this._scrollCleanup();
+    }
+  }
+
   initScrollBehavior() {
+    const nav = this.querySelector(".moda-navigation");
+    if (!nav) return;
+
     // Verifica se está dentro da página PresenteParaEla
     const isInPresenteParaEla = this.closest("presente-para-ela-page");
 
     if (isInPresenteParaEla) {
       // Na página PresenteParaEla, força o estado "scrolled" (fundo branco)
-      const nav = this.querySelector(".moda-navigation");
       nav.classList.add("scrolled");
       return; // Não adiciona listener de scroll
     }
 
-    const nav = this.querySelector(".moda-navigation");
-    let lastScroll = 0;
+    // =========================================================================
+    // SMART NAVBAR - Hide on Scroll Down, Show on Scroll Up
+    // =========================================================================
+    let lastScrollY = window.scrollY;
+    let ticking = false;
+    const scrollThreshold = 80; // Mínimo de scroll para ativar hide/show
+    const topThreshold = 100; // Sempre visível quando próximo do topo
 
-    window.addEventListener("scroll", () => {
-      const currentScroll = window.pageYOffset;
+    const updateNavVisibility = () => {
+      const currentScrollY = window.scrollY;
+      const scrollDelta = currentScrollY - lastScrollY;
 
-      if (currentScroll <= 50) {
-        // No topo - fundo transparente
-        nav.classList.remove("scrolled");
-      } else {
-        // Scrollado - fundo branco
-        nav.classList.add("scrolled");
+      // Sempre visível no topo da página
+      if (currentScrollY < topThreshold) {
+        nav.classList.remove("nav-hidden");
+        nav.classList.remove("scrolled"); // Fundo transparente no topo
+        lastScrollY = currentScrollY;
+        ticking = false;
+        return;
       }
 
-      lastScroll = currentScroll;
-    });
+      // Fundo branco quando scrollado
+      nav.classList.add("scrolled");
+
+      // Scroll para baixo - esconde (apenas se passou do threshold)
+      if (scrollDelta > 0 && currentScrollY > scrollThreshold) {
+        nav.classList.add("nav-hidden");
+      }
+      // Scroll para cima - mostra
+      else if (scrollDelta < -5) {
+        nav.classList.remove("nav-hidden");
+      }
+
+      lastScrollY = currentScrollY;
+      ticking = false;
+    };
+
+    // Usar requestAnimationFrame para performance
+    const onScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(updateNavVisibility);
+        ticking = true;
+      }
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    // Cleanup ao desconectar
+    this._scrollCleanup = () => {
+      window.removeEventListener("scroll", onScroll);
+    };
   }
 
   initMenuLinksAnimation() {

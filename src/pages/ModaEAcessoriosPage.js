@@ -1,7 +1,7 @@
 ﻿// ============================================================================
 // MODA E ACESSÓRIOS PAGE - Página dedicada a Moda e Acessórios
 // ============================================================================
-
+import { getSmoothScroll } from "../components/SmoothScroll.js";
 import "../components/ModaNavigation.js";
 import "../components/FooterSection.js";
 import "../components/ModaAcessoriosContent.js";
@@ -11,6 +11,7 @@ import "../styles/miss-dior.css";
 export class ModaEAcessoriosPage extends HTMLElement {
   constructor() {
     super();
+    this.getSmoothScroll = null;
   }
 
   connectedCallback() {
@@ -21,10 +22,24 @@ export class ModaEAcessoriosPage extends HTMLElement {
     this.initCardButtons();
     this.initDragCards();
     this.initVideoControls();
+    this.initSmoothScroll();
+  }
+
+  initSmoothScroll() {
+    this.SmoothScroll = getSmoothScroll({
+      duration: 1.2,
+      smoothWheel: true,
+      wheelMultiplier: 1,
+    });
+
+    this.SmoothScroll.init();
   }
 
   disconnectedCallback() {
     // Cleanup draggable
+    if (this.SmoothScroll) {
+      this.SmoothScroll.destroy();
+    }
     if (this.draggableInstance) {
       this.draggableInstance.kill();
     }
@@ -57,7 +72,7 @@ export class ModaEAcessoriosPage extends HTMLElement {
             duration: 1.2,
             ease: "power3.out",
           },
-          "-=0.5"
+          "-=0.5",
         )
         .from(
           ".moda-hero-subtitle",
@@ -67,7 +82,7 @@ export class ModaEAcessoriosPage extends HTMLElement {
             duration: 1,
             ease: "power3.out",
           },
-          "-=0.8"
+          "-=0.8",
         )
         .from(
           ".moda-discover-button",
@@ -77,7 +92,7 @@ export class ModaEAcessoriosPage extends HTMLElement {
             duration: 0.8,
             ease: "power3.out",
           },
-          "-=0.6"
+          "-=0.6",
         );
 
       this.animations.push(heroTl);
@@ -104,7 +119,7 @@ export class ModaEAcessoriosPage extends HTMLElement {
       if (!window.gsap) return;
 
       const buttons = this.querySelectorAll(
-        ".moda-discover-button, .moda-discover-button-second"
+        ".moda-discover-button, .moda-discover-button-second",
       );
 
       buttons.forEach((button) => {
@@ -179,7 +194,7 @@ export class ModaEAcessoriosPage extends HTMLElement {
               duration: 1.2,
               ease: "power3.inOut",
             },
-            0.1
+            0.1,
           )
           .to(
             image,
@@ -188,7 +203,7 @@ export class ModaEAcessoriosPage extends HTMLElement {
               duration: 1.2,
               ease: "power3.out",
             },
-            0.1
+            0.1,
           )
           .to(
             title,
@@ -198,7 +213,7 @@ export class ModaEAcessoriosPage extends HTMLElement {
               duration: 0.8,
               ease: "power3.out",
             },
-            0.5
+            0.5,
           )
           .to(
             button,
@@ -208,7 +223,7 @@ export class ModaEAcessoriosPage extends HTMLElement {
               duration: 0.8,
               ease: "power3.out",
             },
-            0.6
+            0.6,
           );
       });
     });
@@ -220,7 +235,7 @@ export class ModaEAcessoriosPage extends HTMLElement {
 
       const buttons = this.querySelectorAll(
         ".moda-card-button",
-        "moda-card-button-second"
+        "moda-card-button-second",
       );
 
       buttons.forEach((button) => {
@@ -399,6 +414,27 @@ export class ModaEAcessoriosPage extends HTMLElement {
   render() {
     this.innerHTML = `
       <div class="all-content" id="all-content" role="main">
+      <section class="moda-hero-video-section">
+      <div class="moda-hero-overlay"></div>
+      <video
+      class="moda-hero-bg-video"
+      autoplay
+      muted
+      loop
+      playsinline
+      >
+      <source src="/videos/book.webm" type="video/mp4" />
+      </video>
+      <div class="moda-hero-content">
+      <p class="moda-hero-label"></p>
+      <h1 class="moda-hero-title"></h1>
+      <p class="moda-hero-title-video">
+      A coleção book cover
+      </p>
+      <a href="/colecao" data-route="/colecao" class="moda-discover-button">Descubra
+      </a>
+      </div>
+      </section>
         <!-- Moda Navigation (customizada) -->
         <moda-navigation></moda-navigation>
 

@@ -77,7 +77,7 @@ function hidePreloaderGlobal() {
       opacity: 0,
       duration: 0.3,
     },
-    "<"
+    "<",
   );
 }
 
@@ -170,7 +170,11 @@ export class SplashPage extends HTMLElement {
           </div>
 
         </div>
+        
       </div>
+      
+
+      
     `;
   }
 
@@ -205,12 +209,12 @@ export class SplashPage extends HTMLElement {
 
         const xTransformer = gsap.utils.pipe(
           gsap.utils.mapRange(0, width, 0, 100),
-          gsap.utils.clamp(0, 100)
+          gsap.utils.clamp(0, 100),
         );
 
         const yTransformer = gsap.utils.pipe(
           gsap.utils.mapRange(0, height, 0, 100),
-          gsap.utils.clamp(0, 100)
+          gsap.utils.clamp(0, 100),
         );
 
         return {
@@ -376,7 +380,7 @@ export class SplashPage extends HTMLElement {
         duration: ANIMATION_CONFIG.duration.videoDarken,
         ease: ANIMATION_CONFIG.ease.smooth,
       },
-      "<0.2"
+      "<0.2",
     );
 
     // FASE 3: Fade out suave dos vídeos para preto total
@@ -387,7 +391,7 @@ export class SplashPage extends HTMLElement {
         duration: ANIMATION_CONFIG.duration.videoDarken,
         ease: ANIMATION_CONFIG.ease.smooth,
       },
-      "<0.3"
+      "<0.3",
     );
 
     // FASE 4: Manter logo visível por um momento (já está centralizada)
@@ -415,7 +419,7 @@ export class SplashPage extends HTMLElement {
         duration: ANIMATION_CONFIG.duration.preloaderFade,
         ease: ANIMATION_CONFIG.ease.smooth,
       },
-      ">"
+      ">",
     );
 
     tl.to(
@@ -425,7 +429,7 @@ export class SplashPage extends HTMLElement {
         duration: ANIMATION_CONFIG.duration.preloaderFade,
         ease: ANIMATION_CONFIG.ease.smooth,
       },
-      "<"
+      "<",
     );
 
     // FASE 7: Após transição, navega usando o router

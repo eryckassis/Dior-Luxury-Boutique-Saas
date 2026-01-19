@@ -46,6 +46,7 @@ import "./components/AppNavigation.js";
 import "./components/FooterSection.js";
 import "./components/Toast.js";
 import "./components/ModaAcessoriosContent.js";
+import "./styles/smooth-scroll.css";
 
 // ============================================================================
 // ROUTER CONFIGURATION
@@ -104,12 +105,12 @@ class Button {
 
     const xTransformer = gsap.utils.pipe(
       gsap.utils.mapRange(0, width, 0, 100),
-      gsap.utils.clamp(0, 100)
+      gsap.utils.clamp(0, 100),
     );
 
     const yTransformer = gsap.utils.pipe(
       gsap.utils.mapRange(0, height, 0, 100),
-      gsap.utils.clamp(0, 100)
+      gsap.utils.clamp(0, 100),
     );
 
     return {
@@ -378,7 +379,7 @@ class OpenAnimationSequence {
         ease: easing.out,
         force3D: true,
       },
-      "<"
+      "<",
     );
   }
 
@@ -390,7 +391,7 @@ class OpenAnimationSequence {
         duration: duration.medium,
         ease: easing.out,
       },
-      "<"
+      "<",
     );
   }
 
@@ -410,7 +411,7 @@ class OpenAnimationSequence {
         ease: easing.out,
         force3D: true,
       },
-      timing.dropdownOffset
+      timing.dropdownOffset,
     );
   }
 
@@ -423,7 +424,7 @@ class OpenAnimationSequence {
         ease: easing.out,
         force3D: true,
       },
-      "<"
+      "<",
     );
   }
 
@@ -439,7 +440,7 @@ class OpenAnimationSequence {
         ease: easing.out,
         force3D: true,
       },
-      `-=${timing.overlap}`
+      `-=${timing.overlap}`,
     );
   }
 
@@ -453,7 +454,7 @@ class OpenAnimationSequence {
         ease: easing.out,
         force3D: true,
       },
-      `-=${timing.overlap}`
+      `-=${timing.overlap}`,
     );
   }
 }
@@ -502,7 +503,7 @@ class CloseAnimationSequence {
         ease: easing.in,
         force3D: true,
       },
-      `+=${timing.delay}`
+      `+=${timing.delay}`,
     );
   }
 
@@ -515,7 +516,7 @@ class CloseAnimationSequence {
         ease: easing.in,
         force3D: true,
       },
-      "<"
+      "<",
     );
   }
 
@@ -530,7 +531,7 @@ class CloseAnimationSequence {
         ease: easing.in,
         force3D: true,
       },
-      `+=${timing.delay}`
+      `+=${timing.delay}`,
     );
   }
 
@@ -542,7 +543,7 @@ class CloseAnimationSequence {
         duration: duration.verySlow,
         ease: easing.in,
       },
-      "<"
+      "<",
     );
   }
 
@@ -556,7 +557,7 @@ class CloseAnimationSequence {
         duration: duration.slow,
         ease: easing.in,
       },
-      timing.closeStartOffset
+      timing.closeStartOffset,
     );
   }
 
@@ -569,7 +570,7 @@ class CloseAnimationSequence {
         ease: easing.in,
         force3D: true,
       },
-      "<"
+      "<",
     );
   }
 }
@@ -605,7 +606,7 @@ class MenuController {
   init() {
     if (!this.elements.hasRequiredElements()) {
       console.error(
-        "Required DOM elements not found. Menu initialization aborted."
+        "Required DOM elements not found. Menu initialization aborted.",
       );
       return false;
     }
@@ -664,7 +665,7 @@ class MenuController {
 
   executeCloseAnimation() {
     const sequence = new CloseAnimationSequence(this.elements, () =>
-      this.onCloseComplete()
+      this.onCloseComplete(),
     );
     sequence.execute();
   }
@@ -784,7 +785,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Inicializa controle de hover nos vídeos da galeria
     // Excluindo os vídeos com classe hero-video-hover que são controlados pelo HomePage
     const galleryVideos = document.querySelectorAll(
-      ".grid-item__wrapper video:not(.hero-video-hover)"
+      ".grid-item__wrapper video:not(.hero-video-hover)",
     );
     galleryVideos.forEach((video) => {
       new VideoHoverController(video);
@@ -830,7 +831,7 @@ function initAnimatedSections() {
   const sections = wrapper.querySelectorAll("section");
   const images = wrapper.querySelectorAll(".bg");
   const headings = gsap.utils.toArray(
-    ".animated-sections-wrapper .section-heading"
+    ".animated-sections-wrapper .section-heading",
   );
   const outerWrappers = gsap.utils.toArray(".animated-sections-wrapper .outer");
   const innerWrappers = gsap.utils.toArray(".animated-sections-wrapper .inner");
@@ -882,7 +883,7 @@ function initAnimatedSections() {
         }
       });
     },
-    { threshold: 0.3 }
+    { threshold: 0.3 },
   ); // Diminui threshold para detectar saída mais cedo
 
   observer.observe(wrapper);
@@ -906,7 +907,7 @@ function initAnimatedSections() {
       gsap.set(sections[currentIndex], { zIndex: 0 });
       tl.to(images[currentIndex], { yPercent: -15 * dFactor }).set(
         sections[currentIndex],
-        { autoAlpha: 0 }
+        { autoAlpha: 0 },
       );
     }
 
@@ -915,7 +916,7 @@ function initAnimatedSections() {
       [outerWrappers[index], innerWrappers[index]],
       { yPercent: (i) => (i ? -100 * dFactor : 100 * dFactor) },
       { yPercent: 0 },
-      0
+      0,
     ).fromTo(images[index], { yPercent: 15 * dFactor }, { yPercent: 0 }, 0);
 
     // Anima texto se disponível
@@ -933,7 +934,7 @@ function initAnimatedSections() {
             from: "random",
           },
         },
-        0.2
+        0.2,
       );
     }
 
@@ -954,7 +955,7 @@ function initAnimatedSections() {
             ease: "power2.out",
             stagger: 0.15,
           },
-          0.3
+          0.3,
         );
       }
     } else {

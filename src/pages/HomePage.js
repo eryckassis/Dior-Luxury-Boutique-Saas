@@ -171,29 +171,58 @@ export class HomePage extends HTMLElement {
 
       if (!section || !imageWrapper) return;
 
-      // Timeline principal com ScrollTrigger (mesma lógica do Diorivera)
-      const tl = window.gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: "top top",
-          end: "+=150%",
-          pin: true,
-          scrub: 0.6,
-          anticipatePin: 1,
-        },
-      });
+      const isMobile = window.innerWidth <= 768;
 
-      // Expande os 4 lados: width e height (imagem fica fixa, só o wrapper expande)
-      tl.to(
-        imageWrapper,
-        {
-          width: "100%",
-          height: "100%",
-          duration: 1,
-          ease: "power2.inOut",
-        },
-        0,
-      );
+      if (isMobile) {
+        // Mobile: pin quando centralizado na tela
+        const tl = window.gsap.timeline({
+          scrollTrigger: {
+            trigger: section,
+            start: "center center", // Começa quando centralizado
+            end: "+=100%",
+            pin: true,
+            scrub: 0.8,
+            anticipatePin: 1,
+          },
+        });
+
+        // Expande de 85% → 100%
+        tl.to(
+          imageWrapper,
+          {
+            width: "100%",
+            height: "100%",
+            borderRadius: "0px",
+            duration: 1,
+            ease: "power2.inOut",
+          },
+          0,
+        );
+      } else {
+        // Desktop: animação com pin (comportamento original)
+        const tl = window.gsap.timeline({
+          scrollTrigger: {
+            trigger: section,
+            start: "top top",
+            end: "+=150%",
+            pin: true,
+            scrub: 0.6,
+            anticipatePin: 1,
+          },
+        });
+
+        // Expande os 4 lados: width e height
+        tl.to(
+          imageWrapper,
+          {
+            width: "100%",
+            height: "100%",
+            duration: 1,
+            ease: "power2.inOut",
+          },
+          0,
+        );
+      }
     });
   }
 

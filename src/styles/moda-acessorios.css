@@ -578,6 +578,81 @@ moda-acessorios-page main {
   left: 0;
 }
 
+/* ============================================================================
+   MODA HERO VIDEO SECTION
+   ============================================================================ */
+
+.moda-hero-video-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.moda-hero-title-video {
+  font-family: "Hellix" sans-serif;
+  font-size: 2rem;
+}
+
+
+
+.moda-hero-video-section .moda-hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.1) 0%,
+    rgba(0, 0, 0, 0.3) 50%,
+    rgba(0, 0, 0, 0.5) 100%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+.moda-hero-bg-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  z-index: 0;
+}
+
+.moda-hero-video-section .moda-hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 2rem;
+  max-width: 800px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .moda-hero-video-section {
+    height: 80vh;
+  }
+  
+  .moda-hero-video-section .moda-hero-content {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .moda-hero-video-section {
+    height: 70vh;
+  }
+}
+
 .moda-hero-video {
   position: absolute;
   top: 0;
@@ -879,6 +954,15 @@ moda-acessorios-page main {
     padding-bottom: 6rem;
   }
 
+    .moda-hero-video-section {
+    height: 80vh;
+  }
+  
+  .moda-hero-video-section .moda-hero-content {
+    padding: 1.5rem;
+  }
+
+
   .moda-hero-label {
     font-size: 0.85rem;
     letter-spacing: 0.08em;
@@ -1155,6 +1239,15 @@ moda-acessorios-page main {
     padding: 5rem 1.5rem;
   }
 
+    .moda-hero-video-section {
+    height: 80vh;
+  }
+  
+  .moda-hero-video-section .moda-hero-content {
+    padding: 1.5rem;
+  }
+
+
   .moda-campaign-title {
     font-size: clamp(32px, 5vw, 60px);
   }
@@ -1271,7 +1364,16 @@ moda-acessorios-page main {
   .moda-discover-button-second {
     font-size: 13px;
   }
+
+    .moda-hero-video-section {
+    height: 80vh;
+  }
+  
+  .moda-hero-video-section .moda-hero-content {
+    padding: 1.5rem;
+  }
 }
+
 
 /* ============================================================================
    ALTO CONTRASTE - Modo de Acessibilidade
