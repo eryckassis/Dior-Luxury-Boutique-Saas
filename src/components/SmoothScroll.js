@@ -31,15 +31,22 @@ class SmoothScroll {
       this.lenis.on("scroll", window.ScrollTrigger.update);
 
       window.gsap.ticker.add((time) => {
-        this.lenis.raf(time * 1000);
+        // Verificar se lenis ainda existe antes de chamar raf
+        if (this.lenis && typeof this.lenis.raf === "function") {
+          this.lenis.raf(time * 1000);
+        }
       });
 
       window.gsap.ticker.lagSmoothing(0);
     } else {
       // Fallback sem GSAP
       const raf = (time) => {
-        this.lenis.raf(time);
-        this.rafId = requestAnimationFrame(raf);
+        if (this.lenis && typeof this.lenis.raf === "function") {
+          this.lenis.raf(time);
+        }
+        if (this.isActive) {
+          this.rafId = requestAnimationFrame(raf);
+        }
       };
       this.rafId = requestAnimationFrame(raf);
     }
@@ -54,8 +61,20 @@ class SmoothScroll {
   destroy() {
     if (!this.isActive) return;
 
+    this.isActive = false;
+
     if (this.rafId) {
       cancelAnimationFrame(this.rafId);
+      this.rafId = null;
+    }
+
+    // Remover listener do GSAP ticker se existir
+    if (window.gsap && window.gsap.ticker) {
+      window.gsap.ticker.remove((time) => {
+        if (this.lenis) {
+          this.lenis.raf(time * 1000);
+        }
+      });
     }
 
     if (this.lenis) {
@@ -63,7 +82,6 @@ class SmoothScroll {
       this.lenis = null;
     }
 
-    this.isActive = false;
     console.log("✓ SmoothScroll destroyed");
   }
 

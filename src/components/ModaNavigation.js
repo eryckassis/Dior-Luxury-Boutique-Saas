@@ -96,6 +96,10 @@ export class ModaNavigation extends HTMLElement {
     const mainMenu = this.querySelector(".moda-menu-content");
     const submenu = this.querySelector(`[data-submenu-id="${submenuId}"]`);
     const sideMenu = this.querySelector(".moda-side-menu");
+    const cards = submenu ? submenu.querySelectorAll(".submenu-card") : [];
+    const cardImages = submenu
+      ? submenu.querySelectorAll(".submenu-card img")
+      : [];
 
     if (!mainMenu || !submenu) return;
 
@@ -110,15 +114,56 @@ export class ModaNavigation extends HTMLElement {
       // Desliza menu principal para esquerda
       window.gsap.to(mainMenu, {
         x: "-100%",
-        duration: 0.4,
-        ease: "power2.inOut",
+        duration: 0.5,
+        ease: "power3.inOut",
       });
 
       // Desliza submenu da direita
       window.gsap.fromTo(
         submenu,
         { x: "100%", display: "flex" },
-        { x: "0%", duration: 0.4, ease: "power2.inOut" },
+        {
+          x: "0%",
+          duration: 0.5,
+          ease: "power3.inOut",
+          onComplete: () => {
+            // Smooth Image Reveal com clipPath e scale
+            window.gsap.fromTo(
+              cardImages,
+              {
+                scale: 1.2,
+                opacity: 0,
+                clipPath: "inset(100% 0% 0% 0%)",
+              },
+              {
+                scale: 1,
+                opacity: 1,
+                clipPath: "inset(0% 0% 0% 0%)",
+                duration: 1.2,
+                stagger: {
+                  amount: 0.3,
+                  from: "start",
+                },
+                ease: "power3.out",
+              },
+            );
+
+            // Anima labels dos cards
+            const cardLabels = submenu.querySelectorAll(".submenu-card-label");
+            window.gsap.fromTo(
+              cardLabels,
+              { y: 30, opacity: 0 },
+              {
+                y: 0,
+                opacity: 1,
+                duration: 0.8,
+                stagger: 0.12,
+                delay: 0.4,
+                ease: "power3.out",
+              },
+            );
+          },
+        },
       );
     }
   }
@@ -131,31 +176,56 @@ export class ModaNavigation extends HTMLElement {
       `[data-submenu-id="${this.currentSubmenu}"]`,
     );
     const sideMenu = this.querySelector(".moda-side-menu");
+    const cards = submenu ? submenu.querySelectorAll(".submenu-card") : [];
 
     if (!mainMenu || !submenu) return;
 
-    // Recolhe o menu lateral
-    if (sideMenu) {
-      sideMenu.classList.remove("submenu-expanded");
-    }
-
     if (window.gsap) {
+      // Anima cards saindo primeiro
+      window.gsap.to(cards, {
+        opacity: 0,
+        y: 30,
+        duration: 0.3,
+        stagger: 0.05,
+        ease: "power2.in",
+      });
+
       // Volta menu principal
       window.gsap.to(mainMenu, {
         x: "0%",
-        duration: 0.4,
-        ease: "power2.inOut",
+        duration: 0.6,
+        delay: 0.2,
+        ease: "power3.inOut",
       });
 
-      // Esconde submenu para direita
+      // Esconde submenu para direita com animação suave
       window.gsap.to(submenu, {
         x: "100%",
-        duration: 0.4,
-        ease: "power2.inOut",
+        duration: 0.6,
+        delay: 0.2,
+        ease: "power3.inOut",
         onComplete: () => {
+          // Cleanup tech lead: Remove do DOM e reseta estilos
           submenu.style.display = "none";
+          submenu.style.transform = "";
+
+          // Reseta cards para próxima abertura
+          window.gsap.set(cards, {
+            opacity: 1,
+            y: 0,
+            clearProps: "all",
+          });
+
+          // Recolhe o menu lateral após animação completa
+          if (sideMenu) {
+            sideMenu.classList.remove("submenu-expanded");
+          }
         },
       });
+    } else {
+      // Fallback sem GSAP
+      sideMenu.classList.remove("submenu-expanded");
+      submenu.style.display = "none";
     }
 
     this.currentSubmenu = null;
@@ -331,30 +401,47 @@ export class ModaNavigation extends HTMLElement {
       sideMenu.style.display = "block";
       backdrop.style.display = "block";
 
-      backdrop.classList.add("active");
-      sideMenu.classList.add("active");
-
-      // Anima hamburguer para X com GSAP
+      // Anima backdrop e side menu com GSAP
       if (window.gsap) {
+        // Backdrop fade in
+        window.gsap.fromTo(
+          backdrop,
+          { opacity: 0 },
+          {
+            opacity: 1,
+            duration: 0.6,
+            ease: "power2.out",
+            onStart: () => backdrop.classList.add("active"),
+          },
+        );
+
+        // Side menu slide in
+        window.gsap.fromTo(
+          sideMenu,
+          { x: -400, opacity: 0 },
+          {
+            x: 0,
+            opacity: 1,
+            duration: 0.7,
+            ease: "power3.out",
+            onStart: () => sideMenu.classList.add("active"),
+          },
+        );
+
+        // Anima hamburguer para X (2 linhas)
         window.gsap.to(lines[0], {
           attr: { y1: 12, y2: 12, x1: 3, x2: 21 },
           rotation: 45,
           transformOrigin: "center",
-          duration: 0.3,
+          duration: 0.4,
           ease: "power2.inOut",
         });
 
         window.gsap.to(lines[1], {
-          opacity: 0,
-          duration: 0.2,
-          ease: "power2.inOut",
-        });
-
-        window.gsap.to(lines[2], {
           attr: { y1: 12, y2: 12, x1: 3, x2: 21 },
           rotation: -45,
           transformOrigin: "center",
-          duration: 0.3,
+          duration: 0.4,
           ease: "power2.inOut",
         });
 
@@ -368,45 +455,64 @@ export class ModaNavigation extends HTMLElement {
           {
             x: 0,
             opacity: 1,
-            duration: 0.4,
-            stagger: 0.05,
+            duration: 0.5,
+            stagger: 0.06,
             ease: "power2.out",
-            delay: 0.2,
+            delay: 0.3,
           },
         );
       }
     } else {
-      backdrop.classList.remove("active");
-      sideMenu.classList.remove("active");
-      sideMenu.classList.remove("submenu-expanded");
+      // Anima saída com GSAP
+      if (window.gsap) {
+        window.gsap.to(backdrop, {
+          opacity: 0,
+          duration: 0.4,
+          ease: "power2.in",
+          onComplete: () => {
+            backdrop.classList.remove("active");
+            backdrop.style.display = "none";
+          },
+        });
 
-      // Cleanup após transição
-      setTimeout(() => {
-        if (!this.menuOpen) {
-          sideMenu.style.display = "none";
-          backdrop.style.display = "none";
-        }
-      }, 400);
+        window.gsap.to(sideMenu, {
+          x: -400,
+          opacity: 0,
+          duration: 0.5,
+          ease: "power3.in",
+          onComplete: () => {
+            sideMenu.classList.remove("active");
+            sideMenu.classList.remove("submenu-expanded");
+            sideMenu.style.display = "none";
+          },
+        });
+      } else {
+        backdrop.classList.remove("active");
+        sideMenu.classList.remove("active");
+        sideMenu.classList.remove("submenu-expanded");
 
-      // Volta hamburguer ao estado normal
+        // Fallback cleanup
+        setTimeout(() => {
+          if (!this.menuOpen) {
+            sideMenu.style.display = "none";
+            backdrop.style.display = "none";
+          }
+        }, 400);
+      }
+
+      // Volta hamburguer ao estado normal (2 linhas)
       if (window.gsap) {
         window.gsap.to(lines[0], {
-          attr: { y1: 6, y2: 6, x1: 3, x2: 21 },
+          attr: { y1: 8, y2: 8, x1: 3, x2: 21 },
           rotation: 0,
-          duration: 0.3,
+          duration: 0.4,
           ease: "power2.inOut",
         });
 
         window.gsap.to(lines[1], {
-          opacity: 1,
-          duration: 0.2,
-          ease: "power2.inOut",
-        });
-
-        window.gsap.to(lines[2], {
-          attr: { y1: 18, y2: 18, x1: 3, x2: 21 },
+          attr: { y1: 16, y2: 16, x1: 3, x2: 21 },
           rotation: 0,
-          duration: 0.3,
+          duration: 0.4,
           ease: "power2.inOut",
         });
       }
@@ -438,23 +544,17 @@ export class ModaNavigation extends HTMLElement {
       }
     }, 400); // Match transition duration
 
-    // Volta hamburguer ao estado normal
+    // Volta hamburguer ao estado normal (2 linhas)
     if (window.gsap) {
       window.gsap.to(lines[0], {
-        attr: { y1: 6, y2: 6, x1: 3, x2: 21 },
+        attr: { y1: 8, y2: 8, x1: 3, x2: 21 },
         rotation: 0,
         duration: 0.3,
         ease: "power2.inOut",
       });
 
       window.gsap.to(lines[1], {
-        opacity: 1,
-        duration: 0.2,
-        ease: "power2.inOut",
-      });
-
-      window.gsap.to(lines[2], {
-        attr: { y1: 18, y2: 18, x1: 3, x2: 21 },
+        attr: { y1: 16, y2: 16, x1: 3, x2: 21 },
         rotation: 0,
         duration: 0.3,
         ease: "power2.inOut",
@@ -469,9 +569,8 @@ export class ModaNavigation extends HTMLElement {
         <!-- Hamburger Menu (Esquerda) -->
         <button class="moda-nav-hamburger" aria-label="Menu">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="3" y1="12" x2="21" y2="12"></line>
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <line x1="3" y1="18" x2="21" y2="18"></line>
+            <line x1="3" y1="8" x2="21" y2="8"></line>
+            <line x1="3" y1="16" x2="21" y2="16"></line>
           </svg>
         </button>
 

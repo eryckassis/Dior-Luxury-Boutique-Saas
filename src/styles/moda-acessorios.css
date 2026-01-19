@@ -98,11 +98,12 @@ moda-acessorios-page main {
 .moda-logo-link {
   display: flex;
   align-items: center;
+  z-index: 1;
 }
 
 .moda-logo-link img {
-  height: 13rem;
-  width: 35rem;
+  height: auto;
+  width: 140px;
   filter: brightness(0) invert(1);
   transition: filter 0.4s ease;
 }
@@ -668,11 +669,7 @@ moda-acessorios-page main {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
-}
-
-.submenu-card:hover img {
-  transform: scale(1.05);
+  /* Hover removido - animação agora é via GSAP reveal */
 }
 
 .submenu-card-label {
