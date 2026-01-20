@@ -163,7 +163,7 @@ class Router {
         opacity: 0,
         duration: 0.3,
       },
-      "<"
+      "<",
     );
   }
 
@@ -211,7 +211,7 @@ class Router {
     if (Object.keys(this.currentParams).length > 0) {
       pageElement.setAttribute(
         "data-params",
-        JSON.stringify(this.currentParams)
+        JSON.stringify(this.currentParams),
       );
       // Também define como propriedade para acesso direto
       pageElement.routeParams = this.currentParams;
