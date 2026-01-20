@@ -7,6 +7,7 @@ import "../components/FooterSection.js";
 import "../components/LooksGallery.js";
 import { looksPrimaveraVerao2026 } from "../data/looks-data.js";
 import { getSmoothScroll } from "../components/SmoothScroll.js";
+import { getVideoUrl } from "../config/cdn.js";
 
 export class PrimaveraVerao2026Page extends HTMLElement {
   constructor() {
@@ -310,7 +311,7 @@ export class PrimaveraVerao2026Page extends HTMLElement {
             loop
             playsinline
           >
-            <source src="/videos/videomoda.mp4" type="video/webm" />
+            <source src="/videos/videomoda_small.mp4" type="video/mp4" />
           </video>
           
           <!-- Video Control Button -->
