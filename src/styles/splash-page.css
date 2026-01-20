@@ -209,7 +209,7 @@
 @media (max-width: 480px) {
   .splash-page .splash-logo {
     width: 80px;
-    margin-top: -400px;
+    margin-top: -360px;
   }
 
   .splash-page .splash-option-title {
@@ -273,6 +273,7 @@
 @media (max-width: 360px) {
   .splash-page .splash-logo {
     width: 120px;
+    margin
   }
 
   .splash-page .splash-option-title {
