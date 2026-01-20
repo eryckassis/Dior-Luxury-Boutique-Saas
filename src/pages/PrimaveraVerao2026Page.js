@@ -316,7 +316,7 @@ export class PrimaveraVerao2026Page extends HTMLElement {
             loop
             playsinline
           >
-            <source src="/videos/videomoda.mp4" type="video/webm" />
+            <source src="/videos/videomoda_small.mp4" type="video/webm" />
           </video>
           
           <!-- Video Control Button -->
