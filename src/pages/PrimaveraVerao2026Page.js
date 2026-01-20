@@ -7,7 +7,6 @@ import "../components/FooterSection.js";
 import "../components/LooksGallery.js";
 import { looksPrimaveraVerao2026 } from "../data/looks-data.js";
 import { getSmoothScroll } from "../components/SmoothScroll.js";
-import { getVideoUrl } from "../config/cdn.js";
 
 export class PrimaveraVerao2026Page extends HTMLElement {
   constructor() {
@@ -285,7 +284,13 @@ export class PrimaveraVerao2026Page extends HTMLElement {
         <!-- Moda Navigation -->
         <moda-navigation></moda-navigation>
 
-        <!-- Sound Wave Button - Fixed Position -->
+        <!-- Sound Wave Button - Fixed Positi
+        <section class="desfile-text-section">
+          <p class="desfile-text-content">
+           Dior Desfile de verão 2026 acompanhe as modelos da Maison
+          </p>
+          <a href="#" class="desfile-read-more-btn">Leia mais</a>
+        </section>on -->
         <!-- Sound Wave Button - Fixed Position -->
 <button class="sound-wave-btn" id="sound-wave-btn" aria-label="Toggle Sound">
   <span class="sound-btn-flair"></span>
@@ -311,7 +316,7 @@ export class PrimaveraVerao2026Page extends HTMLElement {
             loop
             playsinline
           >
-            <source src="/videos/videomoda_small.mp4" type="video/mp4" />
+            <source src="/videos/videomoda.mp4" type="video/webm" />
           </video>
           
           <!-- Video Control Button -->
