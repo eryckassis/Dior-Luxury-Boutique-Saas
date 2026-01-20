@@ -471,7 +471,7 @@ export class ModaEAcessoriosPage extends HTMLElement {
       loop
       playsinline
       >
-      <source src="/videos/book.webm" type="video/mp4" />
+      <source src="/videos/book.mp4" type="video/mp4" />
       </video>
       
       <!-- Video Control Button -->
@@ -530,7 +530,7 @@ export class ModaEAcessoriosPage extends HTMLElement {
       loop
       playsinline
       >
-      <source src="/videos/desfile.webm" type="video/mp4" />
+      <source src="/videos/desfile.mp4" type="video/mp4" />
       </video>
       
       <!-- Video Control Button -->
