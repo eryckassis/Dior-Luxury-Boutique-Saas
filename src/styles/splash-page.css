@@ -209,12 +209,12 @@
 @media (max-width: 480px) {
   .splash-page .splash-logo {
     width: 80px;
-    margin-top: -440px;
+    margin-top: -400px;
   }
 
   .splash-page .splash-option-title {
     font-size: 26px;
-    margin-bottom: 20px;
+    margin-bottom: 22px;
   }
 
   .splash-page .splash-option-button {
@@ -225,6 +225,7 @@
   .splash-page .splash-option-content {
     bottom: 50px;
     padding: 0 16px;
+    margin-bottom: 20px;
   }
 
   .splash-page .splash-option-overlay {
