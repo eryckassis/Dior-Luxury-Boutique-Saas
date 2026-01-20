@@ -1,0 +1,583 @@
+/* ============================================================================
+   PRIMAVERA-VERÃO 2026 PAGE - Desfile Styles
+   ============================================================================ */
+
+.desfile-page-content {
+  width: 100%;
+  min-height: 100vh;
+  background: #f9f8f6;
+}
+
+/* Navigation - Manter cores pretas */
+.desfile-page-content .moda-navigation .moda-nav-hamburger,
+.desfile-page-content .moda-navigation .moda-nav-search {
+  color: #1a1a1a;
+  stroke: #1a1a1a;
+}
+
+.desfile-page-content .moda-navigation .moda-nav-hamburger svg,
+.desfile-page-content .moda-navigation .moda-nav-search svg {
+  stroke: #1a1a1a;
+}
+
+.desfile-page-content .moda-navigation .moda-logo-link img {
+  filter: none;
+}
+
+/* ============================================================================
+   SOUND WAVE BUTTON - Fixed Position (Lusion.co style)
+   ============================================================================ */
+
+.sound-wave-btn {
+  position: fixed;
+  top: 50%;
+  right: 2rem;
+  transform: translateY(-50%);
+  z-index: 100;
+  width: 44px;
+  height: 44px;
+  border: none;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s cubic-bezier(0.645, 0.045, 0.355, 1);
+  color: #1a1a1a;
+  overflow: hidden;
+}
+
+.sound-wave-btn:hover {
+  color: #ffffff;
+}
+
+/* Flair (efeito que segue o mouse) - idêntico ao SplashPage */
+.sound-btn-flair {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  transform: scale(0);
+  transform-origin: 0 0;
+  will-change: transform;
+  z-index: 0;
+}
+
+.sound-btn-flair::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 170%;
+  aspect-ratio: 1/1;
+  background-color: #0217ec;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  display: block;
+}
+
+.sound-wave-svg {
+  position: relative;
+  z-index: 2;
+  width: 24px;
+  height: 24px;
+  overflow: visible;
+}
+
+.sound-wave-path {
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  fill: none;
+  transition: stroke 0.15s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+/* Quando está tocando */
+.sound-wave-btn.playing {
+  background: rgba(26, 26, 26, 0.1);
+}
+
+.sound-wave-btn.playing .sound-wave-path {
+  stroke: #fff;
+}
+
+/* ============================================================================
+   HERO VIDEO SECTION - Full Width Video
+   ============================================================================ */
+
+.desfile-hero-video-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.desfile-hero-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Video Control Button - Reutiliza o estilo do moda-acessorios */
+.desfile-hero-video-section .moda-video-control-btn {
+  position: absolute;
+  left: 2.5rem;
+  bottom: 2.5rem;
+  width: 30px;
+  height: 30px;
+  border-radius: 20%;
+  border: none;
+  background: rgba(255, 255, 255, 0);
+  backdrop-filter: blur(50px);
+  -webkit-backdrop-filter: blur(50px);
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  color: #ffffff;
+}
+
+.desfile-hero-video-section .moda-video-control-btn:active {
+  transform: scale(0.98);
+}
+
+.desfile-hero-video-section .moda-video-control-btn svg {
+  width: 20px;
+  height: 20px;
+  transition: opacity 0.3s ease;
+}
+
+.desfile-hero-video-section .moda-video-control-btn .play-icon {
+  fill: currentColor;
+  stroke: none;
+}
+
+.desfile-hero-video-section .moda-video-control-btn .pause-icon {
+  fill: #ffffff;
+  stroke: none;
+  display: none;
+}
+
+.desfile-hero-video-section .moda-video-control-btn.playing .play-icon {
+  display: none;
+}
+
+.desfile-hero-video-section .moda-video-control-btn.playing .pause-icon {
+  display: block;
+}
+
+/* ============================================================================
+   TEXT SECTION - Description with Read More
+   ============================================================================ */
+
+.desfile-text-section {
+  padding: 6rem 2rem;
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+  background: #f9f8f6;
+}
+
+.desfile-text-content {
+  font-family: "Hellix", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 400;
+  line-height: 1.9;
+  color: #666;
+  margin-bottom: 2.5rem;
+}
+
+/* Read More Button - Underline Animation */
+.desfile-read-more-btn {
+  display: inline-block;
+  font-family: "Hellix", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #1a1a1a;
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 4px;
+  --underline-width: 0%;
+  transition: color 0.3s ease;
+}
+
+.desfile-read-more-btn::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: var(--underline-width, 0%);
+  height: 1px;
+  background-color: #1a1a1a;
+  transition: width 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.desfile-read-more-btn:hover {
+  color: #333;
+}
+
+/* ============================================================================
+   RESPONSIVE
+   ============================================================================ */
+
+@media (max-width: 768px) {
+  .sound-wave-btn {
+    right: 1rem;
+    width: 38px;
+    height: 38px;
+  }
+
+  .sound-wave-svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .desfile-hero-video-section {
+    height: 70vh;
+  }
+
+  .desfile-hero-video-section .moda-video-control-btn {
+    left: 1.5rem;
+    bottom: 1.5rem;
+  }
+
+  .desfile-text-section {
+    padding: 4rem 1.5rem;
+  }
+
+  .desfile-text-content {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .desfile-hero-video-section {
+    height: 60vh;
+  }
+
+  .desfile-text-section {
+    padding: 3rem 1rem;
+  }
+
+  .desfile-text-content {
+    font-size: 0.95rem;
+    line-height: 1.8;
+  }
+
+  .desfile-read-more-btn {
+    font-size: 0.9rem;
+  }
+}
+
+/* ============================================================================
+   LOOKS GALLERY COMPONENT
+   ============================================================================ */
+
+.looks-gallery-section {
+  padding: 4rem 2rem;
+  background: #f9f8f6;
+}
+
+.looks-gallery-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.looks-gallery-title {
+  font-family: "Hellix", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #000;
+  letter-spacing: 0.05em;
+  text-align: center;
+}
+
+.looks-view-toggle {
+  position: absolute;
+  right: 0;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.view-toggle-btn {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #999;
+}
+
+.view-toggle-btn:hover {
+  border-color: #1a1a1a;
+  color: #1a1a1a;
+}
+
+.view-toggle-btn.active {
+  border-color: #1a1a1a;
+  color: #1a1a1a;
+}
+
+/* ============================================================================
+   GRID MODE - 4 Columns Layout
+   ============================================================================ */
+
+.looks-grid-container {
+  width: 100%;
+}
+
+.looks-grid {
+  display: grid;
+  gap: 1rem;
+  transition: all 0.4s ease;
+}
+
+.looks-grid.grid-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* Look Card - Grid */
+.look-card {
+  display: block;
+  text-decoration: none;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.look-card-image-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: #eee;
+  border-radius: 5px;
+}
+
+.look-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+/* ============================================================================
+   DRAG MODE - Horizontal Scroll with GSAP
+   ============================================================================ */
+
+.looks-drag-section {
+  margin: 0;
+  width: 100%;
+  overflow: visible;
+  position: relative;
+}
+
+.looks-drag-container {
+  width: 100%;
+  overflow: visible;
+  position: relative;
+  margin-bottom: 2rem;
+  touch-action: pan-y pinch-zoom;
+  -webkit-overflow-scrolling: touch;
+}
+
+.looks-drag-track {
+  display: inline-flex;
+  gap: 1.5rem;
+  padding: 0 4rem;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: pan-y;
+  -webkit-touch-callout: none;
+  min-width: calc(100vw + 24000px);
+}
+
+.looks-drag-track:active {
+  cursor: grabbing;
+}
+
+/* Look Card - Drag */
+.looks-drag-card {
+  flex-shrink: 0;
+  width: 500px;
+  position: relative;
+  user-select: none;
+  cursor: pointer;
+}
+
+.looks-drag-card-image-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 5;
+  overflow: hidden;
+  background-color: #eee;
+  border-radius: 5px;
+}
+
+.looks-drag-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  pointer-events: none;
+  border-radius: 5px;
+  transition: transform 0.6s ease;
+}
+
+.looks-drag-card:hover .looks-drag-card-image {
+  transform: scale(1.05);
+}
+
+.looks-drag-card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 60%,
+    rgba(0, 0, 0, 0.4) 100%
+  );
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.looks-drag-card:hover .looks-drag-card-overlay {
+  opacity: 1;
+}
+
+.looks-drag-card-number {
+  display: block;
+  margin-top: 1rem;
+  font-family: "Hellix", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #666;
+  text-align: center;
+}
+
+/* Progress Bar - Drag Mode */
+.looks-progress-bar {
+  width: 100%;
+  max-width: 600px;
+  height: 2px;
+  background-color: rgba(0, 0, 0, 0.15);
+  margin: 0 auto;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.looks-progress-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  background-color: #1a1a1a;
+  transition: width 0.3s ease;
+}
+
+.looks-progress-bar:hover {
+  height: 3px;
+}
+
+/* ============================================================================
+   RESPONSIVE - Grid Mode
+   ============================================================================ */
+
+@media (max-width: 1200px) {
+  .looks-grid.grid-4 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .looks-drag-card {
+    width: 280px;
+  }
+}
+
+@media (max-width: 992px) {
+  .looks-grid.grid-4 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .looks-gallery-header {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .looks-view-toggle {
+    position: static;
+  }
+
+  .looks-drag-card {
+    width: 260px;
+  }
+
+  .looks-drag-track {
+    padding: 0 2rem;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .looks-grid.grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .looks-gallery-section {
+    padding: 3rem 1rem;
+  }
+
+  .looks-drag-card {
+    width: 240px;
+  }
+
+  .looks-drag-track {
+    padding: 0 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .looks-grid.grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+
+  .looks-drag-card {
+    width: 200px;
+  }
+
+  .looks-drag-track {
+    padding: 0 1rem;
+    gap: 0.75rem;
+  }
+
+  .looks-drag-card-number {
+    font-size: 0.8rem;
+  }
+}

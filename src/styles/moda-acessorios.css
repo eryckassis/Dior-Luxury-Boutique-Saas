@@ -621,18 +621,15 @@ moda-acessorios-page main {
 
 .submenu-link-active {
   font-weight: 400;
-  --underline-width: 100%;
+  /* Linha removida - usar apenas hover animation */
 }
 
 .submenu-sublink-active {
   font-weight: 500;
-  --underline-width: 100%;
+  /* Linha removida - usar apenas hover animation */
 }
 
-.submenu-link-active::after,
-.submenu-sublink-active::after {
-  width: 100%;
-}
+/* Remover after para active - linha só aparece no hover */
 
 /* Indicador de ponto para item ativo */
 .submenu-link-active::before {
@@ -1262,6 +1259,15 @@ moda-acessorios-page main {
   text-transform: uppercase;
   margin: 0 0 1rem 0;
   opacity: 0.95;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  display: inline-block;
+  transition: opacity 0.3s ease;
+}
+
+.moda-hero-label:hover {
+  opacity: 0.7;
 }
 
 .moda-hero-title {

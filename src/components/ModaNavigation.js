@@ -681,7 +681,7 @@ export class ModaNavigation extends HTMLElement {
             <!-- Coluna Centro: Sub-links -->
             <div class="submenu-center-column">
               <nav class="submenu-sublinks">
-                <a href="#primavera-verao-2026" class="submenu-sublink submenu-sublink-active">Primavera-Verão 2026</a>
+                <a href="/primavera-verao-2026" class="submenu-sublink submenu-sublink-active" data-route="/primavera-verao-2026">Primavera-Verão 2026</a>
                 <a href="#verao-2026" class="submenu-sublink">Verão 2026</a>
                 <a href="#croisiere-2026" class="submenu-sublink">Croisière 2026</a>
                 <a href="#outono-2025" class="submenu-sublink">Outono 2025</a>
@@ -691,7 +691,7 @@ export class ModaNavigation extends HTMLElement {
             <!-- Coluna Direita: Cards Grid - Ocupa altura total -->
             <div class="submenu-right-column">
               <div class="submenu-cards-grid">
-                <a href="#primavera-verao-2026" class="submenu-card">
+                <a href="/primavera-verao-2026" class="submenu-card" data-route="/primavera-verao-2026">
                   <img src="/images/2026.avif" alt="Primavera-Verão 2026" />
                   <span class="submenu-card-label">Primavera-Verão 2026</span>
                 </a>
