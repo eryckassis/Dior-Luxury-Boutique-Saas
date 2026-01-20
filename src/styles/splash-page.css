@@ -34,9 +34,16 @@
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 10003;
-  width: 500px;
-  height: auto;
   pointer-events: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.splash-page .splash-logo svg {
+  width: 180px;
+  height: auto;
+  display: block;
 }
 
 .splash-page .splash-logo img {
@@ -125,13 +132,12 @@
 }
 
 .splash-page .splash-option-title {
-  font-family: "MinhaFonte", sans-serif;
+  font-family: "Hellix", sans-serif;
   font-size: 40px;
-  font-weight: 600;
+  font-weight: 300;
   color: #ededed;
   margin-bottom: 24px;
   letter-spacing: 0.02em;
-  text-transform: uppercase;
 }
 
 /* ============================================================================
@@ -230,7 +236,8 @@
 
 @media (max-width: 480px) {
   .splash-page .splash-logo {
-    width: 160px;
+    width: 80px;
+    margin-top: -440px;
   }
 
   .splash-page .splash-option-title {

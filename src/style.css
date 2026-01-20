@@ -111,10 +111,11 @@ strong {
   overflow: visible; /* Permite a imagem se mover */
 }
 
-.preloader .imagem-logo img {
-  max-width: none; /* ← ALTERE ESTE VALOR para aumentar/diminuir */
+.preloader .imagem-logo img,
+.preloader .imagem-logo svg {
+  max-width: none;
   width: auto;
-  height: 500px;
+  height: 50px;
   object-fit: contain;
   display: block;
   opacity: 0; /* GSAP controla */

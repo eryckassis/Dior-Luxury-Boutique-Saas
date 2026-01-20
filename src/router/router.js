@@ -134,7 +134,7 @@ class Router {
       visibility: "visible",
       ease: "Power3.easeOut",
     })
-      .to(".preloader .imagem-logo img", {
+      .to(".preloader .imagem-logo svg", {
         duration: 0,
         opacity: 1,
         ease: "Power3.easeOut",
@@ -158,7 +158,7 @@ class Router {
       height: "0vh",
       ease: "Power3.easeOut",
     }).to(
-      ".preloader .imagem-logo img",
+      ".preloader .imagem-logo svg",
       {
         opacity: 0,
         duration: 0.3,
