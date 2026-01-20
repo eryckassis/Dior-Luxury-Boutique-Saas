@@ -143,7 +143,6 @@ export class SplashPage extends HTMLElement {
               <h2 class="splash-option-title">Moda & Acessórios</h2>
               <button class="splash-option-button" data-block="button" data-category="fashion">
                 <span class="button__label">Descobrir</span>
-                <span class="button__flair"></span>
               </button>
             </div>
           </div>
@@ -166,7 +165,6 @@ export class SplashPage extends HTMLElement {
               <h2 class="splash-option-title">Perfume & Cosméticos</h2>
               <button class="splash-option-button" data-block="button" data-category="beauty">
                 <span class="button__label">Descobrir</span>
-                <span class="button__flair"></span>
               </button>
             </div>
           </div>
@@ -192,76 +190,28 @@ export class SplashPage extends HTMLElement {
   }
 
   // ============================================================================
-  // BUTTON FLAIR EFFECT - Efeito de hover seguindo o mouse
+  // BUTTON LINE EFFECT - Animação de underline com GSAP
   // ============================================================================
 
   initButtonEffects() {
     if (!window.gsap) return;
 
     this.buttons.forEach((button) => {
-      const flair = button.querySelector(".button__flair");
-      if (!flair) return;
-
-      const xSet = gsap.quickSetter(flair, "xPercent");
-      const ySet = gsap.quickSetter(flair, "yPercent");
-
-      // Calcula posição relativa do mouse no botão
-      const getXY = (e) => {
-        const { left, top, width, height } = button.getBoundingClientRect();
-
-        const xTransformer = gsap.utils.pipe(
-          gsap.utils.mapRange(0, width, 0, 100),
-          gsap.utils.clamp(0, 100),
-        );
-
-        const yTransformer = gsap.utils.pipe(
-          gsap.utils.mapRange(0, height, 0, 100),
-          gsap.utils.clamp(0, 100),
-        );
-
-        return {
-          x: xTransformer(e.clientX - left),
-          y: yTransformer(e.clientY - top),
-        };
-      };
-
-      // Mouse Enter - Flair aparece
-      button.addEventListener("mouseenter", (e) => {
-        const { x, y } = getXY(e);
-        xSet(x);
-        ySet(y);
-
-        gsap.to(flair, {
-          scale: 1,
-          duration: 0.4,
-          ease: "power2.out",
+      // Mouseenter - linha cresce de 0 para 100%
+      button.addEventListener("mouseenter", () => {
+        gsap.to(button, {
+          "--underline-width": "100%",
+          duration: 0.35,
+          ease: "power2.inOut",
         });
       });
 
-      // Mouse Leave - Flair desaparece
-      button.addEventListener("mouseleave", (e) => {
-        const { x, y } = getXY(e);
-
-        gsap.killTweensOf(flair);
-
-        gsap.to(flair, {
-          xPercent: x > 90 ? x + 20 : x < 10 ? x - 20 : x,
-          yPercent: y > 90 ? y + 20 : y < 10 ? y - 20 : y,
-          scale: 0,
-          duration: 0.3,
-          ease: "power2.out",
-        });
-      });
-
-      // Mouse Move - Flair segue o mouse
-      button.addEventListener("mousemove", (e) => {
-        const { x, y } = getXY(e);
-
-        gsap.to(flair, {
-          xPercent: x,
-          yPercent: y,
-          duration: 0.4,
-          ease: "power2",
+      // Mouseleave - linha volta para 0%
+      button.addEventListener("mouseleave", () => {
+        gsap.to(button, {
+          "--underline-width": "0%",
+          duration: 0.35,
+          ease: "power2.inOut",
         });
       });
     });

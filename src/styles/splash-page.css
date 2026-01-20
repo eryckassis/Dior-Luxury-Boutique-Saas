@@ -141,31 +141,36 @@
 }
 
 /* ============================================================================
-   BOTÃO COM EFEITO FLAIR
+   BOTÃO COM EFEITO DE LINHA (UNDERLINE)
    ============================================================================ */
 
 .splash-page .splash-option-button {
   display: inline-block;
-  font-family: var(--font-primary);
+  font-family: "Hellix", sans-serif;
   font-size: 14px;
   font-weight: 500;
   color: #ffffff;
   text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  padding: 14px 40px;
-  border: 1px solid rgba(255, 255, 255, 0.8);
+  padding: 0;
+  padding-bottom: 6px;
+  border: none;
   background: transparent;
-  backdrop-filter: blur(4px);
   position: relative;
-  overflow: hidden;
   cursor: pointer;
-  transition: color 0.15s cubic-bezier(0.645, 0.045, 0.355, 1);
+  --underline-width: 0%;
 }
 
-.splash-page .splash-option-button:hover {
-  color: #000000;
-  border-color: #fff;
+.splash-page .splash-option-button::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: var(--underline-width, 0%);
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 /* Label do botão */
@@ -173,39 +178,6 @@
   position: relative;
   text-align: center;
   z-index: 2;
-  transition: color 50ms cubic-bezier(0.645, 0.045, 0.355, 1);
-}
-
-.splash-page .splash-option-button:hover .button__label {
-  transition: color 0.15s cubic-bezier(0.645, 0.045, 0.355, 1);
-}
-
-/* Flair (efeito que segue o mouse) */
-.splash-page .button__flair {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  pointer-events: none;
-  transform: scale(0);
-  transform-origin: 0 0;
-  will-change: transform;
-  z-index: 1;
-}
-
-.splash-page .button__flair::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 170%;
-  aspect-ratio: 1/1;
-  background-color: #ededed;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-  display: block;
 }
 
 /* ============================================================================
@@ -246,8 +218,8 @@
   }
 
   .splash-page .splash-option-button {
-    padding: 12px 32px;
     font-size: 12px;
+    --underline-width: 100%;
   }
 
   .splash-page .splash-option-content {
@@ -282,9 +254,9 @@
   }
 
   .splash-page .splash-option-button {
-    padding: 10px 28px;
     font-size: 11px;
     letter-spacing: 0.08em;
+    --underline-width: 100%;
   }
 
   .splash-page .splash-option-content {
@@ -308,8 +280,8 @@
   }
 
   .splash-page .splash-option-button {
-    padding: 10px 24px;
     font-size: 10px;
+    --underline-width: 100%;
   }
 
   .splash-page .splash-option-content {
@@ -336,7 +308,6 @@
   }
 
   .splash-page .splash-option-button {
-    padding: 8px 24px;
     font-size: 11px;
   }
 
