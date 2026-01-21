@@ -141,10 +141,10 @@ moda-acessorios-page main {
 
 .moda-side-menu {
   position: fixed;
-  top: 16px;
+  top: 32px;
   left: -480px;
   width: 460px;
-  height: calc(100vh - 32px);
+  height: calc(100vh - 38px);
   background: #f5f5f5;
   z-index: 1200;
   transition: left 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -360,45 +360,54 @@ moda-acessorios-page main {
   transform: translateX(20px);
 }
 
+/* Toggle Button Container - estilo pill/switch */
 .moda-menu-tabs {
   display: flex;
-  gap: 0.75rem;
-  padding-top: 0;
-  border-top: none;
+  gap: 0;
+  padding: 3px;
+  background: #4a4a4a;
+  border-radius: 8px;
+  position: relative;
+  margin-left: -1rem;
+  margin-right: -1rem;
+  width: calc(105% + 0.9rem);
 }
 
+/* Botão individual do toggle */
 .moda-menu-tab {
   flex: 1;
   text-align: center;
   font-family: "Hellix", sans-serif;
   font-size: 0.9rem;
   font-weight: 500;
-  color: #333;
-  text-decoration: none;
-  padding: 0.85rem 1rem;
-  background: #fff;
-  border: 2px solid rgba(0, 0, 0, 0.15);
-  border-radius: 10px;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-
-
-.moda-menu-tab:hover {
-
-  
-}
-
-.moda-menu-tab-active {
   color: #fff;
-  background-color: #000;
-  border-color: #000;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  text-decoration: none;
+  padding: 1rem 0.8rem;
+  background: transparent;
+  border: none;
+  border-radius: 5px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  white-space: nowrap;
+}
+
+/* Hover no botão inativo */
+.moda-menu-tab:not(.moda-menu-tab-active):hover {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Botão ativo do toggle */
+.moda-menu-tab-active {
+  color: #333;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .moda-menu-tab-active:hover {
- 
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+  background-color: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 /* ============================================================================
@@ -501,7 +510,7 @@ moda-acessorios-page main {
 
 .moda-side-menu .submenu-header {
   padding: 2rem 2.5rem 1.5rem;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: none;
   flex-shrink: 0;
 }
 
@@ -714,6 +723,34 @@ moda-acessorios-page main {
     height: 80px;
   }
 
+  /* Side Menu - ESCONDIDO por padrão em tablet/mobile */
+  .moda-side-menu {
+    width: calc(100vw - 32px) !important;
+    left: -100vw !important;
+    visibility: hidden;
+  }
+
+  .moda-side-menu.active {
+    left: 16px !important;
+    visibility: visible;
+  }
+
+  /* Estados expandidos também escondidos */
+  .moda-side-menu.fragrance-expanded,
+  .moda-side-menu.spa-expanded,
+  .moda-side-menu.alta-perfumaria-expanded,
+  .moda-side-menu.submenu-expanded {
+    width: calc(100vw - 32px) !important;
+    left: -100vw !important;
+  }
+
+  .moda-side-menu.active.fragrance-expanded,
+  .moda-side-menu.active.spa-expanded,
+  .moda-side-menu.active.alta-perfumaria-expanded,
+  .moda-side-menu.active.submenu-expanded {
+    left: 16px !important;
+  }
+
   /* Mobile: esconde logo raster, mostra vetorial */
   .moda-logo-link .logo-raster {
     display: none;
@@ -767,6 +804,16 @@ moda-acessorios-page main {
   .moda-side-menu .submenu-header {
     padding: 1.5rem;
   }
+
+  /* Permitir scroll nos submenus expandidos */
+  .moda-side-menu .submenu-panel {
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+  }
+
+  .moda-side-menu .submenu-panel.submenu-expanded {
+    overflow-y: auto !important;
+  }
 }
 
 /* Responsive - iPhone 16 Pro Max e similares (480px) */
@@ -776,17 +823,41 @@ moda-acessorios-page main {
     height: 70px;
   }
 
-  /* Side Menu - Full width no mobile */
+  /* Side Menu - Full width no mobile - ESCONDIDO por padrão */
   .moda-side-menu {
-    width: calc(100vw - 16px);
-    left: calc(-100vw + 8px);
+    width: calc(100vw - 16px) !important;
+    left: -100vw !important;
     top: 8px;
     height: calc(100vh - 16px);
     border-radius: 12px;
+    visibility: hidden;
   }
 
   .moda-side-menu.active {
-    left: 8px;
+    left: 8px !important;
+    visibility: visible;
+  }
+
+  /* Permitir scroll nos submenus expandidos */
+  .moda-side-menu .submenu-panel {
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+  }
+
+  /* Estados expandidos também escondidos por padrão */
+  .moda-side-menu.fragrance-expanded,
+  .moda-side-menu.spa-expanded,
+  .moda-side-menu.alta-perfumaria-expanded,
+  .moda-side-menu.submenu-expanded {
+    width: calc(100vw - 16px) !important;
+    left: -100vw !important;
+  }
+
+  .moda-side-menu.active.fragrance-expanded,
+  .moda-side-menu.active.spa-expanded,
+  .moda-side-menu.active.alta-perfumaria-expanded,
+  .moda-side-menu.active.submenu-expanded {
+    left: 8px !important;
   }
 
   .moda-side-menu-header {

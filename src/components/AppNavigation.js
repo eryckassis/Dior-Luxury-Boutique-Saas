@@ -10,6 +10,7 @@ export class AppNavigation extends HTMLElement {
     this.menuOpen = false;
     this.currentSubmenu = null;
     this.spaExpanded = false;
+    this.fragranceExpanded = false;
 
     // Listener para atualizar o badge quando o carrinho mudar
     this.cartListener = () => {
@@ -145,6 +146,96 @@ export class AppNavigation extends HTMLElement {
             ease: "power2.inOut",
           });
         });
+      });
+
+      // Animação hover para cards de fragrância
+      const fragranceCards = this.querySelectorAll(".fragrance-card");
+
+      fragranceCards.forEach((card) => {
+        const subtitle = card.querySelector(".fragrance-card-subtitle");
+        const img = card.querySelector("img");
+
+        if (subtitle) {
+          card.addEventListener("mouseenter", () => {
+            // Anima underline do subtítulo
+            window.gsap.to(subtitle, {
+              "--underline-width": "100%",
+              duration: 0.4,
+              ease: "power2.out",
+            });
+            // Scale na imagem
+            if (img) {
+              window.gsap.to(img, {
+                scale: 1.05,
+                duration: 0.6,
+                ease: "power2.out",
+              });
+            }
+          });
+
+          card.addEventListener("mouseleave", () => {
+            // Remove underline
+            window.gsap.to(subtitle, {
+              "--underline-width": "0%",
+              duration: 0.4,
+              ease: "power2.out",
+            });
+            // Reset scale
+            if (img) {
+              window.gsap.to(img, {
+                scale: 1,
+                duration: 0.6,
+                ease: "power2.out",
+              });
+            }
+          });
+        }
+      });
+
+      // Animação hover para cards de Alta Perfumaria
+      const altaPerfumariaCards = this.querySelectorAll(
+        ".alta-perfumaria-card",
+      );
+
+      altaPerfumariaCards.forEach((card) => {
+        const cta = card.querySelector(".alta-perfumaria-card-cta");
+        const img = card.querySelector("img");
+
+        if (cta) {
+          card.addEventListener("mouseenter", () => {
+            // Anima underline do CTA
+            window.gsap.to(cta, {
+              "--underline-width": "100%",
+              duration: 0.4,
+              ease: "power2.out",
+            });
+            // Scale na imagem
+            if (img) {
+              window.gsap.to(img, {
+                scale: 1.05,
+                duration: 0.6,
+                ease: "power2.out",
+              });
+            }
+          });
+
+          card.addEventListener("mouseleave", () => {
+            // Remove underline
+            window.gsap.to(cta, {
+              "--underline-width": "0%",
+              duration: 0.4,
+              ease: "power2.out",
+            });
+            // Reset scale
+            if (img) {
+              window.gsap.to(img, {
+                scale: 1,
+                duration: 0.6,
+                ease: "power2.out",
+              });
+            }
+          });
+        }
       });
     });
   }
@@ -301,6 +392,27 @@ export class AppNavigation extends HTMLElement {
       });
     }
 
+    // Alta Perfumaria expansion trigger
+    const altaPerfumariaTrigger = this.querySelector(
+      "[data-alta-perfumaria-trigger]",
+    );
+    if (altaPerfumariaTrigger) {
+      altaPerfumariaTrigger.addEventListener("click", (e) => {
+        e.preventDefault();
+        this.openAltaPerfumariaPanel();
+      });
+    }
+
+    // Botão de voltar do Alta Perfumaria
+    const altaPerfumariaBackBtn = this.querySelector(
+      "[data-alta-perfumaria-back]",
+    );
+    if (altaPerfumariaBackBtn) {
+      altaPerfumariaBackBtn.addEventListener("click", () =>
+        this.closeAltaPerfumariaPanel(),
+      );
+    }
+
     // Acessibilidade - Alto Contraste
     const accessibilityToggle = this.querySelector(".moda-menu-checkbox");
     if (accessibilityToggle) {
@@ -322,6 +434,57 @@ export class AppNavigation extends HTMLElement {
         }
       });
     }
+
+    // Toggle Button - Moda & Acessórios / Perfume & Cosméticos
+    this.setupToggleTabs();
+  }
+
+  // ============================================================================
+  // TOGGLE TABS - Alternância entre Moda & Acessórios e Perfume & Cosméticos
+  // ============================================================================
+  setupToggleTabs() {
+    const tabs = this.querySelectorAll(".moda-menu-tab");
+
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        // Remove active de todos
+        tabs.forEach((t) => t.classList.remove("moda-menu-tab-active"));
+
+        // Adiciona active no clicado
+        tab.classList.add("moda-menu-tab-active");
+
+        // Navega para a rota após animação
+        const route = tab.getAttribute("data-route");
+        this.closeMenu();
+        setTimeout(() => {
+          router.navigate(route);
+        }, 400);
+      });
+    });
+
+    // Atualiza o tab ativo baseado na rota atual
+    this.updateActiveTab();
+  }
+
+  updateActiveTab() {
+    const currentPath = window.location.pathname;
+    const tabs = this.querySelectorAll(".moda-menu-tab");
+
+    tabs.forEach((tab) => {
+      const route = tab.getAttribute("data-route");
+      tab.classList.remove("moda-menu-tab-active");
+
+      // Verifica se a rota atual corresponde ao tab
+      if (
+        route === currentPath ||
+        (route === "/moda-acessorios" && currentPath.startsWith("/moda")) ||
+        (route === "/" && !currentPath.startsWith("/moda"))
+      ) {
+        tab.classList.add("moda-menu-tab-active");
+      }
+    });
   }
 
   // ============================================================================
@@ -416,15 +579,207 @@ export class AppNavigation extends HTMLElement {
     }
   }
 
+  // ============================================================================
+  // ALTA PERFUMARIA PANEL - Painel de terceiro nível expandido
+  // ============================================================================
+  openAltaPerfumariaPanel() {
+    const sideMenu = this.querySelector(".moda-side-menu");
+    const altaPerfumariaPanel = this.querySelector(
+      "[data-alta-perfumaria-panel]",
+    );
+    const fragranciaPanel = this.querySelector(
+      '[data-submenu-id="fragrancia-feminina"]',
+    );
+    const fragranciaBackBtn = this.querySelector(
+      '.submenu-panel[data-submenu-id="fragrancia-feminina"] > .submenu-header .submenu-back-btn',
+    );
+    const altaPerfumariaBackBtn = this.querySelector(
+      "[data-alta-perfumaria-back]",
+    );
+
+    if (!altaPerfumariaPanel) return;
+
+    this.altaPerfumariaExpanded = true;
+
+    // Mostra botão de voltar do Alta Perfumaria, esconde o de Fragrância
+    if (fragranciaBackBtn) fragranciaBackBtn.style.display = "none";
+    if (altaPerfumariaBackBtn) altaPerfumariaBackBtn.style.display = "flex";
+
+    // Detecta se é mobile
+    const isMobile = window.innerWidth <= 768;
+
+    // Mostra o painel
+    altaPerfumariaPanel.style.visibility = "visible";
+    altaPerfumariaPanel.style.display = "flex";
+
+    if (isMobile) {
+      // Em mobile, usar transição CSS simples
+      sideMenu.classList.add("alta-perfumaria-expanded");
+
+      // Força reflow para garantir que a transição funcione
+      altaPerfumariaPanel.offsetHeight;
+
+      altaPerfumariaPanel.classList.add("active");
+      altaPerfumariaPanel.style.transform = "translateX(0)";
+      altaPerfumariaPanel.style.opacity = "1";
+    } else if (window.gsap) {
+      // Em desktop, usar GSAP
+      window.gsap.to(sideMenu, {
+        width: "900px",
+        duration: 0.5,
+        ease: "power2.out",
+        onStart: () => {
+          sideMenu.classList.add("alta-perfumaria-expanded");
+        },
+      });
+
+      window.gsap.fromTo(
+        altaPerfumariaPanel,
+        { x: "100%", opacity: 0 },
+        {
+          x: "0%",
+          opacity: 1,
+          duration: 0.4,
+          ease: "power2.out",
+          onComplete: () => {
+            altaPerfumariaPanel.classList.add("active");
+
+            // Anima os cards com reveal
+            const cardImages = altaPerfumariaPanel.querySelectorAll(
+              ".alta-perfumaria-card img",
+            );
+
+            if (cardImages.length) {
+              window.gsap.fromTo(
+                cardImages,
+                {
+                  scale: 1.2,
+                  opacity: 0,
+                  clipPath: "inset(100% 0% 0% 0%)",
+                },
+                {
+                  scale: 1,
+                  opacity: 1,
+                  clipPath: "inset(0% 0% 0% 0%)",
+                  duration: 1,
+                  stagger: 0.15,
+                  ease: "power3.out",
+                },
+              );
+            }
+          },
+        },
+      );
+    }
+  }
+
+  closeAltaPerfumariaPanel() {
+    const sideMenu = this.querySelector(".moda-side-menu");
+    const altaPerfumariaPanel = this.querySelector(
+      "[data-alta-perfumaria-panel]",
+    );
+    const fragranciaBackBtn = this.querySelector(
+      '.submenu-panel[data-submenu-id="fragrancia-feminina"] > .submenu-header .submenu-back-btn',
+    );
+    const altaPerfumariaBackBtn = this.querySelector(
+      "[data-alta-perfumaria-back]",
+    );
+
+    if (!altaPerfumariaPanel) return;
+
+    this.altaPerfumariaExpanded = false;
+
+    // Restaura os botões de voltar
+    if (fragranciaBackBtn) fragranciaBackBtn.style.display = "flex";
+    if (altaPerfumariaBackBtn) altaPerfumariaBackBtn.style.display = "none";
+
+    // Detecta se é mobile
+    const isMobile = window.innerWidth <= 768;
+
+    if (isMobile) {
+      // Em mobile, usar transição CSS simples
+      altaPerfumariaPanel.classList.remove("active");
+      altaPerfumariaPanel.style.transform = "translateX(100%)";
+      altaPerfumariaPanel.style.opacity = "0";
+
+      setTimeout(() => {
+        altaPerfumariaPanel.style.visibility = "hidden";
+        altaPerfumariaPanel.style.display = "none";
+        sideMenu.classList.remove("alta-perfumaria-expanded");
+      }, 300);
+    } else if (window.gsap) {
+      // Em desktop, usar GSAP
+      window.gsap.to(sideMenu, {
+        width: "650px",
+        duration: 0.4,
+        ease: "power2.inOut",
+        onComplete: () => {
+          sideMenu.classList.remove("alta-perfumaria-expanded");
+        },
+      });
+
+      window.gsap.to(altaPerfumariaPanel, {
+        x: "100%",
+        opacity: 0,
+        duration: 0.3,
+        ease: "power2.in",
+        onComplete: () => {
+          altaPerfumariaPanel.style.visibility = "hidden";
+          altaPerfumariaPanel.style.display = "none";
+          altaPerfumariaPanel.classList.remove("active");
+        },
+      });
+    }
+  }
+
   openSubmenu(submenuId) {
     const mainMenu = this.querySelector(".main-menu-content");
     const submenu = this.querySelector(`[data-submenu-id="${submenuId}"]`);
+    const sideMenu = this.querySelector(".moda-side-menu");
 
     if (!mainMenu || !submenu) return;
 
     this.currentSubmenu = submenuId;
 
+    // Verifica se é fragrância feminina para expandir o menu
+    const isFragranceFeminina = submenuId === "fragrancia-feminina";
+
     if (window.gsap) {
+      // Se for fragrância feminina, expande o menu com animação
+      if (isFragranceFeminina && sideMenu) {
+        this.fragranceExpanded = true;
+
+        // Adiciona classe e anima a largura
+        window.gsap.to(sideMenu, {
+          width: "650px",
+          duration: 0.5,
+          ease: "power2.out",
+          onStart: () => {
+            sideMenu.classList.add("fragrance-expanded");
+            submenu.classList.add("submenu-expanded");
+          },
+        });
+
+        // Anima os cards com stagger após o menu expandir
+        setTimeout(() => {
+          const cards = submenu.querySelectorAll(".fragrance-card");
+          if (cards.length) {
+            window.gsap.fromTo(
+              cards,
+              { opacity: 0, y: 30, scale: 0.95 },
+              {
+                opacity: 1,
+                y: 0,
+                scale: 1,
+                duration: 0.4,
+                stagger: 0.08,
+                ease: "power2.out",
+              },
+            );
+          }
+        }, 300);
+      }
+
       // Desliza menu principal para esquerda
       window.gsap.to(mainMenu, {
         x: "-100%",
@@ -443,6 +798,33 @@ export class AppNavigation extends HTMLElement {
 
   closeSubmenu() {
     if (!this.currentSubmenu) return;
+
+    const sideMenu = this.querySelector(".moda-side-menu");
+
+    // Fecha painel Alta Perfumaria se estiver aberto
+    if (this.altaPerfumariaExpanded) {
+      this.closeAltaPerfumariaPanel();
+    }
+
+    // Fecha expansão de fragrância se estiver aberta
+    if (this.fragranceExpanded && sideMenu) {
+      this.fragranceExpanded = false;
+
+      if (window.gsap) {
+        window.gsap.to(sideMenu, {
+          width: "460px",
+          duration: 0.4,
+          ease: "power2.inOut",
+          onComplete: () => {
+            sideMenu.classList.remove("fragrance-expanded");
+            const submenu = this.querySelector(
+              `[data-submenu-id="${this.currentSubmenu}"]`,
+            );
+            if (submenu) submenu.classList.remove("submenu-expanded");
+          },
+        });
+      }
+    }
 
     // Fecha o painel Spa se estiver aberto
     if (this.spaExpanded) {
@@ -712,61 +1094,131 @@ export class AppNavigation extends HTMLElement {
             </div>
           </div>
 
-          <!-- Submenu: Fragrância Feminina -->
+          <!-- Submenu: Fragrância Feminina (Expandido) -->
           <div class="submenu-panel" data-submenu-id="fragrancia-feminina" style="display: none;">
             <div class="submenu-header">
               <button class="submenu-back-btn">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M15 18l-6-6 6-6"/>
                 </svg>
-                <span>Fragrância Feminina</span>
+                <span>Fragrâncias</span>
+              </button>
+              <!-- Botão de voltar do Alta Perfumaria (inicialmente escondido) -->
+              <button class="submenu-back-btn" data-alta-perfumaria-back style="display: none;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M15 18l-6-6 6-6"/>
+                </svg>
+                <span>Alta Perfumaria</span>
               </button>
             </div>
 
-            <div class="submenu-content">
-              <div class="submenu-icons">
-                <p class="submenu-icons-title">ICONICS</p>
-                <div class="submenu-icons-grid">
-                  <a href="/miss-dior" class="submenu-icon-item" data-route="/miss-dior">
-                    <img src="/images/missdiorpng.png" alt="Miss Dior" />
-                    <span>Miss Dior</span>
-                  </a>
-                  <a href="/miss-dior-essence" class="submenu-icon-item" data-route="/miss-dior-essence">
-                    <img src="/images/jadorepng.png" alt="Miss Dior Essence" />
-                    <span>J'adore</span>
-                  </a>
-                  <a href="/compras-miss-dior-parfum" class="submenu-icon-item" data-route="/compras-miss-dior-parfum">
-                    <img src="/images/poison.webp" alt="Poison" />
-                    <span>Poison</span>
+            <div class="submenu-expanded-content">
+              <!-- Coluna Esquerda - Links -->
+              <div class="submenu-expanded-left">
+                <div class="submenu-icons">
+                  <p class="submenu-icons-title">ICÔNICOS</p>
+                  <div class="submenu-icons-grid">
+                    <a href="/miss-dior" class="submenu-icon-item" data-route="/miss-dior">
+                      <img src="/images/missdiorpng.png" alt="Miss Dior" />
+                      <span>Miss Dior</span>
+                    </a>
+                    <a href="/miss-dior-essence" class="submenu-icon-item" data-route="/miss-dior-essence">
+                      <img src="/images/jadorepng.png" alt="J'adore" />
+                      <span>J'adore</span>
+                    </a>
+                    <a href="/compras-miss-dior-parfum" class="submenu-icon-item" data-route="/compras-miss-dior-parfum">
+                      <img src="/images/poison.webp" alt="Poison" />
+                      <span>Poison</span>
+                    </a>
+                  </div>
+                </div>
+
+                <nav class="submenu-links">
+                  <a href="#novidades" class="submenu-link">Novidades</a>
+                  <a href="#descubra" class="submenu-link">Descubra</a>
+                  <a href="#" class="submenu-link has-alta-perfumaria" data-alta-perfumaria-trigger>Alta Perfumaria <span class="chevron">›</span></a>
+                  <a href="/miss-dior" class="submenu-link submenu-link-bold" data-route="/miss-dior">Miss Dior</a>
+                  <a href="/miss-dior-essence" class="submenu-link" data-route="/miss-dior-essence">Miss Dior Essence</a>
+                  <a href="/compras-miss-dior-parfum" class="submenu-link" data-route="/compras-miss-dior-parfum">Miss Dior Parfum</a>
+                  <a href="/dior-verao" class="submenu-link" data-route="/dior-verao">Dior Verão</a>
+                  <a href="#expertise" class="submenu-link">Expertise de Fragrâncias</a>
+                  <a href="#exclusivas" class="submenu-link">Criações Exclusivas</a>
+                </nav>
+
+                <div class="submenu-footer-cta">
+                  <a href="/la-collection-privee" class="submenu-footer-link" data-route="/la-collection-privee">
+                    Como escolher meu perfume da<br>La Collection Privée
                   </a>
                 </div>
               </div>
 
-              <nav class="submenu-links">
-                <a href="#novidades" class="submenu-link">Novidades</a>
-                <a href="#descubra" class="submenu-link">Descubra</a>
-                <a href="#linhas" class="submenu-link">Linhas</a>
-                <a href="/miss-dior" class="submenu-link submenu-link-bold" data-route="/miss-dior">Miss Dior</a>
-                <a href="/miss-dior-essence" class="submenu-link" data-route="/miss-dior-essence">Miss Dior Essence</a>
-                <a href="/compras-miss-dior-parfum" class="submenu-link" data-route="/compras-miss-dior-parfum">Miss Dior Parfum</a>
-                <a href="/dior-verao" class="submenu-link" data-route="/dior-verao">Dior Verão</a>
-                <a href="#expertise" class="submenu-link">Expertise de Fragâncias</a>
-                <a href="#exclusivas" class="submenu-link">Criações Exclusivas</a>
-              </nav>
-
-              <div class="submenu-featured">
-                <img src="/images/perfumeee.webp" alt="J'ADOR" />
-                <div class="submenu-featured-text">
-                  <h3>J'ADIOR as novas fragrâncias sólidas</h3>
-                  <a href="#" class="submenu-featured-link">Descubra</a>
-                </div>
+              <!-- Coluna Direita - Cards de Imagens -->
+              <div class="submenu-expanded-right">
+                <a href="/la-collection-privee" class="fragrance-card" data-route="/la-collection-privee">
+                  <img src="/images/perfumes/roseStart.jpg" alt="La Collection Privée" />
+                  <div class="fragrance-card-overlay">
+                    <h4 class="fragrance-card-title">La Collection Privée</h4>
+                    <p class="fragrance-card-subtitle">Descubra</p>
+                  </div>
+                </a>
+                <a href="/miss-dior" class="fragrance-card" data-route="/miss-dior">
+                  <img src="/images/perfumes/missdior.webp" alt="Miss Dior" />
+                  <div class="fragrance-card-overlay">
+                    <h4 class="fragrance-card-title">Miss Dior</h4>
+                    <p class="fragrance-card-subtitle">A nova essência de Miss Dior</p>
+                  </div>
+                </a>
               </div>
 
-              <div class="submenu-featured">
-                <img src="/images/perfume22.webp" alt="Miss Dior Essence" />
-                <div class="submenu-featured-text">
-                  <h3>Miss Dior Essence</h3>
-                  <a href="/miss-dior-essence" class="submenu-featured-link" data-route="/miss-dior-essence">Descubra</a>
+              <!-- Painel de Alta Perfumaria (3º nível) -->
+              <div class="alta-perfumaria-panel" data-alta-perfumaria-panel style="display: none;">
+                <!-- Coluna Esquerda - Links Alta Perfumaria -->
+                <div class="alta-perfumaria-left">
+                  <nav class="submenu-links alta-perfumaria-links">
+                    <a href="#exceptional" class="submenu-link">Exceptional Pieces</a>
+                    <a href="#anforas" class="submenu-link">Ânforas personalizáveis</a>
+                  </nav>
+
+                  <div class="alta-perfumaria-divider"></div>
+
+                  <nav class="submenu-links alta-perfumaria-links-main">
+                    <span class="alta-perfumaria-section-title">La Collection Privée</span>
+                    <a href="#mais-vendidos" class="submenu-link">Mais Vendidos</a>
+                    <a href="#fragrancias" class="submenu-link">Fragrâncias</a>
+                    <a href="#esprits" class="submenu-link">Esprits de Parfum e Elixires</a>
+                    <a href="#kit" class="submenu-link">Kit do Perfumista</a>
+                    <a href="#couture" class="submenu-link">Couture Pieces</a>
+                    <a href="#banho" class="submenu-link">Banho e Corpo</a>
+                    <a href="#casa" class="submenu-link">Casa</a>
+                    <a href="#ver-tudo" class="submenu-link">Ver tudo</a>
+                  </nav>
+
+                  
+                </div>
+
+                <!-- Coluna Direita - Cards Alta Perfumaria -->
+                <div class="alta-perfumaria-right">
+                  <a href="/la-collection-privee" class="alta-perfumaria-card" data-route="/la-collection-privee">
+                    <img src="/images/perfumes/roseStart.jpg" alt="Rose Star" />
+                    <div class="alta-perfumaria-card-overlay">
+                      <span class="alta-perfumaria-card-label">La Collection Privée</span>
+                      <span class="alta-perfumaria-card-cta">Descubra</span>
+                    </div>
+                  </a>
+                  <a href="/la-collection-privee" class="alta-perfumaria-card" data-route="/la-collection-privee">
+                    <img src="/images/perfumes/Esprits.webp" alt="Bois D'Argent" />
+                    <div class="alta-perfumaria-card-overlay">
+                      <span class="alta-perfumaria-card-label">La Collection Privée</span>
+                      <span class="alta-perfumaria-card-cta">Bois d'Argent, the new Esprit de Parfum</span>
+                    </div>
+                  </a>
+                  
+                  <!-- Footer CTA dentro dos cards para mobile -->
+                  <div class="alta-perfumaria-footer-mobile">
+                    <a href="/la-collection-privee" class="submenu-footer-link" data-route="/la-collection-privee">
+                      Como escolher meu perfume da<br>La Collection Privée
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
