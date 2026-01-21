@@ -28,48 +28,61 @@ export function initServicesDrag(options) {
   const totalCards = cards.length;
   let draggableInstance = null;
   let resizeHandler = null;
+  let bounds = { minX: 0, maxX: 0 };
+
+  // Função para calcular bounds corretamente
+  const calculateBounds = () => {
+    const containerWidth = container.offsetWidth;
+
+    if (cards.length === 0) return { minX: 0, maxX: 0 };
+
+    // Calcular largura total do track somando cards + gaps
+    const trackStyles = getComputedStyle(track);
+    const gap = parseFloat(trackStyles.gap) || 20;
+    const paddingLeft = parseFloat(trackStyles.paddingLeft) || 0;
+    const paddingRight = parseFloat(trackStyles.paddingRight) || 0;
+
+    // Somar largura de todos os cards
+    let totalCardsWidth = 0;
+    cards.forEach((card) => {
+      totalCardsWidth += card.offsetWidth;
+    });
+
+    // Gaps entre cards
+    const totalGaps = (cards.length - 1) * gap;
+
+    // Largura total do conteúdo
+    const contentWidth =
+      totalCardsWidth + totalGaps + paddingLeft + paddingRight;
+
+    // MaxDrag negativo para mover para esquerda
+    const maxDrag = Math.min(0, -(contentWidth - containerWidth));
+
+    console.log("📏 Services Bounds:", {
+      containerWidth,
+      contentWidth,
+      totalCardsWidth,
+      totalGaps,
+      maxDrag,
+    });
+
+    return { minX: maxDrag, maxX: 0 };
+  };
+
+  // Função para atualizar bounds no draggable
+  const updateBounds = () => {
+    bounds = calculateBounds();
+    if (draggableInstance) {
+      draggableInstance.applyBounds(bounds);
+      const currentX = draggableInstance.x;
+      if (currentX < bounds.minX) {
+        window.gsap.to(track, { x: bounds.minX, duration: 0.3 });
+      }
+    }
+  };
 
   setTimeout(() => {
-    // Função para calcular bounds corretamente
-    const calculateBounds = () => {
-      const containerWidth = container.offsetWidth;
-
-      if (cards.length === 0) return { minX: 0, maxX: 0 };
-
-      // Calcular largura total do track somando cards + gaps
-      const trackStyles = getComputedStyle(track);
-      const gap = parseFloat(trackStyles.gap) || 20;
-      const paddingLeft = parseFloat(trackStyles.paddingLeft) || 0;
-      const paddingRight = parseFloat(trackStyles.paddingRight) || 0;
-
-      // Somar largura de todos os cards
-      let totalCardsWidth = 0;
-      cards.forEach((card) => {
-        totalCardsWidth += card.offsetWidth;
-      });
-
-      // Gaps entre cards
-      const totalGaps = (cards.length - 1) * gap;
-
-      // Largura total do conteúdo
-      const contentWidth =
-        totalCardsWidth + totalGaps + paddingLeft + paddingRight;
-
-      // MaxDrag negativo para mover para esquerda
-      const maxDrag = Math.min(0, -(contentWidth - containerWidth));
-
-      console.log("📏 Services Bounds:", {
-        containerWidth,
-        contentWidth,
-        totalCardsWidth,
-        totalGaps,
-        maxDrag,
-      });
-
-      return { minX: maxDrag, maxX: 0 };
-    };
-
-    let bounds = calculateBounds();
+    bounds = calculateBounds();
 
     // Função para calcular o card atual visível
     const calculateCurrentCard = (x) => {
@@ -92,6 +105,10 @@ export function initServicesDrag(options) {
       }
     };
 
+    // Detectar se é mobile/touch
+    const isTouchDevice =
+      "ontouchstart" in window || navigator.maxTouchPoints > 0;
+
     // Criar Draggable
     draggableInstance = window.Draggable.create(track, {
       type: "x",
@@ -99,10 +116,11 @@ export function initServicesDrag(options) {
       inertia: true,
       edgeResistance: 0.65,
       dragResistance: 0,
-      throwResistance: 2000,
+      throwResistance: isTouchDevice ? 1500 : 2000,
       cursor: "grab",
       activeCursor: "grabbing",
       allowNativeTouchScrolling: false,
+      zIndexBoost: false,
       onPress: function () {
         window.gsap.killTweensOf(track);
       },
@@ -130,24 +148,37 @@ export function initServicesDrag(options) {
 
     // Recalcular bounds on resize
     resizeHandler = () => {
-      bounds = calculateBounds();
-      if (draggableInstance) {
-        draggableInstance.applyBounds(bounds);
-        const currentX = draggableInstance.x;
-        if (currentX < bounds.minX) {
-          window.gsap.to(track, { x: bounds.minX, duration: 0.3 });
-        }
-      }
+      updateBounds();
     };
     window.addEventListener("resize", resizeHandler);
 
     // Recalcular após imagens carregarem
-    setTimeout(() => {
-      bounds = calculateBounds();
-      if (draggableInstance) {
-        draggableInstance.applyBounds(bounds);
-      }
-    }, 500);
+    const images = track.querySelectorAll("img");
+    let loadedImages = 0;
+    const totalImages = images.length;
+
+    if (totalImages > 0) {
+      images.forEach((img) => {
+        if (img.complete) {
+          loadedImages++;
+          if (loadedImages === totalImages) {
+            updateBounds();
+          }
+        } else {
+          img.addEventListener("load", () => {
+            loadedImages++;
+            if (loadedImages === totalImages) {
+              updateBounds();
+            }
+          });
+        }
+      });
+    }
+
+    // Fallback: recalcular após delays
+    setTimeout(updateBounds, 500);
+    setTimeout(updateBounds, 1000);
+    setTimeout(updateBounds, 2000);
 
     updateIndicator(0);
 
@@ -159,6 +190,7 @@ export function initServicesDrag(options) {
     get instance() {
       return draggableInstance;
     },
+    updateBounds: updateBounds,
     destroy: () => {
       if (draggableInstance) {
         draggableInstance.kill();

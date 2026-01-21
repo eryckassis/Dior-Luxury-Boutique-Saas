@@ -520,6 +520,162 @@
 }
 
 /* ============================================================================
+   O TOQUE FINAL SECTION - Seção de destaque
+   ============================================================================ */
+
+.toque-final-section {
+  background-color: #f8f8f8;
+  padding: 100px 0;
+  width: 100%;
+}
+
+.toque-final-container {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 0 40px;
+}
+
+.toque-final-label {
+  font-family: "Hellix", sans-serif;
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: #8b6914;
+  letter-spacing: 0.05em;
+  display: block;
+  margin-bottom: 24px;
+}
+
+.toque-final-title {
+  font-family: "Hellix", sans-serif;
+  font-size: 2rem;
+  font-weight: 400;
+  color: #1a1a1a;
+  line-height: 1.4;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+/* Responsivo */
+@media (max-width: 1024px) {
+  .toque-final-section {
+    padding: 80px 0;
+  }
+
+  .toque-final-title {
+    font-size: 1.75rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .toque-final-section {
+    padding: 60px 0;
+  }
+
+  .toque-final-container {
+    padding: 0 24px;
+  }
+
+  .toque-final-title {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .toque-final-section {
+    padding: 50px 0;
+  }
+
+  .toque-final-label {
+    font-size: 0.75rem;
+    margin-bottom: 16px;
+  }
+
+  .toque-final-title {
+    font-size: 1.25rem;
+  }
+}
+
+/* ============================================================================
+   SELEÇÃO DE PRESENTES - Override para usar classes services-dior
+   ============================================================================ */
+
+/* Override para a seção de seleção de presentes */
+.selecao-presentes-section.services-dior-section {
+  background-color: #fff;
+  background-image: none;
+  padding: 80px 0 100px;
+}
+
+/* Card sem overlay - apenas imagem + título abaixo */
+.selecao-card-style .services-card-image-wrap {
+  height: auto;
+  aspect-ratio: 3/4;
+}
+
+.selecao-card-style .services-card-overlay {
+  display: none;
+}
+
+.selecao-card-style .services-card-info {
+  display: none;
+}
+
+/* Título abaixo do card */
+.selecao-card-title {
+  font-family: "Hellix", sans-serif;
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: #1a1a1a;
+  text-align: center;
+  margin: 16px 0 0 0;
+  letter-spacing: 0.02em;
+}
+
+/* Link Descubra com underline */
+.selecao-presentes-section .selecao-presentes-link {
+  display: inline-block;
+  font-family: "Hellix", sans-serif;
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: #1a1a1a;
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 4px;
+  margin-top: 20px;
+  --underline-width: 100%;
+}
+
+.selecao-presentes-section .selecao-presentes-link::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: var(--underline-width);
+  height: 1px;
+  background-color: #1a1a1a;
+  transition: width 0.35s ease;
+}
+
+/* Responsivo */
+@media (max-width: 900px) {
+  .selecao-presentes-section.services-dior-section {
+    padding: 60px 0 80px;
+  }
+}
+
+@media (max-width: 640px) {
+  .selecao-presentes-section.services-dior-section {
+    padding: 40px 0 60px;
+  }
+
+  .selecao-card-title {
+    font-size: 0.75rem;
+    margin-top: 12px;
+  }
+}
+
+/* ============================================================================
    SECTION SPACER - Espaçamento entre seções
    ============================================================================ */
 
