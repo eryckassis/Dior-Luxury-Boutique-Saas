@@ -403,14 +403,15 @@ export class AppNavigation extends HTMLElement {
       });
     }
 
-    // Botão de voltar do Alta Perfumaria
+    // Botão de voltar do Alta Perfumaria - volta ao menu principal
     const altaPerfumariaBackBtn = this.querySelector(
       "[data-alta-perfumaria-back]",
     );
     if (altaPerfumariaBackBtn) {
-      altaPerfumariaBackBtn.addEventListener("click", () =>
-        this.closeAltaPerfumariaPanel(),
-      );
+      altaPerfumariaBackBtn.addEventListener("click", () => {
+        // Fecha Alta Perfumaria e volta direto ao menu principal
+        this.closeSubmenu();
+      });
     }
 
     // Acessibilidade - Alto Contraste
@@ -608,9 +609,9 @@ export class AppNavigation extends HTMLElement {
     // Detecta se é mobile
     const isMobile = window.innerWidth <= 768;
 
-    // Mostra o painel
+    // Mostra o painel - em mobile usa block, em desktop usa flex
     altaPerfumariaPanel.style.visibility = "visible";
-    altaPerfumariaPanel.style.display = "flex";
+    altaPerfumariaPanel.style.display = isMobile ? "block" : "flex";
 
     if (isMobile) {
       // Em mobile, usar transição CSS simples
@@ -800,6 +801,7 @@ export class AppNavigation extends HTMLElement {
     if (!this.currentSubmenu) return;
 
     const sideMenu = this.querySelector(".moda-side-menu");
+    const isMobile = window.innerWidth <= 768;
 
     // Fecha painel Alta Perfumaria se estiver aberto
     if (this.altaPerfumariaExpanded) {
@@ -810,13 +812,22 @@ export class AppNavigation extends HTMLElement {
     if (this.fragranceExpanded && sideMenu) {
       this.fragranceExpanded = false;
 
-      if (window.gsap) {
+      if (isMobile) {
+        // Em mobile, apenas remove as classes
+        sideMenu.classList.remove("fragrance-expanded");
+        sideMenu.classList.remove("alta-perfumaria-expanded");
+        const submenu = this.querySelector(
+          `[data-submenu-id="${this.currentSubmenu}"]`,
+        );
+        if (submenu) submenu.classList.remove("submenu-expanded");
+      } else if (window.gsap) {
         window.gsap.to(sideMenu, {
           width: "460px",
           duration: 0.4,
           ease: "power2.inOut",
           onComplete: () => {
             sideMenu.classList.remove("fragrance-expanded");
+            sideMenu.classList.remove("alta-perfumaria-expanded");
             const submenu = this.querySelector(
               `[data-submenu-id="${this.currentSubmenu}"]`,
             );
@@ -838,7 +849,14 @@ export class AppNavigation extends HTMLElement {
 
     if (!mainMenu || !submenu) return;
 
-    if (window.gsap) {
+    if (isMobile) {
+      // Em mobile, usar transições CSS simples
+      mainMenu.style.transform = "translateX(0)";
+      submenu.style.transform = "translateX(100%)";
+      setTimeout(() => {
+        submenu.style.display = "none";
+      }, 300);
+    } else if (window.gsap) {
       // Volta menu principal
       window.gsap.to(mainMenu, {
         x: "0%",
@@ -936,19 +954,66 @@ export class AppNavigation extends HTMLElement {
     const backdrop = this.querySelector(".moda-side-menu-backdrop");
     const hamburger = this.querySelector(".moda-nav-hamburger");
     const lines = hamburger.querySelectorAll("line");
+    const mainMenu = this.querySelector(".main-menu-content");
+
+    // Fecha o painel Alta Perfumaria se estiver aberto
+    if (this.altaPerfumariaExpanded) {
+      const altaPerfumariaPanel = this.querySelector(
+        "[data-alta-perfumaria-panel]",
+      );
+      if (altaPerfumariaPanel) {
+        altaPerfumariaPanel.classList.remove("active");
+        altaPerfumariaPanel.style.transform = "";
+        altaPerfumariaPanel.style.opacity = "";
+        altaPerfumariaPanel.style.visibility = "hidden";
+        altaPerfumariaPanel.style.display = "none";
+      }
+      this.altaPerfumariaExpanded = false;
+    }
 
     // Fecha o painel Spa se estiver aberto
     if (this.spaExpanded) {
-      this.closeSpaPanel();
+      const spaPanel = this.querySelector("[data-spa-panel]");
+      if (spaPanel) {
+        spaPanel.classList.remove("active");
+        spaPanel.style.transform = "";
+        spaPanel.style.opacity = "";
+      }
+      this.spaExpanded = false;
     }
 
-    // Se tem submenu aberto, fecha primeiro
+    // Fecha submenu se estiver aberto
     if (this.currentSubmenu) {
-      this.closeSubmenu();
+      const submenu = this.querySelector(
+        `[data-submenu-id="${this.currentSubmenu}"]`,
+      );
+      if (submenu) {
+        submenu.style.display = "none";
+        submenu.style.transform = "";
+        submenu.classList.remove("submenu-expanded");
+      }
+      this.currentSubmenu = null;
     }
+
+    // Reset do menu principal
+    if (mainMenu) {
+      mainMenu.style.transform = "";
+    }
+
+    // Reset expansões
+    this.fragranceExpanded = false;
+
+    // Remove todas as classes de expansão do sideMenu
+    sideMenu.classList.remove("active");
+    sideMenu.classList.remove("fragrance-expanded");
+    sideMenu.classList.remove("spa-expanded");
+    sideMenu.classList.remove("alta-perfumaria-expanded");
+    sideMenu.classList.remove("submenu-expanded");
+
+    // Reset inline styles do sideMenu
+    sideMenu.style.width = "";
 
     backdrop.classList.remove("active");
-    sideMenu.classList.remove("active");
 
     // Volta hamburguer ao estado normal (2 linhas)
     if (window.gsap) {

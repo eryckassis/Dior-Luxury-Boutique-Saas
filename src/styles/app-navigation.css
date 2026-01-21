@@ -2,6 +2,8 @@
    APP NAVIGATION - Sistema de navegação multinível
    ============================================================================ */
 
+
+
 /* Header do menu lateral - X à esquerda */
 .moda-side-menu .moda-side-menu-header {
   justify-content: flex-start !important;
@@ -22,6 +24,88 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+}
+
+/* ============================================================================
+   MOBILE - Search icon ao lado do hamburger menu
+   ============================================================================ */
+
+/* Tablet grande (768px - 1024px) */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .search-container {
+    position: fixed;
+    left: 70px;
+    top: 68px;
+    transform: translateY(-50%);
+    z-index: 1001;
+  }
+  
+  .search-container .search-input {
+    display: none !important;
+  }
+  
+  .search-container .search-icon-btn {
+    padding: 8px;
+  }
+}
+
+/* Tablet (768px) */
+@media (max-width: 768px) {
+  .search-container {
+    position: fixed;
+    left: 60px;
+    top: 63px;
+    transform: translateY(-50%);
+    z-index: 1001;
+  }
+  
+  .search-container .search-input {
+    display: none !important;
+  }
+  
+  .search-container .search-icon-btn {
+    padding: 8px;
+  }
+}
+
+/* iPhone 14 Pro Max / 15 Pro Max / 16 Pro Max (430px) */
+@media (max-width: 430px) {
+  .search-container {
+    left: 55px;
+    top: 58px;
+  }
+}
+
+/* iPhone 14 Pro / 15 Pro / 16 Pro (393px) */
+@media (max-width: 393px) {
+  .search-container {
+    left: 52px;
+    top: 36px;
+  }
+}
+
+/* iPhone SE / iPhone 14 / 15 / 16 (390px) */
+@media (max-width: 390px) {
+  .search-container {
+    left: 50px;
+    top: 58px;
+  }
+}
+
+/* iPhone SE 1st gen e menores (375px) */
+@media (max-width: 375px) {
+  .search-container {
+    left: 48px;
+    top: 58px;
+  }
+}
+
+/* Telas muito pequenas (320px) */
+@media (max-width: 320px) {
+  .search-container {
+    left: 45px;
+    top: 32px;
+  }
 }
 
 /* ============================================================================
@@ -735,9 +819,8 @@
 }
 
 .alta-perfumaria-section-title {
-  font-family: "Hellix", sans-serif;
+   font-family: "SF Pro Text";
   font-size: 0.95rem;
-  font-weight: 600;
   color: #000;
   display: block;
   margin-bottom: 0.75rem;
@@ -1036,18 +1119,22 @@
     width: 100% !important;
     height: 100% !important;
     min-height: unset !important;
+    max-height: 100% !important;
     flex-direction: column !important;
     transform: translateX(100%) !important;
     visibility: hidden !important;
     opacity: 0 !important;
     z-index: 20 !important;
-    overflow-y: auto !important;
+    overflow-y: scroll !important;
     overflow-x: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+    overscroll-behavior-y: auto !important;
     display: block !important;
     transition: transform 0.3s ease, opacity 0.3s ease !important;
     background: #f5f5f5 !important;
-    padding: 0 !important;
+    padding: 0 0 2rem 0 !important;
     margin: 0 !important;
+    touch-action: pan-y !important;
   }
 
   .alta-perfumaria-panel.active {
@@ -1061,6 +1148,7 @@
     width: 100% !important;
     padding: 1rem 1.5rem 0.5rem 1.5rem !important;
     margin: 0 !important;
+    overflow: visible !important;
   }
 
   /* Cards Alta Perfumaria em mobile - empilhados verticalmente */
@@ -1068,27 +1156,28 @@
     display: block !important;
     padding: 0.5rem 1rem 1rem 1rem !important;
     margin: 0 !important;
+    overflow: visible !important;
   }
 
   .alta-perfumaria-card {
     display: block !important;
     width: 100% !important;
-    height: 400px !important;
+    height: 320px !important;
     min-height: 280px !important;
     bottom: 0 !important;
-    margin: 0 0 1rem 0 !important;
+    margin-bottom: 1rem !important;
     position: relative !important;
-    top: 3rem !important;
+    top: 0 !important;
   }
 
-  .alta-perfumaria-card:last-child {
+  .alta-perfumaria-card:last-of-type {
     margin-bottom: 0 !important;
   }
 
   /* Footer mobile dentro do alta-perfumaria-right */
   .alta-perfumaria-footer-mobile {
     display: block !important;
-    padding: 5rem 0 0 0 !important;
+    padding: 1.5rem 0 1rem 0 !important;
     margin: 0 !important;
   }
 
@@ -1171,10 +1260,15 @@
   }
 
   /* Cards menores em telas pequenas */
-  .fragrance-card,
+  .fragrance-card {
+    height: 240px !important;
+    min-height: 240px !important;
+  }
+  
   .alta-perfumaria-card {
-    height: 240px;
-    min-height: 240px;
+    height: 280px !important;
+    min-height: 240px !important;
+    max-height: 280px !important;
   }
 
   .submenu-icons-grid {
@@ -1208,4 +1302,330 @@
     font-size: 0.85rem;
     padding: 0.4rem 0;
   }
+}
+
+/* ============================================================================
+   ALTO CONTRASTE - Modo de Acessibilidade para Menu Completo
+   ============================================================================ */
+
+/* Menu lateral principal */
+body.high-contrast .moda-side-menu {
+  background: #000 !important;
+}
+
+body.high-contrast .moda-side-menu-header {
+  background: #000;
+  border-bottom-color: rgba(255, 255, 255, 0.2);
+}
+
+body.high-contrast .moda-side-menu-close {
+  color: #fff;
+}
+
+/* Links do menu principal */
+body.high-contrast .moda-menu-link {
+  color: #fff !important;
+}
+
+body.high-contrast .moda-menu-link::after {
+  background-color: #fff !important;
+}
+
+body.high-contrast .moda-menu-link::before {
+  color: #fff !important;
+}
+
+/* Submenus */
+body.high-contrast .submenu-panel {
+  background: #000 !important;
+}
+
+body.high-contrast .submenu-header {
+  background: #000 !important;
+  border-bottom-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+body.high-contrast .submenu-back-btn {
+  color: #fff !important;
+}
+
+body.high-contrast .submenu-back-btn svg {
+  stroke: #fff !important;
+}
+
+body.high-contrast .submenu-content {
+  background: #000 !important;
+}
+
+body.high-contrast .submenu-content-wrapper {
+  background: #000 !important;
+}
+
+body.high-contrast .submenu-left-content {
+  background: #000 !important;
+}
+
+body.high-contrast .submenu-link {
+  color: #fff !important;
+}
+
+body.high-contrast .submenu-link:hover {
+  color: #ccc !important;
+}
+
+body.high-contrast .submenu-link.submenu-link-bold {
+  color: #fff !important;
+  font-weight: 600 !important;
+}
+
+/* Submenu expandido (Fragrância Feminina) */
+body.high-contrast .submenu-expanded-content {
+  background: #000 !important;
+}
+
+body.high-contrast .submenu-expanded-left {
+  background: #000 !important;
+  border-right-color: rgba(255, 255, 255, 0.2) !important;
+  border-bottom-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+body.high-contrast .submenu-expanded-right {
+  background: #1a1a1a !important;
+}
+
+/* Ícones do submenu */
+body.high-contrast .submenu-icons {
+  background: #000 !important;
+}
+
+body.high-contrast .submenu-icons-title {
+  color: #aaa !important;
+}
+
+body.high-contrast .submenu-icon-item {
+  color: #fff !important;
+}
+
+body.high-contrast .submenu-icon-item span {
+  color: #fff !important;
+}
+
+body.high-contrast .submenu-icon-item img {
+  filter: brightness(0.9) !important;
+}
+
+/* Footer CTA do submenu */
+body.high-contrast .submenu-footer-cta {
+  border-top-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+body.high-contrast .submenu-footer-link {
+  color: #fff !important;
+  background: #1a1a1a !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Cards de Fragrância */
+body.high-contrast .fragrance-card {
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+}
+
+body.high-contrast .fragrance-card-overlay {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, transparent 100%) !important;
+}
+
+body.high-contrast .fragrance-card-title {
+  color: #fff !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8) !important;
+}
+
+body.high-contrast .fragrance-card-subtitle {
+  color: #ddd !important;
+}
+
+/* Alta Perfumaria Panel */
+body.high-contrast .alta-perfumaria-panel {
+  background: #000 !important;
+}
+
+body.high-contrast .alta-perfumaria-left {
+  background: #000 !important;
+}
+
+body.high-contrast .alta-perfumaria-right {
+  background: #1a1a1a !important;
+}
+
+body.high-contrast .alta-perfumaria-divider {
+  background: rgba(255, 255, 255, 0.3) !important;
+}
+
+body.high-contrast .alta-perfumaria-section-title {
+  color: #fff !important;
+}
+
+body.high-contrast .alta-perfumaria-links .submenu-link,
+body.high-contrast .alta-perfumaria-links-main .submenu-link {
+  color: #fff !important;
+}
+
+body.high-contrast .alta-perfumaria-links .submenu-link:hover,
+body.high-contrast .alta-perfumaria-links-main .submenu-link:hover {
+  color: #ccc !important;
+}
+
+/* Cards Alta Perfumaria */
+body.high-contrast .alta-perfumaria-card {
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+}
+
+body.high-contrast .alta-perfumaria-card-overlay {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, transparent 100%) !important;
+}
+
+body.high-contrast .alta-perfumaria-card-label {
+  color: #fff !important;
+}
+
+body.high-contrast .alta-perfumaria-card-cta {
+  color: #fff !important;
+}
+
+body.high-contrast .alta-perfumaria-card-cta::after {
+  background-color: #fff !important;
+}
+
+body.high-contrast .alta-perfumaria-footer-mobile .submenu-footer-link {
+  color: #fff !important;
+  background: #1a1a1a !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Spa Panel */
+body.high-contrast .spa-locations-panel {
+  background: #000 !important;
+}
+
+body.high-contrast .spa-locations-list {
+  background: #000 !important;
+}
+
+body.high-contrast .spa-location-link {
+  color: #fff !important;
+}
+
+body.high-contrast .spa-location-link:hover {
+  color: #ccc !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+body.high-contrast .spa-view-all {
+  color: #fff !important;
+  font-weight: 600 !important;
+}
+
+/* Chevron e setas */
+body.high-contrast .submenu-link.has-alta-perfumaria .chevron {
+  color: #fff !important;
+}
+
+body.high-contrast .submenu-link.has-spa-submenu::after {
+  color: #fff !important;
+}
+
+/* Menu Container */
+body.high-contrast .moda-menu-container {
+  background: #000 !important;
+}
+
+body.high-contrast .main-menu-content {
+  background: #000 !important;
+}
+
+/* Contato */
+body.high-contrast .moda-menu-contact {
+  border-top-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+body.high-contrast .moda-menu-contact-title {
+  color: #aaa !important;
+}
+
+body.high-contrast .moda-menu-contact-link {
+  color: #fff !important;
+}
+
+/* Footer do menu */
+body.high-contrast .moda-menu-footer {
+  border-top-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+body.high-contrast .moda-menu-accessibility {
+  color: #fff !important;
+}
+
+body.high-contrast .moda-menu-checkbox {
+  background: #333 !important;
+  border-color: #666 !important;
+}
+
+body.high-contrast .moda-menu-checkbox:checked {
+  background: #fff !important;
+}
+
+body.high-contrast .moda-menu-checkbox::before {
+  background: #fff !important;
+}
+
+body.high-contrast .moda-menu-checkbox:checked::before {
+  background: #000 !important;
+}
+
+/* Tabs */
+body.high-contrast .moda-menu-tabs {
+  background: #000 !important;
+}
+
+body.high-contrast .moda-menu-tab {
+  background: #1a1a1a !important;
+  border-color: #444 !important;
+  color: #fff !important;
+}
+
+body.high-contrast .moda-menu-tab-active {
+  background: #fff !important;
+  border-color: #fff !important;
+  color: #000 !important;
+}
+
+/* ============================================================================
+   ALTO CONTRASTE - Linhas Underline GSAP (todos os ::after)
+   ============================================================================ */
+
+/* Underlines dos links do menu */
+body.high-contrast .moda-menu-link::after {
+  background-color: #fff !important;
+}
+
+body.high-contrast .submenu-link::after {
+  background-color: #fff !important;
+}
+
+body.high-contrast .moda-menu-contact-link::after {
+  background-color: #fff !important;
+}
+
+/* Cards de Fragrância */
+body.high-contrast .fragrance-card-subtitle::after {
+  background-color: #fff !important;
+}
+
+/* Ícones do submenu */
+body.high-contrast .submenu-icon-item span::after {
+  background-color: #fff !important;
+}
+
+/* Spa location links */
+body.high-contrast .spa-location-link::after {
+  background-color: #fff !important;
 }

@@ -241,16 +241,15 @@ moda-acessorios-page main {
 .moda-menu-link {
   position: relative;
   display: block;
-  font-family: "Futura", "Helvetica Neue", sans-serif;
+  font-family: "SF Pro Text", sans-serif;
   font-size: 1.1rem;
-  font-weight: 400;
+  font-weight: 300;
   color: #333;
   text-decoration: none;
   padding: 0.75rem 0;
   transition: color 0.3s ease;
   --underline-width: 0%;
 }
-
 .moda-menu-link::after {
   content: "";
   position: absolute;
@@ -2028,73 +2027,78 @@ moda-acessorios-page main {
    ============================================================================ */
 
 body.high-contrast .moda-side-menu {
-  background: #000;
+  background: #000 !important;
+}
+
+body.high-contrast .moda-side-menu-header {
+  background: #000 !important;
+  border-bottom-color: rgba(255, 255, 255, 0.2) !important;
 }
 
 body.high-contrast .moda-menu-link {
-  color: #fff;
+  color: #fff !important;
   font-weight: 500;
 }
 
 body.high-contrast .moda-menu-link::after {
-  background-color: #fff;
+  background-color: #fff !important;
 }
 
 body.high-contrast .moda-menu-link::before {
-  color: #fff;
+  color: #fff !important;
   opacity: 0.7;
 }
 
 body.high-contrast .moda-menu-contact-title {
-  color: #aaa;
+  color: #aaa !important;
 }
 
 body.high-contrast .moda-menu-contact-link {
-  color: #fff;
+  color: #fff !important;
 }
 
 body.high-contrast .moda-menu-footer {
-  border-top-color: rgba(255, 255, 255, 0.3);
+  border-top-color: rgba(255, 255, 255, 0.3) !important;
 }
 
 body.high-contrast .moda-menu-contact {
-  border-top-color: rgba(255, 255, 255, 0.3);
+  border-top-color: rgba(255, 255, 255, 0.3) !important;
 }
 
 body.high-contrast .moda-menu-accessibility {
-  color: #fff;
+  color: #fff !important;
 }
 
 body.high-contrast .moda-menu-checkbox {
-  background: #333;
+  background: #333 !important;
 }
 
 body.high-contrast .moda-menu-checkbox:checked {
-  background: #fff;
+  background: #fff !important;
 }
 
 body.high-contrast .moda-menu-checkbox::before {
-  background: #fff;
+  background: #fff !important;
 }
 
 body.high-contrast .moda-menu-checkbox:checked::before {
-  background: #000;
+  background: #000 !important;
 }
 
 body.high-contrast .moda-menu-tab {
-  background: #1a1a1a;
-  border-color: #444;
-  color: #fff;
+  background: #1a1a1a !important;
+  border-color: #444 !important;
+  color: #fff !important;
 }
 
 body.high-contrast .moda-menu-tab-active {
-  background: #fff;
-  border-color: #fff;
-  color: #000;
+  background: #fff !important;
+  border-color: #fff !important;
+  color: #000 !important;
 }
 
 body.high-contrast .moda-side-menu-close {
-  color: #fff;
+  color: #fff !important;
 }
 
 /* Alto contraste para cards */
@@ -2108,6 +2112,10 @@ body.high-contrast .moda-card-button {
   font-weight: 600;
 }
 
+body.high-contrast .moda-card-button::after {
+  background-color: #fff !important;
+}
+
 /* Alto contraste para textos gerais */
 body.high-contrast .moda-campaign-title {
   color: #000;
@@ -2119,4 +2127,156 @@ body.high-contrast .moda-campaign-description {
 
 body.high-contrast .moda-campaign-section .moda-discover-button {
   font-weight: 600;
+}
+
+/* ============================================================================
+   ALTO CONTRASTE - Submenus Moda & Acessórios (Mundo Dior, Desfiles, etc.)
+   ============================================================================ */
+
+/* Submenu Panel */
+body.high-contrast .submenu-panel {
+  background: #000 !important;
+}
+
+body.high-contrast .submenu-header {
+  background: #000 !important;
+  border-bottom-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+body.high-contrast .submenu-back-btn {
+  color: #fff !important;
+}
+
+body.high-contrast .submenu-back-btn svg {
+  stroke: #fff !important;
+}
+
+/* Menu Container */
+body.high-contrast .moda-menu-container {
+  background: #000 !important;
+}
+
+body.high-contrast .main-menu-content {
+  background: #000 !important;
+}
+
+/* Submenu Dior World Content */
+body.high-contrast .submenu-dior-world-content {
+  background: #000 !important;
+}
+
+body.high-contrast .submenu-left-column {
+  background: #000 !important;
+  border-right-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+body.high-contrast .submenu-center-column {
+  background: #000 !important;
+}
+
+body.high-contrast .submenu-right-column {
+  background: #1a1a1a !important;
+}
+
+/* Top Header e Breadcrumb */
+body.high-contrast .submenu-top-header {
+  border-bottom-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+body.high-contrast .submenu-close-btn {
+  color: #fff !important;
+}
+
+body.high-contrast .submenu-close-btn svg {
+  stroke: #fff !important;
+}
+
+body.high-contrast .submenu-breadcrumb {
+  border-bottom-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+body.high-contrast .breadcrumb-parent {
+  color: #888 !important;
+}
+
+body.high-contrast .breadcrumb-separator {
+  color: #888 !important;
+}
+
+body.high-contrast .breadcrumb-current {
+  color: #fff !important;
+}
+
+/* Links do Submenu */
+body.high-contrast .submenu-links {
+  background: transparent !important;
+}
+
+body.high-contrast .submenu-link {
+  color: #fff !important;
+}
+
+body.high-contrast .submenu-link:hover {
+  color: #ccc !important;
+}
+
+body.high-contrast .submenu-link::after {
+  background-color: #fff !important;
+}
+
+body.high-contrast .submenu-link-active {
+  color: #fff !important;
+  font-weight: 500 !important;
+}
+
+body.high-contrast .submenu-link-active::before {
+  color: #fff !important;
+}
+
+/* Sublinks */
+body.high-contrast .submenu-sublinks {
+  background: transparent !important;
+}
+
+body.high-contrast .submenu-sublink {
+  color: #ccc !important;
+}
+
+body.high-contrast .submenu-sublink:hover {
+  color: #fff !important;
+}
+
+body.high-contrast .submenu-sublink::after {
+  background-color: #fff !important;
+}
+
+body.high-contrast .submenu-sublink-active {
+  color: #fff !important;
+  font-weight: 500 !important;
+}
+
+/* Cards do Submenu */
+body.high-contrast .submenu-cards-grid {
+  background: #000 !important;
+}
+
+body.high-contrast .submenu-card {
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+}
+
+body.high-contrast .submenu-card-label {
+  color: #fff !important;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9) !important;
+}
+
+body.high-contrast .submenu-card-label::after {
+  background-color: #fff !important;
+}
+
+body.high-contrast .submenu-card-wrapper {
+  background: transparent !important;
+}
+
+body.high-contrast .submenu-right-column {
+  background: #000 !important;
 }
