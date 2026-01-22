@@ -24,11 +24,11 @@ export class DiorivieraPageDois extends HTMLElement {
       // Product data for each size
       const productData = {
         "125ml": {
-          image: "/images/dioriviera125.png",
+          image: "/images/presentear/rivera.webp",
           price: "R$ 1.490,00",
         },
         "250ml": {
-          image: "/images/dioriviera250.png",
+          image: "/images/presentear/dois.webp",
           price: "R$ 2.590,00",
         },
       };
@@ -232,7 +232,7 @@ export class DiorivieraPageDois extends HTMLElement {
             <div class="product-detail-grid">
               <!-- Product Image -->
               <div class="product-image-wrapper">
-                <img src="/images/dioriviera125.png" alt="Dioriviera" class="product-main-image" />
+                <img src="/images/presentear/rivera.webp" alt="Dioriviera" class="product-main-image" />
               </div>
 
               <!-- Product Info -->
@@ -334,6 +334,23 @@ export class DiorivieraPageDois extends HTMLElement {
             </video>
           </section>
 
+            <section class="love-quote-section">
+            <div class="love-quote-container">
+            
+              <h2 class="quote-title">Encontre seu perfume Miss Dior*</h2>
+              
+            </div>
+          </section>
+
+            </section>
+
+           <section class="image-reveal-full-section">
+            <div class="image-reveal-wrapper-full">
+              <div class="reveal-overlay-full"></div>
+              <img src="/images/dirivera.webp" alt="Miss Dior" class="reveal-image-full" />
+            </div>
+          </section>
+
           <!-- Steps Ritual Section -->
           <section class="steps-ritual-section">
             <div class="steps-ritual-container">
@@ -345,7 +362,7 @@ export class DiorivieraPageDois extends HTMLElement {
                     <p class="step-label">Passo 1: Limpar</p>
                   </div>
                   <div class="step-image-wrapper">
-                    <img src="/images/saboneteRiviera.webp" alt="Dioriviera Sabonete" class="step-product-image" />
+                    <img src="/images/presentear/diorivera3.webp" alt="Dioriviera Sabonete" class="step-product-image" />
                   </div>
                   <div class="step-info">
                     <h3 class="step-product-name">Dioriviera Sabonete Perfumado</h3>
@@ -364,7 +381,7 @@ export class DiorivieraPageDois extends HTMLElement {
                     <p class="step-label">Passo 2: Hidratar</p>
                   </div>
                   <div class="step-image-wrapper">
-                    <img src="/images/hidratanteRiviera.webp" alt="Dioriviera Body Lotion" class="step-product-image" />
+                    <img src="/images/presentear/diorrivera4.webp" alt="Dioriviera Body Lotion" class="step-product-image" />
                   </div>
                   <div class="step-info">
                     <h3 class="step-product-name">Dioriviera Loção Corporal</h3>
@@ -383,7 +400,7 @@ export class DiorivieraPageDois extends HTMLElement {
                     <p class="step-label">Passo 3: Perfumar</p>
                   </div>
                   <div class="step-image-wrapper">
-                    <img src="/images/dioriviera125.png" alt="Dioriviera EDT" class="step-product-image" />
+                    <img src="/images/presentear/diorrivera5.webp" alt="Dioriviera EDT" class="step-product-image" />
                   </div>
                   <div class="step-info">
                     <h3 class="step-product-name">Dioriviera Eau de Toilette</h3>

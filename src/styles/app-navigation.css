@@ -1448,6 +1448,343 @@ body.high-contrast .alta-perfumaria-panel {
   background: #000 !important;
 }
 
+/* ============================================================================
+   TRATAMENTO - Menu Expandido com Cards
+   ============================================================================ */
+
+/* Menu expandido para Tratamento */
+.moda-side-menu.tratamento-expanded {
+  width: 650px!important;
+  max-width: 99vw;
+  transition: width 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Layout do submenu expandido de Tratamento */
+.tratamento-panel.submenu-expanded {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.tratamento-expanded-content {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  height: calc(100% - 80px);
+  position: relative;
+}
+
+/* Coluna esquerda - Links e Ícones */
+.tratamento-expanded-left {
+  width: 300px;
+  min-width: 280px;
+  padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  border-right: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+/* Esconde scrollbar */
+.tratamento-expanded-left::-webkit-scrollbar {
+  width: 0;
+  display: none;
+}
+
+.tratamento-expanded-left {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Ícones de produtos */
+.tratamento-icons {
+  margin-bottom: 1.8rem;
+  padding-bottom: 0.5rem;
+}
+
+.tratamento-icons-title {
+  font-family: "Hellix", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: #888;
+  margin: 0 0 1.2rem 0;
+  text-transform: uppercase;
+}
+
+.tratamento-icons-grid {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: space-between;
+}
+
+.tratamento-icon-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  gap: 0.6rem;
+  width: 60px;
+  transition: opacity 0.3s ease;
+}
+
+.tratamento-icon-item:hover {
+  opacity: 0.7;
+}
+
+.tratamento-icon-item img {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  border-radius: 10px;
+  background: #e8e8e8;
+  padding: 8px;
+}
+
+.tratamento-icon-item span {
+  font-family: "Hellix", sans-serif;
+  font-size: 0.7rem;
+  font-weight: 400;
+  color: #333;
+  text-align: center;
+  line-height: 1.3;
+}
+
+/* Links de Tratamento */
+.tratamento-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 1rem 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.tratamento-link {
+  font-family: "Hellix", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: #333;
+  text-decoration: none;
+  padding: 0.6rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: color 0.3s ease;
+}
+
+.tratamento-link:hover {
+  color: #000;
+}
+
+.tratamento-link .arrow {
+  font-size: 1.2rem;
+  color: #999;
+  font-weight: 300;
+}
+
+.tratamento-link.has-arrow {
+  cursor: pointer;
+}
+
+/* Links com submenu (seção separada) */
+.tratamento-sublinks {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 1rem 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* Link destaque */
+.tratamento-expertise {
+  padding: 1rem 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.tratamento-link-bold {
+  font-weight: 500;
+}
+
+/* Coluna direita - Cards/Imagens */
+.tratamento-expanded-right {
+  flex: 1;
+  padding: 0 0 0 0;
+  margin-left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  overflow: hidden;
+  background: #f5f5f5;
+  height: 100%;
+  max-height: 100%;
+}
+
+/* Cards de tratamento */
+.tratamento-card {
+  position: relative;
+  overflow: hidden;
+  flex: 1;
+  min-height: 0;
+  cursor: pointer;
+  text-decoration: none;
+  display: block;
+  border-radius: 5px;
+  margin: 0 0.6rem 0 0.4rem;
+}
+
+.tratamento-card:first-child {
+  margin-top: 0;
+}
+
+.tratamento-card:last-child {
+  margin-bottom: 0.6rem;
+}
+
+.tratamento-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.tratamento-card:hover img {
+  transform: scale(1.05);
+}
+
+.tratamento-card-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.25rem;
+  text-align: center;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.4) 0%, transparent 100%);
+}
+
+.tratamento-card-title {
+  font-family: "Hellix", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: #fff;
+  margin: 0 0 0.4rem 0;
+}
+
+.tratamento-card-subtitle {
+  font-family: "Hellix", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: #fff;
+  margin: 0;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  display: inline-block;
+  position: relative;
+}
+
+/* ============================================================================
+   TRATAMENTO - Responsivo
+   ============================================================================ */
+
+@media (max-width: 768px) {
+  .moda-side-menu.tratamento-expanded {
+    width: 100%;
+    max-width: 100vw;
+  }
+
+  .tratamento-expanded-content {
+    flex-direction: column;
+    height: auto;
+    overflow-y: auto;
+  }
+
+  .tratamento-expanded-left {
+    width: 100%;
+    min-width: unset;
+    padding: 0 1.5rem 1rem 1.5rem;
+  }
+
+  .tratamento-expanded-right {
+    flex: none;
+    height: auto;
+    padding: 0 1rem 1rem 1rem;
+    gap: 0.75rem;
+  }
+
+  .tratamento-card {
+    height: 200px;
+    flex: none;
+    margin: 0;
+  }
+
+  .tratamento-icons-grid {
+    gap: 0.5rem;
+    justify-content: space-between;
+  }
+
+  .tratamento-icon-item {
+    width: auto;
+    flex: 1;
+    max-width: 70px;
+  }
+}
+
+/* ============================================================================
+   TRATAMENTO - Alto Contraste
+   ============================================================================ */
+
+body.high-contrast .tratamento-expanded-left {
+  background: #000 !important;
+}
+
+body.high-contrast .tratamento-expanded-right {
+  background: #1a1a1a !important;
+}
+
+body.high-contrast .tratamento-icons-title {
+  color: #aaa !important;
+}
+
+body.high-contrast .tratamento-icon-item span {
+  color: #fff !important;
+}
+
+body.high-contrast .tratamento-icon-item img {
+  background: #333 !important;
+}
+
+body.high-contrast .tratamento-link {
+  color: #fff !important;
+}
+
+body.high-contrast .tratamento-link:hover {
+  color: #ccc !important;
+}
+
+body.high-contrast .tratamento-link .arrow {
+  color: #666 !important;
+}
+
+body.high-contrast .tratamento-links,
+body.high-contrast .tratamento-sublinks,
+body.high-contrast .tratamento-expertise {
+  border-top-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+body.high-contrast .tratamento-card {
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+body.high-contrast .tratamento-card-overlay {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 100%) !important;
+}
+
+body.high-contrast .tratamento-card-title,
+body.high-contrast .tratamento-card-subtitle {
+  color: #fff !important;
+}
+
+/* Alta Perfumaria Panel */
+
 body.high-contrast .alta-perfumaria-left {
   background: #000 !important;
 }

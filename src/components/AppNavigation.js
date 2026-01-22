@@ -742,8 +742,9 @@ export class AppNavigation extends HTMLElement {
 
     this.currentSubmenu = submenuId;
 
-    // Verifica se é fragrância feminina para expandir o menu
+    // Verifica se é fragrância feminina ou tratamento para expandir o menu
     const isFragranceFeminina = submenuId === "fragrancia-feminina";
+    const isTratamento = submenuId === "tratamento";
 
     if (window.gsap) {
       // Se for fragrância feminina, expande o menu com animação
@@ -764,6 +765,44 @@ export class AppNavigation extends HTMLElement {
         // Anima os cards com stagger após o menu expandir
         setTimeout(() => {
           const cards = submenu.querySelectorAll(".fragrance-card");
+          if (cards.length) {
+            window.gsap.fromTo(
+              cards,
+              { opacity: 0, y: 30, scale: 0.95 },
+              {
+                opacity: 1,
+                y: 0,
+                scale: 1,
+                duration: 0.4,
+                stagger: 0.08,
+                ease: "power2.out",
+              },
+            );
+          }
+        }, 300);
+      }
+
+      // Se for tratamento, expande o menu para mostrar os cards
+      if (isTratamento && sideMenu) {
+        this.tratamentoExpanded = true;
+
+        // Detecta se é mobile
+        const isMobile = window.innerWidth <= 768;
+
+        // Adiciona classe e anima a largura
+        window.gsap.to(sideMenu, {
+          width: isMobile ? "100%" : "650px",
+          duration: 0.5,
+          ease: "power2.out",
+          onStart: () => {
+            sideMenu.classList.add("tratamento-expanded");
+            submenu.classList.add("submenu-expanded");
+          },
+        });
+
+        // Anima os cards com stagger após o menu expandir
+        setTimeout(() => {
+          const cards = submenu.querySelectorAll(".tratamento-card");
           if (cards.length) {
             window.gsap.fromTo(
               cards,
@@ -828,6 +867,33 @@ export class AppNavigation extends HTMLElement {
           onComplete: () => {
             sideMenu.classList.remove("fragrance-expanded");
             sideMenu.classList.remove("alta-perfumaria-expanded");
+            const submenu = this.querySelector(
+              `[data-submenu-id="${this.currentSubmenu}"]`,
+            );
+            if (submenu) submenu.classList.remove("submenu-expanded");
+          },
+        });
+      }
+    }
+
+    // Fecha expansão de tratamento se estiver aberta
+    if (this.tratamentoExpanded && sideMenu) {
+      this.tratamentoExpanded = false;
+
+      if (isMobile) {
+        // Em mobile, apenas remove as classes
+        sideMenu.classList.remove("tratamento-expanded");
+        const submenu = this.querySelector(
+          `[data-submenu-id="${this.currentSubmenu}"]`,
+        );
+        if (submenu) submenu.classList.remove("submenu-expanded");
+      } else if (window.gsap) {
+        window.gsap.to(sideMenu, {
+          width: "460px",
+          duration: 0.4,
+          ease: "power2.inOut",
+          onComplete: () => {
+            sideMenu.classList.remove("tratamento-expanded");
             const submenu = this.querySelector(
               `[data-submenu-id="${this.currentSubmenu}"]`,
             );
@@ -1002,10 +1068,12 @@ export class AppNavigation extends HTMLElement {
 
     // Reset expansões
     this.fragranceExpanded = false;
+    this.tratamentoExpanded = false;
 
     // Remove todas as classes de expansão do sideMenu
     sideMenu.classList.remove("active");
     sideMenu.classList.remove("fragrance-expanded");
+    sideMenu.classList.remove("tratamento-expanded");
     sideMenu.classList.remove("spa-expanded");
     sideMenu.classList.remove("alta-perfumaria-expanded");
     sideMenu.classList.remove("submenu-expanded");
@@ -1351,15 +1419,9 @@ export class AppNavigation extends HTMLElement {
             </div>
           </div>
 
-          <!-- Submenu: Tratamento -->
-          <div class="submenu-panel" data-submenu-id="tratamento" style="display: none;">
+          <!-- Submenu: Tratamento (Expandido com Cards) -->
+          <div class="submenu-panel tratamento-panel" data-submenu-id="tratamento" style="display: none;">
             <div class="submenu-header">
-              <button class="submenu-back-btn" data-spa-back style="display: none;">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M15 18l-6-6 6-6"/>
-                </svg>
-                <span>Spa</span>
-              </button>
               <button class="submenu-back-btn" data-tratamento-back>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M15 18l-6-6 6-6"/>
@@ -1367,28 +1429,69 @@ export class AppNavigation extends HTMLElement {
                 <span>Tratamento</span>
               </button>
             </div>
-            <div class="submenu-content-wrapper">
-              <!-- Lado esquerdo: Menu Tratamento/Spa -->
-              <div class="submenu-left-content">
-                <nav class="submenu-links">
-                  <a href="#novidades" class="submenu-link">O que há de novo</a>
-                  <a href="#spa" class="submenu-link has-spa-submenu" data-spa-trigger>Dior Spa</a>
+
+            <div class="tratamento-expanded-content">
+              <!-- Coluna Esquerda - Links e Ícones -->
+              <div class="tratamento-expanded-left">
+                <!-- Ícones de produtos -->
+                <div class="tratamento-icons">
+                  <p class="tratamento-icons-title">ICÔNICOS</p>
+                  <div class="tratamento-icons-grid">
+                    <a href="#le-baume" class="tratamento-icon-item">
+                      <img src="/images/presentear/bosinha.png" alt="Le Baume" />
+                      <span>Le Baume</span>
+                    </a>
+                    <a href="#dior-capture" class="tratamento-icon-item">
+                      <img src="/images/hidra2.webp" alt="Dior Capture" />
+                      <span>Dior Capture</span>
+                    </a>
+                    <a href="#dior-prestige" class="tratamento-icon-item">
+                      <img src="/images/hidratante.webp" alt="Dior Prestige" />
+                      <span>Dior Prestige</span>
+                    </a>
+                    <a href="#la-mousse" class="tratamento-icon-item">
+                      <img src="/images/lamousse.jpg" alt="La Mousse OFF/ON" />
+                      <span>La Mousse<br>OFF/ON</span>
+                    </a>
+                  </div>
+                </div>
+
+                <!-- Links principais -->
+                <nav class="tratamento-links">
+                  <a href="#novidades" class="tratamento-link">Novidades</a>
+                  <a href="#best-sellers" class="tratamento-link">Best sellers</a>
+                  <a href="#conjuntos" class="tratamento-link">Conjuntos de presentes</a>
+                </nav>
+
+                <!-- Links com submenu -->
+                <nav class="tratamento-sublinks">
+                  <a href="#beneficios" class="tratamento-link has-arrow">Benefícios <span class="arrow">›</span></a>
+                  <a href="#categorias" class="tratamento-link has-arrow">Categorias <span class="arrow">›</span></a>
+                  <a href="#colecoes" class="tratamento-link has-arrow">Coleções <span class="arrow">›</span></a>
+                </nav>
+
+                <!-- Link destaque -->
+                <nav class="tratamento-expertise">
+                  <a href="#expertise" class="tratamento-link tratamento-link-bold">Expertise de tratamento</a>
                 </nav>
               </div>
-              
-              <!-- Lado direito: Locais do Spa (aparece ao clicar em Dior Spa) -->
-              <div class="spa-locations-panel" data-spa-panel>
-                <nav class="spa-locations-list">
-                  <a href="#spa-new-york" class="spa-location-link">Dior Spa New York</a>
-                  <a href="#spa-cheval-blanc" class="spa-location-link">Dior Spa Cheval Blanc - Paris</a>
-                  <a href="#spa-harrods" class="spa-location-link">Dior la Suite At Harrods - London</a>
-                  <a href="#spa-plaza" class="spa-location-link">Dior Spa Plaza Athénée - Paris</a>
-                  <a href="#spa-lana" class="spa-location-link">Dior Spa The Lana - Dubaï</a>
-                  <a href="#spa-timeo" class="spa-location-link">Dior Spa Timeo - Sicily</a>
-                  <a href="#spa-doha" class="spa-location-link">Dior Luxury Beauty Retreat - Doha</a>
-                  <a href="#spa-scotsman" class="spa-location-link">Dior Spa Royal Scotsman</a>
-                  <a href="/dior-spa" class="spa-location-link spa-view-all" data-route="/dior-spa">Ver tudo</a>
-                </nav>
+
+              <!-- Coluna Direita - Cards de Imagens -->
+              <div class="tratamento-expanded-right">
+                <a href="#dior-capture" class="tratamento-card">
+                  <img src="/images/presentear/capture.jpg" alt="Dior Capture" />
+                  <div class="tratamento-card-overlay">
+                    <h4 class="tratamento-card-title">Dior Capture</h4>
+                    <p class="tratamento-card-subtitle">Descubra</p>
+                  </div>
+                </a>
+                <a href="#dior-prestige" class="tratamento-card">
+                  <img src="/images/presentear/rouge.jpg" alt="Dior Prestige" />
+                  <div class="tratamento-card-overlay">
+                    <h4 class="tratamento-card-title">Dior Prestige</h4>
+                    <p class="tratamento-card-subtitle">Descubra</p>
+                  </div>
+                </a>
               </div>
             </div>
           </div>
