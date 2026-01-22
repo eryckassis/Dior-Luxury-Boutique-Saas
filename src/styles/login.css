@@ -451,23 +451,535 @@
 }
 
 /* Responsive */
-@media (max-width: 1000px) {
+
+/* Tablet grande (até 1024px) */
+@media (max-width: 1024px) {
   .login-page .main {
-    transform: scale(0.9);
-    min-width: 810px;
+    width: 90%;
+    min-width: unset;
+    max-width: 900px;
   }
 }
 
+/* Tablet (até 900px) */
 @media (max-width: 900px) {
   .login-page .main {
-    transform: scale(0.8);
-    min-width: 720px;
+    width: 100%;
+    max-width: 500px;
+    min-height: auto;
+    height: auto;
+    margin: 20px auto;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .login-page .switch {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    order: -1; /* Coloca o vídeo acima */
+    border-radius: 12px 12px 0 0;
+  }
+
+  .login-page .switch__video {
+    border-radius: 12px 12px 0 0;
+  }
+
+  .login-page .switch__title {
+    font-size: 36px;
+    letter-spacing: 4px;
+  }
+
+  .login-page .container {
+    position: relative;
+    width: 100%;
+    padding: 40px 30px;
+  }
+
+  .login-page .b-container {
+    left: 0;
+  }
+
+  .login-page .form {
+    max-width: 100%;
+  }
+
+  .login-page .form_title {
+    left: 0;
+    font-size: 20px;
+    text-align: center;
+    width: 100%;
+  }
+
+  .login-page .form_subtitle {
+    left: 0;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 40px;
   }
 }
 
-@media (max-width: 750px) {
+/* Mobile grande (até 768px) */
+@media (max-width: 768px) {
+  .login-page .all-content {
+    padding: 20px 16px;
+  }
+
   .login-page .main {
-    transform: scale(0.7);
-    min-width: 630px;
+    margin: 10px auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  }
+
+  .login-page .switch {
+    height: 180px;
+    border-radius: 10px 10px 0 0;
+  }
+
+  .login-page .switch__video {
+    border-radius: 10px 10px 0 0;
+  }
+
+  .login-page .switch__title {
+    font-size: 32px;
+    letter-spacing: 3px;
+  }
+
+  .login-page .container {
+    padding: 36px 24px;
+  }
+
+  .login-page .form_title {
+    font-size: 18px;
+  }
+
+  .login-page .form_subtitle {
+    font-size: 13px;
+    margin-bottom: 36px;
+  }
+
+  .login-page .form__input {
+    font-size: 16px; /* Evita zoom no iOS */
+    padding: 12px 0;
+  }
+
+  .login-page .form__input::placeholder {
+    font-size: 14px;
+  }
+
+  .login-page .login-input-wrapper {
+    margin-bottom: 24px;
+  }
+
+  .login-page .form__link {
+    font-size: 13px;
+    margin-bottom: 28px;
+  }
+
+  .login-page .form__button {
+    padding: 14px;
+    font-size: 14px;
+    margin-bottom: 36px;
+  }
+
+  .login-page .login-footer {
+    gap: 10px;
+  }
+
+  .login-page .login-footer-text {
+    font-size: 13px;
+  }
+
+  .login-page .signup-button {
+    width: 100%;
+    padding: 14px 24px;
+    font-size: 14px;
+  }
+
+  /* Forgot Password Modal */
+  .forgot-password-modal {
+    width: 92%;
+    padding: 32px 24px;
+    border-radius: 10px;
+  }
+
+  .forgot-modal-title {
+    font-size: 20px;
+  }
+
+  .forgot-modal-subtitle {
+    font-size: 13px;
+    margin-bottom: 24px;
+  }
+
+  .forgot-email-input {
+    height: 48px;
+    font-size: 16px; /* Evita zoom no iOS */
+  }
+
+  .forgot-send-btn {
+    height: 48px;
+    font-size: 14px;
+  }
+}
+
+/* iPhone 14 Pro Max / 15 Pro Max / 16 Pro Max (430px) */
+@media (max-width: 430px) {
+  .login-page .all-content {
+    padding: 16px 12px;
+  }
+
+  .login-page .main {
+    margin: 8px auto;
+    border-radius: 8px;
+  }
+
+  .login-page .switch {
+    height: 160px;
+    border-radius: 8px 8px 0 0;
+  }
+
+  .login-page .switch__video {
+    border-radius: 8px 8px 0 0;
+  }
+
+  .login-page .switch__title {
+    font-size: 28px;
+    letter-spacing: 2px;
+  }
+
+  .login-page .container {
+    padding: 32px 20px;
+  }
+
+  .login-page .form_title {
+    font-size: 17px;
+    margin-bottom: 4px;
+  }
+
+  .login-page .form_subtitle {
+    font-size: 12px;
+    margin-bottom: 32px;
+  }
+
+  .login-page .login-input-wrapper {
+    margin-bottom: 22px;
+  }
+
+  .login-page .form__input {
+    padding: 11px 0;
+  }
+
+  .login-page .form__link {
+    margin-top: -12px;
+    margin-bottom: 24px;
+  }
+
+  .login-page .form__button {
+    padding: 13px;
+    margin-bottom: 32px;
+  }
+
+  .login-page .signup-button {
+    padding: 13px 20px;
+  }
+}
+
+/* iPhone 14 Pro / 15 Pro / 16 Pro (393px) */
+@media (max-width: 393px) {
+  .login-page .container {
+    padding: 28px 18px;
+  }
+
+  .login-page .form_title {
+    font-size: 16px;
+  }
+
+  .login-page .form_subtitle {
+    font-size: 12px;
+    margin-bottom: 28px;
+  }
+
+  .login-page .login-input-wrapper {
+    margin-bottom: 20px;
+  }
+
+  .login-page .form__input {
+    padding: 10px 0;
+    font-size: 15px;
+  }
+
+  .login-page .form__button {
+    padding: 12px;
+    margin-bottom: 28px;
+  }
+
+  .login-page .login-footer-text {
+    font-size: 12px;
+  }
+
+  .login-page .signup-button {
+    padding: 12px 18px;
+    font-size: 13px;
+  }
+
+  /* Forgot Password Modal */
+  .forgot-password-modal {
+    width: 94%;
+    padding: 28px 20px;
+  }
+
+  .forgot-modal-title {
+    font-size: 18px;
+  }
+
+  .forgot-modal-subtitle {
+    font-size: 12px;
+  }
+}
+
+/* iPhone SE / iPhone 14 / 15 / 16 (390px) */
+@media (max-width: 390px) {
+  .login-page .switch {
+    height: 150px;
+  }
+
+  .login-page .switch__title {
+    font-size: 26px;
+  }
+
+  .login-page .container {
+    padding: 26px 16px;
+  }
+
+  .login-page .form_title {
+    font-size: 15px;
+  }
+
+  .login-page .form_subtitle {
+    font-size: 11px;
+    margin-bottom: 26px;
+  }
+}
+
+/* iPhone SE 1st gen e menores (375px) */
+@media (max-width: 375px) {
+  .login-page .all-content {
+    padding: 12px 10px;
+  }
+
+  .login-page .switch {
+    height: 140px;
+  }
+
+  .login-page .switch__title {
+    font-size: 24px;
+  }
+
+  .login-page .container {
+    padding: 24px 14px;
+  }
+
+  .login-page .form_title {
+    font-size: 15px;
+  }
+
+  .login-page .form_subtitle {
+    font-size: 11px;
+    margin-bottom: 24px;
+  }
+
+  .login-page .login-input-wrapper {
+    margin-bottom: 18px;
+  }
+
+  .login-page .form__input {
+    padding: 10px 0;
+    font-size: 14px;
+  }
+
+  .login-page .form__input::placeholder {
+    font-size: 12px;
+  }
+
+  .login-page .form__link {
+    font-size: 11px;
+    margin-bottom: 20px;
+  }
+
+  .login-page .form__button {
+    padding: 11px;
+    font-size: 13px;
+    margin-bottom: 24px;
+  }
+
+  .login-page .login-footer-text {
+    font-size: 11px;
+  }
+
+  .login-page .signup-button {
+    padding: 11px 16px;
+    font-size: 12px;
+  }
+
+  /* Forgot Password Modal */
+  .forgot-password-modal {
+    width: 96%;
+    padding: 24px 16px;
+  }
+
+  .forgot-modal-title {
+    font-size: 16px;
+  }
+
+  .forgot-modal-subtitle {
+    font-size: 11px;
+    margin-bottom: 20px;
+  }
+
+  .forgot-email-input {
+    height: 44px;
+    padding: 0 14px;
+    font-size: 14px;
+  }
+
+  .forgot-send-btn {
+    height: 44px;
+    font-size: 13px;
+  }
+}
+
+/* Telas muito pequenas (320px) */
+@media (max-width: 320px) {
+  .login-page .all-content {
+    padding: 10px 8px;
+  }
+
+  .login-page .switch {
+    height: 120px;
+  }
+
+  .login-page .switch__title {
+    font-size: 20px;
+    letter-spacing: 1px;
+  }
+
+  .login-page .container {
+    padding: 20px 12px;
+  }
+
+  .login-page .form_title {
+    font-size: 14px;
+  }
+
+  .login-page .form_subtitle {
+    font-size: 10px;
+    margin-bottom: 20px;
+  }
+
+  .login-page .login-input-wrapper {
+    margin-bottom: 16px;
+  }
+
+  .login-page .form__input {
+    padding: 9px 0;
+    font-size: 13px;
+  }
+
+  .login-page .form__input::placeholder {
+    font-size: 11px;
+  }
+
+  .login-page .form__link {
+    font-size: 10px;
+    margin-bottom: 18px;
+  }
+
+  .login-page .form__button {
+    padding: 10px;
+    font-size: 12px;
+    margin-bottom: 20px;
+  }
+
+  .login-page .login-footer-text {
+    font-size: 10px;
+  }
+
+  .login-page .signup-button {
+    padding: 10px 14px;
+    font-size: 11px;
+  }
+
+  /* Forgot Password Modal */
+  .forgot-password-modal {
+    padding: 20px 14px;
+  }
+
+  .forgot-modal-title {
+    font-size: 15px;
+  }
+
+  .forgot-modal-subtitle {
+    font-size: 10px;
+    margin-bottom: 18px;
+  }
+
+  .forgot-email-input {
+    height: 42px;
+    padding: 0 12px;
+    font-size: 13px;
+  }
+
+  .forgot-send-btn {
+    height: 42px;
+    font-size: 12px;
+  }
+}
+
+/* Landscape mobile - quando a altura é muito pequena */
+@media (max-height: 500px) and (orientation: landscape) {
+  .login-page .all-content {
+    padding: 10px 20px;
+  }
+
+  .login-page .main {
+    margin: 10px auto;
+    min-height: auto;
+    flex-direction: row; /* Em landscape, volta ao lado a lado */
+  }
+
+  .login-page .switch {
+    position: relative;
+    width: 40%;
+    height: 100%;
+    min-height: 280px;
+    order: 0;
+    border-radius: 10px 0 0 10px;
+  }
+
+  .login-page .switch__video {
+    border-radius: 10px 0 0 10px;
+  }
+
+  .login-page .container {
+    width: 60%;
+    padding: 20px 30px;
+  }
+
+  .login-page .form_subtitle {
+    margin-bottom: 20px;
+  }
+
+  .login-page .login-input-wrapper {
+    margin-bottom: 16px;
+  }
+
+  .login-page .form__button {
+    margin-bottom: 20px;
+  }
+
+  .login-page .form__link {
+    margin-bottom: 16px;
   }
 }

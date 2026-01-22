@@ -2,11 +2,11 @@
 // PRIMAVERA-VERÃO 2026 PAGE - Desfile Primavera-Verão 2026
 // ============================================================================
 
-import "../components/ModaNavigation.js";
-import "../components/FooterSection.js";
-import "../components/LooksGallery.js";
-import { looksPrimaveraVerao2026 } from "../data/looks-data.js";
-import { getSmoothScroll } from "../components/SmoothScroll.js";
+import "../../../src/components/ModaNavigation.js";
+import "../../../src/components/FooterSection.js";
+import "../../../src/components/LooksGallery.js";
+import { looksPrimaveraVerao2026 } from "../../../src/data/looks-data.js";
+import { getSmoothScroll } from "../../../src/components/SmoothScroll.js";
 
 export class PrimaveraVerao2026Page extends HTMLElement {
   constructor() {

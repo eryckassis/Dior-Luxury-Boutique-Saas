@@ -42,7 +42,7 @@ import "./pages/GrisDiorPage.js";
 import "./pages/DiorivieraPage.js";
 import "./pages/DiorRivieraPageDois.js";
 import "./pages/DiorSpaPage.js";
-import "./pages/PrimaveraVerao2026Page.js";
+import "../public/images/bastidores/PrimaveraVerao2026Page.js";
 import "./components/ProfileMenu.js";
 import "./components/FragrancesModal.js";
 import "./components/AppNavigation.js";

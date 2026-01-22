@@ -1127,7 +1127,7 @@ export class AppNavigation extends HTMLElement {
           <a href="/" class="moda-logo-link" data-route="/">
             <img
               class="logo-raster"
-              src="/images/Design sem nome (6).svg"
+              src="/images/dior-logo-vector.svg"
               alt="Dior Logo"
               width="140"
               height="32"

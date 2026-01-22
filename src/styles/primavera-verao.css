@@ -229,6 +229,166 @@
 }
 
 /* ============================================================================
+   O CENÁRIO SECTION
+   ============================================================================ */
+
+.desfile-cenario-section {
+  padding: 5rem 2rem;
+  text-align: center;
+  max-width: 1100px;
+  margin: 0 auto;
+  background: #f9f8f6;
+}
+
+.desfile-cenario-title {
+  font-family: "Hellix", sans-serif;
+  font-size: 2rem;
+  font-weight: 400;
+  color: #1a1a1a;
+  margin-bottom: 2.5rem;
+  letter-spacing: 0.02em;
+}
+
+.desfile-cenario-text {
+  font-family: "Hellix", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 400;
+  line-height: 1.9;
+  color: #888;
+  margin-bottom: 1rem;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.desfile-cenario-text:last-child {
+  margin-bottom: 0;
+}
+
+/* ============================================================================
+   SAVOIR-FAIRE SECTION
+   ============================================================================ */
+
+.savoir-faire-section {
+  padding: 5rem 0;
+  background: #f9f8f6;
+}
+
+.savoir-faire-title {
+  font-family: "Hellix", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #1a1a1a;
+  text-align: center;
+  margin-bottom: 3rem;
+  letter-spacing: 0.02em;
+}
+
+.savoir-faire-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  width: 100%;
+}
+
+.savoir-faire-card {
+  position: relative;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  background: #e8e6e3;
+}
+
+.savoir-faire-image,
+.savoir-faire-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.savoir-faire-card:hover .savoir-faire-image,
+.savoir-faire-card:hover .savoir-faire-video {
+  transform: scale(1.03);
+}
+
+/* Video Button - Liquid Glass Style */
+.savoir-video-btn {
+  position: absolute;
+  left: 1.5rem;
+  bottom: 1.5rem;
+  width: 36px;
+  height: 36px;
+  border-radius: 20%;
+  border: none;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  color: #ffffff;
+}
+
+.savoir-video-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.05);
+}
+
+.savoir-video-btn:active {
+  transform: scale(0.98);
+}
+
+.savoir-video-btn svg {
+  width: 18px;
+  height: 18px;
+  transition: opacity 0.3s ease;
+}
+
+.savoir-video-btn .play-icon {
+  fill: currentColor;
+  stroke: none;
+}
+
+.savoir-video-btn .pause-icon {
+  fill: #ffffff;
+  stroke: none;
+  display: none;
+}
+
+.savoir-video-btn.playing .play-icon {
+  display: none;
+}
+
+.savoir-video-btn.playing .pause-icon {
+  display: block;
+}
+
+/* ============================================================================
+   BASTIDORES SECTION
+   ============================================================================ */
+
+.bastidores-section {
+  padding: 5rem 0;
+  max-width: 100%;
+}
+
+.bastidores-section .desfile-cenario-title {
+  margin-bottom: 1.5rem;
+}
+
+.bastidores-section .desfile-cenario-text {
+  margin-bottom: 3rem;
+  font-style: italic;
+}
+
+.bastidores-grid {
+  margin-top: 2rem;
+}
+
+/* ============================================================================
    RESPONSIVE
    ============================================================================ */
 
@@ -260,6 +420,45 @@
   .desfile-text-content {
     font-size: 1rem;
   }
+
+  .desfile-cenario-section {
+    padding: 4rem 1.5rem;
+  }
+
+  .desfile-cenario-title {
+    font-size: 1.75rem;
+  }
+
+  .desfile-cenario-text {
+    font-size: 0.9rem;
+  }
+
+  /* Savoir-faire responsive 768px */
+  .savoir-faire-section {
+    padding: 4rem 0;
+  }
+
+  .savoir-faire-title {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+  }
+
+  .savoir-faire-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+
+  .savoir-video-btn {
+    left: 1rem;
+    bottom: 1rem;
+    width: 32px;
+    height: 32px;
+  }
+
+  .savoir-video-btn svg {
+    width: 16px;
+    height: 16px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -278,6 +477,47 @@
 
   .desfile-read-more-btn {
     font-size: 0.9rem;
+  }
+
+  .desfile-cenario-section {
+    padding: 3rem 1rem;
+  }
+
+  .desfile-cenario-title {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .desfile-cenario-text {
+    font-size: 0.85rem;
+    line-height: 1.8;
+  }
+
+  /* Savoir-faire responsive 480px */
+  .savoir-faire-section {
+    padding: 3rem 0;
+  }
+
+  .savoir-faire-title {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .savoir-faire-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4px;
+  }
+
+  .savoir-video-btn {
+    left: 0.75rem;
+    bottom: 0.75rem;
+    width: 28px;
+    height: 28px;
+  }
+
+  .savoir-video-btn svg {
+    width: 14px;
+    height: 14px;
   }
 }
 

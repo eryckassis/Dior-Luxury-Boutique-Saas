@@ -103,9 +103,10 @@ moda-acessorios-page main {
 
 .moda-logo-link img {
   height: auto;
-  width: 200px;
+  width: 150px;
+  max-width: 100%;
   filter: brightness(0) invert(1);
-  transition: filter 0.4s ease;
+  transition: filter 0.4s ease, width 0.3s ease;
 }
 
 /* Logo vetorial escondido por padrão (desktop) */
@@ -757,9 +758,15 @@ moda-acessorios-page main {
 
   .moda-logo-link .logo-vector {
     display: block;
-    width: 100px;
+    width: 90px;
+    max-width: 90px;
     height: auto;
     filter: none;
+    transition: width 0.3s ease;
+  }
+
+  .moda-nav-logo {
+    max-width: 100px;
   }
 
   /* Submenu Mobile - Stack Layout */
@@ -929,7 +936,12 @@ moda-acessorios-page main {
   }
 
   .moda-logo-link .logo-vector {
-    width: 80px;
+    width: 75px !important;
+    max-width: 75px;
+  }
+
+  .moda-nav-logo {
+    max-width: 85px;
   }
 }
 
@@ -962,7 +974,12 @@ moda-acessorios-page main {
   }
 
   .moda-logo-link .logo-vector {
-    width: 80px;
+    width: 70px !important;
+    max-width: 70px;
+  }
+
+  .moda-nav-logo {
+    max-width: 80px;
   }
 
   /* Submenu Cards para telas pequenas */

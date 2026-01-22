@@ -578,7 +578,7 @@ export class ModaNavigation extends HTMLElement {
         <div class="moda-nav-logo">
           <a href="/" class="moda-logo-link" data-route="/">
             <img
-              src="/images/Design sem nome (6).svg"
+              src="/images/dior-logo-vector.svg"
               alt="Dior Logo"
               width="140"
               height="32"
