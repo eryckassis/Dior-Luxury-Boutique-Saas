@@ -103,7 +103,7 @@ moda-acessorios-page main {
 
 .moda-logo-link img {
   height: auto;
-  width: 150px;
+  width: 130px;
   max-width: 100%;
   filter: brightness(0) invert(1);
   transition: filter 0.4s ease, width 0.3s ease;
