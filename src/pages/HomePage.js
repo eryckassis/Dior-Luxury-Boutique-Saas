@@ -1175,7 +1175,7 @@ export class HomePage extends HTMLElement {
                 <div class="diorivera-text-content">
                   <span class="diorivera-label">La Collection Privée</span>
                   <h2 class="diorivera-title">O espírito da alta costura de verão</h2>
-                  <a href="/dior-verao" class="diorivera-button" data-route="/dior-verao">Descubra</a>
+                  <a href="/dioriviera-dois" class="diorivera-button" data-route="/dioriviera-dois">Descubra</a>
                 </div>
               </div>
               
@@ -1802,7 +1802,7 @@ export class HomePage extends HTMLElement {
             <div class="jadore-text-content">
               <span class="jadore-label">J'adore Eau de Parfum</span>
               <h2 class="jadore-title">A flor dos sonhos de J'adore</h2>
-              <a href="/miss-dior" class="jadore-button" data-route="/miss-dior">Descubra</a>
+              <a href="/dioriviera" class="jadore-button" data-route="/dioriviera-dois">Descubra</a>
             </div>
           </div>
         </div>
