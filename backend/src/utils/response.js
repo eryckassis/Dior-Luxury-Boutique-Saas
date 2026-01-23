@@ -3,7 +3,7 @@ export class ApiResponse {
     res,
     data = null,
     message = "Operação realizada com sucesso",
-    statusCode = 200
+    statusCode = 200,
   ) {
     return res.status(statusCode).json({
       success: true,
@@ -18,7 +18,7 @@ export class ApiResponse {
     message = "Ocorreu um erro",
     statusCode = 500,
     errorCode = null,
-    errors = null
+    errors = null,
   ) {
     const response = {
       success: false,
@@ -52,14 +52,14 @@ export class ApiResponse {
 
   static unauthorized(
     res,
-    message = "Autenticação necessária. Por favor, faça login."
+    message = "Autenticação necessária. Por favor, faça login.",
   ) {
     return this.error(res, message, 401, "ERR_UNAUTHORIZED");
   }
 
   static forbidden(
     res,
-    message = "Você não tem permissão para acessar este recurso."
+    message = "Você não tem permissão para acessar este recurso.",
   ) {
     return this.error(res, message, 403, "ERR_FORBIDDEN");
   }
@@ -77,14 +77,14 @@ export class ApiResponse {
   static validationError(
     res,
     errors,
-    message = "Erro de validação. Verifique os dados enviados."
+    message = "Erro de validação. Verifique os dados enviados.",
   ) {
     return this.error(res, message, 422, "ERR_VALIDATION", errors);
   }
 
   static tooManyRequests(
     res,
-    message = "Muitas tentativas. Por favor, aguarde alguns minutos e tente novamente."
+    message = "Muitas tentativas. Por favor, aguarde alguns minutos e tente novamente.",
   ) {
     return this.error(res, message, 429, "ERR_RATE_LIMIT");
   }
@@ -92,7 +92,7 @@ export class ApiResponse {
   static internalError(
     res,
     message = "Erro interno do servidor. Nossa equipe foi notificada.",
-    error = null
+    error = null,
   ) {
     if (error) {
       console.error("X Internal Server Error:", error);
@@ -103,20 +103,20 @@ export class ApiResponse {
       message,
       500,
       "ERR_INTERNAL_SERVER",
-      process.env.NODE_ENV === "development" ? error : null
+      process.env.NODE_ENV === "development" ? error : null,
     );
   }
 
   static serviceUnavailable(
     res,
-    message = "Serviço temporariamente indisponível. Tente novamente em instantes."
+    message = "Serviço temporariamente indisponível. Tente novamente em instantes.",
   ) {
     return this.error(res, message, 503, "ERR_SERVICE_UNAVAILABLE");
   }
 
   static tokenExpired(
     res,
-    message = "Sua sessão expirou. Por favor, faça login novamente."
+    message = "Sua sessão expirou. Por favor, faça login novamente.",
   ) {
     return this.error(res, message, 401, "ERR_TOKEN_EXPIRED");
   }
@@ -139,7 +139,7 @@ export class ApiResponse {
 
   static emailNotVerified(
     res,
-    message = "Por favor, verifique seu e-mail antes de fazer login."
+    message = "Por favor, verifique seu e-mail antes de fazer login.",
   ) {
     return this.error(res, message, 403, "ERR_EMAIL_NOT_VERIFIED");
   }

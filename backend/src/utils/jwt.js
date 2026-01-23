@@ -23,7 +23,7 @@ export class JwtUtil {
         audience: "dior-client",
       });
     } catch (error) {
-      console.error("❌ Erro ao gerar refresh token:", error);
+      console.error(" Erro ao gerar refresh token:", error);
       throw new Error("Falha ao gerar token de atualização");
     }
   }
@@ -57,7 +57,7 @@ export class JwtUtil {
     } catch (error) {
       if (error.name === "TokenExpiredError") {
         throw new Error(
-          "Refresh token expirado. Por favor, faça login novamente."
+          "Refresh token expirado. Por favor, faça login novamente.",
         );
       }
       if (error.name === "JsonWebTokenError") {

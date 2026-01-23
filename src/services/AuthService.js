@@ -1,7 +1,3 @@
-// ============================================================================
-// AUTH SERVICE - Gerenciamento de Autenticação com Supabase
-// ============================================================================
-
 import { supabase } from "./supabaseClient.js";
 
 class AuthService {
@@ -11,19 +7,13 @@ class AuthService {
     this.currentSession = null;
     this._initialized = false;
 
-    // Inicializa de forma controlada
     this._initPromise = this.initialize();
   }
-
-  // ========================================================================
-  // INICIALIZAÇÃO ÚNICA
-  // ========================================================================
 
   async initialize() {
     console.log("🔐 AuthService: Iniciando...");
 
     try {
-      // Busca sessão existente
       const {
         data: { session },
       } = await supabase.auth.getSession();
@@ -36,7 +26,6 @@ class AuthService {
       this._initialized = true;
       this.notifyListeners();
 
-      // Configura listener para mudanças futuras
       this.setupAuthListener();
     } catch (error) {
       console.error("❌ AuthService: Erro na inicialização:", error);
@@ -44,9 +33,6 @@ class AuthService {
     }
   }
 
-  /**
-   * Listener para mudanças de auth APÓS inicialização
-   */
   setupAuthListener() {
     supabase.auth.onAuthStateChange(async (event, session) => {
       console.log("🔐 Auth Event:", event);
@@ -79,7 +65,6 @@ class AuthService {
       this.notifyListeners();
     });
 
-    // Listener para atualização de perfil
     window.addEventListener("profile-updated", (e) => {
       if (e.detail?.name && this.currentUser) {
         this.currentUser = {
@@ -94,16 +79,9 @@ class AuthService {
     });
   }
 
-  /**
-   * Aguarda inicialização completa
-   */
   async waitForInit() {
     return this._initPromise;
   }
-
-  // ========================================================================
-  // AUTENTICAÇÃO
-  // ========================================================================
 
   async register({ name, email, password }) {
     try {

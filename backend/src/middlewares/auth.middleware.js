@@ -1,43 +1,21 @@
-// ============================================================================
-// AUTH MIDDLEWARE - Validação de Tokens Supabase
-// ============================================================================
-
 import { verifyUserToken, getUserProfile } from "../config/supabase.js";
 import { ApiResponse } from "../utils/response.js";
+import { CookieUtil } from "../utils/cookies.js";
 
 export class AuthMiddleware {
-  /**
-   * Middleware principal de autenticação
-   * Valida token Supabase e adiciona user ao req
-   */
   static async authenticate(req, res, next) {
     try {
-      // 1. Extrai o token do header
-      const authHeader = req.headers.authorization;
+      const token = CookieUtil.getAccessToken(req);
 
-      if (!authHeader) {
+      if (!token) {
         return ApiResponse.unauthorized(
           res,
           "Token de autenticação não fornecido. Por favor, faça login.",
         );
       }
 
-      // 2. Valida formato Bearer
-      const parts = authHeader.split(" ");
-
-      if (parts.length !== 2 || parts[0] !== "Bearer") {
-        return ApiResponse.unauthorized(
-          res,
-          "Formato de token inválido. Use: Bearer <token>",
-        );
-      }
-
-      const token = parts[1];
-
-      // 3. Verifica token no Supabase
       const user = await verifyUserToken(token);
 
-      // 4. Adiciona dados do usuário ao request
       req.user = {
         userId: user.id,
         email: user.email,
@@ -47,7 +25,9 @@ export class AuthMiddleware {
 
       next();
     } catch (error) {
-      console.error("❌ Erro na autenticação:", error.message);
+      console.error(" Erro na autenticação:", error.message);
+
+      CookieUtil.clearAuthCookies(res);
 
       if (
         error.message.includes("expired") ||
@@ -70,66 +50,72 @@ export class AuthMiddleware {
     }
   }
 
-  /**
-   * Middleware opcional - permite acesso com ou sem autenticação
-   * Útil para rotas que têm comportamento diferente para usuários logados
-   */
   static async optionalAuth(req, res, next) {
     try {
-      const authHeader = req.headers.authorization;
+      const token = CookieUtil.getAccessToken(req);
 
-      if (!authHeader) {
+      if (!token) {
         req.user = null;
         return next();
       }
 
-      const parts = authHeader.split(" ");
-
-      if (parts.length === 2 && parts[0] === "Bearer") {
-        const token = parts[1];
-        const user = await verifyUserToken(token);
-
-        req.user = {
-          userId: user.id,
-          email: user.email,
-          emailConfirmed: user.email_confirmed_at !== null,
-          metadata: user.user_metadata,
-        };
-      } else {
-        req.user = null;
-      }
+      const user = await verifyUserToken(token);
+      req.user = {
+        userId: user.id,
+        email: user.email,
+        emailConfirmed: user.email_confirmed_at !== null,
+        metadata: user.user_metadata,
+      };
 
       next();
     } catch (error) {
-      // Em caso de erro, continua sem usuário
       req.user = null;
       next();
     }
   }
 
-  /**
-   * Middleware que requer email verificado
-   * Use após authenticate()
-   */
-  static requireEmailVerified(req, res, next) {
-    if (!req.user) {
-      return ApiResponse.unauthorized(res, "Autenticação necessária.");
-    }
+  static async validateCSRF(req, res, next) {
+    try {
+      if (req.method === "GET" || req.method === "OPTIONS") {
+        return next();
+      }
 
-    if (!req.user.emailConfirmed) {
+      CookieUtil.validateCSRF(req);
+      next();
+    } catch (error) {
+      console.error(" CSRF validations failed:", error.message);
       return ApiResponse.forbidden(
         res,
-        "Por favor, confirme seu email antes de continuar.",
+        "Requisição inválida. Tente Novamente.",
       );
     }
+  }
 
+  static requireEmailVerified(req, res, next) {
+    if (!req.user?.emailConfirmed) {
+      return ApiResponse.emailNotVerified(
+        res,
+        "Por favor, verifique seu email antes de continuar",
+      );
+    }
     next();
   }
 
-  /**
-   * Middleware que carrega perfil completo do usuário
-   * Use após authenticate() quando precisar dos dados do perfil
-   */
+  static authorize(...allowedRoles) {
+    return (req, res, next) => {
+      const userRole = req.user?.metadata?.role || "user";
+
+      if (!allowedRoles.includes(userRole)) {
+        return ApiResponse.forbidden(
+          res,
+          "Voce nao tem permissai para acessar este recurso",
+        );
+      }
+
+      next();
+    };
+  }
+
   static async loadProfile(req, res, next) {
     try {
       if (!req.user) {
@@ -142,7 +128,6 @@ export class AuthMiddleware {
       next();
     } catch (error) {
       console.error("❌ Erro ao carregar perfil:", error.message);
-      // Continua mesmo sem perfil
       req.user.profile = null;
       next();
     }

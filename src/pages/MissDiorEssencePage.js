@@ -116,7 +116,7 @@ export class MissDiorEssencePage extends HTMLElement {
 
       productCards.forEach((card, index) => {
         const imageWrapper = card.querySelector(
-          ".essence-product-image-wrapper"
+          ".essence-product-image-wrapper",
         );
         const image = card.querySelector(".essence-product-image");
         const overlay = card.querySelector(".essence-image-reveal-overlay");
@@ -164,7 +164,7 @@ export class MissDiorEssencePage extends HTMLElement {
               duration: 1.2,
               ease: "power3.out",
             },
-            "-=1.2"
+            "-=1.2",
           )
           .to(
             productInfo,
@@ -174,7 +174,7 @@ export class MissDiorEssencePage extends HTMLElement {
               duration: 0.8,
               ease: "power2.out",
             },
-            "-=0.6"
+            "-=0.6",
           );
       });
     });
