@@ -47,7 +47,10 @@ export class ProductReviews extends HTMLElement {
   disconnectedCallback() {
     // Remove subscription real-time
     if (this.realtimeCallback) {
-      reviewService.unsubscribeFromProduct(this.productId, this.realtimeCallback);
+      reviewService.unsubscribeFromProduct(
+        this.productId,
+        this.realtimeCallback,
+      );
     }
   }
 
@@ -367,7 +370,7 @@ export class ProductReviews extends HTMLElement {
 
   render() {
     const safeProductId = this.productId.replace(/[^a-zA-Z0-9-_]/g, "");
-    
+
     this.innerHTML = `
       <section class="reviews-section-product">
         <div class="reviews-container">

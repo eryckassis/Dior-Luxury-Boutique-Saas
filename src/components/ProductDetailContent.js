@@ -188,7 +188,7 @@ export class ProductDetailContent extends HTMLElement {
         const slideIndex = Math.round(Math.abs(currentX) / wrapperWidth);
         this.currentSlide = Math.max(
           0,
-          Math.min(slideIndex, slides.length - 1)
+          Math.min(slideIndex, slides.length - 1),
         );
 
         gsap.to(track, {
@@ -384,7 +384,7 @@ export class ProductDetailContent extends HTMLElement {
     this.querySelectorAll(".product-size-item:not(.unavailable)").forEach(
       (item) => {
         item.addEventListener("click", () => this.selectSize(item));
-      }
+      },
     );
 
     // Tabs
@@ -403,7 +403,7 @@ export class ProductDetailContent extends HTMLElement {
       "click",
       () => {
         this.addToCart();
-      }
+      },
     );
 
     // Event listeners dos produtos relacionados são tratados no drag
@@ -496,7 +496,7 @@ export class ProductDetailContent extends HTMLElement {
         <div class="product-gallery-slide">
           <img src="${img}" alt="${this.product.name} - Imagem ${index + 1}" />
         </div>
-      `
+      `,
       )
       .join("");
 
@@ -508,7 +508,7 @@ export class ProductDetailContent extends HTMLElement {
           <div class="gallery-dot ${
             index === 0 ? "active" : ""
           }" data-index="${index}"></div>
-        `
+        `,
         )
         .join("");
     }
@@ -712,7 +712,7 @@ export class ProductDetailContent extends HTMLElement {
                     index + 1
                   }" />
                 </div>
-              `
+              `,
                 )
                 .join("")}
             </div>
@@ -738,7 +738,7 @@ export class ProductDetailContent extends HTMLElement {
               <div class="gallery-dot ${
                 index === 0 ? "active" : ""
               }" data-index="${index}"></div>
-            `
+            `,
               )
               .join("")}
           </div>
@@ -756,7 +756,7 @@ export class ProductDetailContent extends HTMLElement {
             <a href="/" data-route="/">Home</a>
             <span>/</span>
             <a href="/para-ela" data-route="/para-ela">${this.getCategoryLabel(
-              product.category
+              product.category,
             )}</a>
             <span>/</span>
             <span>${product.name}</span>
@@ -789,7 +789,7 @@ export class ProductDetailContent extends HTMLElement {
                        title="${color.label}">
                     <img src="${color.image}" alt="${color.label}" />
                   </div>
-                `
+                `,
                   )
                   .join("")}
                 ${
@@ -822,7 +822,7 @@ export class ProductDetailContent extends HTMLElement {
                   .map(
                     (size) => `
                   <div class="product-size-item" data-size="${size}">${size}</div>
-                `
+                `,
                   )
                   .join("")}
               </div>
@@ -1012,7 +1012,7 @@ export class ProductDetailContent extends HTMLElement {
                     <p class="related-product-price">${p.price}</p>
                   </div>
                 </div>
-              `
+              `,
                 )
                 .join("")}
             </div>
