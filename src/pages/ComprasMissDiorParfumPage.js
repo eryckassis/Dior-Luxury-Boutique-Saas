@@ -4,6 +4,7 @@
 
 import "../components/AppNavigation.js";
 import "../components/FooterSection.js";
+import "../components/ProductReviews.js";
 
 export class ComprasMissDiorParfumPage extends HTMLElement {
   constructor() {
@@ -81,7 +82,7 @@ export class ComprasMissDiorParfumPage extends HTMLElement {
           // Add active class to clicked button and corresponding content
           button.classList.add("active");
           const targetContent = this.querySelector(
-            `.tab-content[data-tab="${tabId}"]`
+            `.tab-content[data-tab="${tabId}"]`,
           );
           if (targetContent) {
             targetContent.classList.add("active");
@@ -92,11 +93,11 @@ export class ComprasMissDiorParfumPage extends HTMLElement {
       // Image Reveal Animation with GSAP
       if (window.gsap && window.ScrollTrigger) {
         const imageRevealWrapper = this.querySelector(
-          ".image-reveal-wrapper-full"
+          ".image-reveal-wrapper-full",
         );
         if (imageRevealWrapper) {
           const overlay = imageRevealWrapper.querySelector(
-            ".reveal-overlay-full"
+            ".reveal-overlay-full",
           );
           const image = imageRevealWrapper.querySelector(".reveal-image-full");
 
@@ -123,90 +124,12 @@ export class ComprasMissDiorParfumPage extends HTMLElement {
                 duration: 1.2,
                 ease: "power3.out",
               },
-              "-=1.2"
+              "-=1.2",
             );
         }
       }
 
-      // Review Form Modal
-      const writeReviewBtn = this.querySelector(".reviews-load-more");
-      const reviewModal = this.querySelector(".review-modal");
-      const closeModalBtn = this.querySelector(".close-review-modal");
-      const reviewForm = this.querySelector(".review-form");
-      const starRatingInputs = this.querySelectorAll(".star-rating-input");
-
-      // Open modal
-      if (writeReviewBtn && reviewModal) {
-        writeReviewBtn.addEventListener("click", () => {
-          reviewModal.classList.add("active");
-          document.body.style.overflow = "hidden";
-        });
-      }
-
-      // Close modal
-      if (closeModalBtn && reviewModal) {
-        closeModalBtn.addEventListener("click", () => {
-          reviewModal.classList.remove("active");
-          document.body.style.overflow = "auto";
-          document.body.style.overflowX = "hidden";
-        });
-
-        // Close on backdrop click
-        reviewModal.addEventListener("click", (e) => {
-          if (e.target === reviewModal) {
-            reviewModal.classList.remove("active");
-            document.body.style.overflow = "auto";
-            document.body.style.overflowX = "hidden";
-          }
-        });
-      }
-
-      // Star rating selection
-      starRatingInputs.forEach((star, index) => {
-        star.addEventListener("click", () => {
-          starRatingInputs.forEach((s, i) => {
-            if (i <= index) {
-              s.classList.add("selected");
-            } else {
-              s.classList.remove("selected");
-            }
-          });
-        });
-      });
-
-      // Form submission
-      if (reviewForm) {
-        reviewForm.addEventListener("submit", (e) => {
-          e.preventDefault();
-
-          const formData = new FormData(reviewForm);
-          const rating = this.querySelectorAll(
-            ".star-rating-input.selected"
-          ).length;
-          const reviewText = formData.get("review-text");
-          const recommend = formData.get("recommend");
-          const name = formData.get("reviewer-name");
-
-          // Aqui você pode enviar para uma API
-          console.log({
-            rating,
-            reviewText,
-            recommend,
-            name,
-            date: new Date().toISOString(),
-          });
-
-          // Fechar modal e resetar form
-          reviewModal.classList.remove("active");
-          document.body.style.overflow = "auto";
-          document.body.style.overflowX = "hidden";
-          reviewForm.reset();
-          starRatingInputs.forEach((s) => s.classList.remove("selected"));
-
-          // Mostrar mensagem de sucesso
-          alert("Avaliação enviada com sucesso!");
-        });
-      }
+      // Reviews agora são gerenciados pelo componente <product-reviews>
     });
   }
 
@@ -357,186 +280,12 @@ export class ComprasMissDiorParfumPage extends HTMLElement {
             </div>
           </section>
 
-          <!-- Reviews Section -->
-          <section class="reviews-section-product">
-            <div class="reviews-container">
-              <div class="reviews-header-product">
-                <p class="reviews-gama-text">A gama <span class="miss-dior-highlight">Miss Dior</span> por intensidade</p>
-                <a href="#" class="reviews-discover-link">Descubra</a>
-              </div>
-
-              <div class="reviews-title-area">
-                <h3 class="reviews-main-title">Avaliações sobre o produto</h3>
-              </div>
-
-              <div class="reviews-box-product">
-                <div class="reviews-summary">
-                  <p class="reviews-label">Avaliações</p>
-                  <div class="reviews-stars-display">
-                    <span class="review-star-filled">★</span>
-                    <span class="review-star-filled">★</span>
-                    <span class="review-star-filled">★</span>
-                    <span class="review-star-filled">★</span>
-                    <span class="review-star-filled">★</span>
-                    <span class="review-star-empty">☆</span>
-                  </div>
-                  <p class="reviews-count">892 avaliações</p>
-                </div>
-
-                <div class="reviews-list">
-                  <!-- Review 1 -->
-                  <div class="review-item-card">
-                    <div class="review-stars-rating">
-                      <span class="review-star-filled">★</span>
-                      <span class="review-star-filled">★</span>
-                      <span class="review-star-filled">★</span>
-                      <span class="review-star-filled">★</span>
-                      <span class="review-star-filled">★</span>
-                    </div>
-                    <p class="review-date">Enviado há 8 dias</p>
-                    <p class="review-text">Estou encantado com o Miss Dior, achei um perfume super adorável e feminino, tem um cheirinho floral muito com um toque adocicado que fica de noite mais elegante.</p>
-                    <p class="review-recommendation">Você recomendaria esse produto a um amigo?<br><strong>Sim</strong></p>
-                    <p class="review-author">Por Renata A.</p>
-                  </div>
-
-                  <!-- Review 2 -->
-                  <div class="review-item-card">
-                    <div class="review-stars-rating">
-                      <span class="review-star-filled">★</span>
-                      <span class="review-star-filled">★</span>
-                      <span class="review-star-filled">★</span>
-                      <span class="review-star-filled">★</span>
-                      <span class="review-star-filled">★</span>
-                    </div>
-                    <p class="review-date">Enviado há 6 dias</p>
-                    <p class="review-text">Miss Dior é sempre top de perfume que eu recebi, absolutamente fixado na minha pele e muito marcante, o aroma maravilhoso.</p>
-                    <p class="review-recommendation">Você recomendaria esse produto a um amigo?<br><strong>Sim</strong></p>
-                    <p class="review-author">Por Micaella P.</p>
-                  </div>
-
-                  <!-- Review 3 -->
-                  <div class="review-item-card">
-                    <div class="review-stars-rating">
-                      <span class="review-star-filled">★</span>
-                      <span class="review-star-filled">★</span>
-                      <span class="review-star-filled">★</span>
-                      <span class="review-star-filled">★</span>
-                      <span class="review-star-filled">★</span>
-                    </div>
-                    <p class="review-date">Enviado há 6 dias</p>
-                    <p class="review-text">Eu adoro o Miss Dior! Prefiro sem o laço porque fica mais compacto e lindo. Tem fragrância ajuizada delicada como o chá de Perfum, mas com notas mais construídas, balsâmico.</p>
-                    <p class="review-recommendation">Você recomendaria esse produto a um amigo?<br><strong>Sim</strong></p>
-                    <p class="review-author">Por Vanessa A.</p>
-                  </div>
-
-                  <!-- Review 4 -->
-                  <div class="review-item-card">
-                    <div class="review-stars-rating">
-                      <span class="review-star-filled">★</span>
-                      <span class="review-star-filled">★</span>
-                      <span class="review-star-filled">★</span>
-                      <span class="review-star-filled">★</span>
-                      <span class="review-star-filled">★</span>
-                    </div>
-                    <p class="review-date">Enviado há 6 dias</p>
-                    <p class="review-text">Unde uma fragrância bem criança à fleurs, com um toque de flor de laranjeira que deixa o cheiro, claramente um cheiro bom docinhos, mais elegantemente do que muito moderno.</p>
-                    <p class="review-recommendation">Você recomendaria esse produto a um amigo?<br><strong>Sim</strong></p>
-                    <p class="review-author">Por Brenda S.</p>
-                  </div>
-
-                  <!-- Review 5 -->
-                  <div class="review-item-card">
-                    <div class="review-stars-rating">
-                      <span class="review-star-filled">★</span>
-                      <span class="review-star-filled">★</span>
-                      <span class="review-star-filled">★</span>
-                      <span class="review-star-filled">★</span>
-                      <span class="review-star-filled">★</span>
-                    </div>
-                    <p class="review-date">Enviado há 6 dias</p>
-                    <p class="review-text">Gza reputação incrível e usque o outro e Miss Dior iniciaria a edificação de consumo via preditibilidade, elegante e romântica.</p>
-                    <p class="review-recommendation">Você recomendaria esse produto a um amigo?<br><strong>Sim</strong></p>
-                    <p class="review-author">Por Camille A.</p>
-                  </div>
-                </div>
-
-                <div class="reviews-pagination">
-                  <span class="pagination-info">1-5 de 892</span>
-                  <div class="pagination-arrows">
-                    <button class="pagination-btn" aria-label="Anterior">‹</button>
-                    <button class="pagination-btn" aria-label="Próximo">›</button>
-                  </div>
-                </div>
-
-                <button class="reviews-load-more">Escrever avaliação...</button>
-              </div>
-
-              <!-- Review Modal -->
-              <div class="review-modal">
-                <div class="review-modal-content">
-                  <button class="close-review-modal" aria-label="Fechar">&times;</button>
-                  
-                  <h2 class="review-modal-title">AVALIAÇÃO DO PRODUTO</h2>
-                  
-                  <form class="review-form">
-                    <div class="form-group">
-                      <label class="form-label">Dê uma nota geral para o produto *</label>
-                      <div class="star-rating-select">
-                        <span class="star-rating-input">☆</span>
-                        <span class="star-rating-input">☆</span>
-                        <span class="star-rating-input">☆</span>
-                        <span class="star-rating-input">☆</span>
-                        <span class="star-rating-input">☆</span>
-                        <span class="star-rating-input">☆</span>
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="form-label" for="review-text">Sua avaliação do produto *</label>
-                      <textarea 
-                        id="review-text" 
-                        name="review-text" 
-                        class="form-textarea" 
-                        placeholder="Dê detalhes sobre o produto e por que deu a nota acima. Se possível, fale como você usa o produto e dê dicas para outros consumidores."
-                        required
-                        rows="5"
-                      ></textarea>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="form-label">Você recomendaria esse produto a um amigo? *</label>
-                      <div class="radio-group">
-                        <label class="radio-label">
-                          <input type="radio" name="recommend" value="sim" required>
-                          <span>Sim</span>
-                        </label>
-                        <label class="radio-label">
-                          <input type="radio" name="recommend" value="nao">
-                          <span>Não</span>
-                        </label>
-                      </div>
-                    </div>
-
-                    <div class="form-section-title">SEUS DADOS</div>
-
-                    <div class="form-group">
-                      <label class="form-label" for="reviewer-name">Entre com seu nome ou apelido *</label>
-                      <input 
-                        type="text" 
-                        id="reviewer-name" 
-                        name="reviewer-name" 
-                        class="form-input" 
-                        placeholder="Seu nome ou apelido"
-                        required
-                      >
-                    </div>
-
-                    <button type="submit" class="submit-review-btn">ENVIAR AVALIAÇÃO</button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </section>
+          <!-- Reviews Section - Componente Reutilizável -->
+          <product-reviews 
+            product-id="miss-dior-parfum-50ml"
+            product-name="Miss Dior"
+            collection="A gama"
+          ></product-reviews>
         </div>
 
        
@@ -550,5 +299,5 @@ export class ComprasMissDiorParfumPage extends HTMLElement {
 
 customElements.define(
   "compras-miss-dior-parfum-page",
-  ComprasMissDiorParfumPage
+  ComprasMissDiorParfumPage,
 );

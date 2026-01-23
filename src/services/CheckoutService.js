@@ -13,8 +13,7 @@ class CheckoutService {
     try {
       const data = localStorage.getItem(this.STORAGE_KEY);
       return data ? JSON.parse(data) : this.getDefaultData();
-    } catch (error) {
-      console.error("Erro ao obter dados do checkout:", error);
+    } catch {
       return this.getDefaultData();
     }
   }
@@ -44,8 +43,7 @@ class CheckoutService {
       localStorage.setItem(this.STORAGE_KEY, JSON.stringify(updatedData));
       this.notifyListeners(updatedData);
       return updatedData;
-    } catch (error) {
-      console.error("Erro ao salvar dados do checkout:", error);
+    } catch {
       return null;
     }
   }
@@ -86,8 +84,8 @@ class CheckoutService {
     try {
       localStorage.removeItem(this.STORAGE_KEY);
       this.notifyListeners(this.getDefaultData());
-    } catch (error) {
-      console.error("Erro ao limpar dados do checkout:", error);
+    } catch {
+      // Silently fail
     }
   }
 

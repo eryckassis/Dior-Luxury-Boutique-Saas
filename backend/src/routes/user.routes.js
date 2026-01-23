@@ -1,16 +1,17 @@
-import { Router } from "express";
+import express from "express";
 import { UserController } from "../controllers/user.controller.js";
 import { AuthMiddleware } from "../middlewares/auth.middleware.js";
-import { validateUpdateProfile } from "../validators/user.validator.js";
+import { ValidationMiddleware } from "../middlewares/validation.middleware.js";
 
-const router = Router();
+const router = express.Router();
 
-router.use(AuthMiddleware.authenticate);
+router.get("/profile", AuthMiddleware.authenticate, UserController.getProfile);
 
-//GET aqui obtem dados do perfil do usuario autenticado
-router.get("/profile", UserController.getProfile);
-
-//PUT atualiza dados do perfil do usuario autenticado
-router.put("/profile", validateUpdateProfile, UserController.updateProfile);
+router.put(
+  "/profile",
+  AuthMiddleware.authenticate,
+  ValidationMiddleware.validateProfileUpdate,
+  UserController.updateProfile,
+);
 
 export default router;

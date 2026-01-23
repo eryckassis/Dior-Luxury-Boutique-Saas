@@ -614,7 +614,9 @@
 }
 
 .reviews-load-more {
-  width: 100%;
+  width: 35%;
+  margin: 0 auto;
+  display: block;
   background: #333;
   color: #fff;
   border: none;
@@ -737,7 +739,9 @@
   font-size: 32px;
   color: #ddd;
   cursor: pointer;
-  transition: color 0.2s ease, transform 0.2s ease;
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
   user-select: none;
 }
 
@@ -833,7 +837,9 @@
   font-size: 15px;
   font-weight: 700;
   cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
+  transition:
+    background 0.3s ease,
+    transform 0.2s ease;
   margin-top: 10px;
   letter-spacing: 0.5px;
 }

@@ -2,18 +2,21 @@ import { UserService } from "../services/user.service.js";
 import { ApiResponse } from "../utils/response.js";
 
 export class UserController {
+  /**
+   * GET /api/user/profile
+   */
   static async getProfile(req, res) {
     try {
       const userId = req.user.userId;
-      const user = await UserService.getProfile(userId);
+      const profile = await UserService.getProfile(userId);
 
       return ApiResponse.success(
         res,
-        { user },
-        "Dados do perfil obtidos com sucesso"
+        { user: profile },
+        "Dados do perfil obtidos com sucesso",
       );
     } catch (error) {
-      console.error("X erro ao buscar perfil:", error);
+      console.error("❌ Erro ao buscar perfil:", error);
 
       if (error.message.includes("não encontrado")) {
         return ApiResponse.notFound(res, error.message);
@@ -22,26 +25,28 @@ export class UserController {
       return ApiResponse.internalError(
         res,
         "Erro ao buscar dados do perfil",
-        error
+        error,
       );
     }
   }
 
-  // PUT atualiza os dados do perfil do usuario autenticado
-
+  /**
+   * PUT /api/user/profile
+   */
   static async updateProfile(req, res) {
     try {
       const userId = req.user.userId;
       const updateData = req.body;
 
-      const updateUser = await UserService.updateProfile(userId, updateData);
+      const updatedUser = await UserService.updateProfile(userId, updateData);
+
       return ApiResponse.success(
         res,
-        { user: updateUser },
-        "Dados atualizados com sucesso!"
+        { user: updatedUser },
+        "Dados atualizados com sucesso!",
       );
     } catch (error) {
-      console.error("X Erro ao atualizar perfil:", error);
+      console.error("❌ Erro ao atualizar perfil:", error);
 
       if (error.message.includes("não encontrado")) {
         return ApiResponse.notFound(res, error.message);
@@ -50,7 +55,7 @@ export class UserController {
         return ApiResponse.conflict(res, error.message);
       }
 
-      return ApiResponse.internalError(error);
+      return ApiResponse.internalError(res, "Erro ao atualizar perfil", error);
     }
   }
 }

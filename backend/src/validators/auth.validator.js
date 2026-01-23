@@ -22,7 +22,7 @@ export class AuthValidator {
       .min(8)
       .max(128)
       .pattern(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/,
       )
       .required()
       .messages({
@@ -90,7 +90,7 @@ export class AuthValidator {
       .min(8)
       .max(128)
       .pattern(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/,
       )
       .required()
       .messages({
@@ -110,6 +110,48 @@ export class AuthValidator {
         "any.only": "As senhas não coincidem",
         "any.required": "A confirmação de senha é obrigatória",
       }),
+  });
+
+  // Schema para atualização de perfil
+  static profileUpdateSchema = Joi.object({
+    name: Joi.string().min(2).max(100).trim().messages({
+      "string.base": "O nome deve ser um texto",
+      "string.min": "O nome deve ter pelo menos {#limit} caracteres",
+      "string.max": "O nome deve ter no máximo {#limit} caracteres",
+    }),
+
+    lastName: Joi.string().max(100).trim().allow("", null).messages({
+      "string.base": "O sobrenome deve ser um texto",
+      "string.max": "O sobrenome deve ter no máximo {#limit} caracteres",
+    }),
+
+    cpf: Joi.string()
+      .pattern(/^\d{11}$|^\d{3}\.\d{3}\.\d{3}-\d{2}$/)
+      .allow("", null)
+      .messages({
+        "string.pattern.base":
+          "CPF inválido. Use o formato 000.000.000-00 ou apenas números",
+      }),
+
+    phone: Joi.string()
+      .pattern(/^\d{10,11}$|^\(\d{2}\)\s?\d{4,5}-\d{4}$/)
+      .allow("", null)
+      .messages({
+        "string.pattern.base":
+          "Telefone inválido. Use o formato (00) 00000-0000",
+      }),
+
+    gender: Joi.string()
+      .valid("Masculino", "Feminino", "Outro", "Prefiro não informar")
+      .allow("", null)
+      .messages({
+        "any.only": "Gênero inválido",
+      }),
+
+    birthDate: Joi.date().max("now").allow("", null).messages({
+      "date.base": "Data de nascimento inválida",
+      "date.max": "A data de nascimento não pode ser no futuro",
+    }),
   });
 
   static formatValidationErrors(error) {

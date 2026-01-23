@@ -62,10 +62,9 @@ class SessionExpiredModal {
 
     if (btn) {
       // Click handler
-      btn.addEventListener("click", () => {
+      btn.addEventListener("click", async () => {
         this.hide();
-        authService.clearAuth();
-        authService.notifyListeners();
+        await authService.logout();
         router.navigate("/login");
       });
 
@@ -83,12 +82,12 @@ class SessionExpiredModal {
             // Map transforms mouse position to percentage (0-100)
             const xTransformer = window.gsap.utils.pipe(
               window.gsap.utils.mapRange(0, width, 0, 100),
-              window.gsap.utils.clamp(0, 100)
+              window.gsap.utils.clamp(0, 100),
             );
 
             const yTransformer = window.gsap.utils.pipe(
               window.gsap.utils.mapRange(0, height, 0, 100),
-              window.gsap.utils.clamp(0, 100)
+              window.gsap.utils.clamp(0, 100),
             );
 
             return {

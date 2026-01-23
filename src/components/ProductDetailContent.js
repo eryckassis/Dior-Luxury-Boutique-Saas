@@ -144,10 +144,7 @@ export class ProductDetailContent extends HTMLElement {
       const track = this.querySelector(".product-gallery-track");
       const wrapper = this.querySelector(".product-gallery-wrapper");
 
-      if (!track || !wrapper || !window.gsap || !window.Draggable) {
-        console.warn("Galeria: elementos ou GSAP não encontrados");
-        return;
-      }
+      if (!track || !wrapper || !window.gsap || !window.Draggable) return;
 
       const slides = track.querySelectorAll(".product-gallery-slide");
       if (slides.length === 0) return;
@@ -285,8 +282,6 @@ export class ProductDetailContent extends HTMLElement {
 
       // Inicializa progresso
       this.updateProgress();
-
-      console.log("✅ Galeria de produto inicializada");
     });
   }
 
@@ -574,8 +569,6 @@ export class ProductDetailContent extends HTMLElement {
         : null,
     };
 
-    console.log("Adicionando ao carrinho:", cartItem);
-
     alert(`${this.product.name} adicionado ao carrinho!`);
   }
 
@@ -591,12 +584,7 @@ export class ProductDetailContent extends HTMLElement {
 
   initRelatedProductsDrag() {
     setTimeout(() => {
-      if (!window.gsap || !window.Draggable) {
-        console.warn(
-          "GSAP ou Draggable não disponível para produtos relacionados"
-        );
-        return;
-      }
+      if (!window.gsap || !window.Draggable) return;
 
       const container = this.querySelector(".related-drag-container");
       const slider = this.querySelector(".related-products-grid");
@@ -699,8 +687,6 @@ export class ProductDetailContent extends HTMLElement {
 
       // Initial progress
       updateProgress(0);
-
-      console.log("✅ Drag de produtos relacionados inicializado");
     }, 300);
   }
 

@@ -10,9 +10,8 @@ import { checkoutService } from "../services/CheckoutService.js";
 export class FinalizarCompraPage extends HTMLElement {
   constructor() {
     super();
-    // Inicializa com itens padrão se o carrinho estiver vazio
-    cartService.initializeDefaultItems();
-    this.cartItems = cartService.getItems();
+    // Inicializa com array vazio - será preenchido após init
+    this.cartItems = [];
 
     // Listener para atualizar quando o carrinho mudar
     this.cartListener = (items) => {
@@ -21,7 +20,14 @@ export class FinalizarCompraPage extends HTMLElement {
     };
   }
 
-  connectedCallback() {
+  async connectedCallback() {
+    // Aguarda inicialização do carrinho
+    await cartService.waitForInit();
+
+    // Inicializa com itens do carrinho (ou padrão se vazio)
+    cartService.initializeDefaultItems();
+    this.cartItems = cartService.getItems();
+
     this.render();
 
     // Inicializa controles após o render
@@ -48,7 +54,7 @@ export class FinalizarCompraPage extends HTMLElement {
   calculateSubtotal() {
     return this.cartItems.reduce(
       (total, item) => total + item.price * item.quantity,
-      0
+      0,
     );
   }
 
@@ -75,7 +81,7 @@ export class FinalizarCompraPage extends HTMLElement {
             duration: 0.8,
             ease: "power3.out",
           },
-          "-=0.6"
+          "-=0.6",
         );
 
       this.animations.push(titleTl);
@@ -161,7 +167,7 @@ export class FinalizarCompraPage extends HTMLElement {
 
     // Salvar seleção de embalagem
     const giftWrappingInputs = this.querySelectorAll(
-      'input[name="giftWrapping"]'
+      'input[name="giftWrapping"]',
     );
     giftWrappingInputs.forEach((input) => {
       input.addEventListener("change", (e) => {
@@ -191,7 +197,7 @@ export class FinalizarCompraPage extends HTMLElement {
     }
     if (savedData.giftWrapping) {
       const savedWrapping = this.querySelector(
-        `input[name="giftWrapping"][value="${savedData.giftWrapping}"]`
+        `input[name="giftWrapping"][value="${savedData.giftWrapping}"]`,
       );
       if (savedWrapping) savedWrapping.checked = true;
     }
@@ -422,7 +428,7 @@ export class FinalizarCompraPage extends HTMLElement {
 
     const isEmailValid = this.validateEmail(
       email,
-      this.querySelector("#email")
+      this.querySelector("#email"),
     );
     const isZipCodeValid = zipCode.length === 8;
     const isPhoneValid = phone.length === 10 || phone.length === 11;
@@ -479,7 +485,7 @@ export class FinalizarCompraPage extends HTMLElement {
 
     // Seleção de método de pagamento
     const paymentMethodInputs = this.querySelectorAll(
-      'input[name="payment-method"]'
+      'input[name="payment-method"]',
     );
     paymentMethodInputs.forEach((input) => {
       input.addEventListener("change", (e) => {
@@ -777,7 +783,7 @@ export class FinalizarCompraPage extends HTMLElement {
 
     // Obtém endereço real do checkoutService e criptografa
     const billingAddressLabel = this.querySelector(
-      'label[for="billing-address"]'
+      'label[for="billing-address"]',
     );
     if (billingAddressLabel) {
       const realAddress = checkoutService.getBillingAddress();
@@ -795,7 +801,7 @@ export class FinalizarCompraPage extends HTMLElement {
       window.gsap.fromTo(
         backdrop,
         { opacity: 0 },
-        { opacity: 1, duration: 0.3, ease: "power2.out" }
+        { opacity: 1, duration: 0.3, ease: "power2.out" },
       );
 
       // Animação do scrollbar quando o modal abre
@@ -829,7 +835,7 @@ export class FinalizarCompraPage extends HTMLElement {
           yoyo: true,
           repeat: 2,
           delay: 0.5,
-        }
+        },
       );
 
       // Listener para fazer o scrollbar piscar levemente ao rolar
@@ -889,7 +895,7 @@ export class FinalizarCompraPage extends HTMLElement {
     });
 
     const selectedBrand = this.querySelector(
-      `input[value="${brand}"]`
+      `input[value="${brand}"]`,
     )?.closest(".card-brand-option");
     if (selectedBrand) {
       selectedBrand.classList.add("selected");
@@ -976,7 +982,7 @@ export class FinalizarCompraPage extends HTMLElement {
 
     if (item) {
       const row = this.querySelector(`[data-item-id="${itemId}"]`)?.closest(
-        ".cart-table-row"
+        ".cart-table-row",
       );
       if (row) {
         const quantityInput = row.querySelector(".quantity-input");
@@ -1006,7 +1012,7 @@ export class FinalizarCompraPage extends HTMLElement {
 
     // Atualiza o subtotal na UI
     const subtotalElements = this.querySelectorAll(
-      ".summary-row:first-child span:last-child"
+      ".summary-row:first-child span:last-child",
     );
     if (subtotalElements.length > 0) {
       subtotalElements[0].textContent = `R$ ${subtotal
@@ -1016,7 +1022,7 @@ export class FinalizarCompraPage extends HTMLElement {
 
     // Atualiza o total na UI
     const totalElements = this.querySelectorAll(
-      ".summary-total span:last-child"
+      ".summary-total span:last-child",
     );
     if (totalElements.length > 0) {
       totalElements[0].textContent = `R$ ${total.toFixed(2).replace(".", ",")}`;
@@ -1026,7 +1032,7 @@ export class FinalizarCompraPage extends HTMLElement {
   removeItem(itemId) {
     // Remove a linha com animação suave
     const row = this.querySelector(`[data-item-id="${itemId}"]`)?.closest(
-      ".cart-table-row"
+      ".cart-table-row",
     );
 
     if (row) {
@@ -1067,8 +1073,8 @@ export class FinalizarCompraPage extends HTMLElement {
         <div class="cart-table-row">
           <div class="cart-product-cell">
             <img src="${item.image}" alt="${
-            item.name
-          }" class="cart-product-image" />
+              item.name
+            }" class="cart-product-image" />
             <div class="cart-product-info">
               <h3 class="cart-product-name">${item.name}</h3>
               <p class="cart-product-volume">${item.volume}</p>
@@ -1113,7 +1119,7 @@ export class FinalizarCompraPage extends HTMLElement {
             </svg>
           </button>
         </div>
-      `
+      `,
         )
         .join("");
 
@@ -1422,8 +1428,8 @@ export class FinalizarCompraPage extends HTMLElement {
                   <div class="cart-table-row">
                     <div class="cart-product-cell">
                       <img src="${item.image}" alt="${
-                      item.name
-                    }" class="cart-product-image" />
+                        item.name
+                      }" class="cart-product-image" />
                       <div class="cart-product-info">
                         <h3 class="cart-product-name">${item.name}</h3>
                         <p class="cart-product-volume">${item.volume}</p>
@@ -1470,7 +1476,7 @@ export class FinalizarCompraPage extends HTMLElement {
                       </svg>
                     </button>
                   </div>
-                `
+                `,
                   )
                   .join("")}
                 

@@ -1,82 +1,102 @@
-import prisma from "../config/database.js";
+// ============================================================================
+// USER SERVICE - Operações com Perfil via Supabase
+// ============================================================================
+
+import { supabaseAdmin } from "../config/supabase.js";
 
 export class UserService {
+  /**
+   * Busca perfil do usuário
+   * @param {string} userId - UUID do usuário
+   */
   static async getProfile(userId) {
-    const user = await prisma.user.findUnique({
-      where: { id: userId },
-      select: {
-        id: true,
-        email: true,
-        name: true,
-        lastName: true,
-        cpf: true,
-        phone: true,
-        gender: true,
-        birthDate: true,
-        isEmailVerified: true,
-        createdAt: true,
-        updateAt: true,
-      },
-    });
-    if (!user) {
+    const { data, error } = await supabaseAdmin
+      .from("profiles")
+      .select("*")
+      .eq("id", userId)
+      .single();
+
+    if (error && error.code === "PGRST116") {
       throw new Error("Usuário não encontrado");
     }
 
-    return user;
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    return data;
   }
 
+  /**
+   * Atualiza perfil do usuário
+   * @param {string} userId - UUID do usuário
+   * @param {Object} data - Dados a atualizar
+   */
   static async updateProfile(userId, data) {
-    const existingUser = await prisma.user.findUnique({
-      where: { id: userId },
-    });
+    // Verifica se usuário existe
+    const { data: existingUser, error: findError } = await supabaseAdmin
+      .from("profiles")
+      .select("id")
+      .eq("id", userId)
+      .single();
 
-    if (!existingUser) {
+    if (findError && findError.code === "PGRST116") {
       throw new Error("Usuário não encontrado");
     }
 
+    // Verifica CPF duplicado
     if (data.cpf) {
-      const cpfExist = await prisma.user.findFirst({
-        where: {
-          cpf: data.cpf,
-          id: { not: userId },
-        },
-      });
+      const { data: cpfExists } = await supabaseAdmin
+        .from("profiles")
+        .select("id")
+        .eq("cpf", data.cpf)
+        .neq("id", userId)
+        .single();
 
-      if (cpfExist) {
+      if (cpfExists) {
         throw new Error("CPF já cadastrado em outra conta");
       }
     }
 
+    // Prepara dados para update
     const updateData = {};
 
     if (data.name !== undefined) updateData.name = data.name;
     if (data.lastName !== undefined)
-      updateData.lastName = data.lastName || null;
+      updateData.last_name = data.lastName || null;
     if (data.cpf !== undefined) updateData.cpf = data.cpf || null;
     if (data.phone !== undefined) updateData.phone = data.phone || null;
     if (data.gender !== undefined) updateData.gender = data.gender || null;
     if (data.birthDate !== undefined) {
-      updateData.birthDate = data.birthDate ? new Date(data.birthDate) : null;
+      updateData.birth_date = data.birthDate
+        ? new Date(data.birthDate).toISOString().split("T")[0]
+        : null;
     }
 
-    const updateUser = await prisma.user.update({
-      where: { id: userId },
-      data: updateData,
-      select: {
-        id: true,
-        email: true,
-        name: true,
-        lastName: true,
-        cpf: true,
-        phone: true,
-        gender: true,
-        birthDate: true,
-        isEmailVerified: true,
-        createdAt: true,
-        updateAt: true,
-      },
-    });
+    // Atualiza no Supabase
+    const { data: updatedUser, error: updateError } = await supabaseAdmin
+      .from("profiles")
+      .update(updateData)
+      .eq("id", userId)
+      .select()
+      .single();
 
-    return updateUser;
+    if (updateError) {
+      throw new Error(updateError.message);
+    }
+
+    // Retorna com nomes camelCase para manter compatibilidade com frontend
+    return {
+      id: updatedUser.id,
+      name: updatedUser.name,
+      lastName: updatedUser.last_name,
+      cpf: updatedUser.cpf,
+      phone: updatedUser.phone,
+      gender: updatedUser.gender,
+      birthDate: updatedUser.birth_date,
+      isEmailVerified: updatedUser.is_email_verified,
+      createdAt: updatedUser.created_at,
+      updatedAt: updatedUser.updated_at,
+    };
   }
 }

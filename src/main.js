@@ -17,6 +17,12 @@ import "./styles/filter-sidebar.css";
 import "./styles/dior-spa.css";
 import "./styles/primavera-verao.css";
 import "./styles/dados-pessoais.css";
+
+// IMPORTANTE: Importa serviços no início para garantir inicialização
+import { authService } from "./services/AuthService.js";
+import { cartService } from "./services/CartService.js";
+console.log("🚀 Main.js: Serviços importados", { authService, cartService });
+
 import { router } from "./router/router.js";
 import "./pages/HomePage.js";
 import "./pages/DiorHolidayPage.js";
@@ -88,20 +94,27 @@ router.register("/minha-conta/dados", "dados-pessoais-page");
 class Button {
   constructor(buttonElement) {
     this.block = buttonElement;
-    this.init();
+    if (!this.init()) return; // Se não encontrar elementos necessários, aborta
     this.initEvents();
   }
 
   init() {
     const el = gsap.utils.selector(this.block);
+    const flair = el(".button__flair");
+
+    // Se não encontrar o flair, não inicializa
+    if (!flair || flair.length === 0) {
+      return false;
+    }
 
     this.DOM = {
       button: this.block,
-      flair: el(".button__flair"),
+      flair: flair,
     };
 
     this.xSet = gsap.quickSetter(this.DOM.flair, "xPercent");
     this.ySet = gsap.quickSetter(this.DOM.flair, "yPercent");
+    return true;
   }
 
   getXY(e) {
@@ -167,535 +180,6 @@ class Button {
 
 // Torna a classe Button globalmente disponível
 window.Button = Button;
-
-// ============================================================================
-// VIDEO HOVER CONTROLLER - Play/Pause ao passar o mouse
-// ============================================================================
-
-class VideoHoverController {
-  constructor(videoElement) {
-    this.video = videoElement;
-    this.isHovered = false;
-    this.init();
-  }
-
-  init() {
-    if (!this.video) {
-      return;
-    }
-
-    // Pausa o vídeo inicialmente se ele estiver com autoplay
-    // Mas mantém o loop configurado
-    this.video.pause();
-
-    this.addEventListeners();
-  }
-
-  addEventListeners() {
-    // Mouse entra - inicia o vídeo
-    this.video.addEventListener("mouseenter", () => {
-      this.isHovered = true;
-      this.playVideo();
-    });
-
-    // Mouse sai - pausa e volta ao início
-    this.video.addEventListener("mouseleave", () => {
-      this.isHovered = false;
-      this.resetVideo();
-    });
-  }
-
-  playVideo() {
-    if (this.video.paused) {
-      const playPromise = this.video.play();
-
-      // Tratamento de erro para navegadores que bloqueiam autoplay
-      if (playPromise !== undefined) {
-        playPromise.catch((error) => {
-          console.log("Autoplay foi bloqueado:", error);
-        });
-      }
-    }
-  }
-
-  resetVideo() {
-    if (!this.video.paused) {
-      this.video.pause();
-    }
-    // Volta o vídeo para o início
-    this.video.currentTime = 0;
-  }
-}
-
-// ============================================================================
-// MENU CONSTANTS & CONFIGURATION
-// ============================================================================
-
-const duration = {
-  fast: 0.15,
-  medium: 0.2,
-  slow: 0.25,
-  verySlow: 0.3,
-};
-
-const easing = {
-  out: "power2.out",
-  in: "power2.in",
-};
-
-const stagger = {
-  buttonsOpen: 0.03,
-  buttonsClose: 0.02,
-};
-
-const blur = {
-  initial: "blur(10px)",
-  none: "blur(0px)",
-};
-
-const transform = {
-  buttonsY: 20,
-  imageY: 20,
-  imageYClose: 10,
-  menuRotationOpen: 45,
-  menuRotationClose: 0,
-  navLeftX: 20,
-  navRightX: -20,
-};
-
-const layout = {
-  padding: "20px",
-  maxHeight: "50vh",
-  noPadding: "0",
-  noMargin: "0",
-};
-
-const timing = {
-  overlap: 0.1,
-  delay: 0.05,
-  closeStartOffset: -0.2,
-  dropdownOffset: -0.15,
-};
-
-class DOMElements {
-  constructor() {
-    console.log("DOMElements: Looking for menu elements...");
-    this.menuBtn = this.getElement("#menu-btn");
-    this.dropdown = this.getElement("#dropdown");
-    this.dropdownContent = this.getElement(".dropdown__content");
-    this.dropdownImage = this.getElement(".dropdown__image");
-    this.allContent = this.getElement("#all-content");
-    this.navigation = this.getElement("#navigation");
-    this.navLogo = this.getElement(".navigation__logo");
-    this.navRight = this.getElement(".navigation__right");
-    this.menuButtons = this.getAllElements(".dropdown__button");
-    console.log("DOMElements: menuBtn found?", !!this.menuBtn);
-    console.log("DOMElements: dropdown found?", !!this.dropdown);
-  }
-
-  getElement(selector) {
-    const element = document.querySelector(selector);
-    if (!element) {
-      console.warn(`Element not found: ${selector}`);
-    }
-    return element;
-  }
-
-  getAllElements(selector) {
-    return document.querySelectorAll(selector);
-  }
-
-  get navElements() {
-    return [this.navLogo, this.navRight];
-  }
-
-  get reversedButtons() {
-    return Array.from(this.menuButtons).reverse();
-  }
-
-  hasRequiredElements() {
-    return !!(this.menuBtn && this.dropdown && this.allContent);
-  }
-}
-
-class GSAPAnimationBuilder {
-  static setInitialButtonState(buttons) {
-    gsap.set(buttons, {
-      opacity: 0,
-      y: transform.buttonsY,
-      filter: blur.initial,
-    });
-  }
-
-  static setInitialImageState(image) {
-    gsap.set(image, {
-      opacity: 0,
-      y: transform.imageY,
-    });
-  }
-
-  static createTimeline(config = {}) {
-    return gsap.timeline(config);
-  }
-
-  static animateProperty(element, properties, position) {
-    return gsap.to(element, {
-      ...properties,
-      force3D: true,
-    });
-  }
-}
-
-class OpenAnimationSequence {
-  constructor(elements) {
-    this.elements = elements;
-  }
-
-  execute() {
-    const timeline = GSAPAnimationBuilder.createTimeline();
-
-    this.addBodyPaddingAnimation(timeline);
-    this.addNavigationAnimation(timeline);
-    this.addDropdownMarginAnimation(timeline);
-    this.addDropdownExpansionAnimation(timeline);
-    this.addMenuButtonRotationAnimation(timeline);
-    this.addMenuButtonsAnimation(timeline);
-    this.addImageAnimation(timeline);
-
-    return timeline;
-  }
-
-  addBodyPaddingAnimation(timeline) {
-    timeline.to(document.body, {
-      paddingTop: layout.padding,
-      paddingLeft: layout.padding,
-      paddingRight: layout.padding,
-      duration: duration.medium,
-      ease: easing.out,
-    });
-  }
-
-  addNavigationAnimation(timeline) {
-    timeline.to(
-      this.elements.navElements,
-      {
-        x: (index) => (index === 0 ? transform.navLeftX : transform.navRightX),
-        duration: duration.medium,
-        ease: easing.out,
-        force3D: true,
-      },
-      "<",
-    );
-  }
-
-  addDropdownMarginAnimation(timeline) {
-    timeline.to(
-      this.elements.dropdown,
-      {
-        marginTop: layout.padding,
-        duration: duration.medium,
-        ease: easing.out,
-      },
-      "<",
-    );
-  }
-
-  addDropdownExpansionAnimation(timeline) {
-    timeline.fromTo(
-      this.elements.dropdown,
-      {
-        opacity: 0,
-        scaleY: 0,
-        maxHeight: 0,
-      },
-      {
-        opacity: 1,
-        scaleY: 1,
-        maxHeight: layout.maxHeight,
-        duration: duration.slow,
-        ease: easing.out,
-        force3D: true,
-      },
-      timing.dropdownOffset,
-    );
-  }
-
-  addMenuButtonRotationAnimation(timeline) {
-    timeline.to(
-      this.elements.menuBtn,
-      {
-        rotation: transform.menuRotationOpen,
-        duration: duration.medium,
-        ease: easing.out,
-        force3D: true,
-      },
-      "<",
-    );
-  }
-
-  addMenuButtonsAnimation(timeline) {
-    timeline.to(
-      this.elements.menuButtons,
-      {
-        opacity: 1,
-        y: 0,
-        filter: blur.none,
-        stagger: stagger.buttonsOpen,
-        duration: duration.medium,
-        ease: easing.out,
-        force3D: true,
-      },
-      `-=${timing.overlap}`,
-    );
-  }
-
-  addImageAnimation(timeline) {
-    timeline.to(
-      this.elements.dropdownImage,
-      {
-        opacity: 1,
-        y: 0,
-        duration: duration.medium,
-        ease: easing.out,
-        force3D: true,
-      },
-      `-=${timing.overlap}`,
-    );
-  }
-}
-
-class CloseAnimationSequence {
-  constructor(elements, onComplete) {
-    this.elements = elements;
-    this.onComplete = onComplete;
-  }
-
-  execute() {
-    const timeline = GSAPAnimationBuilder.createTimeline({
-      onComplete: this.onComplete,
-    });
-
-    this.addImageAnimation(timeline);
-    this.addMenuButtonsAnimation(timeline);
-    this.addMenuButtonRotationAnimation(timeline);
-    this.addDropdownCollapseAnimation(timeline);
-    this.addDropdownMarginAnimation(timeline);
-    this.addBodyPaddingAnimation(timeline);
-    this.addNavigationAnimation(timeline);
-
-    return timeline;
-  }
-
-  addImageAnimation(timeline) {
-    timeline.to(this.elements.dropdownImage, {
-      opacity: 0,
-      y: transform.imageYClose,
-      duration: duration.fast,
-      ease: easing.in,
-      force3D: true,
-    });
-  }
-
-  addMenuButtonsAnimation(timeline) {
-    timeline.to(
-      this.elements.reversedButtons,
-      {
-        opacity: 0,
-        y: transform.buttonsY,
-        filter: blur.initial,
-        stagger: stagger.buttonsClose,
-        duration: duration.fast,
-        ease: easing.in,
-        force3D: true,
-      },
-      `+=${timing.delay}`,
-    );
-  }
-
-  addMenuButtonRotationAnimation(timeline) {
-    timeline.to(
-      this.elements.menuBtn,
-      {
-        rotation: transform.menuRotationClose,
-        duration: duration.medium,
-        ease: easing.in,
-        force3D: true,
-      },
-      "<",
-    );
-  }
-
-  addDropdownCollapseAnimation(timeline) {
-    timeline.to(
-      this.elements.dropdown,
-      {
-        opacity: 0,
-        scaleY: 0,
-        maxHeight: 0,
-        duration: duration.verySlow,
-        ease: easing.in,
-        force3D: true,
-      },
-      `+=${timing.delay}`,
-    );
-  }
-
-  addDropdownMarginAnimation(timeline) {
-    timeline.to(
-      this.elements.dropdown,
-      {
-        marginTop: layout.noMargin,
-        duration: duration.verySlow,
-        ease: easing.in,
-      },
-      "<",
-    );
-  }
-
-  addBodyPaddingAnimation(timeline) {
-    timeline.to(
-      document.body,
-      {
-        paddingTop: layout.noPadding,
-        paddingLeft: layout.noPadding,
-        paddingRight: layout.noPadding,
-        duration: duration.slow,
-        ease: easing.in,
-      },
-      timing.closeStartOffset,
-    );
-  }
-
-  addNavigationAnimation(timeline) {
-    timeline.to(
-      this.elements.navElements,
-      {
-        x: 0,
-        duration: duration.slow,
-        ease: easing.in,
-        force3D: true,
-      },
-      "<",
-    );
-  }
-}
-
-class MenuStateManager {
-  constructor() {
-    this.isOpen = false;
-  }
-
-  open() {
-    this.isOpen = true;
-  }
-
-  close() {
-    this.isOpen = false;
-  }
-
-  toggle() {
-    this.isOpen = !this.isOpen;
-  }
-
-  get state() {
-    return this.isOpen;
-  }
-}
-
-class MenuController {
-  constructor(elements) {
-    this.elements = elements;
-    this.state = new MenuStateManager();
-  }
-
-  init() {
-    if (!this.elements.hasRequiredElements()) {
-      console.error(
-        "Required DOM elements not found. Menu initialization aborted.",
-      );
-      return false;
-    }
-
-    this.attachEventListeners();
-    return true;
-  }
-
-  attachEventListeners() {
-    this.elements.menuBtn.addEventListener("click", () => this.toggle());
-
-    // Escuta evento de navegação para fechar o menu
-    window.addEventListener("close-menu-for-navigation", () => {
-      if (this.state.state) {
-        this.close();
-      }
-    });
-  }
-
-  toggle() {
-    if (this.state.state) {
-      this.close();
-      return;
-    }
-
-    this.open();
-  }
-
-  open() {
-    this.updateDOMClasses(true);
-    this.prepareAnimationState();
-    this.executeOpenAnimation();
-    this.state.open();
-  }
-
-  close() {
-    this.executeCloseAnimation();
-    this.state.close();
-  }
-
-  updateDOMClasses(isOpening) {
-    const action = isOpening ? "add" : "remove";
-    this.elements.dropdown.classList[action]("open");
-    this.elements.allContent.classList[action]("menu-open");
-  }
-
-  prepareAnimationState() {
-    GSAPAnimationBuilder.setInitialButtonState(this.elements.menuButtons);
-    GSAPAnimationBuilder.setInitialImageState(this.elements.dropdownImage);
-  }
-
-  executeOpenAnimation() {
-    const sequence = new OpenAnimationSequence(this.elements);
-    sequence.execute();
-  }
-
-  executeCloseAnimation() {
-    const sequence = new CloseAnimationSequence(this.elements, () =>
-      this.onCloseComplete(),
-    );
-    sequence.execute();
-  }
-
-  onCloseComplete() {
-    this.updateDOMClasses(false);
-  }
-}
-
-class Application {
-  static initialize() {
-    const elements = new DOMElements();
-    const menuController = new MenuController(elements);
-
-    const initialized = menuController.init();
-
-    if (!initialized) {
-      console.error("Application failed to initialize");
-      return null;
-    }
-
-    console.log("✓ Menu system initialized successfully");
-    return menuController;
-  }
-}
 
 // ============================================================================
 // SCROLL TRIGGER ANIMATIONS (Gallery Effects)
@@ -796,9 +280,6 @@ document.addEventListener("DOMContentLoaded", () => {
       new VideoHoverController(video);
     });
 
-    // Inicializa menu após preloader
-    Application.initialize();
-
     // Inicializa animações de scroll
     initScrollAnimations();
 
@@ -814,10 +295,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Reinicializa features quando a página mudar via SPA
   window.addEventListener("page-loaded", () => {
-    console.log("Page loaded event - reinitializing menu");
     // Aguarda o DOM ser atualizado
     setTimeout(() => {
-      Application.initialize();
+      initScrollAnimations();
+      initAnimatedSections();
     }, 200);
   });
 });

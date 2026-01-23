@@ -23,7 +23,7 @@ export class ValidationMiddleware {
     return ValidationMiddleware.validate(AuthValidator.registerSchema)(
       req,
       res,
-      next
+      next,
     );
   }
 
@@ -31,7 +31,7 @@ export class ValidationMiddleware {
     return ValidationMiddleware.validate(AuthValidator.loginSchema)(
       req,
       res,
-      next
+      next,
     );
   }
 
@@ -39,7 +39,7 @@ export class ValidationMiddleware {
     return ValidationMiddleware.validate(AuthValidator.refreshTokenSchema)(
       req,
       res,
-      next
+      next,
     );
   }
 
@@ -47,7 +47,7 @@ export class ValidationMiddleware {
     return ValidationMiddleware.validate(AuthValidator.forgotPasswordSchema)(
       req,
       res,
-      next
+      next,
     );
   }
 
@@ -55,7 +55,15 @@ export class ValidationMiddleware {
     return ValidationMiddleware.validate(AuthValidator.resetPasswordSchema)(
       req,
       res,
-      next
+      next,
+    );
+  }
+
+  static validateProfileUpdate(req, res, next) {
+    return ValidationMiddleware.validate(AuthValidator.profileUpdateSchema)(
+      req,
+      res,
+      next,
     );
   }
 }

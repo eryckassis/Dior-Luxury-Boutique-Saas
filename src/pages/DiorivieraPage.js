@@ -4,6 +4,7 @@
 
 import "../components/AppNavigation.js";
 import "../components/FooterSection.js";
+import "../components/ProductReviews.js";
 
 export class DiorivieraPage extends HTMLElement {
   constructor() {
@@ -77,7 +78,7 @@ export class DiorivieraPage extends HTMLElement {
           // Add active class to clicked button and corresponding content
           button.classList.add("active");
           const targetContent = this.querySelector(
-            `.tab-content[data-tab="${tabId}"]`
+            `.tab-content[data-tab="${tabId}"]`,
           );
           if (targetContent) {
             targetContent.classList.add("active");
@@ -88,11 +89,11 @@ export class DiorivieraPage extends HTMLElement {
       // Image Reveal Animation with GSAP
       if (window.gsap && window.ScrollTrigger) {
         const imageRevealWrapper = this.querySelector(
-          ".image-reveal-wrapper-full"
+          ".image-reveal-wrapper-full",
         );
         if (imageRevealWrapper) {
           const overlay = imageRevealWrapper.querySelector(
-            ".reveal-overlay-full"
+            ".reveal-overlay-full",
           );
           const image = imageRevealWrapper.querySelector(".reveal-image-full");
 
@@ -119,87 +120,9 @@ export class DiorivieraPage extends HTMLElement {
                 duration: 1.2,
                 ease: "power3.out",
               },
-              "-=1.2"
+              "-=1.2",
             );
         }
-      }
-
-      // Review Form Modal
-      const writeReviewBtn = this.querySelector(".reviews-load-more");
-      const reviewModal = this.querySelector(".review-modal");
-      const closeModalBtn = this.querySelector(".close-review-modal");
-      const reviewForm = this.querySelector(".review-form");
-      const starRatingInputs = this.querySelectorAll(".star-rating-input");
-
-      // Open modal
-      if (writeReviewBtn && reviewModal) {
-        writeReviewBtn.addEventListener("click", () => {
-          reviewModal.classList.add("active");
-          document.body.style.overflow = "hidden";
-        });
-      }
-
-      // Close modal
-      if (closeModalBtn && reviewModal) {
-        closeModalBtn.addEventListener("click", () => {
-          reviewModal.classList.remove("active");
-          document.body.style.overflow = "auto";
-          document.body.style.overflowX = "hidden";
-        });
-
-        // Close on backdrop click
-        reviewModal.addEventListener("click", (e) => {
-          if (e.target === reviewModal) {
-            reviewModal.classList.remove("active");
-            document.body.style.overflow = "auto";
-            document.body.style.overflowX = "hidden";
-          }
-        });
-      }
-
-      // Star rating selection
-      starRatingInputs.forEach((star, index) => {
-        star.addEventListener("click", () => {
-          starRatingInputs.forEach((s, i) => {
-            if (i <= index) {
-              s.classList.add("selected");
-            } else {
-              s.classList.remove("selected");
-            }
-          });
-        });
-      });
-
-      // Form submission
-      if (reviewForm) {
-        reviewForm.addEventListener("submit", (e) => {
-          e.preventDefault();
-
-          const formData = new FormData(reviewForm);
-          const rating = this.querySelectorAll(
-            ".star-rating-input.selected"
-          ).length;
-          const reviewText = formData.get("review-text");
-          const recommend = formData.get("recommend");
-          const name = formData.get("reviewer-name");
-
-          console.log({
-            rating,
-            reviewText,
-            recommend,
-            name,
-            date: new Date().toISOString(),
-          });
-
-          // Fechar modal e resetar form
-          reviewModal.classList.remove("active");
-          document.body.style.overflow = "auto";
-          document.body.style.overflowX = "hidden";
-          reviewForm.reset();
-          starRatingInputs.forEach((s) => s.classList.remove("selected"));
-
-          alert("Avaliação enviada com sucesso!");
-        });
       }
     });
   }
@@ -411,186 +334,12 @@ export class DiorivieraPage extends HTMLElement {
             </div>
           </section>
 
-          <!-- Reviews Section -->
-          <section class="reviews-section-product">
-            <div class="reviews-container">
-              <div class="reviews-header-product">
-                <p class="reviews-gama-text">La Collection Privée <span class="miss-dior-highlight">Dioriviera</span> por intensidade</p>
-                <a href="#" class="reviews-discover-link">Descubra</a>
-              </div>
-
-              <div class="reviews-title-area">
-                <h3 class="reviews-main-title">Avaliações sobre o produto</h3>
-              </div>
-
-              <div class="reviews-box-product">
-                <div class="reviews-summary">
-                  <p class="reviews-label">Avaliações</p>
-                  <div class="reviews-stars-display">
-                    <span class="review-star-filled">★</span>
-                    <span class="review-star-filled">★</span>
-                    <span class="review-star-filled">★</span>
-                    <span class="review-star-filled">★</span>
-                    <span class="review-star-filled">★</span>
-                    <span class="review-star-empty">☆</span>
-                  </div>
-                  <p class="reviews-count">128 avaliações</p>
-                </div>
-
-                <div class="reviews-list">
-                  <!-- Review 1 -->
-                  <div class="review-item-card">
-                    <div class="review-stars-rating">
-                      <span class="review-star-filled">★</span>
-                      <span class="review-star-filled">★</span>
-                      <span class="review-star-filled">★</span>
-                      <span class="review-star-filled">★</span>
-                      <span class="review-star-filled">★</span>
-                    </div>
-                    <p class="review-date">Enviado há 3 dias</p>
-                    <p class="review-text">Dioriviera é a essência do verão! A fragrância é fresca, alegre e perfeita para dias ensolarados. Me transporta para a Riviera Francesa a cada aplicação.</p>
-                    <p class="review-recommendation">Você recomendaria esse produto a um amigo?<br><strong>Sim</strong></p>
-                    <p class="review-author">Por Marina S.</p>
-                  </div>
-
-                  <!-- Review 2 -->
-                  <div class="review-item-card">
-                    <div class="review-stars-rating">
-                      <span class="review-star-filled">★</span>
-                      <span class="review-star-filled">★</span>
-                      <span class="review-star-filled">★</span>
-                      <span class="review-star-filled">★</span>
-                      <span class="review-star-filled">★</span>
-                    </div>
-                    <p class="review-date">Enviado há 5 dias</p>
-                    <p class="review-text">Apaixonado pela edição limitada! O estojo com padrão Toile de Jouy verde é simplesmente lindo. A fragrância combina perfeitamente com o visual mediterrâneo.</p>
-                    <p class="review-recommendation">Você recomendaria esse produto a um amigo?<br><strong>Sim</strong></p>
-                    <p class="review-author">Por Lucas P.</p>
-                  </div>
-
-                  <!-- Review 3 -->
-                  <div class="review-item-card">
-                    <div class="review-stars-rating">
-                      <span class="review-star-filled">★</span>
-                      <span class="review-star-filled">★</span>
-                      <span class="review-star-filled">★</span>
-                      <span class="review-star-filled">★</span>
-                      <span class="review-star-filled">★</span>
-                    </div>
-                    <p class="review-date">Enviado há 7 dias</p>
-                    <p class="review-text">As notas de figo verde e rosa são incríveis juntas. Um perfume unissex versátil que funciona tanto de dia quanto à noite. Duração excelente!</p>
-                    <p class="review-recommendation">Você recomendaria esse produto a um amigo?<br><strong>Sim</strong></p>
-                    <p class="review-author">Por Beatriz M.</p>
-                  </div>
-
-                  <!-- Review 4 -->
-                  <div class="review-item-card">
-                    <div class="review-stars-rating">
-                      <span class="review-star-filled">★</span>
-                      <span class="review-star-filled">★</span>
-                      <span class="review-star-filled">★</span>
-                      <span class="review-star-filled">★</span>
-                      <span class="review-star-filled">★</span>
-                    </div>
-                    <p class="review-date">Enviado há 10 dias</p>
-                    <p class="review-text">Dioriviera captura perfeitamente a dolce vita. É alegre, sofisticado e evoca memórias de férias no sul da França. Um must-have para o verão!</p>
-                    <p class="review-recommendation">Você recomendaria esse produto a um amigo?<br><strong>Sim</strong></p>
-                    <p class="review-author">Por Rafael C.</p>
-                  </div>
-
-                  <!-- Review 5 -->
-                  <div class="review-item-card">
-                    <div class="review-stars-rating">
-                      <span class="review-star-filled">★</span>
-                      <span class="review-star-filled">★</span>
-                      <span class="review-star-filled">★</span>
-                      <span class="review-star-filled">★</span>
-                      <span class="review-star-filled">★</span>
-                    </div>
-                    <p class="review-date">Enviado há 12 dias</p>
-                    <p class="review-text">Comprei como presente e foi um sucesso absoluto! A apresentação é impecável e o perfume é simplesmente divino. Vale cada centavo.</p>
-                    <p class="review-recommendation">Você recomendaria esse produto a um amigo?<br><strong>Sim</strong></p>
-                    <p class="review-author">Por Camila A.</p>
-                  </div>
-                </div>
-
-                <div class="reviews-pagination">
-                  <span class="pagination-info">1-5 de 128</span>
-                  <div class="pagination-arrows">
-                    <button class="pagination-btn" aria-label="Anterior">‹</button>
-                    <button class="pagination-btn" aria-label="Próximo">›</button>
-                  </div>
-                </div>
-
-                <button class="reviews-load-more">Escrever avaliação...</button>
-              </div>
-
-              <!-- Review Modal -->
-              <div class="review-modal">
-                <div class="review-modal-content">
-                  <button class="close-review-modal" aria-label="Fechar">&times;</button>
-                  
-                  <h2 class="review-modal-title">AVALIAÇÃO DO PRODUTO</h2>
-                  
-                  <form class="review-form">
-                    <div class="form-group">
-                      <label class="form-label">Dê uma nota geral para o produto *</label>
-                      <div class="star-rating-select">
-                        <span class="star-rating-input">☆</span>
-                        <span class="star-rating-input">☆</span>
-                        <span class="star-rating-input">☆</span>
-                        <span class="star-rating-input">☆</span>
-                        <span class="star-rating-input">☆</span>
-                        <span class="star-rating-input">☆</span>
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="form-label" for="review-text">Sua avaliação do produto *</label>
-                      <textarea 
-                        id="review-text" 
-                        name="review-text" 
-                        class="form-textarea" 
-                        placeholder="Dê detalhes sobre o produto e por que deu a nota acima. Se possível, fale como você usa o produto e dê dicas para outros consumidores."
-                        required
-                        rows="5"
-                      ></textarea>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="form-label">Você recomendaria esse produto a um amigo? *</label>
-                      <div class="radio-group">
-                        <label class="radio-label">
-                          <input type="radio" name="recommend" value="sim" required>
-                          <span>Sim</span>
-                        </label>
-                        <label class="radio-label">
-                          <input type="radio" name="recommend" value="nao">
-                          <span>Não</span>
-                        </label>
-                      </div>
-                    </div>
-
-                    <div class="form-section-title">SEUS DADOS</div>
-
-                    <div class="form-group">
-                      <label class="form-label" for="reviewer-name">Entre com seu nome ou apelido *</label>
-                      <input 
-                        type="text" 
-                        id="reviewer-name" 
-                        name="reviewer-name" 
-                        class="form-input" 
-                        placeholder="Seu nome ou apelido"
-                        required
-                      >
-                    </div>
-
-                    <button type="submit" class="submit-review-btn">ENVIAR AVALIAÇÃO</button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </section>
+          <!-- Reviews Section - Componente Reutilizável -->
+          <product-reviews 
+            product-id="dioriviera-100ml"
+            product-name="Dioriviera"
+            collection="La Collection Privée"
+          ></product-reviews>
         </div>
 
         <!-- Footer -->

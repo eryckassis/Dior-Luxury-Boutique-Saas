@@ -9,106 +9,60 @@ class AuthService {
     this.listeners = [];
     this.currentUser = null;
     this.currentSession = null;
-    this._initialized = false;
 
-    // Inicializa de forma controlada
-    this._initPromise = this.initialize();
+    // Escuta mudanças de autenticação do Supabase
+    this.initAuthListener();
   }
 
   // ========================================================================
-  // INICIALIZAÇÃO ÚNICA
+  // INICIALIZAÇÃO - Listener de Auth State
   // ========================================================================
 
-  async initialize() {
-    console.log("🔐 AuthService: Iniciando...");
-
-    try {
-      // Busca sessão existente
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
-
-      this.currentSession = session;
-      this.currentUser = session?.user || null;
-
-      console.log("🔐 AuthService: Sessão restaurada?", !!session);
-
-      this._initialized = true;
-      this.notifyListeners();
-
-      // Configura listener para mudanças futuras
-      this.setupAuthListener();
-    } catch (error) {
-      console.error("❌ AuthService: Erro na inicialização:", error);
-      this._initialized = true;
-    }
-  }
-
-  /**
-   * Listener para mudanças de auth APÓS inicialização
-   */
-  setupAuthListener() {
+  initAuthListener() {
     supabase.auth.onAuthStateChange(async (event, session) => {
       console.log("🔐 Auth Event:", event);
 
-      // Ignora INITIAL_SESSION pois já tratamos
-      if (event === "INITIAL_SESSION") return;
-
       this.currentSession = session;
       this.currentUser = session?.user || null;
 
+      // Eventos específicos
       switch (event) {
         case "SIGNED_IN":
           console.log("✅ Usuário logado:", this.currentUser?.email);
           break;
         case "SIGNED_OUT":
           console.log("👋 Usuário deslogado");
-          if (!this._manualLogout) {
-            window.dispatchEvent(new CustomEvent("session-expired"));
-          }
-          this._manualLogout = false;
           break;
         case "TOKEN_REFRESHED":
-          console.log("🔄 Token renovado");
+          console.log("🔄 Token renovado automaticamente");
           break;
         case "USER_UPDATED":
-          console.log("📝 Usuário atualizado");
+          console.log("📝 Dados do usuário atualizados");
           break;
       }
 
+      // Notifica todos os listeners
       this.notifyListeners();
-    });
 
-    // Listener para atualização de perfil
-    window.addEventListener("profile-updated", (e) => {
-      if (e.detail?.name && this.currentUser) {
-        this.currentUser = {
-          ...this.currentUser,
-          user_metadata: {
-            ...this.currentUser.user_metadata,
-            name: e.detail.name,
-          },
-        };
-        this.notifyListeners();
+      // Dispara evento de sessão expirada se necessário
+      if (event === "SIGNED_OUT" && !this._manualLogout) {
+        window.dispatchEvent(new CustomEvent("session-expired"));
       }
+      this._manualLogout = false;
     });
-  }
-
-  /**
-   * Aguarda inicialização completa
-   */
-  async waitForInit() {
-    return this._initPromise;
   }
 
   // ========================================================================
   // AUTENTICAÇÃO
   // ========================================================================
 
+  /**
+   * Registra novo usuário
+   * @param {Object} userData - {name, email, password}
+   * @returns {Promise<Object>}
+   */
   async register({ name, email, password }) {
     try {
-      console.log("📝 Iniciando registro para:", email);
-
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
@@ -120,10 +74,7 @@ class AuthService {
         },
       });
 
-      console.log("📡 Resposta do Supabase:", { data, error });
-
       if (error) {
-        console.error("❌ Erro do Supabase:", error);
         // Mapeia erros do Supabase para mensagens amigáveis
         if (error.message.includes("already registered")) {
           throw new Error(
@@ -132,12 +83,6 @@ class AuthService {
         }
         throw new Error(error.message);
       }
-
-      console.log("✅ Usuário criado:", data.user?.id);
-      console.log(
-        "📧 Sessão:",
-        data.session ? "Sim" : "Não (precisa confirmar email)",
-      );
 
       // Supabase pode retornar user mesmo sem confirmar email (depende das configurações)
       return {
@@ -153,6 +98,11 @@ class AuthService {
     }
   }
 
+  /**
+   * Faz login do usuário
+   * @param {Object} credentials - {email, password}
+   * @returns {Promise<Object>}
+   */
   async login({ email, password }) {
     try {
       const { data, error } = await supabase.auth.signInWithPassword({
@@ -191,45 +141,31 @@ class AuthService {
     }
   }
 
+  /**
+   * Faz logout do usuário
+   * @returns {Promise<void>}
+   */
   async logout() {
     try {
-      console.log("🔐 AuthService.logout() - Iniciando...");
-      this._manualLogout = true;
+      this._manualLogout = true; // Flag para não disparar session-expired
+      const { error } = await supabase.auth.signOut();
 
-      // Limpa estado local PRIMEIRO (garante logout mesmo se signOut falhar)
-      this.currentUser = null;
-      this.currentSession = null;
-
-      // Remove tokens do localStorage (chave padrão do Supabase)
-      const storageKey = `sb-hstrbobhbravppxpmvle-auth-token`;
-      localStorage.removeItem(storageKey);
-
-      // Remove outras possíveis chaves do Supabase
-      Object.keys(localStorage).forEach((key) => {
-        if (key.startsWith("sb-") || key.includes("supabase")) {
-          localStorage.removeItem(key);
-        }
-      });
-
-      // Notifica listeners ANTES de tentar signOut (UI atualiza imediatamente)
-      this.notifyListeners();
-
-      // Tenta signOut em background (não bloqueia)
-      supabase.auth.signOut().catch((err) => {
-        console.warn("⚠️ signOut() falhou (ignorado):", err);
-      });
+      if (error) {
+        throw new Error(error.message);
+      }
 
       return { success: true, message: "Logout realizado com sucesso!" };
     } catch (error) {
       console.error("❌ Erro no logout:", error);
-      // Mesmo com erro, garante limpeza
-      this.currentUser = null;
-      this.currentSession = null;
-      this.notifyListeners();
       throw error;
     }
   }
 
+  /**
+   * Recuperação de senha
+   * @param {string} email
+   * @returns {Promise<Object>}
+   */
   async forgotPassword(email) {
     try {
       const { error } = await supabase.auth.resetPasswordForEmail(email, {
@@ -251,6 +187,11 @@ class AuthService {
     }
   }
 
+  /**
+   * Reset de senha com token (usuário clicou no link do email)
+   * @param {string} newPassword
+   * @returns {Promise<Object>}
+   */
   async resetPassword(newPassword) {
     try {
       const { error } = await supabase.auth.updateUser({
@@ -275,6 +216,10 @@ class AuthService {
   // PERFIL DO USUÁRIO
   // ========================================================================
 
+  /**
+   * Busca perfil do usuário na tabela profiles
+   * @returns {Promise<Object|null>}
+   */
   async getProfile() {
     try {
       const user = await this.getUser();
@@ -298,6 +243,11 @@ class AuthService {
     }
   }
 
+  /**
+   * Atualiza perfil do usuário
+   * @param {Object} profileData
+   * @returns {Promise<Object>}
+   */
   async updateProfile(profileData) {
     try {
       const user = await this.getUser();
@@ -331,6 +281,10 @@ class AuthService {
   // GETTERS DE SESSÃO
   // ========================================================================
 
+  /**
+   * Obtém usuário atual
+   * @returns {Promise<Object|null>}
+   */
   async getUser() {
     const {
       data: { user },
@@ -338,6 +292,10 @@ class AuthService {
     return user;
   }
 
+  /**
+   * Obtém sessão atual
+   * @returns {Promise<Object|null>}
+   */
   async getSession() {
     const {
       data: { session },
@@ -345,31 +303,35 @@ class AuthService {
     return session;
   }
 
+  /**
+   * Obtém access token atual
+   * @returns {Promise<string|null>}
+   */
   async getAccessToken() {
     const session = await this.getSession();
     return session?.access_token || null;
   }
 
+  /**
+   * Verifica se está autenticado (síncrono, usa cache)
+   * @returns {boolean}
+   */
   isAuthenticated() {
     return !!this.currentSession;
   }
 
   /**
-   * Verifica autenticação de forma ASSÍNCRONA
-   * Aguarda inicialização e retorna o estado correto
+   * Obtém usuário do cache (síncrono)
+   * @returns {Object|null}
    */
-  async isAuthenticatedAsync() {
-    // Aguarda inicialização se ainda não terminou
-    if (!this._initialized) {
-      await this._initPromise;
-    }
-    return !!this.currentSession;
-  }
-
   getCachedUser() {
     return this.currentUser;
   }
 
+  /**
+   * Verifica autenticação e retorna status
+   * @returns {Promise<boolean>}
+   */
   async checkAuth() {
     try {
       const session = await this.getSession();
@@ -406,17 +368,26 @@ class AuthService {
   // MÉTODOS DE COMPATIBILIDADE (para transição gradual)
   // ========================================================================
 
+  /**
+   * @deprecated Use getProfile() ao invés
+   */
   getStoredUser() {
     console.warn("⚠️ getStoredUser() está deprecated. Use getProfile()");
     return this.currentUser;
   }
 
+  /**
+   * @deprecated Supabase gerencia tokens automaticamente
+   */
   setTokens() {
     console.warn(
       "⚠️ setTokens() está deprecated. Supabase gerencia tokens automaticamente.",
     );
   }
 
+  /**
+   * @deprecated Supabase gerencia tokens automaticamente
+   */
   clearAuth() {
     console.warn("⚠️ clearAuth() está deprecated. Use logout()");
     return this.logout();

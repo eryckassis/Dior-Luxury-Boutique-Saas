@@ -21,8 +21,9 @@ export class DadosPessoaisPage extends HTMLElement {
   }
 
   async connectedCallback() {
-    // Verifica autenticação
-    if (!authService.isAuthenticated()) {
+    // Verifica autenticação de forma assíncrona (aguarda sessão restaurar após refresh)
+    const isAuth = await authService.isAuthenticatedAsync();
+    if (!isAuth) {
       router.navigate("/login");
       return;
     }
@@ -132,7 +133,7 @@ export class DadosPessoaisPage extends HTMLElement {
       window.gsap.fromTo(
         content,
         { opacity: 0, y: 10 },
-        { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }
+        { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" },
       );
     }
   }
@@ -267,18 +268,18 @@ export class DadosPessoaisPage extends HTMLElement {
             <span class="dados-field-value ${
               !this.userData?.cpf ? "empty" : ""
             }">${
-      this.userData?.cpf
-        ? userService.formatCPF(this.userData.cpf)
-        : "Não informado"
-    }</span>
+              this.userData?.cpf
+                ? userService.formatCPF(this.userData.cpf)
+                : "Não informado"
+            }</span>
           </div>
           <div class="dados-field">
             <span class="dados-field-label">Gênero</span>
             <span class="dados-field-value ${
               !this.userData?.gender ? "empty" : ""
             }">${
-      this.getGenderLabel(this.userData?.gender) || "Não informado"
-    }</span>
+              this.getGenderLabel(this.userData?.gender) || "Não informado"
+            }</span>
           </div>
         </div>
 
@@ -288,20 +289,20 @@ export class DadosPessoaisPage extends HTMLElement {
             <span class="dados-field-value ${
               !this.userData?.birthDate ? "empty" : ""
             }">${
-      this.userData?.birthDate
-        ? userService.formatDate(this.userData.birthDate)
-        : "Não informado"
-    }</span>
+              this.userData?.birthDate
+                ? userService.formatDate(this.userData.birthDate)
+                : "Não informado"
+            }</span>
           </div>
           <div class="dados-field">
             <span class="dados-field-label">Telefone</span>
             <span class="dados-field-value ${
               !this.userData?.phone ? "empty" : ""
             }">${
-      this.userData?.phone
-        ? userService.formatPhone(this.userData.phone)
-        : "Não informado"
-    }</span>
+              this.userData?.phone
+                ? userService.formatPhone(this.userData.phone)
+                : "Não informado"
+            }</span>
           </div>
         </div>
 
@@ -450,7 +451,7 @@ export class DadosPessoaisPage extends HTMLElement {
   }
 
   render() {
-    const user = authService.getUser();
+    const user = authService.getCachedUser();
     const userName = user?.name || "Usuário";
 
     this.innerHTML = `

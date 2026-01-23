@@ -12,8 +12,9 @@ export class ProfileMenu extends HTMLElement {
     this.isOpen = false;
     this.activeTab = "account";
 
+    // Usa métodos síncronos/cache para inicialização
     this.isAuthenticated = authService.isAuthenticated();
-    this.user = authService.getUser();
+    this.user = authService.getCachedUser();
 
     this.authListener = ({ user, isAuthenticated }) => {
       this.user = user;
@@ -21,7 +22,7 @@ export class ProfileMenu extends HTMLElement {
       this.updateAccountContent();
     };
 
-    cartService.initializeDefaultItems();
+    // CartService - pega itens atuais (pode estar vazio inicialmente)
     this.cartItems = cartService.getItems();
 
     this.cartListener = (items) => {
@@ -30,7 +31,7 @@ export class ProfileMenu extends HTMLElement {
     };
   }
 
-  connectedCallback() {
+  async connectedCallback() {
     this.render();
     this.initEventListeners();
     this.initButtons();
@@ -38,6 +39,11 @@ export class ProfileMenu extends HTMLElement {
     // Adiciona listener para mudanças no carrinho
     cartService.addListener(this.cartListener);
     authService.addListener(this.authListener);
+
+    // Aguarda inicialização do carrinho e atualiza se necessário
+    await cartService.waitForInit();
+    this.cartItems = cartService.getItems();
+    this.updateCart();
   }
 
   disconnectedCallback() {
@@ -149,14 +155,14 @@ export class ProfileMenu extends HTMLElement {
     }
   }
 
-  updateQuantity(itemId, newQuantity) {
-    cartService.updateQuantity(itemId, newQuantity);
+  async updateQuantity(itemId, newQuantity) {
+    await cartService.updateQuantity(itemId, newQuantity);
     this.cartItems = cartService.getItems();
     this.updateCart();
   }
 
-  removeItem(itemId) {
-    cartService.removeItem(itemId);
+  async removeItem(itemId) {
+    await cartService.removeItem(itemId);
     this.cartItems = cartService.getItems();
     this.updateCart();
   }
@@ -258,9 +264,12 @@ export class ProfileMenu extends HTMLElement {
 
   async handleLogout() {
     try {
+      console.log("🚪 Iniciando logout...");
       await authService.logout();
+      console.log("✅ Logout realizado, fechando menu...");
+      this.close();
     } catch (error) {
-      console.error("Erro no logout:", error);
+      console.error("❌ Erro no logout:", error);
     }
   }
 
@@ -315,12 +324,12 @@ export class ProfileMenu extends HTMLElement {
     });
   }
 
-  open(initialTab = "account") {
+  async open(initialTab = "account") {
     if (this.isOpen) return;
 
-    // Sincroniza estado real ao abrir (Safety Check)
-    const currentAuth = authService.isAuthenticated();
-    const currentUser = authService.getUser();
+    // Sincroniza estado real ao abrir (Safety Check) - de forma assíncrona
+    const currentAuth = await authService.isAuthenticatedAsync();
+    const currentUser = authService.getCachedUser();
 
     // Se o estado local estiver diferente do real, atualiza!
     if (
@@ -606,7 +615,10 @@ export class ProfileMenu extends HTMLElement {
   }
 
   renderLoggedInContent() {
-    const userName = this.user?.name || "Usuário";
+    const userName =
+      this.user?.user_metadata?.name ||
+      this.user?.email?.split("@")[0] ||
+      "Usuário";
 
     return `
     <div class="profile-user-welcome">
@@ -650,6 +662,8 @@ export class ProfileMenu extends HTMLElement {
     const signupBtn = this.querySelector(".profile-signup-btn");
     const logoutBtn = this.querySelector(".profile-logout-btn");
 
+    console.log("🔧 initAccountButtons - logoutBtn encontrado:", !!logoutBtn);
+
     if (loginBtn) {
       loginBtn.addEventListener("click", () => {
         this.close();
@@ -665,7 +679,10 @@ export class ProfileMenu extends HTMLElement {
     }
 
     if (logoutBtn) {
-      logoutBtn.addEventListener("click", () => this.handleLogout());
+      logoutBtn.addEventListener("click", () => {
+        console.log("🖱️ Botão logout clicado!");
+        this.handleLogout();
+      });
     }
   }
 

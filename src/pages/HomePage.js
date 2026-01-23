@@ -316,11 +316,8 @@ export class HomePage extends HTMLElement {
       const heroVideos = this.querySelectorAll(".hero-video-hover");
 
       if (heroVideos.length === 0) {
-        console.warn("Nenhum vídeo hero encontrado");
         return;
       }
-
-      console.log(`${heroVideos.length} vídeos hero encontrados`);
 
       heroVideos.forEach((video, index) => {
         // Garantir que o vídeo está pausado inicialmente
