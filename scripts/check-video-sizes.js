@@ -1,8 +1,3 @@
-/**
- * Script para verificar tamanhos dos vídeos
- * Execute: node scripts/check-video-sizes.js
- */
-
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -52,7 +47,6 @@ function checkVideoSizes() {
     }
   });
 
-  // Mostrar arquivos que excedem o limite
   if (oversizedFiles.length > 0) {
     console.log("\n🚨 ARQUIVOS ACIMA DE 100MB (precisam ir para CDN):\n");
     oversizedFiles
@@ -62,7 +56,6 @@ function checkVideoSizes() {
       });
   }
 
-  // Mostrar arquivos seguros
   if (safeFiles.length > 0) {
     console.log("\n✅ ARQUIVOS ABAIXO DE 100MB (podem ficar no Vercel):\n");
     safeFiles

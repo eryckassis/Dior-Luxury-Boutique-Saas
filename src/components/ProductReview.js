@@ -13,7 +13,7 @@ export class ProductReviews extends HTMLElement {
     this.isLoading = false;
     this.hasUserReviewed = false;
   }
-  // Atributos observados
+
   static get observedAttributes() {
     return ["product-id", "product-name", "collection"];
   }
@@ -38,7 +38,6 @@ export class ProductReviews extends HTMLElement {
   }
 
   disconnectedCallback() {
-    // Remove subscription real-time
     if (this.realtimeCallback) {
       reviewService.unsubscribeFromProduct(this.productId, this.realtimeCallback);
     }
@@ -49,7 +48,6 @@ export class ProductReviews extends HTMLElement {
       this.isLoading = true;
       this.updateLoadingState();
 
-      // Carrega em paralelo
       const [reviewsData, statsData, userReviewed] = await Promise.all([
         reviewService.getReviews(this.productId, this.currentPage, this.limit),
         reviewService.getProductStats(this.productId),
@@ -73,7 +71,7 @@ export class ProductReviews extends HTMLElement {
   initRealtime() {
     this.realtimeCallback = async (payload) => {
       console.log("🔄 Real-time update:", payload.eventType);
-      // Recarrega dados quando há mudança
+
       await this.loadData();
     };
 
@@ -81,19 +79,15 @@ export class ProductReviews extends HTMLElement {
   }
 
   initEventListeners() {
-    // Botão "Escrever avaliação"
     this.addEventListener("click", async (e) => {
-      // Abrir modal
       if (e.target.closest(".reviews-load-more")) {
         await this.openReviewModal();
       }
 
-      // Fechar modal
       if (e.target.closest(".close-review-modal") || e.target.classList.contains("review-modal")) {
         this.closeReviewModal();
       }
 
-      // Paginação
       if (e.target.closest(".pagination-btn-prev")) {
         if (this.currentPage > 1) {
           this.currentPage--;
@@ -108,14 +102,12 @@ export class ProductReviews extends HTMLElement {
         }
       }
 
-      // Star rating
       if (e.target.classList.contains("star-rating-input")) {
         const value = parseInt(e.target.dataset.value);
         this.setStarRating(value);
       }
     });
 
-    // Form submit
     this.addEventListener("submit", async (e) => {
       if (e.target.classList.contains("review-form")) {
         e.preventDefault();
@@ -125,16 +117,14 @@ export class ProductReviews extends HTMLElement {
   }
 
   async openReviewModal() {
-    // Verifica autenticação de forma assíncrona
     const isAuth = await authService.isAuthenticatedAsync();
     if (!isAuth) {
       toast.warning("Faça login para avaliar este produto");
-      // Dispara evento para abrir login modal ou redirecionar
+
       window.dispatchEvent(new CustomEvent("open-login-modal"));
       return;
     }
 
-    // Verifica se já avaliou
     if (this.hasUserReviewed) {
       toast.info("Você já avaliou este produto");
       return;
@@ -142,7 +132,6 @@ export class ProductReviews extends HTMLElement {
 
     const modal = this.querySelector(".review-modal");
     if (modal) {
-      // Pré-preenche nome do usuário
       const user = authService.getCachedUser();
       const nameInput = this.querySelector('input[name="reviewer-name"]');
       if (nameInput && user?.user_metadata?.name) {
@@ -182,7 +171,6 @@ export class ProductReviews extends HTMLElement {
       }
     });
 
-    // Guarda o valor
     this._selectedRating = value;
   }
 
@@ -202,7 +190,6 @@ export class ProductReviews extends HTMLElement {
     const recommend = formData.get("recommend") === "sim";
     const authorName = formData.get("reviewer-name")?.trim();
 
-    // Validações
     if (rating < 1 || rating > 5) {
       toast.error("Selecione uma nota de 1 a 5 estrelas");
       return;
@@ -218,7 +205,6 @@ export class ProductReviews extends HTMLElement {
       return;
     }
 
-    // Desabilita botão
     const submitBtn = form.querySelector(".submit-review-btn");
     if (submitBtn) {
       submitBtn.disabled = true;
@@ -237,8 +223,6 @@ export class ProductReviews extends HTMLElement {
       toast.success("Avaliação enviada com sucesso!");
       this.closeReviewModal();
       this.hasUserReviewed = true;
-
-      // Dados serão atualizados via real-time
     } catch (error) {
       toast.error(error.message || "Erro ao enviar avaliação");
     } finally {
@@ -262,7 +246,6 @@ export class ProductReviews extends HTMLElement {
   }
 
   renderContent() {
-    // Atualiza sumário
     const summary = this.querySelector(".reviews-summary");
     if (summary) {
       const avg = this.stats?.average_rating || 0;
@@ -277,7 +260,6 @@ export class ProductReviews extends HTMLElement {
       `;
     }
 
-    // Atualiza lista
     const list = this.querySelector(".reviews-list");
     if (list) {
       if (this.reviews.length === 0) {
@@ -291,7 +273,6 @@ export class ProductReviews extends HTMLElement {
       }
     }
 
-    // Atualiza paginação
     const pagination = this.querySelector(".reviews-pagination");
     if (pagination) {
       const total = this.stats?.total_reviews || 0;
@@ -307,7 +288,6 @@ export class ProductReviews extends HTMLElement {
       `;
     }
 
-    // Atualiza botão de escrever
     const writeBtn = this.querySelector(".reviews-load-more");
     if (writeBtn && this.hasUserReviewed) {
       writeBtn.textContent = "Você já avaliou este produto";

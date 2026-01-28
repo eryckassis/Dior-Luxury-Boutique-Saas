@@ -1,8 +1,3 @@
-/* ============================================================================
-   ARTE DE PRESENTEAR PAGE - Estilos
-   ============================================================================ */
-
-/* Video Section Full Screen */
 .arte-presentear-video-section {
   position: relative;
   width: 100%;
@@ -20,22 +15,18 @@
   object-fit: cover;
 }
 
-/* Vídeo Desktop - visível por padrão */
 .arte-video-desktop {
   display: block;
 }
 
-/* Vídeo Mobile - oculto por padrão */
 .arte-video-mobile {
   display: none;
 }
 
-/* Video Controls - Garantir visibilidade sobre o conteúdo */
 .arte-presentear-video-section .video-controls {
   z-index: 20;
 }
 
-/* Conteúdo de texto sobre o vídeo */
 .arte-video-content {
   display: flex;
   position: absolute;
@@ -70,11 +61,6 @@
   font-family: "Hellix", sans-serif;
 }
 
-/* ============================================================================
-   RESPONSIVO - Breakpoints seguindo o padrão do projeto
-   ============================================================================ */
-
-/* Tablets e dispositivos médios */
 @media (max-width: 1024px) {
   .arte-video-content {
     padding: 0 30px;
@@ -91,7 +77,6 @@
   }
 }
 
-/* Smartphones e dispositivos pequenos */
 @media (max-width: 768px) {
   .arte-video-content {
     padding: 0 20px;
@@ -109,10 +94,9 @@
   }
 }
 
-/* Dispositivos muito pequenos */
 @media (max-width: 640px) {
   .arte-presentear-video-section {
-    height: 100svh; /* Usa viewport height para mobile */
+    height: 100svh;
   }
 
   .arte-video-content {
@@ -129,16 +113,11 @@
   }
 }
 
-/* ============================================================================
-   MOBILE VIDEO SWAP - Troca vídeo para formato vertical em mobile
-   ============================================================================ */
 @media (max-width: 768px) {
-  /* Oculta vídeo desktop em mobile */
   .arte-video-desktop {
     display: none !important;
   }
 
-  /* Mostra vídeo mobile (formato vertical) */
   .arte-video-mobile {
     display: block !important;
   }
@@ -170,7 +149,6 @@
   }
 }
 
-/* iPhone 16 Pro Max e similares */
 @media (max-width: 480px) {
   .arte-presentear-video-section {
     height: 100svh;
@@ -196,7 +174,6 @@
   }
 }
 
-/* iPhone SE e dispositivos menores */
 @media (max-width: 390px) {
   .arte-video-content {
     bottom: 10%;
@@ -212,8 +189,7 @@
 }
 
 .presentes-section-second {
-  /* Adiciona espaço inferior para separar da próxima seção */
-  margin-bottom: 0; /* Ajuste este valor: 40px, 80px, 120px */
+  margin-bottom: 0;
   background: #ffffff;
   padding: 80px 0 100px;
   width: 100%;
@@ -261,7 +237,6 @@
   letter-spacing: 0.2px;
 }
 
-/* Grid de Presentes */
 .presentes-grid-second {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -276,7 +251,6 @@
   gap: 15px;
 }
 
-/* Wrapper do vídeo com posição relativa para os controles */
 .presente-video-wrapper-second {
   position: relative;
   border-radius: 8px;
@@ -296,7 +270,6 @@
   background: #f5f5f5;
 }
 
-/* Controles do vídeo do presente */
 .video-controls-presente {
   right: 15px;
   bottom: 15px;
@@ -336,7 +309,6 @@
   letter-spacing: 0.2px;
 }
 
-/* Botão Descubra com animação GSAP */
 .presente-button-second {
   display: inline-block;
   position: relative;
@@ -362,7 +334,6 @@
   color: #000;
 }
 
-/* Button Flair para o botão descubra */
 .presente-button-second .button__flair {
   position: absolute;
   top: 0;
@@ -395,7 +366,6 @@
   z-index: 1;
 }
 
-/* Responsivo - Botões */
 @media (max-width: 768px) {
   .presente-button-second {
     padding: 10px 25px;
@@ -432,7 +402,6 @@
   letter-spacing: 0.2px;
 }
 
-/* Responsivo - Grid de Presentes */
 @media (max-width: 1024px) {
   .presentes-grid-second {
     gap: 30px;
@@ -518,10 +487,6 @@
   }
 }
 
-/* ============================================================================
-   O TOQUE FINAL SECTION - Seção de destaque
-   ============================================================================ */
-
 .toque-final-section {
   background-color: #f8f8f8;
   padding: 100px 0;
@@ -555,7 +520,6 @@
   letter-spacing: -0.01em;
 }
 
-/* Responsivo */
 @media (max-width: 1024px) {
   .toque-final-section {
     padding: 80px 0;
@@ -595,18 +559,12 @@
   }
 }
 
-/* ============================================================================
-   SELEÇÃO DE PRESENTES - Override para usar classes services-dior
-   ============================================================================ */
-
-/* Override para a seção de seleção de presentes */
 .selecao-presentes-section.services-dior-section {
   background-image: none;
   background-color: #fff;
   padding: 80px 0 100px;
 }
 
-/* Card sem overlay - apenas imagem + título abaixo */
 .selecao-card-style .services-card-image-wrap {
   aspect-ratio: 3/4;
   height: auto;
@@ -620,7 +578,6 @@
   display: none;
 }
 
-/* Título abaixo do card */
 .selecao-card-title {
   margin: 16px 0 0 0;
   color: #1a1a1a;
@@ -631,7 +588,6 @@
   text-align: center;
 }
 
-/* Link Descubra com underline */
 .selecao-presentes-section .selecao-presentes-link {
   display: inline-block;
   position: relative;
@@ -656,7 +612,6 @@
   content: "";
 }
 
-/* Responsivo */
 @media (max-width: 900px) {
   .selecao-presentes-section.services-dior-section {
     padding: 60px 0 80px;
@@ -674,10 +629,6 @@
   }
 }
 
-/* ============================================================================
-   SECTION SPACER - Espaçamento entre seções
-   ============================================================================ */
-
 .section-spacer-wrapper {
   position: relative;
   margin: 0;
@@ -686,7 +637,6 @@
   width: 100%;
 }
 
-/* Responsivo - ajusta o padding em dispositivos menores */
 @media (max-width: 1024px) {
   .section-spacer-wrapper {
     padding: 60px 0;

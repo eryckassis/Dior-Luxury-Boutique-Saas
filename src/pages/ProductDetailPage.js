@@ -1,7 +1,3 @@
-// ============================================================================
-// PRODUCT DETAIL PAGE - Página de detalhes do produto
-// ============================================================================
-
 import "../components/ModaNavigation.js";
 import "../components/FooterSection.js";
 import "../components/ProductDetailContent.js";
@@ -17,7 +13,6 @@ export class ProductDetailPage extends HTMLElement {
   }
 
   connectedCallback() {
-    // Obtém o ID do produto dos parâmetros da rota
     this.productId = this.routeParams?.id || router.getParams()?.id;
 
     if (this.productId) {
@@ -26,7 +21,7 @@ export class ProductDetailPage extends HTMLElement {
 
     if (!this.product) {
       console.error(`Produto não encontrado: ${this.productId}`);
-      // Redireciona para página inicial se produto não existir
+
       router.navigate("/para-ela");
       return;
     }
@@ -36,7 +31,6 @@ export class ProductDetailPage extends HTMLElement {
   }
 
   disconnectedCallback() {
-    // Cleanup animations
     if (this.animations) {
       this.animations.forEach((anim) => anim.kill());
     }
@@ -48,7 +42,6 @@ export class ProductDetailPage extends HTMLElement {
 
       this.animations = [];
 
-      // Fade in da página
       const pageAnim = window.gsap.from(".product-detail-container", {
         opacity: 0,
         y: 30,
@@ -57,7 +50,6 @@ export class ProductDetailPage extends HTMLElement {
       });
       this.animations.push(pageAnim);
 
-      // Stagger das informações do produto
       const infoAnim = window.gsap.from(".product-info > *", {
         opacity: 0,
         y: 20,

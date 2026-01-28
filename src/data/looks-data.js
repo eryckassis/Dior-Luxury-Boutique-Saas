@@ -1,7 +1,3 @@
-// ============================================================================
-// LOOKS DATA - Dados dos looks do desfile Primavera-Verão 2026
-// ============================================================================
-
 export const looksPrimaveraVerao2026 = [
   { id: 1, image: "/images/looks/look1.webp", number: "01" },
   { id: 2, image: "/images/looks/look2.webp", number: "02" },

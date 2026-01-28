@@ -1,7 +1,3 @@
-// ============================================================================
-// PERFUME PRODUCTS DATA - Dados centralizados para páginas de perfumes
-// ============================================================================
-
 export const perfumeProducts = [
   {
     id: "miss-dior-parfum",
@@ -231,57 +227,26 @@ export const perfumeProducts = [
   },
 ];
 
-// ============================================================================
-// HELPER FUNCTIONS - Funções auxiliares para buscar produtos
-// ============================================================================
-
-/**
- * Busca um perfume pelo ID
- * @param {string} id - ID do perfume
- * @returns {Object|undefined} - Objeto do perfume ou undefined
- */
 export function getPerfumeById(id) {
   return perfumeProducts.find((product) => product.id === id);
 }
 
-/**
- * Busca perfumes por categoria
- * @param {string} category - Categoria (feminino, masculino)
- * @returns {Array} - Array de perfumes da categoria
- */
 export function getPerfumesByCategory(category) {
   return perfumeProducts.filter((product) => product.category === category);
 }
 
-/**
- * Busca perfumes por família
- * @param {string} family - Família do perfume (miss-dior, jadore, sauvage, etc)
- * @returns {Array} - Array de perfumes da família
- */
 export function getPerfumesByFamily(family) {
   return perfumeProducts.filter((product) => product.family === family);
 }
 
-/**
- * Retorna todos os perfumes
- * @returns {Array} - Array com todos os perfumes
- */
 export function getAllPerfumes() {
   return perfumeProducts;
 }
 
-/**
- * Retorna categorias únicas
- * @returns {Array} - Array de categorias
- */
 export function getPerfumeCategories() {
   return [...new Set(perfumeProducts.map((p) => p.category))];
 }
 
-/**
- * Retorna famílias únicas de perfumes
- * @returns {Array} - Array de famílias
- */
 export function getPerfumeFamilies() {
   return [...new Set(perfumeProducts.map((p) => p.family))];
 }

@@ -1,14 +1,6 @@
-// ============================================================================
-// USER SERVICE - Operações com Perfil via Supabase
-// ============================================================================
-
 import { supabaseAdmin } from "../config/supabase.js";
 
 export class UserService {
-  /**
-   * Busca perfil do usuário
-   * @param {string} userId - UUID do usuário
-   */
   static async getProfile(userId) {
     const { data, error } = await supabaseAdmin
       .from("profiles")
@@ -27,13 +19,7 @@ export class UserService {
     return data;
   }
 
-  /**
-   * Atualiza perfil do usuário
-   * @param {string} userId - UUID do usuário
-   * @param {Object} data - Dados a atualizar
-   */
   static async updateProfile(userId, data) {
-    // Verifica se usuário existe
     const { data: existingUser, error: findError } = await supabaseAdmin
       .from("profiles")
       .select("id")
@@ -44,7 +30,6 @@ export class UserService {
       throw new Error("Usuário não encontrado");
     }
 
-    // Verifica CPF duplicado
     if (data.cpf) {
       const { data: cpfExists } = await supabaseAdmin
         .from("profiles")
@@ -58,7 +43,6 @@ export class UserService {
       }
     }
 
-    // Prepara dados para update
     const updateData = {};
 
     if (data.name !== undefined) updateData.name = data.name;
@@ -72,7 +56,6 @@ export class UserService {
         : null;
     }
 
-    // Atualiza no Supabase
     const { data: updatedUser, error: updateError } = await supabaseAdmin
       .from("profiles")
       .update(updateData)
@@ -84,7 +67,6 @@ export class UserService {
       throw new Error(updateError.message);
     }
 
-    // Retorna com nomes camelCase para manter compatibilidade com frontend
     return {
       id: updatedUser.id,
       name: updatedUser.name,

@@ -1,7 +1,3 @@
-// ============================================================================
-// LOGIN MODAL COMPONENT - Modal de login/cadastro
-// ============================================================================
-
 export class LoginModal extends HTMLElement {
   constructor() {
     super();
@@ -26,7 +22,6 @@ export class LoginModal extends HTMLElement {
       backdrop.addEventListener("click", () => this.close());
     }
 
-    // Toggle entre Login e Cadastro
     toggleLinks.forEach((link) => {
       link.addEventListener("click", (e) => {
         e.preventDefault();
@@ -43,7 +38,6 @@ export class LoginModal extends HTMLElement {
       });
     });
 
-    // Toggle senha visibility
     const togglePasswordBtns = this.querySelectorAll(".toggle-password");
     togglePasswordBtns.forEach((btn) => {
       btn.addEventListener("click", () => {
@@ -77,7 +71,6 @@ export class LoginModal extends HTMLElement {
       return;
     }
 
-    // Previne scroll do body
     document.body.style.overflow = "hidden";
 
     modal.style.display = "flex";

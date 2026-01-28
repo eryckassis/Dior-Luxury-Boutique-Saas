@@ -1,7 +1,3 @@
-// ============================================================================
-// DIOR HOLIDAY PAGE - Página completa usando Web Components
-// ============================================================================
-
 import "../components/AppNavigation.js";
 import "../components/HeroSection.js";
 import "../components/TextContent.js";

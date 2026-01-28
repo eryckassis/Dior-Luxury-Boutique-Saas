@@ -1,7 +1,3 @@
-﻿// ============================================================================
-// ARTE DE PRESENTEAR PAGE - Página usando Web Components
-// ============================================================================
-
 import "../components/AppNavigation.js";
 import "../components/FooterSection.js";
 import { initServicesDrag, initButtonUnderlineAnimation } from "../components/ServicesDragCards.js";
@@ -33,7 +29,6 @@ export class ArteDePresentearPage extends HTMLElement {
   }
 
   disconnectedCallback() {
-    // Cleanup draggable
     if (this.SmoothScroll) {
       this.SmoothScroll.destroy();
     }
@@ -412,12 +407,10 @@ export class ArteDePresentearPage extends HTMLElement {
         <footer-section></footer-section>
       </div>
 
-      
     `;
   }
 
   initVideoControls() {
-    // Aguarda o DOM estar pronto
     setTimeout(() => {
       const video = document.getElementById("arte-section-video");
       const playPauseBtn = document.getElementById("arte-play-pause-btn");
@@ -430,7 +423,6 @@ export class ArteDePresentearPage extends HTMLElement {
       const iconMute = muteUnmuteBtn.querySelector(".icon-mute");
       const iconUnmute = muteUnmuteBtn.querySelector(".icon-unmute");
 
-      // Play/Pause Toggle
       playPauseBtn.addEventListener("click", () => {
         if (video.paused) {
           video.play();
@@ -443,7 +435,6 @@ export class ArteDePresentearPage extends HTMLElement {
         }
       });
 
-      // Mute/Unmute Toggle
       muteUnmuteBtn.addEventListener("click", () => {
         if (video.muted) {
           video.muted = false;
@@ -456,7 +447,6 @@ export class ArteDePresentearPage extends HTMLElement {
         }
       });
 
-      // Sincroniza estado inicial
       if (!video.paused) {
         iconPlay.style.display = "none";
         iconPause.style.display = "block";
@@ -465,7 +455,6 @@ export class ArteDePresentearPage extends HTMLElement {
   }
 
   initButtonAnimations() {
-    // Aguarda o DOM estar pronto
     setTimeout(() => {
       const playPauseBtn = document.getElementById("arte-play-pause-btn");
       const muteUnmuteBtn = document.getElementById("arte-mute-unmute-btn");
@@ -474,7 +463,6 @@ export class ArteDePresentearPage extends HTMLElement {
       const presentePlayPauseBtn = document.getElementById("presente-play-pause-btn");
       const presenteMuteUnmuteBtn = document.getElementById("presente-mute-unmute-btn");
 
-      // Inicializa animação GSAP nos botões de controle do vídeo principal
       if (playPauseBtn && window.Button) {
         new window.Button(playPauseBtn);
       }
@@ -483,7 +471,6 @@ export class ArteDePresentearPage extends HTMLElement {
         new window.Button(muteUnmuteBtn);
       }
 
-      // Inicializa animação GSAP nos botões de controle do segundo vídeo
       if (playPauseBtn2 && window.Button) {
         new window.Button(playPauseBtn2);
       }
@@ -492,7 +479,6 @@ export class ArteDePresentearPage extends HTMLElement {
         new window.Button(muteUnmuteBtn2);
       }
 
-      // Inicializa animação GSAP nos botões de controle do vídeo do presente
       if (presentePlayPauseBtn && window.Button) {
         new window.Button(presentePlayPauseBtn);
       }
@@ -504,7 +490,6 @@ export class ArteDePresentearPage extends HTMLElement {
   }
 
   initVideoControls2() {
-    // Aguarda o DOM estar pronto
     setTimeout(() => {
       const video = document.getElementById("arte-section-video-2");
       const playPauseBtn = document.getElementById("arte-play-pause-btn-2");
@@ -517,7 +502,6 @@ export class ArteDePresentearPage extends HTMLElement {
       const iconMute = muteUnmuteBtn.querySelector(".icon-mute");
       const iconUnmute = muteUnmuteBtn.querySelector(".icon-unmute");
 
-      // Play/Pause Toggle
       playPauseBtn.addEventListener("click", () => {
         if (video.paused) {
           video.play();
@@ -530,7 +514,6 @@ export class ArteDePresentearPage extends HTMLElement {
         }
       });
 
-      // Mute/Unmute Toggle
       muteUnmuteBtn.addEventListener("click", () => {
         if (video.muted) {
           video.muted = false;
@@ -543,7 +526,6 @@ export class ArteDePresentearPage extends HTMLElement {
         }
       });
 
-      // Sincroniza estado inicial
       if (!video.paused) {
         iconPlay.style.display = "none";
         iconPause.style.display = "block";
@@ -552,7 +534,6 @@ export class ArteDePresentearPage extends HTMLElement {
   }
 
   initPresenteVideoControls() {
-    // Aguarda o DOM estar pronto
     setTimeout(() => {
       const video = document.getElementById("presente-video-1");
       const playPauseBtn = document.getElementById("presente-play-pause-btn");
@@ -565,7 +546,6 @@ export class ArteDePresentearPage extends HTMLElement {
       const iconMute = muteUnmuteBtn.querySelector(".icon-mute");
       const iconUnmute = muteUnmuteBtn.querySelector(".icon-unmute");
 
-      // Play/Pause Toggle
       playPauseBtn.addEventListener("click", () => {
         if (video.paused) {
           video.play();
@@ -578,7 +558,6 @@ export class ArteDePresentearPage extends HTMLElement {
         }
       });
 
-      // Mute/Unmute Toggle
       muteUnmuteBtn.addEventListener("click", () => {
         if (video.muted) {
           video.muted = false;
@@ -591,7 +570,6 @@ export class ArteDePresentearPage extends HTMLElement {
         }
       });
 
-      // Sincroniza estado inicial
       if (!video.paused) {
         iconPlay.style.display = "none";
         iconPause.style.display = "block";
@@ -599,21 +577,16 @@ export class ArteDePresentearPage extends HTMLElement {
     }, 100);
   }
 
-  // ============================================================================
-  // SELEÇÃO DE PRESENTES - Drag Carousel GSAP (usando classes do services-dior)
-  // ============================================================================
   initSelecaoPresentes() {
     setTimeout(() => {
       const section = this.querySelector("#selecao-presentes");
       if (!section) return;
 
-      // Inicializar drag nos cards - usando as mesmas classes do HomePage
       const container = section.querySelector(".services-drag-container");
       const track = section.querySelector(".services-drag-track");
       const cards = section.querySelectorAll(".services-drag-card");
 
       if (container && track && cards.length > 0) {
-        // Log para debug
         console.log("📐 Seleção Presentes Debug:", {
           containerWidth: container.offsetWidth,
           cardWidth: cards[0]?.offsetWidth,
@@ -629,13 +602,11 @@ export class ArteDePresentearPage extends HTMLElement {
         });
       }
 
-      // Inicializar animação do botão
       const button = section.querySelector(".selecao-presentes-link");
       if (button) {
         initButtonUnderlineAnimation([button]);
       }
 
-      // Animação de entrada do título
       if (window.gsap && window.ScrollTrigger) {
         const title = section.querySelector(".services-title");
 
@@ -653,7 +624,6 @@ export class ArteDePresentearPage extends HTMLElement {
           });
         }
 
-        // Animação de entrada dos cards
         cards.forEach((card, index) => {
           window.gsap.from(card, {
             scrollTrigger: {

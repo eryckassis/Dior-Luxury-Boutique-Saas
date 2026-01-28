@@ -1,7 +1,3 @@
-/* ============================================================================
-   SERVICES DIOR SECTION - Seção com drag cards horizontal (estilo Dior.com)
-   ============================================================================ */
-
 .services-dior-section {
   position: relative;
   background-image: url("/cannage-background.png");
@@ -23,10 +19,6 @@
   overflow: visible;
 }
 
-/* ============================================================================
-   TEXT CONTENT - Conteúdo de texto à esquerda (fixo, centralizado verticalmente)
-   ============================================================================ */
-
 .services-text-content {
   display: flex;
   flex: 0 0 auto;
@@ -47,10 +39,6 @@
   font-family: "Hellix", "MinhaFonte", sans-serif;
   letter-spacing: -0.01em;
 }
-
-/* ============================================================================
-   DRAG CARDS CONTAINER - Área dos cards arrastáveis (posicionado à direita)
-   ============================================================================ */
 
 .services-drag-container {
   position: relative;
@@ -74,10 +62,6 @@
 .services-drag-track:active {
   cursor: grabbing;
 }
-
-/* ============================================================================
-   DRAG CARD - Card grande com texto DENTRO (overlay inferior)
-   ============================================================================ */
 
 .services-drag-card {
   position: relative;
@@ -108,7 +92,6 @@
   transform: scale(1.03);
 }
 
-/* Overlay gradiente na parte inferior para legibilidade do texto */
 .services-card-overlay {
   position: absolute;
   bottom: 0;
@@ -123,10 +106,6 @@
   height: 50%;
   pointer-events: none;
 }
-
-/* ============================================================================
-   CARD INFO - Título e botão DENTRO do card (posição absoluta inferior)
-   ============================================================================ */
 
 .services-card-info {
   display: flex;
@@ -168,7 +147,6 @@
   --underline-width: 100%;
 }
 
-/* Linha underline branca com ::after */
 .services-card-button::after {
   position: absolute;
   bottom: -2px;
@@ -179,10 +157,6 @@
   height: 1px;
   content: "";
 }
-
-/* ============================================================================
-   NAVIGATION INDICATOR - Indicador de navegação (1/4)
-   ============================================================================ */
 
 .services-nav-indicator {
   position: absolute;
@@ -195,11 +169,6 @@
   letter-spacing: 0.05em;
 }
 
-/* ============================================================================
-   RESPONSIVO - Breakpoints
-   ============================================================================ */
-
-/* Desktop grande */
 @media (max-width: 1400px) {
   .services-drag-card {
     width: 420px;
@@ -215,7 +184,6 @@
   }
 }
 
-/* Tablets grandes */
 @media (max-width: 1200px) {
   .services-text-content {
     padding: 30px 50px;
@@ -235,7 +203,6 @@
   }
 }
 
-/* Tablets */
 @media (max-width: 900px) {
   .services-dior-container {
     flex-direction: column;
@@ -280,7 +247,6 @@
   }
 }
 
-/* Mobile */
 @media (max-width: 640px) {
   .services-text-content {
     padding: 0 24px;
@@ -331,7 +297,6 @@
   }
 }
 
-/* Mobile pequeno */
 @media (max-width: 480px) {
   .services-text-content {
     padding: 0 20px;

@@ -1,18 +1,4 @@
-// ============================================================================
-// PRODUTOS EXCLUSIVOS DA PÁGINA COLEÇÃO
-// Imagens independentes que só aparecem nesta página
-// ============================================================================
-
-// ============================================================================
-// CATEGORIAS E CONFIGURAÇÕES
-// ============================================================================
-
-/**
- * Categorias de produtos e suas configurações de exibição
- * @type {Object}
- */
 export const PRODUCT_CATEGORIES = {
-  // Roupas - Mostram cores E tamanhos
   BLAZER: {
     key: "blazer",
     label: "Blazers",
@@ -62,7 +48,6 @@ export const PRODUCT_CATEGORIES = {
     description: "Saias que requerem tamanho específico",
   },
 
-  // Sapatos - Mostram cores E tamanhos numéricos
   SAPATO: {
     key: "sapato",
     label: "Sapatos",
@@ -72,7 +57,6 @@ export const PRODUCT_CATEGORIES = {
     description: "Calçados que requerem tamanho específico",
   },
 
-  // Acessórios - Apenas cores, SEM tamanhos
   BOLSA: {
     key: "bolsa",
     label: "Bolsas",
@@ -115,39 +99,19 @@ export const PRODUCT_CATEGORIES = {
   },
 };
 
-/**
- * Obtém configuração de uma categoria
- * @param {string} categoryKey - Chave da categoria (ex: 'bolsa', 'sapato')
- * @returns {Object|null} Configuração da categoria ou null
- */
 export function getCategoryConfig(categoryKey) {
   const normalizedKey = categoryKey?.toLowerCase();
   return Object.values(PRODUCT_CATEGORIES).find((cat) => cat.key === normalizedKey) || null;
 }
 
-/**
- * Valida se uma categoria existe
- * @param {string} categoryKey - Chave da categoria
- * @returns {boolean}
- */
 export function isValidCategory(categoryKey) {
   return getCategoryConfig(categoryKey) !== null;
 }
 
-/**
- * Obtém lista de categorias válidas
- * @returns {Array<string>}
- */
 export function getValidCategories() {
   return Object.values(PRODUCT_CATEGORIES).map((cat) => cat.key);
 }
 
-/**
- * Atualiza a categoria de um produto da coleção
- * @param {string} productId - ID do produto
- * @param {string} newCategory - Nova categoria
- * @returns {Object} Resultado da operação
- */
 export function updateProductCategory(productId, newCategory) {
   const product = colecaoProducts.find((p) => p.id === productId);
 
@@ -172,7 +136,6 @@ export function updateProductCategory(productId, newCategory) {
 
   const categoryConfig = getCategoryConfig(newCategory);
 
-  // Ajusta sizes baseado na nova categoria
   if (!categoryConfig.showSizes) {
     product.sizes = ["Único"];
   }
@@ -184,10 +147,6 @@ export function updateProductCategory(productId, newCategory) {
     categoryConfig,
   };
 }
-
-// ============================================================================
-// PRODUTOS DA COLEÇÃO
-// ============================================================================
 
 export const colecaoProducts = [
   {
@@ -348,9 +307,7 @@ export const colecaoProducts = [
     care: "Lavar à mão ou lavagem a seco",
     isHighlight: true,
   },
-  // ============================================================================
-  // NOVOS PRODUTOS
-  // ============================================================================
+
   {
     id: "colecao-saia-1",
     name: "Saia Midi Plissada Dior Oblique",
@@ -518,36 +475,18 @@ export const colecaoProducts = [
   },
 ];
 
-/**
- * Busca um produto da coleção pelo ID
- * @param {string} id - ID do produto
- * @returns {Object|null} - Produto encontrado ou null
- */
 export function getColecaoProductById(id) {
   return colecaoProducts.find((product) => product.id === id) || null;
 }
 
-/**
- * Busca produtos da coleção por categoria
- * @param {string} category - Categoria (blazer, sapato, bolsa, oculos, etc)
- * @returns {Array} - Array de produtos da categoria
- */
 export function getColecaoProductsByCategory(category) {
   return colecaoProducts.filter((product) => product.category === category);
 }
 
-/**
- * Busca produtos relacionados da coleção com estratégia de máxima diversidade
- * @param {string} currentId - ID do produto atual
- * @param {number} limit - Limite de produtos a retornar
- * @param {boolean} mixedCategories - Se true, mescla categorias quando não houver produtos suficientes
- * @returns {Array} - Array de produtos relacionados embaralhados e únicos
- */
 export function getRelatedColecaoProducts(currentId, limit = 4, mixedCategories = true) {
   const currentProduct = getColecaoProductById(currentId);
   if (!currentProduct) return [];
 
-  // Shuffle function usando Fisher-Yates
   const shuffle = (array) => {
     const shuffled = [...array];
     for (let i = shuffled.length - 1; i > 0; i--) {
@@ -557,7 +496,6 @@ export function getRelatedColecaoProducts(currentId, limit = 4, mixedCategories 
     return shuffled;
   };
 
-  // Remove duplicados por ID E nome (evita variações de cor do mesmo produto)
   const removeDuplicates = (array) => {
     const seen = new Map(); // Usa Map para rastrear nome + categoria
     return array.filter((item) => {
@@ -570,17 +508,14 @@ export function getRelatedColecaoProducts(currentId, limit = 4, mixedCategories 
     });
   };
 
-  // Filtra todos os produtos exceto o atual E variações dele
   const allOtherProducts = colecaoProducts.filter(
     (p) => p.id !== currentId && p.name !== currentProduct.name,
   );
 
-  // Se queremos mixed, embaralha tudo junto para máxima diversidade
   if (mixedCategories) {
     return removeDuplicates(shuffle(allOtherProducts)).slice(0, limit);
   }
 
-  // Se não mixed, apenas mesma categoria (sem variações de cor)
   const sameCategory = allOtherProducts.filter((p) => p.category === currentProduct.category);
 
   return removeDuplicates(shuffle(sameCategory)).slice(0, limit);

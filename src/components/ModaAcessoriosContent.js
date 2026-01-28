@@ -1,7 +1,3 @@
-// ============================================================================
-// MODA ACESSÓRIOS CONTENT COMPONENT - Componente reutilizável para conteúdo
-// ============================================================================
-
 export class ModaAcessoriosContent extends HTMLElement {
   constructor() {
     super();
@@ -12,14 +8,9 @@ export class ModaAcessoriosContent extends HTMLElement {
     this.initInteractions();
   }
 
-  disconnectedCallback() {
-    // Cleanup event listeners if needed
-  }
+  disconnectedCallback() {}
 
   initInteractions() {
-    // Placeholder para funcionalidades futuras
-    // Adicione aqui os event listeners e interações que precisar
-
     console.log("ModaAcessoriosContent: Componente pronto para novas funcionalidades");
   }
 

@@ -1,8 +1,3 @@
-/* ============================================================================
-   PROFILE MENU - Menu lateral de perfil
-   ============================================================================ */
-
-/* Button Styles - Botões com fundo preto */
 .profile-login-btn,
 .bag-checkout-btn {
   position: relative;
@@ -87,7 +82,6 @@ z-index: 1;
   overflow: hidden;
 }
 
-/* Close Button */
 .profile-menu-close {
   position: absolute;
   top: 16px;
@@ -107,7 +101,6 @@ z-index: 1;
   opacity: 0.6 !important;
 }
 
-/* Tabs */
 .profile-menu-tabs {
   display: flex;
   gap: 40px;
@@ -157,7 +150,6 @@ z-index: 1;
   font-size: 13px;
 }
 
-/* Content */
 .profile-menu-content {
   display: flex;
   flex: 1;
@@ -167,7 +159,6 @@ z-index: 1;
   overflow-y: auto;
 }
 
-/* Login Section */
 .profile-login-section {
   margin-bottom: 60px;
   text-align: center;
@@ -195,7 +186,6 @@ z-index: 1;
   max-width: 260px;
 }
 
-/* Signup Section */
 .profile-signup-section {
   border-radius: 4px;
   background-color: #f8f8f8;
@@ -224,7 +214,6 @@ z-index: 1;
   max-width: 260px;
 }
 
-/* Scrollbar */
 .profile-menu-content::-webkit-scrollbar {
   width: 6px;
 }
@@ -241,10 +230,6 @@ z-index: 1;
 .profile-menu-content::-webkit-scrollbar-thumb:hover {
   background: #999999;
 }
-
-/* ============================================
-   PROFILE MENU - LOGGED IN STATE
-   ============================================ */
 
 .profile-user-welcome {
   margin-bottom: 30px;
@@ -328,10 +313,6 @@ z-index: 1;
   color: #fff;
 }
 
-/* ============================================================================
-   BAG CONTENT - Conteúdo da Sacola
-   ============================================================================ */
-
 .profile-bag-content {
   flex-direction: column !important;
   gap: 0 !important;
@@ -367,7 +348,6 @@ z-index: 1;
   font-family: "Hellix", sans-serif;
 }
 
-/* Cart Items */
 .profile-bag-items {
   display: flex;
   flex: 1;
@@ -483,7 +463,6 @@ z-index: 1;
   font-family: "Hellix", sans-serif;
 }
 
-/* Bag Footer */
 .profile-bag-footer {
   display: flex;
   flex-shrink: 0;
@@ -550,7 +529,6 @@ z-index: 1;
   width: 100%;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .profile-menu-container {
     top: 16px;
@@ -629,10 +607,6 @@ z-index: 1;
     width: 100%;
   }
 }
-
-/* ============================================================================
-   COUPON MODAL
-   ============================================================================ */
 
 .coupon-modal-backdrop {
   display: none;
@@ -748,7 +722,6 @@ z-index: 1;
   text-align: center;
 }
 
-/* Responsive Coupon Modal */
 @media (max-width: 480px) {
   .coupon-modal {
     padding: 32px 24px;

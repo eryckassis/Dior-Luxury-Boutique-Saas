@@ -1,14 +1,9 @@
-/* ============================================================================
-   PRIMAVERA-VERÃO 2026 PAGE - Desfile Styles
-   ============================================================================ */
-
 .desfile-page-content {
   background: #f9f8f6;
   width: 100%;
   min-height: 100vh;
 }
 
-/* Navigation - Manter cores pretas */
 .desfile-page-content .moda-navigation .moda-nav-hamburger,
 .desfile-page-content .moda-navigation .moda-nav-search {
   stroke: #1a1a1a;
@@ -23,10 +18,6 @@
 .desfile-page-content .moda-navigation .moda-logo-link img {
   filter: none;
 }
-
-/* ============================================================================
-   SOUND WAVE BUTTON - Fixed Position (Lusion.co style)
-   ============================================================================ */
 
 .sound-wave-btn {
   display: flex;
@@ -54,7 +45,6 @@
   color: #ffffff;
 }
 
-/* Flair (efeito que segue o mouse) - idêntico ao SplashPage */
 .sound-btn-flair {
   position: absolute;
   top: 0;
@@ -98,7 +88,6 @@
   stroke-width: 1.5;
 }
 
-/* Quando está tocando */
 .sound-wave-btn.playing {
   background: rgba(26, 26, 26, 0.1);
 }
@@ -106,10 +95,6 @@
 .sound-wave-btn.playing .sound-wave-path {
   stroke: #fff;
 }
-
-/* ============================================================================
-   HERO VIDEO SECTION - Full Width Video
-   ============================================================================ */
 
 .desfile-hero-video-section {
   position: relative;
@@ -128,7 +113,6 @@
   object-position: center;
 }
 
-/* Video Control Button - Reutiliza o estilo do moda-acessorios */
 .desfile-hero-video-section .moda-video-control-btn {
   display: flex;
   position: absolute;
@@ -178,10 +162,6 @@
   display: block;
 }
 
-/* ============================================================================
-   TEXT SECTION - Description with Read More
-   ============================================================================ */
-
 .desfile-text-section {
   margin: 0 auto;
   background: #f9f8f6;
@@ -199,7 +179,6 @@
   font-family: "Hellix", sans-serif;
 }
 
-/* Read More Button - Underline Animation */
 .desfile-read-more-btn {
   display: inline-block;
   position: relative;
@@ -227,10 +206,6 @@
 .desfile-read-more-btn:hover {
   color: #333;
 }
-
-/* ============================================================================
-   O CENÁRIO SECTION
-   ============================================================================ */
 
 .desfile-cenario-section {
   margin: 0 auto;
@@ -264,10 +239,6 @@
 .desfile-cenario-text:last-child {
   margin-bottom: 0;
 }
-
-/* ============================================================================
-   SAVOIR-FAIRE SECTION
-   ============================================================================ */
 
 .savoir-faire-section {
   background: #f9f8f6;
@@ -311,7 +282,6 @@
   transform: scale(1.03);
 }
 
-/* Video Button - Liquid Glass Style */
 .savoir-video-btn {
   display: flex;
   position: absolute;
@@ -366,10 +336,6 @@
   display: block;
 }
 
-/* ============================================================================
-   BASTIDORES SECTION
-   ============================================================================ */
-
 .bastidores-section {
   padding: 5rem 0;
   max-width: 100%;
@@ -387,10 +353,6 @@
 .bastidores-grid {
   margin-top: 2rem;
 }
-
-/* ============================================================================
-   RESPONSIVE
-   ============================================================================ */
 
 @media (max-width: 768px) {
   .sound-wave-btn {
@@ -433,7 +395,6 @@
     font-size: 0.9rem;
   }
 
-  /* Savoir-faire responsive 768px */
   .savoir-faire-section {
     padding: 4rem 0;
   }
@@ -493,7 +454,6 @@
     line-height: 1.8;
   }
 
-  /* Savoir-faire responsive 480px */
   .savoir-faire-section {
     padding: 3rem 0;
   }
@@ -520,10 +480,6 @@
     height: 14px;
   }
 }
-
-/* ============================================================================
-   LOOKS GALLERY COMPONENT
-   ============================================================================ */
 
 .looks-gallery-section {
   background: #f9f8f6;
@@ -577,10 +533,6 @@
   color: #1a1a1a;
 }
 
-/* ============================================================================
-   GRID MODE - 4 Columns Layout
-   ============================================================================ */
-
 .looks-grid-container {
   width: 100%;
 }
@@ -595,7 +547,6 @@
   grid-template-columns: repeat(4, 1fr);
 }
 
-/* Look Card - Grid */
 .look-card {
   display: block;
   cursor: pointer;
@@ -618,10 +569,6 @@
   height: 100%;
   object-fit: cover;
 }
-
-/* ============================================================================
-   DRAG MODE - Horizontal Scroll with GSAP
-   ============================================================================ */
 
 .looks-drag-section {
   position: relative;
@@ -655,7 +602,6 @@
   cursor: grabbing;
 }
 
-/* Look Card - Drag */
 .looks-drag-card {
   position: relative;
   flex-shrink: 0;
@@ -716,7 +662,6 @@
   text-align: center;
 }
 
-/* Progress Bar - Drag Mode */
 .looks-progress-bar {
   position: relative;
   cursor: pointer;
@@ -741,10 +686,6 @@
 .looks-progress-bar:hover {
   height: 3px;
 }
-
-/* ============================================================================
-   RESPONSIVE - Grid Mode
-   ============================================================================ */
 
 @media (max-width: 1200px) {
   .looks-grid.grid-4 {

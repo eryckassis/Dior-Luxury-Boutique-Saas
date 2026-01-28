@@ -1,7 +1,3 @@
-// ============================================================================
-// LOOKS GALLERY COMPONENT - Galeria de looks do desfile
-// ============================================================================
-
 export class LooksGallery extends HTMLElement {
   constructor() {
     super();
@@ -39,7 +35,6 @@ export class LooksGallery extends HTMLElement {
   }
 
   disconnectedCallback() {
-    // Cleanup draggable
     if (this.draggableInstance) {
       this.draggableInstance.kill();
       this.draggableInstance = null;
@@ -63,7 +58,6 @@ export class LooksGallery extends HTMLElement {
       return;
     }
 
-    // Função para calcular bounds corretamente
     const calculateBounds = () => {
       const containerWidth = container.offsetWidth;
       const trackRect = track.getBoundingClientRect();
@@ -74,10 +68,8 @@ export class LooksGallery extends HTMLElement {
       const paddingLeft = parseFloat(trackStyles.paddingLeft) || 0;
       const paddingRight = parseFloat(trackStyles.paddingRight) || 0;
 
-      // Largura real do conteúdo
       const contentWidth = lastCard.right - firstCard.left + paddingLeft + paddingRight;
 
-      // MaxDrag: quanto precisa mover para ver o último card completamente
       const maxDrag = Math.min(0, -(contentWidth - containerWidth));
 
       console.log("📏 Looks Bounds:", {
@@ -91,7 +83,6 @@ export class LooksGallery extends HTMLElement {
 
     let bounds = calculateBounds();
 
-    // Função para atualizar a barra de progresso
     const updateProgress = (x) => {
       if (bounds.minX >= 0) return;
       const progress = Math.abs(x / bounds.minX);
@@ -104,7 +95,6 @@ export class LooksGallery extends HTMLElement {
       return;
     }
 
-    // Criar Draggable
     this.draggableInstance = window.Draggable.create(track, {
       type: "x",
       bounds: bounds,
@@ -129,7 +119,6 @@ export class LooksGallery extends HTMLElement {
       },
     })[0];
 
-    // Recalcular bounds no resize
     const handleResize = () => {
       bounds = calculateBounds();
       if (this.draggableInstance) {
@@ -138,7 +127,6 @@ export class LooksGallery extends HTMLElement {
     };
     window.addEventListener("resize", handleResize);
 
-    // Clique na barra de progresso
     progressBar.addEventListener("click", (e) => {
       const rect = progressBar.getBoundingClientRect();
       const clickX = e.clientX - rect.left;
@@ -273,10 +261,8 @@ export class LooksGallery extends HTMLElement {
       </section>
     `;
 
-    // Inicializar eventos dos botões de toggle
     this.setupToggleButtons();
 
-    // Se iniciar em drag mode, inicializa o draggable
     if (!isGrid) {
       setTimeout(() => this.initDraggableCards(), 300);
     }
@@ -293,7 +279,6 @@ export class LooksGallery extends HTMLElement {
       return;
     }
 
-    // Botão esquerdo - Modo Drag
     btnDrag.addEventListener("click", () => {
       console.log("🔄 Mudando para modo Drag");
       this._viewMode = "drag";
@@ -302,11 +287,9 @@ export class LooksGallery extends HTMLElement {
       btnDrag.classList.add("active");
       btnGrid4.classList.remove("active");
 
-      // Inicializa o drag após mostrar
       setTimeout(() => this.initDraggableCards(), 100);
     });
 
-    // Botão direito - Modo Grid 4 colunas
     btnGrid4.addEventListener("click", () => {
       console.log("🔄 Mudando para modo Grid");
       this._viewMode = "grid4";
@@ -315,7 +298,6 @@ export class LooksGallery extends HTMLElement {
       btnGrid4.classList.add("active");
       btnDrag.classList.remove("active");
 
-      // Cleanup draggable
       if (this.draggableInstance) {
         this.draggableInstance.kill();
         this.draggableInstance = null;

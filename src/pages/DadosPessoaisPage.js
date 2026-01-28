@@ -1,7 +1,3 @@
-// ============================================================================
-// DADOS PESSOAIS PAGE - Página de Gestão de Dados Pessoais
-// ============================================================================
-
 import "../components/AppNavigation.js";
 import "../components/FooterSection.js";
 import "../styles/dados-pessoais.css";
@@ -21,7 +17,6 @@ export class DadosPessoaisPage extends HTMLElement {
   }
 
   async connectedCallback() {
-    // Verifica autenticação de forma assíncrona (aguarda sessão restaurar após refresh)
     const isAuth = await authService.isAuthenticatedAsync();
     if (!isAuth) {
       router.navigate("/login");
@@ -55,7 +50,6 @@ export class DadosPessoaisPage extends HTMLElement {
   }
 
   initEventListeners() {
-    // Menu links
     this.querySelectorAll(".sidebar-menu-link").forEach((link) => {
       link.addEventListener("click", (e) => {
         e.preventDefault();
@@ -64,7 +58,6 @@ export class DadosPessoaisPage extends HTMLElement {
       });
     });
 
-    // Logout
     const logoutBtn = this.querySelector(".sidebar-logout");
     if (logoutBtn) {
       logoutBtn.addEventListener("click", async () => {
@@ -75,25 +68,21 @@ export class DadosPessoaisPage extends HTMLElement {
   }
 
   initFormListeners() {
-    // Botão Editar
     const editBtn = this.querySelector(".dados-btn-edit");
     if (editBtn) {
       editBtn.addEventListener("click", () => this.toggleEditMode(true));
     }
 
-    // Botão Cancelar
     const cancelBtn = this.querySelector(".dados-btn-cancel");
     if (cancelBtn) {
       cancelBtn.addEventListener("click", () => this.cancelEdit());
     }
 
-    // Formulário Submit
     const form = this.querySelector(".dados-form");
     if (form) {
       form.addEventListener("submit", (e) => this.handleSubmit(e));
     }
 
-    // Máscara de CPF
     const cpfInput = this.querySelector('input[name="cpf"]');
     if (cpfInput) {
       cpfInput.addEventListener("input", (e) => {
@@ -103,7 +92,6 @@ export class DadosPessoaisPage extends HTMLElement {
       });
     }
 
-    // Máscara de Telefone
     const phoneInput = this.querySelector('input[name="phone"]');
     if (phoneInput) {
       phoneInput.addEventListener("input", (e) => {
@@ -127,7 +115,6 @@ export class DadosPessoaisPage extends HTMLElement {
     this.isEditMode = edit;
     this.renderContent();
 
-    // Anima transição com GSAP
     if (window.gsap) {
       const content = this.querySelector(".dados-content");
       window.gsap.fromTo(
@@ -139,7 +126,6 @@ export class DadosPessoaisPage extends HTMLElement {
   }
 
   cancelEdit() {
-    // Restaura dados originais
     this.userData = { ...this.originalData };
     this.toggleEditMode(false);
   }
@@ -149,10 +135,8 @@ export class DadosPessoaisPage extends HTMLElement {
 
     if (this.isSaving) return;
 
-    // Coleta dados do formulário
     const formData = new FormData(e.target);
 
-    // Trata os valores - envia null para campos vazios
     const name = formData.get("name")?.trim() || "";
     const lastName = formData.get("lastName")?.trim() || "";
     const cpfRaw = formData.get("cpf")?.replace(/\D/g, "") || "";
@@ -169,13 +153,11 @@ export class DadosPessoaisPage extends HTMLElement {
       birthDate: birthDateRaw || null,
     };
 
-    // Validação frontend
     if (!data.name || data.name.length < 2) {
       toast.error("Nome deve ter pelo menos 2 caracteres");
       return;
     }
 
-    // Log para debug
     console.log("Enviando dados:", data);
 
     try {
@@ -424,7 +406,6 @@ export class DadosPessoaisPage extends HTMLElement {
 
     this.initFormListeners();
 
-    // Breadcrumb voltar
     const breadcrumb = this.querySelector('[data-action="cancel"]');
     if (breadcrumb) {
       breadcrumb.addEventListener("click", (e) => {

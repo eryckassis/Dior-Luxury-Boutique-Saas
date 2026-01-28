@@ -1,13 +1,8 @@
-/* ============================================================================
-   MISS DIOR ESSENCE PAGE - J'adore
-   ============================================================================ */
-
 .miss-dior-essence-page {
   background-color: #ffffff;
   width: 100%;
 }
 
-/* Hero Section */
 .essence-hero-section {
   display: flex;
   justify-content: center;
@@ -46,7 +41,6 @@
   text-align: center;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .essence-hero-category {
     margin-bottom: 15px;
@@ -69,10 +63,6 @@
   }
 }
 
-/* ============================================================================
-   PRODUCTS SECTION
-   ============================================================================ */
-
 .essence-products-section {
   background-color: #ffffff;
   padding: 80px 20px;
@@ -87,7 +77,6 @@
   max-width: 1400px;
 }
 
-/* Product Card */
 .essence-product-card {
   display: flex;
   flex-direction: column;
@@ -122,7 +111,6 @@
   height: 100%;
 }
 
-/* Product Info */
 .essence-product-info {
   display: flex;
   flex: 1;
@@ -154,7 +142,6 @@
   font-family: "Manrope", sans-serif;
 }
 
-/* Intensity - Reutilizando do miss-dior.css */
 .product-intensity {
   display: flex;
   flex-shrink: 0;
@@ -189,7 +176,6 @@
   background-color: #000;
 }
 
-/* Product Footer */
 .essence-product-footer {
   display: flex;
   flex-shrink: 0;
@@ -208,7 +194,6 @@
   font-family: "Manrope", sans-serif;
 }
 
-/* Bag Button */
 .essence-bag-button {
   display: flex;
   justify-content: center;
@@ -237,7 +222,6 @@
   stroke: #000000;
 }
 
-/* Responsive */
 @media (max-width: 1024px) {
   .essence-products-container {
     grid-template-columns: repeat(2, 1fr);

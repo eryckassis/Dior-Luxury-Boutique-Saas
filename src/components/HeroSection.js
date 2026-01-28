@@ -1,7 +1,3 @@
-﻿// ============================================================================
-// HERO SECTION WEB COMPONENT - Seção principal com vídeo
-// ============================================================================
-
 export class HeroSection extends HTMLElement {
   constructor() {
     super();

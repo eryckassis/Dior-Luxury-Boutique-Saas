@@ -1,14 +1,9 @@
-// ============================================================================
-// CHECKOUT SERVICE - Gerencia dados do checkout com localStorage
-// ============================================================================
-
 class CheckoutService {
   constructor() {
     this.STORAGE_KEY = "dior_checkout_data";
     this.listeners = [];
   }
 
-  // Obtém todos os dados do checkout
   getData() {
     try {
       const data = localStorage.getItem(this.STORAGE_KEY);
@@ -18,7 +13,6 @@ class CheckoutService {
     }
   }
 
-  // Dados padrão
   getDefaultData() {
     return {
       email: "",
@@ -35,7 +29,6 @@ class CheckoutService {
     };
   }
 
-  // Salva dados no localStorage
   saveData(data) {
     try {
       const currentData = this.getData();
@@ -48,14 +41,12 @@ class CheckoutService {
     }
   }
 
-  // Atualiza um campo específico
   updateField(field, value) {
     const data = this.getData();
     data[field] = value;
     return this.saveData(data);
   }
 
-  // Obtém endereço completo formatado
   getFullAddress() {
     const data = this.getData();
     const parts = [];
@@ -68,7 +59,6 @@ class CheckoutService {
     return parts.join(", ");
   }
 
-  // Obtém endereço de cobrança (rua e número)
   getBillingAddress() {
     const data = this.getData();
     const parts = [];
@@ -79,17 +69,13 @@ class CheckoutService {
     return parts.join(", ");
   }
 
-  // Limpa todos os dados
   clearData() {
     try {
       localStorage.removeItem(this.STORAGE_KEY);
       this.notifyListeners(this.getDefaultData());
-    } catch {
-      // Silently fail
-    }
+    } catch {}
   }
 
-  // Sistema de listeners para sincronização
   addListener(callback) {
     this.listeners.push(callback);
   }
@@ -102,7 +88,6 @@ class CheckoutService {
     this.listeners.forEach((listener) => listener(data));
   }
 
-  // Valida se todos os campos obrigatórios estão preenchidos
   isValid() {
     const data = this.getData();
     return (
@@ -118,5 +103,4 @@ class CheckoutService {
   }
 }
 
-// Exporta instância única (singleton)
 export const checkoutService = new CheckoutService();

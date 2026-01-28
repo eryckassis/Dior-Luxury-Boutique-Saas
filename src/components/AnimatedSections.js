@@ -1,7 +1,3 @@
-﻿// ============================================================================
-// ANIMATED SECTIONS WEB COMPONENT - Seções com navegação por scroll
-// ============================================================================
-
 export class AnimatedSections extends HTMLElement {
   constructor() {
     super();

@@ -1,7 +1,3 @@
-/* ============================================================================
-   SESSION EXPIRED MODAL STYLES
-   ============================================================================ */
-
 .session-expired-modal-backdrop {
   display: flex;
   position: fixed;
@@ -67,7 +63,6 @@
   font-family: "Hellix", sans-serif;
 }
 
-/* Botão estilo Spa com GSAP flair */
 .session-expired-btn {
   display: inline-flex;
   position: relative;

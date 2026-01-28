@@ -1,12 +1,7 @@
-// ============================================================================
-// USER SERVICE - Gerenciamento de Dados do Usuário com Supabase
-// ============================================================================
-
 import { supabase } from "./supabaseClient.js";
 
 class UserService {
   constructor() {
-    // Cache do perfil para evitar múltiplas requisições
     this.profileCache = null;
     this.cacheTimestamp = null;
     this.CACHE_DURATION = 60000; // 1 minuto
@@ -16,13 +11,11 @@ class UserService {
     try {
       console.log("🔍 Buscando perfil...");
 
-      // Verifica cache
       if (!forceRefresh && this.isCacheValid()) {
         console.log("✅ Usando perfil do cache");
         return this.profileCache;
       }
 
-      // Verifica se está autenticado
       const {
         data: { user },
       } = await supabase.auth.getUser();
@@ -34,7 +27,6 @@ class UserService {
 
       console.log("👤 Usuário autenticado:", user.id);
 
-      // Busca perfil
       const { data, error } = await supabase
         .from("profiles")
         .select("*")
@@ -43,7 +35,6 @@ class UserService {
 
       console.log("📡 Resposta do Supabase:", { data, error });
 
-      // Se não encontrou o perfil, cria um novo
       if (error && error.code === "PGRST116") {
         console.log("⚠️ Perfil não encontrado, criando...");
 
@@ -76,17 +67,14 @@ class UserService {
         throw new Error(error.message);
       }
 
-      // Transforma para camelCase (compatibilidade com código existente)
       const profile = data ? this.transformToCamelCase(data) : null;
 
-      // Adiciona email do auth
       if (profile) {
         profile.email = user.email;
       }
 
       console.log("✅ Perfil encontrado:", profile);
 
-      // Atualiza cache
       this.profileCache = profile;
       this.cacheTimestamp = Date.now();
 
@@ -107,10 +95,8 @@ class UserService {
         throw new Error("Usuário não autenticado");
       }
 
-      // Transforma para snake_case (formato do banco)
       const updateData = this.transformToSnakeCase(profileData);
 
-      // Atualiza no Supabase
       const { data, error } = await supabase
         .from("profiles")
         .update(updateData)
@@ -119,7 +105,6 @@ class UserService {
         .single();
 
       if (error) {
-        // Erro de CPF duplicado
         if (error.message.includes("duplicate key") && error.message.includes("cpf")) {
           throw new Error("CPF já cadastrado em outra conta");
         }
@@ -136,7 +121,6 @@ class UserService {
         }
       }
 
-      // Invalida cache
       this.invalidateCache();
 
       window.dispatchEvent(
@@ -154,10 +138,6 @@ class UserService {
     }
   }
 
-  // ========================================================================
-  // CACHE
-  // ========================================================================
-
   isCacheValid() {
     if (!this.profileCache || !this.cacheTimestamp) {
       return false;
@@ -169,10 +149,6 @@ class UserService {
     this.profileCache = null;
     this.cacheTimestamp = null;
   }
-
-  // ========================================================================
-  // TRANSFORMAÇÕES DE DADOS
-  // ========================================================================
 
   transformToCamelCase(data) {
     if (!data) return null;
@@ -207,10 +183,6 @@ class UserService {
 
     return result;
   }
-
-  // ========================================================================
-  // FORMATAÇÃO (mantém compatibilidade com código existente)
-  // ========================================================================
 
   formatCPF(cpf) {
     if (!cpf) return "";
@@ -259,7 +231,6 @@ class UserService {
     if (cleaned.length !== 11) return false;
     if (/^(\d)\1+$/.test(cleaned)) return false; // Todos dígitos iguais
 
-    // Validação dos dígitos verificadores
     let sum = 0;
     for (let i = 0; i < 9; i++) {
       sum += parseInt(cleaned.charAt(i)) * (10 - i);
@@ -284,9 +255,5 @@ class UserService {
     return cleaned.length === 10 || cleaned.length === 11;
   }
 }
-
-// ============================================================================
-// SINGLETON EXPORT
-// ============================================================================
 
 export const userService = new UserService();

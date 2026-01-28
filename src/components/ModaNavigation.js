@@ -1,7 +1,3 @@
-﻿// ============================================================================
-// MODA NAVIGATION COMPONENT - Menu exclusivo para página Moda & Acessórios
-// ============================================================================
-
 export class ModaNavigation extends HTMLElement {
   constructor() {
     super();
@@ -17,7 +13,6 @@ export class ModaNavigation extends HTMLElement {
   }
 
   disconnectedCallback() {
-    // Remove listener do scroll
     if (this._scrollCleanup) {
       this._scrollCleanup();
     }
@@ -27,18 +22,13 @@ export class ModaNavigation extends HTMLElement {
     const nav = this.querySelector(".moda-navigation");
     if (!nav) return;
 
-    // Verifica se está dentro da página PresenteParaEla
     const isInPresenteParaEla = this.closest("presente-para-ela-page");
 
     if (isInPresenteParaEla) {
-      // Na página PresenteParaEla, força o estado "scrolled" (fundo branco)
       nav.classList.add("scrolled");
       return; // Não adiciona listener de scroll
     }
 
-    // =========================================================================
-    // SMART NAVBAR - Hide on Scroll Down, Show on Scroll Up
-    // =========================================================================
     let lastScrollY = window.scrollY;
     let ticking = false;
     const scrollThreshold = 80; // Mínimo de scroll para ativar hide/show
@@ -48,7 +38,6 @@ export class ModaNavigation extends HTMLElement {
       const currentScrollY = window.scrollY;
       const scrollDelta = currentScrollY - lastScrollY;
 
-      // Sempre visível no topo da página
       if (currentScrollY < topThreshold) {
         nav.classList.remove("nav-hidden");
         nav.classList.remove("scrolled"); // Fundo transparente no topo
@@ -57,15 +46,11 @@ export class ModaNavigation extends HTMLElement {
         return;
       }
 
-      // Fundo branco quando scrollado
       nav.classList.add("scrolled");
 
-      // Scroll para baixo - esconde (apenas se passou do threshold)
       if (scrollDelta > 0 && currentScrollY > scrollThreshold) {
         nav.classList.add("nav-hidden");
-      }
-      // Scroll para cima - mostra
-      else if (scrollDelta < -5) {
+      } else if (scrollDelta < -5) {
         nav.classList.remove("nav-hidden");
       }
 
@@ -73,7 +58,6 @@ export class ModaNavigation extends HTMLElement {
       ticking = false;
     };
 
-    // Usar requestAnimationFrame para performance
     const onScroll = () => {
       if (!ticking) {
         requestAnimationFrame(updateNavVisibility);
@@ -83,15 +67,11 @@ export class ModaNavigation extends HTMLElement {
 
     window.addEventListener("scroll", onScroll, { passive: true });
 
-    // Cleanup ao desconectar
     this._scrollCleanup = () => {
       window.removeEventListener("scroll", onScroll);
     };
   }
 
-  // =========================================================================
-  // SUBMENU FUNCTIONS - Dior World e Desfiles
-  // =========================================================================
   openSubmenu(submenuId) {
     const mainMenu = this.querySelector(".moda-menu-content");
     const submenu = this.querySelector(`[data-submenu-id="${submenuId}"]`);
@@ -103,20 +83,17 @@ export class ModaNavigation extends HTMLElement {
 
     this.currentSubmenu = submenuId;
 
-    // Expande o menu lateral para mostrar os cards
     if (sideMenu) {
       sideMenu.classList.add("submenu-expanded");
     }
 
     if (window.gsap) {
-      // Desliza menu principal para esquerda
       window.gsap.to(mainMenu, {
         x: "-100%",
         duration: 0.5,
         ease: "power3.inOut",
       });
 
-      // Desliza submenu da direita
       window.gsap.fromTo(
         submenu,
         { x: "100%", display: "flex" },
@@ -125,7 +102,6 @@ export class ModaNavigation extends HTMLElement {
           duration: 0.5,
           ease: "power3.inOut",
           onComplete: () => {
-            // Smooth Image Reveal com clipPath e scale
             window.gsap.fromTo(
               cardImages,
               {
@@ -146,7 +122,6 @@ export class ModaNavigation extends HTMLElement {
               },
             );
 
-            // Anima labels dos cards
             const cardLabels = submenu.querySelectorAll(".submenu-card-label");
             window.gsap.fromTo(
               cardLabels,
@@ -177,7 +152,6 @@ export class ModaNavigation extends HTMLElement {
     if (!mainMenu || !submenu) return;
 
     if (window.gsap) {
-      // Anima cards saindo primeiro
       window.gsap.to(cards, {
         opacity: 0,
         y: 30,
@@ -186,7 +160,6 @@ export class ModaNavigation extends HTMLElement {
         ease: "power2.in",
       });
 
-      // Volta menu principal
       window.gsap.to(mainMenu, {
         x: "0%",
         duration: 0.6,
@@ -194,32 +167,27 @@ export class ModaNavigation extends HTMLElement {
         ease: "power3.inOut",
       });
 
-      // Esconde submenu para direita com animação suave
       window.gsap.to(submenu, {
         x: "100%",
         duration: 0.6,
         delay: 0.2,
         ease: "power3.inOut",
         onComplete: () => {
-          // Cleanup tech lead: Remove do DOM e reseta estilos
           submenu.style.display = "none";
           submenu.style.transform = "";
 
-          // Reseta cards para próxima abertura
           window.gsap.set(cards, {
             opacity: 1,
             y: 0,
             clearProps: "all",
           });
 
-          // Recolhe o menu lateral após animação completa
           if (sideMenu) {
             sideMenu.classList.remove("submenu-expanded");
           }
         },
       });
     } else {
-      // Fallback sem GSAP
       sideMenu.classList.remove("submenu-expanded");
       submenu.style.display = "none";
     }
@@ -234,7 +202,6 @@ export class ModaNavigation extends HTMLElement {
       const menuLinks = this.querySelectorAll(".moda-menu-link");
 
       menuLinks.forEach((link) => {
-        // Mouseenter - linha cresce de 0 para 100%
         link.addEventListener("mouseenter", () => {
           window.gsap.to(link, {
             "--underline-width": "100%",
@@ -243,7 +210,6 @@ export class ModaNavigation extends HTMLElement {
           });
         });
 
-        // Mouseleave - linha volta para 0%
         link.addEventListener("mouseleave", () => {
           window.gsap.to(link, {
             "--underline-width": "0%",
@@ -253,10 +219,8 @@ export class ModaNavigation extends HTMLElement {
         });
       });
 
-      // Animação para links do submenu
       const submenuLinks = this.querySelectorAll(".submenu-link, .submenu-sublink");
       submenuLinks.forEach((link) => {
-        // Não animar links ativos
         if (
           link.classList.contains("submenu-link-active") ||
           link.classList.contains("submenu-sublink-active")
@@ -281,7 +245,6 @@ export class ModaNavigation extends HTMLElement {
         });
       });
 
-      // Animação para labels dos cards
       const cardLabels = this.querySelectorAll(".submenu-card-label");
       cardLabels.forEach((label) => {
         const card = label.closest(".submenu-card");
@@ -314,12 +277,10 @@ export class ModaNavigation extends HTMLElement {
     const backdrop = this.querySelector(".moda-side-menu-backdrop");
     const closeBtn = this.querySelector(".moda-side-menu-close");
 
-    // Toggle menu
     if (hamburger) {
       hamburger.addEventListener("click", () => this.toggleMenu());
     }
 
-    // Close menu
     if (closeBtn) {
       closeBtn.addEventListener("click", () => this.closeMenu());
     }
@@ -328,14 +289,12 @@ export class ModaNavigation extends HTMLElement {
       backdrop.addEventListener("click", () => this.closeMenu());
     }
 
-    // Search (placeholder)
     if (searchBtn) {
       searchBtn.addEventListener("click", () => {
         console.log("Search clicked");
       });
     }
 
-    // Links com submenu
     const submenuTriggers = this.querySelectorAll(".moda-menu-link.has-submenu");
     submenuTriggers.forEach((trigger) => {
       trigger.addEventListener("click", (e) => {
@@ -345,22 +304,18 @@ export class ModaNavigation extends HTMLElement {
       });
     });
 
-    // Botões de voltar nos submenus
     const backButtons = this.querySelectorAll(".submenu-back-btn");
     backButtons.forEach((btn) => {
       btn.addEventListener("click", () => this.closeSubmenu());
     });
 
-    // Botão fechar do submenu (fecha menu inteiro)
     const submenuCloseBtn = this.querySelector(".submenu-close-btn");
     if (submenuCloseBtn) {
       submenuCloseBtn.addEventListener("click", () => this.closeMenu());
     }
 
-    // Acessibilidade - Alto Contraste
     const accessibilityToggle = this.querySelector(".moda-menu-checkbox");
     if (accessibilityToggle) {
-      // Restaura estado salvo
       const highContrast = localStorage.getItem("dior-high-contrast") === "true";
       accessibilityToggle.checked = highContrast;
       if (highContrast) {
@@ -388,13 +343,10 @@ export class ModaNavigation extends HTMLElement {
     const menuLinks = this.querySelectorAll(".moda-menu-link");
 
     if (this.menuOpen) {
-      // Remove display none antes de abrir
       sideMenu.style.display = "block";
       backdrop.style.display = "block";
 
-      // Anima backdrop e side menu com GSAP
       if (window.gsap) {
-        // Backdrop fade in
         window.gsap.fromTo(
           backdrop,
           { opacity: 0 },
@@ -406,7 +358,6 @@ export class ModaNavigation extends HTMLElement {
           },
         );
 
-        // Side menu slide in
         window.gsap.fromTo(
           sideMenu,
           { x: -400, opacity: 0 },
@@ -419,7 +370,6 @@ export class ModaNavigation extends HTMLElement {
           },
         );
 
-        // Anima hamburguer para X (2 linhas)
         window.gsap.to(lines[0], {
           attr: { y1: 12, y2: 12, x1: 3, x2: 21 },
           rotation: 45,
@@ -436,7 +386,6 @@ export class ModaNavigation extends HTMLElement {
           ease: "power2.inOut",
         });
 
-        // Anima os links do menu entrando
         window.gsap.fromTo(
           menuLinks,
           {
@@ -454,7 +403,6 @@ export class ModaNavigation extends HTMLElement {
         );
       }
     } else {
-      // Anima saída com GSAP
       if (window.gsap) {
         window.gsap.to(backdrop, {
           opacity: 0,
@@ -482,7 +430,6 @@ export class ModaNavigation extends HTMLElement {
         sideMenu.classList.remove("active");
         sideMenu.classList.remove("submenu-expanded");
 
-        // Fallback cleanup
         setTimeout(() => {
           if (!this.menuOpen) {
             sideMenu.style.display = "none";
@@ -491,7 +438,6 @@ export class ModaNavigation extends HTMLElement {
         }, 400);
       }
 
-      // Volta hamburguer ao estado normal (2 linhas)
       if (window.gsap) {
         window.gsap.to(lines[0], {
           attr: { y1: 8, y2: 8, x1: 3, x2: 21 },
@@ -513,7 +459,6 @@ export class ModaNavigation extends HTMLElement {
   closeMenu() {
     this.menuOpen = false;
 
-    // Fecha submenu se aberto
     if (this.currentSubmenu) {
       this.closeSubmenu();
     }
@@ -527,7 +472,6 @@ export class ModaNavigation extends HTMLElement {
     sideMenu.classList.remove("active");
     sideMenu.classList.remove("submenu-expanded");
 
-    // Cleanup: Remove do DOM após transição (tech lead best practice)
     setTimeout(() => {
       if (!this.menuOpen) {
         sideMenu.style.display = "none";
@@ -535,7 +479,6 @@ export class ModaNavigation extends HTMLElement {
       }
     }, 400); // Match transition duration
 
-    // Volta hamburguer ao estado normal (2 linhas)
     if (window.gsap) {
       window.gsap.to(lines[0], {
         attr: { y1: 8, y2: 8, x1: 3, x2: 21 },

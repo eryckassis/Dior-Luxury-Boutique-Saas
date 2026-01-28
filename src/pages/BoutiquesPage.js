@@ -1,12 +1,7 @@
-// ============================================================================
-// BOUTIQUES PAGE - Página de localização das boutiques Dior
-// ============================================================================
-
 import "../components/AppNavigation.js";
 import "../components/FooterSection.js";
 import "../styles/boutiques.css";
 
-// Dados das boutiques Dior em São Paulo (dados reais)
 const DIOR_BOUTIQUES = [
   {
     id: 1,
@@ -45,7 +40,6 @@ const DIOR_BOUTIQUES = [
   },
 ];
 
-// Tipos de filtros
 const FILTER_TYPES = [
   { id: "boutique", name: "Boutique Dior", icon: "CD" },
   { id: "restaurante", name: "Restaurante e Café Dior", icon: "CD" },
@@ -205,19 +199,16 @@ export class BoutiquesPage extends HTMLElement {
   }
 
   async loadGoogleMaps() {
-    // Verifica se já existe a API carregada
     if (window.google && window.google.maps) {
       this.initMap();
       return;
     }
 
-    // Cria o script do Google Maps
     const script = document.createElement("script");
     script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyBVJWaOUZWfNI1T5BqxQqCTz4e4rJLVeJY&callback=initBoutiquesMap`;
     script.async = true;
     script.defer = true;
 
-    // Callback global para quando o Maps carregar
     window.initBoutiquesMap = () => {
       this.initMap();
     };
@@ -229,14 +220,11 @@ export class BoutiquesPage extends HTMLElement {
     const mapContainer = document.getElementById("boutiques-map");
     if (!mapContainer) return;
 
-    // Remove loading
     const loading = mapContainer.querySelector(".map-loading");
     if (loading) loading.remove();
 
-    // Centro em São Paulo
     const center = { lat: -23.5829, lng: -46.6889 };
 
-    // Cria o mapa com estilo clean
     this.map = new google.maps.Map(mapContainer, {
       center: center,
       zoom: 13,
@@ -250,12 +238,10 @@ export class BoutiquesPage extends HTMLElement {
       },
     });
 
-    // Adiciona marcadores
     this.addMarkers();
   }
 
   getMapStyles() {
-    // Estilo clean e elegante para o mapa
     return [
       {
         featureType: "all",
@@ -346,11 +332,9 @@ export class BoutiquesPage extends HTMLElement {
   }
 
   addMarkers() {
-    // Remove marcadores existentes
     this.markers.forEach((marker) => marker.setMap(null));
     this.markers = [];
 
-    // Cria marcador customizado Dior
     const markerIcon = {
       path: google.maps.SymbolPath.CIRCLE,
       fillColor: "#1a1a1a",
@@ -361,7 +345,6 @@ export class BoutiquesPage extends HTMLElement {
     };
 
     DIOR_BOUTIQUES.forEach((boutique) => {
-      // Cria marcador com label "CD"
       const marker = new google.maps.Marker({
         position: { lat: boutique.lat, lng: boutique.lng },
         map: this.map,
@@ -376,7 +359,6 @@ export class BoutiquesPage extends HTMLElement {
         },
       });
 
-      // InfoWindow ao clicar
       const infoWindow = new google.maps.InfoWindow({
         content: `
           <div style="padding: 10px; font-family: Hellix, sans-serif;">
@@ -394,7 +376,6 @@ export class BoutiquesPage extends HTMLElement {
       this.markers.push(marker);
     });
 
-    // Ajusta o zoom para mostrar todos os marcadores
     if (this.markers.length > 1) {
       const bounds = new google.maps.LatLngBounds();
       this.markers.forEach((marker) => bounds.extend(marker.getPosition()));
@@ -403,7 +384,6 @@ export class BoutiquesPage extends HTMLElement {
   }
 
   initEventListeners() {
-    // Busca
     const searchInput = document.getElementById("boutiques-search");
     if (searchInput) {
       searchInput.addEventListener("input", (e) => {
@@ -412,7 +392,6 @@ export class BoutiquesPage extends HTMLElement {
       });
     }
 
-    // Filtros
     const filterTags = this.querySelectorAll(".boutiques-filter-tag");
     filterTags.forEach((tag) => {
       tag.addEventListener("click", () => {
@@ -429,13 +408,11 @@ export class BoutiquesPage extends HTMLElement {
       });
     });
 
-    // Botão de localização
     const locationBtn = this.querySelector(".boutiques-location-btn");
     if (locationBtn) {
       locationBtn.addEventListener("click", () => this.getUserLocation());
     }
 
-    // Clique nos cards das boutiques
     const boutiqueCards = this.querySelectorAll(".boutique-card");
     boutiqueCards.forEach((card) => {
       card.addEventListener("click", () => {
@@ -448,7 +425,6 @@ export class BoutiquesPage extends HTMLElement {
   filterBoutiques() {
     let filtered = DIOR_BOUTIQUES;
 
-    // Filtra por busca
     if (this.searchQuery) {
       filtered = filtered.filter(
         (b) =>
@@ -459,14 +435,12 @@ export class BoutiquesPage extends HTMLElement {
       );
     }
 
-    // Atualiza a lista
     const listContainer = document.getElementById("boutiques-list");
     const countElement = document.getElementById("boutiques-count-number");
 
     if (listContainer) {
       listContainer.innerHTML = this.renderBoutiquesList(filtered);
 
-      // Re-adiciona event listeners nos novos cards
       const newCards = listContainer.querySelectorAll(".boutique-card");
       newCards.forEach((card) => {
         card.addEventListener("click", () => {
@@ -485,17 +459,14 @@ export class BoutiquesPage extends HTMLElement {
     const boutique = DIOR_BOUTIQUES.find((b) => b.id === boutiqueId);
     if (!boutique || !this.map) return;
 
-    // Centraliza o mapa na boutique
     this.map.setCenter({ lat: boutique.lat, lng: boutique.lng });
     this.map.setZoom(16);
 
-    // Encontra e abre o InfoWindow do marcador correspondente
     const markerIndex = DIOR_BOUTIQUES.findIndex((b) => b.id === boutiqueId);
     if (markerIndex >= 0 && this.markers[markerIndex]) {
       google.maps.event.trigger(this.markers[markerIndex], "click");
     }
 
-    // Destaca o card
     const cards = this.querySelectorAll(".boutique-card");
     cards.forEach((card) => card.classList.remove("active"));
 
@@ -522,7 +493,6 @@ export class BoutiquesPage extends HTMLElement {
           this.map.setCenter(userLocation);
           this.map.setZoom(14);
 
-          // Adiciona marcador da localização do usuário
           new google.maps.Marker({
             position: userLocation,
             map: this.map,
@@ -546,7 +516,6 @@ export class BoutiquesPage extends HTMLElement {
   }
 
   disconnectedCallback() {
-    // Cleanup
     this.markers.forEach((marker) => marker.setMap(null));
     this.markers = [];
   }

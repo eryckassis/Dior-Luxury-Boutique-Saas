@@ -1,7 +1,3 @@
-﻿// ============================================================================
-// MISS DIOR PAGE - Página dedicada à fragrância Miss Dior
-// ============================================================================
-
 import "../components/AppNavigation.js";
 import "../components/FooterSection.js";
 import { cartService } from "../services/CartService.js";
@@ -19,7 +15,6 @@ export class MissDiorPage extends HTMLElement {
   }
 
   disconnectedCallback() {
-    // Cleanup animations
     if (this.animations) {
       this.animations.forEach((anim) => anim.kill());
     }
@@ -33,7 +28,6 @@ export class MissDiorPage extends HTMLElement {
 
       if (!video || !playPauseBtn || !muteUnmuteBtn) return;
 
-      // Play/Pause
       playPauseBtn.addEventListener("click", () => {
         if (video.paused) {
           video.play();
@@ -46,7 +40,6 @@ export class MissDiorPage extends HTMLElement {
         }
       });
 
-      // Mute/Unmute
       muteUnmuteBtn.addEventListener("click", () => {
         video.muted = !video.muted;
         if (video.muted) {
@@ -66,7 +59,6 @@ export class MissDiorPage extends HTMLElement {
 
       this.animations = [];
 
-      // Video Hero animation
       const heroTl = window.gsap.timeline();
       heroTl
         .from(".miss-dior-video-title", {
@@ -98,7 +90,6 @@ export class MissDiorPage extends HTMLElement {
 
       this.animations.push(heroTl);
 
-      // Full Image Reveal Animation
       const imageReveal = this.querySelector(".miss-dior-image-reveal");
       if (imageReveal) {
         const overlay = imageReveal.querySelector(".reveal-overlay");
@@ -133,7 +124,6 @@ export class MissDiorPage extends HTMLElement {
         this.animations.push(revealTl);
       }
 
-      // Product Detail Animation
       const productDetail = this.querySelector(".miss-dior-product-info");
       if (productDetail) {
         const detailAnim = window.gsap.from(productDetail, {
@@ -150,7 +140,6 @@ export class MissDiorPage extends HTMLElement {
         this.animations.push(detailAnim);
       }
 
-      // Double Images Reveal Animation
       const doubleImageReveals = this.querySelectorAll(".miss-dior-image-reveal-double");
       doubleImageReveals.forEach((imageReveal, index) => {
         const overlay = imageReveal.querySelector(".reveal-overlay");
@@ -186,7 +175,6 @@ export class MissDiorPage extends HTMLElement {
         this.animations.push(revealTl);
       });
 
-      // Double section description animation
       const doubleDescription = this.querySelector(".double-section-description");
       if (doubleDescription) {
         const descAnim = window.gsap.from(doubleDescription, {
@@ -203,7 +191,6 @@ export class MissDiorPage extends HTMLElement {
         this.animations.push(descAnim);
       }
 
-      // Frasco Couture Image Reveal Animation
       const frascoReveal = this.querySelector(".miss-dior-image-reveal-frasco");
       if (frascoReveal) {
         const overlay = frascoReveal.querySelector(".reveal-overlay");
@@ -238,7 +225,6 @@ export class MissDiorPage extends HTMLElement {
         this.animations.push(frascoTl);
       }
 
-      // Frasco Couture Content Animation
       const frascoContent = this.querySelector(".frasco-couture-content");
       if (frascoContent) {
         const frascoContentAnim = window.gsap.from(frascoContent, {
@@ -255,7 +241,6 @@ export class MissDiorPage extends HTMLElement {
         this.animations.push(frascoContentAnim);
       }
 
-      // Services Button Hover Animation
       const servicesButtons = this.querySelectorAll(".services-button");
       if (servicesButtons.length > 0) {
         servicesButtons.forEach((button) => {
@@ -277,7 +262,6 @@ export class MissDiorPage extends HTMLElement {
         });
       }
 
-      // Bouquets Full Image Animation
       const bouquetsImage = this.querySelector(".bouquets-full-image");
       const bouquetsText = this.querySelector(".bouquets-full-text");
 
@@ -369,18 +353,15 @@ export class MissDiorPage extends HTMLElement {
         const productData = productsData[index];
         if (!productData) return;
 
-        // Adiciona data attributes
         button.dataset.productId = productData.id;
         button.dataset.productName = productData.name;
         button.dataset.productVolume = productData.volume;
         button.dataset.productPrice = productData.price;
         button.dataset.productImage = productData.image;
 
-        // Adiciona event listener
         button.addEventListener("click", (e) => {
           e.preventDefault();
 
-          // Adiciona o produto ao carrinho
           cartService.addItem({
             id: productData.id,
             name: productData.name,
@@ -389,7 +370,6 @@ export class MissDiorPage extends HTMLElement {
             image: productData.image,
           });
 
-          // Feedback visual
           this.animateButtonFeedback(button);
         });
       });
@@ -398,7 +378,6 @@ export class MissDiorPage extends HTMLElement {
   animateButtonFeedback(button) {
     if (!window.gsap) return;
 
-    // Animação de sucesso
     window.gsap
       .timeline()
       .to(button, {
@@ -417,7 +396,6 @@ export class MissDiorPage extends HTMLElement {
         ease: "power2.out",
       });
 
-    // Muda temporariamente o ícone para checkmark
     const originalSVG = button.innerHTML;
     button.innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -425,7 +403,6 @@ export class MissDiorPage extends HTMLElement {
       </svg>
     `;
 
-    // Volta ao ícone original após 1 segundo
     setTimeout(() => {
       button.innerHTML = originalSVG;
     }, 1000);
@@ -603,7 +580,6 @@ Christian Dior, 1947
               <p class="miss-dior-video-description"></p>
             </div>
 
-           
             </div>
           </section>
 

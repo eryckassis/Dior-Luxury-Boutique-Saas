@@ -1,7 +1,3 @@
-﻿// ============================================================================
-// DIOR VERÃO PAGE - Página Descubra
-// ============================================================================
-
 import "../styles/dior-verao.css";
 import { cartService } from "../services/CartService.js";
 
@@ -19,7 +15,6 @@ export class DiorVeraoPage extends HTMLElement {
   }
 
   disconnectedCallback() {
-    // Cleanup animations
     if (this.animations) {
       this.animations.forEach((anim) => anim.kill());
     }
@@ -33,7 +28,6 @@ export class DiorVeraoPage extends HTMLElement {
 
       if (!video || !playPauseBtn || !muteUnmuteBtn) return;
 
-      // Play/Pause
       playPauseBtn.addEventListener("click", () => {
         if (video.paused) {
           video.play();
@@ -46,7 +40,6 @@ export class DiorVeraoPage extends HTMLElement {
         }
       });
 
-      // Mute/Unmute
       muteUnmuteBtn.addEventListener("click", () => {
         video.muted = !video.muted;
         if (video.muted) {
@@ -65,7 +58,6 @@ export class DiorVeraoPage extends HTMLElement {
 
       this.animations = [];
 
-      // Hero animation
       const heroTl = window.gsap.timeline();
       heroTl.from(".dior-verao-hero-content", {
         opacity: 0,
@@ -76,7 +68,6 @@ export class DiorVeraoPage extends HTMLElement {
       });
       this.animations.push(heroTl);
 
-      // First Image Reveal Animation
       const imageReveal = this.querySelector(".miss-dior-image-reveal");
       if (imageReveal) {
         const overlay = imageReveal.querySelector(".reveal-overlay");
@@ -111,7 +102,6 @@ export class DiorVeraoPage extends HTMLElement {
         this.animations.push(revealTl);
       }
 
-      // Second Image Reveal Animation
       const imageRevealSecond = this.querySelector(".reveal-second");
       if (imageRevealSecond) {
         const overlay = imageRevealSecond.querySelector(".reveal-overlay");
@@ -146,7 +136,6 @@ export class DiorVeraoPage extends HTMLElement {
         this.animations.push(revealTl2);
       }
 
-      // Third Image Reveal Animation
       const imageRevealThird = this.querySelector(".reveal-third");
       if (imageRevealThird) {
         const overlay = imageRevealThird.querySelector(".reveal-overlay");
@@ -181,7 +170,6 @@ export class DiorVeraoPage extends HTMLElement {
         this.animations.push(revealTl3);
       }
 
-      // Products Image Reveal Animations
       const productCards = this.querySelectorAll(".essence-product-card");
       productCards.forEach((card, index) => {
         const overlay = card.querySelector(".essence-image-reveal-overlay");
@@ -219,7 +207,6 @@ export class DiorVeraoPage extends HTMLElement {
         }
       });
 
-      // Cards stagger animation
       const cardsAnim = window.gsap.from(".dior-verao-card", {
         opacity: 0,
         y: 50,
@@ -233,7 +220,6 @@ export class DiorVeraoPage extends HTMLElement {
       });
       this.animations.push(cardsAnim);
 
-      // Featured section animation
       const featuredTextAnim = window.gsap.from(".dior-verao-featured-text", {
         opacity: 0,
         x: -50,
@@ -262,7 +248,6 @@ export class DiorVeraoPage extends HTMLElement {
 
   initBagButtons() {
     requestAnimationFrame(() => {
-      // Miss Dior Products
       const missDiorBagButtons = this.querySelectorAll(
         ".essence-bag-button:not(.jadore-bag-button)",
       );
@@ -310,7 +295,6 @@ export class DiorVeraoPage extends HTMLElement {
         });
       });
 
-      // J'adore Products
       const jadoreBagButtons = this.querySelectorAll(".jadore-bag-button");
 
       const jadoreProductsData = [
@@ -356,7 +340,6 @@ export class DiorVeraoPage extends HTMLElement {
         });
       });
 
-      // Para Ele Products
       const paraEleBagButtons = this.querySelectorAll(".paraele-bag-button");
 
       const paraEleProductsData = [
@@ -404,7 +387,6 @@ export class DiorVeraoPage extends HTMLElement {
       const buttons = this.querySelectorAll(".verao-descubra-btn");
 
       buttons.forEach((button) => {
-        // Mouseenter - linha diminui para 0
         button.addEventListener("mouseenter", () => {
           window.gsap.to(button, {
             "--underline-width": "0%",
@@ -413,7 +395,6 @@ export class DiorVeraoPage extends HTMLElement {
           });
         });
 
-        // Mouseleave - linha volta a 100%
         button.addEventListener("mouseleave", () => {
           window.gsap.to(button, {
             "--underline-width": "100%",
@@ -423,13 +404,10 @@ export class DiorVeraoPage extends HTMLElement {
         });
       });
 
-      // Parallax effect for images
       this.initVeraoParallax();
 
-      // Text reveal effect
       this.initVeraoTextReveal();
 
-      // Animate section title
       this.initVeraoTitleAnimation();
     });
   }
@@ -466,13 +444,11 @@ export class DiorVeraoPage extends HTMLElement {
       const image = imageWrapper?.querySelector("img");
 
       if (image && imageWrapper) {
-        // Set initial position
         window.gsap.set(image, {
           yPercent: -15,
           scale: 1.1,
         });
 
-        // Create smooth parallax animation with better easing
         const parallaxTl = window.gsap.timeline({
           scrollTrigger: {
             trigger: imageWrapper,
@@ -480,8 +456,6 @@ export class DiorVeraoPage extends HTMLElement {
             end: "bottom top",
             scrub: 2,
             invalidateOnRefresh: true,
-            // Uncomment below to see trigger points during development
-            // markers: true,
           },
         });
 
@@ -494,7 +468,6 @@ export class DiorVeraoPage extends HTMLElement {
 
         this.animations.push(parallaxTl);
 
-        // Enhanced card reveal with stagger
         const cardRevealTl = window.gsap.timeline({
           scrollTrigger: {
             trigger: card,
@@ -539,7 +512,6 @@ export class DiorVeraoPage extends HTMLElement {
       const button = card.querySelector(".services-button");
 
       if (title) {
-        // Wrap each word in a span
         const text = title.textContent;
         const words = text.split(" ");
         title.innerHTML = words.map((word) => `<span>${word}</span>`).join(" ");
@@ -554,7 +526,6 @@ export class DiorVeraoPage extends HTMLElement {
           },
         });
 
-        // Animate title words
         textRevealTl.to(spans, {
           opacity: 1,
           y: 0,
@@ -563,7 +534,6 @@ export class DiorVeraoPage extends HTMLElement {
           ease: "power3.out",
         });
 
-        // Animate button
         if (button) {
           textRevealTl.to(
             button,
@@ -764,10 +734,7 @@ export class DiorVeraoPage extends HTMLElement {
               <p class="miss-dior-video-description"></p>
             </div>
 
-           
-        
           </section>
-          
 
           <section class="miss-dior-full-image section-spacing">
           <div class="miss-dior-image-reveal reveal-second">
@@ -841,8 +808,6 @@ export class DiorVeraoPage extends HTMLElement {
                 </div>
               </div>
             </div>
-
-            
 
             <!-- Product 3 -->
             <div class="essence-product-card">
@@ -1115,7 +1080,6 @@ export class DiorVeraoPage extends HTMLElement {
             </div>
           </div>
         </section>
-
 
     </main>
 

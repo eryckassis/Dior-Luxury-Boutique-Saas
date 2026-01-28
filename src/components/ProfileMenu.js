@@ -1,7 +1,3 @@
-// ============================================================================
-// PROFILE MENU COMPONENT - Menu lateral de perfil
-// ============================================================================
-
 import { router } from "../router/router.js";
 import { cartService } from "../services/CartService.js";
 import { authService } from "../services/AuthService.js";
@@ -12,7 +8,6 @@ export class ProfileMenu extends HTMLElement {
     this.isOpen = false;
     this.activeTab = "account";
 
-    // Usa métodos síncronos/cache para inicialização
     this.isAuthenticated = authService.isAuthenticated();
     this.user = authService.getCachedUser();
 
@@ -22,7 +17,6 @@ export class ProfileMenu extends HTMLElement {
       this.updateAccountContent();
     };
 
-    // CartService - pega itens atuais (pode estar vazio inicialmente)
     this.cartItems = cartService.getItems();
 
     this.cartListener = (items) => {
@@ -36,20 +30,17 @@ export class ProfileMenu extends HTMLElement {
     this.initEventListeners();
     this.initButtons();
 
-    // Adiciona listener para mudanças no carrinho
     cartService.addListener(this.cartListener);
     authService.addListener(this.authListener);
 
-    // Aguarda inicialização do carrinho e atualiza se necessário
     await cartService.waitForInit();
     this.cartItems = cartService.getItems();
     this.updateCart();
   }
 
   disconnectedCallback() {
-    // Remove listener do carrinho
     cartService.removeListener(this.cartListener);
-    // Removce listener de auth
+
     authService.removeListener(this.authListener);
   }
 
@@ -66,7 +57,6 @@ export class ProfileMenu extends HTMLElement {
       backdrop.addEventListener("click", () => this.close());
     }
 
-    // Tab switching
     tabs.forEach((tab) => {
       tab.addEventListener("click", () => {
         const tabType = tab.dataset.tab;
@@ -76,22 +66,17 @@ export class ProfileMenu extends HTMLElement {
   }
 
   initButtons() {
-    // Botão de cupom
     const couponBtn = this.querySelector(".bag-coupon-btn");
     if (couponBtn) {
       couponBtn.addEventListener("click", () => this.openCouponModal());
     }
 
-    // Botão de checkout (Comprar)
     const checkoutBtn = this.querySelector(".bag-checkout-btn");
     if (checkoutBtn) {
       checkoutBtn.addEventListener("click", () => {
-        // Fecha o menu de perfil
         this.close();
 
-        // Aguarda a animação de fechamento do menu
         setTimeout(() => {
-          // Navega para a página de finalizar compra
           router.navigate("/finalizar-compra");
         }, 650); // Tempo da animação de fechamento do menu
       });
@@ -104,7 +89,6 @@ export class ProfileMenu extends HTMLElement {
     const accountContent = this.querySelector(".profile-account-content");
     const bagContent = this.querySelector(".profile-bag-content");
 
-    // Update active tab
     tabs.forEach((tab) => {
       if (tab.dataset.tab === tabType) {
         tab.classList.add("active");
@@ -113,7 +97,6 @@ export class ProfileMenu extends HTMLElement {
       }
     });
 
-    // Animate content switch
     if (!window.gsap) {
       accountContent.style.display = tabType === "account" ? "flex" : "none";
       bagContent.style.display = tabType === "bag" ? "flex" : "none";
@@ -170,13 +153,11 @@ export class ProfileMenu extends HTMLElement {
   updateCart() {
     const bagContent = this.querySelector(".profile-bag-content");
     if (bagContent) {
-      // Atualiza os itens do carrinho
       this.cartItems = cartService.getItems();
       bagContent.innerHTML = this.renderBagContent();
       this.initCartEventListeners();
       this.initButtons();
 
-      // Atualiza o badge com a quantidade total
       const badge = this.querySelector(".profile-tab-badge");
       if (badge) {
         const totalItems = cartService.getTotalItems();
@@ -300,23 +281,21 @@ export class ProfileMenu extends HTMLElement {
   }
 
   initCartEventListeners() {
-    // Remove buttons
     const removeButtons = this.querySelectorAll(".cart-item-remove");
     removeButtons.forEach((btn) => {
       btn.addEventListener("click", (e) => {
         const itemId = e.currentTarget.dataset.itemId;
-        // Tenta converter para número, se falhar mantém como string
+
         const id = isNaN(itemId) ? itemId : parseInt(itemId);
         this.removeItem(id);
       });
     });
 
-    // Quantity selectors
     const quantitySelects = this.querySelectorAll(".cart-item-quantity");
     quantitySelects.forEach((select) => {
       select.addEventListener("change", (e) => {
         const itemId = e.target.dataset.itemId;
-        // Tenta converter para número, se falhar mantém como string
+
         const id = isNaN(itemId) ? itemId : parseInt(itemId);
         const newQuantity = parseInt(e.target.value);
         this.updateQuantity(id, newQuantity);
@@ -327,11 +306,9 @@ export class ProfileMenu extends HTMLElement {
   async open(initialTab = "account") {
     if (this.isOpen) return;
 
-    // Sincroniza estado real ao abrir (Safety Check) - de forma assíncrona
     const currentAuth = await authService.isAuthenticatedAsync();
     const currentUser = authService.getCachedUser();
 
-    // Se o estado local estiver diferente do real, atualiza!
     if (
       this.isAuthenticated !== currentAuth ||
       JSON.stringify(this.user) !== JSON.stringify(currentUser)
@@ -349,7 +326,6 @@ export class ProfileMenu extends HTMLElement {
     const loginSection = this.querySelector(".profile-login-section");
     const signupSection = this.querySelector(".profile-signup-section");
 
-    // Muda para a aba especificada
     if (initialTab === "bag") {
       this.switchTab("bag");
     } else {
@@ -365,10 +341,8 @@ export class ProfileMenu extends HTMLElement {
       return;
     }
 
-    // Previne scroll do body
     document.body.style.overflow = "hidden";
 
-    // Torna visível antes de animar
     menu.style.visibility = "visible";
 
     backdrop.style.display = "block";
@@ -378,13 +352,11 @@ export class ProfileMenu extends HTMLElement {
       defaults: { ease: "power3.out" },
     });
 
-    tl
-      // Backdrop fade in
-      .to(backdrop, {
-        opacity: 1,
-        duration: 0.4,
-      })
-      // Menu slide in
+    tl.to(backdrop, {
+      opacity: 1,
+      duration: 0.4,
+    })
+
       .to(
         menu,
         {
@@ -394,7 +366,7 @@ export class ProfileMenu extends HTMLElement {
         },
         "-=0.3",
       )
-      // Close button appear
+
       .fromTo(
         closeBtn,
         { opacity: 0, scale: 0, rotation: -90 },
@@ -407,21 +379,21 @@ export class ProfileMenu extends HTMLElement {
         },
         "-=0.3",
       )
-      // Tabs stagger
+
       .fromTo(
         tabs,
         { opacity: 0, y: -20 },
         { opacity: 1, y: 0, duration: 0.4, stagger: 0.1, ease: "power2.out" },
         "-=0.4",
       )
-      // Login section
+
       .fromTo(
         loginSection,
         { opacity: 0, y: 30 },
         { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" },
         "-=0.3",
       )
-      // Signup section
+
       .fromTo(
         signupSection,
         { opacity: 0, y: 30 },
@@ -443,7 +415,6 @@ export class ProfileMenu extends HTMLElement {
         ? this.querySelector(".profile-account-content")
         : this.querySelector(".profile-bag-content");
 
-    // Restaura scroll do body
     document.body.style.overflow = "auto";
     document.body.style.overflowX = "hidden";
     backdrop.classList.remove("active");
@@ -464,13 +435,11 @@ export class ProfileMenu extends HTMLElement {
       },
     });
 
-    tl
-      // Content fade out
-      .to(activeContent, {
-        opacity: 0,
-        y: 20,
-        duration: 0.3,
-      })
+    tl.to(activeContent, {
+      opacity: 0,
+      y: 20,
+      duration: 0.3,
+    })
       .to(
         tabs,
         {
@@ -481,7 +450,7 @@ export class ProfileMenu extends HTMLElement {
         },
         "-=0.25",
       )
-      // Close button disappear
+
       .to(
         closeBtn,
         {
@@ -493,7 +462,7 @@ export class ProfileMenu extends HTMLElement {
         },
         "-=0.3",
       )
-      // Menu slide out
+
       .to(
         menu,
         {
@@ -503,7 +472,7 @@ export class ProfileMenu extends HTMLElement {
         },
         "-=0.3",
       )
-      // Backdrop fade out
+
       .to(
         backdrop,
         {
@@ -737,7 +706,6 @@ export class ProfileMenu extends HTMLElement {
       </div>
     `;
 
-    // Inicializa event listeners do carrinho após render
     setTimeout(() => {
       this.initCartEventListeners();
       this.initCouponModalListeners();

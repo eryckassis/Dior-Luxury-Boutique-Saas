@@ -1,4 +1,3 @@
-﻿/* Import fonts */
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&family=IBM+Plex+Mono&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond&display=swap");
@@ -163,18 +162,14 @@ strong {
   font-weight: inherit;
 }
 
-/* ============================================================================
-   PRELOADER STYLES
-   ============================================================================ */
-
 .preloader {
-  display: none; /* Começa escondido - router controla visibilidade */
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
   justify-content: center;
   align-items: center;
-  transform-origin: top center; /* Origem da transformação no topo */
+  transform-origin: top center;
   z-index: 9999;
   background-color: #000;
   width: 100%;
@@ -188,10 +183,10 @@ strong {
   justify-content: center;
   align-items: center;
   gap: 1em;
-  visibility: hidden; /* GSAP controla */
+  visibility: hidden;
   width: 100%;
   height: 100%;
-  overflow: visible; /* Permite animações fora do container */
+  overflow: visible;
   color: white;
 }
 
@@ -199,13 +194,13 @@ strong {
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: visible; /* Permite a imagem se mover */
+  overflow: visible;
 }
 
 .preloader .imagem-logo img,
 .preloader .imagem-logo svg {
   display: block;
-  opacity: 0; /* GSAP controla */
+  opacity: 0;
   width: auto;
   max-width: none;
   height: 50px;
@@ -214,21 +209,20 @@ strong {
 
 body {
   position: relative;
-  transition: padding 0.3s ease; /* Add transition for padding */
-  will-change: padding; /* Optimize for padding changes */
+  transition: padding 0.3s ease;
+  will-change: padding;
   margin: 0;
-  background-color: var(--color-background); /* Mesmo fundo da navegação */
+  background-color: var(--color-background);
   padding: 0;
-  padding-top: calc(var(--nav-height) + var(--gutter) * 2); /* Espaço para menu fixo */
+  padding-top: calc(var(--nav-height) + var(--gutter) * 2);
   width: 100%;
-  overflow: hidden; /* Esconde scroll durante preloader */
+  overflow: hidden;
   overflow-x: hidden;
   color: var(--color-foreground);
   font-family: var(--font-primary);
   letter-spacing: -0.03em;
 }
 
-/* Background noise effect */
 body::before {
   position: fixed;
   top: -50%;
@@ -337,33 +331,30 @@ p {
   line-height: 1.4;
 }
 
-/* All content wrapper */
 .all-content {
   transition:
     transform 0.3s ease,
     border-radius 0.3s ease;
-  will-change: border-radius; /* REMOVIDO transform do will-change para não interferir com ScrollTrigger pin */
+  will-change: border-radius;
   border-radius: 0;
   background-color: var(--color-background);
   width: 100%;
   max-width: 100%;
   min-height: 100vh;
-  overflow-x: hidden; /* Apenas horizontal - permite scroll vertical */
+  overflow-x: hidden;
 }
 
-/* Add a class for when the menu is open to apply border radius */
 .all-content.menu-open {
   border-radius: var(--border-radius);
 }
 
-/* Navigation */
 .navigation {
-  position: fixed; /* Fixed no topo */
+  position: fixed;
   top: 0;
   right: 0;
   left: 0;
-  z-index: 1000; /* Muito alto para ficar sempre visível */
-  backdrop-filter: blur(10px); /* Efeito blur no fundo */
+  z-index: 1000;
+  backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   transition: margin 0.3s ease;
   background-color: var(--color-background);
@@ -375,7 +366,7 @@ p {
 
 .navigation__container {
   display: flex;
-  position: relative; /* Ensure proper positioning context */
+  position: relative;
   justify-content: space-between;
   align-items: center;
   margin: 0 auto;
@@ -389,12 +380,11 @@ p {
   flex: 1;
   align-items: center;
   transform: translateZ(0);
-  transition: transform 0.3s ease; /* Add transition for smooth movement */
+  transition: transform 0.3s ease;
   will-change: transform;
   font-size: 24px;
 }
 
-/* Logo link wrapper */
 .logo-link {
   display: inline-flex;
   align-items: center;
@@ -413,28 +403,25 @@ p {
   transform: translateY(0);
 }
 
-/* Logo SVG/Image styles */
 .logo-svg {
   display: flex;
   position: relative;
   top: -1.5rem;
   transition: filter 0.3s ease;
   width: auto;
-  max-width: 200px; /* Largura máxima (opcional) */
-  height: 180px; /* ← ALTERE AQUI: Aumente ou diminua este valor */
+  max-width: 200px;
+  height: 180px;
   object-fit: contain;
 }
 
-/* Efeito hover no logo */
 .logo-link:hover .logo-svg {
   filter: brightness(1.1);
 }
 
-/* Responsivo - ajustar tamanho em telas menores */
 @media (max-width: 768px) {
   .logo-svg {
     max-width: 160px;
-    height: 40px; /* ← Ajustado proporcionalmente */
+    height: 40px;
   }
 }
 
@@ -455,7 +442,6 @@ p {
   will-change: transform;
 }
 
-/* Navigation Icon Buttons */
 .search-container {
   display: flex;
   position: relative;
@@ -534,12 +520,10 @@ p {
   opacity: 1;
 }
 
-/* Search button - GSAP animation only, no CSS transforms */
 .nav-icon-btn[aria-label="Pesquisar"]:hover {
   opacity: 1;
 }
 
-/* Other icon buttons keep the scale effect */
 .nav-icon-btn[aria-label="Perfil"]:hover {
   transform: scale(1.1);
 }
@@ -562,10 +546,10 @@ p {
   display: flex;
   position: relative;
   align-items: center;
-  transform: translateZ(0); /* Force GPU acceleration */
-  will-change: transform; /* Optimize for animations */
+  transform: translateZ(0);
+  will-change: transform;
   border-radius: var(--border-radius);
-  background-color: var(--color-menu-bg); /* Solid white */
+  background-color: var(--color-menu-bg);
   padding: 8px 16px;
 }
 
@@ -574,29 +558,28 @@ p {
   font-size: 12px;
   font-family: var(--font-secondary);
   letter-spacing: 0.05em;
-  text-rendering: optimizeLegibility; /* Improve text rendering */
+  text-rendering: optimizeLegibility;
   text-transform: uppercase;
-  -webkit-font-smoothing: antialiased; /* Better font smoothing */
+  -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Dior Holiday - Texto Dourado */
 .nav-link-gold {
-  color: #d4af37; /* Dourado elegante */
+  color: #d4af37;
   font-weight: 500;
 }
 
 .nav-link-gold:hover {
-  color: #f4c430; /* Dourado mais claro no hover */
+  color: #f4c430;
 }
 
 .contact-link {
-  font-size: 12px; /* Same size as nav links */
-  font-family: var(--font-secondary); /* Same font as nav links */
-  letter-spacing: 0.05em; /* Same letter spacing as nav links */
-  text-rendering: optimizeLegibility; /* Improve text rendering */
-  text-transform: uppercase; /* Same text transform as nav links */
-  -webkit-font-smoothing: antialiased; /* Better font smoothing */
+  font-size: 12px;
+  font-family: var(--font-secondary);
+  letter-spacing: 0.05em;
+  text-rendering: optimizeLegibility;
+  text-transform: uppercase;
+  -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
@@ -613,24 +596,23 @@ p {
   font-family: var(--font-secondary);
 }
 
-/* Dropdown Menu - MODIFIED to fix text skewing */
 .dropdown {
-  position: fixed; /* Fixed para ficar no topo junto com a nav */
-  top: calc(var(--nav-height) + 20px); /* Position below the navigation + account for padding */
-  left: 50%; /* Center horizontally */
-  transform: translateX(-50%); /* Center horizontally without scaling */
+  position: fixed;
+  top: calc(var(--nav-height) + 20px);
+  left: 50%;
+  transform: translateX(-50%);
   visibility: hidden;
   opacity: 0;
-  z-index: 999; /* Um pouco menor que a navigation */
+  z-index: 999;
   transition:
     opacity 0.3s ease,
     visibility 0.3s ease;
   will-change: opacity, max-height;
-  box-shadow: none; /* No shadow */
+  box-shadow: none;
   border-radius: var(--border-radius);
   background-color: var(--color-menu-bg);
-  width: 40vw; /* 40% viewport width as requested */
-  height: auto; /* Auto height based on content */
+  width: 40vw;
+  height: auto;
   max-height: 0;
   overflow: hidden;
   color: var(--color-menu-text);
@@ -639,25 +621,25 @@ p {
 .dropdown.open {
   visibility: visible;
   opacity: 1;
-  max-height: 50vh; /* Limit maximum height */
+  max-height: 50vh;
   overflow: visible;
 }
 
 .dropdown__content {
   display: flex;
   flex-direction: column;
-  transform: translateY(-100%); /* Start offscreen */
+  transform: translateY(-100%);
   transition: transform 0.3s ease;
   will-change: transform;
-  border-radius: var(--border-radius); /* Ensure content has rounded corners too */
-  background-color: var(--color-menu-bg); /* Match dropdown background */
+  border-radius: var(--border-radius);
+  background-color: var(--color-menu-bg);
   padding: var(--margin);
   width: 100%;
   max-height: 50vh;
 }
 
 .dropdown.open .dropdown__content {
-  transform: translateY(0); /* Slide in when open */
+  transform: translateY(0);
 }
 
 .dropdown__menu {
@@ -669,10 +651,10 @@ p {
 .dropdown__image {
   transition:
     opacity 0.3s ease,
-    transform 0.3s ease; /* Add transition for smoother animation */
-  will-change: opacity, transform; /* Optimize for animations */
+    transform 0.3s ease;
+  will-change: opacity, transform;
   margin-top: var(--margin);
-  border-radius: var(--border-radius); /* Ensure image container has rounded corners */
+  border-radius: var(--border-radius);
   width: 100%;
   height: auto;
   overflow: hidden;
@@ -691,21 +673,21 @@ p {
   position: relative;
   transform: translateY(20px);
   opacity: 0;
-  filter: blur(10px); /* Initial blur state */
+  filter: blur(10px);
   will-change: opacity, transform, filter;
   cursor: pointer;
   margin-bottom: 1.5rem;
   width: -webkit-fit-content;
   width: -moz-fit-content;
-  width: fit-content; /* Make the element only as wide as its content */
+  width: fit-content;
   color: var(--color-menu-text);
-  font-weight: 500; /* Fatter weight */
+  font-weight: 500;
   font-size: 24px;
   font-family: var(--font-secondary);
   letter-spacing: 0.05em;
-  text-rendering: optimizeLegibility; /* Improve text rendering */
+  text-rendering: optimizeLegibility;
   text-transform: uppercase;
-  -webkit-font-smoothing: antialiased; /* Better font smoothing */
+  -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 .dropdown__gold {
@@ -727,11 +709,10 @@ p {
   width: 100%;
 }
 
-/* Main Content */
 .content {
   position: relative;
-  z-index: 5; /* Lower than dropdown */
-  margin-top: 0; /* No top margin since nav is not fixed */
+  z-index: 5;
+  margin-top: 0;
   background-color: #f6f3f7;
   width: 100%;
   max-width: 100%;
@@ -803,7 +784,7 @@ p {
   display: block;
   transition:
     transform 0.3s ease,
-    filter 0.3s ease; /* Mantém apenas transições de hover */
+    filter 0.3s ease;
   cursor: pointer;
   border-radius: var(--border-radius);
   width: 100%;
@@ -813,13 +794,11 @@ p {
   object-fit: cover;
 }
 
-/* Efeito hover nos vídeos da galeria */
 .grid-item video:hover {
   transform: scale(1.02);
   filter: brightness(1.1);
 }
 
-/* Video Overlay Content - Texto sobre o vídeo */
 .video-overlay-content {
   position: absolute;
   top: 70%;
@@ -876,7 +855,6 @@ p {
   color: #000000;
 }
 
-/* Responsive para overlay de vídeo */
 @media (max-width: 768px) {
   .video-overlay-title {
     font-size: 32px;
@@ -892,18 +870,17 @@ p {
   }
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
   .grid-container {
     grid-template-columns: 1fr;
   }
 
   .dropdown {
-    position: fixed; /* Mantém fixed no mobile */
+    position: fixed;
     right: 0;
     left: 0;
     transform: translateX(0);
-    width: 100%; /* Full width on mobile */
+    width: 100%;
   }
 
   .dropdown.open {
@@ -934,7 +911,6 @@ p {
     font-size: 20px;
   }
 
-  /* Icon buttons on mobile */
   .nav-icon-btn {
     padding: 6px;
   }
@@ -948,7 +924,6 @@ p {
     gap: 8px;
   }
 
-  /* Search input on mobile - smaller width */
   .search-input {
     font-size: 12px;
   }
@@ -962,15 +937,11 @@ p {
   font-size: 24px;
 }
 
-/* ============================================================================
-   KEYHOLE REVEAL EFFECT
-   ============================================================================ */
-
 .keyhole-section {
   position: relative;
   background-color: var(--color-background);
   width: 100%;
-  min-height: 200vh; /* Altura grande para permitir scroll */
+  min-height: 200vh;
   overflow: hidden;
 }
 
@@ -995,7 +966,6 @@ p {
 }
 
 .keyhole-image img {
-  /* Inicia com retângulo pequeno no centro - efeito keyhole */
   clip-path: inset(40% 45% 40% 45% round 8px);
   transition: clip-path 0.1s linear;
   will-change: clip-path;
@@ -1005,7 +975,6 @@ p {
   object-position: center;
 }
 
-/* Vinheta sobre a imagem - de baixo para cima */
 .keyhole-image::after {
   position: absolute;
   top: 0;
@@ -1039,7 +1008,7 @@ p {
   bottom: 10%;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 3; /* Acima da vinheta */
+  z-index: 3;
   padding: 0 2rem;
   max-width: 800px;
   color: white;
@@ -1047,8 +1016,8 @@ p {
 }
 
 .keyhole-subtitle {
-  transform: translateY(20px); /* Estado inicial */
-  opacity: 0; /* GSAP controla */
+  transform: translateY(20px);
+  opacity: 0;
   margin-bottom: 1rem;
   font-size: 12px;
   font-family: var(--font-secondary);
@@ -1057,8 +1026,8 @@ p {
 }
 
 .keyhole-title {
-  transform: translateY(20px); /* Estado inicial */
-  opacity: 0; /* GSAP controla */
+  transform: translateY(20px);
+  opacity: 0;
   margin-bottom: 2rem;
   font-weight: 300;
   font-size: clamp(24px, 4vw, 48px);
@@ -1069,8 +1038,8 @@ p {
 .keyhole-button {
   display: inline-block;
   position: relative;
-  transform: translateY(20px); /* Estado inicial */
-  opacity: 0; /* GSAP controla */
+  transform: translateY(20px);
+  opacity: 0;
   transition: color 0.15s cubic-bezier(0.645, 0.045, 0.355, 1);
   cursor: pointer;
   border: 1px solid white;
@@ -1089,7 +1058,6 @@ p {
   color: var(--color-foreground);
 }
 
-/* Button Flair Effect - mesmo padrão do splash-page */
 .keyhole-button .button__flair {
   position: absolute;
   top: 0;
@@ -1134,10 +1102,6 @@ p {
   }
 }
 
-/* ============================================================================
-   ANIMATED SECTIONS - Fullscreen Scroll
-   ============================================================================ */
-
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond&display=swap");
 
@@ -1176,7 +1140,6 @@ p {
   overflow: hidden;
 }
 
-/* Video como background */
 .animated-sections-wrapper .bg-video {
   position: absolute;
   top: 50%;
@@ -1209,7 +1172,6 @@ p {
 }
 
 .animated-sections-wrapper .first .bg {
-  /* Vídeo adicionado via HTML - o gradiente é aplicado via ::before */
 }
 
 .animated-sections-wrapper .first .bg::before {
@@ -1230,7 +1192,6 @@ p {
     url("/images/ImageSectionView.png");
 }
 
-/* Keyhole content dentro da segunda seção - INDEPENDENTE */
 .animated-sections-wrapper .second .keyhole-content {
   position: absolute;
   bottom: 12%;
@@ -1297,7 +1258,6 @@ p {
   color: #000000;
 }
 
-/* Content styling para segunda seção */
 .animated-sections-wrapper .section-content {
   position: absolute;
   bottom: 10%;
@@ -1371,10 +1331,6 @@ p {
   background-position: 50% 45%;
 }
 
-/* ============================================================================
-   VIDEO CONTROLS - LIQUID GLASS
-   ============================================================================ */
-
 .video-controls {
   display: flex;
   position: absolute;
@@ -1403,7 +1359,6 @@ p {
   color: rgba(255, 255, 255, 0.9);
 }
 
-/* Button Flair nos botões glass */
 .glass-button .button__flair {
   position: absolute;
   top: 0;
@@ -1448,7 +1403,6 @@ p {
   pointer-events: none;
 }
 
-/* Responsivo */
 @media (max-width: 768px) {
   .video-controls {
     right: 20px;
@@ -1466,10 +1420,6 @@ p {
     height: 18px;
   }
 }
-
-/* ============================================================================
-   LA MOUSSE SECTION - Full Width Parallax
-   ============================================================================ */
 
 .lamousse-section {
   display: flex;
@@ -1549,7 +1499,7 @@ p {
 .lamousse-button {
   display: inline-block;
   position: relative;
-  opacity: 1; /* Garantir visibilidade */
+  opacity: 1;
   transition: opacity 0.3s ease;
   cursor: pointer;
   margin-top: 0.75rem;
@@ -1581,7 +1531,6 @@ p {
   width: 0;
 }
 
-/* Responsive - La Mousse */
 @media (max-width: 768px) {
   .lamousse-section {
     min-height: 500px;

@@ -1,6 +1,3 @@
-﻿// ============================================================================
-// HORIZONTAL SCROLL SECTION WEB COMPONENT - Scroll horizontal com painéis
-// ============================================================================
 import { cartService } from "../services/CartService.js";
 
 export class HorizontalScrollSection extends HTMLElement {
@@ -10,7 +7,7 @@ export class HorizontalScrollSection extends HTMLElement {
 
   connectedCallback() {
     this.render();
-    // Aguarda o DOM e GSAP estarem prontos antes de inicializar animação
+
     setTimeout(() => {
       this.initScrollAnimation();
       this.initVideoControls();
@@ -505,13 +502,11 @@ export class HorizontalScrollSection extends HTMLElement {
   }
 
   initScrollAnimation() {
-    // Verifica se GSAP e ScrollTrigger estão disponíveis
     if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") {
       console.error("GSAP or ScrollTrigger not loaded");
       return;
     }
 
-    // Registra plugins
     gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
     let panelsSection = this.querySelector("#panels");
@@ -531,7 +526,6 @@ export class HorizontalScrollSection extends HTMLElement {
 
     let tween;
 
-    // Navegação entre painéis - EXATAMENTE como no código original
     document.querySelectorAll(".anchor-panel").forEach((anchor) => {
       anchor.addEventListener("click", function (e) {
         e.preventDefault();
@@ -556,7 +550,6 @@ export class HorizontalScrollSection extends HTMLElement {
       });
     });
 
-    // Animação dos painéis - EXATAMENTE como no código original
     tween = gsap.to(panels, {
       x: () => -1 * (panelsContainer.scrollWidth - innerWidth),
       ease: "none",
@@ -571,7 +564,6 @@ export class HorizontalScrollSection extends HTMLElement {
       },
     });
 
-    // Refresh ScrollTrigger após resize
     let resizeTimer;
     window.addEventListener("resize", () => {
       clearTimeout(resizeTimer);
@@ -593,7 +585,6 @@ export class HorizontalScrollSection extends HTMLElement {
     const mutedIcon = muteBtn.querySelector(".muted-icon");
     const unmutedIcon = muteBtn.querySelector(".unmuted-icon");
 
-    // Play/Pause Toggle
     playPauseBtn.addEventListener("click", () => {
       if (video.paused) {
         video.play();
@@ -606,7 +597,6 @@ export class HorizontalScrollSection extends HTMLElement {
       }
     });
 
-    // Mute/Unmute Toggle
     muteBtn.addEventListener("click", () => {
       if (video.muted) {
         video.muted = false;
@@ -619,7 +609,6 @@ export class HorizontalScrollSection extends HTMLElement {
       }
     });
 
-    // Estado inicial - vídeo começa tocando e mudo
     if (!video.paused) {
       playIcon.style.display = "none";
       pauseIcon.style.display = "block";
@@ -627,7 +616,6 @@ export class HorizontalScrollSection extends HTMLElement {
   }
 
   initButtonAnimations() {
-    // Animação de flair para botões anchor-panel
     const anchorButtons = this.querySelectorAll(".anchor-panel");
 
     anchorButtons.forEach((button) => {
@@ -657,7 +645,6 @@ export class HorizontalScrollSection extends HTMLElement {
       });
     });
 
-    // Animação de flair para controles de vídeo
     const videoControls = this.querySelectorAll(".video-control");
 
     videoControls.forEach((button) => {
@@ -689,7 +676,6 @@ export class HorizontalScrollSection extends HTMLElement {
   }
 
   initPietroButton() {
-    // Inicializa TODOS os botões das seções Pietro Ruffo com a classe Button do GSAP
     const pietroButtons = this.querySelectorAll(".tema-pietro-button");
 
     if (pietroButtons.length > 0 && window.Button) {
@@ -700,15 +686,12 @@ export class HorizontalScrollSection extends HTMLElement {
   }
 
   initParallaxGallery() {
-    // Verifica se GSAP e ScrollTrigger estão disponíveis
     if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") {
       console.error("GSAP or ScrollTrigger not loaded for parallax");
       return;
     }
 
-    // Aguarda um pouco para garantir que o DOM esteja pronto
     setTimeout(() => {
-      // Seleciona todos os painéis parallax
       const panels = this.querySelectorAll(".parallax-panel");
 
       if (panels.length === 0) {
@@ -719,13 +702,11 @@ export class HorizontalScrollSection extends HTMLElement {
       console.log(`Found ${panels.length} parallax panels`);
 
       panels.forEach((panel, index) => {
-        // Seleciona a IMAGEM dentro de cada painel (não o wrapper)
         const image = panel.querySelector(".parallax-img");
 
         if (image) {
           console.log(`Setting up parallax for panel ${index + 1}`);
 
-          // Cria animação parallax: a imagem move de -15% para +15%
           gsap.fromTo(
             image,
             {
@@ -738,7 +719,6 @@ export class HorizontalScrollSection extends HTMLElement {
                 scrub: true, // Sincroniza com o scroll
                 start: "top bottom", // Inicia quando o topo do painel toca o fundo da tela
                 end: "bottom top", // Termina quando o fundo do painel sai do topo da tela
-                // markers: true, // Descomente para debug
               },
               ease: "none", // Movimento linear para efeito parallax suave
             },
@@ -748,17 +728,14 @@ export class HorizontalScrollSection extends HTMLElement {
         }
       });
 
-      // Refresh ScrollTrigger após configurar
       ScrollTrigger.refresh();
     }, 200);
   }
 
   initBagButtons() {
     requestAnimationFrame(() => {
-      // Botões da galeria parallax
       const parallaxBagButtons = this.querySelectorAll(".parallax-bag-button");
 
-      // Dados dos 6 produtos da galeria
       const parallaxProductsData = [
         {
           id: "holiday-1",
@@ -808,14 +785,12 @@ export class HorizontalScrollSection extends HTMLElement {
         const productData = parallaxProductsData[index];
         if (!productData) return;
 
-        // Adiciona data attributes
         button.dataset.productId = productData.id;
         button.dataset.productName = productData.name;
         button.dataset.productVolume = productData.volume;
         button.dataset.productPrice = productData.price;
         button.dataset.productImage = productData.image;
 
-        // Adiciona event listener
         button.addEventListener("click", (e) => {
           e.preventDefault();
           cartService.addItem({
@@ -829,10 +804,8 @@ export class HorizontalScrollSection extends HTMLElement {
         });
       });
 
-      // Botões da seção presentes
       const presenteBagButtons = this.querySelectorAll(".presente-bag-button");
 
-      // Dados dos 3 produtos da seção presentes
       const presenteProductsData = [
         {
           id: "presente-1",
@@ -861,18 +834,15 @@ export class HorizontalScrollSection extends HTMLElement {
         const productData = presenteProductsData[index];
         if (!productData) return;
 
-        // Adiciona data attributes
         button.dataset.productId = productData.id;
         button.dataset.productName = productData.name;
         button.dataset.productVolume = productData.volume;
         button.dataset.productPrice = productData.price;
         button.dataset.productImage = productData.image;
 
-        // Adiciona event listener
         button.addEventListener("click", (e) => {
           e.preventDefault();
 
-          // Adiciona o produto ao carrinho
           cartService.addItem({
             id: productData.id,
             name: productData.name,
@@ -881,7 +851,6 @@ export class HorizontalScrollSection extends HTMLElement {
             image: productData.image,
           });
 
-          // Feedback visual
           this.animateButtonFeedback(button);
         });
       });
@@ -891,7 +860,6 @@ export class HorizontalScrollSection extends HTMLElement {
   animateButtonFeedback(button) {
     if (!window.gsap) return;
 
-    // Animação de sucesso
     window.gsap
       .timeline()
       .to(button, {
@@ -910,7 +878,6 @@ export class HorizontalScrollSection extends HTMLElement {
         ease: "power2.out",
       });
 
-    // Muda temporariamente o ícone para checkmark
     const originalSVG = button.innerHTML;
     button.innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -918,14 +885,12 @@ export class HorizontalScrollSection extends HTMLElement {
       </svg>
     `;
 
-    // Volta ao ícone original após 1 segundo
     setTimeout(() => {
       button.innerHTML = originalSVG;
     }, 1000);
   }
 
   disconnectedCallback() {
-    // Limpa ScrollTriggers quando o componente é removido
     ScrollTrigger.getAll().forEach((trigger) => {
       if (trigger.vars.trigger && this.contains(trigger.vars.trigger)) {
         trigger.kill();

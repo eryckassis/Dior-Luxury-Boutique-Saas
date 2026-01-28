@@ -1,4 +1,4 @@
-﻿import "../components/AppNavigation.js";
+import "../components/AppNavigation.js";
 import "../components/FooterSection.js";
 import "../styles/login.css";
 import { authService } from "../services/AuthService.js";
@@ -45,12 +45,10 @@ export class LoginPage extends HTMLElement {
       sendBtn.addEventListener("click", () => this.sendPasswordReset());
     }
 
-    // Toggle password visibility
     if (passwordToggle) {
       passwordToggle.addEventListener("click", () => this.togglePasswordVisibility());
     }
 
-    // Botão Cadastre-se
     const signupButton = this.querySelector(".signup-button");
     if (signupButton) {
       signupButton.addEventListener("click", () => {
@@ -89,7 +87,6 @@ export class LoginPage extends HTMLElement {
 
         this.showSuccess(response.message || "Login realizado com sucesso!");
 
-        // Aguarda 1 segundo e redireciona para home
         setTimeout(() => {
           router.navigate("/");
         }, 1000);
@@ -107,7 +104,6 @@ export class LoginPage extends HTMLElement {
     const form = this.querySelector("#b-form");
     if (!form) return;
 
-    // Remove mensagem anterior se existir
     const existingMessage = form.querySelector(".login-message");
     if (existingMessage) {
       existingMessage.remove();
@@ -120,7 +116,6 @@ export class LoginPage extends HTMLElement {
     const button = form.querySelector('button[type="submit"]');
     form.insertBefore(messageEl, button);
 
-    // Remove após 5 segundos
     setTimeout(() => {
       messageEl.remove();
     }, 5000);
@@ -130,7 +125,6 @@ export class LoginPage extends HTMLElement {
     const form = this.querySelector("#b-form");
     if (!form) return;
 
-    // Remove mensagem anterior se existir
     const existingMessage = form.querySelector(".login-message");
     if (existingMessage) {
       existingMessage.remove();
@@ -213,7 +207,7 @@ export class LoginPage extends HTMLElement {
           onComplete: () => {
             modal.style.display = "none";
             backdrop.style.display = "none";
-            // Reset form
+
             const input = this.querySelector(".forgot-email-input");
             const message = this.querySelector(".forgot-message");
             if (input) input.value = "";
@@ -254,11 +248,9 @@ export class LoginPage extends HTMLElement {
       return;
     }
 
-    // Desabilita botão durante o envio
     sendBtn.disabled = true;
     sendBtn.textContent = "Enviando...";
 
-    // Chama API de recuperação de senha
     authService
       .forgotPassword(input.value.trim())
       .then((response) => {
@@ -282,13 +274,10 @@ export class LoginPage extends HTMLElement {
   }
 
   initButtonAnimations() {
-    // Removido - não vamos usar mais a animação de hover nas linhas
     return;
   }
 
-  initSwitch() {
-    // Método vazio - form submission agora é tratado em initLoginForm
-  }
+  initSwitch() {}
 
   render() {
     this.innerHTML = `

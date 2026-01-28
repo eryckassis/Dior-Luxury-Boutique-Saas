@@ -1,15 +1,7 @@
-/* ============================================================================
-   GRIS DIOR PAGE - Estilos exclusivos
-   ============================================================================ */
-
 .gris-dior-page {
   background: #faf9f7;
   min-height: 100vh;
 }
-
-/* ============================================================================
-   HERO SECTION
-   ============================================================================ */
 
 .gris-hero-section {
   display: flex;
@@ -113,10 +105,6 @@
   background: #8b7355;
 }
 
-/* ============================================================================
-   PRODUCT DETAIL SECTION
-   ============================================================================ */
-
 .gris-product-section {
   background: #fff;
   padding: 120px 60px;
@@ -185,7 +173,6 @@
   font-family: "Hellix", sans-serif;
 }
 
-/* Size Selector */
 .gris-size-selector {
   display: flex;
   flex-direction: column;
@@ -228,7 +215,6 @@
   color: #fff;
 }
 
-/* Purchase Button */
 .gris-purchase-button {
   display: flex;
   justify-content: space-between;
@@ -252,7 +238,6 @@
   font-weight: 700;
 }
 
-/* Accordion */
 .gris-accordion {
   border-top: 1px solid #e5e5e5;
 }
@@ -305,10 +290,6 @@
   font-family: "Hellix", sans-serif;
 }
 
-/* ============================================================================
-   VIDEO SECTION
-   ============================================================================ */
-
 .gris-video-section {
   position: relative;
   background: #000;
@@ -353,10 +334,6 @@
   font-size: 18px;
   font-family: "Hellix", sans-serif;
 }
-
-/* ============================================================================
-   NOTES SECTION
-   ============================================================================ */
 
 .gris-notes-section {
   background: #faf9f7;
@@ -411,10 +388,6 @@
   line-height: 1.8;
   font-family: "Hellix", sans-serif;
 }
-
-/* ============================================================================
-   RESPONSIVE
-   ============================================================================ */
 
 @media (max-width: 1024px) {
   .gris-hero-content {

@@ -1,12 +1,6 @@
-/* ============================================================================
-   DIOR VERÃO PAGE - Estilos da página Descubra
-   ============================================================================ */
-
-/* Import Miss Dior styles for video section and glass buttons */
 @import "./miss-dior.css";
 @import "./miss-dior-essence.css";
 
-/* Section Spacing */
 .section-spacing {
   margin-top: 5px;
   margin-bottom: 5px;
@@ -16,7 +10,6 @@
   height: 1px;
 }
 
-/* Para Ele Container - 2 produtos centralizados */
 .para-ele-container {
   grid-template-columns: repeat(2, 1fr) !important;
   justify-content: center;
@@ -35,7 +28,6 @@
   min-height: 100vh;
 }
 
-/* Hero Section */
 .dior-verao-hero {
   display: flex;
   position: relative;
@@ -97,12 +89,10 @@
   font-family: "Hellix", sans-serif;
 }
 
-/* Override miss-dior-text-section padding for this page */
 dior-verao-page .miss-dior-text-section {
   padding: 60px 0;
 }
 
-/* Content Section */
 .dior-verao-content {
   background: #ffffff;
   padding: 80px 0;
@@ -114,14 +104,12 @@ dior-verao-page .miss-dior-text-section {
   max-width: 1400px;
 }
 
-/* Grid */
 .dior-verao-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 40px;
 }
 
-/* Card */
 .dior-verao-card {
   transition:
     transform 0.3s ease,
@@ -196,7 +184,6 @@ dior-verao-page .miss-dior-text-section {
   color: #b8860b;
 }
 
-/* Featured Section */
 .dior-verao-featured {
   background: #f8f8f8;
   padding: 100px 0;
@@ -266,7 +253,6 @@ dior-verao-page .miss-dior-text-section {
   object-fit: cover;
 }
 
-/* Responsive */
 @media (max-width: 1200px) {
   .dior-verao-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -364,10 +350,6 @@ dior-verao-page .miss-dior-text-section {
     height: 300px;
   }
 }
-
-/* ============================================================================
-   VERÃO NA DIOR SECTION
-   ============================================================================ */
 
 .verao-dior-section {
   background-color: #ffffff;
@@ -468,7 +450,6 @@ dior-verao-page .miss-dior-text-section {
   opacity: 0;
 }
 
-/* Services Button - Reutilizando estilos existentes */
 .services-button {
   display: inline-block;
   position: relative;
@@ -494,7 +475,6 @@ dior-verao-page .miss-dior-text-section {
   content: "";
 }
 
-/* Responsive */
 @media (max-width: 1024px) {
   .verao-dior-grid {
     grid-template-columns: repeat(2, 1fr);

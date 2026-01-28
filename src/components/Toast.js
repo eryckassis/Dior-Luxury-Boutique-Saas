@@ -1,7 +1,3 @@
-// ============================================================================
-// TOAST COMPONENT - Notificações de Feedback
-// ============================================================================
-
 class ToastManager {
   constructor() {
     this.container = null;
@@ -9,13 +5,11 @@ class ToastManager {
   }
 
   init() {
-    // Cria container se não existir
     if (!document.querySelector(".toast-container")) {
       this.container = document.createElement("div");
       this.container.className = "toast-container";
       document.body.appendChild(this.container);
 
-      // Adiciona estilos
       this.addStyles();
     } else {
       this.container = document.querySelector(".toast-container");
@@ -149,17 +143,14 @@ class ToastManager {
 
     this.container.appendChild(toast);
 
-    // Anima entrada
     requestAnimationFrame(() => {
       toast.classList.add("show");
     });
 
-    // Botão de fechar
     toast.querySelector(".toast-close").addEventListener("click", () => {
       this.dismiss(toast);
     });
 
-    // Auto dismiss
     if (duration > 0) {
       setTimeout(() => {
         this.dismiss(toast);

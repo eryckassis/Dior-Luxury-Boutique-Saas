@@ -1,16 +1,5 @@
-// ============================================================================
-// SPLASH PAGE - Página inicial de escolha de categoria (SPA)
-// ============================================================================
-// Splash screen convertido para Web Component seguindo arquitetura SPA
-// Permite navegação via router e mantém histórico do browser
-// ============================================================================
-
 import "../styles/splash-page.css";
 import { router } from "../router/router.js";
-
-// ============================================================================
-// CONSTANTS - Configurações de animação e rotas
-// ============================================================================
 
 const ANIMATION_CONFIG = {
   duration: {
@@ -18,7 +7,7 @@ const ANIMATION_CONFIG = {
     scale: 0.8,
     flex: 0.5,
     exit: 0.8,
-    // Transição de saída elegante
+
     contentFade: 0.5,
     videoDarken: 0.8,
     logoHold: 0.6,
@@ -44,11 +33,6 @@ const ROUTES = {
   beauty: "/home",
 };
 
-// ============================================================================
-// GLOBAL FUNCTION - Esconde preloader após transição
-// ============================================================================
-// Função global para garantir que funcione mesmo após o componente ser removido
-
 function hidePreloaderGlobal() {
   const preloader = document.querySelector(".preloader");
   if (!preloader) return;
@@ -60,7 +44,7 @@ function hidePreloaderGlobal() {
         height: "100vh", // Reset para próximo uso
         opacity: 1,
       });
-      // Libera o scroll do body após preloader sumir
+
       document.body.style.overflow = "visible";
       document.body.style.overflowX = "hidden";
       document.body.style.overflowY = "auto";
@@ -81,10 +65,6 @@ function hidePreloaderGlobal() {
   );
 }
 
-// ============================================================================
-// SPLASH PAGE COMPONENT
-// ============================================================================
-
 export class SplashPage extends HTMLElement {
   constructor() {
     super();
@@ -92,10 +72,6 @@ export class SplashPage extends HTMLElement {
     this.buttons = [];
     this.isTransitioning = false;
   }
-
-  // ============================================================================
-  // LIFECYCLE METHODS
-  // ============================================================================
 
   connectedCallback() {
     this.render();
@@ -110,12 +86,8 @@ export class SplashPage extends HTMLElement {
     this.cleanup();
   }
 
-  // ============================================================================
-  // RENDER
-  // ============================================================================
-
   render() {
-    this.innerHTML = /* html */ `
+    this.innerHTML = `
       <div class="splash-page">
         <!-- Logo Central -->
         <div class="splash-logo">
@@ -172,15 +144,9 @@ export class SplashPage extends HTMLElement {
         </div>
         
       </div>
-      
 
-      
     `;
   }
-
-  // ============================================================================
-  // ELEMENT CACHING
-  // ============================================================================
 
   cacheElements() {
     this.splashElement = this.querySelector(".splash-page");
@@ -189,15 +155,10 @@ export class SplashPage extends HTMLElement {
     this.videos = this.querySelectorAll(".splash-option-bg");
   }
 
-  // ============================================================================
-  // BUTTON LINE EFFECT - Animação de underline com GSAP
-  // ============================================================================
-
   initButtonEffects() {
     if (!window.gsap) return;
 
     this.buttons.forEach((button) => {
-      // Mouseenter - linha cresce de 0 para 100%
       button.addEventListener("mouseenter", () => {
         gsap.to(button, {
           "--underline-width": "100%",
@@ -206,7 +167,6 @@ export class SplashPage extends HTMLElement {
         });
       });
 
-      // Mouseleave - linha volta para 0%
       button.addEventListener("mouseleave", () => {
         gsap.to(button, {
           "--underline-width": "0%",
@@ -217,10 +177,6 @@ export class SplashPage extends HTMLElement {
     });
   }
 
-  // ============================================================================
-  // HOVER EFFECTS - Clarear/escurecer e zoom nas opções
-  // ============================================================================
-
   initHoverEffects() {
     if (!window.gsap) return;
 
@@ -230,7 +186,6 @@ export class SplashPage extends HTMLElement {
 
       if (!darkening || !bg) return;
 
-      // Mouse Enter - Clareia e aumenta
       option.addEventListener("mouseenter", () => {
         if (this.isTransitioning) return;
 
@@ -253,7 +208,6 @@ export class SplashPage extends HTMLElement {
         });
       });
 
-      // Mouse Leave - Escurece e volta ao normal
       option.addEventListener("mouseleave", () => {
         if (this.isTransitioning) return;
 
@@ -278,10 +232,6 @@ export class SplashPage extends HTMLElement {
     });
   }
 
-  // ============================================================================
-  // CLICK HANDLERS - Navegação para categorias
-  // ============================================================================
-
   initClickHandlers() {
     this.buttons.forEach((button) => {
       button.addEventListener("click", (e) => {
@@ -295,30 +245,21 @@ export class SplashPage extends HTMLElement {
     });
   }
 
-  /**
-   * Processa o clique na categoria e inicia navegação
-   * Transição elegante: escurece → logo permanece → preloader → navega
-   * @param {string} category - 'fashion' ou 'beauty'
-   */
   handleCategoryClick(category) {
     this.isTransitioning = true;
 
     const targetRoute = ROUTES[category] || ROUTES.beauty;
 
-    // Elementos para animar
     const contents = this.querySelectorAll(".splash-option-content");
     const darkenings = this.querySelectorAll(".splash-option-darkening");
     const videos = this.querySelectorAll(".splash-option-bg");
     const logo = this.querySelector(".splash-logo");
     const preloader = document.querySelector(".preloader");
 
-    // Detecta se é mobile (largura <= 480px)
     const isMobile = window.innerWidth <= 480;
 
-    // Timeline de transição elegante
     const tl = gsap.timeline();
 
-    // FASE 1: Fade out dos conteúdos (títulos e botões)
     tl.to(contents, {
       opacity: 0,
       y: 20,
@@ -327,7 +268,6 @@ export class SplashPage extends HTMLElement {
       stagger: 0.1,
     });
 
-    // MOBILE: Logo desaparece junto com os conteúdos
     if (isMobile && logo) {
       tl.to(
         logo,
@@ -341,7 +281,6 @@ export class SplashPage extends HTMLElement {
       );
     }
 
-    // FASE 2: Escurecer os vídeos completamente (em paralelo com fade dos conteúdos)
     tl.to(
       darkenings,
       {
@@ -352,7 +291,6 @@ export class SplashPage extends HTMLElement {
       "<0.2",
     );
 
-    // FASE 3: Fade out suave dos vídeos para preto total
     tl.to(
       videos,
       {
@@ -363,13 +301,10 @@ export class SplashPage extends HTMLElement {
       "<0.3",
     );
 
-    // FASE 4: Manter logo visível por um momento (já está centralizada)
     tl.to({}, { duration: ANIMATION_CONFIG.duration.logoHold });
 
-    // FASE 5: Preparar e mostrar preloader (sincronizado)
     tl.call(() => {
       if (preloader) {
-        // Prepara preloader invisível mas posicionado
         gsap.set(preloader, {
           display: "flex",
           height: "100vh",
@@ -380,7 +315,6 @@ export class SplashPage extends HTMLElement {
       }
     });
 
-    // FASE 6: Crossfade - Splash some, Preloader aparece
     tl.to(
       logo,
       {
@@ -401,38 +335,24 @@ export class SplashPage extends HTMLElement {
       "<",
     );
 
-    // FASE 7: Após transição, navega usando o router
     tl.call(() => {
-      // Navega para a rota (skipPreloader = true pois já mostramos)
       router.navigateFromSplash(targetRoute);
 
-      // Aguarda a página carregar e então esconde o preloader
-      // Usa função global para garantir que funcione mesmo após componente ser removido
       setTimeout(() => {
         hidePreloaderGlobal();
       }, 800);
     });
   }
 
-  // ============================================================================
-  // VIDEO MANAGEMENT
-  // ============================================================================
-
   initVideos() {
     this.videos.forEach((video) => {
-      // Garante autoplay
       video.play().catch((err) => {
         console.warn("Autoplay bloqueado:", err.message);
       });
     });
   }
 
-  // ============================================================================
-  // CLEANUP
-  // ============================================================================
-
   cleanup() {
-    // Para todos os vídeos
     if (this.videos) {
       this.videos.forEach((video) => {
         video.pause();
@@ -440,7 +360,6 @@ export class SplashPage extends HTMLElement {
       });
     }
 
-    // Kill animações GSAP pendentes
     if (window.gsap && this.splashElement) {
       gsap.killTweensOf(this.splashElement);
     }
@@ -454,9 +373,5 @@ export class SplashPage extends HTMLElement {
     }
   }
 }
-
-// ============================================================================
-// REGISTER CUSTOM ELEMENT
-// ============================================================================
 
 customElements.define("splash-page", SplashPage);

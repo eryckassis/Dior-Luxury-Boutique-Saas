@@ -1,7 +1,3 @@
-﻿// ============================================================================
-// FINALIZAR COMPRA PAGE - Página de checkout
-// ============================================================================
-
 import "../components/AppNavigation.js";
 import "../components/FooterSection.js";
 import { cartService } from "../services/CartService.js";
@@ -10,10 +6,9 @@ import { checkoutService } from "../services/CheckoutService.js";
 export class FinalizarCompraPage extends HTMLElement {
   constructor() {
     super();
-    // Inicializa com array vazio - será preenchido após init
+
     this.cartItems = [];
 
-    // Listener para atualizar quando o carrinho mudar
     this.cartListener = (items) => {
       this.cartItems = items;
       this.updateCartDisplay();
@@ -21,33 +16,27 @@ export class FinalizarCompraPage extends HTMLElement {
   }
 
   async connectedCallback() {
-    // Aguarda inicialização do carrinho
     await cartService.waitForInit();
 
-    // Inicializa com itens do carrinho (ou padrão se vazio)
     cartService.initializeDefaultItems();
     this.cartItems = cartService.getItems();
 
     this.render();
 
-    // Inicializa controles após o render
     requestAnimationFrame(() => {
       this.initAnimations();
       this.initCartControls();
       this.initPaymentModal();
     });
 
-    // Adiciona listener para mudanças no carrinho
     cartService.addListener(this.cartListener);
   }
 
   disconnectedCallback() {
-    // Cleanup animations
     if (this.animations) {
       this.animations.forEach((anim) => anim.kill());
     }
 
-    // Remove listener do carrinho
     cartService.removeListener(this.cartListener);
   }
 
@@ -61,7 +50,6 @@ export class FinalizarCompraPage extends HTMLElement {
 
       this.animations = [];
 
-      // Animação de entrada do título
       const titleTl = window.gsap.timeline();
       titleTl
         .from(".checkout-hero-title", {
@@ -83,7 +71,6 @@ export class FinalizarCompraPage extends HTMLElement {
 
       this.animations.push(titleTl);
 
-      // Animação do conteúdo principal
       window.gsap.from(".checkout-container", {
         y: 50,
         opacity: 0,
@@ -95,7 +82,6 @@ export class FinalizarCompraPage extends HTMLElement {
   }
 
   initCartControls() {
-    // Botões de aumentar quantidade
     const plusButtons = this.querySelectorAll(".quantity-plus");
     plusButtons.forEach((btn) => {
       btn.addEventListener("click", (e) => {
@@ -104,7 +90,6 @@ export class FinalizarCompraPage extends HTMLElement {
       });
     });
 
-    // Botões de diminuir quantidade
     const minusButtons = this.querySelectorAll(".quantity-minus");
     minusButtons.forEach((btn) => {
       btn.addEventListener("click", (e) => {
@@ -113,7 +98,6 @@ export class FinalizarCompraPage extends HTMLElement {
       });
     });
 
-    // Botões de remover item
     const removeButtons = this.querySelectorAll(".cart-remove-btn");
     removeButtons.forEach((btn) => {
       btn.addEventListener("click", (e) => {
@@ -122,15 +106,12 @@ export class FinalizarCompraPage extends HTMLElement {
       });
     });
 
-    // Inicializa validação do formulário de contato
     this.initContactFormValidation();
 
-    // Inicializa funcionalidade de presente
     this.initGiftOptions();
   }
 
   initGiftOptions() {
-    // Toggle da mensagem de presente
     const messageToggle = this.querySelector(".gift-message-toggle");
     const messageContent = this.querySelector(".gift-message-content");
 
@@ -148,7 +129,6 @@ export class FinalizarCompraPage extends HTMLElement {
       });
     }
 
-    // Contador de caracteres
     const giftMessageInput = this.querySelector("#giftMessage");
     const characterCount = this.querySelector(".character-count");
 
@@ -157,12 +137,10 @@ export class FinalizarCompraPage extends HTMLElement {
         const length = e.target.value.length;
         characterCount.textContent = length;
 
-        // Salva no checkoutService
         checkoutService.updateField("giftMessage", e.target.value);
       });
     }
 
-    // Salvar seleção de embalagem
     const giftWrappingInputs = this.querySelectorAll('input[name="giftWrapping"]');
     giftWrappingInputs.forEach((input) => {
       input.addEventListener("change", (e) => {
@@ -170,7 +148,6 @@ export class FinalizarCompraPage extends HTMLElement {
       });
     });
 
-    // Botão Validar
     const validateBtn = this.querySelector(".validate-message-btn");
     if (validateBtn) {
       validateBtn.addEventListener("click", () => {
@@ -184,7 +161,6 @@ export class FinalizarCompraPage extends HTMLElement {
       });
     }
 
-    // Carrega dados salvos
     const savedData = checkoutService.getData();
     if (savedData.giftMessage && giftMessageInput) {
       giftMessageInput.value = savedData.giftMessage;
@@ -199,10 +175,8 @@ export class FinalizarCompraPage extends HTMLElement {
   }
 
   initContactFormValidation() {
-    // Carrega dados salvos do localStorage
     this.loadCheckoutData();
 
-    // E-mail
     const emailInput = this.querySelector("#email");
     if (emailInput) {
       emailInput.addEventListener("input", (e) => {
@@ -215,7 +189,6 @@ export class FinalizarCompraPage extends HTMLElement {
       });
     }
 
-    // Nome e Sobrenome
     const firstNameInput = this.querySelector("#firstName");
     const lastNameInput = this.querySelector("#lastName");
     if (firstNameInput) {
@@ -231,7 +204,6 @@ export class FinalizarCompraPage extends HTMLElement {
       });
     }
 
-    // Endereço
     const addressInput = this.querySelector("#address");
     if (addressInput) {
       addressInput.addEventListener("input", (e) => {
@@ -240,7 +212,6 @@ export class FinalizarCompraPage extends HTMLElement {
       });
     }
 
-    // Complemento
     const complementInput = this.querySelector("#complement");
     if (complementInput) {
       complementInput.addEventListener("input", (e) => {
@@ -248,7 +219,6 @@ export class FinalizarCompraPage extends HTMLElement {
       });
     }
 
-    // Cidade
     const cityInput = this.querySelector("#city");
     if (cityInput) {
       cityInput.addEventListener("input", (e) => {
@@ -257,7 +227,6 @@ export class FinalizarCompraPage extends HTMLElement {
       });
     }
 
-    // Estado
     const stateInput = this.querySelector("#state");
     if (stateInput) {
       stateInput.addEventListener("change", (e) => {
@@ -266,14 +235,12 @@ export class FinalizarCompraPage extends HTMLElement {
       });
     }
 
-    // CEP - Validação e formatação
     const zipCodeInput = this.querySelector("#zipCode");
     if (zipCodeInput) {
       zipCodeInput.addEventListener("input", (e) => {
         let value = e.target.value.replace(/\D/g, "");
         value = value.substring(0, 8);
 
-        // Formata CEP: 00000-000
         if (value.length > 5) {
           value = value.replace(/(\d{5})(\d{1,3})/, "$1-$2");
         }
@@ -285,14 +252,12 @@ export class FinalizarCompraPage extends HTMLElement {
       });
     }
 
-    // Telefone - Validação e formatação
     const phoneInput = this.querySelector("#phone");
     if (phoneInput) {
       phoneInput.addEventListener("input", (e) => {
         let value = e.target.value.replace(/\D/g, "");
         value = value.substring(0, 11);
 
-        // Formata Telefone: (00) 00000-0000 ou (00) 0000-0000
         if (value.length > 10) {
           value = value.replace(/(\d{2})(\d{5})(\d{4})/, "($1) $2-$3");
         } else if (value.length > 6) {
@@ -308,12 +273,10 @@ export class FinalizarCompraPage extends HTMLElement {
       });
     }
 
-    // Validação inicial ao carregar
     this.validateContactForm();
   }
 
   loadCheckoutData() {
-    // Carrega dados salvos e preenche os campos
     const data = checkoutService.getData();
 
     if (data.email) {
@@ -392,7 +355,6 @@ export class FinalizarCompraPage extends HTMLElement {
   }
 
   validatePhone(phone, inputElement) {
-    // Aceita 10 dígitos (fixo) ou 11 dígitos (celular)
     const isValid = phone.length === 10 || phone.length === 11;
 
     if (phone.length > 0) {
@@ -454,7 +416,6 @@ export class FinalizarCompraPage extends HTMLElement {
       checkoutBtn.addEventListener("click", () => this.openPaymentModal());
     }
 
-    // Event listeners do modal
     const modalBackdrop = this.querySelector(".payment-modal-backdrop");
     const closeBtn = this.querySelector(".payment-modal-close");
 
@@ -466,7 +427,6 @@ export class FinalizarCompraPage extends HTMLElement {
       closeBtn.addEventListener("click", () => this.closePaymentModal());
     }
 
-    // Seleção de bandeira de cartão
     const cardBrandInputs = this.querySelectorAll('input[name="card-brand"]');
     cardBrandInputs.forEach((input) => {
       input.addEventListener("change", (e) => {
@@ -474,7 +434,6 @@ export class FinalizarCompraPage extends HTMLElement {
       });
     });
 
-    // Seleção de método de pagamento
     const paymentMethodInputs = this.querySelectorAll('input[name="payment-method"]');
     paymentMethodInputs.forEach((input) => {
       input.addEventListener("change", (e) => {
@@ -482,10 +441,8 @@ export class FinalizarCompraPage extends HTMLElement {
       });
     });
 
-    // Validação em tempo real dos campos
     this.initFormValidation();
 
-    // Submit do formulário
     const paymentForm = this.querySelector(".payment-modal-form");
     if (paymentForm) {
       paymentForm.addEventListener("submit", (e) => {
@@ -496,7 +453,6 @@ export class FinalizarCompraPage extends HTMLElement {
   }
 
   initFormValidation() {
-    // Card Number - Validação e formatação
     const cardNumberInput = this.querySelector("#card-number");
     if (cardNumberInput) {
       cardNumberInput.addEventListener("input", (e) => {
@@ -504,24 +460,20 @@ export class FinalizarCompraPage extends HTMLElement {
         value = value.replace(/\D/g, "");
         value = value.substring(0, 16);
 
-        // Formata com espaços a cada 4 dígitos
         const formatted = value.match(/.{1,4}/g)?.join(" ") || value;
         e.target.value = formatted;
 
-        // Valida número do cartão
         this.validateCardNumber(value, e.target);
         this.validateForm();
       });
     }
 
-    // CPF - Validação e formatação
     const cpfInput = this.querySelector("#cpf");
     if (cpfInput) {
       cpfInput.addEventListener("input", (e) => {
         let value = e.target.value.replace(/\D/g, "");
         value = value.substring(0, 11);
 
-        // Formata CPF: 000.000.000-00
         if (value.length > 9) {
           value = value.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
         } else if (value.length > 6) {
@@ -536,7 +488,6 @@ export class FinalizarCompraPage extends HTMLElement {
       });
     }
 
-    // CVV - Validação
     const cvvInput = this.querySelector("#cvv");
     if (cvvInput) {
       cvvInput.addEventListener("input", (e) => {
@@ -550,13 +501,11 @@ export class FinalizarCompraPage extends HTMLElement {
       });
     }
 
-    // Card Name
     const cardNameInput = this.querySelector("#card-name");
     if (cardNameInput) {
       cardNameInput.addEventListener("input", () => this.validateForm());
     }
 
-    // Expiry Month/Year
     const expiryMonth = this.querySelector("#expiry-month");
     const expiryYear = this.querySelector("#expiry-year");
     if (expiryMonth) {
@@ -566,7 +515,6 @@ export class FinalizarCompraPage extends HTMLElement {
       expiryYear.addEventListener("change", () => this.validateForm());
     }
 
-    // Installments
     const installments = this.querySelector("#installments");
     if (installments) {
       installments.addEventListener("change", () => this.validateForm());
@@ -574,7 +522,6 @@ export class FinalizarCompraPage extends HTMLElement {
   }
 
   validateCardNumber(cardNumber, inputElement) {
-    // Algoritmo de Luhn para validar número do cartão
     const isValid = this.luhnCheck(cardNumber);
 
     if (cardNumber.length === 16) {
@@ -622,14 +569,12 @@ export class FinalizarCompraPage extends HTMLElement {
       return false;
     }
 
-    // Verifica se todos os dígitos são iguais
     if (/^(\d)\1{10}$/.test(cpf)) {
       inputElement.classList.add("invalid");
       inputElement.classList.remove("valid");
       return false;
     }
 
-    // Validação dos dígitos verificadores
     let sum = 0;
     for (let i = 0; i < 9; i++) {
       sum += parseInt(cpf.charAt(i)) * (10 - i);
@@ -720,20 +665,17 @@ export class FinalizarCompraPage extends HTMLElement {
   }
 
   encryptAddress(address) {
-    // Criptografa o endereço mostrando apenas partes
     const parts = address.split(",");
     if (parts.length >= 2) {
       const street = parts[0].trim();
       const rest = parts.slice(1).join(",").trim();
 
-      // Mostra primeiras 3 letras e últimas 3 letras da rua
       const streetEncrypted =
         street.substring(0, 3) +
         "***".repeat(Math.max(1, Math.floor(street.length / 5))) +
         " " +
         street.substring(street.length - 3);
 
-      // Criptografa o resto também
       const restEncrypted = rest.substring(0, 3) + "***";
 
       return `${streetEncrypted}, ${restEncrypted}`;
@@ -751,20 +693,17 @@ export class FinalizarCompraPage extends HTMLElement {
       return;
     }
 
-    // Adiciona classes active
     backdrop.classList.add("active");
     modal.classList.add("active");
 
     document.body.style.overflow = "hidden";
 
-    // Desabilita o botão inicialmente
     const submitBtn = this.querySelector(".payment-submit-btn");
     if (submitBtn) {
       submitBtn.disabled = true;
       submitBtn.classList.add("disabled");
     }
 
-    // Obtém endereço real do checkoutService e criptografa
     const billingAddressLabel = this.querySelector('label[for="billing-address"]');
     if (billingAddressLabel) {
       const realAddress = checkoutService.getBillingAddress();
@@ -777,7 +716,6 @@ export class FinalizarCompraPage extends HTMLElement {
       }
     }
 
-    // Animação do backdrop e modal com GSAP
     if (window.gsap) {
       window.gsap.fromTo(
         backdrop,
@@ -785,7 +723,6 @@ export class FinalizarCompraPage extends HTMLElement {
         { opacity: 1, duration: 0.3, ease: "power2.out" },
       );
 
-      // Animação do scrollbar quando o modal abre
       this.animateScrollbar(modal);
     }
   }
@@ -793,11 +730,9 @@ export class FinalizarCompraPage extends HTMLElement {
   animateScrollbar(modal) {
     if (!window.gsap) return;
 
-    // Cria um observador para detectar quando há scroll
     const hasScroll = modal.scrollHeight > modal.clientHeight;
 
     if (hasScroll) {
-      // Animação pulsante sutil do scrollbar para chamar atenção
       window.gsap.to(modal, {
         "--scrollbar-opacity": 1,
         duration: 0.5,
@@ -805,7 +740,6 @@ export class FinalizarCompraPage extends HTMLElement {
         delay: 0.3,
       });
 
-      // Pulso sutil no scrollbar para indicar que há mais conteúdo
       window.gsap.fromTo(
         modal,
         { "--scrollbar-scale": 1 },
@@ -819,7 +753,6 @@ export class FinalizarCompraPage extends HTMLElement {
         },
       );
 
-      // Listener para fazer o scrollbar piscar levemente ao rolar
       let scrollTimeout;
       modal.addEventListener("scroll", () => {
         clearTimeout(scrollTimeout);
@@ -847,11 +780,9 @@ export class FinalizarCompraPage extends HTMLElement {
 
     if (!modal || !backdrop) return;
 
-    // Remove classes active para trigger da animação CSS
     modal.classList.remove("active");
     backdrop.classList.remove("active");
 
-    // GSAP para suavizar ainda mais
     if (window.gsap) {
       window.gsap.to(backdrop, {
         opacity: 0,
@@ -869,7 +800,6 @@ export class FinalizarCompraPage extends HTMLElement {
   }
 
   selectCardBrand(brand) {
-    // Visual feedback para bandeira selecionada
     const allBrands = this.querySelectorAll(".card-brand-option");
     allBrands.forEach((option) => {
       option.classList.remove("selected");
@@ -897,13 +827,11 @@ export class FinalizarCompraPage extends HTMLElement {
   }
 
   processPayment() {
-    // Valida o formulário antes de processar
     if (!this.validateForm()) {
       alert("Por favor, preencha todos os campos corretamente.");
       return;
     }
 
-    // Coleta os dados do formulário de pagamento
     const paymentData = {
       cardNumber: this.querySelector("#card-number")?.value,
       cardName: this.querySelector("#card-name")?.value,
@@ -915,10 +843,8 @@ export class FinalizarCompraPage extends HTMLElement {
       cardBrand: this.getSelectedCardBrand(),
     };
 
-    // Coleta dados do checkout (endereço, contato, etc)
     const checkoutData = checkoutService.getData();
 
-    // Combina todos os dados do pedido
     const orderData = {
       payment: paymentData,
       customer: checkoutData,
@@ -928,7 +854,6 @@ export class FinalizarCompraPage extends HTMLElement {
 
     console.log("Processando pagamento...", orderData);
 
-    // Animação de sucesso
     const submitBtn = this.querySelector(".payment-submit-btn");
     if (submitBtn) {
       submitBtn.textContent = "Processando...";
@@ -940,24 +865,18 @@ export class FinalizarCompraPage extends HTMLElement {
           alert("Pedido finalizado com sucesso! ✓");
           this.closePaymentModal();
           submitBtn.textContent = "Finalizar Pedido";
-
-          // Limpa dados após confirmação (opcional)
-          // checkoutService.clearData();
-          // cartService.clearCart();
         }, 1000);
       }, 1500);
     }
   }
 
   updateQuantity(itemId, change) {
-    // Atualiza no cartService
     if (change > 0) {
       cartService.incrementQuantity(itemId);
     } else {
       cartService.decrementQuantity(itemId);
     }
 
-    // Atualiza a UI
     this.cartItems = cartService.getItems();
     const item = this.cartItems.find((i) => i.id === itemId);
 
@@ -977,23 +896,19 @@ export class FinalizarCompraPage extends HTMLElement {
         }
       }
 
-      // Atualiza os totais
       this.updateTotals();
     }
   }
 
   updateTotals() {
-    // Recalcula o subtotal
     const subtotal = cartService.getTotal();
     const total = subtotal; // Como a entrega é grátis, total = subtotal
 
-    // Atualiza o subtotal na UI
     const subtotalElements = this.querySelectorAll(".summary-row:first-child span:last-child");
     if (subtotalElements.length > 0) {
       subtotalElements[0].textContent = `R$ ${subtotal.toFixed(2).replace(".", ",")}`;
     }
 
-    // Atualiza o total na UI
     const totalElements = this.querySelectorAll(".summary-total span:last-child");
     if (totalElements.length > 0) {
       totalElements[0].textContent = `R$ ${total.toFixed(2).replace(".", ",")}`;
@@ -1001,7 +916,6 @@ export class FinalizarCompraPage extends HTMLElement {
   }
 
   removeItem(itemId) {
-    // Remove a linha com animação suave
     const row = this.querySelector(`[data-item-id="${itemId}"]`)?.closest(".cart-table-row");
 
     if (row) {
@@ -1014,10 +928,10 @@ export class FinalizarCompraPage extends HTMLElement {
           ease: "power2.in",
           onComplete: () => {
             row.remove();
-            // Remove do cartService após a animação
+
             cartService.removeItem(itemId);
             this.cartItems = cartService.getItems();
-            // Atualiza os totais após remover
+
             this.updateTotals();
           },
         });
@@ -1025,17 +939,15 @@ export class FinalizarCompraPage extends HTMLElement {
         row.remove();
         cartService.removeItem(itemId);
         this.cartItems = cartService.getItems();
-        // Atualiza os totais após remover
+
         this.updateTotals();
       }
     }
   }
 
   updateCartDisplay() {
-    // Atualiza apenas a seção do carrinho sem re-renderizar tudo
     const cartTableItems = this.querySelector(".cart-table-items");
     if (cartTableItems && this.cartItems) {
-      // Re-renderiza apenas os itens do carrinho
       const itemsHTML = this.cartItems
         .map(
           (item) => `
@@ -1112,10 +1024,8 @@ export class FinalizarCompraPage extends HTMLElement {
 
       cartTableItems.innerHTML = itemsHTML + freeItemsHTML;
 
-      // Re-inicializa os event listeners
       this.initCartControls();
 
-      // Atualiza os totais
       this.updateTotals();
     }
   }

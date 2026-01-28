@@ -1,7 +1,3 @@
-// ============================================================================
-// DIOR SPA PAGE - Página completa do Dior Spa
-// ============================================================================
-
 import "../components/AppNavigation.js";
 import "../components/FooterSection.js";
 import "../components/SpaSectionCard.js";
@@ -9,7 +5,7 @@ import "../components/SpaSectionCard.js";
 export class DiorSpaPage extends HTMLElement {
   constructor() {
     super();
-    // Array de dados das sections para reutilização
+
     this.spaSections = [
       {
         image: "/images/cama1.jpg",
@@ -94,7 +90,6 @@ export class DiorSpaPage extends HTMLElement {
   }
 
   disconnectedCallback() {
-    // Cleanup ScrollTrigger instances
     if (window.ScrollTrigger) {
       window.ScrollTrigger.getAll().forEach((trigger) => {
         if (trigger.vars.trigger?.closest?.("dior-spa-page")) {
@@ -108,7 +103,6 @@ export class DiorSpaPage extends HTMLElement {
     requestAnimationFrame(() => {
       if (!window.gsap || !window.ScrollTrigger) return;
 
-      // Hero parallax
       const heroImage = this.querySelector(".dior-spa-hero-image");
       if (heroImage) {
         window.gsap.to(heroImage, {
@@ -123,7 +117,6 @@ export class DiorSpaPage extends HTMLElement {
         });
       }
 
-      // Intro section fade in
       const introElements = this.querySelectorAll(
         ".dior-spa-intro-subtitle, .dior-spa-intro-title, .dior-spa-intro-description",
       );
@@ -146,7 +139,6 @@ export class DiorSpaPage extends HTMLElement {
         );
       }
 
-      // What's New section fade in
       const whatsNewElements = this.querySelectorAll(
         ".dior-spa-whats-new-label, .dior-spa-whats-new-title, .dior-spa-whats-new-description",
       );
@@ -169,7 +161,6 @@ export class DiorSpaPage extends HTMLElement {
         );
       }
 
-      // Card section image reveal
       const cardWrapper = this.querySelector(".dior-spa-image-reveal-wrapper");
       if (cardWrapper) {
         const overlay = cardWrapper.querySelector(".dior-spa-image-reveal-overlay");
@@ -204,7 +195,6 @@ export class DiorSpaPage extends HTMLElement {
         }
       }
 
-      // Card text fade in
       const cardText = this.querySelector(".dior-spa-card-text");
       if (cardText) {
         window.gsap.fromTo(
@@ -225,7 +215,6 @@ export class DiorSpaPage extends HTMLElement {
         );
       }
 
-      // Button underline hover animation (linha diminui no hover)
       const underlineButtons = this.querySelectorAll(".dior-spa-btn-underline");
       underlineButtons.forEach((btn) => {
         btn.addEventListener("mouseenter", () => {

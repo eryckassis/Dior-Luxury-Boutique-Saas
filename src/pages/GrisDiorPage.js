@@ -1,7 +1,3 @@
-// ============================================================================
-// GRIS DIOR PAGE - Reutilizando layout da ComprasMissDiorParfumPage
-// ============================================================================
-
 import "../components/AppNavigation.js";
 import "../components/FooterSection.js";
 
@@ -15,13 +11,10 @@ export class GrisDiorPage extends HTMLElement {
     this.initInteractions();
   }
 
-  disconnectedCallback() {
-    // Cleanup
-  }
+  disconnectedCallback() {}
 
   initInteractions() {
     requestAnimationFrame(() => {
-      // Product data for each size
       const productData = {
         "125ml": {
           image: "/images/GrissDior.png",
@@ -33,7 +26,6 @@ export class GrisDiorPage extends HTMLElement {
         },
       };
 
-      // Size selector buttons with image and price change
       const sizeButtons = this.querySelectorAll(".size-option");
       const productImage = this.querySelector(".product-main-image");
       const buttonPrice = this.querySelector(".button-price");
@@ -42,27 +34,22 @@ export class GrisDiorPage extends HTMLElement {
         button.addEventListener("click", () => {
           const size = button.dataset.size;
 
-          // Remove active class from all buttons
           sizeButtons.forEach((btn) => btn.classList.remove("active"));
           button.classList.add("active");
 
-          // Update image and price
           if (productData[size]) {
-            // Fade out effect
             productImage.style.opacity = "0";
 
             setTimeout(() => {
               productImage.src = productData[size].image;
               buttonPrice.textContent = productData[size].price;
 
-              // Fade in effect
               productImage.style.opacity = "1";
             }, 300);
           }
         });
       });
 
-      // Tab navigation
       const tabButtons = this.querySelectorAll(".tab-button");
       const tabContents = this.querySelectorAll(".tab-content");
 
@@ -70,11 +57,9 @@ export class GrisDiorPage extends HTMLElement {
         button.addEventListener("click", () => {
           const tabId = button.dataset.tab;
 
-          // Remove active class from all buttons and contents
           tabButtons.forEach((btn) => btn.classList.remove("active"));
           tabContents.forEach((content) => content.classList.remove("active"));
 
-          // Add active class to clicked button and corresponding content
           button.classList.add("active");
           const targetContent = this.querySelector(`.tab-content[data-tab="${tabId}"]`);
           if (targetContent) {
@@ -83,7 +68,6 @@ export class GrisDiorPage extends HTMLElement {
         });
       });
 
-      // Image Reveal Animation with GSAP
       if (window.gsap && window.ScrollTrigger) {
         const imageRevealWrapper = this.querySelector(".image-reveal-wrapper-full");
         if (imageRevealWrapper) {
@@ -118,14 +102,12 @@ export class GrisDiorPage extends HTMLElement {
         }
       }
 
-      // Review Form Modal
       const writeReviewBtn = this.querySelector(".reviews-load-more");
       const reviewModal = this.querySelector(".review-modal");
       const closeModalBtn = this.querySelector(".close-review-modal");
       const reviewForm = this.querySelector(".review-form");
       const starRatingInputs = this.querySelectorAll(".star-rating-input");
 
-      // Open modal
       if (writeReviewBtn && reviewModal) {
         writeReviewBtn.addEventListener("click", () => {
           reviewModal.classList.add("active");
@@ -133,7 +115,6 @@ export class GrisDiorPage extends HTMLElement {
         });
       }
 
-      // Close modal
       if (closeModalBtn && reviewModal) {
         closeModalBtn.addEventListener("click", () => {
           reviewModal.classList.remove("active");
@@ -141,7 +122,6 @@ export class GrisDiorPage extends HTMLElement {
           document.body.style.overflowX = "hidden";
         });
 
-        // Close on backdrop click
         reviewModal.addEventListener("click", (e) => {
           if (e.target === reviewModal) {
             reviewModal.classList.remove("active");
@@ -151,7 +131,6 @@ export class GrisDiorPage extends HTMLElement {
         });
       }
 
-      // Star rating selection
       starRatingInputs.forEach((star, index) => {
         star.addEventListener("click", () => {
           starRatingInputs.forEach((s, i) => {
@@ -164,7 +143,6 @@ export class GrisDiorPage extends HTMLElement {
         });
       });
 
-      // Form submission
       if (reviewForm) {
         reviewForm.addEventListener("submit", (e) => {
           e.preventDefault();
@@ -183,7 +161,6 @@ export class GrisDiorPage extends HTMLElement {
             date: new Date().toISOString(),
           });
 
-          // Fechar modal e resetar form
           reviewModal.classList.remove("active");
           document.body.style.overflow = "auto";
           document.body.style.overflowX = "hidden";
@@ -325,8 +302,6 @@ export class GrisDiorPage extends HTMLElement {
               <source src="/videos/grisDior.mp4" type="video/mp4" />
             </video>
           </section>
-
-         
 
           <!-- Steps Ritual Section -->
           <section class="steps-ritual-section">

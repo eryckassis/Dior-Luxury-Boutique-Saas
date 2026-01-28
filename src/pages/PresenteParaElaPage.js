@@ -1,7 +1,3 @@
-﻿// ============================================================================
-// PRESENTE PARA ELA PAGE - Página dedicada a presentes femininos
-// ============================================================================
-
 import "../components/ModaNavigation.js";
 import "../components/FooterSection.js";
 import "../components/PresenteParaElaContent.js";
@@ -18,7 +14,6 @@ export class PresenteParaElaPage extends HTMLElement {
   }
 
   disconnectedCallback() {
-    // Cleanup animations
     if (this.animations) {
       this.animations.forEach((anim) => anim.kill());
     }
@@ -30,7 +25,6 @@ export class PresenteParaElaPage extends HTMLElement {
 
       this.animations = [];
 
-      // Hero animation
       const heroTl = window.gsap.timeline();
       heroTl
         .from(".presente-ela-hero-title", {
@@ -52,7 +46,6 @@ export class PresenteParaElaPage extends HTMLElement {
 
       this.animations.push(heroTl);
 
-      // Content fade in
       const contentAnim = window.gsap.from(".presente-ela-content-wrapper", {
         scrollTrigger: {
           trigger: ".presente-ela-content-wrapper",

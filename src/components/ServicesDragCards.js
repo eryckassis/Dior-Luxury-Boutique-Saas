@@ -1,17 +1,3 @@
-// ============================================================================
-// SERVICES DRAG CARDS - Módulo reutilizável para carrossel com drag GSAP
-// Baseado na implementação funcional do ModaEAcessoriosPage
-// ============================================================================
-
-/**
- * Inicializa o drag horizontal em um container de cards
- * @param {Object} options - Configurações do drag
- * @param {HTMLElement} options.container - Container principal (.services-drag-container)
- * @param {HTMLElement} options.track - Track com os cards (.services-drag-track)
- * @param {NodeList} options.cards - Cards arrastáveis (.services-drag-card)
- * @param {Function} options.onUpdate - Callback chamado ao atualizar posição (currentIndex, totalCards)
- * @returns {Object|null} Instância do Draggable ou null se falhar
- */
 export function initServicesDrag(options) {
   const { container, track, cards, onUpdate } = options;
 
@@ -30,31 +16,25 @@ export function initServicesDrag(options) {
   let resizeHandler = null;
   let bounds = { minX: 0, maxX: 0 };
 
-  // Função para calcular bounds corretamente
   const calculateBounds = () => {
     const containerWidth = container.offsetWidth;
 
     if (cards.length === 0) return { minX: 0, maxX: 0 };
 
-    // Calcular largura total do track somando cards + gaps
     const trackStyles = getComputedStyle(track);
     const gap = parseFloat(trackStyles.gap) || 20;
     const paddingLeft = parseFloat(trackStyles.paddingLeft) || 0;
     const paddingRight = parseFloat(trackStyles.paddingRight) || 0;
 
-    // Somar largura de todos os cards
     let totalCardsWidth = 0;
     cards.forEach((card) => {
       totalCardsWidth += card.offsetWidth;
     });
 
-    // Gaps entre cards
     const totalGaps = (cards.length - 1) * gap;
 
-    // Largura total do conteúdo
     const contentWidth = totalCardsWidth + totalGaps + paddingLeft + paddingRight;
 
-    // MaxDrag negativo para mover para esquerda
     const maxDrag = Math.min(0, -(contentWidth - containerWidth));
 
     console.log("📏 Services Bounds:", {
@@ -68,7 +48,6 @@ export function initServicesDrag(options) {
     return { minX: maxDrag, maxX: 0 };
   };
 
-  // Função para atualizar bounds no draggable
   const updateBounds = () => {
     bounds = calculateBounds();
     if (draggableInstance) {
@@ -83,7 +62,6 @@ export function initServicesDrag(options) {
   setTimeout(() => {
     bounds = calculateBounds();
 
-    // Função para calcular o card atual visível
     const calculateCurrentCard = (x) => {
       if (!cards.length) return 1;
       const cardWidth = cards[0].offsetWidth;
@@ -96,7 +74,6 @@ export function initServicesDrag(options) {
       return currentIndex;
     };
 
-    // Função para atualizar o indicador
     const updateIndicator = (x) => {
       if (onUpdate) {
         const currentIndex = calculateCurrentCard(x);
@@ -104,10 +81,8 @@ export function initServicesDrag(options) {
       }
     };
 
-    // Detectar se é mobile/touch
     const isTouchDevice = "ontouchstart" in window || navigator.maxTouchPoints > 0;
 
-    // Criar Draggable
     draggableInstance = window.Draggable.create(track, {
       type: "x",
       bounds: bounds,
@@ -139,13 +114,11 @@ export function initServicesDrag(options) {
       },
     })[0];
 
-    // Recalcular bounds on resize
     resizeHandler = () => {
       updateBounds();
     };
     window.addEventListener("resize", resizeHandler);
 
-    // Recalcular após imagens carregarem
     const images = track.querySelectorAll("img");
     let loadedImages = 0;
     const totalImages = images.length;
@@ -168,7 +141,6 @@ export function initServicesDrag(options) {
       });
     }
 
-    // Fallback: recalcular após delays
     setTimeout(updateBounds, 500);
     setTimeout(updateBounds, 1000);
     setTimeout(updateBounds, 2000);
@@ -178,7 +150,6 @@ export function initServicesDrag(options) {
     console.log("✅ Services Drag inicializado!", bounds);
   }, 300);
 
-  // Retornar cleanup function
   return {
     get instance() {
       return draggableInstance;
@@ -195,15 +166,10 @@ export function initServicesDrag(options) {
   };
 }
 
-/**
- * Inicializa animação do botão com linha underline
- * @param {NodeList} buttons - Botões para animar
- */
 export function initButtonUnderlineAnimation(buttons) {
   if (!window.gsap || !buttons || buttons.length === 0) return;
 
   buttons.forEach((button) => {
-    // Mouseenter - linha diminui para 0
     button.addEventListener("mouseenter", () => {
       window.gsap.to(button, {
         "--underline-width": "0%",
@@ -212,7 +178,6 @@ export function initButtonUnderlineAnimation(buttons) {
       });
     });
 
-    // Mouseleave - linha volta a 100%
     button.addEventListener("mouseleave", () => {
       window.gsap.to(button, {
         "--underline-width": "100%",

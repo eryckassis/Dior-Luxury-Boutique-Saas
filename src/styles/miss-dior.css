@@ -1,16 +1,8 @@
-/* ============================================================================
-   MISS DIOR PAGE - Página dedicada à fragrância Miss Dior
-   ============================================================================ */
-
 .miss-dior-page {
   background-color: var(--color-background);
   width: 100%;
   min-height: 100vh;
 }
-
-/* ============================================================================
-   VIDEO HERO SECTION
-   ============================================================================ */
 
 .miss-dior-video-section {
   display: flex;
@@ -67,7 +59,6 @@
   font-family: "Hellix", sans-serif;
 }
 
-/* Botão Descubra na seção de vídeo */
 .miss-dior-video-content .moda-discover-button {
   display: inline-block;
   position: relative;
@@ -101,7 +92,6 @@
   opacity: 0.9;
 }
 
-/* Video Controls - Mantém os estilos existentes do glass-button */
 .miss-dior-video-section .video-controls {
   display: flex;
   position: absolute;
@@ -110,10 +100,6 @@
   gap: 15px;
   z-index: 3;
 }
-
-/* ============================================================================
-   TEXT SECTION
-   ============================================================================ */
 
 .miss-dior-text-section {
   background-color: white;
@@ -145,10 +131,6 @@
   font-family: "Manrope", sans-serif;
 }
 
-/* ============================================================================
-   FULL IMAGE SECTION WITH REVEAL
-   ============================================================================ */
-
 .miss-dior-full-image {
   background-color: white;
   padding: 0;
@@ -168,9 +150,9 @@
   left: 0;
   transform-origin: left;
   z-index: 2;
-  backdrop-filter: blur(20px); /* Efeito de desfoque */
-  -webkit-backdrop-filter: blur(20px); /* Suporte Safari */
-  background-color: rgba(255, 192, 203, 0); /* Rosa semi-transparente */
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background-color: rgba(255, 192, 203, 0);
   width: 100%;
   height: 100%;
 }
@@ -181,10 +163,6 @@
   height: 100%;
   object-fit: cover;
 }
-
-/* ============================================================================
-   PRODUCT DETAIL SECTION
-   ============================================================================ */
 
 .miss-dior-product-detail {
   background-color: white;
@@ -266,10 +244,6 @@
   background-color: #000;
 }
 
-/* ============================================================================
-   DOUBLE IMAGE SECTION - Duas imagens lado a lado
-   ============================================================================ */
-
 .miss-dior-double-image-section {
   background-color: #faf9f8;
   padding: 80px 0;
@@ -315,9 +289,9 @@
   left: 0;
   transform-origin: left;
   z-index: 2;
-  backdrop-filter: blur(20px); /* Efeito de desfoque */
-  -webkit-backdrop-filter: blur(20px); /* Suporte Safari */
-  background-color: rgba(255, 192, 203, 0.8); /* Rosa semi-transparente */
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background-color: rgba(255, 192, 203, 0.8);
   width: 100%;
   height: 100%;
 }
@@ -328,10 +302,6 @@
   height: 100%;
   object-fit: cover;
 }
-
-/* ============================================================================
-   OLD PRODUCTS SECTION (Mantido para compatibilidade)
-   ============================================================================ */
 
 .miss-dior-products {
   background-color: #faf9f8;
@@ -424,10 +394,6 @@
   color: #000;
 }
 
-/* ============================================================================
-   STORY SECTION
-   ============================================================================ */
-
 .miss-dior-story {
   background-color: white;
   padding: 120px 0;
@@ -472,10 +438,6 @@
   font-family: "Manrope", sans-serif;
 }
 
-/* ============================================================================
-   VIDEO SECTION
-   ============================================================================ */
-
 .miss-dior-video {
   background-color: #faf9f8;
   padding: 120px 0;
@@ -494,10 +456,6 @@
   height: 100%;
   object-fit: cover;
 }
-
-/* ============================================================================
-   RESPONSIVE
-   ============================================================================ */
 
 @media (max-width: 768px) {
   .miss-dior-video-title {
@@ -596,10 +554,6 @@
   }
 }
 
-/* ============================================================================
-   MISS DIOR REINVENTADO SECTION
-   ============================================================================ */
-
 .miss-dior-reinventado {
   background: #fff;
   padding: 120px 0;
@@ -686,7 +640,6 @@
   text-align: center;
 }
 
-/* Responsive */
 @media (max-width: 1024px) {
   .reinventado-grid {
     grid-template-columns: 1fr;
@@ -701,10 +654,6 @@
     font-size: 60px;
   }
 }
-
-/* ============================================================================
-   FRASCO COUTURE SECTION
-   ============================================================================ */
 
 .miss-dior-frasco-couture {
   background: #f9f9f9;
@@ -797,7 +746,6 @@
   content: "";
 }
 
-/* Responsive */
 @media (max-width: 1024px) {
   .frasco-couture-grid {
     grid-template-columns: 1fr;
@@ -821,10 +769,6 @@
     display: inline-block;
   }
 }
-
-/* ============================================================================
-   BOUQUETS FULL IMAGE SECTION
-   ============================================================================ */
 
 .miss-dior-bouquets-full {
   background: #fff;
@@ -864,7 +808,6 @@
   letter-spacing: 0.02em;
 }
 
-/* Responsive */
 @media (max-width: 1024px) {
   .bouquets-full-image-wrapper {
     height: 70vh;
@@ -890,10 +833,6 @@
     font-size: 22px;
   }
 }
-
-/* ============================================================================
-   PRODUCTS GRID SECTION
-   ============================================================================ */
 
 .miss-dior-products-grid {
   background: #fff;
@@ -933,7 +872,6 @@
   object-fit: contain;
 }
 
-/* Reutilizando estilos existentes de product-price, product-name, product-description, product-intensity */
 .product-grid-item .product-price {
   margin-bottom: 10px;
 }
@@ -950,7 +888,6 @@
   margin-top: 10px;
 }
 
-/* Responsive */
 @media (max-width: 1024px) {
   .products-grid {
     grid-template-columns: 1fr;
@@ -972,10 +909,6 @@
     margin-bottom: 20px;
   }
 }
-
-/* ============================================================================
-   PRODUCT BAG BUTTON
-   ============================================================================ */
 
 .product-grid-item {
   display: flex;
@@ -1028,7 +961,6 @@
   stroke: #000000;
 }
 
-/* Product Detail Section Specific */
 .product-detail-content {
   display: flex;
   flex-direction: column;

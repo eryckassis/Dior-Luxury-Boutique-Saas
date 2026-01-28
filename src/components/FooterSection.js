@@ -1,7 +1,3 @@
-// ============================================================================
-// FOOTER SECTION COMPONENT - Web Component para Footer
-// ============================================================================
-
 export class FooterSection extends HTMLElement {
   constructor() {
     super();
@@ -357,13 +353,10 @@ export class FooterSection extends HTMLElement {
   }
 
   attachEventListeners() {
-    // Placeholder animation (Dior style)
     this.initPlaceholderAnimation();
 
-    // Mobile accordion for footer sections
     this.initMobileAccordion();
 
-    // Accordion functionality
     const accordionButtons = this.querySelectorAll(".r-footer__accordion-button");
     accordionButtons.forEach((button) => {
       button.addEventListener("click", (e) => {
@@ -372,10 +365,8 @@ export class FooterSection extends HTMLElement {
         const panel = this.querySelector(`[data-accordion-panel="${panelId}"]`);
         const isExpanded = button.getAttribute("aria-expanded") === "true";
 
-        // Toggle aria-expanded
         button.setAttribute("aria-expanded", !isExpanded);
 
-        // Toggle panel visibility
         if (panel) {
           panel.setAttribute("aria-hidden", isExpanded);
           panel.style.maxHeight = isExpanded ? "0" : panel.scrollHeight + "px";
@@ -383,7 +374,6 @@ export class FooterSection extends HTMLElement {
       });
     });
 
-    // Newsletter form submission
     const newsletterForm = this.querySelector(".js-footer-subscribe-form");
     if (newsletterForm) {
       newsletterForm.addEventListener("submit", (e) => {
@@ -391,7 +381,6 @@ export class FooterSection extends HTMLElement {
         const emailInput = newsletterForm.querySelector('input[type="email"]');
         const emailValue = emailInput.value;
 
-        // Simple validation
         if (emailValue && emailValue.includes("@")) {
           alert("Obrigado por se inscrever!");
           emailInput.value = "";
@@ -401,7 +390,6 @@ export class FooterSection extends HTMLElement {
       });
     }
 
-    // Accessibility toggle
     const accessibilityToggles = this.querySelectorAll(".js-accessibility-toggle");
     accessibilityToggles.forEach((toggle) => {
       toggle.addEventListener("change", (e) => {
@@ -422,23 +410,19 @@ export class FooterSection extends HTMLElement {
 
       if (title) {
         title.addEventListener("click", () => {
-          // Só funciona em mobile (menos de 768px)
           if (window.innerWidth <= 768) {
-            // Fecha outros acordeões
             listWrappers.forEach((otherWrapper) => {
               if (otherWrapper !== wrapper && otherWrapper.classList.contains("active")) {
                 otherWrapper.classList.remove("active");
               }
             });
 
-            // Toggle do atual
             wrapper.classList.toggle("active");
           }
         });
       }
     });
 
-    // Reseta acordeões quando a janela é redimensionada para desktop
     window.addEventListener("resize", () => {
       if (window.innerWidth > 768) {
         listWrappers.forEach((wrapper) => {
@@ -464,7 +448,6 @@ export class FooterSection extends HTMLElement {
       }
     });
 
-    // Mantém o label em cima se tiver valor
     if (emailInput.value !== "") {
       label.classList.add("label-focused");
     }

@@ -1,4 +1,4 @@
-﻿import "../components/AppNavigation.js";
+import "../components/AppNavigation.js";
 import "../components/FooterSection.js";
 import "../styles/register.css";
 import { authService } from "../services/AuthService.js";
@@ -59,7 +59,6 @@ export class RegisterPage extends HTMLElement {
     const form = this.querySelector("#register-form");
     if (!form) return;
 
-    // Real-time password strength indicator
     const passwordInput = form.querySelector('input[name="password"]');
     const strengthIndicator = this.querySelector(".password-strength");
     const strengthBar = this.querySelector(".strength-bar");
@@ -77,7 +76,6 @@ export class RegisterPage extends HTMLElement {
       });
     }
 
-    // Form submission
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
 
@@ -94,7 +92,6 @@ export class RegisterPage extends HTMLElement {
       const password = passwordInput?.value;
       const confirmPassword = confirmPasswordInput?.value;
 
-      // Validações frontend
       if (!name || name.length < 3) {
         this.showError("O nome deve ter pelo menos 3 caracteres");
         return;
@@ -129,11 +126,9 @@ export class RegisterPage extends HTMLElement {
 
         this.showSuccess(response.message || "Conta criada com sucesso!");
 
-        // Limpa o formulário
         form.reset();
         strengthIndicator.style.display = "none";
 
-        // Aguarda 2 segundos e redireciona para home
         setTimeout(() => {
           router.navigate("/");
         }, 2000);
@@ -321,7 +316,6 @@ export class RegisterPage extends HTMLElement {
                 </video>
               </div>
 
-              
             </div>
           </main>
         </div>

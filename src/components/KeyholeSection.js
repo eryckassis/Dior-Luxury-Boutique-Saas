@@ -1,7 +1,3 @@
-﻿// ============================================================================
-// KEYHOLE SECTION WEB COMPONENT - Seção com efeito keyhole
-// ============================================================================
-
 export class KeyholeSection extends HTMLElement {
   constructor() {
     super();
@@ -44,9 +40,6 @@ export class KeyholeSection extends HTMLElement {
     `;
   }
 
-  // ============================================================================
-  // BUTTON FLAIR EFFECT - Efeito de hover seguindo o mouse (igual SplashPage)
-  // ============================================================================
   initButtonFlairEffect() {
     if (!window.gsap) return;
 
@@ -59,7 +52,6 @@ export class KeyholeSection extends HTMLElement {
     const xSet = gsap.quickSetter(flair, "xPercent");
     const ySet = gsap.quickSetter(flair, "yPercent");
 
-    // Calcula posição relativa do mouse no botão
     const getXY = (e) => {
       const { left, top, width, height } = button.getBoundingClientRect();
 
@@ -79,7 +71,6 @@ export class KeyholeSection extends HTMLElement {
       };
     };
 
-    // Mouse Enter - Flair aparece
     button.addEventListener("mouseenter", (e) => {
       const { x, y } = getXY(e);
       xSet(x);
@@ -92,7 +83,6 @@ export class KeyholeSection extends HTMLElement {
       });
     });
 
-    // Mouse Leave - Flair desaparece
     button.addEventListener("mouseleave", (e) => {
       const { x, y } = getXY(e);
 
@@ -107,7 +97,6 @@ export class KeyholeSection extends HTMLElement {
       });
     });
 
-    // Mouse Move - Flair segue o mouse
     button.addEventListener("mousemove", (e) => {
       const { x, y } = getXY(e);
 

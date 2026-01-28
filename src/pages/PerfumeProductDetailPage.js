@@ -1,7 +1,3 @@
-// ============================================================================
-// PERFUME PRODUCT DETAIL PAGE - Página dinâmica de detalhes do perfume
-// ============================================================================
-
 import "../components/AppNavigation.js";
 import "../components/FooterSection.js";
 import "../components/PerfumeProductDetailContent.js";
@@ -17,7 +13,6 @@ export class PerfumeProductDetailPage extends HTMLElement {
   }
 
   connectedCallback() {
-    // Obtém o ID do produto dos parâmetros da rota
     this.productId = this.routeParams?.id || router.getParams()?.id;
 
     if (this.productId) {
@@ -26,7 +21,7 @@ export class PerfumeProductDetailPage extends HTMLElement {
 
     if (!this.product) {
       console.error(`Perfume não encontrado: ${this.productId}`);
-      // Redireciona para home se produto não existir
+
       router.navigate("/home");
       return;
     }
@@ -36,7 +31,6 @@ export class PerfumeProductDetailPage extends HTMLElement {
   }
 
   disconnectedCallback() {
-    // Cleanup animations
     if (this.animations) {
       this.animations.forEach((anim) => anim.kill());
     }
@@ -48,7 +42,6 @@ export class PerfumeProductDetailPage extends HTMLElement {
 
       this.animations = [];
 
-      // Fade in da página
       const pageAnim = window.gsap.from(".compras-miss-dior-page", {
         opacity: 0,
         y: 30,
@@ -57,7 +50,6 @@ export class PerfumeProductDetailPage extends HTMLElement {
       });
       this.animations.push(pageAnim);
 
-      // Stagger das informações do produto
       const infoAnim = window.gsap.from(".product-info-wrapper > *", {
         opacity: 0,
         y: 20,

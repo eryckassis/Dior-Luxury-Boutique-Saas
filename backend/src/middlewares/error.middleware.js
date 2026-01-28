@@ -55,9 +55,6 @@ export class ErrorMiddleware {
     }
   }
 
-  /**
-   * Handler para rotas não encontradas (404)
-   */
   static handleNotFound(req, res) {
     return ApiResponse.notFound(res, `Rota não encontrada: ${req.method} ${req.path}`);
   }

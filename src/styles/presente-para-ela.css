@@ -1,8 +1,3 @@
-/* ============================================================================
-   PRESENTE PARA ELA PAGE - Estilos da página de presentes femininos
-   ============================================================================ */
-
-/* Override ModaNavigation - Forçar fundo branco ao invés de transparente */
 presente-para-ela-page moda-navigation {
   background-color: white !important;
 }
@@ -19,7 +14,6 @@ presente-para-ela-page .moda-icon path {
   fill: #000000 !important;
 }
 
-/* Hero Video Section */
 .presente-ela-hero-section {
   display: flex;
   position: relative;
@@ -85,13 +79,11 @@ presente-para-ela-page .moda-icon path {
   letter-spacing: 0.05em;
 }
 
-/* Content Wrapper */
 .presente-ela-content-wrapper {
   background-color: #f6f3f7;
   padding: 6rem 2rem;
 }
 
-/* Section Intro */
 .presente-ela-intro {
   margin: 0 auto 5rem;
   max-width: 800px;
@@ -116,12 +108,11 @@ presente-para-ela-page .moda-icon path {
   letter-spacing: 0.05em;
 }
 
-/* Drag Cards Section */
 .drag-cards-section {
   position: relative;
   margin: 0 0 6rem 0;
   width: 100%;
-  overflow: visible; /* Mudado de hidden para visible - permite calcular scrollWidth correto */
+  overflow: visible;
 }
 
 .drag-cards-container {
@@ -137,12 +128,12 @@ presente-para-ela-page .moda-icon path {
   display: inline-flex;
   gap: 2rem;
   cursor: grab;
-  padding: 0 4rem; /* Aumentado para garantir mais espaço */
+  padding: 0 4rem;
   touch-action: pan-y;
   user-select: none;
   -webkit-user-select: none;
   -webkit-touch-callout: none;
-  /* Garante que o track tenha largura mínima maior que o container */
+
   min-width: calc(100vw + 500px);
 }
 
@@ -153,7 +144,7 @@ presente-para-ela-page .moda-icon path {
 .drag-card {
   position: relative;
   flex-shrink: 0;
-  width: 380px; /* Ajustado para caber mais cards na tela e garantir scroll */
+  width: 380px;
   height: 520px;
   user-select: none;
 }
@@ -213,7 +204,6 @@ presente-para-ela-page .moda-icon path {
   text-align: left;
 }
 
-/* Progress Bar */
 .drag-progress-bar {
   position: relative;
   cursor: pointer;
@@ -242,10 +232,6 @@ presente-para-ela-page .moda-icon path {
 .drag-progress-bar:hover .drag-progress-fill {
   background-color: #333333;
 }
-
-/* ============================================================================
-   PRODUCTS SHOWCASE SECTION - Grid de produtos com cores
-   ============================================================================ */
 
 .products-showcase-section {
   margin: 0 auto;
@@ -277,7 +263,6 @@ presente-para-ela-page .moda-icon path {
   overflow: hidden;
 }
 
-/* Product Images Track (Draggable) */
 .product-images-track {
   display: flex;
   position: absolute;
@@ -306,7 +291,6 @@ presente-para-ela-page .moda-icon path {
   -webkit-user-drag: none;
 }
 
-/* Product Progress Bar */
 .product-progress-bar {
   position: relative;
   margin-top: 10px;
@@ -327,7 +311,6 @@ presente-para-ela-page .moda-icon path {
   height: 100%;
 }
 
-/* Product Navigation Arrows */
 .product-arrow {
   display: flex;
   position: absolute;
@@ -405,7 +388,6 @@ presente-para-ela-page .moda-icon path {
   font-family: "Hellix", sans-serif;
 }
 
-/* Color Dots */
 .product-showcase-colors {
   display: flex;
   justify-content: center;
@@ -434,7 +416,6 @@ presente-para-ela-page .moda-icon path {
   outline-offset: 2px;
 }
 
-/* Color variations */
 .color-dot--black {
   background-color: #1a1a1a;
 }
@@ -500,7 +481,6 @@ presente-para-ela-page .moda-icon path {
   font-family: "Hellix", sans-serif;
 }
 
-/* Products Grid */
 .presente-ela-products-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -607,7 +587,6 @@ presente-para-ela-page .moda-icon path {
   transform: scaleX(1);
 }
 
-/* Responsive */
 @media (max-width: 1200px) {
   .products-showcase-grid {
     grid-template-columns: repeat(3, 1fr);
@@ -692,7 +671,6 @@ presente-para-ela-page .moda-icon path {
   }
 }
 
-/* Mobile Small - 480px */
 @media (max-width: 480px) {
   .presente-ela-hero-section {
     height: 50vh;
@@ -720,7 +698,6 @@ presente-para-ela-page .moda-icon path {
     padding: 0 5vw;
   }
 
-  /* Products Grid - 2 colunas em mobile */
   .products-showcase-section {
     padding: 2rem 1rem !important;
   }
@@ -773,7 +750,6 @@ presente-para-ela-page .moda-icon path {
   }
 }
 
-/* Mobile Extra Small - 375px */
 @media (max-width: 375px) {
   .presente-ela-hero-section {
     height: 45vh;

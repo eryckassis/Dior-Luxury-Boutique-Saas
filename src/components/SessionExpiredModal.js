@@ -1,7 +1,3 @@
-// ============================================================================
-// SESSION EXPIRED MODAL - Modal de sessão expirada
-// ============================================================================
-
 import { router } from "../router/router.js";
 import { authService } from "../services/AuthService.js";
 
@@ -13,12 +9,10 @@ class SessionExpiredModal {
   }
 
   init() {
-    // Escuta evento de sessão expirada
     window.addEventListener("session-expired", () => this.show());
   }
 
   createModal() {
-    // Remove modal anterior se existir
     const existing = document.querySelector(".session-expired-modal-backdrop");
     if (existing) existing.remove();
 
@@ -50,25 +44,19 @@ class SessionExpiredModal {
     document.body.appendChild(backdrop);
     this.modal = backdrop;
 
-    // addStyles removido - estilos agora em src/styles/session-modal.css
-
     this.initEventListeners();
   }
-
-  /* Método addStyles removido - use src/styles/session-modal.css */
 
   initEventListeners() {
     const btn = this.modal.querySelector(".session-expired-btn");
 
     if (btn) {
-      // Click handler
       btn.addEventListener("click", async () => {
         this.hide();
         await authService.logout();
         router.navigate("/login");
       });
 
-      // GSAP hover animation (Lógica do DiorSpaPage / SpaSectionCard)
       if (window.gsap) {
         const flair = btn.querySelector(".session-expired-btn-flair");
 
@@ -79,7 +67,6 @@ class SessionExpiredModal {
           const getXY = (e) => {
             const { left, top, width, height } = btn.getBoundingClientRect();
 
-            // Map transforms mouse position to percentage (0-100)
             const xTransformer = window.gsap.utils.pipe(
               window.gsap.utils.mapRange(0, width, 0, 100),
               window.gsap.utils.clamp(0, 100),
@@ -122,7 +109,6 @@ class SessionExpiredModal {
           btn.addEventListener("mousemove", (e) => {
             const { x, y } = getXY(e);
 
-            // Usando to() para suavizar o movimento, similar ao SpaSectionCard
             window.gsap.to(flair, {
               xPercent: x,
               yPercent: y,
@@ -142,12 +128,10 @@ class SessionExpiredModal {
     this.isVisible = true;
     this.createModal();
 
-    // Anima entrada
     requestAnimationFrame(() => {
       this.modal.classList.add("visible");
     });
 
-    // Bloqueia scroll
     document.body.style.overflow = "hidden";
 
     console.log("🔒 Modal de sessão expirada exibido");
@@ -159,16 +143,13 @@ class SessionExpiredModal {
     this.isVisible = false;
     this.modal.classList.remove("visible");
 
-    // Remove após animação
     setTimeout(() => {
       this.modal.remove();
       this.modal = null;
     }, 300);
 
-    // Restaura scroll
     document.body.style.overflow = "";
   }
 }
 
-// Singleton - inicializa automaticamente
 export const sessionExpiredModal = new SessionExpiredModal();

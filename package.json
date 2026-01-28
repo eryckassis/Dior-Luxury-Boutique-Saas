@@ -10,17 +10,21 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "format:staged": "prettier --write",
+    "format:fix": "prettier --write . && git add -A",
     "prepare": "husky",
     "format:css": "prettier --write \"src/styles/**/*.css\"",
     "lint:css": "prettier --check \"src/styles/**/*.css\"",
     "remove-comments": "node scripts/remove-comments.js",
     "remove-comments:safe": "node scripts/remove-comments.js && npm run format",
-    "backup-and-clean": "git add -A && git commit -m \"Backup before removing comments\" && npm run remove-comments:safe"
+    "backup-and-clean": "git add -A && git commit -m \"Backup before removing comments\" && npm run remove-comments:safe",
+    "test:format": "prettier --check .",
+    "fix-indentation": "prettier --write . --tab-width 2 --use-tabs false"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx,html,css,json,md}": [
-      "prettier --write"
-    ]
+    "*.{js,jsx,mjs}": ["prettier --write --tab-width 2", "git add"],
+    "*.{css,scss}": ["prettier --write --tab-width 2", "git add"],
+    "*.{html,htm}": ["prettier --write --tab-width 2", "git add"],
+    "*.{json,md}": ["prettier --write --tab-width 2", "git add"]
   },
   "devDependencies": {
     "husky": "^9.1.7",

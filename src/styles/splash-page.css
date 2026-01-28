@@ -1,14 +1,3 @@
-/* ============================================================================
-   SPLASH PAGE STYLES
-   ============================================================================
-   Estilos dedicados para a Splash Page (SPA)
-   Separado do style.css principal para melhor organização
-   ============================================================================ */
-
-/* ============================================================================
-   CONTAINER PRINCIPAL
-   ============================================================================ */
-
 .splash-page {
   display: flex;
   position: fixed;
@@ -23,10 +12,6 @@
   width: 100%;
   height: 100vh;
 }
-
-/* ============================================================================
-   LOGO CENTRAL
-   ============================================================================ */
 
 .splash-page .splash-logo {
   display: flex;
@@ -52,10 +37,6 @@
   height: auto;
 }
 
-/* ============================================================================
-   CONTAINER DAS OPÇÕES
-   ============================================================================ */
-
 .splash-page .splash-container {
   display: flex;
   position: relative;
@@ -63,10 +44,6 @@
   height: 100%;
   overflow: hidden;
 }
-
-/* ============================================================================
-   OPÇÕES (Moda & Beauty)
-   ============================================================================ */
 
 .splash-page .splash-option {
   position: relative;
@@ -76,7 +53,6 @@
   overflow: hidden;
 }
 
-/* Background (vídeo) */
 .splash-page .splash-option-bg {
   position: absolute;
   top: 0;
@@ -87,7 +63,6 @@
   pointer-events: none;
 }
 
-/* Overlay gradiente */
 .splash-page .splash-option-overlay {
   position: absolute;
   top: 0;
@@ -104,7 +79,6 @@
   height: 100%;
 }
 
-/* Camada de escurecimento para efeito hover */
 .splash-page .splash-option-darkening {
   position: absolute;
   top: 0;
@@ -115,10 +89,6 @@
   width: 100%;
   height: 100%;
 }
-
-/* ============================================================================
-   CONTEÚDO (Título + Botão)
-   ============================================================================ */
 
 .splash-page .splash-option-content {
   position: absolute;
@@ -139,10 +109,6 @@
   font-family: "Hellix", sans-serif;
   letter-spacing: 0.02em;
 }
-
-/* ============================================================================
-   BOTÃO COM EFEITO DE LINHA (UNDERLINE)
-   ============================================================================ */
 
 .splash-page .splash-option-button {
   display: inline-block;
@@ -173,16 +139,11 @@
   content: "";
 }
 
-/* Label do botão */
 .splash-page .button__label {
   position: relative;
   z-index: 2;
   text-align: center;
 }
-
-/* ============================================================================
-   RESPONSIVE - Tablets
-   ============================================================================ */
 
 @media (max-width: 768px) {
   .splash-page .splash-container {
@@ -201,10 +162,6 @@
     width: 200px;
   }
 }
-
-/* ============================================================================
-   RESPONSIVE - iPhone 16 Pro Max e similares (440px)
-   ============================================================================ */
 
 @media (max-width: 480px) {
   .splash-page .splash-logo {
@@ -239,10 +196,6 @@
   }
 }
 
-/* ============================================================================
-   RESPONSIVE - iPhone SE e dispositivos pequenos (375px)
-   ============================================================================ */
-
 @media (max-width: 390px) {
   .splash-page .splash-logo {
     width: 140px;
@@ -266,10 +219,6 @@
   }
 }
 
-/* ============================================================================
-   RESPONSIVE - Dispositivos muito pequenos (320px)
-   ============================================================================ */
-
 @media (max-width: 360px) {
   .splash-page .splash-logo {
     width: 120px;
@@ -289,10 +238,6 @@
     bottom: 35px;
   }
 }
-
-/* ============================================================================
-   RESPONSIVE - Landscape mode em mobile
-   ============================================================================ */
 
 @media (max-height: 500px) and (orientation: landscape) {
   .splash-page .splash-container {
@@ -316,10 +261,6 @@
     bottom: 20px;
   }
 }
-
-/* ============================================================================
-   RESPONSIVE - Safe area para notch (iPhone X+)
-   ============================================================================ */
 
 @supports (padding: max(0px)) {
   @media (max-width: 480px) {

@@ -1,10 +1,6 @@
-/* ============================================================================
-   HORIZONTAL SCROLL PANELS - Seção de scroll horizontal
-   ============================================================================ */
-
 .horizontal-panels-section {
   position: relative;
-  /* Remove qualquer transform que possa interferir com pin */
+
   transform: none !important;
   will-change: auto;
   width: 100%;
@@ -20,7 +16,6 @@
   overflow: hidden;
 }
 
-/* Individual Panel Styles */
 .panel.full-screen-panel {
   display: flex;
   position: relative;
@@ -34,7 +29,6 @@
   color: #ffffff;
 }
 
-/* Panel Color Variations */
 .panel-red {
   background: linear-gradient(135deg, #1a1a1a 0%, #2a2826 100%);
 }
@@ -55,7 +49,6 @@
   background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
 }
 
-/* Panel Content Layout */
 .panel-wrapper {
   display: flex;
   justify-content: center;
@@ -76,7 +69,6 @@
   height: 100%;
 }
 
-/* Image Column */
 .panel-image-col {
   position: absolute;
   top: 0;
@@ -93,7 +85,6 @@
   object-fit: cover;
 }
 
-/* Video Styles */
 .panel-image-col video {
   display: block;
   background: #000000;
@@ -102,7 +93,6 @@
   object-fit: cover;
 }
 
-/* Video Controls */
 .video-controls {
   display: flex;
   position: absolute;
@@ -140,7 +130,6 @@
   transition: opacity 0.3s ease;
 }
 
-/* Button Flair para controles de vídeo */
 .video-control .button__flair {
   position: absolute;
   top: 0;
@@ -170,7 +159,6 @@
   content: "";
 }
 
-/* Splash option styles reutilizados */
 .splash-option-darkening {
   position: absolute;
   top: 0;
@@ -236,7 +224,6 @@
   font-family: var(--font-primary);
 }
 
-/* Navigation Controls */
 .panels-navigation {
   display: flex;
   align-items: center;
@@ -277,7 +264,6 @@
   color: #000000;
 }
 
-/* Button Flair para anchor-panel */
 .anchor-panel .button__flair {
   position: absolute;
   top: 0;
@@ -305,13 +291,11 @@
   content: "";
 }
 
-/* Garante que o label fique acima do flair */
 .anchor-panel .button__label {
   position: relative;
   z-index: 2;
 }
 
-/* Cards Wrapper - Para o último painel */
 .cards-wrapper {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -322,7 +306,6 @@
   overflow-y: auto;
 }
 
-/* Custom Scrollbar para cards */
 .cards-wrapper::-webkit-scrollbar {
   width: 6px;
 }
@@ -366,7 +349,6 @@
   background: rgba(255, 255, 255, 0.15);
 }
 
-/* Responsive Design */
 @media (max-width: 1200px) {
   .panel-wrapper {
     padding: 0 60px;
@@ -518,7 +500,6 @@
   }
 }
 
-/* Animation States - Para GSAP controlar */
 .panel-title,
 .panel-description,
 .panels-navigation {
@@ -529,10 +510,6 @@
   will-change: opacity, transform;
 }
 
-/* ============================================================================
-   EXCLUSIVE GIFTS SECTION - Seção de Presentes Exclusivos
-   ============================================================================ */
-
 .exclusive-gifts-section {
   position: relative;
   background: linear-gradient(180deg, #f8f6f3 0%, #ffffff 100%);
@@ -540,7 +517,6 @@
   overflow: hidden;
 }
 
-/* Background Pattern (opcional - efeito de raios como na foto) */
 .exclusive-gifts-section::before {
   position: absolute;
   top: 0;
@@ -568,7 +544,6 @@
   max-width: 1400px;
 }
 
-/* Header da Seção */
 .exclusive-gifts-header {
   margin-bottom: 80px;
   text-align: center;
@@ -611,7 +586,6 @@
   font-weight: 400;
 }
 
-/* Grid de Produtos */
 .products-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -619,7 +593,6 @@
   margin-top: 60px;
 }
 
-/* Card de Produto */
 .product-card-exclusive {
   transition:
     transform 0.4s ease,
@@ -635,11 +608,10 @@
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }
 
-/* Imagem do Produto */
 .product-image-wrapper {
   position: relative;
   background: #f5f5f5;
-  padding-top: 100%; /* Aspect ratio 1:1 */
+  padding-top: 100%;
   width: 100%;
   overflow: hidden;
 }
@@ -658,7 +630,6 @@
   transform: scale(1.05);
 }
 
-/* Info do Produto */
 .product-info {
   padding: 24px 20px 28px;
   text-align: center;
@@ -683,7 +654,6 @@
   letter-spacing: 0.01em;
 }
 
-/* Responsive */
 @media (max-width: 1024px) {
   .products-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -722,13 +692,8 @@
   }
 }
 
-/* ============================================================================
-   PRESENTES SECTION - O desfile encantado de presentes excepcionais
-   ============================================================================ */
-
 .presentes-section {
-  /* Adiciona espaço inferior para separar da próxima seção */
-  margin-bottom: 0; /* Ajuste este valor: 40px, 80px, 120px */
+  margin-bottom: 0;
   background: #ffffff;
   padding: 80px 0 100px;
   width: 100%;
@@ -807,7 +772,6 @@
   object-fit: cover;
 }
 
-/* Presente Info */
 .presente-info {
   display: flex;
   flex: 1;
@@ -844,7 +808,6 @@
   text-align: center;
 }
 
-/* Intensity */
 .presente-intensity {
   display: flex;
   flex-shrink: 0;
@@ -879,7 +842,6 @@
   background-color: #000000;
 }
 
-/* Presente Footer */
 .presente-footer {
   display: flex;
   flex-shrink: 0;
@@ -899,7 +861,6 @@
   text-align: left;
 }
 
-/* Bag Button */
 .presente-bag-button {
   display: flex;
   flex-shrink: 0;
@@ -940,7 +901,6 @@
   letter-spacing: 0.2px;
 }
 
-/* Responsive - Tablets */
 @media (max-width: 1024px) {
   .presentes-section {
     padding: 100px 0 120px;
@@ -988,7 +948,6 @@
   }
 }
 
-/* Responsive - Mobile */
 @media (max-width: 768px) {
   .presentes-section {
     padding: 80px 0 100px;
@@ -1050,53 +1009,43 @@
   }
 }
 
-/* ============================================================================
-   TEMA PIETRO RUFFO SECTION - Seção de imagem em tela cheia com texto
-   ============================================================================ */
-
 .tema-pietro-section {
   display: flex;
-  /* Define altura de 100vh (altura total da tela) */
+
   position: relative;
   justify-content: center;
   align-items: center;
-  /* Adiciona espaço superior para separar da seção anterior */
+
   margin-top: 0;
   width: 100%;
   min-height: 100vh;
   overflow: hidden;
 }
 
-/* Espaçamento entre as seções usando BEM modifier */
 .tema-pietro-section--second {
-  /* Adiciona espaço superior para separar da primeira seção */
-  margin-top: 30px; /* Reduzido de 50px para 30px */
+  margin-top: 30px;
 }
 
-/* Container da imagem de fundo */
 .tema-pietro-background {
-  /* Position absolute faz a imagem ocupar toda a seção */
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 0; /* Fica atrás do texto */
+  z-index: 0;
   width: 100%;
   height: 100%;
 }
 
 .tema-pietro-background img {
   display: block;
-  /* Object-fit cover faz a imagem preencher toda a área */
+
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-/* Container do conteúdo de texto */
 .tema-pietro-content {
-  /* Position relative faz o texto ficar acima da imagem */
   position: relative;
-  z-index: 2; /* Fica na frente da imagem */
+  z-index: 2;
   padding: 0 60px;
   max-width: 1200px;
   color: #333333;
@@ -1126,7 +1075,6 @@
   letter-spacing: 0.5px;
 }
 
-/* Botão da seção Pietro Ruffo */
 .tema-pietro-button {
   display: inline-block;
   position: relative;
@@ -1152,15 +1100,11 @@
   color: #000000;
 }
 
-/* Label do botão deve ficar acima do flair */
 .tema-pietro-button .button__label {
   position: relative;
   z-index: 2;
 }
 
-/* O flair já está definido globalmente em style.css */
-
-/* Responsive - Tablets */
 @media (max-width: 1024px) {
   .tema-pietro-content {
     padding: 0 50px;
@@ -1175,7 +1119,6 @@
   }
 }
 
-/* Responsive - Mobile */
 @media (max-width: 768px) {
   .tema-pietro-section {
     min-height: 70vh;
@@ -1196,21 +1139,17 @@
   }
 }
 
-/* ============================================================================
-   PARALLAX GALLERY - 3 imagens lado a lado com efeito parallax
-   ============================================================================ */
-
 .parallax-intro {
-  background: #f6f3f7; /* Fundo cinza claro - Troque a cor aqui */
-  padding: 50px 0 100px; /* Reduzido para diminuir gap */
+  background: #f6f3f7;
+  padding: 50px 0 100px;
   width: 100%;
 }
 
 .parallax-intro-container {
-  margin: 0 auto; /* Centraliza */
-  padding: 0 40px; /* Espaço nas laterais */
-  max-width: 1400px; /* Largura máxima do conteúdo */
-  text-align: center; /* Texto centralizado */
+  margin: 0 auto;
+  padding: 0 40px;
+  max-width: 1400px;
+  text-align: center;
 }
 
 .parallax-intro-title {
@@ -1234,10 +1173,9 @@
   letter-spacing: 0.2px;
 }
 
-/* Responsive - Tablets */
 @media (max-width: 1024px) {
   .parallax-intro {
-    padding: 50px 0 20px; /* Reduzido para diminuir gap */
+    padding: 50px 0 20px;
   }
 
   .parallax-intro-container {
@@ -1253,10 +1191,9 @@
   }
 }
 
-/* Responsive - Mobile */
 @media (max-width: 768px) {
   .parallax-intro {
-    padding: 40px 0 20px; /* Reduzido para diminuir gap */
+    padding: 40px 0 20px;
   }
 
   .parallax-intro-container {
@@ -1289,7 +1226,6 @@
   overflow: visible;
 }
 
-/* Cada painel ocupa 1/3 da largura */
 .parallax-panel {
   display: flex;
   position: relative;
@@ -1297,7 +1233,6 @@
   flex-direction: column;
 }
 
-/* Container da coluna */
 .parallax-column {
   display: flex;
   flex-direction: column;
@@ -1307,7 +1242,6 @@
   min-height: 100%;
 }
 
-/* Wrapper da imagem com altura extra para efeito parallax */
 .parallax-image-wrap {
   position: relative;
   flex-shrink: 0;
@@ -1317,7 +1251,6 @@
   overflow: hidden;
 }
 
-/* Imagem cobre todo o espaço */
 .parallax-img {
   display: block;
   width: 100%;
@@ -1325,7 +1258,6 @@
   object-fit: cover;
 }
 
-/* Product Info */
 .parallax-product-name {
   margin: 0 0 8px 0;
   padding: 0 10px;
@@ -1349,7 +1281,6 @@
   text-align: center;
 }
 
-/* Intensity */
 .parallax-intensity {
   display: flex;
   flex-direction: column;
@@ -1446,17 +1377,16 @@
   text-align: center;
 }
 
-/* Responsive - Tablets */
 @media (max-width: 1024px) {
   .parallax-intro {
-    padding: 60px 0 25px; /* Reduz gap em tablets também */
+    padding: 60px 0 25px;
   }
 
   .parallax-gallery {
-    margin-top: 8vh; /* Reduzido de 20vh para 8vh */
+    margin-top: 8vh;
     margin-bottom: 1vh;
     padding-right: 30px;
-    padding-left: 30px; /* Reduz espaço lateral em tablets */
+    padding-left: 30px;
     height: 40vh;
   }
 
@@ -1465,19 +1395,18 @@
   }
 }
 
-/* Responsive - Mobile - Empilha as imagens verticalmente */
 @media (max-width: 768px) {
   .parallax-intro {
-    padding: 50px 0 20px; /* Reduz gap em mobile também */
+    padding: 50px 0 20px;
   }
 
   .parallax-gallery {
     flex-direction: column;
-    gap: 15px; /* Espaço entre imagens empilhadas */
-    margin-top: 5vh; /* Reduzido de 10vh para 5vh */
+    gap: 15px;
+    margin-top: 5vh;
     margin-bottom: 10vh;
     padding-right: 20px;
-    padding-left: 20px; /* Reduz espaço lateral em mobile */
+    padding-left: 20px;
     height: auto;
   }
 
@@ -1489,10 +1418,6 @@
     height: 120vh;
   }
 }
-
-/* ============================================================================
-   PARALLAX FOOTER - Rodapé dos produtos com preço e botão
-   ============================================================================ */
 
 .parallax-footer {
   display: flex;
@@ -1564,7 +1489,6 @@
   transform: scale(0.95);
 }
 
-/* Responsive para botões */
 @media (max-width: 1024px) {
   .parallax-footer {
     gap: 10px;

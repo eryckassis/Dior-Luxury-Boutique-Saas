@@ -1,7 +1,3 @@
-﻿// ============================================================================
-// MISS DIOR ESSENCE PAGE - Página dedicada à fragrância J'adore
-// ============================================================================
-
 import "../components/AppNavigation.js";
 import "../components/FooterSection.js";
 import { cartService } from "../services/CartService.js";
@@ -19,7 +15,6 @@ export class MissDiorEssencePage extends HTMLElement {
   }
 
   disconnectedCallback() {
-    // Cleanup video controls
     this.cleanupVideoControls();
   }
 
@@ -40,7 +35,6 @@ export class MissDiorEssencePage extends HTMLElement {
   }
 
   initVideoControls() {
-    // Aguarda o próximo frame para garantir que o DOM foi renderizado
     requestAnimationFrame(() => {
       const video = this.querySelector("#miss-dior-section-video");
       const playPauseBtn = this.querySelector("#miss-dior-play-pause-btn");
@@ -48,7 +42,6 @@ export class MissDiorEssencePage extends HTMLElement {
 
       if (!video || !playPauseBtn || !muteUnmuteBtn) return;
 
-      // Play/Pause functionality
       this.playPauseHandler = () => {
         const iconPlay = playPauseBtn.querySelector(".icon-play");
         const iconPause = playPauseBtn.querySelector(".icon-pause");
@@ -64,7 +57,6 @@ export class MissDiorEssencePage extends HTMLElement {
         }
       };
 
-      // Mute/Unmute functionality
       this.muteUnmuteHandler = () => {
         const iconMute = muteUnmuteBtn.querySelector(".icon-mute");
         const iconUnmute = muteUnmuteBtn.querySelector(".icon-unmute");
@@ -80,11 +72,9 @@ export class MissDiorEssencePage extends HTMLElement {
         }
       };
 
-      // Adiciona event listeners
       playPauseBtn.addEventListener("click", this.playPauseHandler);
       muteUnmuteBtn.addEventListener("click", this.muteUnmuteHandler);
 
-      // Inicializa os ícones com o estado atual
       const iconPlay = playPauseBtn.querySelector(".icon-play");
       const iconPause = playPauseBtn.querySelector(".icon-pause");
 
@@ -122,7 +112,6 @@ export class MissDiorEssencePage extends HTMLElement {
 
         if (!imageWrapper || !image || !overlay || !productInfo) return;
 
-        // Image reveal animation
         const tl = window.gsap.timeline({
           scrollTrigger: {
             trigger: card,
@@ -132,7 +121,6 @@ export class MissDiorEssencePage extends HTMLElement {
           },
         });
 
-        // Initial states
         window.gsap.set(image, {
           scale: 1.3,
           filter: "blur(10px)",
@@ -148,7 +136,6 @@ export class MissDiorEssencePage extends HTMLElement {
           y: 30,
         });
 
-        // Animation sequence
         tl.to(overlay, {
           scaleY: 0,
           duration: 1.2,
@@ -182,7 +169,6 @@ export class MissDiorEssencePage extends HTMLElement {
     requestAnimationFrame(() => {
       const bagButtons = this.querySelectorAll(".essence-bag-button");
 
-      // Dados dos produtos (mapeamento por índice)
       const productsData = [
         {
           id: "essence-1",
@@ -289,18 +275,15 @@ export class MissDiorEssencePage extends HTMLElement {
 
         if (!productData) return;
 
-        // Adiciona data attributes
         button.dataset.productId = productData.id;
         button.dataset.productName = productData.name;
         button.dataset.productVolume = productData.volume;
         button.dataset.productPrice = productData.price;
         button.dataset.productImage = productData.image;
 
-        // Adiciona event listener
         button.addEventListener("click", (e) => {
           e.preventDefault();
 
-          // Adiciona o produto ao carrinho
           cartService.addItem({
             id: productData.id,
             name: productData.name,
@@ -309,7 +292,6 @@ export class MissDiorEssencePage extends HTMLElement {
             image: productData.image,
           });
 
-          // Feedback visual
           this.animateButtonFeedback(button);
         });
       });
@@ -319,7 +301,6 @@ export class MissDiorEssencePage extends HTMLElement {
   animateButtonFeedback(button) {
     if (!window.gsap) return;
 
-    // Animação de sucesso
     window.gsap
       .timeline()
       .to(button, {
@@ -338,7 +319,6 @@ export class MissDiorEssencePage extends HTMLElement {
         ease: "power2.out",
       });
 
-    // Muda temporariamente o ícone para checkmark
     const originalSVG = button.innerHTML;
     button.innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -346,7 +326,6 @@ export class MissDiorEssencePage extends HTMLElement {
       </svg>
     `;
 
-    // Volta ao ícone original após 1 segundo
     setTimeout(() => {
       button.innerHTML = originalSVG;
     }, 1000);

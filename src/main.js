@@ -18,7 +18,6 @@ import "./styles/dior-spa.css";
 import "./styles/primavera-verao.css";
 import "./styles/dados-pessoais.css";
 
-// IMPORTANTE: Importa serviços no início para garantir inicialização
 import { authService } from "./services/AuthService.js";
 import { cartService } from "./services/CartService.js";
 console.log("🚀 Main.js: Serviços importados", { authService, cartService });
@@ -57,11 +56,6 @@ import "./components/Toast.js";
 import "./components/ModaAcessoriosContent.js";
 import "./styles/smooth-scroll.css";
 
-// ============================================================================
-// ROUTER CONFIGURATION
-// ============================================================================
-
-// Registra as rotas
 router.register("/", "splash-page");
 router.register("/home", "home-page");
 router.register("/dior-holiday", "dior-holiday-page");
@@ -87,10 +81,6 @@ router.register("/primavera-verao-2026", "primavera-verao-2026-page");
 router.register("/boutiques", "boutiques-page");
 router.register("/minha-conta/dados", "dados-pessoais-page");
 
-// ============================================================================
-// BUTTON ANIMATION - Efeito Hover com Flair
-// ============================================================================
-
 class Button {
   constructor(buttonElement) {
     this.block = buttonElement;
@@ -102,7 +92,6 @@ class Button {
     const el = gsap.utils.selector(this.block);
     const flair = el(".button__flair");
 
-    // Se não encontrar o flair, não inicializa
     if (!flair || flair.length === 0) {
       return false;
     }
@@ -177,34 +166,21 @@ class Button {
   }
 }
 
-// Torna a classe Button globalmente disponível
 window.Button = Button;
 
-// ============================================================================
-// SCROLL TRIGGER ANIMATIONS (Gallery Effects)
-// ============================================================================
-// NOTA: Keyhole animations foram movidas para HomePage.js para evitar conflito
-// com Web Components e garantir timing correto de inicialização
-// ============================================================================
-
 function initScrollAnimations() {
-  // Registra os plugins ScrollTrigger e ScrollToPlugin
   gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-  // Seleciona todos os wrappers da galeria (para aplicar clip-path no container)
   const galleryWrappers = document.querySelectorAll(".grid-item__wrapper");
 
   galleryWrappers.forEach((wrapper, index) => {
-    // Verifica se tem vídeo ou imagem dentro
     const hasMedia = wrapper.querySelector("img, video");
 
     if (hasMedia) {
-      // Adiciona clip-path inicial no wrapper - começa mostrando tudo sem cortar
       gsap.set(wrapper, {
         clipPath: "inset(0% 0% 0% -90%)", // -10% para dar espaço à esquerda e não cortar
       });
 
-      // Animação com ScrollTrigger no wrapper
       gsap.to(wrapper, {
         clipPath: "inset(0% 0% 0% 100%)", // Esconde completamente da direita para esquerda
         ease: "none",
@@ -213,17 +189,14 @@ function initScrollAnimations() {
           start: "top center",
           end: "bottom center",
           scrub: 1, // Sincroniza com o scroll
-          // markers: true, // Descomente para ver os marcadores de debug
         },
       });
     }
   });
 
-  // Animação suave de fade out para o texto ao fazer scroll
   const textContent = document.querySelectorAll(".grid-content");
 
   textContent.forEach((content) => {
-    // Animação de entrada (aparece)
     gsap.from(content, {
       opacity: 0,
       y: 50,
@@ -236,7 +209,6 @@ function initScrollAnimations() {
       },
     });
 
-    // Animação de saída (desaparece suavemente)
     gsap.to(content, {
       opacity: 0,
       y: -30,
@@ -246,32 +218,20 @@ function initScrollAnimations() {
         start: "top 10%",
         end: "top top",
         scrub: 2, // Scrub mais lento = mais suave
-        // markers: true, // Descomente para debug
       },
     });
   });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  // ============================================================================
-  // SPA INITIALIZATION - Router inicia automaticamente
-  // ============================================================================
-  // Splash Screen agora é uma página SPA (/), não mais hardcoded no HTML
-  // O router carrega automaticamente a rota correta baseado na URL
-  // ============================================================================
-
   router.init();
 
-  // Função para inicializar features após cada mudança de página
   const initializePageFeatures = () => {
-    // Inicializa animação dos botões
     const buttonElements = document.querySelectorAll('[data-block="button"]');
     buttonElements.forEach((buttonElement) => {
       new Button(buttonElement);
     });
 
-    // Inicializa controle de hover nos vídeos da galeria
-    // Excluindo os vídeos com classe hero-video-hover que são controlados pelo HomePage
     const galleryVideos = document.querySelectorAll(
       ".grid-item__wrapper video:not(.hero-video-hover)",
     );
@@ -279,32 +239,22 @@ document.addEventListener("DOMContentLoaded", () => {
       new VideoHoverController(video);
     });
 
-    // Inicializa animações de scroll
     initScrollAnimations();
 
-    // Inicializa seções animadas
     initAnimatedSections();
 
-    // Inicializa controles de vídeo
     initVideoControls();
   };
 
-  // Inicializa features na primeira carga
   initializePageFeatures();
 
-  // Reinicializa features quando a página mudar via SPA
   window.addEventListener("page-loaded", () => {
-    // Aguarda o DOM ser atualizado
     setTimeout(() => {
       initScrollAnimations();
       initAnimatedSections();
     }, 200);
   });
 });
-
-// ============================================================================
-// ANIMATED SECTIONS - Wheel Navigation (Only in section area)
-// ============================================================================
 
 function initAnimatedSections() {
   const wrapper = document.querySelector(".animated-sections-wrapper");
@@ -333,7 +283,6 @@ function initAnimatedSections() {
     dt: 0,
   };
 
-  // Split text
   let splitHeadings = [];
   if (typeof SplitText !== "undefined") {
     splitHeadings = headings.map((heading) => {
@@ -347,7 +296,6 @@ function initAnimatedSections() {
   gsap.set(outerWrappers, { yPercent: 100 });
   gsap.set(innerWrappers, { yPercent: -100 });
 
-  // Detecta quando o usuário entra na área das seções
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -358,7 +306,7 @@ function initAnimatedSections() {
           }
         } else {
           isInSection = false;
-          // Quando sair, reseta para poder entrar de novo
+
           if (currentIndex !== -1) {
             gsap.set(sections[currentIndex], { autoAlpha: 0 });
             currentIndex = -1;
@@ -401,7 +349,6 @@ function initAnimatedSections() {
       0,
     ).fromTo(images[index], { yPercent: 15 * dFactor }, { yPercent: 0 }, 0);
 
-    // Anima texto se disponível
     if (splitHeadings.length > 0 && splitHeadings[index]) {
       tl.fromTo(
         splitHeadings[index].chars,
@@ -420,7 +367,6 @@ function initAnimatedSections() {
       );
     }
 
-    // Anima conteúdo da segunda seção (reutilizando classes do keyhole)
     if (index === 1) {
       const subtitle = sections[index].querySelector(".keyhole-subtitle");
       const title = sections[index].querySelector(".keyhole-title");
@@ -441,7 +387,6 @@ function initAnimatedSections() {
         );
       }
     } else {
-      // Esconde conteúdo da segunda seção quando sair dela
       const prevSection = sections[1];
       if (prevSection && currentIndex === 1) {
         const subtitle = prevSection.querySelector(".keyhole-subtitle");
@@ -460,9 +405,7 @@ function initAnimatedSections() {
   function handleWheel(e) {
     if (!isInSection || animating) return;
 
-    // Se está na primeira seção E rola para CIMA = quer SAIR
     if (currentIndex === 0 && e.wheelDeltaY > 0) {
-      // Scroll suave para FORA da seção
       const wrapperTop = wrapper.getBoundingClientRect().top + window.scrollY;
       window.scrollTo({
         top: wrapperTop - window.innerHeight,
@@ -503,10 +446,6 @@ function initAnimatedSections() {
   document.addEventListener("touchend", handleTouchEnd, { passive: true });
 }
 
-// ============================================================================
-// VIDEO CONTROLS - PLAY/PAUSE & MUTE/UNMUTE
-// ============================================================================
-
 function initVideoControls() {
   const video = document.getElementById("section-video");
   const playPauseBtn = document.getElementById("play-pause-btn");
@@ -519,7 +458,6 @@ function initVideoControls() {
   const iconMute = muteUnmuteBtn.querySelector(".icon-mute");
   const iconUnmute = muteUnmuteBtn.querySelector(".icon-unmute");
 
-  // Play/Pause Toggle
   playPauseBtn.addEventListener("click", () => {
     if (video.paused) {
       video.play();
@@ -532,7 +470,6 @@ function initVideoControls() {
     }
   });
 
-  // Mute/Unmute Toggle
   muteUnmuteBtn.addEventListener("click", () => {
     if (video.muted) {
       video.muted = false;
@@ -545,14 +482,12 @@ function initVideoControls() {
     }
   });
 
-  // Sincroniza estado inicial (video começa pausado mostra play, video tocando mostra pause)
   if (!video.paused) {
     iconPlay.style.display = "none";
     iconPause.style.display = "block";
   }
 }
 
-// Inicializa controles após página carregar
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", initVideoControls);
 } else {

@@ -6,7 +6,6 @@ class SmoothScroll {
     this.rafId = null;
     this.isActive = false;
 
-    // Opções padrão
     this.options = {
       duration: 1.2, // Duração do easing
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Easing exponencial
@@ -23,15 +22,12 @@ class SmoothScroll {
   init() {
     if (this.isActive) return this;
 
-    // Criar instância do Lenis
     this.lenis = new Lenis(this.options);
 
-    // Integrar com GSAP ScrollTrigger
     if (window.ScrollTrigger) {
       this.lenis.on("scroll", window.ScrollTrigger.update);
 
       window.gsap.ticker.add((time) => {
-        // Verificar se lenis ainda existe antes de chamar raf
         if (this.lenis && typeof this.lenis.raf === "function") {
           this.lenis.raf(time * 1000);
         }
@@ -39,7 +35,6 @@ class SmoothScroll {
 
       window.gsap.ticker.lagSmoothing(0);
     } else {
-      // Fallback sem GSAP
       const raf = (time) => {
         if (this.lenis && typeof this.lenis.raf === "function") {
           this.lenis.raf(time);
@@ -57,7 +52,6 @@ class SmoothScroll {
     return this;
   }
 
-  // Destruir instância (importante para SPA)
   destroy() {
     if (!this.isActive) return;
 
@@ -68,7 +62,6 @@ class SmoothScroll {
       this.rafId = null;
     }
 
-    // Remover listener do GSAP ticker se existir
     if (window.gsap && window.gsap.ticker) {
       window.gsap.ticker.remove((time) => {
         if (this.lenis) {
@@ -85,21 +78,18 @@ class SmoothScroll {
     console.log("✓ SmoothScroll destroyed");
   }
 
-  // Pausar scroll
   stop() {
     if (this.lenis) {
       this.lenis.stop();
     }
   }
 
-  // Retomar scroll
   start() {
     if (this.lenis) {
       this.lenis.start();
     }
   }
 
-  // Scroll para elemento ou posição
   scrollTo(target, options = {}) {
     if (this.lenis) {
       this.lenis.scrollTo(target, {
@@ -113,13 +103,11 @@ class SmoothScroll {
     }
   }
 
-  // Obter instância do Lenis
   getInstance() {
     return this.lenis;
   }
 }
 
-// Singleton para uso global
 let smoothScrollInstance = null;
 
 export const getSmoothScroll = (options) => {

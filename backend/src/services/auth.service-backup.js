@@ -34,10 +34,9 @@ export class AuthService {
         createdAt: true,
       },
     });
-    // aqui gera tokens automaticamente após registro
+
     const tokens = JwtUtil.generateTokenPair(user.id, user.email);
 
-    // salva o refresh token no banco
     await prisma.user.update({
       where: { id: user.id },
       data: { refreshToken: tokens.refreshToken },

@@ -1,7 +1,3 @@
-﻿// ============================================================================
-// COMPRAS MISS DIOR PARFUM PAGE - Página de produto Miss Dior Parfum
-// ============================================================================
-
 import "../components/AppNavigation.js";
 import "../components/FooterSection.js";
 import "../components/ProductReviews.js";
@@ -16,13 +12,10 @@ export class ComprasMissDiorParfumPage extends HTMLElement {
     this.initInteractions();
   }
 
-  disconnectedCallback() {
-    // Cleanup
-  }
+  disconnectedCallback() {}
 
   initInteractions() {
     requestAnimationFrame(() => {
-      // Product data for each size
       const productData = {
         "35ml": {
           image: "/images/35mlmiss.webp",
@@ -38,7 +31,6 @@ export class ComprasMissDiorParfumPage extends HTMLElement {
         },
       };
 
-      // Size selector buttons with image and price change
       const sizeButtons = this.querySelectorAll(".size-option");
       const productImage = this.querySelector(".product-main-image");
       const buttonPrice = this.querySelector(".button-price");
@@ -47,27 +39,22 @@ export class ComprasMissDiorParfumPage extends HTMLElement {
         button.addEventListener("click", () => {
           const size = button.dataset.size;
 
-          // Remove active class from all buttons
           sizeButtons.forEach((btn) => btn.classList.remove("active"));
           button.classList.add("active");
 
-          // Update image and price
           if (productData[size]) {
-            // Fade out effect
             productImage.style.opacity = "0";
 
             setTimeout(() => {
               productImage.src = productData[size].image;
               buttonPrice.textContent = productData[size].price;
 
-              // Fade in effect
               productImage.style.opacity = "1";
             }, 300);
           }
         });
       });
 
-      // Tab navigation
       const tabButtons = this.querySelectorAll(".tab-button");
       const tabContents = this.querySelectorAll(".tab-content");
 
@@ -75,11 +62,9 @@ export class ComprasMissDiorParfumPage extends HTMLElement {
         button.addEventListener("click", () => {
           const tabId = button.dataset.tab;
 
-          // Remove active class from all buttons and contents
           tabButtons.forEach((btn) => btn.classList.remove("active"));
           tabContents.forEach((content) => content.classList.remove("active"));
 
-          // Add active class to clicked button and corresponding content
           button.classList.add("active");
           const targetContent = this.querySelector(`.tab-content[data-tab="${tabId}"]`);
           if (targetContent) {
@@ -88,7 +73,6 @@ export class ComprasMissDiorParfumPage extends HTMLElement {
         });
       });
 
-      // Image Reveal Animation with GSAP
       if (window.gsap && window.ScrollTrigger) {
         const imageRevealWrapper = this.querySelector(".image-reveal-wrapper-full");
         if (imageRevealWrapper) {
@@ -122,8 +106,6 @@ export class ComprasMissDiorParfumPage extends HTMLElement {
             );
         }
       }
-
-      // Reviews agora são gerenciados pelo componente <product-reviews>
     });
   }
 
@@ -281,8 +263,6 @@ export class ComprasMissDiorParfumPage extends HTMLElement {
             collection="A gama"
           ></product-reviews>
         </div>
-
-       
 
         <!-- Footer -->
         <footer-section></footer-section>

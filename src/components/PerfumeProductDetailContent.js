@@ -1,7 +1,3 @@
-// ============================================================================
-// PERFUME PRODUCT DETAIL CONTENT - Componente reutilizável de conteúdo
-// ============================================================================
-
 import { getPerfumeById } from "../data/perfume-products.js";
 
 export class PerfumeProductDetailContent extends HTMLElement {
@@ -23,7 +19,6 @@ export class PerfumeProductDetailContent extends HTMLElement {
       return;
     }
 
-    // Define o tamanho default
     this.currentSize = this.product.defaultSize;
 
     this.render();
@@ -100,7 +95,6 @@ export class PerfumeProductDetailContent extends HTMLElement {
 
   initInteractions() {
     requestAnimationFrame(() => {
-      // Size selector buttons
       const sizeButtons = this.querySelectorAll(".size-option");
       const productImage = this.querySelector(".product-main-image");
       const buttonPrice = this.querySelector(".button-price");
@@ -110,14 +104,11 @@ export class PerfumeProductDetailContent extends HTMLElement {
           const size = button.dataset.size;
           this.currentSize = size;
 
-          // Remove active class from all buttons
           sizeButtons.forEach((btn) => btn.classList.remove("active"));
           button.classList.add("active");
 
-          // Update image and price
           const sizeData = this.getCurrentSizeData();
           if (sizeData) {
-            // Fade out effect
             productImage.style.opacity = "0";
 
             setTimeout(() => {
@@ -129,7 +120,6 @@ export class PerfumeProductDetailContent extends HTMLElement {
         });
       });
 
-      // Tab navigation
       const tabButtons = this.querySelectorAll(".tab-button");
       const tabContents = this.querySelectorAll(".tab-content");
 
@@ -148,7 +138,6 @@ export class PerfumeProductDetailContent extends HTMLElement {
         });
       });
 
-      // Image Reveal Animation
       if (window.gsap && window.ScrollTrigger) {
         const imageRevealWrapper = this.querySelector(".image-reveal-wrapper-full");
         if (imageRevealWrapper) {
@@ -183,7 +172,6 @@ export class PerfumeProductDetailContent extends HTMLElement {
         }
       }
 
-      // Review Form Modal
       const writeReviewBtn = this.querySelector(".reviews-load-more");
       const reviewModal = this.querySelector(".review-modal");
       const closeModalBtn = this.querySelector(".close-review-modal");

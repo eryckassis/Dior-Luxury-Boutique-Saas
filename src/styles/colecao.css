@@ -1,14 +1,8 @@
-/* ============================================================================
-   COLEÇÃO PAGE - Estilos minimalistas com Virtual Scrolling
-   ============================================================================ */
-
-/* CRITICAL: Enable scroll on colecao page */
 body:has(.colecao-page-content) {
   overflow-x: hidden !important;
   overflow-y: auto !important;
 }
 
-/* Hero Text Section - Estilo minimalista */
 .colecao-hero-text-section {
   background-color: #f5f5f5;
   padding: 120px 40px 80px;
@@ -52,7 +46,6 @@ body:has(.colecao-page-content) {
   text-transform: uppercase;
 }
 
-/* Filter Bar - Fixed Bottom Center */
 .filter-bar {
   position: fixed;
   bottom: 40px;
@@ -68,7 +61,6 @@ body:has(.colecao-page-content) {
   pointer-events: auto;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .colecao-hero-text-section {
     padding: 80px 24px 60px;
@@ -85,7 +77,6 @@ body:has(.colecao-page-content) {
   }
 }
 
-/* Virtual Scroll Optimizations */
 .virtual-scroll-container {
   position: relative;
   will-change: transform;
@@ -105,7 +96,6 @@ body:has(.colecao-page-content) {
   will-change: transform;
 }
 
-/* Product Item - Sem animações hover */
 .product-showcase-item {
   transition: none;
   cursor: pointer;
@@ -115,7 +105,6 @@ body:has(.colecao-page-content) {
   transform: none;
 }
 
-/* Products Grid Base - Centralização */
 .products-showcase-section {
   display: flex;
   justify-content: center;
@@ -127,14 +116,9 @@ body:has(.colecao-page-content) {
   max-width: 100%;
 }
 
-/* Remove animações de hover nos produtos */
 .product-showcase-image-wrapper:hover .product-showcase-image {
   transform: none;
 }
-
-/* ============================================================================
-   HIGHLIGHT CARD - Card destacado a cada 8 produtos
-   ============================================================================ */
 
 .product-highlight-card {
   position: relative;
@@ -217,7 +201,6 @@ body:has(.colecao-page-content) {
   color: #1a1a1a;
 }
 
-/* Drag cards - Sem animações */
 .drag-card {
   transition: none;
 }
@@ -234,11 +217,6 @@ body:has(.colecao-page-content) {
   transform: none;
 }
 
-/* ============================================================================
-   RESPONSIVE - Mobile First
-   ============================================================================ */
-
-/* Tablet - 768px */
 @media (max-width: 768px) {
   .colecao-hero-text-section {
     padding: 80px 24px 60px;
@@ -254,7 +232,6 @@ body:has(.colecao-page-content) {
     font-size: 16px;
   }
 
-  /* Drag Cards Mobile */
   .drag-cards-container {
     margin-bottom: 1.5rem;
     padding: 0;
@@ -279,7 +256,6 @@ body:has(.colecao-page-content) {
     max-width: 90%;
   }
 
-  /* Products Grid - 2 colunas em tablet */
   .products-showcase-grid {
     grid-template-columns: repeat(2, 1fr) !important;
     justify-items: center;
@@ -320,7 +296,6 @@ body:has(.colecao-page-content) {
     font-size: 0.65rem;
   }
 
-  /* Highlight Card - Tablet */
   .product-highlight-card {
     margin: 1.5rem 0;
     border-radius: 8px;
@@ -345,7 +320,6 @@ body:has(.colecao-page-content) {
   }
 }
 
-/* Mobile Small - 480px */
 @media (max-width: 480px) {
   .colecao-hero-text-section {
     padding: 60px 20px 40px;
@@ -365,7 +339,6 @@ body:has(.colecao-page-content) {
     font-size: 12px;
   }
 
-  /* Drag Cards Mobile Small */
   .drag-cards-track {
     gap: 1rem;
     padding: 0 0.75rem;
@@ -381,7 +354,6 @@ body:has(.colecao-page-content) {
     font-size: 1.1rem;
   }
 
-  /* Products Grid - 2 colunas em mobile */
   .products-showcase-section {
     padding: 2rem 1rem !important;
   }
@@ -417,7 +389,6 @@ body:has(.colecao-page-content) {
     font-size: 0.8rem !important;
   }
 
-  /* Product Arrows - Menor em mobile */
   .product-arrow {
     width: 32px !important;
     height: 32px !important;
@@ -428,7 +399,6 @@ body:has(.colecao-page-content) {
     height: 18px !important;
   }
 
-  /* Highlight Card - Mobile */
   .product-highlight-card {
     margin: 1rem 0;
     border-radius: 6px;
@@ -455,13 +425,11 @@ body:has(.colecao-page-content) {
     letter-spacing: 0.08em;
   }
 
-  /* Progress bar menor */
   .product-carousel-progress {
     height: 2px !important;
   }
 }
 
-/* Mobile Extra Small - 375px (iPhone SE, etc) */
 @media (max-width: 375px) {
   .colecao-hero-title {
     font-size: 24px;
@@ -492,7 +460,6 @@ body:has(.colecao-page-content) {
     font-size: 0.75rem !important;
   }
 
-  /* Highlight Card - iPhone SE */
   .product-highlight-card {
     margin: 0.75rem 0;
     border-radius: 5px;
@@ -514,7 +481,6 @@ body:has(.colecao-page-content) {
   }
 }
 
-/* Landscape Mobile - 568px */
 @media (max-width: 768px) and (orientation: landscape) {
   .colecao-hero-text-section {
     padding: 40px 20px 30px;
@@ -534,7 +500,6 @@ body:has(.colecao-page-content) {
     height: 350px;
   }
 
-  /* Highlight Card - Landscape */
   .product-highlight-card {
     margin: 1rem 0;
     aspect-ratio: 21 / 9;
@@ -563,9 +528,7 @@ body:has(.colecao-page-content) {
   }
 }
 
-/* Touch Improvements */
 @media (hover: none) and (pointer: coarse) {
-  /* Remove hover states em touch devices */
   .product-showcase-item:hover {
     transform: none !important;
   }
@@ -574,7 +537,6 @@ body:has(.colecao-page-content) {
     transform: none !important;
   }
 
-  /* Aumenta área de toque */
   .product-arrow {
     min-width: 44px;
     min-height: 44px;
@@ -585,7 +547,6 @@ body:has(.colecao-page-content) {
     min-height: 10px;
   }
 
-  /* Melhora feedback visual */
   .product-showcase-item:active {
     opacity: 0.7;
   }

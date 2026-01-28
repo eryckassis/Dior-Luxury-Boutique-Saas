@@ -1,8 +1,3 @@
-// ============================================================================
-// COLECAO PRODUCT DETAIL CONTENT - Conteúdo da página de detalhes do produto da coleção
-// Galeria com drag horizontal + Informações do produto com tabs
-// ============================================================================
-
 import { getColecaoProductById, getRelatedColecaoProducts } from "../data/colecao-products.js";
 
 export class ColecaoProductDetailContent extends HTMLElement {
@@ -18,20 +13,11 @@ export class ColecaoProductDetailContent extends HTMLElement {
     this.currentImages = [];
   }
 
-  // ============================================================================
-  // HELPER METHODS - Lógica de exibição baseada na categoria
-  // ============================================================================
-
-  /**
-   * Determina se o produto deve mostrar seletor de tamanho
-   * @returns {boolean}
-   */
   shouldShowSizeSelector() {
     if (!this.product) return false;
 
     const category = this.product.category?.toLowerCase();
 
-    // Produtos com seleção de tamanho
     const categoriesWithSize = [
       "sapato",
       "blazer",
@@ -47,10 +33,6 @@ export class ColecaoProductDetailContent extends HTMLElement {
     return categoriesWithSize.includes(category);
   }
 
-  /**
-   * Determina se o produto deve mostrar seletor de cores
-   * @returns {boolean}
-   */
   shouldShowColorSelector() {
     if (!this.product || !this.product.colors || this.product.colors.length === 0) {
       return false;
@@ -58,10 +40,6 @@ export class ColecaoProductDetailContent extends HTMLElement {
     return true;
   }
 
-  /**
-   * Determina se o produto usa tamanhos numéricos (sapatos) ou letras (roupas)
-   * @returns {string} 'numeric' | 'alpha' | 'none'
-   */
   getSizeType() {
     if (!this.product) return "none";
 
@@ -89,7 +67,6 @@ export class ColecaoProductDetailContent extends HTMLElement {
       return;
     }
 
-    // Inicializa preço e imagens com a primeira cor (ou valores base)
     this.currentPrice = this.product.colors?.[0]?.price || this.product.price;
     this.currentImages = this.product.colors?.[0]?.images || this.product.images;
 
@@ -100,25 +77,21 @@ export class ColecaoProductDetailContent extends HTMLElement {
   }
 
   disconnectedCallback() {
-    // Cleanup do Draggable
     if (this.draggable) {
       this.draggable.kill();
       this.draggable = null;
     }
 
-    // Cleanup do Draggable de produtos relacionados
     if (this.relatedDraggable) {
       this.relatedDraggable.kill();
       this.relatedDraggable = null;
     }
 
-    // Cleanup do ResizeObserver
     if (this.resizeObserver) {
       this.resizeObserver.disconnect();
       this.resizeObserver = null;
     }
 
-    // Cleanup do event listener de resize
     if (this.handleResize) {
       window.removeEventListener("resize", this.handleResize);
       this.handleResize = null;
@@ -126,7 +99,6 @@ export class ColecaoProductDetailContent extends HTMLElement {
   }
 
   initGalleryDrag() {
-    // Aguarda o DOM estar pronto e imagens carregadas
     requestAnimationFrame(() => {
       const track = this.querySelector(".product-gallery-track");
       const wrapper = this.querySelector(".product-gallery-wrapper");
@@ -139,7 +111,6 @@ export class ColecaoProductDetailContent extends HTMLElement {
       const slides = track.querySelectorAll(".product-gallery-slide");
       if (slides.length === 0) return;
 
-      // Função para calcular bounds corretamente
       const calculateBounds = () => {
         const wrapperWidth = wrapper.offsetWidth;
         const slideWidth = slides[0]?.offsetWidth || wrapperWidth;
@@ -150,28 +121,23 @@ export class ColecaoProductDetailContent extends HTMLElement {
         return { minX: maxDrag, maxX: 0 };
       };
 
-      // Função para configurar dimensões
       const setupDimensions = () => {
         const wrapperWidth = wrapper.offsetWidth;
 
-        // Define largura de cada slide = largura do wrapper
         slides.forEach((slide) => {
           slide.style.width = `${wrapperWidth}px`;
           slide.style.minWidth = `${wrapperWidth}px`;
           slide.style.flexShrink = "0";
         });
 
-        // Define largura do track
         track.style.width = `${slides.length * wrapperWidth}px`;
         track.style.display = "flex";
         track.style.willChange = "transform";
       };
 
-      // Configura dimensões iniciais
       setupDimensions();
       let bounds = calculateBounds();
 
-      // Função para snap ao slide mais próximo
       const snapToNearestSlide = () => {
         const wrapperWidth = wrapper.offsetWidth;
         const currentX = window.gsap.getProperty(track, "x") || 0;
@@ -190,7 +156,6 @@ export class ColecaoProductDetailContent extends HTMLElement {
         });
       };
 
-      // Criar Draggable
       this.draggable = window.Draggable.create(track, {
         type: "x",
         bounds: bounds,
@@ -202,7 +167,6 @@ export class ColecaoProductDetailContent extends HTMLElement {
         allowNativeTouchScrolling: false,
         force3D: true,
         onPress: function () {
-          // Parar qualquer animação em andamento para evitar conflito
           window.gsap.killTweensOf(track);
         },
         onDrag: () => {
@@ -219,13 +183,12 @@ export class ColecaoProductDetailContent extends HTMLElement {
         },
       })[0];
 
-      // Atualiza bounds no resize
       const handleResize = () => {
         setupDimensions();
         bounds = calculateBounds();
         if (this.draggable) {
           this.draggable.applyBounds(bounds);
-          // Reposiciona para o slide atual
+
           const wrapperWidth = wrapper.offsetWidth;
           window.gsap.set(track, { x: -(this.currentSlide * wrapperWidth) });
           this.updateProgress();
@@ -235,7 +198,6 @@ export class ColecaoProductDetailContent extends HTMLElement {
       this.handleResize = handleResize;
       window.addEventListener("resize", this.handleResize);
 
-      // ResizeObserver para detectar mudanças no wrapper
       this.resizeObserver = new ResizeObserver(() => {
         setupDimensions();
         bounds = calculateBounds();
@@ -249,7 +211,6 @@ export class ColecaoProductDetailContent extends HTMLElement {
 
       this.resizeObserver.observe(wrapper);
 
-      // Initial progress update
       this.updateProgress();
     });
   }
@@ -304,7 +265,6 @@ export class ColecaoProductDetailContent extends HTMLElement {
   }
 
   initEventListeners() {
-    // Navegação da galeria
     this.querySelector(".gallery-nav-prev")?.addEventListener("click", () => {
       if (this.currentSlide > 0) this.goToSlide(this.currentSlide - 1);
     });
@@ -314,38 +274,30 @@ export class ColecaoProductDetailContent extends HTMLElement {
       if (this.currentSlide < slides.length - 1) this.goToSlide(this.currentSlide + 1);
     });
 
-    // Dots da galeria
     this.querySelectorAll(".gallery-dot").forEach((dot, index) => {
       dot.addEventListener("click", () => this.goToSlide(index));
     });
 
-    // Seleção de cor
     this.querySelectorAll(".product-color-item").forEach((item, index) => {
       item.addEventListener("click", () => this.selectColor(index));
     });
 
-    // Seleção de tamanho
     this.querySelectorAll(".product-size-item:not(.unavailable)").forEach((item) => {
       item.addEventListener("click", () => this.selectSize(item));
     });
 
-    // Tabs
     this.querySelectorAll(".product-tab-btn").forEach((btn, index) => {
       btn.addEventListener("click", () => this.switchTab(index));
     });
 
-    // Botão Ver Mais na descrição
     this.querySelector(".product-ver-mais")?.addEventListener("click", (e) => {
       e.preventDefault();
       this.toggleDescription();
     });
 
-    // Botão Adicionar ao Carrinho
     this.querySelector(".product-btn-primary")?.addEventListener("click", () => {
       this.addToCart();
     });
-
-    // Event listeners dos produtos relacionados são tratados no drag
   }
 
   toggleDescription() {
@@ -378,28 +330,23 @@ export class ColecaoProductDetailContent extends HTMLElement {
   selectColor(index) {
     this.selectedColor = index;
 
-    // Atualiza visual
     this.querySelectorAll(".product-color-item").forEach((item, i) => {
       item.classList.toggle("active", i === index);
     });
 
-    // Atualiza imagens e preço baseado na cor selecionada
     const color = this.product.colors[index];
     if (color) {
-      // Atualiza preço
       this.currentPrice = color.price || this.product.price;
       const priceElement = this.querySelector(".product-price");
       if (priceElement) {
         priceElement.textContent = this.currentPrice;
       }
 
-      // Atualiza título da cor
       const colorTitleElement = this.querySelector(".product-colors-title");
       if (colorTitleElement) {
         colorTitleElement.textContent = `Cor: ${color.label}`;
       }
 
-      // Atualiza galeria de imagens se a cor tiver imagens próprias
       if (color.images && color.images.length > 0) {
         this.currentImages = color.images;
         this.updateGallery();
@@ -422,13 +369,11 @@ export class ColecaoProductDetailContent extends HTMLElement {
 
     if (!track || !this.currentImages) return;
 
-    // Destrói o draggable existente
     if (this.draggable) {
       this.draggable.kill();
       this.draggable = null;
     }
 
-    // Atualiza o HTML dos slides
     track.innerHTML = this.currentImages
       .map(
         (img, index) => `
@@ -439,7 +384,6 @@ export class ColecaoProductDetailContent extends HTMLElement {
       )
       .join("");
 
-    // Atualiza dots de paginação
     if (pagination) {
       pagination.innerHTML = this.currentImages
         .map(
@@ -450,10 +394,8 @@ export class ColecaoProductDetailContent extends HTMLElement {
         .join("");
     }
 
-    // Reseta slide atual
     this.currentSlide = 0;
 
-    // Reinicializa o draggable
     setTimeout(() => {
       this.initGalleryDrag();
     }, 100);
@@ -462,19 +404,16 @@ export class ColecaoProductDetailContent extends HTMLElement {
   switchTab(index) {
     this.activeTab = index;
 
-    // Atualiza botões
     this.querySelectorAll(".product-tab-btn").forEach((btn, i) => {
       btn.classList.toggle("active", i === index);
     });
 
-    // Atualiza painéis
     this.querySelectorAll(".product-tab-panel").forEach((panel, i) => {
       panel.classList.toggle("active", i === index);
     });
   }
 
   addToCart() {
-    // Valida tamanho apenas se o produto requer seleção de tamanho
     if (
       this.shouldShowSizeSelector() &&
       !this.selectedSize &&
@@ -486,13 +425,11 @@ export class ColecaoProductDetailContent extends HTMLElement {
       return;
     }
 
-    // Valida cor apenas se o produto tem cores disponíveis
     if (this.shouldShowColorSelector() && !this.product.colors[this.selectedColor]) {
       alert("Por favor, selecione uma cor");
       return;
     }
 
-    // Adiciona ao carrinho
     const cartItem = {
       product: this.product,
       color: this.shouldShowColorSelector() ? this.product.colors[this.selectedColor] : null,
@@ -533,7 +470,6 @@ export class ColecaoProductDetailContent extends HTMLElement {
       const cards = grid.querySelectorAll(".related-product-card");
       if (cards.length === 0) return;
 
-      // Calcula largura total do grid
       const calculateBounds = () => {
         const containerWidth = container.offsetWidth;
         const gridWidth = grid.scrollWidth;
@@ -546,7 +482,6 @@ export class ColecaoProductDetailContent extends HTMLElement {
         };
       };
 
-      // Cria o Draggable para produtos relacionados
       this.relatedDraggable = window.Draggable.create(grid, {
         type: "x",
         bounds: calculateBounds(),
@@ -565,10 +500,8 @@ export class ColecaoProductDetailContent extends HTMLElement {
         onThrowComplete: () => this.updateRelatedProgress(),
       })[0];
 
-      // Event listeners para clicks nos cards
       cards.forEach((card) => {
         card.addEventListener("click", (e) => {
-          // Se foi um drag, não navega
           if (this.relatedDraggable && this.relatedDraggable.isDragging) {
             e.preventDefault();
             return;
@@ -576,13 +509,11 @@ export class ColecaoProductDetailContent extends HTMLElement {
 
           const productId = card.getAttribute("data-product-id");
           if (productId) {
-            // Navega para o produto da coleção
             window.router.navigate(`/colecao/product/${productId}`);
           }
         });
       });
 
-      // Atualiza bounds no resize
       const resizeHandler = () => {
         if (this.relatedDraggable) {
           this.relatedDraggable.applyBounds(calculateBounds());
@@ -592,7 +523,6 @@ export class ColecaoProductDetailContent extends HTMLElement {
 
       window.addEventListener("resize", resizeHandler);
 
-      // ResizeObserver
       const resizeObserver = new ResizeObserver(() => {
         if (this.relatedDraggable) {
           this.relatedDraggable.applyBounds(calculateBounds());
@@ -602,7 +532,6 @@ export class ColecaoProductDetailContent extends HTMLElement {
 
       resizeObserver.observe(container);
 
-      // Initial progress update
       this.updateRelatedProgress();
     }, 300);
   }
@@ -630,7 +559,7 @@ export class ColecaoProductDetailContent extends HTMLElement {
 
   render() {
     const { product } = this;
-    // Pega produtos relacionados misturando categorias quando necessário
+
     const relatedProducts = getRelatedColecaoProducts(product.id, 8, true);
 
     this.innerHTML = `

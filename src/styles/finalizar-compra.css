@@ -1,13 +1,8 @@
-/* ============================================================================
-   FINALIZAR COMPRA PAGE STYLES
-   ============================================================================ */
-
 .finalizar-compra-page {
   background: #ffffff;
   min-height: 100vh;
 }
 
-/* Hero Section */
 .checkout-hero {
   background: linear-gradient(135deg, #f8f8f8 0%, #ffffff 100%);
   padding: 120px 0 60px;
@@ -40,7 +35,6 @@
   font-family: "Hellix", sans-serif;
 }
 
-/* Main Container */
 .checkout-container {
   display: grid;
   grid-template-columns: 1fr 520px;
@@ -50,7 +44,6 @@
   max-width: 1400px;
 }
 
-/* Form Section */
 .checkout-form-section {
   display: flex;
   flex-direction: column;
@@ -133,7 +126,6 @@
   padding-right: 40px;
 }
 
-/* Validation States for Contact Form */
 .form-group input.valid,
 .form-group select.valid {
   border-color: #28a745;
@@ -188,7 +180,6 @@
   border-color: #dc3545;
 }
 
-/* Payment Methods */
 .payment-methods {
   display: flex;
   flex-direction: column;
@@ -234,7 +225,6 @@
   flex-shrink: 0;
 }
 
-/* Order Summary */
 .checkout-summary-section {
   position: sticky;
   top: 120px;
@@ -259,7 +249,6 @@
   letter-spacing: 0.02em;
 }
 
-/* Cart Table Header */
 .cart-table-header {
   display: grid;
   grid-template-columns: 2.5fr 1fr 1.2fr 1fr;
@@ -285,7 +274,6 @@
   text-align: center;
 }
 
-/* Cart Table Items */
 .cart-table-items {
   background: #ffffff;
   padding: 0;
@@ -315,7 +303,6 @@
   background: #f5f5f5;
 }
 
-/* Product Cell */
 .cart-product-cell {
   display: flex;
   align-items: center;
@@ -357,7 +344,6 @@
   font-family: "Hellix", sans-serif;
 }
 
-/* Price Cell */
 .cart-price-cell {
   padding: 0 5px;
   color: #000000;
@@ -367,7 +353,6 @@
   text-align: center;
 }
 
-/* Quantity Cell */
 .cart-quantity-cell {
   display: flex;
   justify-content: center;
@@ -442,7 +427,6 @@
   text-align: center;
 }
 
-/* Total Cell */
 .cart-total-cell {
   display: flex;
   justify-content: center;
@@ -460,7 +444,6 @@
   font-weight: 600;
 }
 
-/* Remove Button */
 .cart-remove-btn {
   display: flex;
   flex-shrink: 0;
@@ -523,7 +506,6 @@
   padding: 0;
 }
 
-/* Shipping Options */
 .shipping-options {
   border-bottom: 1px solid #e0e0e0;
   padding: 20px;
@@ -585,7 +567,6 @@
   font-family: "Hellix", "Helvetica Neue", Arial, sans-serif;
 }
 
-/* Order Summary Totals */
 .order-summary-totals {
   border-bottom: 1px solid #e0e0e0;
   padding: 20px;
@@ -675,7 +656,6 @@
   flex-shrink: 0;
 }
 
-/* Responsive */
 @media (max-width: 1200px) {
   .checkout-container {
     grid-template-columns: 1fr;
@@ -796,10 +776,6 @@
   }
 }
 
-/* ============================================================================
-   PAYMENT MODAL STYLES
-   ============================================================================ */
-
 .payment-modal-backdrop {
   display: none;
   position: fixed;
@@ -834,7 +810,6 @@
   max-height: 90vh;
   overflow-y: auto;
 
-  /* Variáveis CSS para animação GSAP */
   --scrollbar-opacity: 0.7;
   --scrollbar-scale: 1;
 }
@@ -845,7 +820,6 @@
   opacity: 1;
 }
 
-/* Custom Scrollbar para o Modal */
 .payment-modal::-webkit-scrollbar {
   width: 8px;
 }
@@ -870,7 +844,6 @@
   background: #333333;
 }
 
-/* Firefox Scrollbar */
 .payment-modal {
   scrollbar-color: #000000 #f1f1f1;
   scrollbar-width: thin;
@@ -919,7 +892,6 @@
   opacity: 0.7;
 }
 
-/* Payment Method Selection */
 .payment-method-selection {
   display: flex;
   gap: 15px;
@@ -971,7 +943,6 @@
   color: #666;
 }
 
-/* Card Brand Selector */
 .card-brand-selector {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -1018,7 +989,6 @@
   border-color: #000;
 }
 
-/* Security Badge */
 .security-badge {
   display: flex;
   align-items: center;
@@ -1034,7 +1004,6 @@
   height: 16px;
 }
 
-/* Form Fields */
 .payment-modal-form {
   display: flex;
   flex-direction: column;
@@ -1084,7 +1053,6 @@
   font-family: "Hellix", sans-serif;
 }
 
-/* Validation States */
 .form-field input.valid,
 .form-field select.valid {
   border-color: #28a745;
@@ -1124,7 +1092,6 @@
   margin-bottom: 20px;
 }
 
-/* Checkbox */
 .form-checkbox {
   display: flex;
   align-items: start;
@@ -1147,7 +1114,6 @@
   font-family: "Hellix", sans-serif;
 }
 
-/* Two Cards Option */
 .two-cards-option {
   transition: background 0.2s ease;
   cursor: pointer;
@@ -1166,7 +1132,6 @@
   font-family: "Hellix", sans-serif;
 }
 
-/* reCAPTCHA Notice */
 .recaptcha-notice {
   margin-bottom: 25px;
   color: #999;
@@ -1185,7 +1150,6 @@
   opacity: 0.7;
 }
 
-/* Pix Section */
 .pix-section {
   margin-bottom: 25px;
   border-radius: 8px;
@@ -1201,7 +1165,6 @@
   font-family: "Hellix", sans-serif;
 }
 
-/* Submit Button */
 .payment-submit-btn {
   transition: all 0.3s ease;
   cursor: pointer;
@@ -1245,7 +1208,6 @@
   background: #ccc;
 }
 
-/* Responsive Payment Modal */
 @media (max-width: 768px) {
   .payment-modal {
     width: 100%;
@@ -1288,10 +1250,6 @@
     font-size: 0.95rem;
   }
 }
-
-/* ============================================================================
-   GIFT OPTIONS SECTION
-   ============================================================================ */
 
 .gift-subtitle {
   margin: 20px 0 10px;
@@ -1389,7 +1347,6 @@
   color: #333;
 }
 
-/* Gift Message Section */
 .gift-message-section {
   margin-top: 30px;
   border-top: 1px solid #e0e0e0;

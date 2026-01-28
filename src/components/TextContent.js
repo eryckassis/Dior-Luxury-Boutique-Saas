@@ -1,7 +1,3 @@
-// ============================================================================
-// TEXT CONTENT WEB COMPONENT - Seção de texto
-// ============================================================================
-
 export class TextContent extends HTMLElement {
   constructor() {
     super();

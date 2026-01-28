@@ -1,8 +1,3 @@
-/* ============================================================================
-   BOUTIQUES PAGE - Estilos da página de localização das boutiques
-   ============================================================================ */
-
-/* Container Principal */
 .boutiques-page {
   background: #fff;
   padding-top: 80px;
@@ -15,10 +10,6 @@
   height: calc(100vh - 80px);
 }
 
-/* ============================================================================
-   SIDEBAR - Lado Esquerdo
-   ============================================================================ */
-
 .boutiques-sidebar {
   display: flex;
   flex-direction: column;
@@ -27,7 +18,6 @@
   overflow: hidden;
 }
 
-/* Header com Botão Voltar */
 .boutiques-header {
   border-bottom: 1px solid #f0f0f0;
   padding: 20px 30px;
@@ -56,7 +46,6 @@
   height: 16px;
 }
 
-/* Campo de Busca */
 .boutiques-search {
   display: flex;
   gap: 12px;
@@ -108,7 +97,6 @@
   stroke: #1a1a1a;
 }
 
-/* Filtros */
 .boutiques-filters {
   display: flex;
   flex-wrap: wrap;
@@ -172,7 +160,6 @@
   font-size: 11px;
 }
 
-/* Contador */
 .boutiques-count {
   border-bottom: 1px solid #f0f0f0;
   padding: 20px 30px;
@@ -184,14 +171,12 @@
   text-transform: uppercase;
 }
 
-/* Lista de Boutiques */
 .boutiques-list {
   flex: 1;
   padding: 0;
   overflow-y: auto;
 }
 
-/* Card da Boutique */
 .boutique-card {
   transition: background 0.3s ease;
   cursor: pointer;
@@ -291,7 +276,6 @@
   text-decoration: underline;
 }
 
-/* Empty State */
 .boutiques-empty {
   padding: 40px 30px;
   text-align: center;
@@ -304,10 +288,6 @@
   font-family: "Hellix", sans-serif;
 }
 
-/* ============================================================================
-   MAPA - Lado Direito
-   ============================================================================ */
-
 .boutiques-map-container {
   position: relative;
   background: #f0f0f0;
@@ -318,7 +298,6 @@
   height: 100%;
 }
 
-/* Loading do Mapa */
 .map-loading {
   display: flex;
   position: absolute;
@@ -351,10 +330,6 @@
   font-size: 13px;
   font-family: "Hellix", sans-serif;
 }
-
-/* ============================================================================
-   RESPONSIVE
-   ============================================================================ */
 
 @media (max-width: 1024px) {
   .boutiques-container {

@@ -95,7 +95,6 @@ export class AuthValidator {
     }),
   });
 
-  // Schema para atualização de perfil
   static profileUpdateSchema = Joi.object({
     name: Joi.string().min(2).max(100).trim().messages({
       "string.base": "O nome deve ser um texto",

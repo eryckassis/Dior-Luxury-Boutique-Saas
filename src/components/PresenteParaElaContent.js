@@ -1,7 +1,3 @@
-﻿// ============================================================================
-// PRESENTE PARA ELA CONTENT - Componente de conteúdo da página
-// ============================================================================
-
 import { products } from "../data/products.js";
 import { router } from "../router/router.js";
 
@@ -21,12 +17,10 @@ export class PresenteParaElaContent extends HTMLElement {
   }
 
   disconnectedCallback() {
-    // Cleanup draggable
     if (this.draggableInstance) {
       this.draggableInstance.kill();
     }
 
-    // Cleanup product carousels
     if (this.productCarousels) {
       this.productCarousels.forEach((carousel) => carousel.kill());
     }
@@ -54,23 +48,19 @@ export class PresenteParaElaContent extends HTMLElement {
         return;
       }
 
-      // Função para calcular bounds corretamente
       const calculateBounds = () => {
         const containerWidth = container.offsetWidth;
-        // Usar getBoundingClientRect para pegar a largura REAL do track
+
         const trackRect = track.getBoundingClientRect();
         const firstCard = cards[0].getBoundingClientRect();
         const lastCard = cards[cards.length - 1].getBoundingClientRect();
 
-        // Calcular largura total: do início do primeiro card ao fim do último + padding
         const trackStyles = getComputedStyle(track);
         const paddingLeft = parseFloat(trackStyles.paddingLeft) || 0;
         const paddingRight = parseFloat(trackStyles.paddingRight) || 0;
 
-        // Largura real do conteúdo
         const contentWidth = lastCard.right - firstCard.left + paddingLeft + paddingRight;
 
-        // MaxDrag: quanto precisa mover para ver o último card completamente
         const maxDrag = Math.min(0, -(contentWidth - containerWidth));
 
         console.log("📏 Bounds calculados:", {
@@ -86,7 +76,6 @@ export class PresenteParaElaContent extends HTMLElement {
 
       let bounds = calculateBounds();
 
-      // Função para atualizar a barra de progresso
       const updateProgress = (x) => {
         if (bounds.minX >= 0) return;
         const progress = Math.abs(x / bounds.minX);
@@ -99,7 +88,6 @@ export class PresenteParaElaContent extends HTMLElement {
         return;
       }
 
-      // Criar Draggable
       this.draggableInstance = window.Draggable.create(track, {
         type: "x",
         bounds: bounds,
@@ -124,7 +112,6 @@ export class PresenteParaElaContent extends HTMLElement {
         },
       })[0];
 
-      // Recalcular bounds no resize
       window.addEventListener("resize", () => {
         bounds = calculateBounds();
         if (this.draggableInstance) {
@@ -132,7 +119,6 @@ export class PresenteParaElaContent extends HTMLElement {
         }
       });
 
-      // Clique na barra de progresso
       progressBar.addEventListener("click", (e) => {
         const rect = progressBar.getBoundingClientRect();
         const clickX = e.clientX - rect.left;
@@ -171,9 +157,7 @@ export class PresenteParaElaContent extends HTMLElement {
 
         const imageCount = images.length;
 
-        // Criar setas dinamicamente (após o track para ficarem acima)
         const createArrows = () => {
-          // Seta esquerda
           const leftArrow = document.createElement("button");
           leftArrow.className = "product-arrow product-arrow--left";
           leftArrow.setAttribute("aria-label", "Anterior");
@@ -181,7 +165,6 @@ export class PresenteParaElaContent extends HTMLElement {
             <path d="M15 19L8 12L15 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>`;
 
-          // Seta direita
           const rightArrow = document.createElement("button");
           rightArrow.className = "product-arrow product-arrow--right";
           rightArrow.setAttribute("aria-label", "Próximo");
@@ -189,7 +172,6 @@ export class PresenteParaElaContent extends HTMLElement {
             <path d="M9 5L16 12L9 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>`;
 
-          // Adicionar ao wrapper (depois do track)
           wrapper.appendChild(leftArrow);
           wrapper.appendChild(rightArrow);
 
@@ -198,16 +180,13 @@ export class PresenteParaElaContent extends HTMLElement {
 
         const { leftArrow, rightArrow } = createArrows();
 
-        // Função para configurar dimensões do track e imagens
         const setupDimensions = () => {
           const wrapperWidth = wrapper.offsetWidth;
           const wrapperHeight = wrapper.offsetHeight;
 
-          // Definir largura do track = número de imagens × largura do wrapper
           track.style.width = `${imageCount * wrapperWidth}px`;
           track.style.height = `${wrapperHeight}px`;
 
-          // Definir largura de cada imagem = largura do wrapper
           images.forEach((img) => {
             img.style.width = `${wrapperWidth}px`;
             img.style.height = `${wrapperHeight}px`;
@@ -220,16 +199,12 @@ export class PresenteParaElaContent extends HTMLElement {
           );
         };
 
-        // Configurar dimensões iniciais
         setupDimensions();
 
-        // Calcular largura de cada slide (100% do wrapper)
         const getSlideWidth = () => wrapper.offsetWidth;
 
-        // Calcular maxDrag
         const getMaxDrag = () => -(imageCount - 1) * getSlideWidth();
 
-        // Criar barra de progresso
         const createProgressBar = () => {
           if (imageCount <= 1) return null;
 
@@ -242,7 +217,6 @@ export class PresenteParaElaContent extends HTMLElement {
             progressFill.className = "product-progress-fill";
             progressContainer.appendChild(progressFill);
 
-            // Inserir após o wrapper
             wrapper.parentNode.insertBefore(progressContainer, wrapper.nextSibling);
           }
           return progressContainer.querySelector(".product-progress-fill");
@@ -250,7 +224,6 @@ export class PresenteParaElaContent extends HTMLElement {
 
         const progressFill = createProgressBar();
 
-        // Atualizar barra de progresso
         const updateProgress = () => {
           if (!progressFill || imageCount <= 1) return;
           const currentX = window.gsap.getProperty(track, "x") || 0;
@@ -265,7 +238,6 @@ export class PresenteParaElaContent extends HTMLElement {
           });
         };
 
-        // Navegação por setas
         const navigateByArrow = (direction) => {
           const slideWidth = getSlideWidth();
           const currentX = window.gsap.getProperty(track, "x") || 0;
@@ -281,7 +253,6 @@ export class PresenteParaElaContent extends HTMLElement {
           });
         };
 
-        // Eventos das setas
         leftArrow.addEventListener("click", (e) => {
           e.stopPropagation();
           navigateByArrow(-1);
@@ -292,7 +263,6 @@ export class PresenteParaElaContent extends HTMLElement {
           navigateByArrow(1);
         });
 
-        // Criar Draggable para o track
         const draggable = window.Draggable.create(track, {
           type: "x",
           bounds: {
@@ -304,7 +274,6 @@ export class PresenteParaElaContent extends HTMLElement {
           throwResistance: 1500,
           allowNativeTouchScrolling: false,
           onPress: function () {
-            // Parar qualquer animação em andamento
             window.gsap.killTweensOf(track);
           },
           onDrag: function () {
@@ -320,7 +289,6 @@ export class PresenteParaElaContent extends HTMLElement {
 
         this.productCarousels.push(draggable);
 
-        // Recalcular bounds e dimensões no resize
         const handleResize = () => {
           setupDimensions();
           draggable.applyBounds({
@@ -331,7 +299,6 @@ export class PresenteParaElaContent extends HTMLElement {
 
         window.addEventListener("resize", handleResize);
 
-        // Recalcular quando imagens carregarem
         images.forEach((img) => {
           if (!img.complete) {
             img.addEventListener("load", () => {
@@ -344,7 +311,6 @@ export class PresenteParaElaContent extends HTMLElement {
           }
         });
 
-        // Inicializar progresso
         updateProgress();
 
         console.log(`✅ Carrossel ${index + 1} inicializado com ${imageCount} imagens`);
@@ -354,9 +320,6 @@ export class PresenteParaElaContent extends HTMLElement {
     }, 500);
   }
 
-  // ============================================================================
-  // Navegação para página de detalhe do produto
-  // ============================================================================
   initProductNavigation() {
     setTimeout(() => {
       const productItems = this.querySelectorAll(".product-showcase-item");
@@ -365,12 +328,10 @@ export class PresenteParaElaContent extends HTMLElement {
         const productId = item.getAttribute("data-product-id");
         if (!productId) return;
 
-        // Variáveis para detectar drag vs click
         let startX = 0;
         let startY = 0;
         let isDragging = false;
 
-        // Ao pressionar, guardar posição inicial
         item.addEventListener("mousedown", (e) => {
           startX = e.clientX;
           startY = e.clientY;
@@ -383,7 +344,6 @@ export class PresenteParaElaContent extends HTMLElement {
           isDragging = false;
         });
 
-        // Durante movimento, detectar se é drag
         item.addEventListener("mousemove", (e) => {
           const deltaX = Math.abs(e.clientX - startX);
           const deltaY = Math.abs(e.clientY - startY);
@@ -400,9 +360,7 @@ export class PresenteParaElaContent extends HTMLElement {
           }
         });
 
-        // No click, navegar apenas se não foi drag
         item.addEventListener("click", (e) => {
-          // Ignorar cliques nas setas e bolinhas de cor
           if (
             e.target.closest(".product-arrow") ||
             e.target.closest(".color-dot") ||
@@ -411,17 +369,14 @@ export class PresenteParaElaContent extends HTMLElement {
             return;
           }
 
-          // Se foi drag, não navegar
           if (isDragging) {
             isDragging = false;
             return;
           }
 
-          // Navegar para página de detalhe
           router.navigate(`/produto/${productId}`);
         });
 
-        // Cursor pointer para indicar clicável
         item.style.cursor = "pointer";
       });
 
@@ -435,7 +390,6 @@ export class PresenteParaElaContent extends HTMLElement {
 
       this.animations = [];
 
-      // Products grid animation
       const products = this.querySelectorAll(".presente-ela-product");
 
       products.forEach((product, index) => {
@@ -537,10 +491,7 @@ export class PresenteParaElaContent extends HTMLElement {
     `;
   }
 
-  // Gerar produtos a partir dos dados centralizados
   generateProducts() {
-    // Usa os dados importados do arquivo /data/products.js
-    // Gerar HTML a partir dos dados
     return products
       .map((product, index) => {
         const imagesHtml = product.images

@@ -13,24 +13,36 @@
   "endOfLine": "lf",
   "embeddedLanguageFormatting": "auto",
   "singleAttributePerLine": false,
+  "htmlWhitespaceSensitivity": "css",
   "plugins": ["prettier-plugin-css-order"],
   "overrides": [
     {
       "files": "*.css",
       "options": {
-        "parser": "css"
+        "parser": "css",
+        "tabWidth": 2
       }
     },
     {
       "files": "*.js",
       "options": {
-        "parser": "babel"
+        "parser": "babel",
+        "tabWidth": 2
       }
     },
     {
       "files": "*.html",
       "options": {
-        "parser": "html"
+        "parser": "html",
+        "tabWidth": 2,
+        "printWidth": 120
+      }
+    },
+    {
+      "files": "*.json",
+      "options": {
+        "parser": "json",
+        "tabWidth": 2
       }
     }
   ]

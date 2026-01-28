@@ -1,7 +1,3 @@
-// ============================================================================
-// PRODUCT REVIEWS COMPONENT - Componente de Avaliações Reutilizável
-// ============================================================================
-
 import { reviewService } from "../services/ReviewService.js";
 import { authService } from "../services/AuthService.js";
 import { toast } from "./Toast.js";
@@ -20,7 +16,6 @@ export class ProductReviews extends HTMLElement {
     this._selectedRating = 0;
   }
 
-  // Atributos observados
   static get observedAttributes() {
     return ["product-id", "product-name", "collection"];
   }
@@ -45,7 +40,6 @@ export class ProductReviews extends HTMLElement {
   }
 
   disconnectedCallback() {
-    // Remove subscription real-time
     if (this.realtimeCallback) {
       reviewService.unsubscribeFromProduct(this.productId, this.realtimeCallback);
     }
@@ -56,7 +50,6 @@ export class ProductReviews extends HTMLElement {
       this.isLoading = true;
       this.updateLoadingState();
 
-      // Carrega em paralelo
       const [reviewsData, statsData, userReviewed] = await Promise.all([
         reviewService.getReviews(this.productId, this.currentPage, this.limit),
         reviewService.getProductStats(this.productId),
@@ -71,7 +64,6 @@ export class ProductReviews extends HTMLElement {
       this.renderContent();
     } catch (error) {
       console.error("Erro ao carregar reviews:", error);
-      // Não mostra toast de erro na primeira carga para não assustar usuário
     } finally {
       this.isLoading = false;
     }
@@ -80,7 +72,7 @@ export class ProductReviews extends HTMLElement {
   initRealtime() {
     this.realtimeCallback = async (payload) => {
       console.log("🔄 Real-time update:", payload.eventType);
-      // Recarrega dados quando há mudança
+
       await this.loadData();
     };
 
@@ -88,26 +80,21 @@ export class ProductReviews extends HTMLElement {
   }
 
   initEventListeners() {
-    // Delegação de eventos
     this.addEventListener("click", async (e) => {
-      // Abrir modal
       if (e.target.closest(".reviews-load-more")) {
         e.preventDefault();
         await this.openReviewModal();
       }
 
-      // Fechar modal (botão X)
       if (e.target.closest(".close-review-modal")) {
         e.preventDefault();
         this.closeReviewModal();
       }
 
-      // Fechar modal (clique no backdrop)
       if (e.target.classList.contains("review-modal")) {
         this.closeReviewModal();
       }
 
-      // Paginação anterior
       if (e.target.closest(".pagination-btn-prev")) {
         e.preventDefault();
         if (this.currentPage > 1) {
@@ -116,7 +103,6 @@ export class ProductReviews extends HTMLElement {
         }
       }
 
-      // Paginação próximo
       if (e.target.closest(".pagination-btn-next")) {
         e.preventDefault();
         if (this.currentPage < this.totalPages) {
@@ -125,14 +111,12 @@ export class ProductReviews extends HTMLElement {
         }
       }
 
-      // Star rating
       if (e.target.classList.contains("star-rating-input")) {
         const value = parseInt(e.target.dataset.value);
         this.setStarRating(value);
       }
     });
 
-    // Form submit
     this.addEventListener("submit", async (e) => {
       if (e.target.classList.contains("review-form")) {
         e.preventDefault();
@@ -142,16 +126,14 @@ export class ProductReviews extends HTMLElement {
   }
 
   async openReviewModal() {
-    // Verifica autenticação de forma assíncrona
     const isAuth = await authService.isAuthenticatedAsync();
     if (!isAuth) {
       toast.warning("Faça login para avaliar este produto");
-      // Fecha e redireciona para login
+
       setTimeout(() => router.navigate("/login"), 500);
       return;
     }
 
-    // Verifica se já avaliou
     if (this.hasUserReviewed) {
       toast.info("Você já avaliou este produto");
       return;
@@ -159,7 +141,6 @@ export class ProductReviews extends HTMLElement {
 
     const modal = this.querySelector(".review-modal");
     if (modal) {
-      // Pré-preenche nome do usuário
       const user = authService.getCachedUser();
       const nameInput = this.querySelector('input[name="reviewer-name"]');
       if (nameInput && user?.user_metadata?.name) {
@@ -199,7 +180,6 @@ export class ProductReviews extends HTMLElement {
       }
     });
 
-    // Guarda o valor
     this._selectedRating = value;
   }
 
@@ -219,7 +199,6 @@ export class ProductReviews extends HTMLElement {
     const recommend = formData.get("recommend") === "sim";
     const authorName = formData.get("reviewer-name")?.trim();
 
-    // Validações
     if (rating < 1 || rating > 5) {
       toast.error("Selecione uma nota de 1 a 5 estrelas");
       return;
@@ -235,7 +214,6 @@ export class ProductReviews extends HTMLElement {
       return;
     }
 
-    // Desabilita botão
     const submitBtn = form.querySelector(".submit-review-btn");
     if (submitBtn) {
       submitBtn.disabled = true;
@@ -255,7 +233,6 @@ export class ProductReviews extends HTMLElement {
       this.closeReviewModal();
       this.hasUserReviewed = true;
 
-      // Dados serão atualizados via real-time, mas força reload também
       await this.loadData();
     } catch (error) {
       toast.error(error.message || "Erro ao enviar avaliação");
@@ -280,7 +257,6 @@ export class ProductReviews extends HTMLElement {
   }
 
   renderContent() {
-    // Atualiza sumário
     const summary = this.querySelector(".reviews-summary");
     if (summary) {
       const avg = this.stats?.average_rating || 0;
@@ -295,7 +271,6 @@ export class ProductReviews extends HTMLElement {
       `;
     }
 
-    // Atualiza lista
     const list = this.querySelector(".reviews-list");
     if (list) {
       if (this.reviews.length === 0) {
@@ -309,7 +284,6 @@ export class ProductReviews extends HTMLElement {
       }
     }
 
-    // Atualiza paginação
     const pagination = this.querySelector(".reviews-pagination");
     if (pagination) {
       const total = this.stats?.total_reviews || 0;
@@ -325,7 +299,6 @@ export class ProductReviews extends HTMLElement {
       `;
     }
 
-    // Atualiza botão de escrever
     const writeBtn = this.querySelector(".reviews-load-more");
     if (writeBtn) {
       if (this.hasUserReviewed) {

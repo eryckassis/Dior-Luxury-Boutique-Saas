@@ -1,8 +1,3 @@
-/* ============================================================================
-   SMOOTH SCROLL - Estilos base para Lenis
-   ============================================================================ */
-
-/* HTML precisa ter height definido para Lenis funcionar */
 html.lenis,
 html.lenis body {
   height: auto;
@@ -24,17 +19,14 @@ html.lenis body {
   pointer-events: none;
 }
 
-/* Wrapper para conteúdo com smooth scroll */
 .smooth-scroll-wrapper {
   min-height: 100vh;
 }
 
-/* Desabilitar smooth scroll em elementos específicos */
 [data-lenis-prevent] {
   overscroll-behavior: contain;
 }
 
-/* Performance: GPU acceleration para elementos animados */
 .smooth-scroll-wrapper * {
   will-change: auto;
 }

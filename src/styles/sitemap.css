@@ -1,4 +1,3 @@
-/* Sitemap Panel Styles */
 .r-footer-sitemap {
   transition: max-height 0.5s ease;
   background-color: #f9f9f9;
@@ -49,7 +48,6 @@
   text-decoration: underline !important;
 }
 
-/* High Contrast Mode for Sitemap */
 body.high-contrast .r-footer-sitemap {
   background-color: #1a1a1a;
 }

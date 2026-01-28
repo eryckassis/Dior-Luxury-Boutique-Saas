@@ -1,7 +1,3 @@
-// ============================================================================
-// PRIMAVERA-VERÃO 2026 PAGE - Desfile Primavera-Verão 2026
-// ============================================================================
-
 import "../components/ModaNavigation.js";
 import "../components/FooterSection.js";
 import "../components/LooksGallery.js";
@@ -40,7 +36,7 @@ export class PrimaveraVerao2026Page extends HTMLElement {
     if (this.SmoothScroll) {
       this.SmoothScroll.destroy();
     }
-    // Parar áudio ao sair da página
+
     if (this.audio) {
       this.audio.pause();
       this.audio = null;
@@ -123,23 +119,19 @@ export class PrimaveraVerao2026Page extends HTMLElement {
 
       if (!soundBtn || !wavePath) return;
 
-      // Criar elemento de áudio
       this.audio = new Audio("/audio/desfile-music.mp3");
       this.audio.loop = true;
       this.audio.volume = 0.5;
 
-      // Timeline para animação da onda
       this.waveTimeline = null;
 
       soundBtn.addEventListener("click", () => {
         if (this.isPlaying) {
-          // Pausar música
           this.audio.pause();
           soundBtn.classList.remove("playing");
           this.isPlaying = false;
           this.stopWaveAnimation(wavePath);
         } else {
-          // Tocar música
           this.audio
             .play()
             .then(() => {
@@ -158,15 +150,12 @@ export class PrimaveraVerao2026Page extends HTMLElement {
   startWaveAnimation(wavePath) {
     if (!window.gsap) return;
 
-    // Parar animação anterior se existir
     if (this.waveTimeline) {
       this.waveTimeline.kill();
     }
 
-    // Criar timeline infinita para animação da onda
     this.waveTimeline = window.gsap.timeline({ repeat: -1 });
 
-    // Sequência de paths para criar efeito de onda se movendo
     const wavePaths = [
       "M2 12 Q4 8, 6 12 T10 12 T14 12 T18 12 T22 12",
       "M2 12 Q4 12, 6 8 T10 16 T14 8 T18 16 T22 12",
@@ -187,13 +176,11 @@ export class PrimaveraVerao2026Page extends HTMLElement {
   stopWaveAnimation(wavePath) {
     if (!window.gsap) return;
 
-    // Parar timeline
     if (this.waveTimeline) {
       this.waveTimeline.kill();
       this.waveTimeline = null;
     }
 
-    // Voltar para linha reta
     window.gsap.to(wavePath, {
       attr: { d: "M2 12 Q6 12, 6 12 T10 12 T14 12 T18 12 T22 12" },
       duration: 0.3,
@@ -225,7 +212,6 @@ export class PrimaveraVerao2026Page extends HTMLElement {
         }
       });
 
-      // Inicialmente, vídeo está tocando, então mostra o ícone de pause
       video
         .play()
         .then(() => {
@@ -234,7 +220,6 @@ export class PrimaveraVerao2026Page extends HTMLElement {
           pauseIcon.style.display = "block";
         })
         .catch(() => {
-          // Se autoplay falhar, mantém ícone de play
           btn.classList.remove("playing");
           playIcon.style.display = "block";
           pauseIcon.style.display = "none";
@@ -249,7 +234,6 @@ export class PrimaveraVerao2026Page extends HTMLElement {
       const buttons = this.querySelectorAll(".desfile-read-more-btn");
 
       buttons.forEach((button) => {
-        // Mouseenter - linha diminui para 0
         button.addEventListener("mouseenter", () => {
           window.gsap.to(button, {
             "--underline-width": "100%",
@@ -258,7 +242,6 @@ export class PrimaveraVerao2026Page extends HTMLElement {
           });
         });
 
-        // Mouseleave - linha volta a 0%
         button.addEventListener("mouseleave", () => {
           window.gsap.to(button, {
             "--underline-width": "0%",
@@ -371,8 +354,6 @@ export class PrimaveraVerao2026Page extends HTMLElement {
           </p>
           <a href="#" class="desfile-read-more-btn">Leia mais</a>
         </section>
-
-       
 
         <!-- Section 4: Looks Gallery -->
         <looks-gallery title="Looks"></looks-gallery>
@@ -542,7 +523,6 @@ export class PrimaveraVerao2026Page extends HTMLElement {
             </div>
           </div>
         </section>
-
 
         <!-- Footer -->
         <footer-section></footer-section>

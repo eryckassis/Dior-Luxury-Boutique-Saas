@@ -1,7 +1,3 @@
-﻿// ============================================================================
-// FRAGRANCES MODAL - Modal de navegação de fragrâncias
-// ============================================================================
-
 import { router } from "../router/router.js";
 
 export class FragrancesModal extends HTMLElement {
@@ -23,14 +19,12 @@ export class FragrancesModal extends HTMLElement {
   }
 
   initEventListeners() {
-    // Close button
     this.closeBtn = this.querySelector(".fragrances-modal-close");
     this.closeHandler = () => this.close();
     if (this.closeBtn) {
       this.closeBtn.addEventListener("click", this.closeHandler);
     }
 
-    // Backdrop click
     this.backdrop = this.querySelector(".fragrances-modal-backdrop");
     this.backdropHandler = (e) => {
       if (e.target === this.backdrop) {
@@ -41,7 +35,6 @@ export class FragrancesModal extends HTMLElement {
       this.backdrop.addEventListener("click", this.backdropHandler);
     }
 
-    // ESC key
     this.escHandler = (e) => {
       if (e.key === "Escape" && this.isOpen) {
         if (this.currentView === "feminine") {
@@ -53,13 +46,11 @@ export class FragrancesModal extends HTMLElement {
     };
     document.addEventListener("keydown", this.escHandler);
 
-    // Back button (voltar ao menu principal)
     this.backBtn = this.querySelector(".fragrances-back-btn");
     if (this.backBtn) {
       this.backBtn.addEventListener("click", () => this.showMainView());
     }
 
-    // Fragrância Feminina link
     const feminineLink = this.querySelector('[data-view="feminine"]');
     if (feminineLink) {
       feminineLink.addEventListener("click", (e) => {
@@ -68,7 +59,6 @@ export class FragrancesModal extends HTMLElement {
       });
     }
 
-    // Menu links with routes (tanto da view principal quanto da feminina)
     this.menuLinks = this.querySelectorAll(
       ".fragrances-menu-link[data-route], .feminine-menu-link[data-route], .feminine-featured-link[data-route]",
     );
@@ -79,7 +69,7 @@ export class FragrancesModal extends HTMLElement {
           e.preventDefault();
           console.log(`Navegando para: ${route}`);
           this.close();
-          // Aguarda o modal fechar completamente antes de navegar
+
           setTimeout(() => {
             router.navigate(route);
           }, 500); // Aumentado para garantir que o modal fecha completamente
@@ -87,7 +77,6 @@ export class FragrancesModal extends HTMLElement {
       });
     });
 
-    // Listen for navigation events to close modal
     this.navigationHandler = () => {
       if (this.isOpen) {
         this.close();
@@ -125,7 +114,6 @@ export class FragrancesModal extends HTMLElement {
         defaults: { ease: "power3.inOut" },
       });
 
-      // Animate out feminine view
       tl.to(feminineView, {
         x: "100%",
         opacity: 0,
@@ -133,21 +121,18 @@ export class FragrancesModal extends HTMLElement {
       })
         .set(feminineView, { display: "none" })
 
-        // Prepare main view
         .set(mainView, {
           display: "block",
           x: "-30%",
           opacity: 0,
         })
 
-        // Animate in main view
         .to(mainView, {
           x: 0,
           opacity: 1,
           duration: 0.5,
         })
 
-        // Update header
         .to(
           title,
           {
@@ -168,7 +153,6 @@ export class FragrancesModal extends HTMLElement {
           0.15,
         )
 
-        // Hide back button
         .to(
           backBtn,
           {
@@ -201,7 +185,6 @@ export class FragrancesModal extends HTMLElement {
         defaults: { ease: "power3.inOut" },
       });
 
-      // Animate out main view
       tl.to(mainView, {
         x: "-100%",
         opacity: 0,
@@ -209,21 +192,18 @@ export class FragrancesModal extends HTMLElement {
       })
         .set(mainView, { display: "none" })
 
-        // Prepare feminine view
         .set(feminineView, {
           display: "block",
           x: "30%",
           opacity: 0,
         })
 
-        // Animate in feminine view
         .to(feminineView, {
           x: 0,
           opacity: 1,
           duration: 0.5,
         })
 
-        // Update header
         .to(
           title,
           {
@@ -244,7 +224,6 @@ export class FragrancesModal extends HTMLElement {
           0.15,
         )
 
-        // Show back button
         .call(() => {
           backBtn.classList.add("visible");
         })
@@ -258,7 +237,6 @@ export class FragrancesModal extends HTMLElement {
           0.2,
         );
 
-      // Stagger animate feminine content
       const iconItems = feminineView.querySelectorAll(".feminine-icon-item");
       const menuItems = feminineView.querySelectorAll(".feminine-menu-item");
       const featuredCards = feminineView.querySelectorAll(".feminine-featured-card");
@@ -322,7 +300,6 @@ export class FragrancesModal extends HTMLElement {
     modal.classList.add("active");
     document.body.style.overflow = "hidden";
 
-    // Reset to main view
     const mainView = this.querySelector(".fragrances-main-view");
     const feminineView = this.querySelector(".fragrances-feminine-view");
     const title = this.querySelector(".fragrances-modal-title");
@@ -335,9 +312,7 @@ export class FragrancesModal extends HTMLElement {
       backBtn.classList.remove("visible");
     }
 
-    // Animate with GSAP
     if (window.gsap) {
-      // Kill any existing animations
       window.gsap.killTweensOf([
         container,
         ".fragrances-modal-backdrop",
@@ -350,10 +325,8 @@ export class FragrancesModal extends HTMLElement {
         defaults: { ease: "power4.out" },
       });
 
-      // Backdrop fade in
       tl.fromTo(".fragrances-modal-backdrop", { opacity: 0 }, { opacity: 1, duration: 0.4 })
 
-        // Container slide in with bounce
         .fromTo(
           container,
           { x: "-100%", opacity: 0 },
@@ -366,7 +339,6 @@ export class FragrancesModal extends HTMLElement {
           0.1,
         )
 
-        // Header elements animate in
         .fromTo(
           ".fragrances-modal-header > *",
           { y: -10, opacity: 0 },
@@ -380,7 +352,6 @@ export class FragrancesModal extends HTMLElement {
           0.3,
         )
 
-        // Menu items stagger
         .fromTo(
           ".fragrances-main-view .fragrances-menu-item",
           { x: -30, opacity: 0 },
@@ -394,7 +365,6 @@ export class FragrancesModal extends HTMLElement {
           0.4,
         )
 
-        // Bottom links
         .fromTo(
           ".fragrances-bottom-item",
           { y: 10, opacity: 0 },
@@ -421,20 +391,17 @@ export class FragrancesModal extends HTMLElement {
       return;
     }
 
-    // Animate with GSAP
     if (window.gsap) {
       const tl = window.gsap.timeline({
         defaults: { ease: "power3.in" },
       });
 
-      // Slide out container
       tl.to(container, {
         x: "-100%",
         duration: 0.5,
         ease: "back.in(1.2)",
       })
 
-        // Fade out backdrop
         .to(
           ".fragrances-modal-backdrop",
           {
@@ -446,11 +413,10 @@ export class FragrancesModal extends HTMLElement {
 
         .call(() => {
           modal.classList.remove("active");
-          // Restaurar overflow seguindo o padrão do projeto
+
           document.body.style.overflow = "auto";
           document.body.style.overflowX = "hidden";
 
-          // Reset to main view WITHOUT destroying elements
           this.currentView = "main";
           const mainView = this.querySelector(".fragrances-main-view");
           const feminineView = this.querySelector(".fragrances-feminine-view");
@@ -458,33 +424,27 @@ export class FragrancesModal extends HTMLElement {
           const backBtn = this.querySelector(".fragrances-back-btn");
 
           if (mainView && feminineView) {
-            // Reset visibility
             mainView.style.display = "block";
             feminineView.style.display = "none";
 
-            // Reset transforms
             window.gsap.set(mainView, { x: 0, opacity: 1 });
             window.gsap.set(feminineView, { x: 0, opacity: 1 });
 
-            // Reset header
             title.textContent = "Início";
             backBtn.classList.remove("visible");
             window.gsap.set(backBtn, { opacity: 0, scale: 1 });
 
-            // Reset container position
             window.gsap.set(container, { x: 0 });
 
-            // Reset backdrop
             window.gsap.set(".fragrances-modal-backdrop", { opacity: 1 });
           }
         });
     } else {
       modal.classList.remove("active");
-      // Restaurar overflow seguindo o padrão do projeto
+
       document.body.style.overflow = "auto";
       document.body.style.overflowX = "hidden";
 
-      // Reset to main view
       this.currentView = "main";
       const mainView = this.querySelector(".fragrances-main-view");
       const feminineView = this.querySelector(".fragrances-feminine-view");

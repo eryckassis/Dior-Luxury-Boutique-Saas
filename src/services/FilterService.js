@@ -1,12 +1,4 @@
-// ============================================================================
-// FILTER SERVICE - Serviço de filtragem e ordenação com validações robustas
-// ============================================================================
-
-/**
- * Configuração de filtros disponíveis
- */
 export const FILTER_CONFIG = {
-  // Opções de ordenação
   sortOptions: [
     { id: "recommended", label: "Recomendado", default: true },
     { id: "newest", label: "Novidade" },
@@ -14,7 +6,6 @@ export const FILTER_CONFIG = {
     { id: "price_desc", label: "Maior preço" },
   ],
 
-  // Categorias (extraídas dinamicamente dos produtos)
   categories: [
     { id: "bolsa", label: "Bolsas" },
     { id: "bolsa_cabas", label: "Bolsas Cabas" },
@@ -34,7 +25,6 @@ export const FILTER_CONFIG = {
     { id: "lencos", label: "Lenços" },
   ],
 
-  // Linhas/Coleções Dior
   lines: [
     { id: "dior_book_tote", label: "Dior Book Tote" },
     { id: "dior_bow", label: "Dior Bow" },
@@ -51,7 +41,6 @@ export const FILTER_CONFIG = {
     { id: "dior_mariniere", label: "Dior Marinière" },
   ],
 
-  // Cores com códigos hex
   colors: [
     { id: "amarelo", label: "Amarelo", hex: "#E5C946" },
     { id: "azul", label: "Azul", hex: "#4A7BB5" },
@@ -69,7 +58,6 @@ export const FILTER_CONFIG = {
     { id: "prata", label: "Prata", hex: "#C0C0C0" },
   ],
 
-  // Materiais
   materials: [
     { id: "acetato", label: "Acetato" },
     { id: "algodao", label: "Algodão" },
@@ -88,7 +76,6 @@ export const FILTER_CONFIG = {
     { id: "renda", label: "Renda" },
   ],
 
-  // Tamanhos por tipo
   sizeGroups: [
     {
       id: "roupa_superior",
@@ -123,9 +110,6 @@ export const FILTER_CONFIG = {
   ],
 };
 
-/**
- * Classe principal do serviço de filtros
- */
 export class FilterService {
   constructor() {
     this.activeFilters = {
@@ -139,10 +123,6 @@ export class FilterService {
     this.listeners = new Set();
   }
 
-  /**
-   * Registra um listener para mudanças nos filtros
-   * @param {Function} callback - Função a ser chamada quando filtros mudarem
-   */
   subscribe(callback) {
     if (typeof callback !== "function") {
       console.error("[FilterService] Subscribe requer uma função callback");
@@ -152,9 +132,6 @@ export class FilterService {
     return () => this.listeners.delete(callback);
   }
 
-  /**
-   * Notifica todos os listeners sobre mudanças
-   */
   notifyListeners() {
     this.listeners.forEach((callback) => {
       try {
@@ -165,12 +142,6 @@ export class FilterService {
     });
   }
 
-  /**
-   * Valida se um filtro existe na configuração
-   * @param {string} filterType - Tipo do filtro (categories, colors, etc)
-   * @param {string} value - Valor a ser validado
-   * @returns {boolean}
-   */
   validateFilter(filterType, value) {
     if (!filterType || !value) return false;
 
@@ -180,7 +151,6 @@ export class FilterService {
       return false;
     }
 
-    // Para sizeGroups, validação especial
     if (filterType === "sizes") {
       const allSizes = FILTER_CONFIG.sizeGroups.flatMap((g) => g.sizes);
       return allSizes.includes(value);
@@ -189,10 +159,6 @@ export class FilterService {
     return config.some((item) => item.id === value);
   }
 
-  /**
-   * Define a ordenação ativa
-   * @param {string} sortId - ID da ordenação
-   */
   setSort(sortId) {
     const validSort = FILTER_CONFIG.sortOptions.find((s) => s.id === sortId);
     if (!validSort) {
@@ -204,11 +170,6 @@ export class FilterService {
     return true;
   }
 
-  /**
-   * Adiciona ou remove um filtro
-   * @param {string} filterType - Tipo do filtro
-   * @param {string} value - Valor do filtro
-   */
   toggleFilter(filterType, value) {
     if (!this.activeFilters.hasOwnProperty(filterType)) {
       console.warn(`[FilterService] Tipo de filtro inexistente: ${filterType}`);
@@ -219,7 +180,6 @@ export class FilterService {
       return this.setSort(value);
     }
 
-    // Valida o filtro antes de aplicar
     if (!this.validateFilter(filterType, value)) {
       console.warn(`[FilterService] Valor inválido para ${filterType}: ${value}`);
       return false;
@@ -238,12 +198,6 @@ export class FilterService {
     return true;
   }
 
-  /**
-   * Verifica se um filtro está ativo
-   * @param {string} filterType - Tipo do filtro
-   * @param {string} value - Valor do filtro
-   * @returns {boolean}
-   */
   isFilterActive(filterType, value) {
     if (filterType === "sort") {
       return this.activeFilters.sort === value;
@@ -251,9 +205,6 @@ export class FilterService {
     return this.activeFilters[filterType]?.includes(value) || false;
   }
 
-  /**
-   * Limpa todos os filtros
-   */
   clearAllFilters() {
     this.activeFilters = {
       sort: "recommended",
@@ -266,10 +217,6 @@ export class FilterService {
     this.notifyListeners();
   }
 
-  /**
-   * Limpa filtros de um tipo específico
-   * @param {string} filterType - Tipo do filtro a limpar
-   */
   clearFilterType(filterType) {
     if (filterType === "sort") {
       this.activeFilters.sort = "recommended";
@@ -279,18 +226,10 @@ export class FilterService {
     this.notifyListeners();
   }
 
-  /**
-   * Retorna os filtros ativos
-   * @returns {Object}
-   */
   getActiveFilters() {
     return { ...this.activeFilters };
   }
 
-  /**
-   * Conta quantos filtros estão ativos (excluindo sort)
-   * @returns {number}
-   */
   getActiveFilterCount() {
     return (
       this.activeFilters.categories.length +
@@ -301,15 +240,9 @@ export class FilterService {
     );
   }
 
-  /**
-   * Extrai o preço numérico de uma string de preço
-   * @param {string} priceStr - String do preço (ex: "R$ 33.000,00")
-   * @returns {number}
-   */
   parsePrice(priceStr) {
     if (!priceStr || typeof priceStr !== "string") return 0;
 
-    // Remove "R$", "A partir de", espaços e converte formato brasileiro
     const cleaned = priceStr
       .replace(/R\$\s*/gi, "")
       .replace(/A partir de\s*/gi, "")
@@ -321,11 +254,6 @@ export class FilterService {
     return isNaN(price) ? 0 : price;
   }
 
-  /**
-   * Normaliza string para comparação (remove acentos, lowercase)
-   * @param {string} str - String a normalizar
-   * @returns {string}
-   */
   normalizeString(str) {
     if (!str) return "";
     return str
@@ -335,12 +263,6 @@ export class FilterService {
       .replace(/[^a-z0-9]/g, "");
   }
 
-  /**
-   * Verifica se um produto possui uma cor específica
-   * @param {Object} product - Produto a verificar
-   * @param {string} colorId - ID da cor
-   * @returns {boolean}
-   */
   productHasColor(product, colorId) {
     if (!product.colors || !Array.isArray(product.colors)) return false;
 
@@ -353,41 +275,21 @@ export class FilterService {
     });
   }
 
-  /**
-   * Verifica se um produto possui um material específico
-   * @param {Object} product - Produto a verificar
-   * @param {string} materialId - ID do material
-   * @returns {boolean}
-   */
   productHasMaterial(product, materialId) {
     if (!product.material) return false;
 
     const normalizedMaterial = this.normalizeString(product.material);
     const normalizedMaterialId = this.normalizeString(materialId);
 
-    // Verifica se o material do produto contém o material buscado
     return normalizedMaterial.includes(normalizedMaterialId);
   }
 
-  /**
-   * Verifica se um produto possui um tamanho específico
-   * @param {Object} product - Produto a verificar
-   * @param {string} size - Tamanho
-   * @returns {boolean}
-   */
   productHasSize(product, size) {
     if (!product.sizes || !Array.isArray(product.sizes)) return false;
     return product.sizes.includes(size);
   }
 
-  /**
-   * Verifica se um produto pertence a uma linha/coleção
-   * @param {Object} product - Produto a verificar
-   * @param {string} lineId - ID da linha
-   * @returns {boolean}
-   */
   productHasLine(product, lineId) {
-    // Verifica no nome, descrição ou reference
     const searchFields = [
       product.name || "",
       product.description || "",
@@ -404,11 +306,6 @@ export class FilterService {
     return normalizedSearch.includes(normalizedLine);
   }
 
-  /**
-   * Filtra e ordena produtos
-   * @param {Array} products - Array de produtos
-   * @returns {Array} - Produtos filtrados e ordenados
-   */
   applyFilters(products) {
     if (!Array.isArray(products)) {
       console.error("[FilterService] applyFilters requer um array de produtos");
@@ -418,7 +315,6 @@ export class FilterService {
     let filtered = [...products];
     const filters = this.activeFilters;
 
-    // Filtrar por categoria
     if (filters.categories.length > 0) {
       filtered = filtered.filter((product) => {
         const normalizedCategory = this.normalizeString(product.category);
@@ -426,46 +322,35 @@ export class FilterService {
       });
     }
 
-    // Filtrar por linha
     if (filters.lines.length > 0) {
       filtered = filtered.filter((product) =>
         filters.lines.some((line) => this.productHasLine(product, line)),
       );
     }
 
-    // Filtrar por cor
     if (filters.colors.length > 0) {
       filtered = filtered.filter((product) =>
         filters.colors.some((color) => this.productHasColor(product, color)),
       );
     }
 
-    // Filtrar por material
     if (filters.materials.length > 0) {
       filtered = filtered.filter((product) =>
         filters.materials.some((material) => this.productHasMaterial(product, material)),
       );
     }
 
-    // Filtrar por tamanho
     if (filters.sizes.length > 0) {
       filtered = filtered.filter((product) =>
         filters.sizes.some((size) => this.productHasSize(product, size)),
       );
     }
 
-    // Aplicar ordenação
     filtered = this.sortProducts(filtered, filters.sort);
 
     return filtered;
   }
 
-  /**
-   * Ordena produtos
-   * @param {Array} products - Array de produtos
-   * @param {string} sortType - Tipo de ordenação
-   * @returns {Array}
-   */
   sortProducts(products, sortType) {
     const sorted = [...products];
 
@@ -479,25 +364,17 @@ export class FilterService {
         break;
 
       case "newest":
-        // Assume que produtos mais recentes têm IDs maiores ou podem ter campo de data
         sorted.reverse();
         break;
 
       case "recommended":
       default:
-        // Mantém ordem original (recomendado)
         break;
     }
 
     return sorted;
   }
 
-  /**
-   * Extrai valores únicos de um campo dos produtos
-   * @param {Array} products - Array de produtos
-   * @param {string} field - Campo a extrair
-   * @returns {Array}
-   */
   extractUniqueValues(products, field) {
     const values = new Set();
 
@@ -517,5 +394,4 @@ export class FilterService {
   }
 }
 
-// Singleton instance
 export const filterService = new FilterService();

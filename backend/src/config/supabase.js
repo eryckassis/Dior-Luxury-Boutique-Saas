@@ -1,6 +1,3 @@
-// ============================================================================
-// SUPABASE CLIENT - Backend (Service Role)
-// ============================================================================
 import { createClient } from "@supabase/supabase-js";
 import { config } from "./env.js";
 
@@ -12,10 +9,6 @@ if (!supabaseUrl || !supabaseServiceKey) {
   console.error("   Verifique SUPABASE_URL e SUPABASE_SERVICE_ROLE_KEY no .env");
 }
 
-/**
- * Cliente Supabase com Service Role Key
- * ATENÇÃO: Este cliente BYPASS RLS - use apenas no backend!
- */
 export const supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey, {
   auth: {
     autoRefreshToken: false,
@@ -23,11 +16,6 @@ export const supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey, {
   },
 });
 
-/**
- * Verifica e decodifica token de usuário
- * @param {string} token - Access token do Supabase
- * @returns {Promise<Object>} - Dados do usuário
- */
 export const verifyUserToken = async (token) => {
   const {
     data: { user },
@@ -46,11 +34,6 @@ export const verifyUserToken = async (token) => {
   return user;
 };
 
-/**
- * Busca perfil completo do usuário
- * @param {string} userId - UUID do usuário
- * @returns {Promise<Object>} - Perfil do usuário
- */
 export const getUserProfile = async (userId) => {
   const { data, error } = await supabaseAdmin
     .from("profiles")

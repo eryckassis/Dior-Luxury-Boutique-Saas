@@ -2,9 +2,6 @@ import { UserService } from "../services/user.service.js";
 import { ApiResponse } from "../utils/response.js";
 
 export class UserController {
-  /**
-   * GET /api/user/profile
-   */
   static async getProfile(req, res) {
     try {
       const userId = req.user.userId;
@@ -22,9 +19,6 @@ export class UserController {
     }
   }
 
-  /**
-   * PUT /api/user/profile
-   */
   static async updateProfile(req, res) {
     try {
       const userId = req.user.userId;

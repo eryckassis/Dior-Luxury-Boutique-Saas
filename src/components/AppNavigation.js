@@ -1,6 +1,3 @@
-// ============================================================================
-// APP NAVIGATION COMPONENT - Navegação principal com menu multinível
-// ============================================================================
 import { cartService } from "../services/CartService.js";
 import { router } from "../router/router.js";
 
@@ -12,7 +9,6 @@ export class AppNavigation extends HTMLElement {
     this.spaExpanded = false;
     this.fragranceExpanded = false;
 
-    // Listener para atualizar o badge quando o carrinho mudar
     this.cartListener = () => {
       this.updateBagBadge();
     };
@@ -27,20 +23,16 @@ export class AppNavigation extends HTMLElement {
     this.initProfileMenu();
     this.updateBagBadge();
 
-    // Adiciona listener para mudanças no carrinho
     cartService.addListener(this.cartListener);
   }
 
   disconnectedCallback() {
-    // Remove listener do carrinho
     cartService.removeListener(this.cartListener);
 
-    // Remove listener do scroll
     if (this._scrollCleanup) {
       this._scrollCleanup();
     }
 
-    // Cleanup do painel Spa
     if (this.spaExpanded) {
       this.closeSpaPanel();
     }
@@ -50,12 +42,8 @@ export class AppNavigation extends HTMLElement {
     const nav = this.querySelector(".moda-navigation");
     if (!nav) return;
 
-    // Perfume e Cosméticos sempre com fundo branco
     nav.classList.add("scrolled");
 
-    // =========================================================================
-    // SMART NAVBAR - Hide on Scroll Down, Show on Scroll Up
-    // =========================================================================
     let lastScrollY = window.scrollY;
     let ticking = false;
     const scrollThreshold = 80; // Mínimo de scroll para ativar hide/show
@@ -65,7 +53,6 @@ export class AppNavigation extends HTMLElement {
       const currentScrollY = window.scrollY;
       const scrollDelta = currentScrollY - lastScrollY;
 
-      // Sempre visível no topo da página
       if (currentScrollY < topThreshold) {
         nav.classList.remove("nav-hidden");
         lastScrollY = currentScrollY;
@@ -73,12 +60,9 @@ export class AppNavigation extends HTMLElement {
         return;
       }
 
-      // Scroll para baixo - esconde (apenas se passou do threshold)
       if (scrollDelta > 0 && currentScrollY > scrollThreshold) {
         nav.classList.add("nav-hidden");
-      }
-      // Scroll para cima - mostra
-      else if (scrollDelta < -5) {
+      } else if (scrollDelta < -5) {
         nav.classList.remove("nav-hidden");
       }
 
@@ -86,7 +70,6 @@ export class AppNavigation extends HTMLElement {
       ticking = false;
     };
 
-    // Usar requestAnimationFrame para performance
     const onScroll = () => {
       if (!ticking) {
         requestAnimationFrame(updateNavVisibility);
@@ -96,7 +79,6 @@ export class AppNavigation extends HTMLElement {
 
     window.addEventListener("scroll", onScroll, { passive: true });
 
-    // Cleanup ao desconectar
     this._scrollCleanup = () => {
       window.removeEventListener("scroll", onScroll);
     };
@@ -106,7 +88,6 @@ export class AppNavigation extends HTMLElement {
     requestAnimationFrame(() => {
       if (!window.gsap) return;
 
-      // Todos os links do menu principal (com e sem submenu)
       const menuLinks = this.querySelectorAll(".moda-menu-link");
 
       menuLinks.forEach((link) => {
@@ -127,7 +108,6 @@ export class AppNavigation extends HTMLElement {
         });
       });
 
-      // Links dos submenus também
       const submenuLinks = this.querySelectorAll(".submenu-link");
 
       submenuLinks.forEach((link) => {
@@ -148,7 +128,6 @@ export class AppNavigation extends HTMLElement {
         });
       });
 
-      // Animação hover para cards de fragrância
       const fragranceCards = this.querySelectorAll(".fragrance-card");
 
       fragranceCards.forEach((card) => {
@@ -157,13 +136,12 @@ export class AppNavigation extends HTMLElement {
 
         if (subtitle) {
           card.addEventListener("mouseenter", () => {
-            // Anima underline do subtítulo
             window.gsap.to(subtitle, {
               "--underline-width": "100%",
               duration: 0.4,
               ease: "power2.out",
             });
-            // Scale na imagem
+
             if (img) {
               window.gsap.to(img, {
                 scale: 1.05,
@@ -174,13 +152,12 @@ export class AppNavigation extends HTMLElement {
           });
 
           card.addEventListener("mouseleave", () => {
-            // Remove underline
             window.gsap.to(subtitle, {
               "--underline-width": "0%",
               duration: 0.4,
               ease: "power2.out",
             });
-            // Reset scale
+
             if (img) {
               window.gsap.to(img, {
                 scale: 1,
@@ -192,7 +169,6 @@ export class AppNavigation extends HTMLElement {
         }
       });
 
-      // Animação hover para cards de Alta Perfumaria
       const altaPerfumariaCards = this.querySelectorAll(".alta-perfumaria-card");
 
       altaPerfumariaCards.forEach((card) => {
@@ -201,13 +177,12 @@ export class AppNavigation extends HTMLElement {
 
         if (cta) {
           card.addEventListener("mouseenter", () => {
-            // Anima underline do CTA
             window.gsap.to(cta, {
               "--underline-width": "100%",
               duration: 0.4,
               ease: "power2.out",
             });
-            // Scale na imagem
+
             if (img) {
               window.gsap.to(img, {
                 scale: 1.05,
@@ -218,13 +193,12 @@ export class AppNavigation extends HTMLElement {
           });
 
           card.addEventListener("mouseleave", () => {
-            // Remove underline
             window.gsap.to(cta, {
               "--underline-width": "0%",
               duration: 0.4,
               ease: "power2.out",
             });
-            // Reset scale
+
             if (img) {
               window.gsap.to(img, {
                 scale: 1,
@@ -246,7 +220,6 @@ export class AppNavigation extends HTMLElement {
 
       if (!searchContainer || !searchInput || !searchBtn || !window.gsap) return;
 
-      // Estado inicial - input escondido
       window.gsap.set(searchInput, {
         width: 0,
         opacity: 0,
@@ -254,7 +227,6 @@ export class AppNavigation extends HTMLElement {
         paddingRight: 0,
       });
 
-      // Hover enter no container
       searchContainer.addEventListener("mouseenter", () => {
         window.gsap.to(searchInput, {
           width: 200,
@@ -266,7 +238,6 @@ export class AppNavigation extends HTMLElement {
         });
       });
 
-      // Hover leave no container
       searchContainer.addEventListener("mouseleave", () => {
         if (document.activeElement !== searchInput) {
           window.gsap.to(searchInput, {
@@ -280,7 +251,6 @@ export class AppNavigation extends HTMLElement {
         }
       });
 
-      // Mantém aberto quando input está focado
       searchInput.addEventListener("blur", () => {
         window.gsap.to(searchInput, {
           width: 0,
@@ -302,14 +272,12 @@ export class AppNavigation extends HTMLElement {
 
       if (!profileMenu) return;
 
-      // Botão de perfil abre na aba "account"
       if (profileBtn) {
         profileBtn.addEventListener("click", () => {
           profileMenu.open("account");
         });
       }
 
-      // Botão de sacola abre na aba "bag"
       if (bagBtn) {
         bagBtn.addEventListener("click", (e) => {
           e.stopPropagation();
@@ -325,12 +293,10 @@ export class AppNavigation extends HTMLElement {
     const backdrop = this.querySelector(".moda-side-menu-backdrop");
     const closeBtn = this.querySelector(".moda-side-menu-close");
 
-    // Toggle menu
     if (hamburger) {
       hamburger.addEventListener("click", () => this.toggleMenu());
     }
 
-    // Close menu
     if (closeBtn) {
       closeBtn.addEventListener("click", () => this.closeMenu());
     }
@@ -339,7 +305,6 @@ export class AppNavigation extends HTMLElement {
       backdrop.addEventListener("click", () => this.closeMenu());
     }
 
-    // Links com submenu
     const submenuTriggers = this.querySelectorAll(".moda-menu-link.has-submenu");
     submenuTriggers.forEach((trigger) => {
       trigger.addEventListener("click", (e) => {
@@ -349,7 +314,6 @@ export class AppNavigation extends HTMLElement {
       });
     });
 
-    // Botões de voltar nos submenus (exceto o botão Spa)
     const backButtons = this.querySelectorAll(
       ".submenu-back-btn[data-tratamento-back], .submenu-back-btn:not([data-spa-back]):not([data-tratamento-back])",
     );
@@ -357,13 +321,11 @@ export class AppNavigation extends HTMLElement {
       btn.addEventListener("click", () => this.closeSubmenu());
     });
 
-    // Botão de voltar do Spa (fecha apenas o painel Spa)
     const spaBackBtn = this.querySelector("[data-spa-back]");
     if (spaBackBtn) {
       spaBackBtn.addEventListener("click", () => this.closeSpaPanel());
     }
 
-    // Navegação dos links do menu (sem submenu)
     const menuLinks = this.querySelectorAll(
       ".moda-menu-link[data-route]:not(.has-submenu), .submenu-link[data-route]",
     );
@@ -378,7 +340,6 @@ export class AppNavigation extends HTMLElement {
       });
     });
 
-    // Dior Spa expansion trigger
     const spaTrigger = this.querySelector("[data-spa-trigger]");
     if (spaTrigger) {
       spaTrigger.addEventListener("click", (e) => {
@@ -387,7 +348,6 @@ export class AppNavigation extends HTMLElement {
       });
     }
 
-    // Alta Perfumaria expansion trigger
     const altaPerfumariaTrigger = this.querySelector("[data-alta-perfumaria-trigger]");
     if (altaPerfumariaTrigger) {
       altaPerfumariaTrigger.addEventListener("click", (e) => {
@@ -396,19 +356,15 @@ export class AppNavigation extends HTMLElement {
       });
     }
 
-    // Botão de voltar do Alta Perfumaria - volta ao menu principal
     const altaPerfumariaBackBtn = this.querySelector("[data-alta-perfumaria-back]");
     if (altaPerfumariaBackBtn) {
       altaPerfumariaBackBtn.addEventListener("click", () => {
-        // Fecha Alta Perfumaria e volta direto ao menu principal
         this.closeSubmenu();
       });
     }
 
-    // Acessibilidade - Alto Contraste
     const accessibilityToggle = this.querySelector(".moda-menu-checkbox");
     if (accessibilityToggle) {
-      // Restaura estado salvo
       const highContrast = localStorage.getItem("dior-high-contrast") === "true";
       accessibilityToggle.checked = highContrast;
       if (highContrast) {
@@ -426,13 +382,9 @@ export class AppNavigation extends HTMLElement {
       });
     }
 
-    // Toggle Button - Moda & Acessórios / Perfume & Cosméticos
     this.setupToggleTabs();
   }
 
-  // ============================================================================
-  // TOGGLE TABS - Alternância entre Moda & Acessórios e Perfume & Cosméticos
-  // ============================================================================
   setupToggleTabs() {
     const tabs = this.querySelectorAll(".moda-menu-tab");
 
@@ -440,13 +392,10 @@ export class AppNavigation extends HTMLElement {
       tab.addEventListener("click", (e) => {
         e.preventDefault();
 
-        // Remove active de todos
         tabs.forEach((t) => t.classList.remove("moda-menu-tab-active"));
 
-        // Adiciona active no clicado
         tab.classList.add("moda-menu-tab-active");
 
-        // Navega para a rota após animação
         const route = tab.getAttribute("data-route");
         this.closeMenu();
         setTimeout(() => {
@@ -455,7 +404,6 @@ export class AppNavigation extends HTMLElement {
       });
     });
 
-    // Atualiza o tab ativo baseado na rota atual
     this.updateActiveTab();
   }
 
@@ -467,7 +415,6 @@ export class AppNavigation extends HTMLElement {
       const route = tab.getAttribute("data-route");
       tab.classList.remove("moda-menu-tab-active");
 
-      // Verifica se a rota atual corresponde ao tab
       if (
         route === currentPath ||
         (route === "/moda-acessorios" && currentPath.startsWith("/moda")) ||
@@ -478,9 +425,6 @@ export class AppNavigation extends HTMLElement {
     });
   }
 
-  // ============================================================================
-  // DIOR SPA PANEL - Expansão do painel dentro do menu
-  // ============================================================================
   openSpaPanel() {
     const sideMenu = this.querySelector(".moda-side-menu");
     const spaPanel = this.querySelector("[data-spa-panel]");
@@ -492,16 +436,13 @@ export class AppNavigation extends HTMLElement {
 
     this.spaExpanded = true;
 
-    // Atualiza os botões de voltar
     if (spaBackBtn) spaBackBtn.style.display = "flex";
     if (tratamentoBackBtn) tratamentoBackBtn.style.display = "none";
 
     if (window.gsap) {
-      // Expande o menu lateral
       sideMenu.classList.add("spa-expanded");
       if (tratamentoPanel) tratamentoPanel.classList.add("spa-open");
 
-      // Anima o painel Spa entrando da direita
       window.gsap.to(spaPanel, {
         left: "380px",
         opacity: 1,
@@ -513,7 +454,6 @@ export class AppNavigation extends HTMLElement {
         },
       });
 
-      // Anima os links do Spa com stagger
       const spaLinks = spaPanel.querySelectorAll(".spa-location-link");
       window.gsap.fromTo(
         spaLinks,
@@ -541,12 +481,10 @@ export class AppNavigation extends HTMLElement {
 
     this.spaExpanded = false;
 
-    // Restaura os botões de voltar
     if (spaBackBtn) spaBackBtn.style.display = "none";
     if (tratamentoBackBtn) tratamentoBackBtn.style.display = "flex";
 
     if (window.gsap) {
-      // Anima o painel Spa saindo
       window.gsap.to(spaPanel, {
         left: "100%",
         opacity: 0,
@@ -566,9 +504,6 @@ export class AppNavigation extends HTMLElement {
     }
   }
 
-  // ============================================================================
-  // ALTA PERFUMARIA PANEL - Painel de terceiro nível expandido
-  // ============================================================================
   openAltaPerfumariaPanel() {
     const sideMenu = this.querySelector(".moda-side-menu");
     const altaPerfumariaPanel = this.querySelector("[data-alta-perfumaria-panel]");
@@ -582,29 +517,23 @@ export class AppNavigation extends HTMLElement {
 
     this.altaPerfumariaExpanded = true;
 
-    // Mostra botão de voltar do Alta Perfumaria, esconde o de Fragrância
     if (fragranciaBackBtn) fragranciaBackBtn.style.display = "none";
     if (altaPerfumariaBackBtn) altaPerfumariaBackBtn.style.display = "flex";
 
-    // Detecta se é mobile
     const isMobile = window.innerWidth <= 768;
 
-    // Mostra o painel - em mobile usa block, em desktop usa flex
     altaPerfumariaPanel.style.visibility = "visible";
     altaPerfumariaPanel.style.display = isMobile ? "block" : "flex";
 
     if (isMobile) {
-      // Em mobile, usar transição CSS simples
       sideMenu.classList.add("alta-perfumaria-expanded");
 
-      // Força reflow para garantir que a transição funcione
       altaPerfumariaPanel.offsetHeight;
 
       altaPerfumariaPanel.classList.add("active");
       altaPerfumariaPanel.style.transform = "translateX(0)";
       altaPerfumariaPanel.style.opacity = "1";
     } else if (window.gsap) {
-      // Em desktop, usar GSAP
       window.gsap.to(sideMenu, {
         width: "900px",
         duration: 0.5,
@@ -625,7 +554,6 @@ export class AppNavigation extends HTMLElement {
           onComplete: () => {
             altaPerfumariaPanel.classList.add("active");
 
-            // Anima os cards com reveal
             const cardImages = altaPerfumariaPanel.querySelectorAll(".alta-perfumaria-card img");
 
             if (cardImages.length) {
@@ -664,15 +592,12 @@ export class AppNavigation extends HTMLElement {
 
     this.altaPerfumariaExpanded = false;
 
-    // Restaura os botões de voltar
     if (fragranciaBackBtn) fragranciaBackBtn.style.display = "flex";
     if (altaPerfumariaBackBtn) altaPerfumariaBackBtn.style.display = "none";
 
-    // Detecta se é mobile
     const isMobile = window.innerWidth <= 768;
 
     if (isMobile) {
-      // Em mobile, usar transição CSS simples
       altaPerfumariaPanel.classList.remove("active");
       altaPerfumariaPanel.style.transform = "translateX(100%)";
       altaPerfumariaPanel.style.opacity = "0";
@@ -683,7 +608,6 @@ export class AppNavigation extends HTMLElement {
         sideMenu.classList.remove("alta-perfumaria-expanded");
       }, 300);
     } else if (window.gsap) {
-      // Em desktop, usar GSAP
       window.gsap.to(sideMenu, {
         width: "650px",
         duration: 0.4,
@@ -716,16 +640,13 @@ export class AppNavigation extends HTMLElement {
 
     this.currentSubmenu = submenuId;
 
-    // Verifica se é fragrância feminina ou tratamento para expandir o menu
     const isFragranceFeminina = submenuId === "fragrancia-feminina";
     const isTratamento = submenuId === "tratamento";
 
     if (window.gsap) {
-      // Se for fragrância feminina, expande o menu com animação
       if (isFragranceFeminina && sideMenu) {
         this.fragranceExpanded = true;
 
-        // Adiciona classe e anima a largura
         window.gsap.to(sideMenu, {
           width: "650px",
           duration: 0.5,
@@ -736,7 +657,6 @@ export class AppNavigation extends HTMLElement {
           },
         });
 
-        // Anima os cards com stagger após o menu expandir
         setTimeout(() => {
           const cards = submenu.querySelectorAll(".fragrance-card");
           if (cards.length) {
@@ -756,14 +676,11 @@ export class AppNavigation extends HTMLElement {
         }, 300);
       }
 
-      // Se for tratamento, expande o menu para mostrar os cards
       if (isTratamento && sideMenu) {
         this.tratamentoExpanded = true;
 
-        // Detecta se é mobile
         const isMobile = window.innerWidth <= 768;
 
-        // Adiciona classe e anima a largura
         window.gsap.to(sideMenu, {
           width: isMobile ? "100%" : "650px",
           duration: 0.5,
@@ -774,7 +691,6 @@ export class AppNavigation extends HTMLElement {
           },
         });
 
-        // Anima os cards com stagger após o menu expandir
         setTimeout(() => {
           const cards = submenu.querySelectorAll(".tratamento-card");
           if (cards.length) {
@@ -794,14 +710,12 @@ export class AppNavigation extends HTMLElement {
         }, 300);
       }
 
-      // Desliza menu principal para esquerda
       window.gsap.to(mainMenu, {
         x: "-100%",
         duration: 0.4,
         ease: "power2.inOut",
       });
 
-      // Desliza submenu da direita
       window.gsap.fromTo(
         submenu,
         { x: "100%", display: "block" },
@@ -816,17 +730,14 @@ export class AppNavigation extends HTMLElement {
     const sideMenu = this.querySelector(".moda-side-menu");
     const isMobile = window.innerWidth <= 768;
 
-    // Fecha painel Alta Perfumaria se estiver aberto
     if (this.altaPerfumariaExpanded) {
       this.closeAltaPerfumariaPanel();
     }
 
-    // Fecha expansão de fragrância se estiver aberta
     if (this.fragranceExpanded && sideMenu) {
       this.fragranceExpanded = false;
 
       if (isMobile) {
-        // Em mobile, apenas remove as classes
         sideMenu.classList.remove("fragrance-expanded");
         sideMenu.classList.remove("alta-perfumaria-expanded");
         const submenu = this.querySelector(`[data-submenu-id="${this.currentSubmenu}"]`);
@@ -846,12 +757,10 @@ export class AppNavigation extends HTMLElement {
       }
     }
 
-    // Fecha expansão de tratamento se estiver aberta
     if (this.tratamentoExpanded && sideMenu) {
       this.tratamentoExpanded = false;
 
       if (isMobile) {
-        // Em mobile, apenas remove as classes
         sideMenu.classList.remove("tratamento-expanded");
         const submenu = this.querySelector(`[data-submenu-id="${this.currentSubmenu}"]`);
         if (submenu) submenu.classList.remove("submenu-expanded");
@@ -869,7 +778,6 @@ export class AppNavigation extends HTMLElement {
       }
     }
 
-    // Fecha o painel Spa se estiver aberto
     if (this.spaExpanded) {
       this.closeSpaPanel();
     }
@@ -880,21 +788,18 @@ export class AppNavigation extends HTMLElement {
     if (!mainMenu || !submenu) return;
 
     if (isMobile) {
-      // Em mobile, usar transições CSS simples
       mainMenu.style.transform = "translateX(0)";
       submenu.style.transform = "translateX(100%)";
       setTimeout(() => {
         submenu.style.display = "none";
       }, 300);
     } else if (window.gsap) {
-      // Volta menu principal
       window.gsap.to(mainMenu, {
         x: "0%",
         duration: 0.4,
         ease: "power2.inOut",
       });
 
-      // Esconde submenu para direita
       window.gsap.to(submenu, {
         x: "100%",
         duration: 0.4,
@@ -920,7 +825,6 @@ export class AppNavigation extends HTMLElement {
       backdrop.classList.add("active");
       sideMenu.classList.add("active");
 
-      // Anima hamburguer para X com GSAP (2 linhas)
       if (window.gsap) {
         window.gsap.to(lines[0], {
           attr: { y1: 12, y2: 12, x1: 3, x2: 21 },
@@ -938,7 +842,6 @@ export class AppNavigation extends HTMLElement {
           ease: "power2.inOut",
         });
 
-        // Anima os links do menu entrando
         window.gsap.fromTo(
           menuLinks,
           {
@@ -959,7 +862,6 @@ export class AppNavigation extends HTMLElement {
       backdrop.classList.remove("active");
       sideMenu.classList.remove("active");
 
-      // Volta hamburguer ao estado normal (2 linhas)
       if (window.gsap) {
         window.gsap.to(lines[0], {
           attr: { y1: 8, y2: 8, x1: 3, x2: 21 },
@@ -986,7 +888,6 @@ export class AppNavigation extends HTMLElement {
     const lines = hamburger.querySelectorAll("line");
     const mainMenu = this.querySelector(".main-menu-content");
 
-    // Fecha o painel Alta Perfumaria se estiver aberto
     if (this.altaPerfumariaExpanded) {
       const altaPerfumariaPanel = this.querySelector("[data-alta-perfumaria-panel]");
       if (altaPerfumariaPanel) {
@@ -999,7 +900,6 @@ export class AppNavigation extends HTMLElement {
       this.altaPerfumariaExpanded = false;
     }
 
-    // Fecha o painel Spa se estiver aberto
     if (this.spaExpanded) {
       const spaPanel = this.querySelector("[data-spa-panel]");
       if (spaPanel) {
@@ -1010,7 +910,6 @@ export class AppNavigation extends HTMLElement {
       this.spaExpanded = false;
     }
 
-    // Fecha submenu se estiver aberto
     if (this.currentSubmenu) {
       const submenu = this.querySelector(`[data-submenu-id="${this.currentSubmenu}"]`);
       if (submenu) {
@@ -1021,16 +920,13 @@ export class AppNavigation extends HTMLElement {
       this.currentSubmenu = null;
     }
 
-    // Reset do menu principal
     if (mainMenu) {
       mainMenu.style.transform = "";
     }
 
-    // Reset expansões
     this.fragranceExpanded = false;
     this.tratamentoExpanded = false;
 
-    // Remove todas as classes de expansão do sideMenu
     sideMenu.classList.remove("active");
     sideMenu.classList.remove("fragrance-expanded");
     sideMenu.classList.remove("tratamento-expanded");
@@ -1038,12 +934,10 @@ export class AppNavigation extends HTMLElement {
     sideMenu.classList.remove("alta-perfumaria-expanded");
     sideMenu.classList.remove("submenu-expanded");
 
-    // Reset inline styles do sideMenu
     sideMenu.style.width = "";
 
     backdrop.classList.remove("active");
 
-    // Volta hamburguer ao estado normal (2 linhas)
     if (window.gsap) {
       window.gsap.to(lines[0], {
         attr: { y1: 8, y2: 8, x1: 3, x2: 21 },
@@ -1286,7 +1180,6 @@ export class AppNavigation extends HTMLElement {
                     <a href="#ver-tudo" class="submenu-link">Ver tudo</a>
                   </nav>
 
-                  
                 </div>
 
                 <!-- Coluna Direita - Cards Alta Perfumaria -->

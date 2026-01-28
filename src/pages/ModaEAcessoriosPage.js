@@ -1,6 +1,3 @@
-﻿// ============================================================================
-// MODA E ACESSÓRIOS PAGE - Página dedicada a Moda e Acessórios
-// ============================================================================
 import { getSmoothScroll } from "../components/SmoothScroll.js";
 import "../components/ModaNavigation.js";
 import "../components/FooterSection.js";
@@ -36,14 +33,13 @@ export class ModaEAcessoriosPage extends HTMLElement {
   }
 
   disconnectedCallback() {
-    // Cleanup draggable
     if (this.SmoothScroll) {
       this.SmoothScroll.destroy();
     }
     if (this.draggableInstance) {
       this.draggableInstance.kill();
     }
-    // Cleanup animations
+
     if (this.animations) {
       this.animations.forEach((anim) => anim.kill());
     }
@@ -55,7 +51,6 @@ export class ModaEAcessoriosPage extends HTMLElement {
 
       this.animations = [];
 
-      // Hero animation
       const heroTl = window.gsap.timeline();
       heroTl
         .from(".moda-hero-label", {
@@ -97,7 +92,6 @@ export class ModaEAcessoriosPage extends HTMLElement {
 
       this.animations.push(heroTl);
 
-      // Content fade in
       const contentAnim = window.gsap.from(".moda-content-wrapper", {
         scrollTrigger: {
           trigger: ".moda-content-wrapper",
@@ -121,7 +115,6 @@ export class ModaEAcessoriosPage extends HTMLElement {
       const buttons = this.querySelectorAll(".moda-discover-button, .moda-discover-button-second");
 
       buttons.forEach((button) => {
-        // Mouseenter - linha diminui para 0
         button.addEventListener("mouseenter", () => {
           window.gsap.to(button, {
             "--underline-width": "0%",
@@ -130,7 +123,6 @@ export class ModaEAcessoriosPage extends HTMLElement {
           });
         });
 
-        // Mouseleave - linha volta a 100%
         button.addEventListener("mouseleave", () => {
           window.gsap.to(button, {
             "--underline-width": "100%",
@@ -154,7 +146,6 @@ export class ModaEAcessoriosPage extends HTMLElement {
         const title = card.querySelector(".moda-card-title");
         const button = card.querySelector(".moda-card-button");
 
-        // Set initial states
         window.gsap.set(image, {
           scale: 1.3,
           opacity: 0,
@@ -170,7 +161,6 @@ export class ModaEAcessoriosPage extends HTMLElement {
           opacity: 0,
         });
 
-        // Create scroll trigger animation
         const tl = window.gsap.timeline({
           scrollTrigger: {
             trigger: card,
@@ -234,7 +224,6 @@ export class ModaEAcessoriosPage extends HTMLElement {
       const buttons = this.querySelectorAll(".moda-card-button", "moda-card-button-second");
 
       buttons.forEach((button) => {
-        // Mouseenter - linha diminui para 0
         button.addEventListener("mouseenter", () => {
           window.gsap.to(button, {
             "--underline-width": "0%",
@@ -243,7 +232,6 @@ export class ModaEAcessoriosPage extends HTMLElement {
           });
         });
 
-        // Mouseleave - linha volta a 100%
         button.addEventListener("mouseleave", () => {
           window.gsap.to(button, {
             "--underline-width": "100%",
@@ -256,7 +244,6 @@ export class ModaEAcessoriosPage extends HTMLElement {
   }
 
   initVideoControls() {
-    // Controle para os 3 vídeos principais com botão liquid glass
     const videoControls = [
       { videoId: "moda-video-1", btnId: "moda-video-1-btn" },
       { videoId: "moda-video-3", btnId: "moda-video-3-btn" },
@@ -286,7 +273,6 @@ export class ModaEAcessoriosPage extends HTMLElement {
         }
       });
 
-      // Inicialmente, vídeo está tocando, então mostra o ícone de pause
       video
         .play()
         .then(() => {
@@ -295,14 +281,12 @@ export class ModaEAcessoriosPage extends HTMLElement {
           pauseIcon.style.display = "block";
         })
         .catch(() => {
-          // Se autoplay falhar, mantém ícone de play
           btn.classList.remove("playing");
           playIcon.style.display = "block";
           pauseIcon.style.display = "none";
         });
     });
 
-    // Controle legacy para video com botões de mute
     const video = this.querySelector("#miss-dior-section-video");
     const playPauseBtn = this.querySelector("#miss-dior-play-pause-btn");
     const muteBtn = this.querySelector("#miss-dior-mute-unmute-btn");
@@ -314,7 +298,6 @@ export class ModaEAcessoriosPage extends HTMLElement {
     const iconMute = muteBtn.querySelector(".icon-mute");
     const iconUnmute = muteBtn.querySelector(".icon-unmute");
 
-    // Play/Pause handler
     playPauseBtn.addEventListener("click", () => {
       if (video.paused) {
         video.play();
@@ -327,7 +310,6 @@ export class ModaEAcessoriosPage extends HTMLElement {
       }
     });
 
-    // Mute/Unmute handler
     muteBtn.addEventListener("click", () => {
       video.muted = !video.muted;
       if (video.muted) {
@@ -357,20 +339,16 @@ export class ModaEAcessoriosPage extends HTMLElement {
         return;
       }
 
-      // Função para calcular bounds corretamente
       const calculateBounds = () => {
         const containerWidth = container.offsetWidth;
         const firstCard = cards[0].getBoundingClientRect();
         const lastCard = cards[cards.length - 1].getBoundingClientRect();
 
-        // Largura real do conteúdo: do início do primeiro ao fim do último card
         const contentWidth = lastCard.right - firstCard.left;
 
-        // Adiciona padding extra para ver o último card completamente
         const padding = parseFloat(getComputedStyle(container).paddingLeft) || 0;
         const totalWidth = contentWidth + padding;
 
-        // MaxDrag negativo para mover para esquerda
         const maxDrag = Math.min(0, -(totalWidth - containerWidth + padding));
 
         console.log("📏 Bounds:", {
@@ -385,7 +363,6 @@ export class ModaEAcessoriosPage extends HTMLElement {
 
       let bounds = calculateBounds();
 
-      // Atualizar progress bar
       const updateProgress = (x) => {
         if (!progressFill || bounds.minX >= 0) return;
         const progress = Math.abs(x) / Math.abs(bounds.minX);
@@ -397,7 +374,6 @@ export class ModaEAcessoriosPage extends HTMLElement {
         });
       };
 
-      // Criar Draggable
       this.draggableInstance = window.Draggable.create(slider, {
         type: "x",
         bounds: bounds,
@@ -424,12 +400,11 @@ export class ModaEAcessoriosPage extends HTMLElement {
         },
       })[0];
 
-      // Recalcular bounds on resize
       window.addEventListener("resize", () => {
         bounds = calculateBounds();
         if (this.draggableInstance) {
           this.draggableInstance.applyBounds(bounds);
-          // Corrigir posição se estiver fora dos bounds
+
           const currentX = this.draggableInstance.x;
           if (currentX < bounds.minX) {
             window.gsap.to(slider, { x: bounds.minX, duration: 0.3 });
@@ -437,7 +412,6 @@ export class ModaEAcessoriosPage extends HTMLElement {
         }
       });
 
-      // Recalcular após imagens carregarem
       setTimeout(() => {
         bounds = calculateBounds();
         if (this.draggableInstance) {
@@ -445,7 +419,6 @@ export class ModaEAcessoriosPage extends HTMLElement {
         }
       }, 500);
 
-      // Initial progress
       updateProgress(0);
 
       console.log("✅ Drag cards inicializado!", bounds);
@@ -512,7 +485,6 @@ export class ModaEAcessoriosPage extends HTMLElement {
               <a href="/colecao" data-route="/colecao" class="moda-discover-button">Descubra a  coleção</a>
             </div>
           </section>
-          
 
           <section class="moda-hero-video-section">
       <div class="moda-hero-overlay"></div>
@@ -645,14 +617,12 @@ export class ModaEAcessoriosPage extends HTMLElement {
                 </div>
               </section>
             </div>
-           
 
             <!-- Progress Bar -->
             <div class="moda-drag-progress">
               <div class="moda-drag-progress-fill"></div>
             </div>
           </div> 
-          
 
            <section class="miss-dior-video-section">
             <video
@@ -787,7 +757,6 @@ export class ModaEAcessoriosPage extends HTMLElement {
             </div>
             
             </section>
-
 
         <!-- Footer -->
         <footer-section></footer-section>

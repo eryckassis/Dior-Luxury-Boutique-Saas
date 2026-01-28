@@ -1,7 +1,3 @@
-// ============================================================================
-// COLEÇÃO PAGE - Página dedicada à coleção Primavera-Verão 2026
-// ============================================================================
-
 import "../components/ModaNavigation.js";
 import "../components/FooterSection.js";
 import "../components/ColecaoContent.js";
@@ -20,7 +16,6 @@ export class ColecaoPage extends HTMLElement {
   }
 
   disconnectedCallback() {
-    // Cleanup animations
     if (this.animations && this.animations.length > 0) {
       this.animations.forEach((anim) => {
         if (anim && typeof anim.kill === "function") {
@@ -30,16 +25,13 @@ export class ColecaoPage extends HTMLElement {
       this.animations = [];
     }
 
-    // Cleanup ScrollTrigger instances
     if (window.ScrollTrigger) {
       const triggers = window.ScrollTrigger.getAll();
       triggers.forEach((trigger) => trigger.kill());
     }
   }
 
-  initAnimations() {
-    // Sem animações - Performance otimizada para Virtual Scrolling
-  }
+  initAnimations() {}
 
   render() {
     this.innerHTML = `

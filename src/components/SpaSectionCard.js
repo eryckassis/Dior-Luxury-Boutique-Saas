@@ -1,7 +1,3 @@
-// ============================================================================
-// SPA SECTION CARD - Componente reutilizável para sections do Dior Spa
-// ============================================================================
-
 export class SpaSectionCard extends HTMLElement {
   constructor() {
     super();
@@ -25,7 +21,6 @@ export class SpaSectionCard extends HTMLElement {
   }
 
   disconnectedCallback() {
-    // Cleanup ScrollTrigger
     if (this.scrollTriggerInstance) {
       this.scrollTriggerInstance.kill();
     }
@@ -48,12 +43,10 @@ export class SpaSectionCard extends HTMLElement {
   }
 
   get buttonStyle() {
-    // "line" para botão com underline, "filled" para botão preenchido
     return this.getAttribute("button-style") || "line";
   }
 
   get imagePosition() {
-    // "left" ou "right"
     return this.getAttribute("image-position") || "left";
   }
 
@@ -71,7 +64,6 @@ export class SpaSectionCard extends HTMLElement {
       const content = this.querySelector(".spa-card-content");
 
       if (imageWrapper && overlay && image) {
-        // Image reveal animation
         const revealTl = window.gsap.timeline({
           scrollTrigger: {
             trigger: imageWrapper,
@@ -97,7 +89,6 @@ export class SpaSectionCard extends HTMLElement {
         this.scrollTriggerInstance = revealTl.scrollTrigger;
       }
 
-      // Content fade in
       if (content) {
         window.gsap.fromTo(
           content,
@@ -116,7 +107,6 @@ export class SpaSectionCard extends HTMLElement {
         );
       }
 
-      // Button hover animation (for filled button style)
       const filledButton = this.querySelector(".spa-btn-filled");
       if (filledButton) {
         const flair = filledButton.querySelector(".spa-btn-flair");

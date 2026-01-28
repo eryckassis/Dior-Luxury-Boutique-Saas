@@ -25,24 +25,20 @@ export class ColecaoContent extends HTMLElement {
   }
 
   disconnectedCallback() {
-    // Cleanup filter subscription
     if (this.unsubscribeFilter) {
       this.unsubscribeFilter();
     }
 
-    // Cleanup intersection observer
     if (this.intersectionObserver) {
       this.intersectionObserver.disconnect();
       this.intersectionObserver = null;
     }
 
-    // Cleanup draggable
     if (this.draggableInstance) {
       this.draggableInstance.kill();
       this.draggableInstance = null;
     }
 
-    // Cleanup product carousels
     if (this.productCarousels && this.productCarousels.length > 0) {
       this.productCarousels.forEach((carousel) => {
         if (carousel && typeof carousel.kill === "function") {
@@ -52,13 +48,11 @@ export class ColecaoContent extends HTMLElement {
       this.productCarousels = [];
     }
 
-    // Remove resize listener
     if (this.resizeHandler) {
       window.removeEventListener("resize", this.resizeHandler);
       this.resizeHandler = null;
     }
 
-    // Clear rendered products
     this.renderedProducts.clear();
   }
 
@@ -80,7 +74,6 @@ export class ColecaoContent extends HTMLElement {
         return;
       }
 
-      // Função para calcular bounds corretamente
       const calculateBounds = () => {
         const containerWidth = container.offsetWidth;
         const trackRect = track.getBoundingClientRect();
@@ -100,7 +93,6 @@ export class ColecaoContent extends HTMLElement {
 
       let bounds = calculateBounds();
 
-      // Função para atualizar a barra de progresso
       const updateProgress = (x) => {
         if (bounds.minX >= 0) return;
         const progress = Math.abs(x / bounds.minX);
@@ -113,7 +105,6 @@ export class ColecaoContent extends HTMLElement {
         return;
       }
 
-      // Criar Draggable
       this.draggableInstance = window.Draggable.create(track, {
         type: "x",
         bounds: bounds,
@@ -135,7 +126,6 @@ export class ColecaoContent extends HTMLElement {
         },
       })[0];
 
-      // Recalcular bounds no resize
       this.resizeHandler = () => {
         bounds = calculateBounds();
         if (this.draggableInstance) {
@@ -149,7 +139,6 @@ export class ColecaoContent extends HTMLElement {
 
       window.addEventListener("resize", this.resizeHandler);
 
-      // Clique na barra de progresso
       progressBar.addEventListener("click", (e) => {
         const rect = progressBar.getBoundingClientRect();
         const clickX = e.clientX - rect.left;
@@ -188,7 +177,6 @@ export class ColecaoContent extends HTMLElement {
 
         const imageCount = images.length;
 
-        // Criar setas
         const leftArrow = document.createElement("button");
         leftArrow.className = "product-arrow product-arrow--left";
         leftArrow.setAttribute("aria-label", "Anterior");
@@ -202,7 +190,6 @@ export class ColecaoContent extends HTMLElement {
         wrapper.appendChild(leftArrow);
         wrapper.appendChild(rightArrow);
 
-        // Configurar dimensões
         const setupDimensions = () => {
           const wrapperWidth = wrapper.offsetWidth;
           window.gsap.set(track, { width: wrapperWidth * imageCount });
@@ -214,7 +201,6 @@ export class ColecaoContent extends HTMLElement {
         const getSlideWidth = () => wrapper.offsetWidth;
         const getMaxDrag = () => -(imageCount - 1) * getSlideWidth();
 
-        // Criar barra de progresso
         const progressBar = document.createElement("div");
         progressBar.className = "product-carousel-progress";
         const progressFill = document.createElement("div");
@@ -222,7 +208,6 @@ export class ColecaoContent extends HTMLElement {
         progressBar.appendChild(progressFill);
         wrapper.appendChild(progressBar);
 
-        // Atualizar progresso
         const updateProgress = () => {
           const currentX = window.gsap.getProperty(track, "x");
           const progress = Math.abs(currentX / getMaxDrag());
@@ -235,7 +220,6 @@ export class ColecaoContent extends HTMLElement {
           rightArrow.style.pointerEvents = currentX <= getMaxDrag() + 10 ? "none" : "auto";
         };
 
-        // Navegação por setas
         const navigateByArrow = (direction) => {
           const currentX = window.gsap.getProperty(track, "x");
           const slideWidth = getSlideWidth();
@@ -260,7 +244,6 @@ export class ColecaoContent extends HTMLElement {
           navigateByArrow("right");
         });
 
-        // Criar Draggable
         const draggable = window.Draggable.create(track, {
           type: "x",
           bounds: { minX: getMaxDrag(), maxX: 0 },
@@ -278,7 +261,6 @@ export class ColecaoContent extends HTMLElement {
 
         this.productCarousels.push(draggable);
 
-        // Resize handler
         const handleResize = () => {
           setupDimensions();
           draggable.applyBounds({ minX: getMaxDrag(), maxX: 0 });
@@ -352,9 +334,6 @@ export class ColecaoContent extends HTMLElement {
     }, 600);
   }
 
-  // ============================================================================
-  // VIRTUAL SCROLLING - Renderiza apenas elementos visíveis
-  // ============================================================================
   initVirtualScrolling() {
     setTimeout(() => {
       const productItems = this.querySelectorAll(".product-showcase-item");
@@ -364,7 +343,6 @@ export class ColecaoContent extends HTMLElement {
         return;
       }
 
-      // Intersection Observer: detecta quando produto entra na viewport
       const observerOptions = {
         root: null, // viewport
         rootMargin: "200px", // Pre-load 200px antes
@@ -376,19 +354,15 @@ export class ColecaoContent extends HTMLElement {
           const productId = entry.target.getAttribute("data-product-id");
 
           if (entry.isIntersecting && !this.renderedProducts.has(productId)) {
-            // Marca como renderizado
             this.renderedProducts.add(productId);
 
-            // Renderiza o conteúdo do produto
             this.renderProductContent(entry.target);
 
-            // Para de observar (já foi renderizado)
             this.intersectionObserver.unobserve(entry.target);
           }
         });
       }, observerOptions);
 
-      // Observa todos os produtos
       productItems.forEach((item) => {
         this.intersectionObserver.observe(item);
       });
@@ -397,21 +371,17 @@ export class ColecaoContent extends HTMLElement {
     }, 100);
   }
 
-  // Renderiza conteúdo do produto quando entra na viewport
   renderProductContent(productElement) {
     const productId = productElement.getAttribute("data-product-id");
     const product = colecaoProducts.find((p) => p.id === productId);
 
     if (!product) return;
 
-    // Inicializa carrossel para este produto específico
     this.initSingleProductCarousel(productElement);
 
-    // Inicializa navegação para este produto
     this.initSingleProductNavigation(productElement);
   }
 
-  // Inicializa carrossel de um único produto
   initSingleProductCarousel(item) {
     if (!window.gsap || !window.Draggable) return;
 
@@ -425,7 +395,6 @@ export class ColecaoContent extends HTMLElement {
 
     const imageCount = images.length;
 
-    // Criar setas
     const leftArrow = document.createElement("button");
     leftArrow.className = "product-arrow product-arrow--left";
     leftArrow.setAttribute("aria-label", "Anterior");
@@ -439,7 +408,6 @@ export class ColecaoContent extends HTMLElement {
     wrapper.appendChild(leftArrow);
     wrapper.appendChild(rightArrow);
 
-    // Configurar dimensões
     const setupDimensions = () => {
       const wrapperWidth = wrapper.offsetWidth;
       window.gsap.set(track, { width: wrapperWidth * imageCount });
@@ -451,7 +419,6 @@ export class ColecaoContent extends HTMLElement {
     const getSlideWidth = () => wrapper.offsetWidth;
     const getMaxDrag = () => -(imageCount - 1) * getSlideWidth();
 
-    // Criar barra de progresso
     const progressBar = document.createElement("div");
     progressBar.className = "product-carousel-progress";
     const progressFill = document.createElement("div");
@@ -459,7 +426,6 @@ export class ColecaoContent extends HTMLElement {
     progressBar.appendChild(progressFill);
     wrapper.appendChild(progressBar);
 
-    // Atualizar progresso
     const updateProgress = () => {
       const currentX = window.gsap.getProperty(track, "x");
       const progress = Math.abs(currentX / getMaxDrag());
@@ -472,7 +438,6 @@ export class ColecaoContent extends HTMLElement {
       rightArrow.style.pointerEvents = currentX <= getMaxDrag() + 10 ? "none" : "auto";
     };
 
-    // Navegação por setas
     const navigateByArrow = (direction) => {
       const currentX = window.gsap.getProperty(track, "x");
       const slideWidth = getSlideWidth();
@@ -497,7 +462,6 @@ export class ColecaoContent extends HTMLElement {
       navigateByArrow("right");
     });
 
-    // Criar Draggable
     const draggable = window.Draggable.create(track, {
       type: "x",
       bounds: { minX: getMaxDrag(), maxX: 0 },
@@ -518,7 +482,6 @@ export class ColecaoContent extends HTMLElement {
     updateProgress();
   }
 
-  // Inicializa navegação de um único produto
   initSingleProductNavigation(item) {
     const productId = item.getAttribute("data-product-id");
     if (!productId) return;
@@ -569,13 +532,7 @@ export class ColecaoContent extends HTMLElement {
     item.style.cursor = "pointer";
   }
 
-  initAnimations() {
-    // SEM ANIMAÇÕES - Virtual Scrolling otimizado
-  }
-
-  // ============================================================================
-  // FILTER SYSTEM
-  // ============================================================================
+  initAnimations() {}
 
   initFilterButton() {
     const filterBtn = this.querySelector(".filter-trigger-btn");
@@ -585,12 +542,10 @@ export class ColecaoContent extends HTMLElement {
   }
 
   initFilterListeners() {
-    // Subscribe para mudanças nos filtros
     this.unsubscribeFilter = filterService.subscribe(() => {
       this.applyFilters();
     });
 
-    // Listener para quando o sidebar aplicar filtros
     this.addEventListener("filters-applied", () => {
       this.applyFilters();
     });
@@ -605,19 +560,15 @@ export class ColecaoContent extends HTMLElement {
   }
 
   applyFilters() {
-    // Aplica filtros e ordenação
     this.filteredProducts = filterService.applyFilters(colecaoProducts);
 
-    // Atualiza a contagem no sidebar
     const sidebar = this.querySelector("filter-sidebar");
     if (sidebar) {
       sidebar.setProductCount(this.filteredProducts.length);
     }
 
-    // Atualiza o contador na página
     this.updateProductCount();
 
-    // Re-renderiza os produtos
     this.updateProductsGrid();
   }
 
@@ -627,7 +578,6 @@ export class ColecaoContent extends HTMLElement {
       countElement.textContent = `${this.filteredProducts.length} Artigos`;
     }
 
-    // Atualiza também o botão de filtro
     const filterCount = filterService.getActiveFilterCount();
     const filterBtnCount = this.querySelector(".filter-trigger-count");
     if (filterBtnCount) {
@@ -640,16 +590,13 @@ export class ColecaoContent extends HTMLElement {
     const grid = this.querySelector(".products-showcase-grid");
     if (!grid) return;
 
-    // Limpa observadores existentes
     if (this.intersectionObserver) {
       this.intersectionObserver.disconnect();
     }
     this.renderedProducts.clear();
 
-    // Re-renderiza grid
     grid.innerHTML = this.generateProducts();
 
-    // Re-inicializa virtual scrolling
     this.initVirtualScrolling();
   }
 
@@ -756,12 +703,10 @@ export class ColecaoContent extends HTMLElement {
   generateProducts() {
     return this.filteredProducts
       .map((product) => {
-        // Se for um card destacado (highlight)
         if (product.isHighlight) {
           return this.generateHighlightCard(product);
         }
 
-        // Card normal
         const imagesHtml = product.images
           .map(
             (img, i) =>

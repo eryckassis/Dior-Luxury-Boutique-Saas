@@ -1,7 +1,3 @@
-// ============================================================================
-// FILTER SIDEBAR - Componente de filtros e ordenação
-// ============================================================================
-
 import { filterService, FILTER_CONFIG } from "../services/FilterService.js";
 
 export class FilterSidebar extends HTMLElement {
@@ -18,7 +14,6 @@ export class FilterSidebar extends HTMLElement {
     this.render();
     this.initEventListeners();
 
-    // Subscribe para atualizações dos filtros
     this.unsubscribe = filterService.subscribe(() => {
       this.updateUI();
     });
@@ -30,18 +25,11 @@ export class FilterSidebar extends HTMLElement {
     }
   }
 
-  /**
-   * Define a contagem de produtos
-   * @param {number} count
-   */
   setProductCount(count) {
     this.productCount = count;
     this.updateProductCount();
   }
 
-  /**
-   * Abre o sidebar
-   */
   open() {
     this.isOpen = true;
     this.currentPanel = "main";
@@ -56,9 +44,6 @@ export class FilterSidebar extends HTMLElement {
     }
   }
 
-  /**
-   * Fecha o sidebar
-   */
   close() {
     this.isOpen = false;
     const sidebar = this.querySelector(".filter-sidebar");
@@ -71,19 +56,12 @@ export class FilterSidebar extends HTMLElement {
     }
   }
 
-  /**
-   * Navega para um painel específico
-   * @param {string} panel
-   */
   navigateToPanel(panel) {
     this.panelHistory.push(this.currentPanel);
     this.currentPanel = panel;
     this.renderPanelContent();
   }
 
-  /**
-   * Volta para o painel anterior
-   */
   goBack() {
     if (this.panelHistory.length > 0) {
       this.currentPanel = this.panelHistory.pop();
@@ -91,28 +69,20 @@ export class FilterSidebar extends HTMLElement {
     }
   }
 
-  /**
-   * Atualiza a UI após mudança nos filtros
-   */
   updateUI() {
     this.updateActiveIndicators();
     this.updateProductCount();
   }
 
-  /**
-   * Atualiza indicadores de filtros ativos
-   */
   updateActiveIndicators() {
     const filters = filterService.getActiveFilters();
 
-    // Atualiza indicador de ordenação
     const sortIndicator = this.querySelector('[data-panel="sort"] .filter-option-value');
     if (sortIndicator) {
       const sortOption = FILTER_CONFIG.sortOptions.find((s) => s.id === filters.sort);
       sortIndicator.textContent = sortOption ? sortOption.label : "Recomendado";
     }
 
-    // Atualiza contadores em cada opção
     this.updateFilterCount("category", filters.categories.length);
     this.updateFilterCount("line", filters.lines.length);
     this.updateFilterCount("color", filters.colors.length);
@@ -120,9 +90,6 @@ export class FilterSidebar extends HTMLElement {
     this.updateFilterCount("size", filters.sizes.length);
   }
 
-  /**
-   * Atualiza contador de um tipo de filtro
-   */
   updateFilterCount(type, count) {
     const indicator = this.querySelector(`[data-panel="${type}"] .filter-count`);
     if (indicator) {
@@ -131,9 +98,6 @@ export class FilterSidebar extends HTMLElement {
     }
   }
 
-  /**
-   * Atualiza contagem de produtos
-   */
   updateProductCount() {
     const countBtn = this.querySelector(".filter-view-btn");
     if (countBtn) {
@@ -141,9 +105,6 @@ export class FilterSidebar extends HTMLElement {
     }
   }
 
-  /**
-   * Renderiza o conteúdo do painel atual
-   */
   renderPanelContent() {
     const contentContainer = this.querySelector(".filter-panel-content");
     if (!contentContainer) return;
@@ -151,17 +112,14 @@ export class FilterSidebar extends HTMLElement {
     const headerTitle = this.querySelector(".filter-header-title");
     const backBtn = this.querySelector(".filter-back-btn");
 
-    // Mostra/esconde botão voltar
     if (backBtn) {
       backBtn.style.display = this.currentPanel === "main" ? "none" : "flex";
     }
 
-    // Atualiza título
     if (headerTitle) {
       headerTitle.textContent = this.getPanelTitle(this.currentPanel);
     }
 
-    // Renderiza conteúdo baseado no painel
     switch (this.currentPanel) {
       case "main":
         contentContainer.innerHTML = this.renderMainPanel();
@@ -188,13 +146,9 @@ export class FilterSidebar extends HTMLElement {
         contentContainer.innerHTML = this.renderMainPanel();
     }
 
-    // Re-adiciona event listeners
     this.initPanelEventListeners();
   }
 
-  /**
-   * Obtém título do painel
-   */
   getPanelTitle(panel) {
     const titles = {
       main: "Filtrar e ordenar",
@@ -208,9 +162,6 @@ export class FilterSidebar extends HTMLElement {
     return titles[panel] || "Filtrar e ordenar";
   }
 
-  /**
-   * Renderiza o painel principal
-   */
   renderMainPanel() {
     const filters = filterService.getActiveFilters();
     const sortOption = FILTER_CONFIG.sortOptions.find((s) => s.id === filters.sort);
@@ -277,9 +228,6 @@ export class FilterSidebar extends HTMLElement {
     `;
   }
 
-  /**
-   * Renderiza painel de ordenação
-   */
   renderSortPanel() {
     const currentSort = filterService.getActiveFilters().sort;
 
@@ -306,9 +254,6 @@ export class FilterSidebar extends HTMLElement {
     `;
   }
 
-  /**
-   * Renderiza painel de categorias
-   */
   renderCategoryPanel() {
     const activeCategories = filterService.getActiveFilters().categories;
 
@@ -337,9 +282,6 @@ export class FilterSidebar extends HTMLElement {
     `;
   }
 
-  /**
-   * Renderiza painel de linhas
-   */
   renderLinePanel() {
     const activeLines = filterService.getActiveFilters().lines;
 
@@ -368,9 +310,6 @@ export class FilterSidebar extends HTMLElement {
     `;
   }
 
-  /**
-   * Renderiza painel de cores
-   */
   renderColorPanel() {
     const activeColors = filterService.getActiveFilters().colors;
 
@@ -404,9 +343,6 @@ export class FilterSidebar extends HTMLElement {
     `;
   }
 
-  /**
-   * Renderiza painel de materiais
-   */
   renderMaterialPanel() {
     const activeMaterials = filterService.getActiveFilters().materials;
 
@@ -435,9 +371,6 @@ export class FilterSidebar extends HTMLElement {
     `;
   }
 
-  /**
-   * Renderiza painel de tamanhos
-   */
   renderSizePanel() {
     const activeSizes = filterService.getActiveFilters().sizes;
 
@@ -484,11 +417,7 @@ export class FilterSidebar extends HTMLElement {
     `;
   }
 
-  /**
-   * Event listeners do painel atual
-   */
   initPanelEventListeners() {
-    // Radio buttons para ordenação
     const radioInputs = this.querySelectorAll(".filter-radio-input");
     radioInputs.forEach((input) => {
       input.addEventListener("change", (e) => {
@@ -497,7 +426,6 @@ export class FilterSidebar extends HTMLElement {
       });
     });
 
-    // Checkboxes para filtros
     const checkboxInputs = this.querySelectorAll(".filter-checkbox-input");
     checkboxInputs.forEach((input) => {
       input.addEventListener("change", (e) => {
@@ -505,7 +433,6 @@ export class FilterSidebar extends HTMLElement {
         const value = e.target.value;
         filterService.toggleFilter(filterType, value);
 
-        // Atualiza visual do checkbox
         const customCheckbox = e.target.nextElementSibling;
         if (customCheckbox) {
           customCheckbox.classList.toggle("checked", e.target.checked);
@@ -513,7 +440,6 @@ export class FilterSidebar extends HTMLElement {
       });
     });
 
-    // Accordion para tamanhos
     const groupHeaders = this.querySelectorAll(".filter-size-group-header");
     groupHeaders.forEach((header) => {
       header.addEventListener("click", () => {
@@ -529,7 +455,6 @@ export class FilterSidebar extends HTMLElement {
       });
     });
 
-    // Navegação para sub-painéis
     const panelOptions = this.querySelectorAll(".filter-option[data-panel]");
     panelOptions.forEach((option) => {
       option.addEventListener("click", () => {
@@ -539,34 +464,26 @@ export class FilterSidebar extends HTMLElement {
     });
   }
 
-  /**
-   * Inicializa event listeners principais
-   */
   initEventListeners() {
-    // Botão fechar
     const closeBtn = this.querySelector(".filter-close-btn");
     closeBtn?.addEventListener("click", () => this.close());
 
-    // Overlay
     const overlay = this.querySelector(".filter-overlay");
     overlay?.addEventListener("click", () => this.close());
 
-    // Botão voltar
     const backBtn = this.querySelector(".filter-back-btn");
     backBtn?.addEventListener("click", () => this.goBack());
 
-    // Botão limpar filtros
     const clearBtn = this.querySelector(".filter-clear-btn");
     clearBtn?.addEventListener("click", () => {
       filterService.clearAllFilters();
       this.renderPanelContent();
     });
 
-    // Botão ver produtos
     const viewBtn = this.querySelector(".filter-view-btn");
     viewBtn?.addEventListener("click", () => {
       this.close();
-      // Dispara evento para atualizar produtos
+
       this.dispatchEvent(
         new CustomEvent("filters-applied", {
           bubbles: true,
@@ -575,7 +492,6 @@ export class FilterSidebar extends HTMLElement {
       );
     });
 
-    // Event listeners do painel inicial
     this.initPanelEventListeners();
   }
 

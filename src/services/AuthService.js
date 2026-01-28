@@ -37,7 +37,6 @@ class AuthService {
     supabase.auth.onAuthStateChange(async (event, session) => {
       console.log("🔐 Auth Event:", event);
 
-      // Ignora INITIAL_SESSION pois já tratamos
       if (event === "INITIAL_SESSION") return;
 
       this.currentSession = session;
@@ -102,7 +101,7 @@ class AuthService {
 
       if (error) {
         console.error("❌ Erro do Supabase:", error);
-        // Mapeia erros do Supabase para mensagens amigáveis
+
         if (error.message.includes("already registered")) {
           throw new Error("Email já está cadastrado. Por favor, faça login ou use outro email.");
         }
@@ -112,7 +111,6 @@ class AuthService {
       console.log("✅ Usuário criado:", data.user?.id);
       console.log("📧 Sessão:", data.session ? "Sim" : "Não (precisa confirmar email)");
 
-      // Supabase pode retornar user mesmo sem confirmar email (depende das configurações)
       return {
         success: true,
         message: "Conta criada com sucesso! Verifique seu email para confirmar.",
@@ -133,7 +131,6 @@ class AuthService {
       });
 
       if (error) {
-        // Mapeia erros para mensagens amigáveis em português
         if (error.message.includes("Invalid login credentials")) {
           throw new Error("Email ou senha incorretos.");
         }
@@ -143,7 +140,6 @@ class AuthService {
         throw new Error(error.message);
       }
 
-      // Busca perfil do usuário
       const profile = await this.getProfile();
 
       return {
@@ -166,25 +162,20 @@ class AuthService {
       console.log("🔐 AuthService.logout() - Iniciando...");
       this._manualLogout = true;
 
-      // Limpa estado local PRIMEIRO (garante logout mesmo se signOut falhar)
       this.currentUser = null;
       this.currentSession = null;
 
-      // Remove tokens do localStorage (chave padrão do Supabase)
       const storageKey = `sb-hstrbobhbravppxpmvle-auth-token`;
       localStorage.removeItem(storageKey);
 
-      // Remove outras possíveis chaves do Supabase
       Object.keys(localStorage).forEach((key) => {
         if (key.startsWith("sb-") || key.includes("supabase")) {
           localStorage.removeItem(key);
         }
       });
 
-      // Notifica listeners ANTES de tentar signOut (UI atualiza imediatamente)
       this.notifyListeners();
 
-      // Tenta signOut em background (não bloqueia)
       supabase.auth.signOut().catch((err) => {
         console.warn("⚠️ signOut() falhou (ignorado):", err);
       });
@@ -192,7 +183,7 @@ class AuthService {
       return { success: true, message: "Logout realizado com sucesso!" };
     } catch (error) {
       console.error("❌ Erro no logout:", error);
-      // Mesmo com erro, garante limpeza
+
       this.currentUser = null;
       this.currentSession = null;
       this.notifyListeners();
@@ -240,10 +231,6 @@ class AuthService {
     }
   }
 
-  // ========================================================================
-  // PERFIL DO USUÁRIO
-  // ========================================================================
-
   async getProfile() {
     try {
       const user = await this.getUser();
@@ -256,7 +243,6 @@ class AuthService {
         .single();
 
       if (error && error.code !== "PGRST116") {
-        // PGRST116 = not found
         throw new Error(error.message);
       }
 
@@ -293,10 +279,6 @@ class AuthService {
     }
   }
 
-  // ========================================================================
-  // GETTERS DE SESSÃO
-  // ========================================================================
-
   async getUser() {
     const {
       data: { user },
@@ -320,12 +302,7 @@ class AuthService {
     return !!this.currentSession;
   }
 
-  /**
-   * Verifica autenticação de forma ASSÍNCRONA
-   * Aguarda inicialização e retorna o estado correto
-   */
   async isAuthenticatedAsync() {
-    // Aguarda inicialização se ainda não terminou
     if (!this._initialized) {
       await this._initPromise;
     }
@@ -345,13 +322,9 @@ class AuthService {
     }
   }
 
-  // ========================================================================
-  // LISTENERS (Observer Pattern) - Mantém compatibilidade
-  // ========================================================================
-
   addListener(callback) {
     this.listeners.push(callback);
-    // Notifica imediatamente com estado atual
+
     callback({
       user: this.currentUser,
       isAuthenticated: this.isAuthenticated(),
@@ -368,10 +341,6 @@ class AuthService {
     this.listeners.forEach((callback) => callback({ user, isAuthenticated }));
   }
 
-  // ========================================================================
-  // MÉTODOS DE COMPATIBILIDADE (para transição gradual)
-  // ========================================================================
-
   getStoredUser() {
     console.warn("⚠️ getStoredUser() está deprecated. Use getProfile()");
     return this.currentUser;
@@ -386,9 +355,5 @@ class AuthService {
     return this.logout();
   }
 }
-
-// ============================================================================
-// SINGLETON EXPORT
-// ============================================================================
 
 export const authService = new AuthService();

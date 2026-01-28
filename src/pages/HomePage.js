@@ -1,7 +1,3 @@
-﻿// ============================================================================
-// HOME PAGE - Página inicial usando Web Components
-// ============================================================================
-
 import "../components/AppNavigation.js";
 import "../components/HeroSection.js";
 import "../components/TextContent.js";
@@ -41,18 +37,12 @@ export class HomePage extends HTMLElement {
     this.initLaMousseParallax();
   }
 
-  // ============================================================================
-  // DIORIVERA SCROLL MORPH - Animação estilo Dior.com
-  // 1 imagem central → scroll → laterais diminuem + 2 imagens sobem dos lados
-  // ============================================================================
   initDioriveraScrollMorph() {
     if (!window.gsap || !window.ScrollTrigger) return;
 
-    // Não rodar animação em mobile - cards ficam empilhados via CSS
     const isMobile = window.innerWidth <= 768;
 
     if (isMobile) {
-      // Garantir que elementos estejam com estilos corretos para mobile
       const section = this.querySelector(".diorivera-morph-section");
       const centerImage = this.querySelector(".diorivera-center");
       const leftImage = this.querySelector(".diorivera-left");
@@ -68,7 +58,6 @@ export class HomePage extends HTMLElement {
         window.gsap.set(rightImage, { clearProps: "all" });
       }
 
-      // Matar qualquer ScrollTrigger existente nesta seção
       if (section) {
         window.ScrollTrigger.getAll().forEach((trigger) => {
           if (trigger.trigger === section) {
@@ -87,7 +76,6 @@ export class HomePage extends HTMLElement {
 
       if (!section || !centerImage) return;
 
-      // Timeline principal com ScrollTrigger
       const tl = window.gsap.timeline({
         scrollTrigger: {
           trigger: section,
@@ -99,7 +87,6 @@ export class HomePage extends HTMLElement {
         },
       });
 
-      // Fase 1: Imagem central diminui (laterais contraem) - 0 a 1
       tl.to(
         centerImage,
         {
@@ -111,7 +98,6 @@ export class HomePage extends HTMLElement {
         0,
       );
 
-      // Fase 2: APÓS morph completo, imagens laterais sobem SINCRONIZADAS
       tl.to(
         [leftImage, rightImage],
         {
@@ -125,15 +111,11 @@ export class HomePage extends HTMLElement {
     });
   }
 
-  // ============================================================================
-  // DIORIVERA CLICK NAVIGATION - Navegação ao clicar nas imagens laterais
-  // ============================================================================
   initDioriveraClickNavigation() {
     requestAnimationFrame(() => {
       const leftImage = this.querySelector(".diorivera-left");
       const rightImage = this.querySelector(".diorivera-right");
 
-      // Clique na imagem esquerda → navega para Dioriviera
       if (leftImage) {
         leftImage.style.cursor = "pointer";
         leftImage.addEventListener("click", () => {
@@ -143,7 +125,6 @@ export class HomePage extends HTMLElement {
         });
       }
 
-      // Clique na imagem direita → navega para página Gris Dior
       if (rightImage) {
         rightImage.style.cursor = "pointer";
         rightImage.addEventListener("click", () => {
@@ -155,10 +136,6 @@ export class HomePage extends HTMLElement {
     });
   }
 
-  // ============================================================================
-  // J'ADORE EXPAND MORPH - Efeito inverso: inicia com padding, expande para full
-  // Mesma lógica do Diorivera, mas animando de pequeno → full-width
-  // ============================================================================
   initJadoreExpandMorph() {
     if (!window.gsap || !window.ScrollTrigger) return;
 
@@ -171,7 +148,6 @@ export class HomePage extends HTMLElement {
       const isMobile = window.innerWidth <= 768;
 
       if (isMobile) {
-        // Mobile: pin quando centralizado na tela
         const tl = window.gsap.timeline({
           scrollTrigger: {
             trigger: section,
@@ -183,7 +159,6 @@ export class HomePage extends HTMLElement {
           },
         });
 
-        // Expande de 85% → 100%
         tl.to(
           imageWrapper,
           {
@@ -196,7 +171,6 @@ export class HomePage extends HTMLElement {
           0,
         );
       } else {
-        // Desktop: animação com pin (comportamento original)
         const tl = window.gsap.timeline({
           scrollTrigger: {
             trigger: section,
@@ -208,7 +182,6 @@ export class HomePage extends HTMLElement {
           },
         });
 
-        // Expande os 4 lados: width e height
         tl.to(
           imageWrapper,
           {
@@ -223,15 +196,11 @@ export class HomePage extends HTMLElement {
     });
   }
 
-  // ============================================================================
-  // SERVICES DIOR SECTION - Inicialização do drag cards + animações
-  // ============================================================================
   initServicesDiorSection() {
     setTimeout(() => {
       const section = this.querySelector(".services-dior-section");
       if (!section) return;
 
-      // Inicializar drag nos cards
       const container = section.querySelector(".services-drag-container");
       const track = section.querySelector(".services-drag-track");
       const cards = section.querySelectorAll(".services-drag-card");
@@ -250,11 +219,9 @@ export class HomePage extends HTMLElement {
         });
       }
 
-      // Inicializar animação dos botões
       const buttons = section.querySelectorAll(".services-card-button");
       initButtonUnderlineAnimation(buttons);
 
-      // Animação de entrada do título
       if (window.gsap && window.ScrollTrigger) {
         const title = section.querySelector(".services-title");
 
@@ -272,7 +239,6 @@ export class HomePage extends HTMLElement {
           });
         }
 
-        // Animação de entrada dos cards
         cards.forEach((card, index) => {
           window.gsap.from(card, {
             scrollTrigger: {
@@ -289,7 +255,6 @@ export class HomePage extends HTMLElement {
         });
       }
 
-      // Navegação ao clicar nos cards
       cards.forEach((card) => {
         const link = card.querySelector(".services-card-button");
         if (link) {
@@ -308,7 +273,6 @@ export class HomePage extends HTMLElement {
   }
 
   initHeroVideosHover() {
-    // Aguardar os web components renderizarem
     setTimeout(() => {
       const heroVideos = this.querySelectorAll(".hero-video-hover");
 
@@ -317,11 +281,9 @@ export class HomePage extends HTMLElement {
       }
 
       heroVideos.forEach((video, index) => {
-        // Garantir que o vídeo está pausado inicialmente
         video.pause();
         video.currentTime = 0;
 
-        // Pegar o wrapper do vídeo para melhor detecção de hover
         const wrapper = video.closest(".grid-item__wrapper") || video.parentElement;
 
         const playVideo = () => {
@@ -336,7 +298,6 @@ export class HomePage extends HTMLElement {
           video.currentTime = 0;
         };
 
-        // Adicionar eventos no wrapper E no vídeo para garantir detecção
         if (wrapper && wrapper !== video) {
           wrapper.addEventListener("mouseenter", playVideo);
           wrapper.addEventListener("mouseleave", pauseVideo);
@@ -354,19 +315,15 @@ export class HomePage extends HTMLElement {
   initHeroScrollAnimations() {
     if (!window.gsap || !window.ScrollTrigger) return;
 
-    // Aguardar os web components renderizarem
     setTimeout(() => {
-      // Selecionar os wrappers dos vídeos hero
       const heroWrappers = this.querySelectorAll(".hero-video-hover").forEach((video) => {
         const wrapper = video.closest(".grid-item__wrapper");
 
         if (wrapper) {
-          // Adiciona clip-path inicial no wrapper
           window.gsap.set(wrapper, {
             clipPath: "inset(0% 0% 0% -90%)",
           });
 
-          // Animação com ScrollTrigger no wrapper
           window.gsap.to(wrapper, {
             clipPath: "inset(0% 0% 0% 100%)",
             ease: "none",
@@ -380,11 +337,9 @@ export class HomePage extends HTMLElement {
         }
       });
 
-      // Animação do texto que aparece entre os vídeos
       const textContent = this.querySelectorAll(".grid-content");
 
       textContent.forEach((content) => {
-        // Animação de entrada (aparece)
         window.gsap.from(content, {
           opacity: 0,
           y: 50,
@@ -397,7 +352,6 @@ export class HomePage extends HTMLElement {
           },
         });
 
-        // Animação de saída (desaparece suavemente)
         window.gsap.to(content, {
           opacity: 0,
           y: -30,
@@ -414,11 +368,7 @@ export class HomePage extends HTMLElement {
   }
 
   initHeroButtons() {
-    // Aguardar os web components renderizarem
     setTimeout(() => {
-      // Selecionar TODOS os botões na HomePage
-      // 1. Botões dentro de web components (hero-section, video-section, keyhole-section)
-      // 2. Botões glass-button dos controles de vídeo
       const allButtons = this.querySelectorAll(
         'hero-section [data-block="button"], video-section [data-block="button"], keyhole-section [data-block="button"], .glass-button[data-block="button"]',
       );
@@ -430,7 +380,6 @@ export class HomePage extends HTMLElement {
 
       console.log(`${allButtons.length} botões encontrados na HomePage`);
 
-      // Inicializar cada botão com a classe Button
       allButtons.forEach((button, index) => {
         if (window.Button) {
           new window.Button(button);
@@ -445,7 +394,6 @@ export class HomePage extends HTMLElement {
   initKeyholeScrollAnimations() {
     if (!window.gsap || !window.ScrollTrigger) return;
 
-    // Função para inicializar as animações
     const initAnimations = () => {
       const keyholeComponent = this.querySelector("keyhole-section");
       if (!keyholeComponent) {
@@ -468,7 +416,6 @@ export class HomePage extends HTMLElement {
 
       console.log("Inicializando ScrollTrigger do Keyhole");
 
-      // Animação da imagem - expande o retângulo do centro até preencher tela
       window.gsap.to(keyholeImage, {
         clipPath: "inset(0% 0% 0% 0% round 0px)",
         ease: "none",
@@ -481,7 +428,6 @@ export class HomePage extends HTMLElement {
         },
       });
 
-      // Animação do overlay - desaparece conforme expande
       if (keyholeOverlay) {
         window.gsap.to(keyholeOverlay, {
           opacity: 0,
@@ -495,7 +441,6 @@ export class HomePage extends HTMLElement {
         });
       }
 
-      // Anima o subtitle
       if (keyholeSubtitle) {
         window.gsap.to(keyholeSubtitle, {
           opacity: 1,
@@ -510,7 +455,6 @@ export class HomePage extends HTMLElement {
         });
       }
 
-      // Anima o título
       if (keyholeTitle) {
         window.gsap.to(keyholeTitle, {
           opacity: 1,
@@ -525,7 +469,6 @@ export class HomePage extends HTMLElement {
         });
       }
 
-      // Anima o botão
       if (keyholeButton) {
         window.gsap.to(keyholeButton, {
           opacity: 1,
@@ -544,7 +487,6 @@ export class HomePage extends HTMLElement {
       return true;
     };
 
-    // Aguardar o web component keyhole-section renderizar com retry
     const tryInit = (attempts = 0) => {
       if (attempts > 10) {
         console.error("Keyhole section não renderizou após 10 tentativas");
@@ -556,7 +498,6 @@ export class HomePage extends HTMLElement {
       }
     };
 
-    // Iniciar após um pequeno delay para garantir que o DOM está pronto
     setTimeout(() => tryInit(), 100);
   }
 
@@ -569,17 +510,14 @@ export class HomePage extends HTMLElement {
         tab.addEventListener("click", () => {
           const category = tab.dataset.category;
 
-          // Remove active class from all tabs
           tabs.forEach((t) => t.classList.remove("active"));
           tab.classList.add("active");
 
-          // Animate out current content
           const activeContent = this.querySelector(".category-content.active");
           if (activeContent) {
             this.animateOut(activeContent, () => {
               activeContent.classList.remove("active");
 
-              // Show new content
               const newContent = this.querySelector(`[data-content="${category}"]`);
               if (newContent) {
                 newContent.classList.add("active");
@@ -590,7 +528,6 @@ export class HomePage extends HTMLElement {
         });
       });
 
-      // Animate initial content
       const initialContent = this.querySelector(".category-content.active");
       if (initialContent && window.gsap) {
         this.revealImages(initialContent);
@@ -625,13 +562,11 @@ export class HomePage extends HTMLElement {
 
     const items = element.querySelectorAll(".category-item");
 
-    // Reset initial state
     window.gsap.set(items, {
       opacity: 0,
       y: 30,
     });
 
-    // Animate in
     window.gsap.to(items, {
       opacity: 1,
       y: 0,
@@ -640,7 +575,6 @@ export class HomePage extends HTMLElement {
       ease: "power3.out",
     });
 
-    // Reveal images
     this.revealImages(element);
   }
 
@@ -653,7 +587,6 @@ export class HomePage extends HTMLElement {
       const overlay = wrap.querySelector(".image-reveal-overlay");
       const image = wrap.querySelector(".category-image");
 
-      // Set initial states
       window.gsap.set(overlay, {
         scaleX: 1,
         transformOrigin: "left center",
@@ -664,7 +597,6 @@ export class HomePage extends HTMLElement {
         opacity: 0,
       });
 
-      // Create reveal animation
       const tl = window.gsap.timeline({
         delay: index * 0.1,
       });
@@ -708,7 +640,6 @@ export class HomePage extends HTMLElement {
 
         if (!overlay || !image) return;
 
-        // Set initial states
         window.gsap.set(overlay, {
           scaleY: 1,
           transformOrigin: "top center",
@@ -724,7 +655,6 @@ export class HomePage extends HTMLElement {
           y: 20,
         });
 
-        // Create timeline with ScrollTrigger
         const tl = window.gsap.timeline({
           scrollTrigger: {
             trigger: card,
@@ -772,9 +702,7 @@ export class HomePage extends HTMLElement {
   }
 
   initCategoryBagButtons() {
-    // Dados completos dos produtos por categoria
     const categoryProductsData = {
-      // Para Ela
       4: {
         id: 4,
         name: "J'adore",
@@ -803,7 +731,7 @@ export class HomePage extends HTMLElement {
         price: 355.0,
         image: "/images/paraela4.webp",
       },
-      // Para Ele
+
       8: {
         id: 8,
         name: "Sauvage Eau de Toilette",
@@ -832,7 +760,7 @@ export class HomePage extends HTMLElement {
         price: 599.0,
         image: "/images/paraele4.webp",
       },
-      // Para Casa
+
       12: {
         id: 12,
         name: "Vela Perfumada Miss Dior",
@@ -896,7 +824,6 @@ export class HomePage extends HTMLElement {
   }
 
   initParallaxBagButtons() {
-    // Dados dos produtos
     const productsData = {
       1: {
         id: 1,
@@ -925,7 +852,6 @@ export class HomePage extends HTMLElement {
       const bagButtons = this.querySelectorAll(".parallax-bag-button");
 
       bagButtons.forEach((button) => {
-        // Pega o ID do produto do data-attribute
         const productId = parseInt(button.dataset.productId);
         const productData = productsData[productId];
 
@@ -934,11 +860,9 @@ export class HomePage extends HTMLElement {
           return;
         }
 
-        // Adiciona event listener
         button.addEventListener("click", (e) => {
           e.preventDefault();
 
-          // Adiciona o produto ao carrinho usando CartService
           cartService.addItem({
             id: productData.id,
             name: productData.name,
@@ -947,10 +871,8 @@ export class HomePage extends HTMLElement {
             image: productData.image,
           });
 
-          // Feedback visual
           this.animateButtonFeedback(button);
 
-          // Log para debug
           console.log("✅ Produto adicionado ao carrinho:", productData.name);
           console.log("🛒 Total de itens no carrinho:", cartService.getTotalItems());
         });
@@ -958,9 +880,6 @@ export class HomePage extends HTMLElement {
     });
   }
 
-  // ============================================================================
-  // LA MOUSSE PARALLAX - Efeito parallax na imagem fullscreen
-  // ============================================================================
   initLaMousseParallax() {
     if (!window.gsap || !window.ScrollTrigger) return;
 
@@ -971,7 +890,6 @@ export class HomePage extends HTMLElement {
 
       if (!section || !image) return;
 
-      // Parallax na imagem - move mais lento que o scroll
       window.gsap.to(image, {
         yPercent: 20,
         ease: "none",
@@ -983,13 +901,11 @@ export class HomePage extends HTMLElement {
         },
       });
 
-      // Animação do conteúdo ao entrar na viewport
       if (content) {
         const label = content.querySelector(".lamousse-label");
         const title = content.querySelector(".lamousse-title");
         const button = content.querySelector(".lamousse-button");
 
-        // Estado inicial - invisível
         gsap.set([label, title, button], { opacity: 0, y: 30 });
 
         const tl = window.gsap.timeline({
@@ -1064,7 +980,6 @@ export class HomePage extends HTMLElement {
   }
 
   initVideoControls() {
-    // Aguardar um frame para garantir que o DOM está pronto
     requestAnimationFrame(() => {
       const videoDesktop = this.querySelector("#arte-section-video");
       const videoMobile = this.querySelector("#arte-section-video-mobile");
@@ -1078,13 +993,11 @@ export class HomePage extends HTMLElement {
       const iconMute = muteUnmuteBtn.querySelector(".icon-mute");
       const iconUnmute = muteUnmuteBtn.querySelector(".icon-unmute");
 
-      // Função para obter o vídeo ativo (baseado no tamanho da tela)
       const getActiveVideo = () => {
         const isMobile = window.innerWidth <= 768;
         return isMobile ? videoMobile : videoDesktop;
       };
 
-      // Play/Pause Toggle - controla o vídeo ativo
       playPauseBtn.addEventListener("click", () => {
         const video = getActiveVideo();
         if (!video) return;
@@ -1100,14 +1013,12 @@ export class HomePage extends HTMLElement {
         }
       });
 
-      // Mute/Unmute Toggle - controla ambos os vídeos para sincronizar
       muteUnmuteBtn.addEventListener("click", () => {
         const video = getActiveVideo();
         if (!video) return;
 
         const newMutedState = !video.muted;
 
-        // Sincroniza o estado de mudo em ambos os vídeos
         if (videoDesktop) videoDesktop.muted = newMutedState;
         if (videoMobile) videoMobile.muted = newMutedState;
 
@@ -1805,7 +1716,6 @@ export class HomePage extends HTMLElement {
         button-text="Descubra"
       ></keyhole-section>
 
-
       <!-- Services Dior Section - Drag Cards -->
       <section class="services-dior-section" id="services-dior">
         <div class="services-dior-container">
@@ -1872,11 +1782,8 @@ export class HomePage extends HTMLElement {
         </div>
       </section>
 
-     
-
       <footer-section></footer-section>
-      
-      
+
     `;
   }
 }

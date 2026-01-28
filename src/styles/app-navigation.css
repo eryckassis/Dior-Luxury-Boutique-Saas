@@ -1,13 +1,7 @@
-/* ============================================================================
-   APP NAVIGATION - Sistema de navegação multinível
-   ============================================================================ */
-
-/* Header do menu lateral - X à esquerda */
 .moda-side-menu .moda-side-menu-header {
   justify-content: flex-start !important;
 }
 
-/* Container dos 3 ícones - permite ajustar posição de todos juntos */
 .app-nav-icons-container {
   display: flex;
   position: relative;
@@ -17,18 +11,12 @@
   margin-right: 0;
 }
 
-/* Adiciona espaço para os ícones adicionais na direita */
 .moda-nav-actions {
   display: flex;
   align-items: center;
   gap: 1rem;
 }
 
-/* ============================================================================
-   MOBILE - Search icon ao lado do hamburger menu
-   ============================================================================ */
-
-/* Tablet grande (768px - 1024px) */
 @media (max-width: 1024px) and (min-width: 769px) {
   .search-container {
     position: fixed;
@@ -47,7 +35,6 @@
   }
 }
 
-/* Tablet (768px) */
 @media (max-width: 768px) {
   .search-container {
     position: fixed;
@@ -66,7 +53,6 @@
   }
 }
 
-/* iPhone 14 Pro Max / 15 Pro Max / 16 Pro Max (430px) */
 @media (max-width: 430px) {
   .search-container {
     top: 58px;
@@ -74,7 +60,6 @@
   }
 }
 
-/* iPhone 14 Pro / 15 Pro / 16 Pro (393px) */
 @media (max-width: 393px) {
   .search-container {
     top: 36px;
@@ -82,7 +67,6 @@
   }
 }
 
-/* iPhone SE / iPhone 14 / 15 / 16 (390px) */
 @media (max-width: 390px) {
   .search-container {
     top: 58px;
@@ -90,7 +74,6 @@
   }
 }
 
-/* iPhone SE 1st gen e menores (375px) */
 @media (max-width: 375px) {
   .search-container {
     top: 58px;
@@ -98,17 +81,12 @@
   }
 }
 
-/* Telas muito pequenas (320px) */
 @media (max-width: 320px) {
   .search-container {
     top: 32px;
     left: 45px;
   }
 }
-
-/* ============================================================================
-   SUBMENU SYSTEM
-   ============================================================================ */
 
 .moda-menu-container {
   position: relative;
@@ -130,7 +108,6 @@
   overflow-y: auto;
 }
 
-/* Esconde a scrollbar */
 .main-menu-content::-webkit-scrollbar {
   display: none;
   width: 0;
@@ -142,7 +119,6 @@
   scrollbar-width: none;
 }
 
-/* Link com submenu */
 .moda-menu-link.has-submenu {
   display: flex;
   justify-content: space-between;
@@ -150,7 +126,6 @@
   cursor: pointer;
 }
 
-/* Remove arrow padrão do moda-acessorios.css para links com submenu */
 .moda-menu-link.has-submenu::before {
   position: absolute;
   right: 0;
@@ -160,7 +135,6 @@
   font-size: 1.4rem;
 }
 
-/* Submenu Panel */
 .submenu-panel {
   position: absolute;
   top: 0;
@@ -173,7 +147,6 @@
   overflow-y: auto;
 }
 
-/* Esconde a scrollbar dos submenus */
 .submenu-panel::-webkit-scrollbar {
   display: none;
   width: 0;
@@ -190,7 +163,6 @@
   padding: 1.5rem 2.5rem 1rem;
 }
 
-/* Header do submenu expandido - linha se estende até os cards */
 .submenu-expanded .submenu-header {
   margin-top: 0.5rem;
   margin-right: -440px;
@@ -224,7 +196,6 @@
   padding: 1.5rem 2.5rem;
 }
 
-/* Submenu Icons */
 .submenu-icons {
   margin-bottom: 1rem;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -269,7 +240,6 @@
   text-align: center;
 }
 
-/* Submenu Links */
 .submenu-links {
   display: flex;
   flex-direction: column;
@@ -297,7 +267,6 @@
   font-weight: 600;
 }
 
-/* Submenu Featured */
 .submenu-featured {
   position: relative;
   margin-bottom: 1.5rem;
@@ -336,7 +305,6 @@
   opacity: 0.8;
 }
 
-/* Menu Footer no menu principal */
 .main-menu-content .moda-menu-contact {
   margin-top: auto;
   margin-bottom: 1rem;
@@ -420,7 +388,6 @@
   transform: translateX(20px);
 }
 
-/* Toggle Button Container - estilo pill/switch */
 .main-menu-content .moda-menu-tabs {
   display: flex;
   position: relative;
@@ -433,7 +400,6 @@
   width: calc(105% + 2.8rem);
 }
 
-/* Botão individual do toggle */
 .main-menu-content .moda-menu-tab {
   position: relative;
   flex: 1;
@@ -453,12 +419,10 @@
   white-space: nowrap;
 }
 
-/* Hover no botão inativo */
 .main-menu-content .moda-menu-tab:not(.moda-menu-tab-active):hover {
   color: rgba(255, 255, 255, 0.9);
 }
 
-/* Botão ativo do toggle */
 .main-menu-content .moda-menu-tab-active {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   background-color: #fff;
@@ -470,7 +434,6 @@
   background-color: #fff;
 }
 
-/* Responsive */
 @media (max-width: 480px) {
   .main-menu-content,
   .submenu-content {
@@ -487,7 +450,6 @@
     height: 60px;
   }
 
-  /* Toggle Tabs em mobile - ajuste para caber melhor */
   .main-menu-content .moda-menu-tabs {
     position: relative;
     top: 15px;
@@ -507,7 +469,6 @@
 }
 
 @media (max-width: 390px) {
-  /* Toggle Tabs em telas muito pequenas */
   .main-menu-content .moda-menu-tabs {
     padding: 1px;
   }
@@ -518,11 +479,6 @@
   }
 }
 
-/* ============================================================================
-   DIOR SPA EXPANDED PANEL - Painel expandido dentro do menu
-   ============================================================================ */
-
-/* Wrapper para layout lado a lado */
 .submenu-content-wrapper {
   display: flex;
   width: 100%;
@@ -536,7 +492,6 @@
   width: 100%;
 }
 
-/* Painel de locais do Spa - inicialmente escondido */
 .spa-locations-panel {
   position: absolute;
   top: 80px;
@@ -577,7 +532,6 @@
 .spa-location-link:first-child {
 }
 
-/* Hover effect: all items fade, only hovered stays dark */
 .spa-locations-list:hover .spa-location-link {
   color: #aaa;
 }
@@ -597,7 +551,6 @@
   text-decoration: underline;
 }
 
-/* Submenu link com indicador de expansão */
 .submenu-link.has-spa-submenu {
   display: flex;
   justify-content: space-between;
@@ -612,29 +565,21 @@
   font-size: 1.5rem;
 }
 
-/* Menu lateral expandido quando Spa está aberto */
 .moda-side-menu.spa-expanded {
   width: 760px;
   max-width: 100vw;
 }
 
-/* Submenu Tratamento com Spa aberto */
 .submenu-panel[data-submenu-id="tratamento"].spa-open {
   width: 100%;
 }
 
-/* ============================================================================
-   FRAGRÂNCIA FEMININA - Menu Expandido com Cards
-   ============================================================================ */
-
-/* Menu expandido para Fragrância Feminina */
 .moda-side-menu.fragrance-expanded {
   transition: width 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   width: 900px;
   max-width: 95vw;
 }
 
-/* Layout do submenu expandido */
 .submenu-panel.submenu-expanded {
   display: flex;
   flex-direction: column;
@@ -649,14 +594,12 @@
   overflow: hidden;
 }
 
-/* Coluna esquerda - Links */
 .submenu-expanded-left {
   padding: 0 2rem;
   width: 320px;
   min-width: 280px;
 }
 
-/* Coluna direita - Cards/Imagens */
 .submenu-expanded-right {
   display: flex;
   flex: 1;
@@ -669,7 +612,6 @@
   overflow: hidden;
 }
 
-/* Cards de fragrância */
 .fragrance-card {
   display: block;
   position: relative;
@@ -719,7 +661,6 @@
   --underline-width: 0%;
 }
 
-/* Underline animado com GSAP */
 .fragrance-card-subtitle::after {
   position: absolute;
   bottom: -2px;
@@ -731,7 +672,6 @@
   content: "";
 }
 
-/* Footer CTA no submenu de fragrâncias */
 .submenu-footer-cta {
   margin-top: auto;
   padding: 9rem 0 1.5rem 0;
@@ -754,17 +694,11 @@
   text-decoration: none;
 }
 
-/* ============================================================================
-   ALTA PERFUMARIA PANEL - 3º Nível Expandido
-   ============================================================================ */
-
-/* Menu expandido para Alta Perfumaria */
 .moda-side-menu.alta-perfumaria-expanded {
   width: 900px !important;
   max-width: 95vw;
 }
 
-/* Link trigger para Alta Perfumaria */
 .submenu-link.has-alta-perfumaria {
   cursor: pointer;
 }
@@ -776,7 +710,6 @@
   font-size: 1.2rem;
 }
 
-/* Painel de Alta Perfumaria */
 .alta-perfumaria-panel {
   display: flex;
   position: absolute;
@@ -796,7 +729,6 @@
   opacity: 1;
 }
 
-/* Coluna Esquerda - Links */
 .alta-perfumaria-left {
   display: flex;
   flex-direction: column;
@@ -835,7 +767,6 @@
   font-size: 0.9rem;
 }
 
-/* Coluna Direita - Cards */
 .alta-perfumaria-right {
   display: flex;
   flex: 1;
@@ -845,7 +776,6 @@
   overflow: hidden;
 }
 
-/* Cards de Alta Perfumaria */
 .alta-perfumaria-card {
   display: block;
   position: relative;
@@ -910,7 +840,6 @@
   content: "";
 }
 
-/* Footer CTA no Alta Perfumaria */
 .alta-perfumaria-left .submenu-footer-cta {
   margin-top: auto;
   padding-top: 1.5rem;
@@ -922,14 +851,9 @@
   font-size: 0.85rem;
 }
 
-/* Footer mobile - escondido por padrão em desktop */
 .alta-perfumaria-footer-mobile {
   display: none;
 }
-
-/* ============================================================================
-   RESPONSIVE - Alta Perfumaria
-   ============================================================================ */
 
 @media (max-width: 1024px) {
   .moda-side-menu.alta-perfumaria-expanded {
@@ -981,7 +905,6 @@
   }
 }
 
-/* Responsive para menu expandido */
 @media (max-width: 768px) {
   .moda-side-menu.fragrance-expanded {
     width: 100vw;
@@ -1021,12 +944,7 @@
   }
 }
 
-/* ============================================================================
-   MOBILE RESPONSIVIDADE COMPLETA - Menu Lateral
-   ============================================================================ */
-
 @media (max-width: 768px) {
-  /* Reset de largura para menu em mobile */
   .moda-side-menu,
   .moda-side-menu.fragrance-expanded,
   .moda-side-menu.spa-expanded,
@@ -1045,7 +963,6 @@
     left: 8px !important;
   }
 
-  /* Submenu expandido em mobile - layout vertical scrollável */
   .submenu-panel.submenu-expanded {
     display: block !important;
     height: 100% !important;
@@ -1070,7 +987,6 @@
     min-width: 100% !important;
   }
 
-  /* Cards de Fragrância em mobile - empilhados verticalmente */
   .submenu-expanded-right {
     flex-shrink: 0 !important;
     flex-direction: column !important;
@@ -1098,7 +1014,6 @@
     object-fit: cover !important;
   }
 
-  /* Header do submenu expandido - ajuste para mobile */
   .submenu-expanded .submenu-header {
     position: sticky !important;
     top: 0 !important;
@@ -1107,7 +1022,6 @@
     background: #f5f5f5 !important;
   }
 
-  /* Alta Perfumaria em mobile - scrollável */
   .alta-perfumaria-panel {
     position: absolute !important;
     top: 0 !important;
@@ -1149,7 +1063,6 @@
     overflow: visible !important;
   }
 
-  /* Cards Alta Perfumaria em mobile - empilhados verticalmente */
   .alta-perfumaria-right {
     display: block !important;
     margin: 0 !important;
@@ -1172,7 +1085,6 @@
     margin-bottom: 0 !important;
   }
 
-  /* Footer mobile dentro do alta-perfumaria-right */
   .alta-perfumaria-footer-mobile {
     display: block !important;
     margin: 0 !important;
@@ -1190,28 +1102,23 @@
     object-fit: cover !important;
   }
 
-  /* Remove footer do Alta Perfumaria em mobile para evitar espaço vazio */
   .alta-perfumaria-left .submenu-footer-cta {
     display: none !important;
   }
 
-  /* Remove divider extra margin */
   .alta-perfumaria-divider {
     margin: 0.5rem 0 !important;
   }
 
-  /* Remove padding da última nav */
   .alta-perfumaria-links-main {
     margin-bottom: 0 !important;
     padding-bottom: 0 !important;
   }
 
-  /* Ajuste para .submenu-expanded-right não ter espaço extra */
   .submenu-expanded-right {
     padding-bottom: 1rem !important;
   }
 
-  /* Footer CTA ajustes mobile */
   .submenu-footer-cta {
     padding: 2rem 0 1rem 0;
   }
@@ -1222,7 +1129,6 @@
     font-size: 0.85rem;
   }
 
-  /* Spa locations panel mobile */
   .spa-locations-panel {
     position: absolute;
     top: 0;
@@ -1237,7 +1143,6 @@
   }
 }
 
-/* Mobile pequeno (iPhone SE, etc) */
 @media (max-width: 480px) {
   .moda-side-menu,
   .moda-side-menu.fragrance-expanded,
@@ -1257,7 +1162,6 @@
     left: 8px !important;
   }
 
-  /* Cards menores em telas pequenas */
   .fragrance-card {
     height: 240px !important;
     min-height: 240px !important;
@@ -1302,11 +1206,6 @@
   }
 }
 
-/* ============================================================================
-   ALTO CONTRASTE - Modo de Acessibilidade para Menu Completo
-   ============================================================================ */
-
-/* Menu lateral principal */
 body.high-contrast .moda-side-menu {
   background: #000 !important;
 }
@@ -1320,7 +1219,6 @@ body.high-contrast .moda-side-menu-close {
   color: #fff;
 }
 
-/* Links do menu principal */
 body.high-contrast .moda-menu-link {
   color: #fff !important;
 }
@@ -1333,7 +1231,6 @@ body.high-contrast .moda-menu-link::before {
   color: #fff !important;
 }
 
-/* Submenus */
 body.high-contrast .submenu-panel {
   background: #000 !important;
 }
@@ -1376,7 +1273,6 @@ body.high-contrast .submenu-link.submenu-link-bold {
   font-weight: 600 !important;
 }
 
-/* Submenu expandido (Fragrância Feminina) */
 body.high-contrast .submenu-expanded-content {
   background: #000 !important;
 }
@@ -1391,7 +1287,6 @@ body.high-contrast .submenu-expanded-right {
   background: #1a1a1a !important;
 }
 
-/* Ícones do submenu */
 body.high-contrast .submenu-icons {
   background: #000 !important;
 }
@@ -1412,7 +1307,6 @@ body.high-contrast .submenu-icon-item img {
   filter: brightness(0.9) !important;
 }
 
-/* Footer CTA do submenu */
 body.high-contrast .submenu-footer-cta {
   border-top-color: rgba(255, 255, 255, 0.2) !important;
 }
@@ -1423,7 +1317,6 @@ body.high-contrast .submenu-footer-link {
   color: #fff !important;
 }
 
-/* Cards de Fragrância */
 body.high-contrast .fragrance-card {
   border: 1px solid rgba(255, 255, 255, 0.3) !important;
 }
@@ -1441,23 +1334,16 @@ body.high-contrast .fragrance-card-subtitle {
   color: #ddd !important;
 }
 
-/* Alta Perfumaria Panel */
 body.high-contrast .alta-perfumaria-panel {
   background: #000 !important;
 }
 
-/* ============================================================================
-   TRATAMENTO - Menu Expandido com Cards
-   ============================================================================ */
-
-/* Menu expandido para Tratamento */
 .moda-side-menu.tratamento-expanded {
   transition: width 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   width: 650px !important;
   max-width: 99vw;
 }
 
-/* Layout do submenu expandido de Tratamento */
 .tratamento-panel.submenu-expanded {
   display: flex;
   flex-direction: column;
@@ -1472,7 +1358,6 @@ body.high-contrast .alta-perfumaria-panel {
   overflow: hidden;
 }
 
-/* Coluna esquerda - Links e Ícones */
 .tratamento-expanded-left {
   display: flex;
   flex-direction: column;
@@ -1483,7 +1368,6 @@ body.high-contrast .alta-perfumaria-panel {
   overflow-y: auto;
 }
 
-/* Esconde scrollbar */
 .tratamento-expanded-left::-webkit-scrollbar {
   display: none;
   width: 0;
@@ -1494,7 +1378,6 @@ body.high-contrast .alta-perfumaria-panel {
   scrollbar-width: none;
 }
 
-/* Ícones de produtos */
 .tratamento-icons {
   margin-bottom: 1.8rem;
   padding-bottom: 0.5rem;
@@ -1548,7 +1431,6 @@ body.high-contrast .alta-perfumaria-panel {
   text-align: center;
 }
 
-/* Links de Tratamento */
 .tratamento-links {
   display: flex;
   flex-direction: column;
@@ -1584,7 +1466,6 @@ body.high-contrast .alta-perfumaria-panel {
   cursor: pointer;
 }
 
-/* Links com submenu (seção separada) */
 .tratamento-sublinks {
   display: flex;
   flex-direction: column;
@@ -1593,7 +1474,6 @@ body.high-contrast .alta-perfumaria-panel {
   padding: 1rem 0;
 }
 
-/* Link destaque */
 .tratamento-expertise {
   border-top: 1px solid rgba(0, 0, 0, 0.08);
   padding: 1rem 0;
@@ -1603,7 +1483,6 @@ body.high-contrast .alta-perfumaria-panel {
   font-weight: 500;
 }
 
-/* Coluna direita - Cards/Imagens */
 .tratamento-expanded-right {
   display: flex;
   flex: 1;
@@ -1617,7 +1496,6 @@ body.high-contrast .alta-perfumaria-panel {
   overflow: hidden;
 }
 
-/* Cards de tratamento */
 .tratamento-card {
   display: block;
   position: relative;
@@ -1679,10 +1557,6 @@ body.high-contrast .alta-perfumaria-panel {
   text-underline-offset: 3px;
 }
 
-/* ============================================================================
-   TRATAMENTO - Responsivo
-   ============================================================================ */
-
 @media (max-width: 768px) {
   .moda-side-menu.tratamento-expanded {
     width: 100%;
@@ -1725,10 +1599,6 @@ body.high-contrast .alta-perfumaria-panel {
     max-width: 70px;
   }
 }
-
-/* ============================================================================
-   TRATAMENTO - Alto Contraste
-   ============================================================================ */
 
 body.high-contrast .tratamento-expanded-left {
   background: #000 !important;
@@ -1781,8 +1651,6 @@ body.high-contrast .tratamento-card-subtitle {
   color: #fff !important;
 }
 
-/* Alta Perfumaria Panel */
-
 body.high-contrast .alta-perfumaria-left {
   background: #000 !important;
 }
@@ -1809,7 +1677,6 @@ body.high-contrast .alta-perfumaria-links-main .submenu-link:hover {
   color: #ccc !important;
 }
 
-/* Cards Alta Perfumaria */
 body.high-contrast .alta-perfumaria-card {
   border: 1px solid rgba(255, 255, 255, 0.3) !important;
 }
@@ -1836,7 +1703,6 @@ body.high-contrast .alta-perfumaria-footer-mobile .submenu-footer-link {
   color: #fff !important;
 }
 
-/* Spa Panel */
 body.high-contrast .spa-locations-panel {
   background: #000 !important;
 }
@@ -1859,7 +1725,6 @@ body.high-contrast .spa-view-all {
   font-weight: 600 !important;
 }
 
-/* Chevron e setas */
 body.high-contrast .submenu-link.has-alta-perfumaria .chevron {
   color: #fff !important;
 }
@@ -1868,7 +1733,6 @@ body.high-contrast .submenu-link.has-spa-submenu::after {
   color: #fff !important;
 }
 
-/* Menu Container */
 body.high-contrast .moda-menu-container {
   background: #000 !important;
 }
@@ -1877,7 +1741,6 @@ body.high-contrast .main-menu-content {
   background: #000 !important;
 }
 
-/* Contato */
 body.high-contrast .moda-menu-contact {
   border-top-color: rgba(255, 255, 255, 0.2) !important;
 }
@@ -1890,7 +1753,6 @@ body.high-contrast .moda-menu-contact-link {
   color: #fff !important;
 }
 
-/* Footer do menu */
 body.high-contrast .moda-menu-footer {
   border-top-color: rgba(255, 255, 255, 0.2) !important;
 }
@@ -1916,7 +1778,6 @@ body.high-contrast .moda-menu-checkbox:checked::before {
   background: #000 !important;
 }
 
-/* Tabs */
 body.high-contrast .moda-menu-tabs {
   background: #000 !important;
 }
@@ -1933,11 +1794,6 @@ body.high-contrast .moda-menu-tab-active {
   color: #000 !important;
 }
 
-/* ============================================================================
-   ALTO CONTRASTE - Linhas Underline GSAP (todos os ::after)
-   ============================================================================ */
-
-/* Underlines dos links do menu */
 body.high-contrast .moda-menu-link::after {
   background-color: #fff !important;
 }
@@ -1950,17 +1806,14 @@ body.high-contrast .moda-menu-contact-link::after {
   background-color: #fff !important;
 }
 
-/* Cards de Fragrância */
 body.high-contrast .fragrance-card-subtitle::after {
   background-color: #fff !important;
 }
 
-/* Ícones do submenu */
 body.high-contrast .submenu-icon-item span::after {
   background-color: #fff !important;
 }
 
-/* Spa location links */
 body.high-contrast .spa-location-link::after {
   background-color: #fff !important;
 }

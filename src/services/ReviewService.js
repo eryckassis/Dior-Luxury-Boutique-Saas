@@ -10,7 +10,6 @@ class ReviewService {
     try {
       const offset = (page - 1) * limit;
 
-      // Busca reviews com contagem total
       const { data, error, count } = await supabase
         .from("reviews")
         .select("*", { count: "exact" })
@@ -83,7 +82,6 @@ class ReviewService {
         .single();
 
       if (error) {
-        // Erro de constraint unique (já avaliou)
         if (error.code === "23505") {
           throw new Error("Você já avaliou este produto");
         }
@@ -134,18 +132,12 @@ class ReviewService {
     }
   }
 
-  // ========================================================================
-  // REAL-TIME
-  // ========================================================================
-
   subscribeToProduct(productId, callback) {
-    // Adiciona listener
     if (!this.listeners.has(productId)) {
       this.listeners.set(productId, new Set());
     }
     this.listeners.get(productId).add(callback);
 
-    // Cria subscription se não existir
     if (!this.subscriptions.has(productId)) {
       const subscription = supabase
         .channel(`reviews:${productId}`)
@@ -173,7 +165,6 @@ class ReviewService {
     if (listeners) {
       listeners.delete(callback);
 
-      // Se não há mais listeners, remove subscription
       if (listeners.size === 0) {
         const subscription = this.subscriptions.get(productId);
         if (subscription) {
@@ -191,10 +182,6 @@ class ReviewService {
       listeners.forEach((callback) => callback(payload));
     }
   }
-
-  // ========================================================================
-  // UTILITÁRIOS
-  // ========================================================================
 
   formatRelativeDate(dateString) {
     const date = new Date(dateString);

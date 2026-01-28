@@ -1,4 +1,4 @@
-﻿export class VideoSection extends HTMLElement {
+export class VideoSection extends HTMLElement {
   constructor() {
     super();
   }
