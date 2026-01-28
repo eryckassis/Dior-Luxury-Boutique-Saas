@@ -9,7 +9,7 @@ const DIOR_BOUTIQUES = [
     type: "Boutique Dior",
     address: "Rua Haddock Lobo 1644 – L01, Cerqueira César",
     city: "São Paulo",
-    state: "Sergipe",
+    state: "São Paulo",
     cep: "01414-002",
     lat: -23.5629,
     lng: -46.6689,
@@ -66,7 +66,7 @@ export class BoutiquesPage extends HTMLElement {
   render() {
     this.innerHTML = `
       <app-navigation></app-navigation>
-      
+
       <main class="boutiques-page">
         <div class="boutiques-container">
           <!-- Lado Esquerdo - Lista de Lojas -->
@@ -80,12 +80,12 @@ export class BoutiquesPage extends HTMLElement {
                 <span>Voltar</span>
               </button>
             </div>
-            
+
             <!-- Campo de Busca -->
             <div class="boutiques-search">
-              <input 
-                type="text" 
-                class="boutiques-search-input" 
+              <input
+                type="text"
+                class="boutiques-search-input"
                 placeholder="Pesquisar por endereço, cidade, código postal..."
                 id="boutiques-search"
               />
@@ -96,7 +96,7 @@ export class BoutiquesPage extends HTMLElement {
                 </svg>
               </button>
             </div>
-            
+
             <!-- Filtros -->
             <div class="boutiques-filters">
               <button class="boutiques-filter-toggle">
@@ -116,18 +116,18 @@ export class BoutiquesPage extends HTMLElement {
                 ).join("")}
               </div>
             </div>
-            
+
             <!-- Contador de Endereços -->
             <div class="boutiques-count">
               <span id="boutiques-count-number">${DIOR_BOUTIQUES.length}</span> ENDEREÇOS PRÓXIMOS
             </div>
-            
+
             <!-- Lista de Boutiques -->
             <div class="boutiques-list" id="boutiques-list">
               ${this.renderBoutiquesList(DIOR_BOUTIQUES)}
             </div>
           </aside>
-          
+
           <!-- Lado Direito - Mapa -->
           <div class="boutiques-map-container">
             <div class="boutiques-map" id="boutiques-map">
@@ -140,7 +140,7 @@ export class BoutiquesPage extends HTMLElement {
           </div>
         </div>
       </main>
-      
+
       <footer-section></footer-section>
     `;
   }
@@ -168,11 +168,11 @@ export class BoutiquesPage extends HTMLElement {
             <span class="status-text">Aberto agora - Fecha às ${boutique.hours.close}</span>
           </div>
         </div>
-        
+
         <div class="boutique-address">
           <p>${boutique.address}, ${boutique.city} ${boutique.cep}</p>
         </div>
-        
+
         <div class="boutique-categories">
           ${boutique.categories
             .map(
