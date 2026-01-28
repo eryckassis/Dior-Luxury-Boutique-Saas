@@ -4,10 +4,7 @@
 
 import "../components/AppNavigation.js";
 import "../components/FooterSection.js";
-import {
-  initServicesDrag,
-  initButtonUnderlineAnimation,
-} from "../components/ServicesDragCards.js";
+import { initServicesDrag, initButtonUnderlineAnimation } from "../components/ServicesDragCards.js";
 import { getSmoothScroll } from "../components/SmoothScroll.js";
 
 export class ArteDePresentearPage extends HTMLElement {
@@ -474,12 +471,8 @@ export class ArteDePresentearPage extends HTMLElement {
       const muteUnmuteBtn = document.getElementById("arte-mute-unmute-btn");
       const playPauseBtn2 = document.getElementById("arte-play-pause-btn-2");
       const muteUnmuteBtn2 = document.getElementById("arte-mute-unmute-btn-2");
-      const presentePlayPauseBtn = document.getElementById(
-        "presente-play-pause-btn",
-      );
-      const presenteMuteUnmuteBtn = document.getElementById(
-        "presente-mute-unmute-btn",
-      );
+      const presentePlayPauseBtn = document.getElementById("presente-play-pause-btn");
+      const presenteMuteUnmuteBtn = document.getElementById("presente-mute-unmute-btn");
 
       // Inicializa animação GSAP nos botões de controle do vídeo principal
       if (playPauseBtn && window.Button) {

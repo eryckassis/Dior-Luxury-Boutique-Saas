@@ -76,9 +76,7 @@ export class GrisDiorPage extends HTMLElement {
 
           // Add active class to clicked button and corresponding content
           button.classList.add("active");
-          const targetContent = this.querySelector(
-            `.tab-content[data-tab="${tabId}"]`
-          );
+          const targetContent = this.querySelector(`.tab-content[data-tab="${tabId}"]`);
           if (targetContent) {
             targetContent.classList.add("active");
           }
@@ -87,13 +85,9 @@ export class GrisDiorPage extends HTMLElement {
 
       // Image Reveal Animation with GSAP
       if (window.gsap && window.ScrollTrigger) {
-        const imageRevealWrapper = this.querySelector(
-          ".image-reveal-wrapper-full"
-        );
+        const imageRevealWrapper = this.querySelector(".image-reveal-wrapper-full");
         if (imageRevealWrapper) {
-          const overlay = imageRevealWrapper.querySelector(
-            ".reveal-overlay-full"
-          );
+          const overlay = imageRevealWrapper.querySelector(".reveal-overlay-full");
           const image = imageRevealWrapper.querySelector(".reveal-image-full");
 
           const revealTl = window.gsap.timeline({
@@ -119,7 +113,7 @@ export class GrisDiorPage extends HTMLElement {
                 duration: 1.2,
                 ease: "power3.out",
               },
-              "-=1.2"
+              "-=1.2",
             );
         }
       }
@@ -176,9 +170,7 @@ export class GrisDiorPage extends HTMLElement {
           e.preventDefault();
 
           const formData = new FormData(reviewForm);
-          const rating = this.querySelectorAll(
-            ".star-rating-input.selected"
-          ).length;
+          const rating = this.querySelectorAll(".star-rating-input.selected").length;
           const reviewText = formData.get("review-text");
           const recommend = formData.get("recommend");
           const name = formData.get("reviewer-name");

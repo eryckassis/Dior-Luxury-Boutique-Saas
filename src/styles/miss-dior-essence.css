@@ -3,54 +3,54 @@
    ============================================================================ */
 
 .miss-dior-essence-page {
-  width: 100%;
   background-color: #ffffff;
+  width: 100%;
 }
 
 /* Hero Section */
 .essence-hero-section {
-  width: 100%;
-  min-height: 10vh;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   background-color: #f6f3f7;
   padding: 120px 20px 80px;
+  width: 100%;
+  min-height: 10vh;
 }
 
 .essence-hero-content {
-  text-align: center;
-  max-width: 1200px;
   width: 100%;
+  max-width: 1200px;
+  text-align: center;
 }
 
 .essence-hero-category {
-  font-family: "Manrope", sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  color: #8b7355;
-  text-align: center;
   margin: 0 0 20px 0;
+  color: #8b7355;
+  font-weight: 400;
+  font-size: 14px;
+  font-family: "Manrope", sans-serif;
   letter-spacing: 2px;
+  text-align: center;
   text-transform: none;
 }
 
 .essence-hero-title {
-  font-family: "MinhaFonte", serif;
-  font-size: 96px;
-  font-weight: 400;
-  color: #000000;
-  text-align: center;
   margin: 0;
-  letter-spacing: 0;
+  color: #000000;
+  font-weight: 400;
+  font-size: 96px;
   line-height: 1.1;
+  font-family: "MinhaFonte", serif;
+  letter-spacing: 0;
+  text-align: center;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
   .essence-hero-category {
-    font-size: 12px;
     margin-bottom: 15px;
+    font-size: 12px;
   }
 
   .essence-hero-title {
@@ -60,8 +60,8 @@
 
 @media (max-width: 480px) {
   .essence-hero-category {
-    font-size: 11px;
     margin-bottom: 12px;
+    font-size: 11px;
   }
 
   .essence-hero-title {
@@ -74,17 +74,17 @@
    ============================================================================ */
 
 .essence-products-section {
-  width: 100%;
   background-color: #ffffff;
   padding: 80px 20px;
+  width: 100%;
 }
 
 .essence-products-container {
-  max-width: 1400px;
-  margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 40px;
+  margin: 0 auto;
+  max-width: 1400px;
 }
 
 /* Product Card */
@@ -97,79 +97,79 @@
 
 .essence-product-image-wrapper {
   position: relative;
-  width: 100%;
-  aspect-ratio: 3/4;
-  overflow: hidden;
-  margin-bottom: 24px;
   flex-shrink: 0;
+  margin-bottom: 24px;
+  aspect-ratio: 3/4;
+  width: 100%;
+  overflow: hidden;
 }
 
 .essence-product-image {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
 }
 
 .essence-image-reveal-overlay {
   position: absolute;
   top: 0;
   left: 0;
+  transform-origin: top;
+  z-index: 2;
+  background-color: #f6f3f7;
   width: 100%;
   height: 100%;
-  background-color: #f6f3f7;
-  z-index: 2;
-  transform-origin: top;
 }
 
 /* Product Info */
 .essence-product-info {
   display: flex;
+  flex: 1;
   flex-direction: column;
   gap: 12px;
-  flex: 1;
 }
 
 .essence-product-name {
-  font-family: "MinhaFonte", serif;
-  font-size: 24px;
-  font-weight: 600;
-  color: #000000;
-  margin: 0;
-  line-height: 1.2;
-  min-height: 58px;
   display: flex;
   align-items: flex-start;
+  margin: 0;
+  min-height: 58px;
+  color: #000000;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1.2;
+  font-family: "MinhaFonte", serif;
 }
 
 .essence-product-description {
-  font-family: "Manrope", sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  color: #666666;
-  margin: 0;
-  line-height: 1.4;
-  min-height: 40px;
   display: flex;
   align-items: flex-start;
+  margin: 0;
+  min-height: 40px;
+  color: #666666;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.4;
+  font-family: "Manrope", sans-serif;
 }
 
 /* Intensity - Reutilizando do miss-dior.css */
 .product-intensity {
   display: flex;
+  flex-shrink: 0;
   flex-direction: column;
   align-items: center;
   gap: 8px;
   margin-top: 8px;
   min-height: 50px;
-  flex-shrink: 0;
 }
 
 .intensity-label {
-  font-family: "Manrope", sans-serif;
-  font-size: 12px;
-  font-weight: 500;
   color: #999;
+  font-weight: 500;
+  font-size: 12px;
+  font-family: "Manrope", sans-serif;
   text-transform: capitalize;
 }
 
@@ -179,10 +179,10 @@
 }
 
 .bar {
+  border-radius: 2px;
+  background-color: #e0e0e0;
   width: 20px;
   height: 4px;
-  background-color: #e0e0e0;
-  border-radius: 2px;
 }
 
 .bar.filled {
@@ -192,40 +192,40 @@
 /* Product Footer */
 .essence-product-footer {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: auto;
-  padding-top: 16px;
-  border-top: 1px solid #e8e8e8;
   flex-shrink: 0;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  border-top: 1px solid #e8e8e8;
+  padding-top: 16px;
 }
 
 .essence-product-price {
-  font-family: "Manrope", sans-serif;
-  font-size: 16px;
-  font-weight: 500;
-  color: #000000;
   margin: 0;
+  color: #000000;
+  font-weight: 500;
+  font-size: 16px;
+  font-family: "Manrope", sans-serif;
 }
 
 /* Bag Button */
 .essence-bag-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 1px solid #000000;
+  border-radius: 50%;
+  background-color: transparent;
+  padding: 0;
   width: 44px;
   height: 44px;
-  border-radius: 50%;
-  border: 1px solid #000000;
-  background-color: transparent;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  padding: 0;
 }
 
 .essence-bag-button:hover {
-  background-color: #000000;
   transform: scale(1.05);
+  background-color: #000000;
 }
 
 .essence-bag-button:hover svg {
@@ -233,8 +233,8 @@
 }
 
 .essence-bag-button svg {
-  stroke: #000000;
   transition: stroke 0.3s ease;
+  stroke: #000000;
 }
 
 /* Responsive */

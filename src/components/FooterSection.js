@@ -364,9 +364,7 @@ export class FooterSection extends HTMLElement {
     this.initMobileAccordion();
 
     // Accordion functionality
-    const accordionButtons = this.querySelectorAll(
-      ".r-footer__accordion-button"
-    );
+    const accordionButtons = this.querySelectorAll(".r-footer__accordion-button");
     accordionButtons.forEach((button) => {
       button.addEventListener("click", (e) => {
         e.preventDefault();
@@ -404,9 +402,7 @@ export class FooterSection extends HTMLElement {
     }
 
     // Accessibility toggle
-    const accessibilityToggles = this.querySelectorAll(
-      ".js-accessibility-toggle"
-    );
+    const accessibilityToggles = this.querySelectorAll(".js-accessibility-toggle");
     accessibilityToggles.forEach((toggle) => {
       toggle.addEventListener("change", (e) => {
         if (e.target.checked) {
@@ -430,10 +426,7 @@ export class FooterSection extends HTMLElement {
           if (window.innerWidth <= 768) {
             // Fecha outros acordeões
             listWrappers.forEach((otherWrapper) => {
-              if (
-                otherWrapper !== wrapper &&
-                otherWrapper.classList.contains("active")
-              ) {
+              if (otherWrapper !== wrapper && otherWrapper.classList.contains("active")) {
                 otherWrapper.classList.remove("active");
               }
             });

@@ -16,8 +16,7 @@ export const userValidators = {
       .pattern(/^\d{11}$/)
       .allow("")
       .messages({
-        "string.pattern.base":
-          "CPF deve conter exatamente 11 dígitos numéricos",
+        "string.pattern.base": "CPF deve conter exatamente 11 dígitos numéricos",
       }),
 
     phone: Joi.string()

@@ -14,10 +14,10 @@
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 1;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  z-index: 1;
 }
 
 /* Vídeo Desktop - visível por padrão */
@@ -37,38 +37,37 @@
 
 /* Conteúdo de texto sobre o vídeo */
 .arte-video-content {
+  display: flex;
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 10;
-  text-align: center;
-  color: #fff;
-  width: 100%;
-  max-width: 1200px;
-  padding: 0 40px;
-
-  display: flex;
   flex-direction: column;
   align-items: center;
   gap: clamp(1.25rem, 3vw, 2rem);
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  padding: 0 40px;
+  width: 100%;
+  max-width: 1200px;
+  color: #fff;
+  text-align: center;
 }
 
 .arte-video-title {
-  font-family: "MinhaFonte", sans-serif;
-  font-size: clamp(40px, 80vw, 40px);
-  font-weight: 400;
-  letter-spacing: 0.02em;
   margin: 0;
+  font-weight: 400;
+  font-size: clamp(40px, 80vw, 40px);
+  font-family: "MinhaFonte", sans-serif;
+  letter-spacing: 0.02em;
 }
 
 .arte-video-description {
-  font-family: "Hellix", sans-serif;
-  font-size: clamp(16px, 2vw, 24px);
-  font-weight: 300;
-  margin: 0;
   opacity: 0.9;
+  margin: 0;
   max-width: 90%;
+  font-weight: 300;
+  font-size: clamp(16px, 2vw, 24px);
+  font-family: "Hellix", sans-serif;
 }
 
 /* ============================================================================
@@ -78,8 +77,8 @@
 /* Tablets e dispositivos médios */
 @media (max-width: 1024px) {
   .arte-video-content {
-    max-width: 900px;
     padding: 0 30px;
+    max-width: 900px;
   }
 
   .arte-video-title {
@@ -87,16 +86,16 @@
   }
 
   .arte-video-description {
-    font-size: clamp(15px, 2vw, 22px);
     margin-top: 15px;
+    font-size: clamp(15px, 2vw, 22px);
   }
 }
 
 /* Smartphones e dispositivos pequenos */
 @media (max-width: 768px) {
   .arte-video-content {
-    max-width: 100%;
     padding: 0 20px;
+    max-width: 100%;
   }
 
   .arte-video-title {
@@ -105,8 +104,8 @@
   }
 
   .arte-video-description {
-    font-size: clamp(14px, 1.8vw, 20px);
     margin-top: 12px;
+    font-size: clamp(14px, 1.8vw, 20px);
   }
 }
 
@@ -125,8 +124,8 @@
   }
 
   .arte-video-description {
-    font-size: clamp(13px, 1.6vw, 18px);
     margin-top: 10px;
+    font-size: clamp(13px, 1.6vw, 18px);
   }
 }
 
@@ -166,8 +165,8 @@
   }
 
   .arte-video-description {
-    font-size: 0.9rem;
     max-width: 100%;
+    font-size: 0.9rem;
   }
 }
 
@@ -179,8 +178,8 @@
 
   .arte-video-content {
     bottom: 12%;
-    padding: 0 1rem;
     gap: 0.75rem;
+    padding: 0 1rem;
   }
 
   .arte-video-title {
@@ -192,8 +191,8 @@
   }
 
   .arte-presentear-video-section .video-controls {
-    bottom: 4%;
     right: 1rem;
+    bottom: 4%;
   }
 }
 
@@ -213,52 +212,52 @@
 }
 
 .presentes-section-second {
+  /* Adiciona espaço inferior para separar da próxima seção */
+  margin-bottom: 0; /* Ajuste este valor: 40px, 80px, 120px */
   background: #ffffff;
   padding: 80px 0 100px;
   width: 100%;
-  /* Adiciona espaço inferior para separar da próxima seção */
-  margin-bottom: 0; /* Ajuste este valor: 40px, 80px, 120px */
 }
 
 .presentes-container-second {
-  max-width: 2200px;
   margin: 0 auto;
   padding: 0 20px;
+  max-width: 2200px;
 }
 
 .presentes-header-second {
-  text-align: center;
   margin-bottom: 80px;
+  text-align: center;
 }
 
 .presentes-label-second {
-  font-family: "Manrope", sans-serif;
-  font-size: 20px;
-  font-weight: 600;
-  color: #999999;
   margin: 0 0 15px 0;
-  letter-spacing: 0px;
+  color: #999999;
+  font-weight: 600;
+  font-size: 20px;
   line-height: 1;
+  font-family: "Manrope", sans-serif;
+  letter-spacing: 0px;
 }
 
 .presentes-title-second {
-  font-family: "Manrope", sans-serif;
-  font-size: 28px;
-  font-weight: 400;
-  color: #292929;
   margin: 0 0 20px 0;
-  letter-spacing: 0.5px;
+  color: #292929;
+  font-weight: 400;
+  font-size: 28px;
   line-height: 1.3;
+  font-family: "Manrope", sans-serif;
+  letter-spacing: 0.5px;
 }
 
 .presentes-subtitle-second {
-  font-family: "Manrope", sans-serif;
-  font-size: 13px;
-  font-weight: 500;
-  color: #292929;
-  max-width: 800px;
   margin: 0 auto;
+  max-width: 800px;
+  color: #292929;
+  font-weight: 500;
+  font-size: 13px;
   line-height: 1.7;
+  font-family: "Manrope", sans-serif;
   letter-spacing: 0.2px;
 }
 
@@ -267,8 +266,8 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 40px;
-  max-width: 1400px;
   margin: 0 auto;
+  max-width: 1400px;
 }
 
 .presente-item-second {
@@ -280,9 +279,9 @@
 /* Wrapper do vídeo com posição relativa para os controles */
 .presente-video-wrapper-second {
   position: relative;
-  width: 100%;
-  aspect-ratio: 1 / 1;
   border-radius: 8px;
+  aspect-ratio: 1 / 1;
+  width: 100%;
   overflow: hidden;
 }
 
@@ -299,8 +298,8 @@
 
 /* Controles do vídeo do presente */
 .video-controls-presente {
-  bottom: 15px;
   right: 15px;
+  bottom: 15px;
   gap: 10px;
 }
 
@@ -315,47 +314,47 @@
 }
 
 .presente-price-second {
-  font-family: "MinhaFonte", sans-serif;
-  font-size: 30px;
   position: relative;
   left: 22px;
-  font-weight: 600;
-  color: #292929;
   margin: 0;
+  color: #292929;
+  font-weight: 600;
+  font-size: 30px;
+  font-family: "MinhaFonte", sans-serif;
   letter-spacing: 0.3px;
 }
 
 .presente-caption-second {
-  font-family: "Manrope", sans-serif;
   position: relative;
   left: 1.5rem;
-  font-size: 14px;
-  font-weight: 400;
-  color: #666666;
   margin: 0;
+  color: #666666;
+  font-weight: 400;
+  font-size: 14px;
   line-height: 1.5;
+  font-family: "Manrope", sans-serif;
   letter-spacing: 0.2px;
 }
 
 /* Botão Descubra com animação GSAP */
 .presente-button-second {
   display: inline-block;
-  padding: 12px 30px;
-  background-color: #fff;
-  color: #222222;
-  font-family: "Manrope", sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  text-decoration: none;
-  text-align: center;
-  border-radius: 0;
-  border: 1px solid #000;
   position: relative;
-  overflow: hidden;
-  cursor: pointer;
   transition: all 0.3s ease;
-  letter-spacing: 0.5px;
+  cursor: pointer;
   margin-left: 1.5rem;
+  border: 1px solid #000;
+  border-radius: 0;
+  background-color: #fff;
+  padding: 12px 30px;
+  overflow: hidden;
+  color: #222222;
+  font-weight: 500;
+  font-size: 14px;
+  font-family: "Manrope", sans-serif;
+  letter-spacing: 0.5px;
+  text-align: center;
+  text-decoration: none;
 }
 
 .presente-button-second:hover {
@@ -367,28 +366,28 @@
 .presente-button-second .button__flair {
   position: absolute;
   top: 0;
-  left: 0;
   right: 0;
   bottom: 0;
-  pointer-events: none;
+  left: 0;
   transform: scale(0);
   transform-origin: 0 0;
-  will-change: transform;
   z-index: 0;
+  will-change: transform;
+  pointer-events: none;
 }
 
 .presente-button-second .button__flair::before {
-  content: "";
+  display: block;
   position: absolute;
   top: 0;
   left: 0;
-  width: 170%;
-  aspect-ratio: 1/1;
-  background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
   transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.2);
+  aspect-ratio: 1/1;
+  width: 170%;
   pointer-events: none;
-  display: block;
+  content: "";
 }
 
 .presente-button-second .button__label {
@@ -406,30 +405,30 @@
 
 @media (max-width: 640px) {
   .presente-button-second {
-    width: calc(100% - 1.5rem);
     padding: 12px 20px;
+    width: calc(100% - 1.5rem);
   }
 }
 
 .presentes-title-terceiro {
-  font-family: "MinhaFonte", sans-serif;
-  font-size: 40px;
-  font-weight: 600;
-  color: #292929;
-  max-width: 800px;
   margin: 0 auto;
+  max-width: 800px;
+  color: #292929;
+  font-weight: 600;
+  font-size: 40px;
   line-height: 1.7;
+  font-family: "MinhaFonte", sans-serif;
   letter-spacing: 0.2px;
 }
 
 .presentes-subtitle-terceiro {
-  font-family: "Manrope", sans-serif;
-  font-size: 18px;
-  font-weight: 400;
-  color: #292929;
-  max-width: 800px;
   margin: 0 auto;
+  max-width: 800px;
+  color: #292929;
+  font-weight: 400;
+  font-size: 18px;
   line-height: 1.7;
+  font-family: "Manrope", sans-serif;
   letter-spacing: 0.2px;
 }
 
@@ -530,29 +529,29 @@
 }
 
 .toque-final-container {
-  max-width: 900px;
   margin: 0 auto;
-  text-align: center;
   padding: 0 40px;
+  max-width: 900px;
+  text-align: center;
 }
 
 .toque-final-label {
-  font-family: "Hellix", sans-serif;
-  font-size: 0.875rem;
-  font-weight: 400;
-  color: #8b6914;
-  letter-spacing: 0.05em;
   display: block;
   margin-bottom: 24px;
+  color: #8b6914;
+  font-weight: 400;
+  font-size: 0.875rem;
+  font-family: "Hellix", sans-serif;
+  letter-spacing: 0.05em;
 }
 
 .toque-final-title {
-  font-family: "Hellix", sans-serif;
-  font-size: 2rem;
-  font-weight: 400;
-  color: #1a1a1a;
-  line-height: 1.4;
   margin: 0;
+  color: #1a1a1a;
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 1.4;
+  font-family: "Hellix", sans-serif;
   letter-spacing: -0.01em;
 }
 
@@ -587,8 +586,8 @@
   }
 
   .toque-final-label {
-    font-size: 0.75rem;
     margin-bottom: 16px;
+    font-size: 0.75rem;
   }
 
   .toque-final-title {
@@ -602,15 +601,15 @@
 
 /* Override para a seção de seleção de presentes */
 .selecao-presentes-section.services-dior-section {
-  background-color: #fff;
   background-image: none;
+  background-color: #fff;
   padding: 80px 0 100px;
 }
 
 /* Card sem overlay - apenas imagem + título abaixo */
 .selecao-card-style .services-card-image-wrap {
-  height: auto;
   aspect-ratio: 3/4;
+  height: auto;
 }
 
 .selecao-card-style .services-card-overlay {
@@ -623,38 +622,38 @@
 
 /* Título abaixo do card */
 .selecao-card-title {
-  font-family: "Hellix", sans-serif;
-  font-size: 0.875rem;
-  font-weight: 400;
-  color: #1a1a1a;
-  text-align: center;
   margin: 16px 0 0 0;
+  color: #1a1a1a;
+  font-weight: 400;
+  font-size: 0.875rem;
+  font-family: "Hellix", sans-serif;
   letter-spacing: 0.02em;
+  text-align: center;
 }
 
 /* Link Descubra com underline */
 .selecao-presentes-section .selecao-presentes-link {
   display: inline-block;
-  font-family: "Hellix", sans-serif;
-  font-size: 0.875rem;
-  font-weight: 400;
-  color: #1a1a1a;
-  text-decoration: none;
   position: relative;
-  padding-bottom: 4px;
   margin-top: 20px;
+  padding-bottom: 4px;
+  color: #1a1a1a;
+  font-weight: 400;
+  font-size: 0.875rem;
+  font-family: "Hellix", sans-serif;
+  text-decoration: none;
   --underline-width: 100%;
 }
 
 .selecao-presentes-section .selecao-presentes-link::after {
-  content: "";
   position: absolute;
   bottom: 0;
   left: 0;
+  transition: width 0.35s ease;
+  background-color: #1a1a1a;
   width: var(--underline-width);
   height: 1px;
-  background-color: #1a1a1a;
-  transition: width 0.35s ease;
+  content: "";
 }
 
 /* Responsivo */
@@ -670,8 +669,8 @@
   }
 
   .selecao-card-title {
-    font-size: 0.75rem;
     margin-top: 12px;
+    font-size: 0.75rem;
   }
 }
 
@@ -680,11 +679,11 @@
    ============================================================================ */
 
 .section-spacer-wrapper {
+  position: relative;
+  margin: 0;
   background-color: #fff;
   padding: 80px 0;
-  margin: 0;
   width: 100%;
-  position: relative;
 }
 
 /* Responsivo - ajusta o padding em dispositivos menores */

@@ -538,15 +538,11 @@ export class HorizontalScrollSection extends HTMLElement {
         let targetElem = document.querySelector(e.target.getAttribute("href"));
         let y = targetElem;
 
-        if (
-          targetElem &&
-          panelsContainer.isSameNode(targetElem.parentElement)
-        ) {
+        if (targetElem && panelsContainer.isSameNode(targetElem.parentElement)) {
           let totalScroll = tween.scrollTrigger.end - tween.scrollTrigger.start;
           let totalMovement = (panels.length - 1) * targetElem.offsetWidth;
           y = Math.round(
-            tween.scrollTrigger.start +
-              (targetElem.offsetLeft / totalMovement) * totalScroll
+            tween.scrollTrigger.start + (targetElem.offsetLeft / totalMovement) * totalScroll,
           );
         }
 
@@ -745,7 +741,7 @@ export class HorizontalScrollSection extends HTMLElement {
                 // markers: true, // Descomente para debug
               },
               ease: "none", // Movimento linear para efeito parallax suave
-            }
+            },
           );
         } else {
           console.error(`No image found in panel ${index + 1}`);

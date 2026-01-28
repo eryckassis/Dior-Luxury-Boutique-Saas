@@ -70,7 +70,7 @@ export class FragrancesModal extends HTMLElement {
 
     // Menu links with routes (tanto da view principal quanto da feminina)
     this.menuLinks = this.querySelectorAll(
-      ".fragrances-menu-link[data-route], .feminine-menu-link[data-route], .feminine-featured-link[data-route]"
+      ".fragrances-menu-link[data-route], .feminine-menu-link[data-route], .feminine-featured-link[data-route]",
     );
     this.menuLinks.forEach((link) => {
       link.addEventListener("click", (e) => {
@@ -157,7 +157,7 @@ export class FragrancesModal extends HTMLElement {
               title.textContent = "Início";
             },
           },
-          0
+          0,
         )
         .to(
           title,
@@ -165,7 +165,7 @@ export class FragrancesModal extends HTMLElement {
             opacity: 1,
             duration: 0.15,
           },
-          0.15
+          0.15,
         )
 
         // Hide back button
@@ -179,7 +179,7 @@ export class FragrancesModal extends HTMLElement {
               backBtn.classList.remove("visible");
             },
           },
-          0
+          0,
         );
     } else {
       feminineView.style.display = "none";
@@ -233,7 +233,7 @@ export class FragrancesModal extends HTMLElement {
               title.textContent = "Fragrância Feminina";
             },
           },
-          0
+          0,
         )
         .to(
           title,
@@ -241,7 +241,7 @@ export class FragrancesModal extends HTMLElement {
             opacity: 1,
             duration: 0.15,
           },
-          0.15
+          0.15,
         )
 
         // Show back button
@@ -255,15 +255,13 @@ export class FragrancesModal extends HTMLElement {
             scale: 1,
             duration: 0.3,
           },
-          0.2
+          0.2,
         );
 
       // Stagger animate feminine content
       const iconItems = feminineView.querySelectorAll(".feminine-icon-item");
       const menuItems = feminineView.querySelectorAll(".feminine-menu-item");
-      const featuredCards = feminineView.querySelectorAll(
-        ".feminine-featured-card"
-      );
+      const featuredCards = feminineView.querySelectorAll(".feminine-featured-card");
 
       tl.fromTo(
         iconItems,
@@ -275,7 +273,7 @@ export class FragrancesModal extends HTMLElement {
           stagger: 0.08,
           ease: "back.out(1.2)",
         },
-        0.3
+        0.3,
       )
         .fromTo(
           menuItems,
@@ -287,7 +285,7 @@ export class FragrancesModal extends HTMLElement {
             stagger: 0.05,
             ease: "power2.out",
           },
-          0.4
+          0.4,
         )
         .fromTo(
           featuredCards,
@@ -299,7 +297,7 @@ export class FragrancesModal extends HTMLElement {
             stagger: 0.1,
             ease: "power2.out",
           },
-          0.5
+          0.5,
         );
     } else {
       mainView.style.display = "none";
@@ -353,11 +351,7 @@ export class FragrancesModal extends HTMLElement {
       });
 
       // Backdrop fade in
-      tl.fromTo(
-        ".fragrances-modal-backdrop",
-        { opacity: 0 },
-        { opacity: 1, duration: 0.4 }
-      )
+      tl.fromTo(".fragrances-modal-backdrop", { opacity: 0 }, { opacity: 1, duration: 0.4 })
 
         // Container slide in with bounce
         .fromTo(
@@ -369,7 +363,7 @@ export class FragrancesModal extends HTMLElement {
             duration: 0.6,
             ease: "back.out(1.4)",
           },
-          0.1
+          0.1,
         )
 
         // Header elements animate in
@@ -383,7 +377,7 @@ export class FragrancesModal extends HTMLElement {
             stagger: 0.05,
             ease: "power2.out",
           },
-          0.3
+          0.3,
         )
 
         // Menu items stagger
@@ -397,7 +391,7 @@ export class FragrancesModal extends HTMLElement {
             stagger: 0.04,
             ease: "power2.out",
           },
-          0.4
+          0.4,
         )
 
         // Bottom links
@@ -411,7 +405,7 @@ export class FragrancesModal extends HTMLElement {
             stagger: 0.05,
             ease: "power2.out",
           },
-          0.6
+          0.6,
         );
     }
   }
@@ -447,7 +441,7 @@ export class FragrancesModal extends HTMLElement {
             opacity: 0,
             duration: 0.3,
           },
-          0.2
+          0.2,
         )
 
         .call(() => {

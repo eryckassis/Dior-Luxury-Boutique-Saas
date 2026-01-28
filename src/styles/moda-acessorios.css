@@ -16,20 +16,20 @@ moda-acessorios-page {
 }
 
 moda-acessorios-page .all-content {
-  margin: 0 !important;
-  padding: 0 !important;
-  background: transparent !important;
   display: flex;
   flex-direction: column;
   gap: 4rem; /* Espaçamento entre sections */
+  margin: 0 !important;
+  background: transparent !important;
+  padding: 0 !important;
 }
 
 moda-acessorios-page .content,
 moda-acessorios-page main {
   margin: 0 !important;
-  padding: 0 !important;
-  background: transparent !important;
   margin-top: 0 !important;
+  background: transparent !important;
+  padding: 0 !important;
   padding-top: 0 !important;
 }
 
@@ -38,22 +38,23 @@ moda-acessorios-page main {
    ============================================================================ */
 
 .moda-navigation {
+  display: flex;
   position: fixed;
   top: 0;
-  left: 0;
   right: 0;
-  height: 90px;
-  display: flex;
-  align-items: center;
+  left: 0;
   justify-content: space-between;
-  padding: 0 2rem;
-  background: transparent;
-  backdrop-filter: none;
+  align-items: center;
   z-index: 1000;
-  border-bottom: 0px solid rgba(0, 0, 0, 0);
-  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+  backdrop-filter: none;
+  transition:
+    all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
     transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   will-change: transform;
+  border-bottom: 0px solid rgba(0, 0, 0, 0);
+  background: transparent;
+  padding: 0 2rem;
+  height: 90px;
 }
 
 /* Smart Navbar - Hide on Scroll Down */
@@ -63,19 +64,21 @@ moda-acessorios-page main {
 
 /* Estado quando scrollado */
 .moda-navigation.scrolled {
-  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.95);
 }
 
 .moda-nav-hamburger,
 .moda-nav-search {
-  background: transparent;
-  border: none;
+  transition:
+    opacity 0.3s ease,
+    color 0.4s ease;
   cursor: pointer;
+  margin-top: 3px;
+  border: none;
+  background: transparent;
   padding: 8px;
   color: #ffffff;
-  transition: opacity 0.3s ease, color 0.4s ease;
-  margin-top: 3px;
 }
 
 /* Cor dos ícones quando scrollado */
@@ -102,11 +105,13 @@ moda-acessorios-page main {
 }
 
 .moda-logo-link img {
-  height: auto;
+  filter: brightness(0) invert(1);
+  transition:
+    filter 0.4s ease,
+    width 0.3s ease;
   width: 130px;
   max-width: 100%;
-  filter: brightness(0) invert(1);
-  transition: filter 0.4s ease, width 0.3s ease;
+  height: auto;
 }
 
 /* Logo vetorial escondido por padrão (desktop) */
@@ -123,48 +128,51 @@ moda-acessorios-page main {
 .moda-side-menu-backdrop {
   position: fixed;
   top: 0;
-  left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  left: 0;
+  visibility: hidden;
+  opacity: 0;
+  z-index: 1100;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.4s ease, visibility 0.4s ease, backdrop-filter 0.4s ease;
-  z-index: 1100;
+  transition:
+    opacity 0.4s ease,
+    visibility 0.4s ease,
+    backdrop-filter 0.4s ease;
+  background: rgba(0, 0, 0, 0.5);
 }
 
 .moda-side-menu-backdrop.active {
-  opacity: 1;
   visibility: visible;
+  opacity: 1;
 }
 
 .moda-side-menu {
   position: fixed;
   top: 32px;
   left: -480px;
-  width: 460px;
-  height: calc(100vh - 38px);
-  background: #f5f5f5;
   z-index: 1200;
   transition: left 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  overflow-y: auto;
-  overflow-x: hidden;
-  border-radius: 5px;
   box-shadow: 4px 0 24px rgba(0, 0, 0, 0.15);
+  border-radius: 5px;
+  background: #f5f5f5;
+  width: 460px;
+  height: calc(100vh - 38px);
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 /* Esconde a scrollbar mas mantém a funcionalidade de scroll */
 .moda-side-menu::-webkit-scrollbar {
+  display: none;
   width: 0;
   height: 0;
-  display: none;
 }
 
 .moda-side-menu {
-  -ms-overflow-style: none;  /* IE e Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* IE e Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 .moda-side-menu.active {
@@ -173,26 +181,27 @@ moda-acessorios-page main {
 
 /* Estado expandido - quando submenu com cards está aberto */
 .moda-side-menu.submenu-expanded {
+  transition:
+    width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    left 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   width: calc(100vw - 32px);
   max-width: 1600px;
-  transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-              left 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .moda-side-menu-header {
   display: flex;
   justify-content: flex-end;
-  padding: 1.5rem 2rem;
   border-bottom: none;
+  padding: 1.5rem 2rem;
 }
 
 .moda-side-menu-close {
-  background: transparent;
-  border: none;
+  transition: opacity 0.3s ease;
   cursor: pointer;
+  border: none;
+  background: transparent;
   padding: 8px;
   color: #1a1a1a;
-  transition: opacity 0.3s ease;
 }
 
 .moda-side-menu-close:hover {
@@ -212,17 +221,17 @@ moda-acessorios-page main {
 .moda-menu-content {
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 100px);
   padding: 0 2.5rem 2rem 2.5rem;
-  overflow-y: auto;
+  height: calc(100vh - 100px);
   overflow-x: hidden;
+  overflow-y: auto;
 }
 
 /* Esconde scrollbar do conteúdo também */
 .moda-menu-content::-webkit-scrollbar {
+  display: none;
   width: 0;
   height: 0;
-  display: none;
 }
 
 .moda-menu-content {
@@ -240,26 +249,26 @@ moda-acessorios-page main {
 
 /* Menu Links - Efeito Underline com GSAP */
 .moda-menu-link {
-  position: relative;
   display: block;
-  font-family: "SF Pro Text", sans-serif;
-  font-size: 1.1rem;
-  font-weight: 300;
-  color: #333;
-  text-decoration: none;
-  padding: 0.75rem 0;
+  position: relative;
   transition: color 0.3s ease;
+  padding: 0.75rem 0;
+  color: #333;
+  font-weight: 300;
+  font-size: 1.1rem;
+  font-family: "SF Pro Text", sans-serif;
+  text-decoration: none;
   --underline-width: 0%;
 }
 .moda-menu-link::after {
-  content: "";
   position: absolute;
   bottom: 0;
   left: 0;
+  transition: width 0.35s ease;
+  background-color: #000;
   width: var(--underline-width);
   height: 1px;
-  background-color: #000;
-  transition: width 0.35s ease;
+  content: "";
 }
 
 .moda-menu-link:hover {
@@ -268,41 +277,41 @@ moda-acessorios-page main {
 
 /* Setas nos links principais */
 .moda-menu-link::before {
-  content: "›";
   position: absolute;
   right: 0;
   opacity: 0.4;
-  font-size: 1.4rem;
+  content: "›";
   font-weight: 300;
+  font-size: 1.4rem;
 }
 
 /* Contact Section */
 .moda-menu-contact {
   margin-top: auto;
-  padding-top: 1.5rem;
-  border-top: 1px solid rgba(0, 0, 0, 0.15);
   margin-bottom: 6.5rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
+  padding-top: 1.5rem;
 }
 
 .moda-menu-contact-title {
-  font-family: "Hellix", sans-serif;
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: #666;
   margin-bottom: 1rem;
+  color: #666;
+  font-weight: 600;
+  font-size: 0.75rem;
+  font-family: "Hellix", sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .moda-menu-contact-link {
   display: block;
-  font-family: "Hellix", sans-serif;
-  font-weight: 600
-  font-size: 0.9rem;
-  color: #333;
-  text-decoration: none;
-  padding: 0.4rem 0;
   transition: opacity 0.3s ease;
+  padding: 0.4rem 0;
+  color: #333;
+  font-weight: 600;
+  font-size: 0.9rem;
+  font-family: "Hellix", sans-serif;
+  text-decoration: none;
 }
 
 .moda-menu-contact-link:hover {
@@ -311,45 +320,45 @@ moda-acessorios-page main {
 
 /* Menu Footer */
 .moda-menu-footer {
-  padding-top: 1.5rem;
   border-top: 1px solid rgba(0, 0, 0, 0.15);
+  padding-top: 1.5rem;
 }
 
 .moda-menu-accessibility {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   gap: 0.75rem;
-  font-family: "Hellix", sans-serif;
-  font-size: 0.9rem;
-  color: #333;
   cursor: pointer;
   margin-bottom: 3.5rem;
   padding: 0.5rem 0;
+  color: #333;
+  font-size: 0.9rem;
+  font-family: "Hellix", sans-serif;
 }
 
 /* Toggle Switch Personalizado */
 .moda-menu-checkbox {
   position: relative;
+  appearance: none;
+  transition: background 0.3s ease;
+  cursor: pointer;
+  border-radius: 12px;
+  background: #ddd;
   width: 44px;
   height: 24px;
-  appearance: none;
-  background: #ddd;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: background 0.3s ease;
 }
 
 .moda-menu-checkbox::before {
-  content: "";
   position: absolute;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: #fff;
   top: 2px;
   left: 2px;
   transition: transform 0.3s ease;
+  border-radius: 50%;
+  background: #fff;
+  width: 20px;
+  height: 20px;
+  content: "";
 }
 
 .moda-menu-checkbox:checked {
@@ -363,33 +372,33 @@ moda-acessorios-page main {
 /* Toggle Button Container - estilo pill/switch */
 .moda-menu-tabs {
   display: flex;
-  gap: 0;
-  padding: 3px;
-  background: #4a4a4a;
-  border-radius: 8px;
   position: relative;
-  margin-left: -1rem;
+  gap: 0;
   margin-right: -1rem;
+  margin-left: -1rem;
+  border-radius: 8px;
+  background: #4a4a4a;
+  padding: 3px;
   width: calc(105% + 0.9rem);
 }
 
 /* Botão individual do toggle */
 .moda-menu-tab {
+  position: relative;
   flex: 1;
-  text-align: center;
-  font-family: "Hellix", sans-serif;
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: #fff;
-  text-decoration: none;
-  padding: 1rem 0.8rem;
-  background: transparent;
-  border: none;
-  border-radius: 5px;
+  z-index: 1;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
-  position: relative;
-  z-index: 1;
+  border: none;
+  border-radius: 5px;
+  background: transparent;
+  padding: 1rem 0.8rem;
+  color: #fff;
+  font-weight: 500;
+  font-size: 0.9rem;
+  font-family: "Hellix", sans-serif;
+  text-align: center;
+  text-decoration: none;
   white-space: nowrap;
 }
 
@@ -400,14 +409,14 @@ moda-acessorios-page main {
 
 /* Botão ativo do toggle */
 .moda-menu-tab-active {
-  color: #333;
-  background-color: #fff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  background-color: #fff;
+  color: #333;
 }
 
 .moda-menu-tab-active:hover {
-  background-color: #fff;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
 }
 
 /* ============================================================================
@@ -415,45 +424,45 @@ moda-acessorios-page main {
    ============================================================================ */
 
 .moda-side-menu .submenu-panel {
+  display: none;
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background: #f5f5f5;
-  overflow: hidden;
+  flex-direction: row;
   transform: translateX(100%);
   z-index: 10;
-  display: none;
-  flex-direction: row;
+  background: #f5f5f5;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 
 .moda-side-menu .submenu-panel::-webkit-scrollbar {
+  display: none;
   width: 0;
   height: 0;
-  display: none;
 }
 
 /* Submenu Top Header - X Fechar - Agora dentro da coluna esquerda */
 .submenu-top-header {
-  padding: 0 0 1.25rem 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   margin-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 0 0 1.25rem 0;
 }
 
 .submenu-close-btn {
-  background: transparent;
-  border: none;
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-family: "Hellix", sans-serif;
-  font-size: 0.9rem;
-  font-weight: 400;
-  color: #333;
-  cursor: pointer;
-  padding: 0;
   transition: opacity 0.3s ease;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  padding: 0;
+  color: #333;
+  font-weight: 400;
+  font-size: 0.9rem;
+  font-family: "Hellix", sans-serif;
 }
 
 .submenu-close-btn:hover {
@@ -465,29 +474,29 @@ moda-acessorios-page main {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0 0 1.25rem 0;
   margin-bottom: 1.5rem;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 0 0 1.25rem 0;
 }
 
 /* Texto do breadcrumb */
 .breadcrumb-text {
-  font-family: "Hellix", sans-serif;
-  font-size: 0.85rem;
   display: flex;
   align-items: center;
   gap: 0.35rem;
+  font-size: 0.85rem;
+  font-family: "Hellix", sans-serif;
 }
 
 .submenu-breadcrumb .submenu-back-btn {
-  background: transparent;
-  border: none;
-  padding: 0;
-  cursor: pointer;
   display: flex;
   align-items: center;
-  color: #333;
   transition: opacity 0.3s ease;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  padding: 0;
+  color: #333;
 }
 
 .submenu-breadcrumb .submenu-back-btn:hover {
@@ -509,24 +518,24 @@ moda-acessorios-page main {
 }
 
 .moda-side-menu .submenu-header {
-  padding: 2rem 2.5rem 1.5rem;
-  border-bottom: none;
   flex-shrink: 0;
+  border-bottom: none;
+  padding: 2rem 2.5rem 1.5rem;
 }
 
 .moda-side-menu .submenu-back-btn {
-  background: transparent;
-  border: none;
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-family: "Hellix", sans-serif;
-  font-size: 1.1rem;
-  font-weight: 400;
-  color: #000;
-  cursor: pointer;
-  padding: 0;
   transition: opacity 0.3s ease;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  padding: 0;
+  color: #000;
+  font-weight: 400;
+  font-size: 1.1rem;
+  font-family: "Hellix", sans-serif;
 }
 
 .moda-side-menu .submenu-back-btn:hover {
@@ -537,38 +546,38 @@ moda-acessorios-page main {
 .submenu-dior-world-content {
   display: flex;
   flex: 1;
-  padding: 0;
-  overflow: hidden;
   gap: 0;
+  padding: 0;
   height: 100%;
+  overflow: hidden;
 }
 
 .submenu-left-column {
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: column;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 1.5rem 2rem;
   width: 320px;
   min-width: 300px;
-  padding: 1.5rem 2rem;
-  border-right: 1px solid rgba(0, 0, 0, 0.1);
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
 }
 
 .submenu-center-column {
-  width: 250px;
-  padding: 6.9rem 2rem;
-  flex-shrink: 0;
   display: flex;
+  flex-shrink: 0;
   flex-direction: column;
   align-items: flex-start;
+  padding: 6.9rem 2rem;
+  width: 250px;
 }
 
 .submenu-right-column {
+  display: flex;
   flex: 1;
+  justify-content: flex-end;
+  align-items: stretch;
   padding: 0.9rem 0.7rem 0rem 0rem;
   overflow: hidden;
-  display: flex;
-  align-items: stretch;
-  justify-content: flex-end;
 }
 
 /* Links do Submenu */
@@ -585,28 +594,30 @@ moda-acessorios-page main {
 }
 
 .submenu-link {
-  font-family: "Hellix", sans-serif;
-  font-size: 0.9rem;
-  font-weight: 400;
-  color: #333;
-  text-decoration: none;
   position: relative;
+  color: #333;
+  font-weight: 400;
+  font-size: 0.9rem;
+  font-family: "Hellix", sans-serif;
+  text-decoration: none;
   --underline-width: 0%;
-  transition: opacity 0.3s ease;
   display: inline-block;
+  transition: opacity 0.3s ease;
   width: fit-content;
 }
 
 .submenu-sublink {
-  font-family: "Hellix", sans-serif;
-  font-size: 0.95rem;
-  font-weight: 400;
-  color: #555;
-  text-decoration: none;
   position: relative;
+  color: #555;
+  font-weight: 400;
+  font-size: 0.95rem;
+  font-family: "Hellix", sans-serif;
+  text-decoration: none;
   --underline-width: 0%;
-  transition: color 0.3s ease, opacity 0.3s ease;
   display: inline-block;
+  transition:
+    color 0.3s ease,
+    opacity 0.3s ease;
   width: fit-content;
   letter-spacing: 0.01em;
   white-space: nowrap;
@@ -618,14 +629,14 @@ moda-acessorios-page main {
 
 .submenu-link::after,
 .submenu-sublink::after {
-  content: "";
   position: absolute;
   bottom: -4px;
   left: 0;
+  transition: width 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  background-color: #000;
   width: var(--underline-width, 0%);
   height: 1px;
-  background-color: #000;
-  transition: width 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  content: "";
 }
 
 .submenu-link-active {
@@ -642,33 +653,33 @@ moda-acessorios-page main {
 
 /* Indicador de ponto para item ativo */
 .submenu-link-active::before {
-  content: "•";
   position: absolute;
+  top: 50%;
   right: -1.2rem;
+  transform: translateY(-50%);
+  content: "•";
   color: #000;
   font-size: 0.6rem;
-  top: 50%;
-  transform: translateY(-50%);
 }
 
 /* Cards Grid */
 .submenu-cards-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 0.5rem;
-  height: 99%;
   width: 75%;
+  height: 99%;
 }
 
 .submenu-card {
+  display: block;
   position: relative;
+  border-radius: 4px;
   width: 100%;
   height: 100%;
   overflow: hidden;
-  border-radius: 4px;
   text-decoration: none;
-  display: block;
 }
 
 .submenu-card img {
@@ -683,28 +694,28 @@ moda-acessorios-page main {
   bottom: 20%;
   left: 50%;
   transform: translate(-50%, 50%);
-  font-family: "Hellix", sans-serif;
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: #fff;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
-  text-align: center;
   width: 80%;
+  color: #fff;
+  font-weight: 500;
+  font-size: 0.9rem;
+  font-family: "Hellix", sans-serif;
+  text-align: center;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
   --underline-width: 0%;
-  position: relative;
   display: inline-block;
+  position: relative;
 }
 
 .submenu-card-label::after {
-  content: "";
   position: absolute;
   bottom: -4px;
   left: 50%;
   transform: translateX(-50%);
+  transition: width 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  background-color: #fff;
   width: var(--underline-width, 0%);
   height: 2px;
-  background-color: #fff;
-  transition: width 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  content: "";
 }
 
 .submenu-card-wrapper {
@@ -725,9 +736,9 @@ moda-acessorios-page main {
 
   /* Side Menu - ESCONDIDO por padrão em tablet/mobile */
   .moda-side-menu {
-    width: calc(100vw - 32px) !important;
     left: -100vw !important;
     visibility: hidden;
+    width: calc(100vw - 32px) !important;
   }
 
   .moda-side-menu.active {
@@ -740,8 +751,8 @@ moda-acessorios-page main {
   .moda-side-menu.spa-expanded,
   .moda-side-menu.alta-perfumaria-expanded,
   .moda-side-menu.submenu-expanded {
-    width: calc(100vw - 32px) !important;
     left: -100vw !important;
+    width: calc(100vw - 32px) !important;
   }
 
   .moda-side-menu.active.fragrance-expanded,
@@ -758,11 +769,11 @@ moda-acessorios-page main {
 
   .moda-logo-link .logo-vector {
     display: block;
+    filter: none;
+    transition: width 0.3s ease;
     width: 90px;
     max-width: 90px;
     height: auto;
-    filter: none;
-    transition: width 0.3s ease;
   }
 
   .moda-nav-logo {
@@ -778,10 +789,10 @@ moda-acessorios-page main {
 
   .submenu-left-column,
   .submenu-center-column {
-    width: 100%;
     border-right: none;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     padding: 1rem 1.5rem;
+    width: 100%;
   }
 
   .submenu-right-column {
@@ -790,8 +801,8 @@ moda-acessorios-page main {
   }
 
   .submenu-cards-grid {
-    grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 0.75rem;
     width: 100%;
     height: auto;
@@ -803,8 +814,8 @@ moda-acessorios-page main {
   }
 
   .submenu-card-label {
-    font-size: 0.8rem;
     width: 85%;
+    font-size: 0.8rem;
   }
 
   .moda-side-menu .submenu-header {
@@ -813,8 +824,8 @@ moda-acessorios-page main {
 
   /* Permitir scroll nos submenus expandidos */
   .moda-side-menu .submenu-panel {
-    overflow-y: auto !important;
     overflow-x: hidden !important;
+    overflow-y: auto !important;
   }
 
   .moda-side-menu .submenu-panel.submenu-expanded {
@@ -831,12 +842,12 @@ moda-acessorios-page main {
 
   /* Side Menu - Full width no mobile - ESCONDIDO por padrão */
   .moda-side-menu {
-    width: calc(100vw - 16px) !important;
-    left: -100vw !important;
     top: 8px;
-    height: calc(100vh - 16px);
-    border-radius: 12px;
+    left: -100vw !important;
     visibility: hidden;
+    border-radius: 12px;
+    width: calc(100vw - 16px) !important;
+    height: calc(100vh - 16px);
   }
 
   .moda-side-menu.active {
@@ -846,8 +857,8 @@ moda-acessorios-page main {
 
   /* Permitir scroll nos submenus expandidos */
   .moda-side-menu .submenu-panel {
-    overflow-y: auto !important;
     overflow-x: hidden !important;
+    overflow-y: auto !important;
   }
 
   /* Estados expandidos também escondidos por padrão */
@@ -855,8 +866,8 @@ moda-acessorios-page main {
   .moda-side-menu.spa-expanded,
   .moda-side-menu.alta-perfumaria-expanded,
   .moda-side-menu.submenu-expanded {
-    width: calc(100vw - 16px) !important;
     left: -100vw !important;
+    width: calc(100vw - 16px) !important;
   }
 
   .moda-side-menu.active.fragrance-expanded,
@@ -871,8 +882,8 @@ moda-acessorios-page main {
   }
 
   .moda-menu-content {
-    height: calc(100vh - 70px);
     padding: 0 1.25rem 1.5rem 1.25rem;
+    height: calc(100vh - 70px);
   }
 
   .moda-menu-nav {
@@ -882,23 +893,23 @@ moda-acessorios-page main {
   }
 
   .moda-menu-link {
-    font-size: 1rem;
     padding: 0.65rem 0;
+    font-size: 1rem;
   }
 
   .moda-menu-contact {
-    padding-top: 1rem;
     margin-bottom: 1rem;
+    padding-top: 1rem;
   }
 
   .moda-menu-contact-title {
-    font-size: 0.7rem;
     margin-bottom: 0.75rem;
+    font-size: 0.7rem;
   }
 
   .moda-menu-contact-link {
-    font-size: 0.85rem;
     padding: 0.35rem 0;
+    font-size: 0.85rem;
   }
 
   .moda-menu-footer {
@@ -906,9 +917,9 @@ moda-acessorios-page main {
   }
 
   .moda-menu-accessibility {
-    font-size: 0.85rem;
     margin-bottom: 1.25rem;
     padding: 0.4rem 0;
+    font-size: 0.85rem;
   }
 
   .moda-menu-checkbox {
@@ -930,9 +941,9 @@ moda-acessorios-page main {
   }
 
   .moda-menu-tab {
-    font-size: 0.8rem;
-    padding: 0.7rem 0.5rem;
     border-radius: 8px;
+    padding: 0.7rem 0.5rem;
+    font-size: 0.8rem;
   }
 
   .moda-logo-link .logo-vector {
@@ -948,11 +959,11 @@ moda-acessorios-page main {
 /* Responsive - iPhone SE e dispositivos pequenos (390px) */
 @media (max-width: 390px) {
   .moda-side-menu {
-    width: 100vw;
-    left: -100vw;
     top: 0;
-    height: 100vh;
+    left: -100vw;
     border-radius: 0;
+    width: 100vw;
+    height: 100vh;
   }
 
   .moda-side-menu.active {
@@ -964,13 +975,13 @@ moda-acessorios-page main {
   }
 
   .moda-menu-link {
-    font-size: 0.95rem;
     padding: 0.6rem 0;
+    font-size: 0.95rem;
   }
 
   .moda-menu-tab {
-    font-size: 0.75rem;
     padding: 0.6rem 0.4rem;
+    font-size: 0.75rem;
   }
 
   .moda-logo-link .logo-vector {
@@ -984,8 +995,8 @@ moda-acessorios-page main {
 
   /* Submenu Cards para telas pequenas */
   .submenu-cards-grid {
-    grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 0.4rem;
     width: 100%;
     height: auto;
@@ -993,14 +1004,14 @@ moda-acessorios-page main {
   }
 
   .submenu-card {
-    min-height: 150px;
     border-radius: 6px;
+    min-height: 150px;
   }
 
   .submenu-card-label {
-    font-size: 0.7rem;
-    width: 90%;
     bottom: 10%;
+    width: 90%;
+    font-size: 0.7rem;
   }
 
   .submenu-right-column {
@@ -1009,8 +1020,8 @@ moda-acessorios-page main {
 
   /* Video Control Button - iPhone SE */
   .moda-video-control-btn {
-    left: 0.75rem;
     bottom: 0.75rem;
+    left: 0.75rem;
     width: 40px;
     height: 40px;
   }
@@ -1024,8 +1035,8 @@ moda-acessorios-page main {
 /* Responsive - Landscape mode em mobile */
 @media (max-height: 500px) and (orientation: landscape) {
   .moda-menu-content {
-    height: calc(100vh - 50px);
     padding: 0 1.5rem 1rem 1.5rem;
+    height: calc(100vh - 50px);
   }
 
   .moda-menu-link {
@@ -1033,8 +1044,8 @@ moda-acessorios-page main {
   }
 
   .moda-menu-contact {
-    padding-top: 0.75rem;
     margin-bottom: 0.75rem;
+    padding-top: 0.75rem;
   }
 
   .moda-menu-footer {
@@ -1052,17 +1063,17 @@ moda-acessorios-page main {
 
 /* Hero Section */
 .moda-hero-section {
+  display: flex;
   position: relative;
+  top: 0;
+  left: 0;
+  justify-content: center;
+  align-items: center;
+  margin: 0 !important;
+  padding: 0 !important;
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 !important;
-  padding: 0 !important;
-  top: 0;
-  left: 0;
 }
 
 /* ============================================================================
@@ -1070,35 +1081,33 @@ moda-acessorios-page main {
    ============================================================================ */
 
 .moda-hero-video-section {
+  display: flex;
   position: relative;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .moda-hero-title-video {
-  font-family: "Hellix" sans-serif;
   font-size: 2rem;
+  font-family: "Hellix" sans-serif;
 }
-
-
 
 .moda-hero-video-section .moda-hero-overlay {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  z-index: 1;
   background: linear-gradient(
     to bottom,
     rgba(0, 0, 0, 0.1) 0%,
     rgba(0, 0, 0, 0.3) 50%,
     rgba(0, 0, 0, 0.5) 100%
   );
-  z-index: 1;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
 }
 
@@ -1106,21 +1115,21 @@ moda-acessorios-page main {
   position: absolute;
   top: 50%;
   left: 50%;
-  min-width: 100%;
-  min-height: 100%;
-  width: auto;
-  height: auto;
   transform: translate(-50%, -50%);
-  object-fit: cover;
   z-index: 0;
+  width: auto;
+  min-width: 100%;
+  height: auto;
+  min-height: 100%;
+  object-fit: cover;
 }
 
 .moda-hero-video-section .moda-hero-content {
   position: relative;
   z-index: 2;
-  text-align: center;
   padding: 2rem;
   max-width: 800px;
+  text-align: center;
 }
 
 /* Responsive */
@@ -1128,15 +1137,15 @@ moda-acessorios-page main {
   .moda-hero-video-section {
     height: 80vh;
   }
-  
+
   .moda-hero-video-section .moda-hero-content {
     padding: 1.5rem;
   }
 
   /* Video Control Button - Tablet */
   .moda-video-control-btn {
-    left: 1.5rem;
     bottom: 1.5rem;
+    left: 1.5rem;
     width: 50px;
     height: 50px;
   }
@@ -1155,8 +1164,8 @@ moda-acessorios-page main {
 
   /* Video Control Button - iPhone Pro Max */
   .moda-video-control-btn {
-    left: 1rem;
     bottom: 1rem;
+    left: 1rem;
     width: 45px;
     height: 45px;
   }
@@ -1175,8 +1184,8 @@ moda-acessorios-page main {
 
   /* Video Control Button - iPhone Pro */
   .moda-video-control-btn {
-    left: 0.9rem;
     bottom: 0.9rem;
+    left: 0.9rem;
     width: 35px;
     height: 35px;
   }
@@ -1191,11 +1200,11 @@ moda-acessorios-page main {
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 1;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
-  z-index: 1;
 }
 
 /* ============================================================================
@@ -1203,35 +1212,33 @@ moda-acessorios-page main {
    ============================================================================ */
 
 .moda-video-control-btn {
+  display: flex;
   position: absolute;
-  left: 2.5rem;
   bottom: 2.5rem;
-  width: 30px;
-  height: 30px;
-  border-radius: 20%;
-  border: none;
-  background: rgba(255, 255, 255, 0.0);
+  left: 2.5rem;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
   backdrop-filter: blur(50px);
   -webkit-backdrop-filter: blur(50px);
-  cursor: pointer;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  cursor: pointer;
+  border: none;
+  border-radius: 20%;
+  background: rgba(255, 255, 255, 0);
+  width: 30px;
+  height: 30px;
   color: #ffffff;
 }
-
-
 
 .moda-video-control-btn:active {
   transform: scale(0.98);
 }
 
 .moda-video-control-btn svg {
+  transition: opacity 0.3s ease;
   width: 20px;
   height: 20px;
-  transition: opacity 0.3s ease;
 }
 
 /* Play icon - preenchido */
@@ -1242,9 +1249,9 @@ moda-acessorios-page main {
 
 /* Pause Icon - linhas finas brancas */
 .moda-video-control-btn .pause-icon {
+  display: none;
   fill: #ffffff;
   stroke: none;
-  display: none;
 }
 
 .moda-video-control-btn.playing .play-icon {
@@ -1262,8 +1269,8 @@ moda-acessorios-page main {
 /* iPhone 14 Pro Max / 15 Pro Max / 16 Pro Max / 17 Pro Max (430px) */
 @media (max-width: 430px) {
   .moda-video-control-btn {
-    left: 1rem !important;
     bottom: 1rem !important;
+    left: 1rem !important;
     width: 35px !important;
     height: 35px !important;
   }
@@ -1282,8 +1289,8 @@ moda-acessorios-page main {
 /* iPhone 14 Pro / 15 Pro / 16 Pro / 17 Pro (393px) */
 @media (max-width: 393px) {
   .moda-video-control-btn {
-    left: 0.9rem !important;
     bottom: 0.9rem !important;
+    left: 0.9rem !important;
     width: 35px !important;
     height: 35px !important;
   }
@@ -1302,8 +1309,8 @@ moda-acessorios-page main {
 /* iPhone 14 / 15 / 16 / 17 (390px) e iPhone SE */
 @media (max-width: 390px) {
   .moda-video-control-btn {
-    left: 0.75rem !important;
     bottom: 0.75rem !important;
+    left: 0.75rem !important;
     width: 35px !important;
     height: 35px !important;
   }
@@ -1319,38 +1326,34 @@ moda-acessorios-page main {
   }
 }
 
-
-
 .moda-hero-content {
-  position: relative;
-  z-index: 3;
-  text-align: center;
-  color: #fff;
-  padding: 0 2rem;
-  max-width: 1200px;
   display: flex;
+  position: relative;
   flex-direction: column;
-  align-items: center;
   justify-content: flex-end;
-  height: 100%;
+  align-items: center;
+  z-index: 3;
+  padding: 0 2rem;
   padding-bottom: 8rem;
+  max-width: 1200px;
+  height: 100%;
+  color: #fff;
+  text-align: center;
 }
 
-
-
 .moda-hero-label {
-  font-family: "Hellix", sans-serif;
-  font-size: clamp(0.875rem, 1.5vw, 1rem);
-  font-weight: 300;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  margin: 0 0 1rem 0;
-  opacity: 0.95;
-  text-decoration: none;
-  color: inherit;
-  cursor: pointer;
   display: inline-block;
+  opacity: 0.95;
   transition: opacity 0.3s ease;
+  cursor: pointer;
+  margin: 0 0 1rem 0;
+  color: inherit;
+  font-weight: 300;
+  font-size: clamp(0.875rem, 1.5vw, 1rem);
+  font-family: "Hellix", sans-serif;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  text-transform: uppercase;
 }
 
 .moda-hero-label:hover {
@@ -1358,73 +1361,71 @@ moda-acessorios-page main {
 }
 
 .moda-hero-title {
-  font-family: "MinhaFonte", sans-serif;
-  font-size: clamp(3rem, 6vw, 6rem);
+  margin: 0 0 1.5rem 0;
   font-weight: 300;
+  font-size: clamp(3rem, 6vw, 6rem);
+  line-height: 1.1;
+  font-family: "MinhaFonte", sans-serif;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  margin: 0 0 1.5rem 0;
-  line-height: 1.1;
 }
 
-
-
 .moda-hero-subtitle {
-  font-family: "Hellix", sans-serif;
-  font-size: 1rem;
-  font-weight: 300;
-  letter-spacing: 0.03em;
-  margin: 0 0 2.5rem 0;
   opacity: 0.9;
-  line-height: 1.6;
-  max-width: 700px;
-  margin-left: auto;
+  margin: 0 0 2.5rem 0;
   margin-right: auto;
+  margin-left: auto;
+  max-width: 700px;
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.6;
+  font-family: "Hellix", sans-serif;
+  letter-spacing: 0.03em;
 }
 
 /* Botão Descobrir com underline animado */
 .moda-discover-button {
-  background: transparent;
-  border: none;
-  font-family: "Hellix", sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  color: #fff;
-  text-decoration: none;
-  padding: 0;
-  cursor: pointer;
-  letter-spacing: 0.3px;
   display: inline-block;
   position: relative;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  padding: 0;
+  color: #fff;
+  font-weight: 500;
+  font-size: 14px;
+  font-family: "Hellix", sans-serif;
+  letter-spacing: 0.3px;
+  text-decoration: none;
   --underline-width: 100%;
   margin-top: 0.5rem;
 }
 
 .moda-discover-button::after {
-  content: "";
   position: absolute;
   bottom: -4px;
   left: 0;
+  transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  background-color: #fff;
   width: var(--underline-width, 100%);
   height: 1px;
-  background-color: #fff;
-  transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  content: "";
 }
 
 /* Content Wrapper */
 .moda-content-wrapper {
   background: #fff;
-  min-height: 50vh;
   padding: 6rem 0;
+  min-height: 50vh;
   overflow: hidden;
 }
 
 /* Drag Container */
 .moda-drag-container {
+  cursor: grab;
+  padding: 0 4rem;
   width: 100%;
   overflow: visible;
-  padding: 0 4rem;
-  cursor: grab;
   touch-action: pan-y;
   -webkit-overflow-scrolling: touch;
 }
@@ -1440,43 +1441,39 @@ moda-acessorios-page main {
 .moda-gift-cards-section {
   display: inline-flex;
   gap: 2rem;
-  padding: 2rem 0;
   will-change: transform;
+  padding: 2rem 0;
   touch-action: pan-y;
 }
 
 .moda-gift-card {
   position: relative;
   flex-shrink: 0;
-  width: 400px;
-  aspect-ratio: 9 / 16;
-  overflow: hidden;
-  border-radius: 5px;
-  cursor: pointer;
   transition: transform 0.4s ease;
+  cursor: pointer;
+  border-radius: 5px;
+  aspect-ratio: 9 / 16;
+  width: 400px;
+  overflow: hidden;
 }
-
-
 
 /* Progress Bar */
 .moda-drag-progress {
-  width: 200px;
-  height: 2px;
-  background: rgba(0, 0, 0, 0.1);
   margin: 3rem auto 0;
   border-radius: 2px;
+  background: rgba(0, 0, 0, 0.1);
+  width: 200px;
+  height: 2px;
   overflow: hidden;
 }
 
 .moda-drag-progress-fill {
+  transform: scaleX(0.15);
+  transform-origin: left center;
+  background: #1a1a1a;
   width: 100%;
   height: 100%;
-  background: #1a1a1a;
-  transform-origin: left center;
-  transform: scaleX(0.15);
 }
-
-
 
 .moda-card-image-wrapper {
   position: relative;
@@ -1486,32 +1483,34 @@ moda-acessorios-page main {
 }
 
 .moda-card-image {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
 }
 
 .moda-card-overlay {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(246, 243, 247, 0.25);
+  transform-origin: left center;
+  z-index: 2;
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(20px);
-  z-index: 2;
-  transform-origin: left center;
   will-change: transform;
+  background: rgba(246, 243, 247, 0.25);
+  width: 100%;
+  height: 100%;
 }
 
 .moda-card-content {
+  display: flex;
   position: absolute;
+  right: 0;
   bottom: 0;
   left: 0;
-  right: 0;
-  padding: 3rem 2.5rem;
+  flex-direction: column;
+  gap: 1.5rem;
   z-index: 3;
   background: linear-gradient(
     to top,
@@ -1519,79 +1518,75 @@ moda-acessorios-page main {
     rgba(0, 0, 0, 0.4) 50%,
     transparent 100%
   );
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  padding: 3rem 2.5rem;
 }
 
 .moda-card-title {
-  font-family: "Hellix", sans-serif;
-  font-size: clamp(1.75rem, 3vw, 2.5rem);
-  text-align: center;
-  font-weight: 300;
-  color: #ffffff;
   margin: 0;
-  letter-spacing: 0.02em;
+  color: #ffffff;
+  font-weight: 300;
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
   line-height: 1.2;
+  font-family: "Hellix", sans-serif;
+  letter-spacing: 0.02em;
+  text-align: center;
 }
 
 .moda-card-button {
-  align-self: flex-start;
-  background: transparent;
-  border: none;
-  font-family: "Hellix", sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  color: #fff;
-  text-decoration: none;
-  left: 8rem;
-  padding: 0;
-  cursor: pointer;
-  letter-spacing: 0.3px;
   display: inline-block;
   position: relative;
+  left: 8rem;
+  align-self: flex-start;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  padding: 0;
+  color: #fff;
+  font-weight: 500;
+  font-size: 14px;
+  font-family: "Hellix", sans-serif;
+  letter-spacing: 0.3px;
+  text-decoration: none;
   --underline-width: 100%;
 }
 
 .moda-card-button::after {
-  content: "";
   position: absolute;
   bottom: -4px;
   left: 0;
+  transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  background-color: #fff;
   width: var(--underline-width, 100%);
   height: 1px;
-  background-color: #fff;
-  transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  content: "";
 }
 
-
 .moda-placeholder-section {
-  max-width: 1400px;
   margin: 0 auto;
   padding: 4rem 0;
+  max-width: 1400px;
 }
 
 .moda-placeholder-title {
-  font-family: "Futura", "Helvetica Neue", sans-serif;
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 300;
-  letter-spacing: 0.05em;
-  text-align: center;
   margin-bottom: 2rem;
   color: #1a1a1a;
+  font-weight: 300;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-family: "Futura", "Helvetica Neue", sans-serif;
+  letter-spacing: 0.05em;
+  text-align: center;
 }
 
 .moda-placeholder-text {
-  font-family: "Futura", "Helvetica Neue", sans-serif;
-  font-size: 1.125rem;
-  font-weight: 300;
-  line-height: 1.8;
-  text-align: center;
-  max-width: 800px;
   margin: 0 auto;
+  max-width: 800px;
   color: #555;
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.8;
+  font-family: "Futura", "Helvetica Neue", sans-serif;
+  text-align: center;
 }
-
 
 @media (max-width: 1024px) {
   .moda-drag-container {
@@ -1618,30 +1613,29 @@ moda-acessorios-page main {
     padding-bottom: 6rem;
   }
 
-    .moda-hero-video-section {
+  .moda-hero-video-section {
     height: 80vh;
   }
-  
+
   .moda-hero-video-section .moda-hero-content {
     padding: 1.5rem;
   }
 
-
   .moda-hero-label {
+    margin-bottom: 0.75rem;
     font-size: 0.85rem;
     letter-spacing: 0.08em;
-    margin-bottom: 0.75rem;
   }
 
   .moda-hero-title {
-    font-size: clamp(2.5rem, 5vw, 4rem);
     margin-bottom: 1rem;
+    font-size: clamp(2.5rem, 5vw, 4rem);
   }
 
   .moda-hero-subtitle {
-    font-size: 0.95rem;
     margin-bottom: 2rem;
     max-width: 90%;
+    font-size: 0.95rem;
   }
 
   .moda-discover-button {
@@ -1677,8 +1671,8 @@ moda-acessorios-page main {
   }
 
   .moda-card-button {
-    align-self: center;
     left: 0;
+    align-self: center;
   }
 
   .moda-placeholder-section {
@@ -1698,21 +1692,21 @@ moda-acessorios-page main {
   }
 
   .moda-hero-label {
+    margin-bottom: 0.5rem;
     font-size: 0.75rem;
     letter-spacing: 0.06em;
-    margin-bottom: 0.5rem;
   }
 
   .moda-hero-title {
-    font-size: clamp(2rem, 8vw, 3rem);
     margin-bottom: 0.75rem;
+    font-size: clamp(2rem, 8vw, 3rem);
     letter-spacing: 0.03em;
   }
 
   .moda-hero-subtitle {
-    font-size: 0.875rem;
     margin-bottom: 1.5rem;
     max-width: 95%;
+    font-size: 0.875rem;
     line-height: 1.5;
   }
 
@@ -1742,8 +1736,8 @@ moda-acessorios-page main {
   }
 
   .moda-card-content {
-    padding: 1.5rem 1.25rem;
     gap: 1rem;
+    padding: 1.5rem 1.25rem;
   }
 
   .moda-card-title {
@@ -1755,8 +1749,8 @@ moda-acessorios-page main {
   }
 
   .moda-card-button {
-    align-self: center;
     left: 0;
+    align-self: center;
     font-size: 12px;
   }
 
@@ -1785,8 +1779,8 @@ moda-acessorios-page main {
   }
 
   .moda-hero-subtitle {
-    font-size: 0.8rem;
     margin-bottom: 1.25rem;
+    font-size: 0.8rem;
   }
 
   .moda-discover-button {
@@ -1802,8 +1796,8 @@ moda-acessorios-page main {
   }
 
   .moda-card-button {
-    align-self: center;
     left: 0;
+    align-self: center;
     font-size: 11px;
   }
 
@@ -1827,13 +1821,13 @@ moda-acessorios-page main {
   }
 
   .moda-hero-title {
-    font-size: clamp(1.5rem, 4vw, 2.5rem);
     margin-bottom: 0.5rem;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
   }
 
   .moda-hero-subtitle {
-    font-size: 0.85rem;
     margin-bottom: 1rem;
+    font-size: 0.85rem;
   }
 }
 
@@ -1846,48 +1840,43 @@ moda-acessorios-page main {
   }
 }
 
-
-
-
-
 .moda-campaign-section {
-  background: #fff;
-  padding: 8rem 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
+  background: #fff;
+  padding: 8rem 2rem;
   min-height: 50vh;
 }
 
 .moda-campaign-content {
-  max-width: 900px;
-  text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: clamp(1.5rem, 3vw, 2.5rem);
+  max-width: 900px;
+  text-align: center;
 }
 
 .moda-campaign-title {
-  font-family: "MinhaFonte", sans-serif;
-  font-size: clamp(40px, 6vw, 80px);
-  font-weight: 400;
   margin: 0;
-  letter-spacing: 2px;
-  line-height: 1.1;
   color: #1a1a1a;
+  font-weight: 400;
+  font-size: clamp(40px, 6vw, 80px);
+  line-height: 1.1;
+  font-family: "MinhaFonte", sans-serif;
+  letter-spacing: 2px;
 }
 
 .moda-campaign-description {
-  font-family: "Hellix", sans-serif;
-  font-size: clamp(16px, 1.8vw, 22px);
-  font-weight: 300;
   margin: 0;
-  line-height: 1.6;
   max-width: 85%;
   color: #333;
+  font-weight: 300;
+  font-size: clamp(16px, 1.8vw, 22px);
+  line-height: 1.6;
+  font-family: "Hellix", sans-serif;
 }
-
 
 .moda-campaign-section .moda-discover-button {
   color: #1a1a1a;
@@ -1897,28 +1886,26 @@ moda-acessorios-page main {
   background-color: #1a1a1a;
 }
 
-
 @media (max-width: 768px) {
   .moda-campaign-section {
     padding: 5rem 1.5rem;
   }
 
-    .moda-hero-video-section {
+  .moda-hero-video-section {
     height: 80vh;
   }
-  
+
   .moda-hero-video-section .moda-hero-content {
     padding: 1.5rem;
   }
-
 
   .moda-campaign-title {
     font-size: clamp(32px, 5vw, 60px);
   }
 
   .moda-campaign-description {
-    font-size: clamp(14px, 1.6vw, 18px);
     max-width: 95%;
+    font-size: clamp(14px, 1.6vw, 18px);
   }
 }
 
@@ -1937,70 +1924,69 @@ moda-acessorios-page main {
    ============================================================================ */
 
 .moda-hero-content-second {
-  position: absolute;
-  z-index: 3;
-  text-align: center;
-  color: #fff;
-  padding: 0 2rem;
-  max-width: 1200px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: clamp(1rem, 2vw, 2rem);
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  padding: 0 2rem;
+  max-width: 1200px;
+  color: #fff;
+  text-align: center;
 }
 
 .moda-hero-label-second {
-  font-family: "Hellix", sans-serif;
-  font-size: clamp(0.875rem, 1.5vw, 1rem);
+  opacity: 0.95;
+  margin: 0;
   font-weight: 300;
+  font-size: clamp(0.875rem, 1.5vw, 1rem);
+  font-family: "Hellix", sans-serif;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  margin: 0;
-  opacity: 0.95;
 }
 
 .moda-hero-title-second {
-  font-family: "MinhaFonte", sans-serif;
-  font-size: clamp(3rem, 6vw, 6rem);
+  margin: 0;
   font-weight: 300;
+  font-size: clamp(3rem, 6vw, 6rem);
+  line-height: 1.1;
+  font-family: "MinhaFonte", sans-serif;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  margin: 0;
-  line-height: 1.1;
 }
 
 .moda-discover-button-second {
-  background: transparent;
-  border: none;
-  font-family: "Hellix", sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  color: #fff;
-  text-decoration: none;
-  padding: 0;
-  cursor: pointer;
-  letter-spacing: 0.3px;
   display: inline-block;
   position: relative;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  padding: 0;
+  color: #fff;
+  font-weight: 500;
+  font-size: 14px;
+  font-family: "Hellix", sans-serif;
+  letter-spacing: 0.3px;
+  text-decoration: none;
   --underline-width: 100%;
   margin-top: 0.5rem;
 }
 
 .moda-discover-button-second::after {
-  content: "";
   position: absolute;
   bottom: -4px;
   left: 0;
+  transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  background-color: #fff;
   width: var(--underline-width, 100%);
   height: 1px;
-  background-color: #fff;
-  transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  content: "";
 }
-
 
 @media (max-width: 768px) {
   .moda-hero-content-second {
@@ -2029,15 +2015,14 @@ moda-acessorios-page main {
     font-size: 13px;
   }
 
-    .moda-hero-video-section {
+  .moda-hero-video-section {
     height: 80vh;
   }
-  
+
   .moda-hero-video-section .moda-hero-content {
     padding: 1.5rem;
   }
 }
-
 
 /* ============================================================================
    ALTO CONTRASTE - Modo de Acessibilidade
@@ -2048,8 +2033,8 @@ body.high-contrast .moda-side-menu {
 }
 
 body.high-contrast .moda-side-menu-header {
-  background: #000 !important;
   border-bottom-color: rgba(255, 255, 255, 0.2) !important;
+  background: #000 !important;
 }
 
 body.high-contrast .moda-menu-link {
@@ -2062,8 +2047,8 @@ body.high-contrast .moda-menu-link::after {
 }
 
 body.high-contrast .moda-menu-link::before {
-  color: #fff !important;
   opacity: 0.7;
+  color: #fff !important;
 }
 
 body.high-contrast .moda-menu-contact-title {
@@ -2103,14 +2088,14 @@ body.high-contrast .moda-menu-checkbox:checked::before {
 }
 
 body.high-contrast .moda-menu-tab {
-  background: #1a1a1a !important;
   border-color: #444 !important;
+  background: #1a1a1a !important;
   color: #fff !important;
 }
 
 body.high-contrast .moda-menu-tab-active {
-  background: #fff !important;
   border-color: #fff !important;
+  background: #fff !important;
   color: #000 !important;
 }
 
@@ -2156,8 +2141,8 @@ body.high-contrast .submenu-panel {
 }
 
 body.high-contrast .submenu-header {
-  background: #000 !important;
   border-bottom-color: rgba(255, 255, 255, 0.2) !important;
+  background: #000 !important;
 }
 
 body.high-contrast .submenu-back-btn {
@@ -2183,8 +2168,8 @@ body.high-contrast .submenu-dior-world-content {
 }
 
 body.high-contrast .submenu-left-column {
-  background: #000 !important;
   border-right-color: rgba(255, 255, 255, 0.2) !important;
+  background: #000 !important;
 }
 
 body.high-contrast .submenu-center-column {

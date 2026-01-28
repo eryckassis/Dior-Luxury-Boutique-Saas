@@ -4,8 +4,7 @@
   }
 
   connectedCallback() {
-    const videoSrc =
-      this.getAttribute("video") || "/videos/videosection1.2.mp4";
+    const videoSrc = this.getAttribute("video") || "/videos/videosection1.2.mp4";
     const id = this.getAttribute("section-id") || "depth-meaning";
 
     this.render(videoSrc, id);

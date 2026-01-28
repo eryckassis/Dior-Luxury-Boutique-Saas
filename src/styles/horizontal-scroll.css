@@ -4,34 +4,34 @@
 
 .horizontal-panels-section {
   position: relative;
-  width: 100%;
   /* Remove qualquer transform que possa interferir com pin */
   transform: none !important;
   will-change: auto;
+  width: 100%;
 }
 
 .horizontal-panels-container {
-  height: 100vh;
   display: flex;
-  flex-wrap: nowrap;
-  padding: 0;
-  overflow: hidden;
-  will-change: transform;
   position: relative;
+  flex-wrap: nowrap;
+  will-change: transform;
+  padding: 0;
+  height: 100vh;
+  overflow: hidden;
 }
 
 /* Individual Panel Styles */
 .panel.full-screen-panel {
+  display: flex;
   position: relative;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   min-width: 100vw;
   height: 100vh;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   color: #ffffff;
-  flex-shrink: 0;
 }
 
 /* Panel Color Variations */
@@ -57,23 +57,23 @@
 
 /* Panel Content Layout */
 .panel-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 80px;
   width: 100%;
   height: 100%;
-  padding: 0 80px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .panel-content-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 80px;
   align-items: center;
-  max-width: 1400px;
-  width: 100%;
-  height: 100%;
+  gap: 80px;
   padding: 60px 0;
+  width: 100%;
+  max-width: 1400px;
+  height: 100%;
 }
 
 /* Image Column */
@@ -81,57 +81,57 @@
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 0;
   width: 100%;
   height: 100%;
-  z-index: 0;
 }
 
 .panel-image-col img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
 }
 
 /* Video Styles */
 .panel-image-col video {
+  display: block;
+  background: #000000;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
-  background: #000000;
 }
 
 /* Video Controls */
 .video-controls {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
   display: flex;
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
   gap: 12px;
   z-index: 10;
 }
 
 .video-control {
+  display: flex;
   position: relative;
-  background: rgba(0, 0, 0, 0.7);
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  cursor: pointer;
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 50%;
+  background: rgba(0, 0, 0, 0.7);
   width: 48px;
   height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
-  backdrop-filter: blur(10px);
   overflow: hidden;
 }
 
 .video-control:hover {
-  background: rgba(0, 0, 0, 0.9);
-  border-color: rgba(255, 255, 255, 0.6);
   transform: scale(1.05);
+  border-color: rgba(255, 255, 255, 0.6);
+  background: rgba(0, 0, 0, 0.9);
 }
 
 .video-control svg {
@@ -144,30 +144,30 @@
 .video-control .button__flair {
   position: absolute;
   top: 0;
-  left: 0;
   right: 0;
   bottom: 0;
-  pointer-events: none;
+  left: 0;
   transform: scale(0);
   transform-origin: 0 0;
-  will-change: transform;
   z-index: 1;
+  will-change: transform;
   border-radius: 50%;
   overflow: hidden;
+  pointer-events: none;
 }
 
 .video-control .button__flair::before {
-  content: "";
+  display: block;
   position: absolute;
   top: 0;
   left: 0;
-  width: 170%;
-  aspect-ratio: 1/1;
-  background-color: rgba(255, 255, 255, 0.15);
-  border-radius: 50%;
   transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.15);
+  aspect-ratio: 1/1;
+  width: 170%;
   pointer-events: none;
-  display: block;
+  content: "";
 }
 
 /* Splash option styles reutilizados */
@@ -175,77 +175,73 @@
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.3);
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.3);
-  z-index: 1;
 }
 
 .splash-option-overlay {
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 2;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.4) 100%);
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    135deg,
-    rgba(0, 0, 0, 0.1) 0%,
-    rgba(0, 0, 0, 0.4) 100%
-  );
-  z-index: 2;
 }
 
 .splash-option-bg {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
 }
 
 .panel-title {
-  font-family: "MinhaFonte", sans-serif;
-  font-size: 56px;
-  font-weight: 600;
-  color: #ffffff;
   margin: 0;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 56px;
   line-height: 1.2;
+  font-family: "MinhaFonte", sans-serif;
   letter-spacing: 0.02em;
   text-transform: uppercase;
 }
 
 .panel-first-title {
-  font-family: "MinhaFonte", sans-serif;
   position: absolute;
-  font-size: 48px;
-  font-weight: 600;
-  color: #ffffff;
-  margin: 0;
-  line-height: 1.2;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
   bottom: 10%;
   left: 47%;
   transform: translateX(-50%);
-  text-align: center;
   z-index: 10;
+  margin: 0;
   max-width: 800px;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 48px;
+  line-height: 1.2;
+  font-family: "MinhaFonte", sans-serif;
+  letter-spacing: 0.02em;
+  text-align: center;
+  text-transform: uppercase;
 }
 
 .panel-description {
-  font-family: var(--font-primary);
-  font-size: 35px;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.85);
   margin: 0;
   max-width: 500px;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 35px;
+  line-height: 1.6;
+  font-family: var(--font-primary);
 }
 
 /* Navigation Controls */
 .panels-navigation {
   display: flex;
+  align-items: center;
   gap: 16px;
   margin-top: 20px;
-  align-items: center;
 }
 
 .panels-navigation.text-right {
@@ -258,55 +254,55 @@
 
 .anchor-panel {
   display: inline-block;
-  font-family: var(--font-primary);
-  font-size: 14px;
-  font-weight: 500;
-  color: #ffffff;
-  text-decoration: none;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  padding: 14px 32px;
+  position: relative;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  cursor: pointer;
   border: 1px solid rgba(255, 255, 255, 0.3);
   background: transparent;
-  backdrop-filter: blur(10px);
-  position: relative;
+  padding: 14px 32px;
   overflow: hidden;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 14px;
+  font-family: var(--font-primary);
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  text-transform: uppercase;
 }
 
 .anchor-panel:hover {
-  color: #000000;
   border-color: #ffffff;
   background: rgba(255, 255, 255, 0.95);
+  color: #000000;
 }
 
 /* Button Flair para anchor-panel */
 .anchor-panel .button__flair {
   position: absolute;
   top: 0;
-  left: 0;
   right: 0;
   bottom: 0;
-  pointer-events: none;
+  left: 0;
   transform: scale(0);
   transform-origin: center center;
-  will-change: transform;
   z-index: 1;
+  will-change: transform;
+  pointer-events: none;
 }
 
 .anchor-panel .button__flair::before {
-  content: "";
+  display: block;
   position: absolute;
   top: 50%;
   left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background-color: #ffffff;
   width: 80px;
   height: 80px;
-  background-color: #ffffff;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
   pointer-events: none;
-  display: block;
+  content: "";
 }
 
 /* Garante que o label fique acima do flair */
@@ -321,9 +317,9 @@
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 16px;
   margin-top: 24px;
+  padding-right: 10px;
   max-height: 300px;
   overflow-y: auto;
-  padding-right: 10px;
 }
 
 /* Custom Scrollbar para cards */
@@ -332,13 +328,13 @@
 }
 
 .cards-wrapper::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.1);
   border-radius: 3px;
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .cards-wrapper::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.3);
   border-radius: 3px;
+  background: rgba(255, 255, 255, 0.3);
 }
 
 .cards-wrapper::-webkit-scrollbar-thumb:hover {
@@ -346,28 +342,28 @@
 }
 
 .product-card {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
-  padding: 20px;
   display: flex;
-  align-items: center;
   justify-content: center;
-  color: #ffffff;
-  font-family: var(--font-primary);
-  font-size: 14px;
-  font-weight: 500;
-  min-height: 120px;
+  align-items: center;
+  backdrop-filter: blur(10px);
   transition: all 0.3s ease;
   cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  min-height: 120px;
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 14px;
+  font-family: var(--font-primary);
 }
 
 .product-card:hover {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.4);
   transform: translateY(-4px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.15);
 }
 
 /* Responsive Design */
@@ -385,18 +381,18 @@
   }
 
   .panel-first-title {
-    font-size: 42px;
     top: 10%;
+    font-size: 42px;
   }
 
   .panel-description-2 {
-    font-size: 30px;
     top: 18%;
+    font-size: 30px;
   }
 
   .video-controls {
-    bottom: 15px;
     right: 15px;
+    bottom: 15px;
     gap: 10px;
   }
 
@@ -446,8 +442,8 @@
   }
 
   .video-controls {
-    bottom: 12px;
     right: 12px;
+    bottom: 12px;
     gap: 8px;
   }
 
@@ -506,8 +502,8 @@
   }
 
   .video-controls {
-    bottom: 10px;
     right: 10px;
+    bottom: 10px;
     gap: 6px;
   }
 
@@ -538,21 +534,19 @@
    ============================================================================ */
 
 .exclusive-gifts-section {
+  position: relative;
   background: linear-gradient(180deg, #f8f6f3 0%, #ffffff 100%);
   padding: 120px 0;
-  position: relative;
   overflow: hidden;
 }
 
 /* Background Pattern (opcional - efeito de raios como na foto) */
 .exclusive-gifts-section::before {
-  content: "";
   position: absolute;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 200%;
-  height: 100%;
+  z-index: 0;
   background: repeating-linear-gradient(
     0deg,
     transparent,
@@ -560,54 +554,56 @@
     rgba(218, 165, 32, 0.03) 40px,
     rgba(218, 165, 32, 0.03) 80px
   );
+  width: 200%;
+  height: 100%;
   pointer-events: none;
-  z-index: 0;
+  content: "";
 }
 
 .exclusive-gifts-container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 80px;
   position: relative;
   z-index: 1;
+  margin: 0 auto;
+  padding: 0 80px;
+  max-width: 1400px;
 }
 
 /* Header da Seção */
 .exclusive-gifts-header {
-  text-align: center;
   margin-bottom: 80px;
+  text-align: center;
 }
 
 .section-eyebrow {
-  font-family: "Inter", sans-serif;
-  font-size: 13px;
+  margin: 0 0 24px 0;
+  color: #999;
   font-weight: 400;
+  font-size: 13px;
+  font-family: "Inter", sans-serif;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #999;
-  margin: 0 0 24px 0;
 }
 
 .section-main-title {
-  font-family: "MinhaFonte", serif;
-  font-size: clamp(36px, 4vw, 52px);
-  font-weight: 400;
-  line-height: 1.2;
-  color: #1a1a1a;
   margin: 0 0 24px 0;
+  color: #1a1a1a;
+  font-weight: 400;
+  font-size: clamp(36px, 4vw, 52px);
+  line-height: 1.2;
+  font-family: "MinhaFonte", serif;
   letter-spacing: -0.01em;
 }
 
 .section-subtitle {
-  font-family: "Inter", sans-serif;
-  font-size: 16px;
-  font-weight: 300;
-  line-height: 1.8;
-  color: #333;
   margin: 0;
-  max-width: 800px;
-  margin-left: auto;
   margin-right: auto;
+  margin-left: auto;
+  max-width: 800px;
+  color: #333;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.8;
+  font-family: "Inter", sans-serif;
 }
 
 .section-subtitle .highlight-text {
@@ -625,11 +621,13 @@
 
 /* Card de Produto */
 .product-card-exclusive {
-  background: #ffffff;
-  border-radius: 0;
-  overflow: hidden;
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  transition:
+    transform 0.4s ease,
+    box-shadow 0.4s ease;
   cursor: pointer;
+  border-radius: 0;
+  background: #ffffff;
+  overflow: hidden;
 }
 
 .product-card-exclusive:hover {
@@ -640,20 +638,20 @@
 /* Imagem do Produto */
 .product-image-wrapper {
   position: relative;
-  width: 100%;
-  padding-top: 100%; /* Aspect ratio 1:1 */
-  overflow: hidden;
   background: #f5f5f5;
+  padding-top: 100%; /* Aspect ratio 1:1 */
+  width: 100%;
+  overflow: hidden;
 }
 
 .product-image {
   position: absolute;
   top: 0;
   left: 0;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .product-card-exclusive:hover .product-image {
@@ -667,21 +665,21 @@
 }
 
 .product-price {
-  font-family: "Inter", sans-serif;
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 0.05em;
-  color: #666;
   margin: 0 0 12px 0;
+  color: #666;
+  font-weight: 500;
+  font-size: 13px;
+  font-family: "Inter", sans-serif;
+  letter-spacing: 0.05em;
 }
 
 .product-title {
-  font-family: "Inter", sans-serif;
-  font-size: 15px;
-  font-weight: 400;
-  line-height: 1.5;
-  color: #1a1a1a;
   margin: 0;
+  color: #1a1a1a;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.5;
+  font-family: "Inter", sans-serif;
   letter-spacing: 0.01em;
 }
 
@@ -729,52 +727,52 @@
    ============================================================================ */
 
 .presentes-section {
+  /* Adiciona espaço inferior para separar da próxima seção */
+  margin-bottom: 0; /* Ajuste este valor: 40px, 80px, 120px */
   background: #ffffff;
   padding: 80px 0 100px;
   width: 100%;
-  /* Adiciona espaço inferior para separar da próxima seção */
-  margin-bottom: 0; /* Ajuste este valor: 40px, 80px, 120px */
 }
 
 .presentes-container {
-  max-width: 2200px;
   margin: 0 auto;
   padding: 0 20px;
+  max-width: 2200px;
 }
 
 .presentes-header {
-  text-align: center;
   margin-bottom: 80px;
+  text-align: center;
 }
 
 .presentes-label {
-  font-family: "Manrope", sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  color: #999999;
   margin: 0 0 15px 0;
-  letter-spacing: 0px;
+  color: #999999;
+  font-weight: 600;
+  font-size: 14px;
   line-height: 1;
+  font-family: "Manrope", sans-serif;
+  letter-spacing: 0px;
 }
 
 .presentes-title {
-  font-family: "Manrope", sans-serif;
-  font-size: 28px;
-  font-weight: 400;
-  color: #292929;
   margin: 0 0 20px 0;
-  letter-spacing: 0.5px;
+  color: #292929;
+  font-weight: 400;
+  font-size: 28px;
   line-height: 1.3;
+  font-family: "Manrope", sans-serif;
+  letter-spacing: 0.5px;
 }
 
 .presentes-subtitle {
-  font-family: "Manrope", sans-serif;
-  font-size: 13px;
-  font-weight: 400;
-  color: #292929;
-  max-width: 800px;
   margin: 0 auto;
+  max-width: 800px;
+  color: #292929;
+  font-weight: 400;
+  font-size: 13px;
   line-height: 1.7;
+  font-family: "Manrope", sans-serif;
   letter-spacing: 0.2px;
 }
 
@@ -786,82 +784,82 @@
 }
 
 .presente-item {
-  text-align: center;
   display: flex;
   flex-direction: column;
   background-color: #ffffff;
   height: 100%;
+  text-align: center;
 }
 
 .presente-image-wrapper {
   position: relative;
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  overflow: hidden;
-  margin-bottom: 20px;
   flex-shrink: 0;
+  margin-bottom: 20px;
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  overflow: hidden;
 }
 
 .presente-item img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
 }
 
 /* Presente Info */
 .presente-info {
   display: flex;
+  flex: 1;
   flex-direction: column;
   gap: 12px;
-  flex: 1;
   padding: 0 10px;
 }
 
 .presente-name {
-  font-family: "MinhaFonte", serif;
-  font-size: 24px;
-  font-weight: 600;
-  color: #000000;
-  margin: 0;
-  line-height: 1.2;
-  min-height: 58px;
   display: flex;
-  align-items: flex-start;
   justify-content: center;
+  align-items: flex-start;
+  margin: 0;
+  min-height: 58px;
+  color: #000000;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1.2;
+  font-family: "MinhaFonte", serif;
   text-align: center;
 }
 
 .presente-description {
-  font-family: "Manrope", sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  color: #666666;
-  margin: 0;
-  line-height: 1.4;
-  min-height: 40px;
   display: flex;
-  align-items: flex-start;
   justify-content: center;
+  align-items: flex-start;
+  margin: 0;
+  min-height: 40px;
+  color: #666666;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.4;
+  font-family: "Manrope", sans-serif;
   text-align: center;
 }
 
 /* Intensity */
 .presente-intensity {
   display: flex;
+  flex-shrink: 0;
   flex-direction: column;
   align-items: center;
   gap: 8px;
   margin-top: 8px;
   min-height: 50px;
-  flex-shrink: 0;
 }
 
 .presente-intensity-label {
-  font-family: "Manrope", sans-serif;
-  font-size: 12px;
-  font-weight: 500;
   color: #999999;
+  font-weight: 500;
+  font-size: 12px;
+  font-family: "Manrope", sans-serif;
   text-transform: capitalize;
 }
 
@@ -871,10 +869,10 @@
 }
 
 .presente-intensity-bar {
+  border-radius: 2px;
+  background-color: #e0e0e0;
   width: 20px;
   height: 4px;
-  background-color: #e0e0e0;
-  border-radius: 2px;
 }
 
 .presente-intensity-bar.filled {
@@ -884,42 +882,42 @@
 /* Presente Footer */
 .presente-footer {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: auto;
-  padding-top: 16px;
-  border-top: 1px solid #e8e8e8;
   flex-shrink: 0;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  border-top: 1px solid #e8e8e8;
+  padding-top: 16px;
 }
 
 .presente-price {
-  font-family: "Manrope", sans-serif;
-  font-size: 16px;
-  font-weight: 500;
-  color: #000000;
   margin: 0;
+  color: #000000;
+  font-weight: 500;
+  font-size: 16px;
+  font-family: "Manrope", sans-serif;
   text-align: left;
 }
 
 /* Bag Button */
 .presente-bag-button {
+  display: flex;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 1px solid #000000;
+  border-radius: 50%;
+  background-color: transparent;
+  padding: 0;
   width: 44px;
   height: 44px;
-  border-radius: 50%;
-  border: 1px solid #000000;
-  background-color: transparent;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  padding: 0;
-  flex-shrink: 0;
 }
 
 .presente-bag-button:hover {
-  background-color: #000000;
   transform: scale(1.05);
+  background-color: #000000;
 }
 
 .presente-bag-button:hover svg {
@@ -927,18 +925,18 @@
 }
 
 .presente-bag-button svg {
-  stroke: #000000;
   transition: stroke 0.3s ease;
+  stroke: #000000;
 }
 
 .presente-caption {
-  font-family: "Manrope", sans-serif;
-  font-size: 11.5px;
-  font-weight: 600;
-  color: #000;
   margin: 0;
   padding: 0 10px;
+  color: #000;
+  font-weight: 600;
+  font-size: 11.5px;
   line-height: 1.4;
+  font-family: "Manrope", sans-serif;
   letter-spacing: 0.2px;
 }
 
@@ -957,8 +955,8 @@
   }
 
   .presentes-grid {
-    gap: 32px;
     grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
   }
 
   .presentes-title {
@@ -966,13 +964,13 @@
   }
 
   .presente-name {
-    font-size: 20px;
     min-height: 48px;
+    font-size: 20px;
   }
 
   .presente-description {
-    font-size: 13px;
     min-height: 36px;
+    font-size: 13px;
   }
 
   .presente-price {
@@ -1005,8 +1003,8 @@
   }
 
   .presentes-title {
-    font-size: 26px;
     margin-bottom: 24px;
+    font-size: 26px;
   }
 
   .presentes-subtitle {
@@ -1024,13 +1022,13 @@
   }
 
   .presente-name {
-    font-size: 18px;
     min-height: auto;
+    font-size: 18px;
   }
 
   .presente-description {
-    font-size: 12px;
     min-height: auto;
+    font-size: 12px;
   }
 
   .presente-price {
@@ -1057,16 +1055,16 @@
    ============================================================================ */
 
 .tema-pietro-section {
+  display: flex;
   /* Define altura de 100vh (altura total da tela) */
   position: relative;
-  width: 100%;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
   justify-content: center;
-  overflow: hidden;
+  align-items: center;
   /* Adiciona espaço superior para separar da seção anterior */
   margin-top: 0;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
 }
 
 /* Espaçamento entre as seções usando BEM modifier */
@@ -1081,17 +1079,17 @@
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 0; /* Fica atrás do texto */
   width: 100%;
   height: 100%;
-  z-index: 0; /* Fica atrás do texto */
 }
 
 .tema-pietro-background img {
+  display: block;
   /* Object-fit cover faz a imagem preencher toda a área */
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
 }
 
 /* Container do conteúdo de texto */
@@ -1099,59 +1097,59 @@
   /* Position relative faz o texto ficar acima da imagem */
   position: relative;
   z-index: 2; /* Fica na frente da imagem */
-  text-align: center;
-  max-width: 1200px;
   padding: 0 60px;
+  max-width: 1200px;
   color: #333333;
+  text-align: center;
 }
 
 .tema-pietro-title {
-  font-family: "MinhaFonte", sans-serif;
   position: relative;
   top: 25rem;
-  font-size: 36px;
-  font-weight: 600;
-  color: #fff;
   margin: 0 0 30px 0;
-  letter-spacing: 0.5px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 36px;
   line-height: 1.3;
+  font-family: "MinhaFonte", sans-serif;
+  letter-spacing: 0.5px;
 }
 .tema-pietro-description {
-  font-family: "Manrope", sans-serif;
   position: relative;
   top: 23.5rem;
-  font-size: 20px;
-  font-weight: 400;
-  color: #fff;
   margin: 0 0 30px 0;
-  letter-spacing: 0.5px;
+  color: #fff;
+  font-weight: 400;
+  font-size: 20px;
   line-height: 1.3;
+  font-family: "Manrope", sans-serif;
+  letter-spacing: 0.5px;
 }
 
 /* Botão da seção Pietro Ruffo */
 .tema-pietro-button {
   display: inline-block;
-  font-family: "Manrope", sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  color: #ffffff;
-  text-decoration: none;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  padding: 14px 40px;
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  background: transparent;
-  backdrop-filter: blur(4px);
   position: relative;
   top: 23rem;
-  overflow: hidden;
-  cursor: pointer;
+  backdrop-filter: blur(4px);
   transition: color 0.15s cubic-bezier(0.645, 0.045, 0.355, 1);
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  background: transparent;
+  padding: 14px 40px;
+  overflow: hidden;
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 14px;
+  font-family: "Manrope", sans-serif;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  text-transform: uppercase;
 }
 
 .tema-pietro-button:hover {
-  color: #000000;
   border-color: #fff;
+  color: #000000;
 }
 
 /* Label do botão deve ficar acima do flair */
@@ -1188,8 +1186,8 @@
   }
 
   .tema-pietro-title {
-    font-size: 24px;
     margin-bottom: 20px;
+    font-size: 24px;
   }
 
   .tema-pietro-description {
@@ -1209,30 +1207,30 @@
 }
 
 .parallax-intro-container {
-  max-width: 1400px; /* Largura máxima do conteúdo */
   margin: 0 auto; /* Centraliza */
   padding: 0 40px; /* Espaço nas laterais */
+  max-width: 1400px; /* Largura máxima do conteúdo */
   text-align: center; /* Texto centralizado */
 }
 
 .parallax-intro-title {
-  font-family: "Manrope", sans-serif;
-  font-size: 28px;
-  font-weight: 400;
-  color: #292929;
   margin: 0 0 25px 0;
-  letter-spacing: 0.5px;
+  color: #292929;
+  font-weight: 400;
+  font-size: 28px;
   line-height: 1.3;
+  font-family: "Manrope", sans-serif;
+  letter-spacing: 0.5px;
 }
 
 .parallax-intro-description {
-  font-family: "Manrope", sans-serif;
-  font-size: 13px;
-  font-weight: 400;
-  color: #292929;
-  max-width: 500px;
   margin: 0 auto;
+  max-width: 500px;
+  color: #292929;
+  font-weight: 400;
+  font-size: 13px;
   line-height: 1.7;
+  font-family: "Manrope", sans-serif;
   letter-spacing: 0.2px;
 }
 
@@ -1266,8 +1264,8 @@
   }
 
   .parallax-intro-title {
-    font-size: 24px;
     margin-bottom: 20px;
+    font-size: 24px;
   }
 
   .parallax-intro-description {
@@ -1278,76 +1276,76 @@
 
 .parallax-gallery {
   display: flex;
+  position: relative;
   justify-content: center;
   align-items: flex-start;
-  min-height: 80vh;
-  overflow: visible;
+  gap: 20px;
+  z-index: 1;
   margin-top: 0;
   margin-bottom: -160px;
-  gap: 20px;
   background: #f6f3f7;
   padding: 0 40px 40px 40px;
-  position: relative;
-  z-index: 1;
+  min-height: 80vh;
+  overflow: visible;
 }
 
 /* Cada painel ocupa 1/3 da largura */
 .parallax-panel {
-  flex: 0 0 calc(33.333% - 14px);
   display: flex;
-  flex-direction: column;
   position: relative;
+  flex: 0 0 calc(33.333% - 14px);
+  flex-direction: column;
 }
 
 /* Container da coluna */
 .parallax-column {
-  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 100%;
   padding: 0 45px;
+  width: 100%;
+  min-height: 100%;
 }
 
 /* Wrapper da imagem com altura extra para efeito parallax */
 .parallax-image-wrap {
-  width: 100%;
-  aspect-ratio: 1 / 1;
   position: relative;
-  overflow: hidden;
   flex-shrink: 0;
   margin-bottom: 20px;
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  overflow: hidden;
 }
 
 /* Imagem cobre todo o espaço */
 .parallax-img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
 }
 
 /* Product Info */
 .parallax-product-name {
-  font-family: "Manrope", sans-serif;
-  font-size: 13px;
-  font-weight: 600;
-  color: #000;
   margin: 0 0 8px 0;
   padding: 0 10px;
+  color: #000;
+  font-weight: 600;
+  font-size: 13px;
   line-height: 1.3;
+  font-family: "Manrope", sans-serif;
   letter-spacing: 0.2px;
   text-align: center;
 }
 
 .parallax-product-description {
-  font-family: "Manrope", sans-serif;
-  font-size: 11px;
-  font-weight: 400;
-  color: #666666;
   margin: 0 0 12px 0;
   padding: 0 10px;
+  color: #666666;
+  font-weight: 400;
+  font-size: 11px;
   line-height: 1.4;
+  font-family: "Manrope", sans-serif;
   text-align: center;
 }
 
@@ -1362,10 +1360,10 @@
 }
 
 .parallax-intensity-label {
-  font-family: "Manrope", sans-serif;
-  font-size: 10px;
-  font-weight: 500;
   color: #999999;
+  font-weight: 500;
+  font-size: 10px;
+  font-family: "Manrope", sans-serif;
   text-transform: capitalize;
 }
 
@@ -1375,11 +1373,11 @@
 }
 
 .parallax-intensity-bar {
+  transition: background-color 0.3s ease;
+  border-radius: 2px;
+  background-color: #e0e0e0;
   width: 18px;
   height: 3px;
-  background-color: #e0e0e0;
-  border-radius: 2px;
-  transition: background-color 0.3s ease;
 }
 
 .parallax-intensity-bar.filled {
@@ -1387,63 +1385,63 @@
 }
 
 .parallax-price {
-  font-family: "Manrope", sans-serif;
-  font-size: 12px;
-  font-weight: 600;
-  color: #000000;
   margin: 0;
   padding: 0;
+  color: #000000;
+  font-weight: 600;
+  font-size: 12px;
   line-height: 1.2;
+  font-family: "Manrope", sans-serif;
   letter-spacing: 0.3px;
   text-align: left;
 }
 
 .parallax-price-second {
-  font-family: "Manrope", sans-serif;
-  font-size: 12px;
-  font-weight: 600;
-  color: #000000;
   margin: 0;
   padding: 0;
+  color: #000000;
+  font-weight: 600;
+  font-size: 12px;
   line-height: 1.2;
+  font-family: "Manrope", sans-serif;
   letter-spacing: 0.3px;
   text-align: left;
 }
 
 .parallax-caption {
-  font-family: "Manrope", sans-serif;
-  font-size: 11.5px;
-  font-weight: 600;
-  color: #000;
   margin: 0;
   padding: 0 10px;
+  color: #000;
+  font-weight: 600;
+  font-size: 11.5px;
   line-height: 1.4;
+  font-family: "Manrope", sans-serif;
   letter-spacing: 0.2px;
   text-align: center;
 }
 
 .parallax-caption-second {
-  font-family: "Manrope", sans-serif;
-  font-size: 11.5px;
-  font-weight: 600;
-  color: #000;
   margin: 0;
   padding: 0 10px;
+  color: #000;
+  font-weight: 600;
+  font-size: 11.5px;
   line-height: 1.4;
+  font-family: "Manrope", sans-serif;
   letter-spacing: 0.2px;
   text-align: center;
 }
 
 .parallax-caption-subtext {
-  font-family: "Manrope", sans-serif;
-  font-size: 13.5px;
   position: relative;
   top: 1rem;
-  font-weight: 600;
-  color: #666666;
   margin: 0 0 8px 0;
   padding: 0;
+  color: #666666;
+  font-weight: 600;
+  font-size: 13.5px;
   line-height: 1;
+  font-family: "Manrope", sans-serif;
   letter-spacing: 0.2px;
   text-align: center;
 }
@@ -1455,11 +1453,11 @@
   }
 
   .parallax-gallery {
-    height: 40vh;
     margin-top: 8vh; /* Reduzido de 20vh para 8vh */
     margin-bottom: 1vh;
-    padding-left: 30px; /* Reduz espaço lateral em tablets */
     padding-right: 30px;
+    padding-left: 30px; /* Reduz espaço lateral em tablets */
+    height: 40vh;
   }
 
   .parallax-image-wrap {
@@ -1475,12 +1473,12 @@
 
   .parallax-gallery {
     flex-direction: column;
-    height: auto;
+    gap: 15px; /* Espaço entre imagens empilhadas */
     margin-top: 5vh; /* Reduzido de 10vh para 5vh */
     margin-bottom: 10vh;
-    padding-left: 20px; /* Reduz espaço lateral em mobile */
     padding-right: 20px;
-    gap: 15px; /* Espaço entre imagens empilhadas */
+    padding-left: 20px; /* Reduz espaço lateral em mobile */
+    height: auto;
   }
 
   .parallax-panel {
@@ -1498,57 +1496,57 @@
 
 .parallax-footer {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   gap: 12px;
   margin-top: auto;
-  padding-top: 16px;
   border-top: 1px solid rgba(0, 0, 0, 0.08);
+  padding-top: 16px;
   width: 100%;
 }
 
 .parallax-bag-button {
-  width: 44px;
-  height: 44px;
+  display: flex;
+  position: relative;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 1px solid #000000;
   border-radius: 50%;
   background: transparent;
-  border: 1px solid #000000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  flex-shrink: 0;
-  position: relative;
-  overflow: hidden;
   padding: 0;
+  width: 44px;
+  height: 44px;
+  overflow: hidden;
 }
 
 .parallax-bag-button svg {
-  color: #000000;
-  transition: all 0.3s ease;
   position: relative;
   z-index: 2;
+  transition: all 0.3s ease;
   stroke: #000000;
+  color: #000000;
 }
 
 .parallax-bag-button::before {
-  content: "";
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 0;
-  height: 0;
+  transition: all 0.4s ease;
   border-radius: 50%;
   background: #000000;
-  transition: all 0.4s ease;
+  width: 0;
+  height: 0;
+  content: "";
 }
 
 .parallax-bag-button:hover {
-  background: #000000;
-  border-color: #000000;
   transform: scale(1.05);
+  border-color: #000000;
+  background: #000000;
 }
 
 .parallax-bag-button:hover::before {
@@ -1557,9 +1555,9 @@
 }
 
 .parallax-bag-button:hover svg {
-  color: #ffffff;
-  stroke: #ffffff;
   transform: scale(1.1);
+  stroke: #ffffff;
+  color: #ffffff;
 }
 
 .parallax-bag-button:active {
@@ -1588,8 +1586,8 @@
   }
 
   .parallax-product-description {
-    font-size: 10px;
     margin-bottom: 10px;
+    font-size: 10px;
   }
 
   .parallax-intensity {
@@ -1623,18 +1621,18 @@
   }
 
   .parallax-product-name {
-    font-size: 11px;
     margin-bottom: 6px;
+    font-size: 11px;
   }
 
   .parallax-product-description {
-    font-size: 9px;
     margin-bottom: 8px;
+    font-size: 9px;
   }
 
   .parallax-intensity {
-    margin: 10px 0;
     gap: 5px;
+    margin: 10px 0;
   }
 
   .parallax-intensity-label {

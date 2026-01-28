@@ -5,32 +5,27 @@
 .fragrances-submenu {
   position: fixed;
   top: calc(var(--nav-height) + var(--gutter) * 2);
-  left: 0;
   right: 0;
-  background-color: rgba(
-    246,
-    243,
-    247,
-    0.85
-  ); /* Semi-transparente para o blur funcionar */
+  left: 0;
+  opacity: 0;
+  z-index: 998;
   backdrop-filter: blur(20px); /* Efeito de desfoque */
   -webkit-backdrop-filter: blur(20px); /* Suporte Safari */
-  z-index: 998;
-  opacity: 0;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  background-color: rgba(246, 243, 247, 0.85); /* Semi-transparente para o blur funcionar */
   max-height: calc(100vh - var(--nav-height) - var(--gutter) * 2);
   overflow-y: auto;
 }
 
 .fragrances-submenu-content {
-  max-width: 1400px; /* Aumentado para acomodar 3 colunas */
-  margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 0.8fr 1fr; /* 3 colunas: left, video, right */
   gap: 40px;
-  padding: 30px 60px; /* Padding aumentado */
-  opacity: 0;
   transform: translateY(-20px);
+  opacity: 0;
+  margin: 0 auto;
+  padding: 30px 60px; /* Padding aumentado */
+  max-width: 1400px; /* Aumentado para acomodar 3 colunas */
 }
 
 /* ============================================================================
@@ -47,12 +42,12 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  font-family: "Manrope", sans-serif;
-  font-size: 13px;
-  font-weight: 400;
-  color: #666;
-  cursor: pointer;
   transition: color 0.3s ease;
+  cursor: pointer;
+  color: #666;
+  font-weight: 400;
+  font-size: 13px;
+  font-family: "Manrope", sans-serif;
 }
 
 .submenu-back:hover {
@@ -75,34 +70,34 @@
 }
 
 .submenu-section-title {
-  font-family: "Manrope", sans-serif;
-  font-size: 15px;
-  font-weight: 600;
-  color: #000;
-  letter-spacing: 1px;
   margin: 0;
+  color: #000;
+  font-weight: 600;
+  font-size: 15px;
+  font-family: "Manrope", sans-serif;
+  letter-spacing: 1px;
 }
 
 .fragrance-icons {
   display: flex;
-  gap: 50px; /* Aumentado de 30px para 50px */
   align-items: flex-start;
+  gap: 50px; /* Aumentado de 30px para 50px */
   margin-top: 10px;
 }
 
 .fragrance-icon-item {
   display: flex;
+  flex: 0 0 auto;
   flex-direction: column;
   align-items: center;
   gap: 18px; /* Aumentado de 12px para 18px */
-  cursor: pointer;
-  opacity: 0;
   transform: translateY(20px);
   perspective: 1000px; /* Adiciona perspectiva 3D */
-  flex: 0 0 auto;
-  text-decoration: none; /* Remove underline do link */
-  color: inherit; /* Herda cor do texto */
+  opacity: 0;
   transition: opacity 0.3s ease;
+  cursor: pointer;
+  color: inherit; /* Herda cor do texto */
+  text-decoration: none; /* Remove underline do link */
 }
 
 .fragrance-icon-item:hover {
@@ -110,23 +105,23 @@
 }
 
 .fragrance-icon-image {
+  transform-style: preserve-3d; /* Preserva transformações 3D */
+  backface-visibility: hidden; /* Otimização */
+  -webkit-backface-visibility: hidden;
+  will-change: transform;
   width: 120px; /* Aumentado de 80px para 120px */
   height: 120px; /* Aumentado de 80px para 120px */
   object-fit: contain;
-  transform-style: preserve-3d; /* Preserva transformações 3D */
-  will-change: transform;
-  backface-visibility: hidden; /* Otimização */
-  -webkit-backface-visibility: hidden;
 }
 
 /* Hover effect agora controlado por GSAP */
 
 .fragrance-icon-name {
-  font-family: "Manrope", sans-serif;
-  font-size: 14px; /* Aumentado de 12px para 14px */
-  font-weight: 400;
-  color: #333;
   margin: 0;
+  color: #333;
+  font-weight: 400;
+  font-size: 14px; /* Aumentado de 12px para 14px */
+  font-family: "Manrope", sans-serif;
   text-align: center;
 }
 
@@ -142,18 +137,18 @@
 
 .submenu-item {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding: 14px 0;
-  font-family: "Manrope", sans-serif;
-  font-size: 15px;
-  font-weight: 400;
-  color: #333;
-  text-decoration: none;
-  border-bottom: 1px solid #f0f0f0;
-  transition: color 0.3s ease;
-  opacity: 0;
+  align-items: center;
   transform: translateX(-20px);
+  opacity: 0;
+  transition: color 0.3s ease;
+  border-bottom: 1px solid #f0f0f0;
+  padding: 14px 0;
+  color: #333;
+  font-weight: 400;
+  font-size: 15px;
+  font-family: "Manrope", sans-serif;
+  text-decoration: none;
 }
 
 .submenu-item:hover {
@@ -161,20 +156,22 @@
 }
 
 .submenu-item svg {
+  opacity: 0.5;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
   width: 14px;
   height: 14px;
-  opacity: 0.5;
-  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .submenu-item:hover svg {
-  opacity: 1;
   transform: translateX(3px);
+  opacity: 1;
 }
 
 .submenu-item-bold {
-  font-weight: 500;
   color: #000;
+  font-weight: 500;
 }
 
 /* ============================================================================
@@ -189,17 +186,17 @@
 
 .submenu-featured {
   position: relative;
-  overflow: hidden;
-  border-radius: 0;
   cursor: pointer;
+  border-radius: 0;
+  overflow: hidden;
 }
 
 .submenu-featured-image {
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   width: 100%;
   height: 400px;
   object-fit: cover;
-  display: block;
-  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .submenu-featured:hover .submenu-featured-image {
@@ -211,24 +208,24 @@
 }
 
 .submenu-featured-content {
+  display: flex;
   position: absolute;
+  right: 0;
   bottom: 0;
   left: 0;
-  right: 0;
-  padding: 30px;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 100%);
-  color: #fff;
-  display: flex;
   flex-direction: column;
   gap: 12px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 100%);
+  padding: 30px;
+  color: #fff;
 }
 
 .submenu-featured-title {
-  font-family: "Manrope", sans-serif;
-  font-size: 18px;
-  font-weight: 400;
   margin: 0;
+  font-weight: 400;
+  font-size: 18px;
   line-height: 1.3;
+  font-family: "Manrope", sans-serif;
 }
 
 .submenu-featured-small .submenu-featured-title {
@@ -236,15 +233,15 @@
 }
 
 .submenu-featured-link {
-  font-family: "Manrope", sans-serif;
-  font-size: 13px;
-  font-weight: 500;
-  color: #fff;
-  text-decoration: underline;
-  text-underline-offset: 4px;
   display: inline-block;
   align-self: flex-start;
   transition: opacity 0.3s ease;
+  color: #fff;
+  font-weight: 500;
+  font-size: 13px;
+  font-family: "Manrope", sans-serif;
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 
 .submenu-featured-link:hover {
@@ -279,8 +276,8 @@
   }
 
   .fragrances-submenu-content {
-    padding: 30px 20px;
     gap: 30px;
+    padding: 30px 20px;
   }
 
   .fragrance-icons {
@@ -301,8 +298,8 @@
   }
 
   .submenu-item {
-    font-size: 14px;
     padding: 12px 0;
+    font-size: 14px;
   }
 }
 
@@ -312,22 +309,22 @@
 
 .fragrances-video-panel {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 }
 
 .submenu-video-container {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
   width: 100%;
   height: 100%;
   min-height: 400px;
-  border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 .submenu-video {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
 }

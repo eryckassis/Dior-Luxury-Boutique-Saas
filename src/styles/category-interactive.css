@@ -3,16 +3,16 @@
    ============================================================================ */
 
 .category-interactive-section {
+  position: relative;
   background-color: #fff;
   padding: 100px 0;
   width: 100%;
-  position: relative;
 }
 
 .category-container {
-  max-width: 1400px;
   margin: 0 auto;
   padding: 0 40px;
+  max-width: 1400px;
 }
 
 /* ============================================================================
@@ -21,38 +21,38 @@
 
 .category-tabs {
   display: flex;
+  position: relative;
   justify-content: center;
   gap: 0;
   margin-bottom: 80px;
   border-bottom: 1px solid #e0e0e0;
-  position: relative;
 }
 
 .category-tab {
-  background: transparent;
-  border: none;
-  padding: 20px 50px;
-  font-family: "Manrope", sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  color: #666;
-  cursor: pointer;
   position: relative;
   transition: color 0.3s ease;
-  text-transform: none;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  padding: 20px 50px;
+  color: #666;
+  font-weight: 400;
+  font-size: 16px;
+  font-family: "Manrope", sans-serif;
   letter-spacing: 0.5px;
+  text-transform: none;
 }
 
 .category-tab::after {
-  content: "";
   position: absolute;
   bottom: -1px;
   left: 0;
-  width: 100%;
-  height: 2px;
-  background-color: #000;
   transform: scaleX(0);
   transition: transform 0.3s ease;
+  background-color: #000;
+  width: 100%;
+  height: 2px;
+  content: "";
 }
 
 .category-tab.active {
@@ -70,8 +70,8 @@
 
 /* Underline das tabs */
 .category-tab span {
-  position: relative;
   display: inline-block;
+  position: relative;
 }
 
 /* ============================================================================
@@ -113,14 +113,14 @@
 
 /* Itens que não estão na categoria ativa ficam invisíveis */
 .category-content:not(.active) .category-item {
-  opacity: 0;
   transform: translateY(30px);
+  opacity: 0;
 }
 
 /* Itens da categoria ativa começam visíveis */
 .category-content.active .category-item {
-  opacity: 1;
   transform: translateY(0);
+  opacity: 1;
 }
 
 /* ============================================================================
@@ -129,18 +129,18 @@
 
 .category-image-wrap {
   position: relative;
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  overflow: hidden;
-  background-color: #f5f5f5;
   border-radius: 8px;
+  background-color: #f5f5f5;
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  overflow: hidden;
 }
 
 .category-image {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
 }
 
 /* Imagens que não estão na categoria ativa ficam preparadas para animação */
@@ -159,12 +159,12 @@
   position: absolute;
   top: 0;
   left: 0;
+  transform-origin: left center;
+  z-index: 2;
+  will-change: transform;
+  background-color: #f6f3f7;
   width: 100%;
   height: 100%;
-  background-color: #f6f3f7;
-  z-index: 2;
-  transform-origin: left center;
-  will-change: transform;
 }
 
 /* Overlay invisível na categoria ativa inicialmente */
@@ -183,23 +183,23 @@
 }
 
 .category-product-name {
-  font-family: "Manrope", sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  color: #333;
   margin: 0;
-  line-height: 1.4;
   min-height: 40px;
+  color: #333;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.4;
+  font-family: "Manrope", sans-serif;
 }
 
 .category-product-description {
-  font-family: "Manrope", sans-serif;
-  font-size: 12px;
-  font-weight: 400;
-  color: #666;
   margin: 0;
-  line-height: 1.5;
   min-height: 36px;
+  color: #666;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.5;
+  font-family: "Manrope", sans-serif;
 }
 
 .category-product-footer {
@@ -210,33 +210,33 @@
 }
 
 .category-product-price {
-  font-family: "Manrope", sans-serif;
-  font-size: 16px;
-  font-weight: 600;
-  color: #000;
   margin: 0;
+  color: #000;
+  font-weight: 600;
+  font-size: 16px;
+  font-family: "Manrope", sans-serif;
   letter-spacing: 0.3px;
 }
 
 /* Botão de adicionar ao carrinho */
 .category-bag-button {
-  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
   border: 1px solid #000;
+  border-radius: 50%;
+  background-color: transparent;
   width: 40px;
   height: 40px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
   color: #000;
 }
 
 .category-bag-button:hover {
+  transform: scale(1.05);
   background-color: #000;
   color: #fff;
-  transform: scale(1.05);
 }
 
 .category-bag-button:active {
@@ -244,9 +244,9 @@
 }
 
 .category-bag-button svg {
+  transition: all 0.3s ease;
   width: 18px;
   height: 18px;
-  transition: all 0.3s ease;
 }
 
 /* Product Intensity Bars */
@@ -259,12 +259,12 @@
 }
 
 .category-item .intensity-label {
-  font-family: "Manrope", sans-serif;
-  font-size: 11px;
-  font-weight: 500;
   color: #999;
-  text-transform: capitalize;
+  font-weight: 500;
+  font-size: 11px;
+  font-family: "Manrope", sans-serif;
   letter-spacing: 0.5px;
+  text-transform: capitalize;
 }
 
 .category-item .intensity-bars {
@@ -273,10 +273,10 @@
 }
 
 .category-item .bar {
+  border-radius: 2px;
+  background-color: #e0e0e0;
   width: 18px;
   height: 3px;
-  background-color: #e0e0e0;
-  border-radius: 2px;
 }
 
 .category-item .bar.filled {
@@ -293,8 +293,8 @@
 }
 
 .category-item:hover .category-product-name {
-  color: #000;
   transition: color 0.3s ease;
+  color: #000;
 }
 
 /* ============================================================================
@@ -367,20 +367,20 @@
   }
 
   .category-tab {
+    flex-shrink: 0;
     padding: 14px 20px;
     font-size: 13px;
     white-space: nowrap;
-    flex-shrink: 0;
   }
 
   .category-product-name {
-    font-size: 12px;
     min-height: auto;
+    font-size: 12px;
   }
 
   .category-product-description {
-    font-size: 11px;
     min-height: auto;
+    font-size: 11px;
   }
 
   .category-product-price {
@@ -419,7 +419,7 @@
   }
 
   .category-item {
-    max-width: 350px;
     margin: 0 auto;
+    max-width: 350px;
   }
 }

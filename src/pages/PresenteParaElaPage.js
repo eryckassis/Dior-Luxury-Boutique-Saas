@@ -47,7 +47,7 @@ export class PresenteParaElaPage extends HTMLElement {
             duration: 1,
             ease: "power3.out",
           },
-          "-=0.8"
+          "-=0.8",
         );
 
       this.animations.push(heroTl);

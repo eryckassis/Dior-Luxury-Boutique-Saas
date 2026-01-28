@@ -40,10 +40,7 @@ export class ProductReviews extends HTMLElement {
   disconnectedCallback() {
     // Remove subscription real-time
     if (this.realtimeCallback) {
-      reviewService.unsubscribeFromProduct(
-        this.productId,
-        this.realtimeCallback,
-      );
+      reviewService.unsubscribeFromProduct(this.productId, this.realtimeCallback);
     }
   }
 
@@ -92,10 +89,7 @@ export class ProductReviews extends HTMLElement {
       }
 
       // Fechar modal
-      if (
-        e.target.closest(".close-review-modal") ||
-        e.target.classList.contains("review-modal")
-      ) {
+      if (e.target.closest(".close-review-modal") || e.target.classList.contains("review-modal")) {
         this.closeReviewModal();
       }
 
@@ -293,9 +287,7 @@ export class ProductReviews extends HTMLElement {
           </div>
         `;
       } else {
-        list.innerHTML = this.reviews
-          .map((review) => this.renderReviewCard(review))
-          .join("");
+        list.innerHTML = this.reviews.map((review) => this.renderReviewCard(review)).join("");
       }
     }
 

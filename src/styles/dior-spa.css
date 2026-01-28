@@ -4,9 +4,9 @@
 
 /* Hero Section - Full Image */
 .dior-spa-hero {
+  position: relative;
   width: 100%;
   height: 100vh;
-  position: relative;
   overflow: hidden;
 }
 
@@ -20,8 +20,6 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
   background: linear-gradient(
     to bottom,
     rgba(0, 0, 0, 0.1) 0%,
@@ -29,161 +27,163 @@
     rgba(0, 0, 0, 0) 70%,
     rgba(0, 0, 0, 0.2) 100%
   );
+  width: 100%;
+  height: 100%;
 }
 
 /* Intro Section - Text Content */
 .dior-spa-intro {
-  padding: 8rem 2rem;
-  text-align: center;
-  max-width: 900px;
   margin: 0 auto;
   background: #fff;
+  padding: 8rem 2rem;
+  max-width: 900px;
+  text-align: center;
 }
 
 .dior-spa-intro-subtitle {
-  font-family: "Hellix", sans-serif;
-  font-size: 0.85rem;
+  margin-bottom: 1.5rem;
+  color: #8b7355;
   font-weight: 500;
+  font-size: 0.85rem;
+  font-family: "Hellix", sans-serif;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: #8b7355;
-  margin-bottom: 1.5rem;
 }
 
 .dior-spa-intro-title {
-  font-family: "Hellix", sans-serif;
-  font-size: 2.8rem;
-  font-weight: 300;
-  letter-spacing: 0.1em;
-  color: #1a1a1a;
   margin-bottom: 2rem;
+  color: #1a1a1a;
+  font-weight: 300;
+  font-size: 2.8rem;
   line-height: 1.2;
+  font-family: "Hellix", sans-serif;
+  letter-spacing: 0.1em;
 }
 
 .dior-spa-intro-description {
-  font-family: "Hellix", sans-serif;
-  font-size: 1.1rem;
-  font-weight: 400;
-  line-height: 1.8;
-  color: #555;
-  max-width: 700px;
   margin: 0 auto;
+  max-width: 700px;
+  color: #555;
+  font-weight: 400;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  font-family: "Hellix", sans-serif;
 }
 
 /* What's New Section */
 .dior-spa-whats-new {
+  background: #f9f8f6;
   padding: 6rem 2rem;
   text-align: center;
-  background: #f9f8f6;
 }
 
 .dior-spa-whats-new-label {
-  font-family: "Hellix", sans-serif;
-  font-size: 0.8rem;
-  font-weight: 400;
-  letter-spacing: 0.1em;
-  color: #888;
   margin-bottom: 1rem;
+  color: #888;
+  font-weight: 400;
+  font-size: 0.8rem;
+  font-family: "Hellix", sans-serif;
+  letter-spacing: 0.1em;
 }
 
 .dior-spa-whats-new-title {
-  font-family: "Hellix", sans-serif;
-  font-size: 2.2rem;
-  font-weight: 300;
-  letter-spacing: 0.08em;
-  color: #1a1a1a;
   margin-bottom: 1.5rem;
+  color: #1a1a1a;
+  font-weight: 300;
+  font-size: 2.2rem;
+  font-family: "Hellix", sans-serif;
+  letter-spacing: 0.08em;
 }
 
 .dior-spa-whats-new-description {
-  font-family: "Hellix", sans-serif;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.7;
-  color: #666;
-  max-width: 600px;
   margin: 0 auto;
+  max-width: 600px;
+  color: #666;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.7;
+  font-family: "Hellix", sans-serif;
 }
 
 /* Image Reveal Card Section */
 .dior-spa-card-section {
-  padding: 4rem 0;
   background: #f9f8f6;
+  padding: 4rem 0;
 }
 
 .dior-spa-card-container {
-  max-width: 900px;
   margin: 0 auto;
   padding: 0 2rem;
+  max-width: 900px;
 }
 
 .dior-spa-image-reveal-wrapper {
   position: relative;
-  overflow: hidden;
   margin-bottom: 3rem;
   height: 80vh;
   min-height: 600px;
+  overflow: hidden;
 }
 
 .dior-spa-image-reveal-overlay {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background: #f9f8f6;
   transform-origin: right center;
   z-index: 2;
+  background: #f9f8f6;
+  width: 100%;
+  height: 100%;
 }
 
 .dior-spa-image-reveal {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
 }
 
 .dior-spa-card-text {
-  text-align: center;
   padding: 0 2rem;
+  text-align: center;
 }
 
 .dior-spa-card-description {
-  font-family: "Hellix", sans-serif;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.8;
-  color: #555;
-  margin-bottom: 2rem;
-  max-width: 600px;
-  margin-left: auto;
   margin-right: auto;
+  margin-bottom: 2rem;
+  margin-left: auto;
+  max-width: 600px;
+  color: #555;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.8;
+  font-family: "Hellix", sans-serif;
 }
 
 /* Button with Underline Animation (GSAP) */
 .dior-spa-btn-underline {
   display: inline-block;
-  font-family: "Hellix", sans-serif;
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: #1a1a1a;
-  text-decoration: none;
-  cursor: pointer;
   position: relative;
+  cursor: pointer;
   padding-bottom: 6px;
+  color: #1a1a1a;
+  font-weight: 500;
+  font-size: 0.95rem;
+  font-family: "Hellix", sans-serif;
+  text-decoration: none;
   --underline-width: 100%;
   transition: opacity 0.3s ease;
 }
 
 .dior-spa-btn-underline::after {
-  content: "";
   position: absolute;
   bottom: 0;
   left: 0;
+  transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  background-color: #1a1a1a;
   width: var(--underline-width, 100%);
   height: 1px;
-  background-color: #1a1a1a;
-  transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  content: "";
 }
 
 .dior-spa-btn-underline:hover {
@@ -195,52 +195,52 @@
    ============================================================================ */
 
 .spa-section-card {
-  padding: 4rem 0;
   background: #f9f8f6;
+  padding: 4rem 0;
 }
 
 .spa-card-container {
   display: flex;
   align-items: center;
-  max-width: 1600px;
+  gap: 3rem;
   margin: 0 auto;
   padding: 0 4rem;
-  gap: 3rem;
+  max-width: 1600px;
 }
 
 .spa-section-card.image-right .spa-card-container {
-  flex-direction: row;
   position: relative;
   left: 25rem;
+  flex-direction: row;
   padding-right: 4rem;
   padding-left: 4rem;
 }
 
 .spa-section-card.image-left .spa-card-container {
-  flex-direction: row;
   position: relative;
   right: 25rem;
-  padding-left: 0;
+  flex-direction: row;
   padding-right: 4rem;
+  padding-left: 0;
 }
 
 /* Image Wrapper */
 .spa-card-image-wrapper {
-  flex: 10;
   position: relative;
-  overflow: hidden;
+  flex: 10;
   aspect-ratio: 2 / 1;
+  overflow: hidden;
 }
 
 .spa-card-overlay {
   position: absolute;
   top: 0;
   left: 0;
+  transform-origin: right center;
+  z-index: 2;
+  background: #f9f8f6;
   width: 100%;
   height: 100%;
-  background: #f9f8f6;
-  z-index: 2;
-  transform-origin: right center;
 }
 
 .spa-section-card.image-right .spa-card-overlay {
@@ -248,20 +248,20 @@
 }
 
 .spa-card-image {
+  display: block;
+  will-change: transform;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
-  will-change: transform;
 }
 
 /* Content */
 .spa-card-content {
-  flex: 2;
-  padding: 2rem;
   display: flex;
+  flex: 2;
   flex-direction: column;
   align-items: center;
+  padding: 2rem;
   text-align: center;
 }
 
@@ -278,46 +278,46 @@
 }
 
 .spa-card-title {
-  font-family: "Hellix", sans-serif;
-  font-size: 1.6rem;
-  font-weight: 300;
-  letter-spacing: 0.12em;
-  color: #1a1a1a;
   margin-bottom: 1.2rem;
+  color: #1a1a1a;
+  font-weight: 300;
+  font-size: 1.6rem;
   line-height: 1.3;
+  font-family: "Hellix", sans-serif;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
 .spa-card-description {
-  font-family: "Hellix", sans-serif;
-  font-size: 0.9rem;
-  font-weight: 400;
-  line-height: 1.8;
-  color: #888;
   margin-bottom: 2rem;
   max-width: 320px;
+  color: #888;
+  font-weight: 400;
+  font-size: 0.9rem;
+  line-height: 1.8;
+  font-family: "Hellix", sans-serif;
 }
 
 /* Button with Line (underline) */
 .spa-btn-line {
   display: inline-flex;
+  position: relative;
   flex-direction: column;
   align-items: center;
-  text-decoration: none;
   cursor: pointer;
-  position: relative;
+  text-decoration: none;
 }
 
 .spa-btn-text {
-  font-family: "Hellix", sans-serif;
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: #1a1a1a;
-  letter-spacing: 0.05em;
-  padding: 0.65rem 1.8rem;
+  transition: all 0.3s ease;
   border: 1px solid #1a1a1a;
   border-radius: 5px;
-  transition: all 0.3s ease;
+  padding: 0.65rem 1.8rem;
+  color: #1a1a1a;
+  font-weight: 500;
+  font-size: 0.85rem;
+  font-family: "Hellix", sans-serif;
+  letter-spacing: 0.05em;
 }
 
 .spa-btn-line:hover .spa-btn-text {
@@ -331,22 +331,22 @@
 
 /* Button Filled with GSAP Flair */
 .spa-btn-filled {
-  position: relative;
   display: inline-flex;
-  align-items: center;
+  position: relative;
   justify-content: center;
-  padding: 0.75rem 2rem;
-  font-family: "Hellix", sans-serif;
-  font-size: 0.85rem;
-  font-weight: 500;
-  letter-spacing: 0.05em;
-  color: #1a1a1a;
-  background: transparent;
+  align-items: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
   border: 1px solid #1a1a1a;
   border-radius: 5px;
-  cursor: pointer;
+  background: transparent;
+  padding: 0.75rem 2rem;
   overflow: hidden;
-  transition: all 0.3s ease;
+  color: #1a1a1a;
+  font-weight: 500;
+  font-size: 0.85rem;
+  font-family: "Hellix", sans-serif;
+  letter-spacing: 0.05em;
 }
 
 .spa-btn-filled:hover {
@@ -381,8 +381,8 @@
   }
 
   .spa-card-content {
-    text-align: center;
     padding: 1rem 0;
+    text-align: center;
   }
 
   .spa-btn-line {
@@ -439,33 +439,33 @@
    ============================================================================ */
 
 .dior-spa-tech-section {
-  padding: 6rem 0;
   background: #f9f8f6;
+  padding: 6rem 0;
 }
 
 .dior-spa-tech-header {
-  text-align: center;
-  max-width: 800px;
   margin: 0 auto 4rem;
   padding: 0 2rem;
+  max-width: 800px;
+  text-align: center;
 }
 
 .dior-spa-tech-title {
-  font-family: "Hellix", sans-serif;
-  font-size: 1.8rem;
-  font-weight: 300;
-  letter-spacing: 0.15em;
-  color: #1a1a1a;
   margin-bottom: 1.5rem;
+  color: #1a1a1a;
+  font-weight: 300;
+  font-size: 1.8rem;
+  font-family: "Hellix", sans-serif;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
 }
 
 .dior-spa-tech-description {
-  font-family: "Hellix", sans-serif;
-  font-size: 0.95rem;
-  font-weight: 400;
-  line-height: 1.8;
   color: #888;
+  font-weight: 400;
+  font-size: 0.95rem;
+  line-height: 1.8;
+  font-family: "Hellix", sans-serif;
 }
 
 /* Tech Cards Grid */
@@ -484,17 +484,17 @@
 }
 
 .dior-spa-tech-card-image-wrapper {
-  width: 100%;
-  aspect-ratio: 3 / 4;
-  overflow: hidden;
   margin-bottom: 2rem;
+  aspect-ratio: 3 / 4;
+  width: 100%;
+  overflow: hidden;
 }
 
 .dior-spa-tech-card-image {
+  transition: transform 0.6s ease;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.6s ease;
 }
 
 .dior-spa-tech-card:hover .dior-spa-tech-card-image {
@@ -502,24 +502,24 @@
 }
 
 .dior-spa-tech-card-title {
-  font-family: "Hellix", sans-serif;
-  font-size: 1.1rem;
-  font-weight: 400;
-  letter-spacing: 0.08em;
-  color: #1a1a1a;
   margin-bottom: 1rem;
+  color: #1a1a1a;
+  font-weight: 400;
+  font-size: 1.1rem;
+  font-family: "Hellix", sans-serif;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
 .dior-spa-tech-card-description {
-  font-family: "Hellix", sans-serif;
-  font-size: 0.85rem;
-  font-weight: 400;
-  line-height: 1.7;
-  color: #888;
   margin-bottom: 1.5rem;
   padding: 0 1rem;
   max-width: 380px;
+  color: #888;
+  font-weight: 400;
+  font-size: 0.85rem;
+  line-height: 1.7;
+  font-family: "Hellix", sans-serif;
 }
 
 .dior-spa-tech-card .spa-btn-line {
@@ -531,8 +531,8 @@
   .dior-spa-tech-cards {
     grid-template-columns: 1fr;
     gap: 3rem;
-    max-width: 500px;
     margin: 0 auto;
+    max-width: 500px;
   }
 
   .dior-spa-tech-card-image-wrapper {

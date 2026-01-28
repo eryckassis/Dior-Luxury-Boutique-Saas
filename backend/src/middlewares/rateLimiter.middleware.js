@@ -6,14 +6,13 @@ import { ApiResponse } from "../utils/response.js";
 export const generalLimiter = rateLimit({
   windowMs: config.rateLimit.windowMs,
   max: config.rateLimit.maxRequests, // 100 requisições por windowMs
-  message:
-    "Muitas requisições. Por favor, aguarde alguns minutos e tente novamente.",
+  message: "Muitas requisições. Por favor, aguarde alguns minutos e tente novamente.",
   standardHeaders: true, // Retorna info no `RateLimit-*` headers
   legacyHeaders: false, // Desabilita `X-RateLimit-*` headers
   handler: (req, res) => {
     return ApiResponse.tooManyRequests(
       res,
-      "Muitas requisições. Por favor, aguarde alguns minutos e tente novamente."
+      "Muitas requisições. Por favor, aguarde alguns minutos e tente novamente.",
     );
   },
 });
@@ -26,7 +25,7 @@ export const loginLimiter = rateLimit({
   handler: (req, res) => {
     return ApiResponse.tooManyRequests(
       res,
-      "Muitas tentativas de login. Por favor, aguarde 15 minutos e tente novamente."
+      "Muitas tentativas de login. Por favor, aguarde 15 minutos e tente novamente.",
     );
   },
 });
@@ -38,7 +37,7 @@ export const registerLimiter = rateLimit({
   handler: (req, res) => {
     return ApiResponse.tooManyRequests(
       res,
-      "Muitas tentativas de registro. Por favor, aguarde uma hora e tente novamente."
+      "Muitas tentativas de registro. Por favor, aguarde uma hora e tente novamente.",
     );
   },
 });
@@ -46,12 +45,11 @@ export const registerLimiter = rateLimit({
 export const passwordResetLimiter = rateLimit({
   windowMs: 60 * 60 * 1000, // 1 hora
   max: 3, // 3 tentativas por hora
-  message:
-    "Muitas solicitações de reset de senha. Por favor, aguarde uma hora.",
+  message: "Muitas solicitações de reset de senha. Por favor, aguarde uma hora.",
   handler: (req, res) => {
     return ApiResponse.tooManyRequests(
       res,
-      "Muitas solicitações de reset de senha. Por favor, aguarde uma hora."
+      "Muitas solicitações de reset de senha. Por favor, aguarde uma hora.",
     );
   },
 });

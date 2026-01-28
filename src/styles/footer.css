@@ -10,27 +10,27 @@
 
 /* Footer Wrapper - Background Cannage */
 .footer-wrapper {
-  background-color: #ebddcd;
+  margin-top: 80px;
   background-image: url("/cannage-background.png");
-  background-size: cover;
   background-position: center;
+  background-size: cover;
   background-repeat: no-repeat;
+  background-color: #ebddcd;
   padding: 40px;
   padding-bottom: 0;
-  margin-top: 80px;
 }
 
 /* Footer Container */
 .dior-footer {
-  background-color: #ffffff;
-  color: #000;
-  font-family: "Inter";
-  padding: 0;
-  margin-top: 0px;
   position: relative;
   z-index: 10;
+  margin-top: 0px;
   border-radius: 10px;
+  background-color: #ffffff;
+  padding: 0;
   overflow: hidden;
+  color: #000;
+  font-family: "Inter";
 }
 
 /* ============================================================================
@@ -40,15 +40,15 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 0;
-  list-style: none;
   margin: 0;
-  padding: 0;
   border-bottom: 1px solid #d0d0d0;
+  padding: 0;
+  list-style: none;
 }
 
 .r-reassurance__item {
-  border-right: 1px solid #fff;
   position: relative;
+  border-right: 1px solid #fff;
 }
 
 .r-reassurance__item:not(:last-child) {
@@ -56,13 +56,13 @@
 }
 
 .r-reassurance__item:not(:last-child)::after {
-  content: "";
   position: absolute;
   top: 20px; /* distância do topo */
   right: 0;
+  background: #ccc; /* cor da linha */
   width: 1px; /* espessura da linha */
   height: 60px; /* altura da linha */
-  background: #ccc; /* cor da linha */
+  content: "";
 }
 
 .r-reassurance__item:last-child {
@@ -71,13 +71,13 @@
 
 .r-reassurance__cta {
   display: flex;
-  align-items: flex-start;
   justify-content: space-between;
-  padding: 24px 32px;
-  text-decoration: none;
-  color: #000;
+  align-items: flex-start;
   transition: background-color 0.2s ease;
+  padding: 24px 32px;
   min-height: 100px;
+  color: #000;
+  text-decoration: none;
 }
 
 .r-reassurance__cta:hover {
@@ -86,31 +86,31 @@
 
 .r-reassurance__content {
   display: flex;
+  flex: 1;
   flex-direction: column;
   gap: 6px;
-  flex: 1;
 }
 
 .r-reassurance__title {
-  font-size: 14px;
-  font-family: "Hubot Sans";
-  font-weight: 500;
-  letter-spacing: 0.5px;
-  line-height: 1.4;
   color: #000;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.4;
+  font-family: "Hubot Sans";
+  letter-spacing: 0.5px;
 }
 
 .r-reassurance__text {
-  font-size: 14px;
   color: #000;
+  font-size: 14px;
   line-height: 1.4;
 }
 
 .r-icon {
   flex-shrink: 0;
+  margin-left: 12px;
   width: 20px;
   height: 20px;
-  margin-left: 12px;
 }
 
 .r-icon svg {
@@ -125,9 +125,9 @@
   display: grid;
   grid-template-columns: 380px 1fr;
   gap: 80px;
+  margin: 0 auto;
   padding: 60px 40px;
   max-width: 1600px;
-  margin: 0 auto;
 }
 
 /* ============================================================================
@@ -140,18 +140,18 @@
 }
 
 .r-newsletter__title {
-  font-size: 16px;
-  font-weight: 400;
   margin: 0 0 24px 0;
-  letter-spacing: 0;
   color: #000;
+  font-weight: 400;
+  font-size: 16px;
   font-family: "Inter", serif;
+  letter-spacing: 0;
 }
 
 .r-form-field {
-  width: 100%;
   position: relative;
   right: 7rem;
+  width: 100%;
 }
 
 .r-newsletter__input-wrapper {
@@ -159,25 +159,25 @@
 }
 
 .r-form-field__input-field {
-  position: relative;
-  margin-bottom: 0;
   display: flex;
-  border: none !important;
+  position: relative;
   align-items: center;
+  margin-bottom: 0;
+  border: none !important;
   background-color: #fff;
 }
 
 .r-form-field__input-field input {
   flex: 1;
-  padding: 12px 16px;
-  border-radius: 8px;
+  outline: none;
   border-width: 1px;
   border: 1px solid #d0d0d0;
+  border-radius: 8px;
   background-color: transparent;
-  font-size: 14px;
-  outline: none;
-  font-family: inherit;
+  padding: 12px 16px;
   color: #000;
+  font-size: 14px;
+  font-family: inherit;
 }
 
 .r-form-field__input-field input::placeholder {
@@ -191,15 +191,15 @@
 
 .r-form-field__input-field label {
   position: absolute;
-  left: 16px;
   top: 50%;
+  left: 16px;
   transform: translateY(-50%);
-  color: #666;
-  font-size: 14px;
-  pointer-events: none;
   transition: all 0.3s ease;
   background: white;
   padding: 0 4px;
+  pointer-events: none;
+  color: #666;
+  font-size: 14px;
 }
 
 .r-form-field__input-field label.label-focused {
@@ -208,22 +208,22 @@
 }
 
 .r-newsletter__submit {
-  background-color: #000;
-  color: #fff;
-  border: none;
-  height: 2.7rem;
-  padding: 12px 24px;
-  font-size: 13px;
-  font-weight: 400;
-  letter-spacing: 0.5px;
   position: relative;
-  left: 24rem;
   bottom: 2.7rem;
-  cursor: pointer;
-  border-radius: 8px;
+  left: 24rem;
   transition: background-color 0.2s ease;
-  text-transform: capitalize;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  background-color: #000;
+  padding: 12px 24px;
+  height: 2.7rem;
+  color: #fff;
+  font-weight: 400;
+  font-size: 13px;
   font-family: inherit;
+  letter-spacing: 0.5px;
+  text-transform: capitalize;
 }
 
 .r-newsletter__submit:hover {
@@ -235,8 +235,8 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  font-size: 14px;
   color: #000;
+  font-size: 14px;
 }
 
 .r-footer__accessibility-toggle--mobile {
@@ -244,8 +244,8 @@
 }
 
 .r-switch {
-  position: relative;
   display: inline-block;
+  position: relative;
   width: 44px;
   height: 22px;
 }
@@ -258,26 +258,26 @@
 
 .r-switch__slider {
   position: absolute;
-  cursor: pointer;
   top: 0;
-  left: 0;
   right: 0;
   bottom: 0;
-  background-color: #000;
+  left: 0;
   transition: 0.3s;
+  cursor: pointer;
   border-radius: 22px;
+  background-color: #000;
 }
 
 .r-switch__slider:before {
   position: absolute;
-  content: "";
-  height: 16px;
-  width: 16px;
-  left: 3px;
   bottom: 3px;
-  background-color: white;
+  left: 3px;
   transition: 0.3s;
   border-radius: 50%;
+  background-color: white;
+  width: 16px;
+  height: 16px;
+  content: "";
 }
 
 .r-switch__input:checked + .r-switch__slider {
@@ -303,31 +303,31 @@
 }
 
 .r-footer__list-title {
-  font-size: 16px;
-  font-weight: 400;
   margin: 0 0 20px 0;
-  letter-spacing: 0;
   color: #000;
+  font-weight: 400;
+  font-size: 16px;
   font-family: "Inter", serif;
+  letter-spacing: 0;
 }
 
 .r-footer__list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
   display: flex;
   flex-direction: column;
   gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .r-footer__item a {
-  color: #000;
-  text-decoration: none;
-  font-size: 14px;
-  transition: opacity 0.2s ease;
   display: inline-flex;
   align-items: center;
+  transition: opacity 0.2s ease;
+  color: #000;
+  font-size: 14px;
   line-height: 1.4;
+  text-decoration: none;
 }
 
 .r-footer__item a:hover {
@@ -336,20 +336,20 @@
 
 /* Accordion Buttons */
 .r-footer__accordion-button {
-  background: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  transition: opacity 0.2s ease;
+  cursor: pointer;
   border: none;
+  background: none;
   padding: 0;
+  width: 100%;
+  color: #000;
   font-size: 14px;
   font-family: inherit;
-  color: #000;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
   text-align: left;
-  transition: opacity 0.2s ease;
-  gap: 8px;
 }
 
 .r-footer__accordion-button:hover {
@@ -357,9 +357,9 @@
 }
 
 .r-footer__accordion-button .r-icon {
+  transition: transform 0.3s ease;
   width: 16px;
   height: 16px;
-  transition: transform 0.3s ease;
 }
 
 .r-footer__accordion-button[aria-expanded="true"] .r-icon {
@@ -368,9 +368,9 @@
 
 /* Accordion Panel */
 .r-footer__accordion-panel {
+  transition: max-height 0.3s ease;
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.3s ease;
 }
 
 .r-footer__accordion-panel[aria-hidden="false"] {
@@ -378,8 +378,8 @@
 }
 
 .r-footer__list--accordion {
-  padding-left: 0;
   gap: 10px;
+  padding-left: 0;
 }
 
 .r-footer__list--accordion .r-footer__item a {
@@ -394,10 +394,10 @@
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   gap: 40px;
-  padding: 40px;
-  max-width: 1600px;
   margin: 0 auto;
   border-top: 1px solid #d0d0d0;
+  padding: 40px;
+  max-width: 1600px;
 }
 
 /* Social Media */
@@ -406,26 +406,26 @@
 }
 
 .r-follow-us__title {
-  font-size: 14px;
-  font-weight: 400;
   margin: 0 0 16px 0;
   color: #000;
+  font-weight: 400;
+  font-size: 14px;
 }
 
 .r-follow-us__list {
   display: flex;
-  gap: 20px;
-  list-style: none;
-  padding: 0;
-  margin: 0;
   flex-wrap: wrap;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .r-follow-us__link {
-  color: #000;
-  text-decoration: none;
-  font-size: 14px;
   transition: opacity 0.2s ease;
+  color: #000;
+  font-size: 14px;
+  text-decoration: none;
 }
 
 .r-follow-us__link:hover {
@@ -435,11 +435,11 @@
 /* Dior Logo */
 .r-footer__logo {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  justify-self: center;
   width: 100px;
   height: 30px;
-  justify-self: center;
   text-decoration: none;
 }
 
@@ -459,14 +459,14 @@
 }
 
 .r-open-country-modal {
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
   display: flex;
   align-items: center;
   gap: 16px;
   transition: opacity 0.2s ease;
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: 0;
   font-family: inherit;
 }
 
@@ -482,16 +482,16 @@
 }
 
 .r-open-country-modal__title {
-  font-size: 12px;
   color: #000;
-  letter-spacing: 0;
   font-weight: 400;
+  font-size: 12px;
+  letter-spacing: 0;
 }
 
 .r-open-country-modal__content {
-  font-size: 14px;
-  font-weight: 400;
   color: #000;
+  font-weight: 400;
+  font-size: 14px;
 }
 
 .r-open-country-modal .r-icon {
@@ -520,8 +520,8 @@
   }
 
   .r-newsletter__submit {
-    left: 0;
     bottom: 0;
+    left: 0;
     margin-top: 15px;
     width: 100%;
   }
@@ -570,8 +570,8 @@
   }
 
   .r-footer__content-main {
-    padding: 40px 20px;
     gap: 40px;
+    padding: 40px 20px;
   }
 
   .r-footer__left-column {
@@ -579,8 +579,8 @@
   }
 
   .r-newsletter__title {
-    font-size: 14px;
     margin-bottom: 20px;
+    font-size: 14px;
   }
 
   .r-form-field {
@@ -589,16 +589,16 @@
   }
 
   .r-form-field__input-field input {
-    font-size: 14px;
     padding: 14px 16px;
+    font-size: 14px;
   }
 
   .r-newsletter__submit {
     position: relative;
-    left: 0;
     bottom: 0;
-    width: 100%;
+    left: 0;
     margin-top: 12px;
+    width: 100%;
     height: 48px;
     font-size: 14px;
   }
@@ -618,20 +618,20 @@
   }
 
   .r-footer__list-title {
-    font-size: 14px;
-    margin: 0;
-    padding: 18px 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
+    margin: 0;
+    padding: 18px 0;
+    font-size: 14px;
   }
 
   .r-footer__list-title::after {
-    content: "+";
-    font-size: 20px;
-    font-weight: 300;
     transition: transform 0.3s ease;
+    content: "+";
+    font-weight: 300;
+    font-size: 20px;
   }
 
   .r-footer__list-wrapper.active .r-footer__list-title::after {
@@ -639,22 +639,22 @@
   }
 
   .r-footer__list {
-    max-height: 0;
-    overflow: hidden;
     transition:
       max-height 0.3s ease,
       padding 0.3s ease;
     padding: 0;
+    max-height: 0;
+    overflow: hidden;
   }
 
   .r-footer__list-wrapper.active .r-footer__list {
-    max-height: 500px;
     padding-bottom: 20px;
+    max-height: 500px;
   }
 
   .r-footer__item a {
-    font-size: 13px;
     padding: 8px 0;
+    font-size: 13px;
   }
 
   .r-footer__accessibility-toggle--desktop {
@@ -664,14 +664,14 @@
   .r-footer__accessibility-toggle--mobile {
     display: flex;
     justify-content: center;
-    padding: 30px 20px;
     border-top: 1px solid #e5e5e5;
+    padding: 30px 20px;
   }
 
   .r-footer__content-bottom {
     grid-template-columns: 1fr;
-    padding: 30px 20px;
     gap: 25px;
+    padding: 30px 20px;
     text-align: center;
   }
 
@@ -681,9 +681,9 @@
   }
 
   .r-follow-us__title {
+    margin-bottom: 12px;
     font-size: 13px;
     text-align: center;
-    margin-bottom: 12px;
   }
 
   .r-follow-us__list {
@@ -696,8 +696,8 @@
   }
 
   .r-footer__logo {
-    order: 1;
     justify-self: center;
+    order: 1;
     width: 90px;
     height: 27px;
   }
@@ -705,8 +705,8 @@
   .r-footer__logo img,
   .r-footer__logo svg {
     width: 100%;
-    height: auto;
     max-width: 90px;
+    height: auto;
   }
 
   .r-footer__locale-switcher {
@@ -716,8 +716,8 @@
 
   .r-open-country-modal {
     flex-direction: column;
-    gap: 8px;
     align-items: center;
+    gap: 8px;
   }
 
   .r-open-country-modal__wrapper {
@@ -748,8 +748,8 @@
   }
 
   .r-footer__content-main {
-    padding: 30px 15px;
     gap: 30px;
+    padding: 30px 15px;
   }
 
   .r-newsletter__title {
@@ -757,8 +757,8 @@
   }
 
   .r-form-field__input-field input {
-    font-size: 13px;
     padding: 12px 14px;
+    font-size: 13px;
   }
 
   .r-newsletter__submit {
@@ -767,8 +767,8 @@
   }
 
   .r-footer__list-title {
-    font-size: 13px;
     padding: 15px 0;
+    font-size: 13px;
   }
 
   .r-footer__item a {
@@ -776,8 +776,8 @@
   }
 
   .r-footer__content-bottom {
-    padding: 25px 15px;
     gap: 20px;
+    padding: 25px 15px;
   }
 
   .r-footer__logo {
@@ -787,11 +787,11 @@
 
   .r-footer__logo img,
   .r-footer__logo svg {
-    width: 290px;
-    height: auto;
     position: relative;
     right: 30px;
+    width: 290px;
     max-width: 70px;
+    height: auto;
   }
 
   .r-follow-us__title {
@@ -819,9 +819,9 @@
    HIGH CONTRAST MODE
    ============================================================================ */
 body.high-contrast .dior-footer {
+  border-top-color: #333;
   background-color: #000;
   color: #fff;
-  border-top-color: #333;
 }
 
 body.high-contrast .r-reassurance {

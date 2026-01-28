@@ -209,10 +209,7 @@ class Router {
 
     // Passa os parâmetros para o componente via atributo
     if (Object.keys(this.currentParams).length > 0) {
-      pageElement.setAttribute(
-        "data-params",
-        JSON.stringify(this.currentParams),
-      );
+      pageElement.setAttribute("data-params", JSON.stringify(this.currentParams));
       // Também define como propriedade para acesso direto
       pageElement.routeParams = this.currentParams;
     }

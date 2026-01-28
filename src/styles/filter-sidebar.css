@@ -7,37 +7,37 @@
   position: fixed;
   top: 0;
   left: 0;
+  visibility: hidden;
+  opacity: 0;
+  z-index: 9998;
+  transition: all 0.3s ease;
+  background: rgba(0, 0, 0, 0.4);
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.4);
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.3s ease;
-  z-index: 9998;
 }
 
 .filter-overlay.active {
-  opacity: 1;
   visibility: visible;
+  opacity: 1;
 }
 
 /* Sidebar */
 .filter-sidebar {
+  display: flex;
   position: fixed;
   top: 16px;
   right: 16px;
   bottom: 16px;
+  flex-direction: column;
+  transform: translateX(calc(100% + 16px));
+  z-index: 9999;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.15);
+  border-radius: 5px;
+  background: #fff;
   width: 410px;
   max-width: calc(100% - 32px);
   height: calc(100vh - 32px);
-  border-radius: 5px;
-  background: #fff;
-  transform: translateX(calc(100% + 16px));
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: 9999;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.15);
 }
 
 .filter-sidebar.active {
@@ -47,35 +47,35 @@
 /* Header */
 .filter-header {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px 24px;
-  border-bottom: 1px solid #e5e5e5;
   position: relative;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid #e5e5e5;
+  padding: 20px 24px;
   min-height: 60px;
 }
 
 .filter-header-title {
-  font-family: "Hellix", sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  color: #1a1a1a;
   margin: 0;
+  color: #1a1a1a;
+  font-weight: 500;
+  font-size: 14px;
+  font-family: "Hellix", sans-serif;
   text-align: center;
 }
 
 .filter-back-btn,
 .filter-close-btn {
-  position: absolute;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 8px;
   display: flex;
-  align-items: center;
+  position: absolute;
   justify-content: center;
-  color: #1a1a1a;
+  align-items: center;
   transition: opacity 0.2s ease;
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: 8px;
+  color: #1a1a1a;
 }
 
 .filter-back-btn {
@@ -94,8 +94,8 @@
 /* Content */
 .filter-panel-content {
   flex: 1;
-  overflow-y: auto;
   padding: 0;
+  overflow-y: auto;
 }
 
 /* Options List (Main Panel) */
@@ -105,12 +105,12 @@
 
 .filter-option {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding: 20px 24px;
-  border-bottom: 1px solid #f0f0f0;
-  cursor: pointer;
+  align-items: center;
   transition: background 0.2s ease;
+  cursor: pointer;
+  border-bottom: 1px solid #f0f0f0;
+  padding: 20px 24px;
 }
 
 .filter-option:hover {
@@ -118,10 +118,10 @@
 }
 
 .filter-option-label {
-  font-family: "Hellix", sans-serif;
-  font-size: 14px;
-  font-weight: 500;
   color: #1a1a1a;
+  font-weight: 500;
+  font-size: 14px;
+  font-family: "Hellix", sans-serif;
 }
 
 .filter-option-right {
@@ -131,15 +131,15 @@
 }
 
 .filter-option-value {
-  font-family: "Hellix", sans-serif;
-  font-size: 13px;
   color: #888;
+  font-size: 13px;
+  font-family: "Hellix", sans-serif;
 }
 
 .filter-count {
-  font-weight: 400;
-  color: #888;
   margin-left: 4px;
+  color: #888;
+  font-weight: 400;
 }
 
 .filter-chevron {
@@ -153,12 +153,12 @@
 
 .filter-radio-option {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding: 20px 24px;
-  border-bottom: 1px solid #f0f0f0;
-  cursor: pointer;
+  align-items: center;
   transition: background 0.2s ease;
+  cursor: pointer;
+  border-bottom: 1px solid #f0f0f0;
+  padding: 20px 24px;
 }
 
 .filter-radio-option:hover {
@@ -166,9 +166,9 @@
 }
 
 .filter-radio-label {
-  font-family: "Hellix", sans-serif;
-  font-size: 14px;
   color: #1a1a1a;
+  font-size: 14px;
+  font-family: "Hellix", sans-serif;
 }
 
 .filter-radio-input {
@@ -176,12 +176,12 @@
 }
 
 .filter-radio-custom {
-  width: 20px;
-  height: 20px;
-  border: 2px solid #ccc;
-  border-radius: 50%;
   position: relative;
   transition: all 0.2s ease;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
 }
 
 .filter-radio-custom.checked {
@@ -189,15 +189,15 @@
 }
 
 .filter-radio-custom.checked::after {
-  content: "";
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: #1a1a1a;
   width: 10px;
   height: 10px;
-  background: #1a1a1a;
-  border-radius: 50%;
+  content: "";
 }
 
 /* Checkbox List */
@@ -207,12 +207,12 @@
 
 .filter-checkbox-option {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding: 18px 24px;
-  border-bottom: 1px solid #f0f0f0;
-  cursor: pointer;
+  align-items: center;
   transition: background 0.2s ease;
+  cursor: pointer;
+  border-bottom: 1px solid #f0f0f0;
+  padding: 18px 24px;
 }
 
 .filter-checkbox-option:hover {
@@ -220,9 +220,9 @@
 }
 
 .filter-checkbox-label {
-  font-family: "Hellix", sans-serif;
-  font-size: 14px;
   color: #1a1a1a;
+  font-size: 14px;
+  font-family: "Hellix", sans-serif;
 }
 
 .filter-checkbox-input {
@@ -230,13 +230,13 @@
 }
 
 .filter-checkbox-custom {
-  width: 20px;
-  height: 20px;
+  position: relative;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
   border: 2px solid #ccc;
   border-radius: 3px;
-  position: relative;
-  transition: all 0.2s ease;
-  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
 }
 
 .filter-checkbox-custom.checked {
@@ -245,15 +245,15 @@
 }
 
 .filter-checkbox-custom.checked::after {
-  content: "";
   position: absolute;
   top: 2px;
   left: 6px;
-  width: 5px;
-  height: 10px;
+  transform: rotate(45deg);
   border: solid #fff;
   border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
+  width: 5px;
+  height: 10px;
+  content: "";
 }
 
 /* Color List */
@@ -264,11 +264,11 @@
 .filter-color-option {
   display: flex;
   align-items: center;
-  padding: 16px 24px;
-  border-bottom: 1px solid #f0f0f0;
-  cursor: pointer;
-  transition: background 0.2s ease;
   gap: 16px;
+  transition: background 0.2s ease;
+  cursor: pointer;
+  border-bottom: 1px solid #f0f0f0;
+  padding: 16px 24px;
 }
 
 .filter-color-option:hover {
@@ -276,18 +276,18 @@
 }
 
 .filter-color-swatch {
+  flex-shrink: 0;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
   width: 40px;
   height: 40px;
-  border-radius: 4px;
-  border: 1px solid #e5e5e5;
-  flex-shrink: 0;
 }
 
 .filter-color-label {
   flex: 1;
-  font-family: "Hellix", sans-serif;
-  font-size: 14px;
   color: #1a1a1a;
+  font-size: 14px;
+  font-family: "Hellix", sans-serif;
 }
 
 /* Size Groups (Accordion) */
@@ -301,18 +301,18 @@
 
 .filter-size-group-header {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  width: 100%;
-  padding: 18px 24px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-family: "Hellix", sans-serif;
-  font-size: 14px;
-  color: #1a1a1a;
-  text-align: left;
+  align-items: center;
   transition: background 0.2s ease;
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: 18px 24px;
+  width: 100%;
+  color: #1a1a1a;
+  font-size: 14px;
+  font-family: "Hellix", sans-serif;
+  text-align: left;
 }
 
 .filter-size-group-header:hover {
@@ -320,8 +320,8 @@
 }
 
 .filter-chevron-down {
-  color: #888;
   transition: transform 0.3s ease;
+  color: #888;
 }
 
 .filter-chevron-down.rotated {
@@ -329,37 +329,37 @@
 }
 
 .filter-size-group-content {
-  padding-left: 20px;
   background: #fafafa;
+  padding-left: 20px;
 }
 
 .filter-size-group-content .filter-checkbox-option {
-  padding: 14px 24px;
   border-bottom: 1px solid #eee;
+  padding: 14px 24px;
 }
 
 /* Footer */
 .filter-footer {
   display: flex;
   align-items: center;
-  padding: 16px 24px;
-  border-top: 1px solid #e5e5e5;
   gap: 12px;
-  background: #fff;
+  border-top: 1px solid #e5e5e5;
   border-radius: 0 0 5px 5px;
+  background: #fff;
+  padding: 16px 24px;
 }
 
 .filter-clear-btn {
   flex: 1;
-  padding: 9px 20px;
-  background: #fff;
+  transition: all 0.2s ease;
+  cursor: pointer;
   border: 1px solid #e5e5e5;
   border-radius: 5px;
-  font-family: "Hellix", sans-serif;
-  font-size: 13px;
+  background: #fff;
+  padding: 9px 20px;
   color: #000;
-  cursor: pointer;
-  transition: all 0.2s ease;
+  font-size: 13px;
+  font-family: "Hellix", sans-serif;
   text-transform: lowercase;
 }
 
@@ -370,14 +370,14 @@
 
 .filter-view-btn {
   flex: 1.5;
-  padding: 15px 20px;
-  background: #1a1a1a;
-  border-radius: 5px;
-  font-family: "Hellix", sans-serif;
-  font-size: 13px;
-  color: #fff;
-  cursor: pointer;
   transition: all 0.2s ease;
+  cursor: pointer;
+  border-radius: 5px;
+  background: #1a1a1a;
+  padding: 15px 20px;
+  color: #fff;
+  font-size: 13px;
+  font-family: "Hellix", sans-serif;
 }
 
 .filter-view-btn:hover {
@@ -392,23 +392,23 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  padding: 10px 20px;
-  background: #fff;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   border: 1px solid #e5e5e5;
   border-radius: 4px;
-  font-family: "Hellix", sans-serif;
+  background: #fff;
+  padding: 10px 20px;
+  color: #000;
   font-weight: 500;
   font-size: 14px;
-  color: #000;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  font-family: "Hellix", sans-serif;
 }
 
 .filter-trigger-btn:hover {
+  border-color: #1a1a1a;
   background: #1a1a1a;
   color: #fff;
-  border-color: #1a1a1a;
 }
 
 .filter-trigger-btn:hover svg {
@@ -416,22 +416,22 @@
 }
 
 .filter-trigger-btn svg {
+  transition: stroke 0.3s ease;
   width: 25px;
   height: 25px;
-  transition: stroke 0.3s ease;
 }
 
 .filter-trigger-count {
   display: inline-flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  background: #1a1a1a;
+  padding: 0 6px;
   min-width: 20px;
   height: 20px;
-  padding: 0 6px;
-  background: #1a1a1a;
-  border-radius: 10px;
-  font-size: 11px;
   color: #fff;
+  font-size: 11px;
 }
 
 /* ============================================================================

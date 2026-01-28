@@ -13,17 +13,14 @@ export class AuthValidator {
     email: Joi.string().email().lowercase().trim().required().messages({
       "string.base": "O e-mail deve ser um texto",
       "string.empty": "O e-mail é obrigatório",
-      "string.email":
-        "Por favor, insira um e-mail válido (exemplo: usuario@email.com)",
+      "string.email": "Por favor, insira um e-mail válido (exemplo: usuario@email.com)",
       "any.required": "O e-mail é obrigatório",
     }),
 
     password: Joi.string()
       .min(8)
       .max(128)
-      .pattern(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/,
-      )
+      .pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/)
       .required()
       .messages({
         "string.base": "A senha deve ser um texto",
@@ -35,14 +32,10 @@ export class AuthValidator {
         "any.required": "A senha é obrigatória",
       }),
 
-    confirmPassword: Joi.string()
-      .valid(Joi.ref("password"))
-      .required()
-      .messages({
-        "any.only":
-          "As senhas não coincidem. Por favor, confirme a senha corretamente.",
-        "any.required": "A confirmação de senha é obrigatória",
-      }),
+    confirmPassword: Joi.string().valid(Joi.ref("password")).required().messages({
+      "any.only": "As senhas não coincidem. Por favor, confirme a senha corretamente.",
+      "any.required": "A confirmação de senha é obrigatória",
+    }),
   });
 
   static loginSchema = Joi.object({
@@ -67,17 +60,12 @@ export class AuthValidator {
   });
 
   static forgotPasswordSchema = Joi.object({
-    email: Joi.string()
-      .email({ minDomainSegments: 2 })
-      .lowercase()
-      .trim()
-      .required()
-      .messages({
-        "string.base": "O e-mail deve ser um texto",
-        "string.empty": "O e-mail é obrigatório",
-        "string.email": "Por favor, insira um e-mail válido",
-        "any.required": "O e-mail é obrigatório",
-      }),
+    email: Joi.string().email({ minDomainSegments: 2 }).lowercase().trim().required().messages({
+      "string.base": "O e-mail deve ser um texto",
+      "string.empty": "O e-mail é obrigatório",
+      "string.email": "Por favor, insira um e-mail válido",
+      "any.required": "O e-mail é obrigatório",
+    }),
   });
 
   static resetPasswordSchema = Joi.object({
@@ -89,9 +77,7 @@ export class AuthValidator {
     password: Joi.string()
       .min(8)
       .max(128)
-      .pattern(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/,
-      )
+      .pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/)
       .required()
       .messages({
         "string.base": "A senha deve ser um texto",
@@ -103,13 +89,10 @@ export class AuthValidator {
         "any.required": "A nova senha é obrigatória",
       }),
 
-    confirmPassword: Joi.string()
-      .valid(Joi.ref("password"))
-      .required()
-      .messages({
-        "any.only": "As senhas não coincidem",
-        "any.required": "A confirmação de senha é obrigatória",
-      }),
+    confirmPassword: Joi.string().valid(Joi.ref("password")).required().messages({
+      "any.only": "As senhas não coincidem",
+      "any.required": "A confirmação de senha é obrigatória",
+    }),
   });
 
   // Schema para atualização de perfil
@@ -129,16 +112,14 @@ export class AuthValidator {
       .pattern(/^\d{11}$|^\d{3}\.\d{3}\.\d{3}-\d{2}$/)
       .allow("", null)
       .messages({
-        "string.pattern.base":
-          "CPF inválido. Use o formato 000.000.000-00 ou apenas números",
+        "string.pattern.base": "CPF inválido. Use o formato 000.000.000-00 ou apenas números",
       }),
 
     phone: Joi.string()
       .pattern(/^\d{10,11}$|^\(\d{2}\)\s?\d{4,5}-\d{4}$/)
       .allow("", null)
       .messages({
-        "string.pattern.base":
-          "Telefone inválido. Use o formato (00) 00000-0000",
+        "string.pattern.base": "Telefone inválido. Use o formato (00) 00000-0000",
       }),
 
     gender: Joi.string()

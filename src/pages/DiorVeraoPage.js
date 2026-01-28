@@ -105,7 +105,7 @@ export class DiorVeraoPage extends HTMLElement {
               duration: 1.2,
               ease: "power3.out",
             },
-            "-=1.2"
+            "-=1.2",
           );
 
         this.animations.push(revealTl);
@@ -140,7 +140,7 @@ export class DiorVeraoPage extends HTMLElement {
               duration: 1.2,
               ease: "power3.out",
             },
-            "-=1.2"
+            "-=1.2",
           );
 
         this.animations.push(revealTl2);
@@ -175,7 +175,7 @@ export class DiorVeraoPage extends HTMLElement {
               duration: 1.2,
               ease: "power3.out",
             },
-            "-=1.2"
+            "-=1.2",
           );
 
         this.animations.push(revealTl3);
@@ -212,7 +212,7 @@ export class DiorVeraoPage extends HTMLElement {
                 duration: 1,
                 ease: "power3.out",
               },
-              "-=1"
+              "-=1",
             );
 
           this.animations.push(productRevealTl);
@@ -264,7 +264,7 @@ export class DiorVeraoPage extends HTMLElement {
     requestAnimationFrame(() => {
       // Miss Dior Products
       const missDiorBagButtons = this.querySelectorAll(
-        ".essence-bag-button:not(.jadore-bag-button)"
+        ".essence-bag-button:not(.jadore-bag-button)",
       );
 
       const missDiorProductsData = [
@@ -521,7 +521,7 @@ export class DiorVeraoPage extends HTMLElement {
               duration: 1,
               ease: "power3.out",
             },
-            "-=0.8"
+            "-=0.8",
           );
 
         this.animations.push(cardRevealTl);
@@ -573,7 +573,7 @@ export class DiorVeraoPage extends HTMLElement {
               duration: 0.6,
               ease: "power3.out",
             },
-            "-=0.4"
+            "-=0.4",
           );
         }
 

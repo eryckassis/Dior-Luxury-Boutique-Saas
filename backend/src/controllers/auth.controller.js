@@ -33,11 +33,7 @@ export class AuthController {
       if (error.message.includes("Já cadastrado")) {
         return ApiResponse.conflict(res, error.message);
       }
-      return ApiResponse.internalError(
-        res,
-        "Erro ao criar conta. Tente Novamente.",
-        error,
-      );
+      return ApiResponse.internalError(res, "Erro ao criar conta. Tente Novamente.", error);
     }
   }
 
@@ -68,10 +64,7 @@ export class AuthController {
     } catch (error) {
       console.error(" Erro no login:", error);
 
-      if (
-        error.message.includes("incorretos") ||
-        error.message.includes("tentativa")
-      ) {
+      if (error.message.includes("incorretos") || error.message.includes("tentativa")) {
         return ApiResponse.unauthorized(res, error.message);
       }
       if (error.message.includes("bloqueada")) {
@@ -81,11 +74,7 @@ export class AuthController {
         return ApiResponse.emailNotVerified(res, error.message);
       }
 
-      return ApiResponse.internalError(
-        res,
-        "Erro ao fazer login. Tente novamente.",
-        error,
-      );
+      return ApiResponse.internalError(res, "Erro ao fazer login. Tente novamente.", error);
     }
   }
 
@@ -96,11 +85,7 @@ export class AuthController {
 
       CookieUtil.clearAuthCookies(res);
 
-      return ApiResponse.success(
-        res,
-        null,
-        "logout realizado com sucesso. Até logo!",
-      );
+      return ApiResponse.success(res, null, "logout realizado com sucesso. Até logo!");
     } catch (error) {
       console.error("Erro no logout:", error);
       return ApiResponse.internalError(res, "Erro ao fazer Logout.", error);
@@ -111,10 +96,7 @@ export class AuthController {
     try {
       const refreshToken = req.cookies?.refresh_token || req.body.refreshToken;
       if (!refreshToken) {
-        return ApiResponse.unauthorized(
-          res,
-          "Refresh token não fornecido. faça login novamente.",
-        );
+        return ApiResponse.unauthorized(res, "Refresh token não fornecido. faça login novamente.");
       }
 
       const result = await AuthService.refreshToken(refreshToken);
@@ -133,10 +115,7 @@ export class AuthController {
 
       CookieUtil.clearAuthCookies(res);
 
-      if (
-        error.message.includes("inválido") ||
-        error.message.includes("expirado")
-      ) {
+      if (error.message.includes("inválido") || error.message.includes("expirado")) {
         return ApiResponse.unauthorized(res, error.message);
       }
 
@@ -151,10 +130,7 @@ export class AuthController {
       return ApiResponse.success(res, null, result.message);
     } catch (error) {
       console.error("Erro ao verificar email:", error);
-      if (
-        error.message.includes("inválido") ||
-        error.message.includes("expirado")
-      ) {
+      if (error.message.includes("inválido") || error.message.includes("expirado")) {
         return ApiResponse.badRequest(res, error.message);
       }
       return ApiResponse.internalError(res, "Erro ao verificar e-mail.", error);
@@ -168,11 +144,7 @@ export class AuthController {
       return ApiResponse.success(res, null, result.message);
     } catch (error) {
       console.error("Erro ao solicitar reset de senha:", error);
-      return ApiResponse.internalError(
-        res,
-        "Erro ao processar solicitação",
-        error,
-      );
+      return ApiResponse.internalError(res, "Erro ao processar solicitação", error);
     }
   }
 
@@ -183,10 +155,7 @@ export class AuthController {
       return ApiResponse.success(res, null, result.message);
     } catch (error) {
       console.error("Erro ao redefinir senha:", error);
-      if (
-        error.message.includes("inválido") ||
-        error.message.includes("Expirado")
-      ) {
+      if (error.message.includes("inválido") || error.message.includes("Expirado")) {
         return ApiResponse.badRequest(res, error.message);
       }
       return ApiResponse.internalError(res, "Erro ao  redefinir senha", error);

@@ -1,10 +1,5 @@
 export class ApiResponse {
-  static success(
-    res,
-    data = null,
-    message = "Operação realizada com sucesso",
-    statusCode = 200,
-  ) {
+  static success(res, data = null, message = "Operação realizada com sucesso", statusCode = 200) {
     return res.status(statusCode).json({
       success: true,
       message,
@@ -50,17 +45,11 @@ export class ApiResponse {
     return this.error(res, message, 400, "ERR_BAD_REQUEST", errors);
   }
 
-  static unauthorized(
-    res,
-    message = "Autenticação necessária. Por favor, faça login.",
-  ) {
+  static unauthorized(res, message = "Autenticação necessária. Por favor, faça login.") {
     return this.error(res, message, 401, "ERR_UNAUTHORIZED");
   }
 
-  static forbidden(
-    res,
-    message = "Você não tem permissão para acessar este recurso.",
-  ) {
+  static forbidden(res, message = "Você não tem permissão para acessar este recurso.") {
     return this.error(res, message, 403, "ERR_FORBIDDEN");
   }
 
@@ -74,11 +63,7 @@ export class ApiResponse {
     return this.error(res, errorMessage, 409, "ERR_CONFLICT");
   }
 
-  static validationError(
-    res,
-    errors,
-    message = "Erro de validação. Verifique os dados enviados.",
-  ) {
+  static validationError(res, errors, message = "Erro de validação. Verifique os dados enviados.") {
     return this.error(res, message, 422, "ERR_VALIDATION", errors);
   }
 
@@ -114,10 +99,7 @@ export class ApiResponse {
     return this.error(res, message, 503, "ERR_SERVICE_UNAVAILABLE");
   }
 
-  static tokenExpired(
-    res,
-    message = "Sua sessão expirou. Por favor, faça login novamente.",
-  ) {
+  static tokenExpired(res, message = "Sua sessão expirou. Por favor, faça login novamente.") {
     return this.error(res, message, 401, "ERR_TOKEN_EXPIRED");
   }
 
@@ -137,10 +119,7 @@ export class ApiResponse {
     return this.error(res, message, 423, "ERR_ACCOUNT_LOCKED");
   }
 
-  static emailNotVerified(
-    res,
-    message = "Por favor, verifique seu e-mail antes de fazer login.",
-  ) {
+  static emailNotVerified(res, message = "Por favor, verifique seu e-mail antes de fazer login.") {
     return this.error(res, message, 403, "ERR_EMAIL_NOT_VERIFIED");
   }
 }

@@ -20,50 +20,26 @@ export class ValidationMiddleware {
   }
 
   static validateRegister(req, res, next) {
-    return ValidationMiddleware.validate(AuthValidator.registerSchema)(
-      req,
-      res,
-      next,
-    );
+    return ValidationMiddleware.validate(AuthValidator.registerSchema)(req, res, next);
   }
 
   static validateLogin(req, res, next) {
-    return ValidationMiddleware.validate(AuthValidator.loginSchema)(
-      req,
-      res,
-      next,
-    );
+    return ValidationMiddleware.validate(AuthValidator.loginSchema)(req, res, next);
   }
 
   static validateRefreshToken(req, res, next) {
-    return ValidationMiddleware.validate(AuthValidator.refreshTokenSchema)(
-      req,
-      res,
-      next,
-    );
+    return ValidationMiddleware.validate(AuthValidator.refreshTokenSchema)(req, res, next);
   }
 
   static validateForgotPassword(req, res, next) {
-    return ValidationMiddleware.validate(AuthValidator.forgotPasswordSchema)(
-      req,
-      res,
-      next,
-    );
+    return ValidationMiddleware.validate(AuthValidator.forgotPasswordSchema)(req, res, next);
   }
 
   static validateResetPassword(req, res, next) {
-    return ValidationMiddleware.validate(AuthValidator.resetPasswordSchema)(
-      req,
-      res,
-      next,
-    );
+    return ValidationMiddleware.validate(AuthValidator.resetPasswordSchema)(req, res, next);
   }
 
   static validateProfileUpdate(req, res, next) {
-    return ValidationMiddleware.validate(AuthValidator.profileUpdateSchema)(
-      req,
-      res,
-      next,
-    );
+    return ValidationMiddleware.validate(AuthValidator.profileUpdateSchema)(req, res, next);
   }
 }

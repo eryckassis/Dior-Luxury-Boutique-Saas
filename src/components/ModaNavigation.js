@@ -97,9 +97,7 @@ export class ModaNavigation extends HTMLElement {
     const submenu = this.querySelector(`[data-submenu-id="${submenuId}"]`);
     const sideMenu = this.querySelector(".moda-side-menu");
     const cards = submenu ? submenu.querySelectorAll(".submenu-card") : [];
-    const cardImages = submenu
-      ? submenu.querySelectorAll(".submenu-card img")
-      : [];
+    const cardImages = submenu ? submenu.querySelectorAll(".submenu-card img") : [];
 
     if (!mainMenu || !submenu) return;
 
@@ -172,9 +170,7 @@ export class ModaNavigation extends HTMLElement {
     if (!this.currentSubmenu) return;
 
     const mainMenu = this.querySelector(".moda-menu-content");
-    const submenu = this.querySelector(
-      `[data-submenu-id="${this.currentSubmenu}"]`,
-    );
+    const submenu = this.querySelector(`[data-submenu-id="${this.currentSubmenu}"]`);
     const sideMenu = this.querySelector(".moda-side-menu");
     const cards = submenu ? submenu.querySelectorAll(".submenu-card") : [];
 
@@ -258,9 +254,7 @@ export class ModaNavigation extends HTMLElement {
       });
 
       // Animação para links do submenu
-      const submenuLinks = this.querySelectorAll(
-        ".submenu-link, .submenu-sublink",
-      );
+      const submenuLinks = this.querySelectorAll(".submenu-link, .submenu-sublink");
       submenuLinks.forEach((link) => {
         // Não animar links ativos
         if (
@@ -342,9 +336,7 @@ export class ModaNavigation extends HTMLElement {
     }
 
     // Links com submenu
-    const submenuTriggers = this.querySelectorAll(
-      ".moda-menu-link.has-submenu",
-    );
+    const submenuTriggers = this.querySelectorAll(".moda-menu-link.has-submenu");
     submenuTriggers.forEach((trigger) => {
       trigger.addEventListener("click", (e) => {
         e.preventDefault();
@@ -369,8 +361,7 @@ export class ModaNavigation extends HTMLElement {
     const accessibilityToggle = this.querySelector(".moda-menu-checkbox");
     if (accessibilityToggle) {
       // Restaura estado salvo
-      const highContrast =
-        localStorage.getItem("dior-high-contrast") === "true";
+      const highContrast = localStorage.getItem("dior-high-contrast") === "true";
       accessibilityToggle.checked = highContrast;
       if (highContrast) {
         document.body.classList.add("high-contrast");

@@ -8,9 +8,7 @@ export class TextContent extends HTMLElement {
   }
 
   connectedCallback() {
-    const heading =
-      this.getAttribute("heading") ||
-      "Dior Holiday — Embracing the Extraordinary";
+    const heading = this.getAttribute("heading") || "Dior Holiday — Embracing the Extraordinary";
     const text =
       this.getAttribute("text") ||
       "O encanto das suas festas é iluminado pelas novas criações festivas Dior.<br />A verdadeira elegância se revela nos momentos de celebração, quando a Dior transforma cada detalhe em uma expressão radiante de alegria.";

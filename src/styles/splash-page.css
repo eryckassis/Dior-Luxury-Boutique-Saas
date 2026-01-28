@@ -10,18 +10,18 @@
    ============================================================================ */
 
 .splash-page {
+  display: flex;
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  visibility: visible;
+  opacity: 1;
   z-index: 10000;
   background: #000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 1;
-  visibility: visible;
+  width: 100%;
+  height: 100vh;
 }
 
 /* ============================================================================
@@ -29,27 +29,27 @@
    ============================================================================ */
 
 .splash-page .splash-logo {
+  display: flex;
   position: absolute;
   top: 50%;
   left: 50%;
+  justify-content: center;
+  align-items: center;
   transform: translate(-50%, -50%);
   z-index: 10003;
   pointer-events: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .splash-page .splash-logo svg {
+  display: block;
   width: 180px;
   height: auto;
-  display: block;
 }
 
 .splash-page .splash-logo img {
+  display: block;
   width: 100%;
   height: auto;
-  display: block;
 }
 
 /* ============================================================================
@@ -57,10 +57,10 @@
    ============================================================================ */
 
 .splash-page .splash-container {
+  display: flex;
   position: relative;
   width: 100%;
   height: 100%;
-  display: flex;
   overflow: hidden;
 }
 
@@ -71,9 +71,9 @@
 .splash-page .splash-option {
   position: relative;
   flex: 1;
+  cursor: pointer;
   height: 100%;
   overflow: hidden;
-  cursor: pointer;
 }
 
 /* Background (vídeo) */
@@ -92,8 +92,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  z-index: 1;
   background: linear-gradient(
     to top,
     rgba(0, 0, 0, 0.9) 0%,
@@ -101,7 +100,8 @@
     rgba(0, 0, 0, 0.3) 70%,
     transparent 100%
   );
-  z-index: 1;
+  width: 100%;
+  height: 100%;
 }
 
 /* Camada de escurecimento para efeito hover */
@@ -109,11 +109,11 @@
   position: absolute;
   top: 0;
   left: 0;
+  opacity: 1;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.7);
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.7);
-  z-index: 1;
-  opacity: 1;
 }
 
 /* ============================================================================
@@ -126,17 +126,17 @@
   left: 50%;
   transform: translateX(-50%);
   z-index: 2;
-  text-align: center;
-  width: 100%;
   padding: 0 20px;
+  width: 100%;
+  text-align: center;
 }
 
 .splash-page .splash-option-title {
-  font-family: "Hellix", sans-serif;
-  font-size: 40px;
-  font-weight: 300;
-  color: #ededed;
   margin-bottom: 24px;
+  color: #ededed;
+  font-weight: 300;
+  font-size: 40px;
+  font-family: "Hellix", sans-serif;
   letter-spacing: 0.02em;
 }
 
@@ -146,38 +146,38 @@
 
 .splash-page .splash-option-button {
   display: inline-block;
-  font-family: "Hellix", sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  color: #ffffff;
-  text-decoration: none;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  padding: 0;
-  padding-bottom: 6px;
-  border: none;
-  background: transparent;
   position: relative;
   cursor: pointer;
+  border: none;
+  background: transparent;
+  padding: 0;
+  padding-bottom: 6px;
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 14px;
+  font-family: "Hellix", sans-serif;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  text-transform: uppercase;
   --underline-width: 0%;
 }
 
 .splash-page .splash-option-button::after {
-  content: "";
   position: absolute;
   bottom: 0;
   left: 0;
+  transition: width 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  background-color: #ffffff;
   width: var(--underline-width, 0%);
   height: 1px;
-  background-color: #ffffff;
-  transition: width 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  content: "";
 }
 
 /* Label do botão */
 .splash-page .button__label {
   position: relative;
-  text-align: center;
   z-index: 2;
+  text-align: center;
 }
 
 /* ============================================================================
@@ -208,13 +208,13 @@
 
 @media (max-width: 480px) {
   .splash-page .splash-logo {
-    width: 60px;
     margin-top: -330px;
+    width: 60px;
   }
 
   .splash-page .splash-option-title {
-    font-size: 26px;
     margin-bottom: 22px;
+    font-size: 26px;
   }
 
   .splash-page .splash-option-button {
@@ -224,8 +224,8 @@
 
   .splash-page .splash-option-content {
     bottom: 50px;
-    padding: 0 16px;
     margin-bottom: 20px;
+    padding: 0 16px;
   }
 
   .splash-page .splash-option-overlay {
@@ -249,8 +249,8 @@
   }
 
   .splash-page .splash-option-title {
-    font-size: 22px;
     margin-bottom: 16px;
+    font-size: 22px;
     letter-spacing: 0.01em;
   }
 
@@ -273,12 +273,11 @@
 @media (max-width: 360px) {
   .splash-page .splash-logo {
     width: 120px;
-    margin
   }
 
   .splash-page .splash-option-title {
-    font-size: 20px;
     margin-bottom: 14px;
+    font-size: 20px;
   }
 
   .splash-page .splash-option-button {
@@ -305,8 +304,8 @@
   }
 
   .splash-page .splash-option-title {
-    font-size: 20px;
     margin-bottom: 12px;
+    font-size: 20px;
   }
 
   .splash-page .splash-option-button {

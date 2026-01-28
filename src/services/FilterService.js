@@ -221,9 +221,7 @@ export class FilterService {
 
     // Valida o filtro antes de aplicar
     if (!this.validateFilter(filterType, value)) {
-      console.warn(
-        `[FilterService] Valor inválido para ${filterType}: ${value}`
-      );
+      console.warn(`[FilterService] Valor inválido para ${filterType}: ${value}`);
       return false;
     }
 
@@ -351,10 +349,7 @@ export class FilterService {
     return product.colors.some((color) => {
       const normalizedLabel = this.normalizeString(color.label);
       const normalizedName = this.normalizeString(color.name);
-      return (
-        normalizedLabel === normalizedColorId ||
-        normalizedName === normalizedColorId
-      );
+      return normalizedLabel === normalizedColorId || normalizedName === normalizedColorId;
     });
   }
 
@@ -427,39 +422,35 @@ export class FilterService {
     if (filters.categories.length > 0) {
       filtered = filtered.filter((product) => {
         const normalizedCategory = this.normalizeString(product.category);
-        return filters.categories.some(
-          (cat) => this.normalizeString(cat) === normalizedCategory
-        );
+        return filters.categories.some((cat) => this.normalizeString(cat) === normalizedCategory);
       });
     }
 
     // Filtrar por linha
     if (filters.lines.length > 0) {
       filtered = filtered.filter((product) =>
-        filters.lines.some((line) => this.productHasLine(product, line))
+        filters.lines.some((line) => this.productHasLine(product, line)),
       );
     }
 
     // Filtrar por cor
     if (filters.colors.length > 0) {
       filtered = filtered.filter((product) =>
-        filters.colors.some((color) => this.productHasColor(product, color))
+        filters.colors.some((color) => this.productHasColor(product, color)),
       );
     }
 
     // Filtrar por material
     if (filters.materials.length > 0) {
       filtered = filtered.filter((product) =>
-        filters.materials.some((material) =>
-          this.productHasMaterial(product, material)
-        )
+        filters.materials.some((material) => this.productHasMaterial(product, material)),
       );
     }
 
     // Filtrar por tamanho
     if (filters.sizes.length > 0) {
       filtered = filtered.filter((product) =>
-        filters.sizes.some((size) => this.productHasSize(product, size))
+        filters.sizes.some((size) => this.productHasSize(product, size)),
       );
     }
 
@@ -480,15 +471,11 @@ export class FilterService {
 
     switch (sortType) {
       case "price_asc":
-        sorted.sort(
-          (a, b) => this.parsePrice(a.price) - this.parsePrice(b.price)
-        );
+        sorted.sort((a, b) => this.parsePrice(a.price) - this.parsePrice(b.price));
         break;
 
       case "price_desc":
-        sorted.sort(
-          (a, b) => this.parsePrice(b.price) - this.parsePrice(a.price)
-        );
+        sorted.sort((a, b) => this.parsePrice(b.price) - this.parsePrice(a.price));
         break;
 
       case "newest":

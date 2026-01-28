@@ -73,8 +73,7 @@ export class RegisterPage extends HTMLElement {
         strengthBar.className = `strength-bar strength-${strength.level}`;
         strengthBar.style.width = `${strength.percentage}%`;
         strengthText.textContent = strength.text;
-        strengthIndicator.style.display =
-          password.length > 0 ? "block" : "none";
+        strengthIndicator.style.display = password.length > 0 ? "block" : "none";
       });
     }
 
@@ -87,9 +86,7 @@ export class RegisterPage extends HTMLElement {
       const nameInput = form.querySelector('input[name="name"]');
       const emailInput = form.querySelector('input[name="email"]');
       const passwordInput = form.querySelector('input[name="password"]');
-      const confirmPasswordInput = form.querySelector(
-        'input[name="confirmPassword"]'
-      );
+      const confirmPasswordInput = form.querySelector('input[name="confirmPassword"]');
       const submitButton = form.querySelector('button[type="submit"]');
 
       const name = nameInput?.value.trim();
@@ -141,9 +138,7 @@ export class RegisterPage extends HTMLElement {
           router.navigate("/");
         }, 2000);
       } catch (error) {
-        this.showError(
-          error.message || "Erro ao criar conta. Tente novamente."
-        );
+        this.showError(error.message || "Erro ao criar conta. Tente novamente.");
       } finally {
         this.isLoading = false;
         submitButton.disabled = false;

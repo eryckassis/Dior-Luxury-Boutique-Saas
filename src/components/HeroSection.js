@@ -10,8 +10,7 @@ export class HeroSection extends HTMLElement {
   connectedCallback() {
     const videoSrc = this.getAttribute("video") || "/videos/VideoSection1.mp4";
     const label = this.getAttribute("label") || "Dior Holiday";
-    const title =
-      this.getAttribute("title") || "Bem-vindo ao Circo dos Sonhos Dior";
+    const title = this.getAttribute("title") || "Bem-vindo ao Circo dos Sonhos Dior";
     const buttonText = this.getAttribute("button-text") || "Chegue mais perto";
 
     this.render(videoSrc, label, title, buttonText);

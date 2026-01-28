@@ -52,8 +52,7 @@ export function initServicesDrag(options) {
     const totalGaps = (cards.length - 1) * gap;
 
     // Largura total do conteúdo
-    const contentWidth =
-      totalCardsWidth + totalGaps + paddingLeft + paddingRight;
+    const contentWidth = totalCardsWidth + totalGaps + paddingLeft + paddingRight;
 
     // MaxDrag negativo para mover para esquerda
     const maxDrag = Math.min(0, -(contentWidth - containerWidth));
@@ -106,8 +105,7 @@ export function initServicesDrag(options) {
     };
 
     // Detectar se é mobile/touch
-    const isTouchDevice =
-      "ontouchstart" in window || navigator.maxTouchPoints > 0;
+    const isTouchDevice = "ontouchstart" in window || navigator.maxTouchPoints > 0;
 
     // Criar Draggable
     draggableInstance = window.Draggable.create(track, {
@@ -128,12 +126,7 @@ export function initServicesDrag(options) {
         updateIndicator(this.x);
       },
       onDragEnd: function () {
-        console.log(
-          "🎯 Services Drag finalizado em:",
-          this.x,
-          "/ minX:",
-          bounds.minX,
-        );
+        console.log("🎯 Services Drag finalizado em:", this.x, "/ minX:", bounds.minX);
         updateIndicator(this.x);
       },
       onThrowUpdate: function () {

@@ -38,9 +38,7 @@ export class LoginPage extends HTMLElement {
     }
 
     if (modalBackdrop) {
-      modalBackdrop.addEventListener("click", () =>
-        this.closeForgotPasswordModal()
-      );
+      modalBackdrop.addEventListener("click", () => this.closeForgotPasswordModal());
     }
 
     if (sendBtn) {
@@ -49,9 +47,7 @@ export class LoginPage extends HTMLElement {
 
     // Toggle password visibility
     if (passwordToggle) {
-      passwordToggle.addEventListener("click", () =>
-        this.togglePasswordVisibility()
-      );
+      passwordToggle.addEventListener("click", () => this.togglePasswordVisibility());
     }
 
     // Botão Cadastre-se
@@ -98,9 +94,7 @@ export class LoginPage extends HTMLElement {
           router.navigate("/");
         }, 1000);
       } catch (error) {
-        this.showError(
-          error.message || "Erro ao fazer login. Tente novamente."
-        );
+        this.showError(error.message || "Erro ao fazer login. Tente novamente.");
       } finally {
         this.isLoading = false;
         submitButton.disabled = false;
@@ -152,7 +146,7 @@ export class LoginPage extends HTMLElement {
 
   togglePasswordVisibility() {
     const passwordInputWrapper = this.querySelector(
-      ".login-input-wrapper:has(input[type='password']), .login-input-wrapper:has(input[type='text'][placeholder*='senha'])"
+      ".login-input-wrapper:has(input[type='password']), .login-input-wrapper:has(input[type='text'][placeholder*='senha'])",
     );
     const passwordInput = passwordInputWrapper?.querySelector("input");
     const toggleBtn = passwordInputWrapper?.querySelector(".password-toggle");
@@ -199,7 +193,7 @@ export class LoginPage extends HTMLElement {
           modal,
           { opacity: 0, scale: 0.9, y: -20 },
           { opacity: 1, scale: 1, y: 0, duration: 0.4, ease: "back.out(1.7)" },
-          "-=0.2"
+          "-=0.2",
         );
     } else {
       backdrop.style.opacity = "1";
@@ -240,7 +234,7 @@ export class LoginPage extends HTMLElement {
             duration: 0.2,
             ease: "power2.in",
           },
-          "-=0.2"
+          "-=0.2",
         );
     } else {
       modal.style.display = "none";
@@ -268,8 +262,7 @@ export class LoginPage extends HTMLElement {
     authService
       .forgotPassword(input.value.trim())
       .then((response) => {
-        message.textContent =
-          response.message || "Email de recuperação enviado com sucesso!";
+        message.textContent = response.message || "Email de recuperação enviado com sucesso!";
         message.style.color = "#27ae60";
         message.style.display = "block";
 
@@ -278,8 +271,7 @@ export class LoginPage extends HTMLElement {
         }, 2000);
       })
       .catch((error) => {
-        message.textContent =
-          error.message || "Erro ao enviar email de recuperação";
+        message.textContent = error.message || "Erro ao enviar email de recuperação";
         message.style.color = "#e74c3c";
         message.style.display = "block";
       })

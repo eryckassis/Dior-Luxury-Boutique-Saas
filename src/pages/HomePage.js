@@ -16,10 +16,7 @@ import "../styles/miss-dior-essence.css";
 import "../styles/diorivera-morph.css";
 import { router } from "../router/router.js";
 import { cartService } from "../services/CartService.js";
-import {
-  initServicesDrag,
-  initButtonUnderlineAnimation,
-} from "../components/ServicesDragCards.js";
+import { initServicesDrag, initButtonUnderlineAnimation } from "../components/ServicesDragCards.js";
 
 export class HomePage extends HTMLElement {
   constructor() {
@@ -325,15 +322,12 @@ export class HomePage extends HTMLElement {
         video.currentTime = 0;
 
         // Pegar o wrapper do vídeo para melhor detecção de hover
-        const wrapper =
-          video.closest(".grid-item__wrapper") || video.parentElement;
+        const wrapper = video.closest(".grid-item__wrapper") || video.parentElement;
 
         const playVideo = () => {
           console.log(`Hover no vídeo ${index + 1}`);
           video.currentTime = 0;
-          video
-            .play()
-            .catch((err) => console.error("Erro ao reproduzir:", err));
+          video.play().catch((err) => console.error("Erro ao reproduzir:", err));
         };
 
         const pauseVideo = () => {
@@ -346,9 +340,7 @@ export class HomePage extends HTMLElement {
         if (wrapper && wrapper !== video) {
           wrapper.addEventListener("mouseenter", playVideo);
           wrapper.addEventListener("mouseleave", pauseVideo);
-          console.log(
-            `Event listeners adicionados ao wrapper do vídeo ${index + 1}`,
-          );
+          console.log(`Event listeners adicionados ao wrapper do vídeo ${index + 1}`);
         }
 
         video.addEventListener("mouseenter", playVideo);
@@ -365,30 +357,28 @@ export class HomePage extends HTMLElement {
     // Aguardar os web components renderizarem
     setTimeout(() => {
       // Selecionar os wrappers dos vídeos hero
-      const heroWrappers = this.querySelectorAll(".hero-video-hover").forEach(
-        (video) => {
-          const wrapper = video.closest(".grid-item__wrapper");
+      const heroWrappers = this.querySelectorAll(".hero-video-hover").forEach((video) => {
+        const wrapper = video.closest(".grid-item__wrapper");
 
-          if (wrapper) {
-            // Adiciona clip-path inicial no wrapper
-            window.gsap.set(wrapper, {
-              clipPath: "inset(0% 0% 0% -90%)",
-            });
+        if (wrapper) {
+          // Adiciona clip-path inicial no wrapper
+          window.gsap.set(wrapper, {
+            clipPath: "inset(0% 0% 0% -90%)",
+          });
 
-            // Animação com ScrollTrigger no wrapper
-            window.gsap.to(wrapper, {
-              clipPath: "inset(0% 0% 0% 100%)",
-              ease: "none",
-              scrollTrigger: {
-                trigger: wrapper,
-                start: "top center",
-                end: "bottom center",
-                scrub: 1,
-              },
-            });
-          }
-        },
-      );
+          // Animação com ScrollTrigger no wrapper
+          window.gsap.to(wrapper, {
+            clipPath: "inset(0% 0% 0% 100%)",
+            ease: "none",
+            scrollTrigger: {
+              trigger: wrapper,
+              start: "top center",
+              end: "bottom center",
+              scrub: 1,
+            },
+          });
+        }
+      });
 
       // Animação do texto que aparece entre os vídeos
       const textContent = this.querySelectorAll(".grid-content");
@@ -465,13 +455,11 @@ export class HomePage extends HTMLElement {
 
       const keyholeImage = keyholeComponent.querySelector(".keyhole-image img");
       const keyholeOverlay = keyholeComponent.querySelector(".keyhole-overlay");
-      const keyholeSubtitle =
-        keyholeComponent.querySelector(".keyhole-subtitle");
+      const keyholeSubtitle = keyholeComponent.querySelector(".keyhole-subtitle");
       const keyholeTitle = keyholeComponent.querySelector(".keyhole-title");
       const keyholeButton = keyholeComponent.querySelector(".keyhole-button");
       const keyholeSection = keyholeComponent.querySelector(".keyhole-section");
-      const keyholeContainer =
-        keyholeComponent.querySelector(".keyhole-container");
+      const keyholeContainer = keyholeComponent.querySelector(".keyhole-container");
 
       if (!keyholeImage || !keyholeSection) {
         console.warn("Keyhole elements não encontrados, aguardando...");
@@ -592,9 +580,7 @@ export class HomePage extends HTMLElement {
               activeContent.classList.remove("active");
 
               // Show new content
-              const newContent = this.querySelector(
-                `[data-content="${category}"]`,
-              );
+              const newContent = this.querySelector(`[data-content="${category}"]`);
               if (newContent) {
                 newContent.classList.add("active");
                 this.animateIn(newContent);
@@ -712,14 +698,10 @@ export class HomePage extends HTMLElement {
     if (!window.gsap || !window.ScrollTrigger) return;
 
     requestAnimationFrame(() => {
-      const productCards = this.querySelectorAll(
-        ".essence-products-section .essence-product-card",
-      );
+      const productCards = this.querySelectorAll(".essence-products-section .essence-product-card");
 
       productCards.forEach((card, index) => {
-        const imageWrapper = card.querySelector(
-          ".essence-product-image-wrapper",
-        );
+        const imageWrapper = card.querySelector(".essence-product-image-wrapper");
         const overlay = card.querySelector(".essence-image-reveal-overlay");
         const image = card.querySelector(".essence-product-image");
         const info = card.querySelector(".essence-product-info");
@@ -970,10 +952,7 @@ export class HomePage extends HTMLElement {
 
           // Log para debug
           console.log("✅ Produto adicionado ao carrinho:", productData.name);
-          console.log(
-            "🛒 Total de itens no carrinho:",
-            cartService.getTotalItems(),
-          );
+          console.log("🛒 Total de itens no carrinho:", cartService.getTotalItems());
         });
       });
     });

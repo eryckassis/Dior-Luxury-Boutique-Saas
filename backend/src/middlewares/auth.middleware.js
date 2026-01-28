@@ -29,17 +29,11 @@ export class AuthMiddleware {
 
       CookieUtil.clearAuthCookies(res);
 
-      if (
-        error.message.includes("expired") ||
-        error.message.includes("expirado")
-      ) {
+      if (error.message.includes("expired") || error.message.includes("expirado")) {
         return ApiResponse.tokenExpired(res);
       }
 
-      if (
-        error.message.includes("invalid") ||
-        error.message.includes("inválido")
-      ) {
+      if (error.message.includes("invalid") || error.message.includes("inválido")) {
         return ApiResponse.tokenInvalid(res);
       }
 
@@ -84,19 +78,13 @@ export class AuthMiddleware {
       next();
     } catch (error) {
       console.error(" CSRF validations failed:", error.message);
-      return ApiResponse.forbidden(
-        res,
-        "Requisição inválida. Tente Novamente.",
-      );
+      return ApiResponse.forbidden(res, "Requisição inválida. Tente Novamente.");
     }
   }
 
   static requireEmailVerified(req, res, next) {
     if (!req.user?.emailConfirmed) {
-      return ApiResponse.emailNotVerified(
-        res,
-        "Por favor, verifique seu email antes de continuar",
-      );
+      return ApiResponse.emailNotVerified(res, "Por favor, verifique seu email antes de continuar");
     }
     next();
   }
@@ -106,10 +94,7 @@ export class AuthMiddleware {
       const userRole = req.user?.metadata?.role || "user";
 
       if (!allowedRoles.includes(userRole)) {
-        return ApiResponse.forbidden(
-          res,
-          "Voce nao tem permissai para acessar este recurso",
-        );
+        return ApiResponse.forbidden(res, "Voce nao tem permissai para acessar este recurso");
       }
 
       next();

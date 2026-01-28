@@ -91,8 +91,7 @@ export class ColecaoContent extends HTMLElement {
         const paddingLeft = parseFloat(trackStyles.paddingLeft) || 0;
         const paddingRight = parseFloat(trackStyles.paddingRight) || 0;
 
-        const contentWidth =
-          lastCard.right - firstCard.left + paddingLeft + paddingRight;
+        const contentWidth = lastCard.right - firstCard.left + paddingLeft + paddingRight;
 
         const maxDrag = Math.min(0, -(contentWidth - containerWidth));
 
@@ -232,20 +231,15 @@ export class ColecaoContent extends HTMLElement {
 
           leftArrow.style.opacity = currentX >= -10 ? "0.5" : "1";
           leftArrow.style.pointerEvents = currentX >= -10 ? "none" : "auto";
-          rightArrow.style.opacity =
-            currentX <= getMaxDrag() + 10 ? "0.5" : "1";
-          rightArrow.style.pointerEvents =
-            currentX <= getMaxDrag() + 10 ? "none" : "auto";
+          rightArrow.style.opacity = currentX <= getMaxDrag() + 10 ? "0.5" : "1";
+          rightArrow.style.pointerEvents = currentX <= getMaxDrag() + 10 ? "none" : "auto";
         };
 
         // Navegação por setas
         const navigateByArrow = (direction) => {
           const currentX = window.gsap.getProperty(track, "x");
           const slideWidth = getSlideWidth();
-          const targetX =
-            direction === "left"
-              ? currentX + slideWidth
-              : currentX - slideWidth;
+          const targetX = direction === "left" ? currentX + slideWidth : currentX - slideWidth;
           const clampedX = Math.max(getMaxDrag(), Math.min(0, targetX));
 
           window.gsap.to(track, {
@@ -399,9 +393,7 @@ export class ColecaoContent extends HTMLElement {
         this.intersectionObserver.observe(item);
       });
 
-      console.log(
-        `✅ Virtual Scrolling ativo - ${productItems.length} produtos`
-      );
+      console.log(`✅ Virtual Scrolling ativo - ${productItems.length} produtos`);
     }, 100);
   }
 
@@ -477,16 +469,14 @@ export class ColecaoContent extends HTMLElement {
       leftArrow.style.opacity = currentX >= -10 ? "0.5" : "1";
       leftArrow.style.pointerEvents = currentX >= -10 ? "none" : "auto";
       rightArrow.style.opacity = currentX <= getMaxDrag() + 10 ? "0.5" : "1";
-      rightArrow.style.pointerEvents =
-        currentX <= getMaxDrag() + 10 ? "none" : "auto";
+      rightArrow.style.pointerEvents = currentX <= getMaxDrag() + 10 ? "none" : "auto";
     };
 
     // Navegação por setas
     const navigateByArrow = (direction) => {
       const currentX = window.gsap.getProperty(track, "x");
       const slideWidth = getSlideWidth();
-      const targetX =
-        direction === "left" ? currentX + slideWidth : currentX - slideWidth;
+      const targetX = direction === "left" ? currentX + slideWidth : currentX - slideWidth;
       const clampedX = Math.max(getMaxDrag(), Math.min(0, targetX));
 
       window.gsap.to(track, {
@@ -777,14 +767,14 @@ export class ColecaoContent extends HTMLElement {
             (img, i) =>
               `<img src="${img}" alt="${product.name} - Vista ${
                 i + 1
-              }" class="product-showcase-image" />`
+              }" class="product-showcase-image" />`,
           )
           .join("\n                  ");
 
         const colorsHtml = product.colors
           .map(
             (color) =>
-              `<button class="color-dot color-dot--${color.name}" data-color="${color.name}" aria-label="${color.label}"></button>`
+              `<button class="color-dot color-dot--${color.name}" data-color="${color.name}" aria-label="${color.label}"></button>`,
           )
           .join("\n                  ");
 

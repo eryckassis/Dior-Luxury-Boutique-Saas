@@ -52,10 +52,7 @@ export class FinalizarCompraPage extends HTMLElement {
   }
 
   calculateSubtotal() {
-    return this.cartItems.reduce(
-      (total, item) => total + item.price * item.quantity,
-      0,
-    );
+    return this.cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
   }
 
   initAnimations() {
@@ -166,9 +163,7 @@ export class FinalizarCompraPage extends HTMLElement {
     }
 
     // Salvar seleção de embalagem
-    const giftWrappingInputs = this.querySelectorAll(
-      'input[name="giftWrapping"]',
-    );
+    const giftWrappingInputs = this.querySelectorAll('input[name="giftWrapping"]');
     giftWrappingInputs.forEach((input) => {
       input.addEventListener("change", (e) => {
         checkoutService.updateField("giftWrapping", e.target.value);
@@ -422,14 +417,10 @@ export class FinalizarCompraPage extends HTMLElement {
     const address = this.querySelector("#address")?.value.trim() || "";
     const city = this.querySelector("#city")?.value.trim() || "";
     const state = this.querySelector("#state")?.value || "";
-    const zipCode =
-      this.querySelector("#zipCode")?.value.replace(/\D/g, "") || "";
+    const zipCode = this.querySelector("#zipCode")?.value.replace(/\D/g, "") || "";
     const phone = this.querySelector("#phone")?.value.replace(/\D/g, "") || "";
 
-    const isEmailValid = this.validateEmail(
-      email,
-      this.querySelector("#email"),
-    );
+    const isEmailValid = this.validateEmail(email, this.querySelector("#email"));
     const isZipCodeValid = zipCode.length === 8;
     const isPhoneValid = phone.length === 10 || phone.length === 11;
 
@@ -484,9 +475,7 @@ export class FinalizarCompraPage extends HTMLElement {
     });
 
     // Seleção de método de pagamento
-    const paymentMethodInputs = this.querySelectorAll(
-      'input[name="payment-method"]',
-    );
+    const paymentMethodInputs = this.querySelectorAll('input[name="payment-method"]');
     paymentMethodInputs.forEach((input) => {
       input.addEventListener("change", (e) => {
         this.switchPaymentMethod(e.target.value);
@@ -695,8 +684,7 @@ export class FinalizarCompraPage extends HTMLElement {
   }
 
   validateForm() {
-    const cardNumber =
-      this.querySelector("#card-number")?.value.replace(/\s/g, "") || "";
+    const cardNumber = this.querySelector("#card-number")?.value.replace(/\s/g, "") || "";
     const cardName = this.querySelector("#card-name")?.value.trim() || "";
     const expiryMonth = this.querySelector("#expiry-month")?.value || "";
     const expiryYear = this.querySelector("#expiry-year")?.value || "";
@@ -704,8 +692,7 @@ export class FinalizarCompraPage extends HTMLElement {
     const cpf = this.querySelector("#cpf")?.value.replace(/\D/g, "") || "";
     const installments = this.querySelector("#installments")?.value || "";
 
-    const isCardNumberValid =
-      this.luhnCheck(cardNumber) && cardNumber.length === 16;
+    const isCardNumberValid = this.luhnCheck(cardNumber) && cardNumber.length === 16;
     const isCPFValid = this.validateCPF(cpf, this.querySelector("#cpf"));
     const maxCVVLength = this.getSelectedCardBrand() === "amex" ? 4 : 3;
     const isCVVValid = cvv.length === maxCVVLength;
@@ -752,11 +739,7 @@ export class FinalizarCompraPage extends HTMLElement {
       return `${streetEncrypted}, ${restEncrypted}`;
     }
 
-    return (
-      address.substring(0, 3) +
-      "*** ***" +
-      address.substring(address.length - 3)
-    );
+    return address.substring(0, 3) + "*** ***" + address.substring(address.length - 3);
   }
 
   openPaymentModal() {
@@ -782,9 +765,7 @@ export class FinalizarCompraPage extends HTMLElement {
     }
 
     // Obtém endereço real do checkoutService e criptografa
-    const billingAddressLabel = this.querySelector(
-      'label[for="billing-address"]',
-    );
+    const billingAddressLabel = this.querySelector('label[for="billing-address"]');
     if (billingAddressLabel) {
       const realAddress = checkoutService.getBillingAddress();
 
@@ -894,9 +875,9 @@ export class FinalizarCompraPage extends HTMLElement {
       option.classList.remove("selected");
     });
 
-    const selectedBrand = this.querySelector(
-      `input[value="${brand}"]`,
-    )?.closest(".card-brand-option");
+    const selectedBrand = this.querySelector(`input[value="${brand}"]`)?.closest(
+      ".card-brand-option",
+    );
     if (selectedBrand) {
       selectedBrand.classList.add("selected");
     }
@@ -981,9 +962,7 @@ export class FinalizarCompraPage extends HTMLElement {
     const item = this.cartItems.find((i) => i.id === itemId);
 
     if (item) {
-      const row = this.querySelector(`[data-item-id="${itemId}"]`)?.closest(
-        ".cart-table-row",
-      );
+      const row = this.querySelector(`[data-item-id="${itemId}"]`)?.closest(".cart-table-row");
       if (row) {
         const quantityInput = row.querySelector(".quantity-input");
         const totalCell = row.querySelector(".cart-total-cell");
@@ -993,9 +972,7 @@ export class FinalizarCompraPage extends HTMLElement {
         }
 
         if (totalCell && !totalCell.classList.contains("cart-free-text")) {
-          const itemTotal = (item.price * item.quantity)
-            .toFixed(2)
-            .replace(".", ",");
+          const itemTotal = (item.price * item.quantity).toFixed(2).replace(".", ",");
           totalCell.textContent = `R$ ${itemTotal}`;
         }
       }
@@ -1011,19 +988,13 @@ export class FinalizarCompraPage extends HTMLElement {
     const total = subtotal; // Como a entrega é grátis, total = subtotal
 
     // Atualiza o subtotal na UI
-    const subtotalElements = this.querySelectorAll(
-      ".summary-row:first-child span:last-child",
-    );
+    const subtotalElements = this.querySelectorAll(".summary-row:first-child span:last-child");
     if (subtotalElements.length > 0) {
-      subtotalElements[0].textContent = `R$ ${subtotal
-        .toFixed(2)
-        .replace(".", ",")}`;
+      subtotalElements[0].textContent = `R$ ${subtotal.toFixed(2).replace(".", ",")}`;
     }
 
     // Atualiza o total na UI
-    const totalElements = this.querySelectorAll(
-      ".summary-total span:last-child",
-    );
+    const totalElements = this.querySelectorAll(".summary-total span:last-child");
     if (totalElements.length > 0) {
       totalElements[0].textContent = `R$ ${total.toFixed(2).replace(".", ",")}`;
     }
@@ -1031,9 +1002,7 @@ export class FinalizarCompraPage extends HTMLElement {
 
   removeItem(itemId) {
     // Remove a linha com animação suave
-    const row = this.querySelector(`[data-item-id="${itemId}"]`)?.closest(
-      ".cart-table-row",
-    );
+    const row = this.querySelector(`[data-item-id="${itemId}"]`)?.closest(".cart-table-row");
 
     if (row) {
       if (window.gsap) {
@@ -1072,9 +1041,7 @@ export class FinalizarCompraPage extends HTMLElement {
           (item) => `
         <div class="cart-table-row">
           <div class="cart-product-cell">
-            <img src="${item.image}" alt="${
-              item.name
-            }" class="cart-product-image" />
+            <img src="${item.image}" alt="${item.name}" class="cart-product-image" />
             <div class="cart-product-info">
               <h3 class="cart-product-name">${item.name}</h3>
               <p class="cart-product-volume">${item.volume}</p>
@@ -1087,19 +1054,13 @@ export class FinalizarCompraPage extends HTMLElement {
           
           <div class="cart-quantity-cell">
             <div class="quantity-controls">
-              <button class="quantity-btn quantity-minus" data-item-id="${
-                item.id
-              }">
+              <button class="quantity-btn quantity-minus" data-item-id="${item.id}">
                 <svg width="12" height="2" viewBox="0 0 12 2" fill="none">
                   <line x1="0" y1="1" x2="12" y2="1" stroke="currentColor" stroke-width="2"/>
                 </svg>
               </button>
-              <input type="text" class="quantity-input" value="${
-                item.quantity
-              }" readonly />
-              <button class="quantity-btn quantity-plus" data-item-id="${
-                item.id
-              }">
+              <input type="text" class="quantity-input" value="${item.quantity}" readonly />
+              <button class="quantity-btn quantity-plus" data-item-id="${item.id}">
                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
                   <line x1="6" y1="0" x2="6" y2="12" stroke="currentColor" stroke-width="2"/>
                   <line x1="0" y1="6" x2="12" y2="6" stroke="currentColor" stroke-width="2"/>
@@ -1427,9 +1388,7 @@ export class FinalizarCompraPage extends HTMLElement {
                     (item) => `
                   <div class="cart-table-row">
                     <div class="cart-product-cell">
-                      <img src="${item.image}" alt="${
-                        item.name
-                      }" class="cart-product-image" />
+                      <img src="${item.image}" alt="${item.name}" class="cart-product-image" />
                       <div class="cart-product-info">
                         <h3 class="cart-product-name">${item.name}</h3>
                         <p class="cart-product-volume">${item.volume}</p>
@@ -1442,9 +1401,7 @@ export class FinalizarCompraPage extends HTMLElement {
                     
                     <div class="cart-quantity-cell">
                       <div class="quantity-controls">
-                        <button class="quantity-btn quantity-minus" data-item-id="${
-                          item.id
-                        }">
+                        <button class="quantity-btn quantity-minus" data-item-id="${item.id}">
                           <svg width="12" height="2" viewBox="0 0 12 2" fill="none">
                             <line x1="0" y1="1" x2="12" y2="1" stroke="currentColor" stroke-width="2"/>
                           </svg>
@@ -1452,9 +1409,7 @@ export class FinalizarCompraPage extends HTMLElement {
                         <input type="text" class="quantity-input" value="${
                           item.quantity
                         }" readonly />
-                        <button class="quantity-btn quantity-plus" data-item-id="${
-                          item.id
-                        }">
+                        <button class="quantity-btn quantity-plus" data-item-id="${item.id}">
                           <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
                             <line x1="6" y1="0" x2="6" y2="12" stroke="currentColor" stroke-width="2"/>
                             <line x1="0" y1="6" x2="12" y2="6" stroke="currentColor" stroke-width="2"/>
@@ -1464,9 +1419,7 @@ export class FinalizarCompraPage extends HTMLElement {
                     </div>
                     
                     <div class="cart-total-cell">
-                      R$ ${(item.price * item.quantity)
-                        .toFixed(2)
-                        .replace(".", ",")}
+                      R$ ${(item.price * item.quantity).toFixed(2).replace(".", ",")}
                     </div>
                     
                     <button class="cart-remove-btn" data-item-id="${item.id}">

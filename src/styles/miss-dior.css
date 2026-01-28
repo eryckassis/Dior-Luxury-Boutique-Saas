@@ -3,9 +3,9 @@
    ============================================================================ */
 
 .miss-dior-page {
+  background-color: var(--color-background);
   width: 100%;
   min-height: 100vh;
-  background-color: var(--color-background);
 }
 
 /* ============================================================================
@@ -13,88 +13,88 @@
    ============================================================================ */
 
 .miss-dior-video-section {
+  display: flex;
   position: relative;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .miss-dior-video-bg {
   position: absolute;
   top: 50%;
   left: 50%;
-  min-width: 100%;
-  min-height: 100%;
-  width: auto;
-  height: auto;
   transform: translate(-50%, -50%);
-  object-fit: cover;
   z-index: 1;
+  width: auto;
+  min-width: 100%;
+  height: auto;
+  min-height: 100%;
+  object-fit: cover;
 }
 
 .miss-dior-video-content {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  color: white;
-  max-width: 900px;
-  padding: 0 var(--gutter);
-  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
   display: flex;
+  position: relative;
   flex-direction: column;
   align-items: center;
   gap: clamp(1.5rem, 3vw, 2.5rem);
+  z-index: 2;
+  padding: 0 var(--gutter);
+  max-width: 900px;
+  color: white;
+  text-align: center;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
 }
 
 .miss-dior-video-title {
-  font-family: "MinhaFonte", sans-serif;
-  font-size: clamp(40px, 6vw, 80px);
-  font-weight: 400;
   margin: 0;
-  letter-spacing: 2px;
+  font-weight: 400;
+  font-size: clamp(40px, 6vw, 80px);
   line-height: 1.1;
+  font-family: "MinhaFonte", sans-serif;
+  letter-spacing: 2px;
 }
 
 .miss-dior-video-description {
-  font-family: "Hellix", sans-serif;
-  font-size: clamp(16px, 1.8vw, 22px);
-  font-weight: 300;
   margin: 0;
-  line-height: 1.6;
   max-width: 85%;
+  font-weight: 300;
+  font-size: clamp(16px, 1.8vw, 22px);
+  line-height: 1.6;
+  font-family: "Hellix", sans-serif;
 }
 
 /* Botão Descubra na seção de vídeo */
 .miss-dior-video-content .moda-discover-button {
-  background: transparent;
-  border: none;
-  font-family: "Hellix", sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  color: #fff;
-  text-decoration: none;
-  padding: 0;
-  cursor: pointer;
-  letter-spacing: 0.3px;
   display: inline-block;
   position: relative;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  padding: 0;
+  color: #fff;
+  font-weight: 500;
+  font-size: 14px;
+  font-family: "Hellix", sans-serif;
+  letter-spacing: 0.3px;
+  text-decoration: none;
   --underline-width: 100%;
-  margin-top: 0.5rem;
   transition: opacity 0.3s ease;
+  margin-top: 0.5rem;
 }
 
 .miss-dior-video-content .moda-discover-button::after {
-  content: "";
   position: absolute;
   bottom: -4px;
   left: 0;
+  transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  background-color: #fff;
   width: var(--underline-width, 100%);
   height: 1px;
-  background-color: #fff;
-  transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  content: "";
 }
 
 .miss-dior-video-content .moda-discover-button:hover {
@@ -103,12 +103,12 @@
 
 /* Video Controls - Mantém os estilos existentes do glass-button */
 .miss-dior-video-section .video-controls {
-  position: absolute;
-  bottom: 40px;
-  right: 40px;
-  z-index: 3;
   display: flex;
+  position: absolute;
+  right: 40px;
+  bottom: 40px;
   gap: 15px;
+  z-index: 3;
 }
 
 /* ============================================================================
@@ -116,33 +116,33 @@
    ============================================================================ */
 
 .miss-dior-text-section {
-  padding: 100px 0;
   background-color: white;
+  padding: 100px 0;
 }
 
 .miss-dior-text-content {
-  max-width: 1000px;
   margin: 0 auto;
   padding: 0 var(--gutter);
+  max-width: 1000px;
   text-align: center;
 }
 
 .miss-dior-main-title {
-  font-family: "MinhaFonte", serif;
-  font-size: clamp(32px, 4vw, 48px);
-  font-weight: 600;
   margin: 0 0 30px 0;
   color: #000;
+  font-weight: 600;
+  font-size: clamp(32px, 4vw, 48px);
   line-height: 1.2;
+  font-family: "MinhaFonte", serif;
 }
 
 .miss-dior-main-description {
-  font-family: "Manrope", sans-serif;
-  font-size: clamp(14px, 1.5vw, 16px);
-  font-weight: 400;
-  color: #000;
-  line-height: 1.8;
   margin: 0;
+  color: #000;
+  font-weight: 400;
+  font-size: clamp(14px, 1.5vw, 16px);
+  line-height: 1.8;
+  font-family: "Manrope", sans-serif;
 }
 
 /* ============================================================================
@@ -150,9 +150,9 @@
    ============================================================================ */
 
 .miss-dior-full-image {
-  width: 100%;
-  padding: 0;
   background-color: white;
+  padding: 0;
+  width: 100%;
 }
 
 .miss-dior-image-reveal {
@@ -166,20 +166,20 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(255, 192, 203, 0); /* Rosa semi-transparente */
+  transform-origin: left;
+  z-index: 2;
   backdrop-filter: blur(20px); /* Efeito de desfoque */
   -webkit-backdrop-filter: blur(20px); /* Suporte Safari */
-  z-index: 2;
-  transform-origin: left;
+  background-color: rgba(255, 192, 203, 0); /* Rosa semi-transparente */
+  width: 100%;
+  height: 100%;
 }
 
 .reveal-image {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
 }
 
 /* ============================================================================
@@ -187,21 +187,21 @@
    ============================================================================ */
 
 .miss-dior-product-detail {
-  padding: 80px 0;
   background-color: white;
+  padding: 80px 0;
 }
 
 .miss-dior-product-info {
-  max-width: 600px;
   margin: 0 auto;
-  text-align: center;
   padding: 0 var(--gutter);
+  max-width: 600px;
+  text-align: center;
 }
 
 .product-detail-image {
+  margin: 0 auto 30px auto;
   width: 110%;
   max-width: 700px;
-  margin: 0 auto 30px auto;
 }
 
 .product-detail-image img {
@@ -211,28 +211,28 @@
 }
 
 .product-price {
-  font-family: "Manrope", sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  color: #666;
   margin: 0 0 10px 0;
+  color: #666;
+  font-weight: 400;
+  font-size: 14px;
+  font-family: "Manrope", sans-serif;
 }
 
 .product-name {
-  font-family: "MinhaFonte", serif;
-  font-size: 24px;
-  font-weight: 600;
-  color: #000;
   margin: 0 0 10px 0;
+  color: #000;
+  font-weight: 600;
+  font-size: 24px;
+  font-family: "MinhaFonte", serif;
 }
 
 .product-description {
-  font-family: "Manrope", sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  color: #666;
   margin: 0 0 20px 0;
+  color: #666;
+  font-weight: 400;
+  font-size: 14px;
   line-height: 1.6;
+  font-family: "Manrope", sans-serif;
 }
 
 .product-intensity {
@@ -243,10 +243,10 @@
 }
 
 .intensity-label {
-  font-family: "Manrope", sans-serif;
-  font-size: 12px;
-  font-weight: 500;
   color: #999;
+  font-weight: 500;
+  font-size: 12px;
+  font-family: "Manrope", sans-serif;
   text-transform: capitalize;
 }
 
@@ -256,10 +256,10 @@
 }
 
 .bar {
+  border-radius: 2px;
+  background-color: #e0e0e0;
   width: 20px;
   height: 4px;
-  background-color: #e0e0e0;
-  border-radius: 2px;
 }
 
 .bar.filled {
@@ -271,25 +271,25 @@
    ============================================================================ */
 
 .miss-dior-double-image-section {
-  padding: 80px 0;
   background-color: #faf9f8;
+  padding: 80px 0;
 }
 
 .miss-dior-double-content {
-  max-width: 1400px;
   margin: 0 auto;
   padding: 0 var(--gutter);
+  max-width: 1400px;
 }
 
 .double-section-description {
-  font-family: "Manrope", sans-serif;
-  font-size: clamp(14px, 1.5vw, 16px);
-  font-weight: 600;
-  color: #333;
-  line-height: 1.8;
-  text-align: center;
-  max-width: 900px;
   margin: 0 auto 60px auto;
+  max-width: 900px;
+  color: #333;
+  font-weight: 600;
+  font-size: clamp(14px, 1.5vw, 16px);
+  line-height: 1.8;
+  font-family: "Manrope", sans-serif;
+  text-align: center;
 }
 
 .double-images-grid {
@@ -313,20 +313,20 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(255, 192, 203, 0.8); /* Rosa semi-transparente */
+  transform-origin: left;
+  z-index: 2;
   backdrop-filter: blur(20px); /* Efeito de desfoque */
   -webkit-backdrop-filter: blur(20px); /* Suporte Safari */
-  z-index: 2;
-  transform-origin: left;
+  background-color: rgba(255, 192, 203, 0.8); /* Rosa semi-transparente */
+  width: 100%;
+  height: 100%;
 }
 
 .miss-dior-image-reveal-double .reveal-image {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
 }
 
 /* ============================================================================
@@ -334,33 +334,35 @@
    ============================================================================ */
 
 .miss-dior-products {
-  padding: 120px 0;
   background-color: #faf9f8;
+  padding: 120px 0;
 }
 
 .section-title {
-  font-family: "MinhaFonte", serif;
-  font-size: clamp(40px, 5vw, 60px);
-  font-weight: 400;
-  text-align: center;
   margin: 0 0 80px 0;
   color: #000;
+  font-weight: 400;
+  font-size: clamp(40px, 5vw, 60px);
+  font-family: "MinhaFonte", serif;
+  text-align: center;
 }
 
 .miss-dior-products-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 40px;
-  max-width: 1400px;
   margin: 0 auto;
   padding: 0 var(--gutter);
+  max-width: 1400px;
 }
 
 .miss-dior-product-card {
+  transition:
+    transform 0.4s ease,
+    box-shadow 0.4s ease;
   background-color: white;
   padding: 40px;
   text-align: center;
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
 .miss-dior-product-card:hover {
@@ -369,17 +371,17 @@
 }
 
 .product-image {
+  margin-bottom: 30px;
   width: 100%;
   height: 400px;
-  margin-bottom: 30px;
   overflow: hidden;
 }
 
 .product-image img {
+  transition: transform 0.6s ease;
   width: 100%;
   height: 100%;
   object-fit: contain;
-  transition: transform 0.6s ease;
 }
 
 .miss-dior-product-card:hover .product-image img {
@@ -387,34 +389,34 @@
 }
 
 .miss-dior-product-card h3 {
-  font-family: "MinhaFonte", serif;
-  font-size: 28px;
-  font-weight: 400;
   margin: 0 0 15px 0;
   color: #000;
+  font-weight: 400;
+  font-size: 28px;
+  font-family: "MinhaFonte", serif;
 }
 
 .miss-dior-product-card p {
-  font-family: "Manrope", sans-serif;
-  font-size: 16px;
-  font-weight: 300;
-  color: #666;
   margin: 0 0 30px 0;
+  color: #666;
+  font-weight: 300;
+  font-size: 16px;
   line-height: 1.6;
+  font-family: "Manrope", sans-serif;
 }
 
 .product-cta {
-  font-family: "Manrope", sans-serif;
-  font-size: 12px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 2px solid #000;
+  background-color: #000;
+  padding: 14px 40px;
+  color: white;
   font-weight: 600;
+  font-size: 12px;
+  font-family: "Manrope", sans-serif;
   letter-spacing: 1px;
   text-transform: uppercase;
-  padding: 14px 40px;
-  background-color: #000;
-  color: white;
-  border: 2px solid #000;
-  cursor: pointer;
-  transition: all 0.3s ease;
 }
 
 .product-cta:hover {
@@ -427,18 +429,18 @@
    ============================================================================ */
 
 .miss-dior-story {
-  padding: 120px 0;
   background-color: white;
+  padding: 120px 0;
 }
 
 .miss-dior-story-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 80px;
   align-items: center;
-  max-width: 1400px;
+  gap: 80px;
   margin: 0 auto;
   padding: 0 var(--gutter);
+  max-width: 1400px;
 }
 
 .miss-dior-story-image {
@@ -454,20 +456,20 @@
 }
 
 .miss-dior-story-content h2 {
-  font-family: "MinhaFonte", serif;
-  font-size: clamp(36px, 4vw, 50px);
-  font-weight: 400;
   margin: 0 0 30px 0;
   color: #000;
+  font-weight: 400;
+  font-size: clamp(36px, 4vw, 50px);
+  font-family: "MinhaFonte", serif;
 }
 
 .miss-dior-story-content p {
-  font-family: "Manrope", sans-serif;
-  font-size: 18px;
-  font-weight: 300;
-  color: #333;
-  line-height: 1.8;
   margin: 0 0 20px 0;
+  color: #333;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 1.8;
+  font-family: "Manrope", sans-serif;
 }
 
 /* ============================================================================
@@ -475,16 +477,16 @@
    ============================================================================ */
 
 .miss-dior-video {
-  padding: 120px 0;
   background-color: #faf9f8;
+  padding: 120px 0;
 }
 
 .video-container {
-  max-width: 1200px;
   margin: 0 auto;
+  background-color: #000;
   padding: 0 var(--gutter);
   aspect-ratio: 16 / 9;
-  background-color: #000;
+  max-width: 1200px;
 }
 
 .video-container video {
@@ -507,8 +509,8 @@
   }
 
   .miss-dior-video-section .video-controls {
-    bottom: 20px;
     right: 20px;
+    bottom: 20px;
     gap: 10px;
   }
 
@@ -517,8 +519,8 @@
   }
 
   .miss-dior-main-title {
-    font-size: 28px;
     margin-bottom: 20px;
+    font-size: 28px;
   }
 
   .miss-dior-main-description {
@@ -550,8 +552,8 @@
   }
 
   .double-section-description {
-    font-size: 14px;
     margin-bottom: 40px;
+    font-size: 14px;
   }
 
   .double-images-grid {
@@ -599,36 +601,36 @@
    ============================================================================ */
 
 .miss-dior-reinventado {
-  padding: 120px 0;
   background: #fff;
+  padding: 120px 0;
 }
 
 .reinventado-title {
-  font-family: "MinhaFonte", serif;
-  font-size: 48px;
-  text-align: center;
   margin-bottom: 20px;
   color: #000;
   font-weight: 600;
+  font-size: 48px;
+  font-family: "MinhaFonte", serif;
   letter-spacing: 0.02em;
+  text-align: center;
 }
 
 .reinventado-subtitle {
-  font-family: "Manrope", sans-serif;
-  font-size: 16px;
-  text-align: center;
-  max-width: 1200px;
   margin: 0 auto 80px;
+  max-width: 1200px;
   color: #333;
+  font-size: 16px;
   line-height: 1.6;
+  font-family: "Manrope", sans-serif;
+  text-align: center;
 }
 
 .reinventado-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 40px;
-  max-width: 1400px;
   margin: 0 auto;
+  max-width: 1400px;
 }
 
 .reinventado-card {
@@ -638,10 +640,10 @@
 
 .reinventado-image {
   position: relative;
-  width: 100%;
-  aspect-ratio: 3 / 4;
-  overflow: hidden;
   margin-bottom: 30px;
+  aspect-ratio: 3 / 4;
+  width: 100%;
+  overflow: hidden;
 }
 
 .reinventado-image img {
@@ -655,32 +657,32 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-family: "MinhaFonte", serif;
-  font-size: 80px;
-  font-weight: 600;
-  color: #ff1493;
-  text-align: center;
-  line-height: 0.85;
-  letter-spacing: -0.02em;
-  pointer-events: none;
   z-index: 2;
+  pointer-events: none;
+  color: #ff1493;
+  font-weight: 600;
+  font-size: 80px;
+  line-height: 0.85;
+  font-family: "MinhaFonte", serif;
+  letter-spacing: -0.02em;
+  text-align: center;
 }
 
 .reinventado-card-title {
-  font-family: "MinhaFonte", serif;
-  font-size: 28px;
   margin-bottom: 15px;
   color: #000;
   font-weight: 600;
+  font-size: 28px;
+  font-family: "MinhaFonte", serif;
   text-align: center;
 }
 
 .reinventado-card-text {
-  font-family: "Manrope", sans-serif;
+  color: #333;
   font-weight: 500;
   font-size: 14px;
   line-height: 1.7;
-  color: #333;
+  font-family: "Manrope", sans-serif;
   text-align: center;
 }
 
@@ -705,17 +707,17 @@
    ============================================================================ */
 
 .miss-dior-frasco-couture {
-  padding: 120px 0;
   background: #f9f9f9;
+  padding: 120px 0;
 }
 
 .frasco-couture-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 80px;
   align-items: center;
-  max-width: 1400px;
+  gap: 80px;
   margin: 0 auto;
+  max-width: 1400px;
 }
 
 .frasco-couture-image-wrapper {
@@ -733,13 +735,13 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(255, 192, 203, 0.8);
+  transform-origin: left;
+  z-index: 2;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  z-index: 2;
-  transform-origin: left;
+  background: rgba(255, 192, 203, 0.8);
+  width: 100%;
+  height: 100%;
 }
 
 .miss-dior-image-reveal-frasco .reveal-image {
@@ -754,45 +756,45 @@
 }
 
 .frasco-couture-title {
-  font-family: "MinhaFonte", serif;
-  font-size: 52px;
   margin-bottom: 30px;
   color: #000;
   font-weight: 600;
+  font-size: 52px;
   line-height: 1.2;
+  font-family: "MinhaFonte", serif;
   letter-spacing: 0.01em;
 }
 
 .frasco-couture-text {
-  font-family: "Manrope", sans-serif;
+  margin-bottom: 40px;
+  color: #333;
   font-size: 16px;
   line-height: 1.8;
-  color: #333;
-  margin-bottom: 40px;
+  font-family: "Manrope", sans-serif;
 }
 
 .frasco-couture-content .services-button {
-  font-size: 16px;
-  font-weight: 600;
-  color: #000;
-  text-decoration: none;
-  padding: 0;
-  cursor: pointer;
-  letter-spacing: 0.5px;
   display: inline-block;
   position: relative;
+  cursor: pointer;
+  padding: 0;
+  color: #000;
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  text-decoration: none;
   --underline-width: 100%;
 }
 
 .frasco-couture-content .services-button::after {
-  content: "";
   position: absolute;
   bottom: -4px;
   left: 0;
+  transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  background-color: #000;
   width: var(--underline-width, 100%);
   height: 1.5px;
-  background-color: #000;
-  transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  content: "";
 }
 
 /* Responsive */
@@ -825,25 +827,25 @@
    ============================================================================ */
 
 .miss-dior-bouquets-full {
-  padding: 0;
   background: #fff;
+  padding: 0;
   overflow: hidden;
 }
 
 .bouquets-full-image-wrapper {
+  position: relative;
   width: 100%;
   height: 90vh;
   min-height: 600px;
   overflow: hidden;
-  position: relative;
 }
 
 .bouquets-full-image {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
-  display: block;
 }
 
 .miss-dior-bouquets-full .container {
@@ -852,14 +854,14 @@
 }
 
 .bouquets-full-text {
-  font-family: "MinhaFonte", serif;
-  font-size: 40px;
-  color: #000;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  line-height: 1.4;
   margin: 0 auto;
   max-width: 800px;
+  color: #000;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 1.4;
+  font-family: "MinhaFonte", serif;
+  letter-spacing: 0.02em;
 }
 
 /* Responsive */
@@ -894,16 +896,16 @@
    ============================================================================ */
 
 .miss-dior-products-grid {
-  padding: 100px 0 120px;
   background: #fff;
+  padding: 100px 0 120px;
 }
 
 .products-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 60px;
-  max-width: 1400px;
   margin: 0 auto;
+  max-width: 1400px;
 }
 
 .product-grid-item {
@@ -914,21 +916,21 @@
 }
 
 .product-grid-image {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  margin-bottom: 30px;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
   background: #f5f5f5;
+  aspect-ratio: 1 / 1;
+  width: 100%;
   overflow: hidden;
 }
 
 .product-grid-image img {
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   width: 100%;
   height: 100%;
   object-fit: contain;
-  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 /* Reutilizando estilos existentes de product-price, product-name, product-description, product-intensity */
@@ -983,38 +985,38 @@
 
 .product-info {
   display: flex;
+  flex: 1;
   flex-direction: column;
   gap: 12px;
-  flex: 1;
 }
 
 .product-footer {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: auto;
-  padding-top: 16px;
-  border-top: 1px solid #e8e8e8;
   flex-shrink: 0;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  border-top: 1px solid #e8e8e8;
+  padding-top: 16px;
 }
 
 .product-bag-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 1px solid #000000;
+  border-radius: 50%;
+  background-color: transparent;
+  padding: 0;
   width: 44px;
   height: 44px;
-  border-radius: 50%;
-  border: 1px solid #000000;
-  background-color: transparent;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  padding: 0;
 }
 
 .product-bag-button:hover {
-  background-color: #000000;
   transform: scale(1.05);
+  background-color: #000000;
 }
 
 .product-bag-button:hover svg {
@@ -1022,8 +1024,8 @@
 }
 
 .product-bag-button svg {
-  stroke: #000000;
   transition: stroke 0.3s ease;
+  stroke: #000000;
 }
 
 /* Product Detail Section Specific */
@@ -1035,11 +1037,11 @@
 
 .product-detail-footer {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   margin-top: 20px;
-  padding-top: 16px;
   border-top: 1px solid #e8e8e8;
+  padding-top: 16px;
 }
 
 .product-detail-bag-button {
@@ -1064,7 +1066,7 @@
   }
 
   .product-detail-bag-button {
-    margin-left: 0;
     align-self: center;
+    margin-left: 0;
   }
 }

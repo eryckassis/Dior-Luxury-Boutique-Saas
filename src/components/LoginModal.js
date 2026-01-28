@@ -48,8 +48,7 @@ export class LoginModal extends HTMLElement {
     togglePasswordBtns.forEach((btn) => {
       btn.addEventListener("click", () => {
         const input = btn.previousElementSibling;
-        const type =
-          input.getAttribute("type") === "password" ? "text" : "password";
+        const type = input.getAttribute("type") === "password" ? "text" : "password";
         input.setAttribute("type", type);
 
         const svg = btn.querySelector("svg");
@@ -94,7 +93,7 @@ export class LoginModal extends HTMLElement {
       modal,
       { scale: 0.8, opacity: 0 },
       { scale: 1, opacity: 1, duration: 0.4, ease: "back.out(1.7)" },
-      "-=0.2"
+      "-=0.2",
     );
   }
 
@@ -132,7 +131,7 @@ export class LoginModal extends HTMLElement {
         opacity: 0,
         duration: 0.2,
       },
-      "-=0.2"
+      "-=0.2",
     );
   }
 

@@ -77,9 +77,7 @@ class AuthService {
       if (error) {
         // Mapeia erros do Supabase para mensagens amigáveis
         if (error.message.includes("already registered")) {
-          throw new Error(
-            "Email já está cadastrado. Por favor, faça login ou use outro email.",
-          );
+          throw new Error("Email já está cadastrado. Por favor, faça login ou use outro email.");
         }
         throw new Error(error.message);
       }
@@ -87,8 +85,7 @@ class AuthService {
       // Supabase pode retornar user mesmo sem confirmar email (depende das configurações)
       return {
         success: true,
-        message:
-          "Conta criada com sucesso! Verifique seu email para confirmar.",
+        message: "Conta criada com sucesso! Verifique seu email para confirmar.",
         user: data.user,
         session: data.session,
       };
@@ -116,9 +113,7 @@ class AuthService {
           throw new Error("Email ou senha incorretos.");
         }
         if (error.message.includes("Email not confirmed")) {
-          throw new Error(
-            "Por favor, confirme seu email antes de fazer login.",
-          );
+          throw new Error("Por favor, confirme seu email antes de fazer login.");
         }
         throw new Error(error.message);
       }
@@ -178,8 +173,7 @@ class AuthService {
 
       return {
         success: true,
-        message:
-          "Se o email existir, você receberá instruções para redefinir a senha.",
+        message: "Se o email existir, você receberá instruções para redefinir a senha.",
       };
     } catch (error) {
       console.error("❌ Erro na recuperação de senha:", error);
@@ -261,10 +255,7 @@ class AuthService {
         .single();
 
       if (error) {
-        if (
-          error.message.includes("duplicate key") &&
-          error.message.includes("cpf")
-        ) {
+        if (error.message.includes("duplicate key") && error.message.includes("cpf")) {
           throw new Error("CPF já cadastrado em outra conta");
         }
         throw new Error(error.message);
@@ -380,9 +371,7 @@ class AuthService {
    * @deprecated Supabase gerencia tokens automaticamente
    */
   setTokens() {
-    console.warn(
-      "⚠️ setTokens() está deprecated. Supabase gerencia tokens automaticamente.",
-    );
+    console.warn("⚠️ setTokens() está deprecated. Supabase gerencia tokens automaticamente.");
   }
 
   /**

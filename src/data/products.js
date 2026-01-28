@@ -117,11 +117,7 @@ export const PRODUCT_CATEGORIES = {
  */
 export function getCategoryConfig(categoryKey) {
   const normalizedKey = categoryKey?.toLowerCase();
-  return (
-    Object.values(PRODUCT_CATEGORIES).find(
-      (cat) => cat.key === normalizedKey
-    ) || null
-  );
+  return Object.values(PRODUCT_CATEGORIES).find((cat) => cat.key === normalizedKey) || null;
 }
 
 /**
@@ -161,7 +157,7 @@ export function updateProductCategory(productId, newCategory) {
     return {
       success: false,
       error: `Categoria '${newCategory}' inválida. Categorias válidas: ${getValidCategories().join(
-        ", "
+        ", ",
       )}`,
     };
   }
@@ -241,11 +237,7 @@ export const products = [
       "A bolsa Dior Toujours apresenta um design sofisticado com linhas limpas. Confeccionada em couro de bezerro granulado, possui compartimento principal espaçoso, bolso interno com zíper e alças duplas. O emblema CD em metal dourado adiciona um toque de luxo.",
     reference: "M2821OTLL_M928",
     category: "bolsa",
-    images: [
-      "/images/bolsa1.webp",
-      "/images/bolsa2.webp",
-      "/images/bolsa4.webp",
-    ],
+    images: ["/images/bolsa1.webp", "/images/bolsa2.webp", "/images/bolsa4.webp"],
     colors: [
       { name: "blue", label: "Azul", image: "/images/bolsa1.webp" },
       { name: "cream", label: "Creme", image: "/images/bolsa2.webp" },
@@ -330,11 +322,7 @@ export const products = [
       "A bolsa Dior Toujours em preto clássico. Confeccionada em couro de bezerro granulado, possui compartimento principal espaçoso, bolso interno com zíper e alças duplas.",
     reference: "M2821OTLL_M900",
     category: "bolsa",
-    images: [
-      "/images/bolsa1.webp",
-      "/images/bolsa2.webp",
-      "/images/bolsa4.webp",
-    ],
+    images: ["/images/bolsa1.webp", "/images/bolsa2.webp", "/images/bolsa4.webp"],
     colors: [
       { name: "black", label: "Preto", image: "/images/bolsa1.webp" },
       { name: "beige", label: "Bege", image: "/images/bolsa2.webp" },
@@ -416,11 +404,7 @@ export const products = [
       "A bolsa Dior Toujours em verde sofisticado. Confeccionada em couro de bezerro granulado, possui compartimento principal espaçoso e alças duplas.",
     reference: "M2821OTLL_M930",
     category: "bolsa",
-    images: [
-      "/images/bolsa1.webp",
-      "/images/bolsa2.webp",
-      "/images/bolsa4.webp",
-    ],
+    images: ["/images/bolsa1.webp", "/images/bolsa2.webp", "/images/bolsa4.webp"],
     colors: [
       { name: "green", label: "Verde", image: "/images/bolsa1.webp" },
       { name: "brown", label: "Marrom", image: "/images/bolsa2.webp" },
@@ -492,9 +476,7 @@ export const products = [
       "/images/sapato3.webp",
       "/images/sapato4.webp",
     ],
-    colors: [
-      { name: "navy", label: "Azul Marinho", image: "/images/sapato1.webp" },
-    ],
+    colors: [{ name: "navy", label: "Azul Marinho", image: "/images/sapato1.webp" }],
     sizes: ["35", "36", "37", "38", "39", "40", "41"],
     material: "Couro de bezerro",
     care: "Proteger da umidade",
@@ -508,11 +490,7 @@ export const products = [
       "A bolsa Dior Toujours em vermelho vibrante. Confeccionada em couro de bezerro granulado premium.",
     reference: "M2821OTLL_M901",
     category: "bolsa",
-    images: [
-      "/images/bolsa1.webp",
-      "/images/bolsa2.webp",
-      "/images/bolsa4.webp",
-    ],
+    images: ["/images/bolsa1.webp", "/images/bolsa2.webp", "/images/bolsa4.webp"],
     colors: [{ name: "red", label: "Vermelho", image: "/images/bolsa1.webp" }],
     sizes: ["Único"],
     material: "Couro de bezerro granulado",
@@ -598,11 +576,7 @@ export const products = [
       "A bolsa Dior Toujours em dourado sofisticado. Confeccionada em couro de bezerro granulado com acabamento metalizado.",
     reference: "M2821OTLL_M950",
     category: "bolsa",
-    images: [
-      "/images/bolsa1.webp",
-      "/images/bolsa2.webp",
-      "/images/bolsa4.webp",
-    ],
+    images: ["/images/bolsa1.webp", "/images/bolsa2.webp", "/images/bolsa4.webp"],
     colors: [
       { name: "gold", label: "Dourado", image: "/images/bolsa1.webp" },
       { name: "black", label: "Preto", image: "/images/bolsa2.webp" },
@@ -662,11 +636,7 @@ export function getProductsByCategory(category) {
  * @param {boolean} mixedCategories - Se true, mescla categorias quando não houver produtos suficientes
  * @returns {Array} - Array de produtos relacionados embaralhados e únicos
  */
-export function getRelatedProducts(
-  currentId,
-  limit = 4,
-  mixedCategories = true
-) {
+export function getRelatedProducts(currentId, limit = 4, mixedCategories = true) {
   const currentProduct = getProductById(currentId);
   if (!currentProduct) return [];
 
@@ -695,7 +665,7 @@ export function getRelatedProducts(
 
   // Filtra todos os produtos exceto o atual E variações dele
   const allOtherProducts = products.filter(
-    (p) => p.id !== currentId && p.name !== currentProduct.name
+    (p) => p.id !== currentId && p.name !== currentProduct.name,
   );
 
   // Se queremos mixed, embaralha tudo junto para máxima diversidade
@@ -704,9 +674,7 @@ export function getRelatedProducts(
   }
 
   // Se não mixed, apenas mesma categoria (sem variações de cor)
-  const sameCategory = allOtherProducts.filter(
-    (p) => p.category === currentProduct.category
-  );
+  const sameCategory = allOtherProducts.filter((p) => p.category === currentProduct.category);
 
   return removeDuplicates(shuffle(sameCategory)).slice(0, limit);
 }

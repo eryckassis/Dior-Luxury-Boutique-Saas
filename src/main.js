@@ -118,8 +118,7 @@ class Button {
   }
 
   getXY(e) {
-    const { left, top, width, height } =
-      this.DOM.button.getBoundingClientRect();
+    const { left, top, width, height } = this.DOM.button.getBoundingClientRect();
 
     const xTransformer = gsap.utils.pipe(
       gsap.utils.mapRange(0, width, 0, 100),
@@ -316,9 +315,7 @@ function initAnimatedSections() {
 
   const sections = wrapper.querySelectorAll("section");
   const images = wrapper.querySelectorAll(".bg");
-  const headings = gsap.utils.toArray(
-    ".animated-sections-wrapper .section-heading",
-  );
+  const headings = gsap.utils.toArray(".animated-sections-wrapper .section-heading");
   const outerWrappers = gsap.utils.toArray(".animated-sections-wrapper .outer");
   const innerWrappers = gsap.utils.toArray(".animated-sections-wrapper .inner");
   const clamp = gsap.utils.clamp(0, sections.length - 1);
@@ -391,10 +388,9 @@ function initAnimatedSections() {
 
     if (currentIndex >= 0) {
       gsap.set(sections[currentIndex], { zIndex: 0 });
-      tl.to(images[currentIndex], { yPercent: -15 * dFactor }).set(
-        sections[currentIndex],
-        { autoAlpha: 0 },
-      );
+      tl.to(images[currentIndex], { yPercent: -15 * dFactor }).set(sections[currentIndex], {
+        autoAlpha: 0,
+      });
     }
 
     gsap.set(sections[index], { autoAlpha: 1, zIndex: 1 });
@@ -477,9 +473,7 @@ function initAnimatedSections() {
 
     e.preventDefault();
 
-    e.wheelDeltaY < 0
-      ? gotoSection(currentIndex + 1, 1)
-      : gotoSection(currentIndex - 1, -1);
+    e.wheelDeltaY < 0 ? gotoSection(currentIndex + 1, 1) : gotoSection(currentIndex - 1, -1);
   }
 
   function handleTouchStart(e) {

@@ -122,11 +122,7 @@ export const PRODUCT_CATEGORIES = {
  */
 export function getCategoryConfig(categoryKey) {
   const normalizedKey = categoryKey?.toLowerCase();
-  return (
-    Object.values(PRODUCT_CATEGORIES).find(
-      (cat) => cat.key === normalizedKey
-    ) || null
-  );
+  return Object.values(PRODUCT_CATEGORIES).find((cat) => cat.key === normalizedKey) || null;
 }
 
 /**
@@ -166,7 +162,7 @@ export function updateProductCategory(productId, newCategory) {
     return {
       success: false,
       error: `Categoria '${newCategory}' inválida. Categorias válidas: ${getValidCategories().join(
-        ", "
+        ", ",
       )}`,
     };
   }
@@ -203,11 +199,7 @@ export const colecaoProducts = [
       "A camisa polo Dior Marinière com mangas longas de Jonathan Anderson revisita uma estética esportiva pelo olhar de moda da Maison. Confeccionada em algodão cinza e rosa, a peça destaca-se por um corte descontraído valorizado por uma inscrição Dior bordada e acabamentos canelados.",
     reference: "841V01AT060_X0200",
     category: "blazer",
-    images: [
-      "/images/vestido1.avif",
-      "/images/vestido2.webp",
-      "/images/vestido3.webp",
-    ],
+    images: ["/images/vestido1.avif", "/images/vestido2.webp", "/images/vestido3.webp"],
     colors: [
       { name: "black", label: "Preto", image: "/images/logoPreto.webp" },
       { name: "beige", label: "Bege", image: "/images/logo.webp" },
@@ -225,11 +217,7 @@ export const colecaoProducts = [
       "O icônico scarpin slingback J'Adior apresenta uma silhueta elegante e atemporal. Confeccionado em couro de bezerro técnico preto, possui a assinatura J'ADIOR na tira do calcanhar. O salto kitten de 6,5 cm oferece conforto e sofisticação para uso diário.",
     reference: "KCB453CNP_S900",
     category: "sapato",
-    images: [
-      "/images/bolsa1.avif",
-      "/images/bolsa22.webp",
-      "/images/bolsa3.webp",
-    ],
+    images: ["/images/bolsa1.avif", "/images/bolsa22.webp", "/images/bolsa3.webp"],
     colors: [{ name: "black", label: "Preto", image: "/images/sapato1.webp" }],
     sizes: ["35", "36", "37", "38", "39", "40", "41"],
     material: "Couro de bezerro",
@@ -244,11 +232,7 @@ export const colecaoProducts = [
       "A bolsa Dior Toujours apresenta um design sofisticado com linhas limpas. Confeccionada em couro de bezerro granulado, possui compartimento principal espaçoso, bolso interno com zíper e alças duplas. O emblema CD em metal dourado adiciona um toque de luxo.",
     reference: "M2821OTLL_M928",
     category: "bolsa",
-    images: [
-      "/images/blusinha1.avif",
-      "/images/blusinha2.webp",
-      "/images/blusinha3.webp",
-    ],
+    images: ["/images/blusinha1.avif", "/images/blusinha2.webp", "/images/blusinha3.webp"],
     colors: [
       { name: "blue", label: "Azul", image: "/images/bolsa1.webp" },
       { name: "cream", label: "Creme", image: "/images/bolsa2.webp" },
@@ -267,11 +251,7 @@ export const colecaoProducts = [
       "Os óculos Dior Signature apresentam uma armação oversized em acetato tartaruga. As hastes largas exibem o logotipo DIOR em metal dourado. As lentes degradê marrom oferecem proteção UV400.",
     reference: "DIORSIGNATURE_S7I",
     category: "oculos",
-    images: [
-      "/images/camisa1.avif",
-      "/images/camisa2.webp",
-      "/images/camisa3.webp",
-    ],
+    images: ["/images/camisa1.avif", "/images/camisa2.webp", "/images/camisa3.webp"],
     colors: [
       { name: "black", label: "Preto", image: "/images/oculos.webp" },
       { name: "brown", label: "Marrom", image: "/images/oculos2.webp" },
@@ -312,11 +292,7 @@ export const colecaoProducts = [
       "O colar Rose des Vents combina elegância e simbolismo. Confeccionado em ouro amarelo 18k, o pingente é ornado com diamantes cuidadosamente selecionados. Uma peça de joalheria fina que pode ser usada em qualquer ocasião.",
     reference: "JRDV95003_0000",
     category: "joias",
-    images: [
-      "/images/trevo1.avif",
-      "/images/trevo2.webp",
-      "/images/trevo3.webp",
-    ],
+    images: ["/images/trevo1.avif", "/images/trevo2.webp", "/images/trevo3.webp"],
     colors: [{ name: "gold", label: "Ouro", image: "/images/joias.avif" }],
     sizes: ["Único"],
     material: "Ouro 18k e diamantes",
@@ -384,11 +360,7 @@ export const colecaoProducts = [
       "A saia midi plissada Dior Oblique é uma peça statement que combina tradição e modernidade. Confeccionada em seda técnica com a icônica estampa Dior Oblique, apresenta plissado delicado e cintura alta. Perfeita para looks sofisticados do dia à noite.",
     reference: "151S22A8901_X0100",
     category: "saia",
-    images: [
-      "/images/vestido1.avif",
-      "/images/vestido2.webp",
-      "/images/vestido3.webp",
-    ],
+    images: ["/images/vestido1.avif", "/images/vestido2.webp", "/images/vestido3.webp"],
     colors: [
       { name: "navy", label: "Azul Marinho", image: "/images/logoPreto.webp" },
       { name: "beige", label: "Bege", image: "/images/logo.webp" },
@@ -406,11 +378,7 @@ export const colecaoProducts = [
       "Esta calça de alfaiataria Dior apresenta um corte impecável em lã fria italiana. Com cintura alta, pernas retas e vincos frontais precisos, é uma peça essencial para o guarda-roupa moderno. O acabamento interno em seda garante conforto durante todo o dia.",
     reference: "143P45A6789_C300",
     category: "calca",
-    images: [
-      "/images/calca1.avif",
-      "/images/calca2.webp",
-      "/images/calca3.webp",
-    ],
+    images: ["/images/calca1.avif", "/images/calca2.webp", "/images/calca3.webp"],
     colors: [
       { name: "black", label: "Preto", image: "/images/logoPreto.webp" },
       { name: "gray", label: "Cinza", image: "/images/logo.webp" },
@@ -428,11 +396,7 @@ export const colecaoProducts = [
       "A camisa de seda CD Icon é uma peça atemporal com detalhes refinados. Confeccionada em seda pura francesa, apresenta o bordado CD discreto no bolso frontal. O corte oversized e os punhos abotoados conferem elegância descontraída.",
     reference: "213C78B4567_X0500",
     category: "camisa",
-    images: [
-      "/images/camisa1.avif",
-      "/images/camisa2.webp",
-      "/images/camisa3.webp",
-    ],
+    images: ["/images/camisa1.avif", "/images/camisa2.webp", "/images/camisa3.webp"],
     colors: [
       { name: "white", label: "Branco", image: "/images/logo.webp" },
       { name: "black", label: "Preto", image: "/images/logoPreto.webp" },
@@ -451,11 +415,7 @@ export const colecaoProducts = [
       "A icônica bolsa Lady Dior Mini é um símbolo de elegância atemporal. O padrão cannage é meticulosamente trabalhado em couro de cordeiro, complementado por ferragens em metal dourado e os charms D.I.O.R. que adornam a alça. Uma peça de colecionador.",
     reference: "M0505ONMJ_M323",
     category: "bolsa",
-    images: [
-      "/images/bolsa1.avif",
-      "/images/bolsa22.webp",
-      "/images/bolsa3.webp",
-    ],
+    images: ["/images/bolsa1.avif", "/images/bolsa22.webp", "/images/bolsa3.webp"],
     colors: [
       { name: "black", label: "Preto", image: "/images/logoPreto.webp" },
       { name: "red", label: "Vermelho", image: "/images/logo.webp" },
@@ -475,11 +435,7 @@ export const colecaoProducts = [
       "O tênis Dior-ID combina esportividade e luxo em um design contemporâneo. Confeccionado em couro de bezerro branco com detalhes em jacquard Dior Oblique, apresenta sola ergonômica e palmilha acolchoada. O logo CD é discretamente posicionado na lateral.",
     reference: "3SN272ZJJ_H065",
     category: "sapato",
-    images: [
-      "/images/blusinha1.avif",
-      "/images/blusinha2.webp",
-      "/images/blusinha3.webp",
-    ],
+    images: ["/images/blusinha1.avif", "/images/blusinha2.webp", "/images/blusinha3.webp"],
     colors: [
       { name: "white", label: "Branco", image: "/images/logo.webp" },
       { name: "black", label: "Preto", image: "/images/logoPreto.webp" },
@@ -497,11 +453,7 @@ export const colecaoProducts = [
       "Os brincos Tribales Dior são um ícone da joalheria fantasia da Maison. Com design assimétrico, combinam uma pérola de resina frontal com uma esfera CD na parte posterior. O acabamento em metal dourado confere sofisticação a qualquer look.",
     reference: "E1045TRICY_D301",
     category: "joias",
-    images: [
-      "/images/trevo1.avif",
-      "/images/trevo2.webp",
-      "/images/trevo3.webp",
-    ],
+    images: ["/images/trevo1.avif", "/images/trevo2.webp", "/images/trevo3.webp"],
     colors: [
       { name: "gold", label: "Dourado", image: "/images/joias.avif" },
       { name: "silver", label: "Prateado", image: "/images/relogio.avif" },
@@ -519,11 +471,7 @@ export const colecaoProducts = [
       "Este vestido midi em renda é uma obra de arte da costura Dior. A renda francesa é delicadamente aplicada sobre um forro de seda pura, criando uma silhueta etérea. Com mangas três-quartos e decote em V, é perfeito para eventos especiais.",
     reference: "151R88A9012_X0800",
     category: "vestido",
-    images: [
-      "/images/vestido1.avif",
-      "/images/vestido2.webp",
-      "/images/vestido3.webp",
-    ],
+    images: ["/images/vestido1.avif", "/images/vestido2.webp", "/images/vestido3.webp"],
     colors: [
       { name: "black", label: "Preto", image: "/images/logoPreto.webp" },
       { name: "nude", label: "Nude", image: "/images/logo.webp" },
@@ -541,11 +489,7 @@ export const colecaoProducts = [
       "Os óculos DiorSoStellaire apresentam um design futurista com armação ultraleve em metal. As lentes espelhadas em degradê oferecem proteção UV total enquanto conferem um visual contemporâneo. As hastes finas exibem o logotipo Dior gravado.",
     reference: "DIORSOSTELLAIRE_O1I",
     category: "oculos",
-    images: [
-      "/images/camisa1.avif",
-      "/images/camisa2.webp",
-      "/images/camisa3.webp",
-    ],
+    images: ["/images/camisa1.avif", "/images/camisa2.webp", "/images/camisa3.webp"],
     colors: [
       { name: "gold", label: "Dourado", image: "/images/logo.webp" },
       { name: "silver", label: "Prateado", image: "/images/logoPreto.webp" },
@@ -599,11 +543,7 @@ export function getColecaoProductsByCategory(category) {
  * @param {boolean} mixedCategories - Se true, mescla categorias quando não houver produtos suficientes
  * @returns {Array} - Array de produtos relacionados embaralhados e únicos
  */
-export function getRelatedColecaoProducts(
-  currentId,
-  limit = 4,
-  mixedCategories = true
-) {
+export function getRelatedColecaoProducts(currentId, limit = 4, mixedCategories = true) {
   const currentProduct = getColecaoProductById(currentId);
   if (!currentProduct) return [];
 
@@ -632,7 +572,7 @@ export function getRelatedColecaoProducts(
 
   // Filtra todos os produtos exceto o atual E variações dele
   const allOtherProducts = colecaoProducts.filter(
-    (p) => p.id !== currentId && p.name !== currentProduct.name
+    (p) => p.id !== currentId && p.name !== currentProduct.name,
   );
 
   // Se queremos mixed, embaralha tudo junto para máxima diversidade
@@ -641,9 +581,7 @@ export function getRelatedColecaoProducts(
   }
 
   // Se não mixed, apenas mesma categoria (sem variações de cor)
-  const sameCategory = allOtherProducts.filter(
-    (p) => p.category === currentProduct.category
-  );
+  const sameCategory = allOtherProducts.filter((p) => p.category === currentProduct.category);
 
   return removeDuplicates(shuffle(sameCategory)).slice(0, limit);
 }

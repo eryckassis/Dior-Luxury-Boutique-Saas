@@ -40,8 +40,7 @@ export class DiorSpaPage extends HTMLElement {
       {
         image: "/images/cama4.webp",
         title: "Dior Spa Plaza Athénée",
-        description:
-          "Haute Couture beauty rituals in the heart of the Golden Triangle.",
+        description: "Haute Couture beauty rituals in the heart of the Golden Triangle.",
         buttonText: "Descubra",
         buttonStyle: "line",
         imagePosition: "right",
@@ -49,8 +48,7 @@ export class DiorSpaPage extends HTMLElement {
       {
         image: "/images/cama5.jpg",
         title: "Dior Spa Courchevel",
-        description:
-          "Um santuário alpino de bem-estar onde a natureza encontra o luxo.",
+        description: "Um santuário alpino de bem-estar onde a natureza encontra o luxo.",
         buttonText: "Descubra",
         buttonStyle: "line",
         imagePosition: "left",
@@ -58,8 +56,7 @@ export class DiorSpaPage extends HTMLElement {
       {
         image: "/images/cama6.jpg",
         title: "Dior Spa Saint-Tropez",
-        description:
-          "L'art de vivre na Riviera Francesa com tratamentos exclusivos.",
+        description: "L'art de vivre na Riviera Francesa com tratamentos exclusivos.",
         buttonText: "Descubra",
         buttonStyle: "line",
         imagePosition: "right",
@@ -67,8 +64,7 @@ export class DiorSpaPage extends HTMLElement {
       {
         image: "/images/cama7.jpg",
         title: "Dior Spa Marrakech",
-        description:
-          "Uma experiência sensorial única inspirada nas tradições marroquinas.",
+        description: "Uma experiência sensorial única inspirada nas tradições marroquinas.",
         buttonText: "Descubra",
         buttonStyle: "line",
         imagePosition: "left",
@@ -76,8 +72,7 @@ export class DiorSpaPage extends HTMLElement {
       {
         image: "/images/cama8.jpg",
         title: "Dior Spa Maldives",
-        description:
-          "O paraíso do bem-estar sobre as águas cristalinas do Oceano Índico.",
+        description: "O paraíso do bem-estar sobre as águas cristalinas do Oceano Índico.",
         buttonText: "Descubra",
         buttonStyle: "line",
         imagePosition: "right",
@@ -85,8 +80,7 @@ export class DiorSpaPage extends HTMLElement {
       {
         image: "/images/cama9.jpg",
         title: "Dior Spa Tokyo",
-        description:
-          "A harmonia entre a tradição japonesa e a elegância francesa.",
+        description: "A harmonia entre a tradição japonesa e a elegância francesa.",
         buttonText: "Descubra",
         buttonStyle: "line",
         imagePosition: "left",
@@ -131,7 +125,7 @@ export class DiorSpaPage extends HTMLElement {
 
       // Intro section fade in
       const introElements = this.querySelectorAll(
-        ".dior-spa-intro-subtitle, .dior-spa-intro-title, .dior-spa-intro-description"
+        ".dior-spa-intro-subtitle, .dior-spa-intro-title, .dior-spa-intro-description",
       );
       if (introElements.length) {
         window.gsap.fromTo(
@@ -148,13 +142,13 @@ export class DiorSpaPage extends HTMLElement {
               start: "top 80%",
               toggleActions: "play none none reverse",
             },
-          }
+          },
         );
       }
 
       // What's New section fade in
       const whatsNewElements = this.querySelectorAll(
-        ".dior-spa-whats-new-label, .dior-spa-whats-new-title, .dior-spa-whats-new-description"
+        ".dior-spa-whats-new-label, .dior-spa-whats-new-title, .dior-spa-whats-new-description",
       );
       if (whatsNewElements.length) {
         window.gsap.fromTo(
@@ -171,16 +165,14 @@ export class DiorSpaPage extends HTMLElement {
               start: "top 80%",
               toggleActions: "play none none reverse",
             },
-          }
+          },
         );
       }
 
       // Card section image reveal
       const cardWrapper = this.querySelector(".dior-spa-image-reveal-wrapper");
       if (cardWrapper) {
-        const overlay = cardWrapper.querySelector(
-          ".dior-spa-image-reveal-overlay"
-        );
+        const overlay = cardWrapper.querySelector(".dior-spa-image-reveal-overlay");
         const image = cardWrapper.querySelector(".dior-spa-image-reveal");
 
         if (overlay && image) {
@@ -201,13 +193,13 @@ export class DiorSpaPage extends HTMLElement {
                 duration: 1.2,
                 ease: "power3.inOut",
                 transformOrigin: "right center",
-              }
+              },
             )
             .fromTo(
               image,
               { scale: 1.3 },
               { scale: 1, duration: 1.4, ease: "power2.out" },
-              "-=0.8"
+              "-=0.8",
             );
         }
       }
@@ -229,7 +221,7 @@ export class DiorSpaPage extends HTMLElement {
               start: "top 85%",
               toggleActions: "play none none reverse",
             },
-          }
+          },
         );
       }
 
@@ -268,7 +260,7 @@ export class DiorSpaPage extends HTMLElement {
         image-position="${section.imagePosition}"
         section-index="${index}"
       ></spa-section-card>
-    `
+    `,
       )
       .join("");
   }

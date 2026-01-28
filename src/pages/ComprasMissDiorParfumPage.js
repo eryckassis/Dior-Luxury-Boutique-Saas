@@ -81,9 +81,7 @@ export class ComprasMissDiorParfumPage extends HTMLElement {
 
           // Add active class to clicked button and corresponding content
           button.classList.add("active");
-          const targetContent = this.querySelector(
-            `.tab-content[data-tab="${tabId}"]`,
-          );
+          const targetContent = this.querySelector(`.tab-content[data-tab="${tabId}"]`);
           if (targetContent) {
             targetContent.classList.add("active");
           }
@@ -92,13 +90,9 @@ export class ComprasMissDiorParfumPage extends HTMLElement {
 
       // Image Reveal Animation with GSAP
       if (window.gsap && window.ScrollTrigger) {
-        const imageRevealWrapper = this.querySelector(
-          ".image-reveal-wrapper-full",
-        );
+        const imageRevealWrapper = this.querySelector(".image-reveal-wrapper-full");
         if (imageRevealWrapper) {
-          const overlay = imageRevealWrapper.querySelector(
-            ".reveal-overlay-full",
-          );
+          const overlay = imageRevealWrapper.querySelector(".reveal-overlay-full");
           const image = imageRevealWrapper.querySelector(".reveal-image-full");
 
           const revealTl = window.gsap.timeline({
@@ -297,7 +291,4 @@ export class ComprasMissDiorParfumPage extends HTMLElement {
   }
 }
 
-customElements.define(
-  "compras-miss-dior-parfum-page",
-  ComprasMissDiorParfumPage,
-);
+customElements.define("compras-miss-dior-parfum-page", ComprasMissDiorParfumPage);

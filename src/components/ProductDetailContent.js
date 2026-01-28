@@ -53,11 +53,7 @@ export class ProductDetailContent extends HTMLElement {
    * @returns {boolean}
    */
   shouldShowColorSelector() {
-    if (
-      !this.product ||
-      !this.product.colors ||
-      this.product.colors.length === 0
-    ) {
+    if (!this.product || !this.product.colors || this.product.colors.length === 0) {
       return false;
     }
     return true;
@@ -75,16 +71,9 @@ export class ProductDetailContent extends HTMLElement {
     if (category === "sapato") {
       return "numeric"; // 35, 36, 37...
     } else if (
-      [
-        "blazer",
-        "vestido",
-        "casaco",
-        "camisa",
-        "calca",
-        "saia",
-        "jaqueta",
-        "roupa",
-      ].includes(category)
+      ["blazer", "vestido", "casaco", "camisa", "calca", "saia", "jaqueta", "roupa"].includes(
+        category,
+      )
     ) {
       return "alpha"; // P, M, G, GG ou 34, 36, 38...
     }
@@ -103,8 +92,7 @@ export class ProductDetailContent extends HTMLElement {
 
     // Inicializa preço e imagens com a primeira cor (ou valores base)
     this.currentPrice = this.product.colors?.[0]?.price || this.product.price;
-    this.currentImages =
-      this.product.colors?.[0]?.images || this.product.images;
+    this.currentImages = this.product.colors?.[0]?.images || this.product.images;
 
     this.render();
     this.initGalleryDrag();
@@ -186,10 +174,7 @@ export class ProductDetailContent extends HTMLElement {
         const wrapperWidth = wrapper.offsetWidth;
         const currentX = gsap.getProperty(track, "x") || 0;
         const slideIndex = Math.round(Math.abs(currentX) / wrapperWidth);
-        this.currentSlide = Math.max(
-          0,
-          Math.min(slideIndex, slides.length - 1),
-        );
+        this.currentSlide = Math.max(0, Math.min(slideIndex, slides.length - 1));
 
         gsap.to(track, {
           x: -(this.currentSlide * wrapperWidth),
@@ -381,11 +366,9 @@ export class ProductDetailContent extends HTMLElement {
     });
 
     // Seleção de tamanho
-    this.querySelectorAll(".product-size-item:not(.unavailable)").forEach(
-      (item) => {
-        item.addEventListener("click", () => this.selectSize(item));
-      },
-    );
+    this.querySelectorAll(".product-size-item:not(.unavailable)").forEach((item) => {
+      item.addEventListener("click", () => this.selectSize(item));
+    });
 
     // Tabs
     this.querySelectorAll(".product-tab-btn").forEach((btn, index) => {
@@ -399,12 +382,9 @@ export class ProductDetailContent extends HTMLElement {
     });
 
     // Botão Adicionar ao Carrinho
-    this.querySelector(".product-btn-primary")?.addEventListener(
-      "click",
-      () => {
-        this.addToCart();
-      },
-    );
+    this.querySelector(".product-btn-primary")?.addEventListener("click", () => {
+      this.addToCart();
+    });
 
     // Event listeners dos produtos relacionados são tratados no drag
   }
@@ -505,9 +485,7 @@ export class ProductDetailContent extends HTMLElement {
       pagination.innerHTML = this.currentImages
         .map(
           (_, index) => `
-          <div class="gallery-dot ${
-            index === 0 ? "active" : ""
-          }" data-index="${index}"></div>
+          <div class="gallery-dot ${index === 0 ? "active" : ""}" data-index="${index}"></div>
         `,
         )
         .join("");
@@ -550,10 +528,7 @@ export class ProductDetailContent extends HTMLElement {
     }
 
     // Valida cor apenas se o produto tem cores disponíveis
-    if (
-      this.shouldShowColorSelector() &&
-      !this.product.colors[this.selectedColor]
-    ) {
+    if (this.shouldShowColorSelector() && !this.product.colors[this.selectedColor]) {
       alert("Por favor, selecione uma cor");
       return;
     }
@@ -561,12 +536,8 @@ export class ProductDetailContent extends HTMLElement {
     // Adiciona ao carrinho
     const cartItem = {
       product: this.product,
-      color: this.shouldShowColorSelector()
-        ? this.product.colors[this.selectedColor]
-        : null,
-      size: this.shouldShowSizeSelector()
-        ? this.selectedSize || this.product.sizes[0]
-        : null,
+      color: this.shouldShowColorSelector() ? this.product.colors[this.selectedColor] : null,
+      size: this.shouldShowSizeSelector() ? this.selectedSize || this.product.sizes[0] : null,
     };
 
     alert(`${this.product.name} adicionado ao carrinho!`);
@@ -601,8 +572,7 @@ export class ProductDetailContent extends HTMLElement {
         const firstCard = cards[0].getBoundingClientRect();
         const lastCard = cards[cards.length - 1].getBoundingClientRect();
         const contentWidth = lastCard.right - firstCard.left;
-        const padding =
-          parseFloat(getComputedStyle(container).paddingLeft) || 0;
+        const padding = parseFloat(getComputedStyle(container).paddingLeft) || 0;
         const totalWidth = contentWidth + padding;
         const maxDrag = Math.min(0, -(totalWidth - containerWidth + padding));
 
@@ -708,9 +678,7 @@ export class ProductDetailContent extends HTMLElement {
                 .map(
                   (img, index) => `
                 <div class="product-gallery-slide">
-                  <img src="${img}" alt="${product.name} - Imagem ${
-                    index + 1
-                  }" />
+                  <img src="${img}" alt="${product.name} - Imagem ${index + 1}" />
                 </div>
               `,
                 )
@@ -735,9 +703,7 @@ export class ProductDetailContent extends HTMLElement {
             ${this.currentImages
               .map(
                 (_, index) => `
-              <div class="gallery-dot ${
-                index === 0 ? "active" : ""
-              }" data-index="${index}"></div>
+              <div class="gallery-dot ${index === 0 ? "active" : ""}" data-index="${index}"></div>
             `,
               )
               .join("")}
@@ -775,16 +741,12 @@ export class ProductDetailContent extends HTMLElement {
             this.shouldShowColorSelector()
               ? `
             <div class="product-colors">
-              <p class="product-colors-title">Cor: ${
-                product.colors[0].label
-              }</p>
+              <p class="product-colors-title">Cor: ${product.colors[0].label}</p>
               <div class="product-colors-list">
                 ${product.colors
                   .map(
                     (color, index) => `
-                  <div class="product-color-item ${
-                    index === 0 ? "active" : ""
-                  }" 
+                  <div class="product-color-item ${index === 0 ? "active" : ""}" 
                        data-color="${color.name}" 
                        title="${color.label}">
                     <img src="${color.image}" alt="${color.label}" />
@@ -861,9 +823,7 @@ export class ProductDetailContent extends HTMLElement {
               <!-- Tab Descrição -->
               <div class="product-tab-panel active" data-panel="0">
                 <div class="description-content">
-                  <p class="product-description-text collapsed">${
-                    product.fullDescription
-                  }</p>
+                  <p class="product-description-text collapsed">${product.fullDescription}</p>
                   <button class="product-ver-mais">
                     <span class="ver-mais-text">Ver mais</span>
                     <i class="fas fa-chevron-down"></i>

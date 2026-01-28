@@ -193,9 +193,7 @@ export class AppNavigation extends HTMLElement {
       });
 
       // Animação hover para cards de Alta Perfumaria
-      const altaPerfumariaCards = this.querySelectorAll(
-        ".alta-perfumaria-card",
-      );
+      const altaPerfumariaCards = this.querySelectorAll(".alta-perfumaria-card");
 
       altaPerfumariaCards.forEach((card) => {
         const cta = card.querySelector(".alta-perfumaria-card-cta");
@@ -246,8 +244,7 @@ export class AppNavigation extends HTMLElement {
       const searchInput = this.querySelector(".search-input");
       const searchBtn = this.querySelector(".search-icon-btn");
 
-      if (!searchContainer || !searchInput || !searchBtn || !window.gsap)
-        return;
+      if (!searchContainer || !searchInput || !searchBtn || !window.gsap) return;
 
       // Estado inicial - input escondido
       window.gsap.set(searchInput, {
@@ -343,9 +340,7 @@ export class AppNavigation extends HTMLElement {
     }
 
     // Links com submenu
-    const submenuTriggers = this.querySelectorAll(
-      ".moda-menu-link.has-submenu",
-    );
+    const submenuTriggers = this.querySelectorAll(".moda-menu-link.has-submenu");
     submenuTriggers.forEach((trigger) => {
       trigger.addEventListener("click", (e) => {
         e.preventDefault();
@@ -393,9 +388,7 @@ export class AppNavigation extends HTMLElement {
     }
 
     // Alta Perfumaria expansion trigger
-    const altaPerfumariaTrigger = this.querySelector(
-      "[data-alta-perfumaria-trigger]",
-    );
+    const altaPerfumariaTrigger = this.querySelector("[data-alta-perfumaria-trigger]");
     if (altaPerfumariaTrigger) {
       altaPerfumariaTrigger.addEventListener("click", (e) => {
         e.preventDefault();
@@ -404,9 +397,7 @@ export class AppNavigation extends HTMLElement {
     }
 
     // Botão de voltar do Alta Perfumaria - volta ao menu principal
-    const altaPerfumariaBackBtn = this.querySelector(
-      "[data-alta-perfumaria-back]",
-    );
+    const altaPerfumariaBackBtn = this.querySelector("[data-alta-perfumaria-back]");
     if (altaPerfumariaBackBtn) {
       altaPerfumariaBackBtn.addEventListener("click", () => {
         // Fecha Alta Perfumaria e volta direto ao menu principal
@@ -418,8 +409,7 @@ export class AppNavigation extends HTMLElement {
     const accessibilityToggle = this.querySelector(".moda-menu-checkbox");
     if (accessibilityToggle) {
       // Restaura estado salvo
-      const highContrast =
-        localStorage.getItem("dior-high-contrast") === "true";
+      const highContrast = localStorage.getItem("dior-high-contrast") === "true";
       accessibilityToggle.checked = highContrast;
       if (highContrast) {
         document.body.classList.add("high-contrast");
@@ -494,9 +484,7 @@ export class AppNavigation extends HTMLElement {
   openSpaPanel() {
     const sideMenu = this.querySelector(".moda-side-menu");
     const spaPanel = this.querySelector("[data-spa-panel]");
-    const tratamentoPanel = this.querySelector(
-      '[data-submenu-id="tratamento"]',
-    );
+    const tratamentoPanel = this.querySelector('[data-submenu-id="tratamento"]');
     const spaBackBtn = this.querySelector("[data-spa-back]");
     const tratamentoBackBtn = this.querySelector("[data-tratamento-back]");
 
@@ -545,9 +533,7 @@ export class AppNavigation extends HTMLElement {
   closeSpaPanel() {
     const sideMenu = this.querySelector(".moda-side-menu");
     const spaPanel = this.querySelector("[data-spa-panel]");
-    const tratamentoPanel = this.querySelector(
-      '[data-submenu-id="tratamento"]',
-    );
+    const tratamentoPanel = this.querySelector('[data-submenu-id="tratamento"]');
     const spaBackBtn = this.querySelector("[data-spa-back]");
     const tratamentoBackBtn = this.querySelector("[data-tratamento-back]");
 
@@ -585,18 +571,12 @@ export class AppNavigation extends HTMLElement {
   // ============================================================================
   openAltaPerfumariaPanel() {
     const sideMenu = this.querySelector(".moda-side-menu");
-    const altaPerfumariaPanel = this.querySelector(
-      "[data-alta-perfumaria-panel]",
-    );
-    const fragranciaPanel = this.querySelector(
-      '[data-submenu-id="fragrancia-feminina"]',
-    );
+    const altaPerfumariaPanel = this.querySelector("[data-alta-perfumaria-panel]");
+    const fragranciaPanel = this.querySelector('[data-submenu-id="fragrancia-feminina"]');
     const fragranciaBackBtn = this.querySelector(
       '.submenu-panel[data-submenu-id="fragrancia-feminina"] > .submenu-header .submenu-back-btn',
     );
-    const altaPerfumariaBackBtn = this.querySelector(
-      "[data-alta-perfumaria-back]",
-    );
+    const altaPerfumariaBackBtn = this.querySelector("[data-alta-perfumaria-back]");
 
     if (!altaPerfumariaPanel) return;
 
@@ -646,9 +626,7 @@ export class AppNavigation extends HTMLElement {
             altaPerfumariaPanel.classList.add("active");
 
             // Anima os cards com reveal
-            const cardImages = altaPerfumariaPanel.querySelectorAll(
-              ".alta-perfumaria-card img",
-            );
+            const cardImages = altaPerfumariaPanel.querySelectorAll(".alta-perfumaria-card img");
 
             if (cardImages.length) {
               window.gsap.fromTo(
@@ -676,15 +654,11 @@ export class AppNavigation extends HTMLElement {
 
   closeAltaPerfumariaPanel() {
     const sideMenu = this.querySelector(".moda-side-menu");
-    const altaPerfumariaPanel = this.querySelector(
-      "[data-alta-perfumaria-panel]",
-    );
+    const altaPerfumariaPanel = this.querySelector("[data-alta-perfumaria-panel]");
     const fragranciaBackBtn = this.querySelector(
       '.submenu-panel[data-submenu-id="fragrancia-feminina"] > .submenu-header .submenu-back-btn',
     );
-    const altaPerfumariaBackBtn = this.querySelector(
-      "[data-alta-perfumaria-back]",
-    );
+    const altaPerfumariaBackBtn = this.querySelector("[data-alta-perfumaria-back]");
 
     if (!altaPerfumariaPanel) return;
 
@@ -855,9 +829,7 @@ export class AppNavigation extends HTMLElement {
         // Em mobile, apenas remove as classes
         sideMenu.classList.remove("fragrance-expanded");
         sideMenu.classList.remove("alta-perfumaria-expanded");
-        const submenu = this.querySelector(
-          `[data-submenu-id="${this.currentSubmenu}"]`,
-        );
+        const submenu = this.querySelector(`[data-submenu-id="${this.currentSubmenu}"]`);
         if (submenu) submenu.classList.remove("submenu-expanded");
       } else if (window.gsap) {
         window.gsap.to(sideMenu, {
@@ -867,9 +839,7 @@ export class AppNavigation extends HTMLElement {
           onComplete: () => {
             sideMenu.classList.remove("fragrance-expanded");
             sideMenu.classList.remove("alta-perfumaria-expanded");
-            const submenu = this.querySelector(
-              `[data-submenu-id="${this.currentSubmenu}"]`,
-            );
+            const submenu = this.querySelector(`[data-submenu-id="${this.currentSubmenu}"]`);
             if (submenu) submenu.classList.remove("submenu-expanded");
           },
         });
@@ -883,9 +853,7 @@ export class AppNavigation extends HTMLElement {
       if (isMobile) {
         // Em mobile, apenas remove as classes
         sideMenu.classList.remove("tratamento-expanded");
-        const submenu = this.querySelector(
-          `[data-submenu-id="${this.currentSubmenu}"]`,
-        );
+        const submenu = this.querySelector(`[data-submenu-id="${this.currentSubmenu}"]`);
         if (submenu) submenu.classList.remove("submenu-expanded");
       } else if (window.gsap) {
         window.gsap.to(sideMenu, {
@@ -894,9 +862,7 @@ export class AppNavigation extends HTMLElement {
           ease: "power2.inOut",
           onComplete: () => {
             sideMenu.classList.remove("tratamento-expanded");
-            const submenu = this.querySelector(
-              `[data-submenu-id="${this.currentSubmenu}"]`,
-            );
+            const submenu = this.querySelector(`[data-submenu-id="${this.currentSubmenu}"]`);
             if (submenu) submenu.classList.remove("submenu-expanded");
           },
         });
@@ -909,9 +875,7 @@ export class AppNavigation extends HTMLElement {
     }
 
     const mainMenu = this.querySelector(".main-menu-content");
-    const submenu = this.querySelector(
-      `[data-submenu-id="${this.currentSubmenu}"]`,
-    );
+    const submenu = this.querySelector(`[data-submenu-id="${this.currentSubmenu}"]`);
 
     if (!mainMenu || !submenu) return;
 
@@ -1024,9 +988,7 @@ export class AppNavigation extends HTMLElement {
 
     // Fecha o painel Alta Perfumaria se estiver aberto
     if (this.altaPerfumariaExpanded) {
-      const altaPerfumariaPanel = this.querySelector(
-        "[data-alta-perfumaria-panel]",
-      );
+      const altaPerfumariaPanel = this.querySelector("[data-alta-perfumaria-panel]");
       if (altaPerfumariaPanel) {
         altaPerfumariaPanel.classList.remove("active");
         altaPerfumariaPanel.style.transform = "";
@@ -1050,9 +1012,7 @@ export class AppNavigation extends HTMLElement {
 
     // Fecha submenu se estiver aberto
     if (this.currentSubmenu) {
-      const submenu = this.querySelector(
-        `[data-submenu-id="${this.currentSubmenu}"]`,
-      );
+      const submenu = this.querySelector(`[data-submenu-id="${this.currentSubmenu}"]`);
       if (submenu) {
         submenu.style.display = "none";
         submenu.style.transform = "";

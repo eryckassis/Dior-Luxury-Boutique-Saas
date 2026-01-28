@@ -10,11 +10,7 @@ export class UserController {
       const userId = req.user.userId;
       const profile = await UserService.getProfile(userId);
 
-      return ApiResponse.success(
-        res,
-        { user: profile },
-        "Dados do perfil obtidos com sucesso",
-      );
+      return ApiResponse.success(res, { user: profile }, "Dados do perfil obtidos com sucesso");
     } catch (error) {
       console.error("❌ Erro ao buscar perfil:", error);
 
@@ -22,11 +18,7 @@ export class UserController {
         return ApiResponse.notFound(res, error.message);
       }
 
-      return ApiResponse.internalError(
-        res,
-        "Erro ao buscar dados do perfil",
-        error,
-      );
+      return ApiResponse.internalError(res, "Erro ao buscar dados do perfil", error);
     }
   }
 
@@ -40,11 +32,7 @@ export class UserController {
 
       const updatedUser = await UserService.updateProfile(userId, updateData);
 
-      return ApiResponse.success(
-        res,
-        { user: updatedUser },
-        "Dados atualizados com sucesso!",
-      );
+      return ApiResponse.success(res, { user: updatedUser }, "Dados atualizados com sucesso!");
     } catch (error) {
       console.error("❌ Erro ao atualizar perfil:", error);
 

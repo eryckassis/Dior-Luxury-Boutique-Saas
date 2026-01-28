@@ -125,10 +125,7 @@ class ReviewService {
 
   async deleteReview(reviewId) {
     try {
-      const { error } = await supabase
-        .from("reviews")
-        .delete()
-        .eq("id", reviewId);
+      const { error } = await supabase.from("reviews").delete().eq("id", reviewId);
 
       if (error) throw new Error(error.message);
     } catch (error) {

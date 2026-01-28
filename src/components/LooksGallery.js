@@ -75,8 +75,7 @@ export class LooksGallery extends HTMLElement {
       const paddingRight = parseFloat(trackStyles.paddingRight) || 0;
 
       // Largura real do conteúdo
-      const contentWidth =
-        lastCard.right - firstCard.left + paddingLeft + paddingRight;
+      const contentWidth = lastCard.right - firstCard.left + paddingLeft + paddingRight;
 
       // MaxDrag: quanto precisa mover para ver o último card completamente
       const maxDrag = Math.min(0, -(contentWidth - containerWidth));
@@ -164,9 +163,7 @@ export class LooksGallery extends HTMLElement {
       const cards = this.querySelectorAll(".look-card, .looks-drag-card");
 
       cards.forEach((card) => {
-        const image = card.querySelector(
-          ".look-card-image, .looks-drag-card-image",
-        );
+        const image = card.querySelector(".look-card-image, .looks-drag-card-image");
 
         if (!image) return;
 

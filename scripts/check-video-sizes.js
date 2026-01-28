@@ -58,9 +58,7 @@ function checkVideoSizes() {
     oversizedFiles
       .sort((a, b) => b.size - a.size)
       .forEach((f) => {
-        console.log(
-          `   ❌ ${f.name.padEnd(30)} ${formatBytes(f.size).padStart(10)}`,
-        );
+        console.log(`   ❌ ${f.name.padEnd(30)} ${formatBytes(f.size).padStart(10)}`);
       });
   }
 
@@ -70,9 +68,7 @@ function checkVideoSizes() {
     safeFiles
       .sort((a, b) => b.size - a.size)
       .forEach((f) => {
-        console.log(
-          `   ✓ ${f.name.padEnd(30)} ${formatBytes(f.size).padStart(10)}`,
-        );
+        console.log(`   ✓ ${f.name.padEnd(30)} ${formatBytes(f.size).padStart(10)}`);
       });
   }
 
@@ -85,9 +81,7 @@ function checkVideoSizes() {
 
   if (oversizedFiles.length > 0) {
     console.log(`\n💡 RECOMENDAÇÃO:`);
-    console.log(
-      `   Mova os ${oversizedFiles.length} arquivo(s) acima para um CDN externo.`,
-    );
+    console.log(`   Mova os ${oversizedFiles.length} arquivo(s) acima para um CDN externo.`);
     console.log(`   Consulte: CDN-SETUP-GUIDE.md\n`);
   } else {
     console.log(`\n🎉 Todos os vídeos estão dentro do limite do Vercel!\n`);

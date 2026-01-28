@@ -20,9 +20,7 @@ export class ModaAcessoriosContent extends HTMLElement {
     // Placeholder para funcionalidades futuras
     // Adicione aqui os event listeners e interações que precisar
 
-    console.log(
-      "ModaAcessoriosContent: Componente pronto para novas funcionalidades"
-    );
+    console.log("ModaAcessoriosContent: Componente pronto para novas funcionalidades");
   }
 
   render() {

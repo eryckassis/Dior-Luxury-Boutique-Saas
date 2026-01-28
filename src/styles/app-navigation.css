@@ -2,8 +2,6 @@
    APP NAVIGATION - Sistema de navegação multinível
    ============================================================================ */
 
-
-
 /* Header do menu lateral - X à esquerda */
 .moda-side-menu .moda-side-menu-header {
   justify-content: flex-start !important;
@@ -12,11 +10,11 @@
 /* Container dos 3 ícones - permite ajustar posição de todos juntos */
 .app-nav-icons-container {
   display: flex;
+  position: relative;
   align-items: center;
   gap: 1rem;
-  position: relative;
-  margin-right: 0;
   margin-top: 50px;
+  margin-right: 0;
 }
 
 /* Adiciona espaço para os ícones adicionais na direita */
@@ -34,16 +32,16 @@
 @media (max-width: 1024px) and (min-width: 769px) {
   .search-container {
     position: fixed;
-    left: 70px;
     top: 68px;
+    left: 70px;
     transform: translateY(-50%);
     z-index: 1001;
   }
-  
+
   .search-container .search-input {
     display: none !important;
   }
-  
+
   .search-container .search-icon-btn {
     padding: 8px;
   }
@@ -53,16 +51,16 @@
 @media (max-width: 768px) {
   .search-container {
     position: fixed;
-    left: 60px;
     top: 63px;
+    left: 60px;
     transform: translateY(-50%);
     z-index: 1001;
   }
-  
+
   .search-container .search-input {
     display: none !important;
   }
-  
+
   .search-container .search-icon-btn {
     padding: 8px;
   }
@@ -71,40 +69,40 @@
 /* iPhone 14 Pro Max / 15 Pro Max / 16 Pro Max (430px) */
 @media (max-width: 430px) {
   .search-container {
-    left: 55px;
     top: 58px;
+    left: 55px;
   }
 }
 
 /* iPhone 14 Pro / 15 Pro / 16 Pro (393px) */
 @media (max-width: 393px) {
   .search-container {
-    left: 52px;
     top: 36px;
+    left: 52px;
   }
 }
 
 /* iPhone SE / iPhone 14 / 15 / 16 (390px) */
 @media (max-width: 390px) {
   .search-container {
-    left: 50px;
     top: 58px;
+    left: 50px;
   }
 }
 
 /* iPhone SE 1st gen e menores (375px) */
 @media (max-width: 375px) {
   .search-container {
-    left: 48px;
     top: 58px;
+    left: 48px;
   }
 }
 
 /* Telas muito pequenas (320px) */
 @media (max-width: 320px) {
   .search-container {
-    left: 45px;
     top: 32px;
+    left: 45px;
   }
 }
 
@@ -114,29 +112,29 @@
 
 .moda-menu-container {
   position: relative;
-  overflow: hidden;
   width: 100%;
   height: calc(100vh - 120px);
+  overflow: hidden;
 }
 
 .main-menu-content {
   display: flex;
-  flex-direction: column;
-  height: 100%;
-  padding: 0 2.5rem 1rem 2.5rem;
   position: absolute;
-  width: 100%;
-  left: 0;
   top: 0;
-  overflow-y: auto;
+  left: 0;
+  flex-direction: column;
+  padding: 0 2.5rem 1rem 2.5rem;
+  width: 100%;
+  height: 100%;
   overflow-x: hidden;
+  overflow-y: auto;
 }
 
 /* Esconde a scrollbar */
 .main-menu-content::-webkit-scrollbar {
+  display: none;
   width: 0;
   height: 0;
-  display: none;
 }
 
 .main-menu-content {
@@ -147,19 +145,19 @@
 /* Link com submenu */
 .moda-menu-link.has-submenu {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   cursor: pointer;
 }
 
 /* Remove arrow padrão do moda-acessorios.css para links com submenu */
 .moda-menu-link.has-submenu::before {
-  content: "›";
   position: absolute;
   right: 0;
   opacity: 0.4;
-  font-size: 1.4rem;
+  content: "›";
   font-weight: 300;
+  font-size: 1.4rem;
 }
 
 /* Submenu Panel */
@@ -167,19 +165,19 @@
   position: absolute;
   top: 0;
   left: 0;
+  transform: translateX(100%);
+  background: #f5f5f5;
   width: 100%;
   height: 100%;
-  background: #f5f5f5;
-  overflow-y: auto;
   overflow-x: hidden;
-  transform: translateX(100%);
+  overflow-y: auto;
 }
 
 /* Esconde a scrollbar dos submenus */
 .submenu-panel::-webkit-scrollbar {
+  display: none;
   width: 0;
   height: 0;
-  display: none;
 }
 
 .submenu-panel {
@@ -188,34 +186,34 @@
 }
 
 .submenu-header {
-  padding: 1.5rem 2.5rem 1rem;
   border-bottom: none;
+  padding: 1.5rem 2.5rem 1rem;
 }
 
 /* Header do submenu expandido - linha se estende até os cards */
 .submenu-expanded .submenu-header {
-  margin-right: -440px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  padding-bottom: 1rem;
-  padding-top: 1rem;
-  margin-bottom: 1rem;
   margin-top: 0.5rem;
+  margin-right: -440px;
+  margin-bottom: 1rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 .submenu-back-btn {
-  background: transparent;
-  border: none;
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-family: "Hellix", sans-serif;
-  font-size: 1rem;
-  font-weight: 500;
-  color: #000;
-  cursor: pointer;
-  padding: 0;
   transition: opacity 0.3s ease;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  padding: 0;
+  color: #000;
+  font-weight: 500;
+  font-size: 1rem;
+  font-family: "Hellix", sans-serif;
 }
 
 .submenu-back-btn:hover {
@@ -229,17 +227,17 @@
 /* Submenu Icons */
 .submenu-icons {
   margin-bottom: 1rem;
-  padding-bottom: 1rem;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding-bottom: 1rem;
 }
 
 .submenu-icons-title {
-  font-family: "Hellix", sans-serif;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  color: #666;
   margin-bottom: 0.75rem;
+  color: #666;
+  font-weight: 600;
+  font-size: 0.75rem;
+  font-family: "Hellix", sans-serif;
+  letter-spacing: 0.1em;
 }
 
 .submenu-icons-grid {
@@ -253,21 +251,21 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-decoration: none;
   transition: transform 0.3s ease;
+  text-decoration: none;
 }
 
 .submenu-icon-item img {
+  margin-bottom: 0.4rem;
   width: 65px;
   height: 65px;
   object-fit: contain;
-  margin-bottom: 0.4rem;
 }
 
 .submenu-icon-item span {
-  font-family: "Hellix", sans-serif;
-  font-size: 0.8rem;
   color: #333;
+  font-size: 0.8rem;
+  font-family: "Hellix", sans-serif;
   text-align: center;
 }
 
@@ -280,14 +278,14 @@
 }
 
 .submenu-link {
-  font-family: "Hellix", sans-serif;
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: #333;
-  text-decoration: none;
-  padding: 0.5rem 0;
-  transition: color 0.3s ease;
   position: relative;
+  transition: color 0.3s ease;
+  padding: 0.5rem 0;
+  color: #333;
+  font-weight: 500;
+  font-size: 0.95rem;
+  font-family: "Hellix", sans-serif;
+  text-decoration: none;
 }
 
 .submenu-link:hover {
@@ -295,22 +293,22 @@
 }
 
 .submenu-link-bold {
-  font-weight: 600;
   color: #000;
+  font-weight: 600;
 }
 
 /* Submenu Featured */
 .submenu-featured {
-  margin-bottom: 1.5rem;
   position: relative;
+  margin-bottom: 1.5rem;
   border-radius: 8px;
   overflow: hidden;
 }
 
 .submenu-featured img {
+  display: block;
   width: 100%;
   height: auto;
-  display: block;
 }
 
 .submenu-featured-text {
@@ -321,17 +319,17 @@
 }
 
 .submenu-featured-text h3 {
-  font-family: "Hellix", sans-serif;
-  font-size: 1.1rem;
-  font-weight: 500;
   margin-bottom: 0.5rem;
+  font-weight: 500;
+  font-size: 1.1rem;
+  font-family: "Hellix", sans-serif;
 }
 
 .submenu-featured-link {
-  color: #fff;
-  text-decoration: underline;
-  font-size: 0.9rem;
   transition: opacity 0.3s ease;
+  color: #fff;
+  font-size: 0.9rem;
+  text-decoration: underline;
 }
 
 .submenu-featured-link:hover {
@@ -341,30 +339,30 @@
 /* Menu Footer no menu principal */
 .main-menu-content .moda-menu-contact {
   margin-top: auto;
-  padding-top: 1rem;
-  border-top: 1px solid rgba(0, 0, 0, 0.15);
   margin-bottom: 1rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
+  padding-top: 1rem;
 }
 
 .main-menu-content .moda-menu-contact-title {
-  font-family: "Hellix", sans-serif;
-  font-size: 0.7rem;
-  font-weight: 300;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: #000;
   margin-bottom: 0.5rem;
+  color: #000;
+  font-weight: 300;
+  font-size: 0.7rem;
+  font-family: "Hellix", sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .main-menu-content .moda-menu-contact-link {
   display: block;
-  font-family: "Hellix", sans-serif;
-  font-size: 0.85rem;
-  font-weight: 400;
-  color: #333;
-  text-decoration: none;
-  padding: 0.3rem 0;
   transition: opacity 0.3s ease;
+  padding: 0.3rem 0;
+  color: #333;
+  font-weight: 400;
+  font-size: 0.85rem;
+  font-family: "Hellix", sans-serif;
+  text-decoration: none;
 }
 
 .main-menu-content .moda-menu-contact-link:hover {
@@ -372,46 +370,46 @@
 }
 
 .main-menu-content .moda-menu-footer {
-  padding-top: 1rem;
-  : 1px solid rgba(0, border-top 0, 0, 0.15);
   margin-right: -2rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
+  padding-top: 1rem;
   padding-right: 2rem;
 }
 
 .main-menu-content .moda-menu-accessibility {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   gap: 0.5rem;
-  font-family: "Hellix", sans-serif;
-  font-size: 0.85rem;
-  color: #333;
   cursor: pointer;
   margin-bottom: 1rem;
   padding: 0.3rem 0;
+  color: #333;
+  font-size: 0.85rem;
+  font-family: "Hellix", sans-serif;
 }
 
 .main-menu-content .moda-menu-checkbox {
   position: relative;
+  appearance: none;
+  transition: background 0.3s ease;
+  cursor: pointer;
+  border-radius: 12px;
+  background: #ddd;
   width: 44px;
   height: 24px;
-  appearance: none;
-  background: #ddd;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: background 0.3s ease;
 }
 
 .main-menu-content .moda-menu-checkbox::before {
-  content: "";
   position: absolute;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: #fff;
   top: 2px;
   left: 2px;
   transition: transform 0.3s ease;
+  border-radius: 50%;
+  background: #fff;
+  width: 20px;
+  height: 20px;
+  content: "";
 }
 
 .main-menu-content .moda-menu-checkbox:checked {
@@ -425,33 +423,33 @@
 /* Toggle Button Container - estilo pill/switch */
 .main-menu-content .moda-menu-tabs {
   display: flex;
-  gap: 0;
-  padding: 3px;
-  background: #4a4a4a;
-  border-radius: 5px;
   position: relative;
-  margin-left: -2rem;
+  gap: 0;
   margin-right: -2rem;
+  margin-left: -2rem;
+  border-radius: 5px;
+  background: #4a4a4a;
+  padding: 3px;
   width: calc(105% + 2.8rem);
 }
 
 /* Botão individual do toggle */
 .main-menu-content .moda-menu-tab {
+  position: relative;
   flex: 1;
-  text-align: center;
-  font-family: "Hellix", sans-serif;
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: #fff;
-  text-decoration: none;
-  padding: 1rem 0.8rem;
-  background: transparent;
-  border: none;
-  border-radius: 5px;
+  z-index: 1;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
-  position: relative;
-  z-index: 1;
+  border: none;
+  border-radius: 5px;
+  background: transparent;
+  padding: 1rem 0.8rem;
+  color: #fff;
+  font-weight: 500;
+  font-size: 0.9rem;
+  font-family: "Hellix", sans-serif;
+  text-align: center;
+  text-decoration: none;
   white-space: nowrap;
 }
 
@@ -462,14 +460,14 @@
 
 /* Botão ativo do toggle */
 .main-menu-content .moda-menu-tab-active {
-  color: #333;
-  background-color: #fff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  background-color: #fff;
+  color: #333;
 }
 
 .main-menu-content .moda-menu-tab-active:hover {
-  background-color: #fff;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
 }
 
 /* Responsive */
@@ -491,20 +489,20 @@
 
   /* Toggle Tabs em mobile - ajuste para caber melhor */
   .main-menu-content .moda-menu-tabs {
-    margin-left: -1.4rem;
-    margin-right: -1.4rem;
-    width: calc(100% + 2.7rem);
-    padding: 2px;
-    border-radius: 8px;
     position: relative;
     top: 15px;
+    margin-right: -1.4rem;
+    margin-left: -1.4rem;
+    border-radius: 8px;
+    padding: 2px;
+    width: calc(100% + 2.7rem);
   }
 
   .main-menu-content .moda-menu-tab {
-    font-size: 0.80rem;
-    padding: 0.90rem 0.5rem;
-    white-space: normal;
+    padding: 0.9rem 0.5rem;
+    font-size: 0.8rem;
     line-height: 1.2;
+    white-space: normal;
   }
 }
 
@@ -515,8 +513,8 @@
   }
 
   .main-menu-content .moda-menu-tab {
-    font-size: 0.7rem;
     padding: 0.75rem 0.4rem;
+    font-size: 0.7rem;
   }
 }
 
@@ -533,9 +531,9 @@
 
 .submenu-left-content {
   flex: 0 0 auto;
-  width: 100%;
-  padding: 2rem 2.5rem;
   transition: width 0.4s ease;
+  padding: 2rem 2.5rem;
+  width: 100%;
 }
 
 /* Painel de locais do Spa - inicialmente escondido */
@@ -543,19 +541,19 @@
   position: absolute;
   top: 80px;
   left: 100%;
-  width: 380px;
-  height: calc(100% - 80px);
+  visibility: hidden;
+  opacity: 0;
   background: #f5f5f5;
   padding: 2rem 2.5rem;
-  opacity: 0;
-  visibility: hidden;
+  width: 380px;
+  height: calc(100% - 80px);
 
   overflow-y: auto;
 }
 
 .spa-locations-panel.active {
-  opacity: 1;
   visibility: visible;
+  opacity: 1;
 }
 
 .spa-locations-list {
@@ -565,15 +563,15 @@
 }
 
 .spa-location-link {
-  font-family: "Hellix", sans-serif;
-  font-size: 1rem;
-  font-weight: 500;
-  color: #1a1a1a;
-  text-decoration: none;
-  padding: 0.85rem 0;
+  display: block;
 
   transition: all 0.3s ease;
-  display: block;
+  padding: 0.85rem 0;
+  color: #1a1a1a;
+  font-weight: 500;
+  font-size: 1rem;
+  font-family: "Hellix", sans-serif;
+  text-decoration: none;
 }
 
 .spa-location-link:first-child {
@@ -589,10 +587,10 @@
 }
 
 .spa-location-link.spa-view-all {
-  font-weight: 500;
   margin-top: 1rem;
   border: none;
   color: #1a1a1a;
+  font-weight: 500;
 }
 
 .spa-location-link.spa-view-all:hover {
@@ -602,16 +600,16 @@
 /* Submenu link com indicador de expansão */
 .submenu-link.has-spa-submenu {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   cursor: pointer;
 }
 
 .submenu-link.has-spa-submenu::after {
-  content: "·";
-  font-size: 1.5rem;
-  color: #999;
   margin-left: 0.5rem;
+  content: "·";
+  color: #999;
+  font-size: 1.5rem;
 }
 
 /* Menu lateral expandido quando Spa está aberto */
@@ -631,9 +629,9 @@
 
 /* Menu expandido para Fragrância Feminina */
 .moda-side-menu.fragrance-expanded {
+  transition: width 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   width: 900px;
   max-width: 95vw;
-  transition: width 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 /* Layout do submenu expandido */
@@ -645,94 +643,92 @@
 
 .submenu-expanded-content {
   display: flex;
-  flex: 1;
-  overflow: hidden;
-  height: calc(100% - 80px);
   position: relative;
+  flex: 1;
+  height: calc(100% - 80px);
+  overflow: hidden;
 }
 
 /* Coluna esquerda - Links */
 .submenu-expanded-left {
+  padding: 0 2rem;
   width: 320px;
   min-width: 280px;
-  padding: 0 2rem;
 }
 
 /* Coluna direita - Cards/Imagens */
 .submenu-expanded-right {
-  flex: 1;
-  padding: 0rem;
   display: flex;
+  flex: 1;
   flex-direction: column;
   gap: 0.5rem;
-  overflow: hidden;
   background: #f5f5f5;
+  padding: 0rem;
   height: 100%;
   max-height: 100%;
+  overflow: hidden;
 }
 
 /* Cards de fragrância */
 .fragrance-card {
+  display: block;
   position: relative;
   right: 6px;
   bottom: 32px;
-  overflow: hidden;
   flex: 1;
-  min-height: 0;
   cursor: pointer;
-  text-decoration: none;
-  display: block;
   border-radius: 6px;
+  min-height: 0;
+  overflow: hidden;
+  text-decoration: none;
 }
 
 .fragrance-card img {
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
-
-
 
 .fragrance-card-overlay {
   position: absolute;
+  right: 0;
   bottom: 0;
   left: 0;
-  right: 0;
   padding: 1.5rem;
   text-align: center;
 }
 
 .fragrance-card-title {
-  font-family: "Hellix", sans-serif;
-  font-size: 1rem;
-  font-weight: 400;
-  color: #fff;
   margin: 0 0 0.5rem 0;
+  color: #fff;
+  font-weight: 400;
+  font-size: 1rem;
+  font-family: "Hellix", sans-serif;
 }
 
 .fragrance-card-subtitle {
-  font-family: "Hellix", sans-serif;
-  font-size: 0.85rem;
-  font-weight: 400;
-  color: #fff;
-  margin: 0;
-  text-decoration: none;
   display: inline-block;
   position: relative;
+  margin: 0;
+  color: #fff;
+  font-weight: 400;
+  font-size: 0.85rem;
+  font-family: "Hellix", sans-serif;
+  text-decoration: none;
   --underline-width: 0%;
 }
 
 /* Underline animado com GSAP */
 .fragrance-card-subtitle::after {
-  content: "";
   position: absolute;
   bottom: -2px;
   left: 0;
+  transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  background-color: #fff;
   width: var(--underline-width, 0%);
   height: 1px;
-  background-color: #fff;
-  transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  content: "";
 }
 
 /* Footer CTA no submenu de fragrâncias */
@@ -742,20 +738,20 @@
 }
 
 .submenu-footer-link {
-  font-family: "Hellix", sans-serif;
-  font-size: 0.9rem;
-  font-weight: 400;
-  color: #333;
-  text-decoration: none;
-  text-align: center;
   display: block;
-  line-height: 1.5;
+  position: relative;
+  bottom: 40px;
+  border-radius: 5px;
   background: #fff;
   padding: 1rem 1.5rem;
-  border-radius: 5px;
   padding-top: 0.6rem;
-  position:relative;
-  bottom: 40px;
+  color: #333;
+  font-weight: 400;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  font-family: "Hellix", sans-serif;
+  text-align: center;
+  text-decoration: none;
 }
 
 /* ============================================================================
@@ -774,25 +770,25 @@
 }
 
 .submenu-link.has-alta-perfumaria .chevron {
-  font-size: 1.2rem;
+  margin-left: 0.3rem;
   color: #999;
   font-weight: 300;
-  margin-left: 0.3rem;
+  font-size: 1.2rem;
 }
 
 /* Painel de Alta Perfumaria */
 .alta-perfumaria-panel {
+  display: flex;
   position: absolute;
   top: 0;
   right: 0;
-  width: calc(100% - 320px);
-  height: 100%;
-  background: #f5f5f5;
-  display: flex;
   gap: 0;
-  z-index: 10;
   visibility: hidden;
   opacity: 0;
+  z-index: 10;
+  background: #f5f5f5;
+  width: calc(100% - 320px);
+  height: 100%;
 }
 
 .alta-perfumaria-panel.active {
@@ -802,28 +798,28 @@
 
 /* Coluna Esquerda - Links */
 .alta-perfumaria-left {
-  width: 280px;
-  min-width: 250px;
-  padding: 1.5rem 2rem;
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
   background: #f5f5f5;
+  padding: 1.5rem 2rem;
+  width: 280px;
+  min-width: 250px;
+  overflow-y: auto;
 }
 
 .alta-perfumaria-divider {
+  margin: 1rem 0;
+  background: rgba(0, 0, 0, 0.1);
   width: 100%;
   height: 1px;
-  background: rgba(0, 0, 0, 0.1);
-  margin: 1rem 0;
 }
 
 .alta-perfumaria-section-title {
-   font-family: "SF Pro Text";
-  font-size: 0.95rem;
-  color: #000;
   display: block;
   margin-bottom: 0.75rem;
+  color: #000;
+  font-size: 0.95rem;
+  font-family: "SF Pro Text";
 }
 
 .alta-perfumaria-links,
@@ -841,8 +837,8 @@
 
 /* Coluna Direita - Cards */
 .alta-perfumaria-right {
-  flex: 1;
   display: flex;
+  flex: 1;
   flex-direction: column;
   gap: 0.5rem;
   padding: 0.3rem;
@@ -851,21 +847,21 @@
 
 /* Cards de Alta Perfumaria */
 .alta-perfumaria-card {
-  flex: 1;
+  display: block;
   position: relative;
   bottom: 30px;
-  overflow: hidden;
+  flex: 1;
   border-radius: 6px;
-  text-decoration: none;
-  display: block;
   min-height: 0;
+  overflow: hidden;
+  text-decoration: none;
 }
 
 .alta-perfumaria-card img {
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .alta-perfumaria-card:hover img {
@@ -873,45 +869,45 @@
 }
 
 .alta-perfumaria-card-overlay {
+  display: flex;
   position: absolute;
+  right: 0;
   bottom: 0;
   left: 0;
-  right: 0;
-  padding: 1.5rem;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, transparent 100%);
-  display: flex;
   flex-direction: column;
   gap: 0.3rem;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, transparent 100%);
+  padding: 1.5rem;
 }
 
 .alta-perfumaria-card-label {
-  font-family: "Hellix", sans-serif;
-  font-size: 0.85rem;
-  font-weight: 400;
   color: #fff;
+  font-weight: 400;
+  font-size: 0.85rem;
+  font-family: "Hellix", sans-serif;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 .alta-perfumaria-card-cta {
-  font-family: "Hellix", sans-serif;
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: #fff;
-  text-decoration: none;
-  position: relative;
   display: inline-block;
+  position: relative;
+  color: #fff;
+  font-weight: 500;
+  font-size: 0.9rem;
+  font-family: "Hellix", sans-serif;
+  text-decoration: none;
   --underline-width: 0%;
 }
 
 .alta-perfumaria-card-cta::after {
-  content: "";
   position: absolute;
   bottom: -2px;
   left: 0;
+  transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  background-color: #fff;
   width: var(--underline-width, 0%);
   height: 1px;
-  background-color: #fff;
-  transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  content: "";
 }
 
 /* Footer CTA no Alta Perfumaria */
@@ -922,8 +918,8 @@
 
 .alta-perfumaria-left .submenu-footer-link {
   bottom: 0;
-  font-size: 0.85rem;
   padding: 0.8rem 1rem;
+  font-size: 0.85rem;
 }
 
 /* Footer mobile - escondido por padrão em desktop */
@@ -945,9 +941,9 @@
   }
 
   .alta-perfumaria-left {
+    padding: 1rem 1.5rem;
     width: 240px;
     min-width: 200px;
-    padding: 1rem 1.5rem;
   }
 }
 
@@ -956,11 +952,11 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
     flex-direction: column;
     transform: translateX(100%);
     transition: transform 0.3s ease;
+    width: 100%;
+    height: 100%;
   }
 
   .alta-perfumaria-panel.active {
@@ -968,10 +964,10 @@
   }
 
   .alta-perfumaria-left {
-    width: 100%;
     flex-shrink: 0;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     padding-bottom: 1rem;
+    width: 100%;
   }
 
   .alta-perfumaria-right {
@@ -996,10 +992,10 @@
   }
 
   .submenu-expanded-left {
-    width: 100%;
     border-right: none;
     border-bottom: 1px solid rgba(0, 0, 0, 0.08);
     padding-bottom: 1rem;
+    width: 100%;
   }
 
   .submenu-expanded-right {
@@ -1009,11 +1005,11 @@
 
 @media (max-width: 768px) {
   .spa-locations-panel {
-    width: 100%;
-    left: 0;
     top: 0;
-    height: 100%;
+    left: 0;
     transform: translateX(100%);
+    width: 100%;
+    height: 100%;
   }
 
   .spa-locations-panel.active {
@@ -1035,11 +1031,11 @@
   .moda-side-menu.fragrance-expanded,
   .moda-side-menu.spa-expanded,
   .moda-side-menu.alta-perfumaria-expanded {
+    left: calc(-100vw) !important;
     width: calc(100vw - 16px) !important;
     max-width: 100vw !important;
-    left: calc(-100vw) !important;
-    overflow-y: auto !important;
     overflow-x: hidden !important;
+    overflow-y: auto !important;
   }
 
   .moda-side-menu.active,
@@ -1051,49 +1047,49 @@
 
   /* Submenu expandido em mobile - layout vertical scrollável */
   .submenu-panel.submenu-expanded {
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-    height: 100% !important;
     display: block !important;
+    height: 100% !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
   }
 
   .submenu-expanded-content {
+    display: flex !important;
     flex-direction: column !important;
     height: auto !important;
     min-height: auto !important;
     overflow: visible !important;
-    display: flex !important;
   }
 
   .submenu-expanded-left {
-    width: 100% !important;
-    min-width: 100% !important;
-    padding: 1rem 1.5rem !important;
+    flex-shrink: 0 !important;
     border-right: none !important;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
-    flex-shrink: 0 !important;
+    padding: 1rem 1.5rem !important;
+    width: 100% !important;
+    min-width: 100% !important;
   }
 
   /* Cards de Fragrância em mobile - empilhados verticalmente */
   .submenu-expanded-right {
+    flex-shrink: 0 !important;
     flex-direction: column !important;
+    gap: 1rem !important;
+    padding: 1rem !important;
     height: auto !important;
     min-height: auto !important;
     max-height: none !important;
-    padding: 1rem !important;
-    gap: 1rem !important;
-    flex-shrink: 0 !important;
     overflow: visible !important;
   }
 
   .fragrance-card {
+    position: relative !important;
+    right: 0 !important;
+    bottom: 0 !important;
     flex: none !important;
     width: 100% !important;
     height: 280px !important;
     min-height: 280px !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    position: relative !important;
   }
 
   .fragrance-card img {
@@ -1104,11 +1100,11 @@
 
   /* Header do submenu expandido - ajuste para mobile */
   .submenu-expanded .submenu-header {
-    margin-right: 0 !important;
     position: sticky !important;
     top: 0 !important;
-    background: #f5f5f5 !important;
     z-index: 5 !important;
+    margin-right: 0 !important;
+    background: #f5f5f5 !important;
   }
 
   /* Alta Perfumaria em mobile - scrollável */
@@ -1116,24 +1112,26 @@
     position: absolute !important;
     top: 0 !important;
     left: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    min-height: unset !important;
-    max-height: 100% !important;
     flex-direction: column !important;
     transform: translateX(100%) !important;
     visibility: hidden !important;
     opacity: 0 !important;
     z-index: 20 !important;
-    overflow-y: scroll !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: unset !important;
+    max-height: 100% !important;
     overflow-x: hidden !important;
+    overflow-y: scroll !important;
     -webkit-overflow-scrolling: touch !important;
-    overscroll-behavior-y: auto !important;
     display: block !important;
-    transition: transform 0.3s ease, opacity 0.3s ease !important;
+    transition:
+      transform 0.3s ease,
+      opacity 0.3s ease !important;
+    margin: 0 !important;
     background: #f5f5f5 !important;
     padding: 0 0 2rem 0 !important;
-    margin: 0 !important;
+    overscroll-behavior-y: auto !important;
     touch-action: pan-y !important;
   }
 
@@ -1145,29 +1143,29 @@
 
   .alta-perfumaria-left {
     display: block !important;
-    width: 100% !important;
-    padding: 1rem 1.5rem 0.5rem 1.5rem !important;
     margin: 0 !important;
+    padding: 1rem 1.5rem 0.5rem 1.5rem !important;
+    width: 100% !important;
     overflow: visible !important;
   }
 
   /* Cards Alta Perfumaria em mobile - empilhados verticalmente */
   .alta-perfumaria-right {
     display: block !important;
-    padding: 0.5rem 1rem 1rem 1rem !important;
     margin: 0 !important;
+    padding: 0.5rem 1rem 1rem 1rem !important;
     overflow: visible !important;
   }
 
   .alta-perfumaria-card {
     display: block !important;
+    position: relative !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    margin-bottom: 1rem !important;
     width: 100% !important;
     height: 320px !important;
     min-height: 280px !important;
-    bottom: 0 !important;
-    margin-bottom: 1rem !important;
-    position: relative !important;
-    top: 0 !important;
   }
 
   .alta-perfumaria-card:last-of-type {
@@ -1177,8 +1175,8 @@
   /* Footer mobile dentro do alta-perfumaria-right */
   .alta-perfumaria-footer-mobile {
     display: block !important;
-    padding: 1.5rem 0 1rem 0 !important;
     margin: 0 !important;
+    padding: 1.5rem 0 1rem 0 !important;
   }
 
   .alta-perfumaria-footer-mobile .submenu-footer-link {
@@ -1220,18 +1218,18 @@
 
   .submenu-footer-link {
     bottom: 0;
-    font-size: 0.85rem;
     padding: 0.8rem 1rem;
+    font-size: 0.85rem;
   }
 
   /* Spa locations panel mobile */
   .spa-locations-panel {
-    width: 100% !important;
-    left: 0;
-    top: 0;
-    height: 100%;
-    transform: translateX(100%);
     position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateX(100%);
+    width: 100% !important;
+    height: 100%;
   }
 
   .spa-locations-panel.active {
@@ -1245,11 +1243,11 @@
   .moda-side-menu.fragrance-expanded,
   .moda-side-menu.spa-expanded,
   .moda-side-menu.alta-perfumaria-expanded {
-    width: calc(100vw - 16px) !important;
-    left: calc(-100vw) !important;
     top: 8px;
-    height: calc(100vh - 16px);
+    left: calc(-100vw) !important;
     border-radius: 12px;
+    width: calc(100vw - 16px) !important;
+    height: calc(100vh - 16px);
   }
 
   .moda-side-menu.active,
@@ -1264,7 +1262,7 @@
     height: 240px !important;
     min-height: 240px !important;
   }
-  
+
   .alta-perfumaria-card {
     height: 280px !important;
     min-height: 240px !important;
@@ -1299,8 +1297,8 @@
 
   .alta-perfumaria-links .submenu-link,
   .alta-perfumaria-links-main .submenu-link {
-    font-size: 0.85rem;
     padding: 0.4rem 0;
+    font-size: 0.85rem;
   }
 }
 
@@ -1314,8 +1312,8 @@ body.high-contrast .moda-side-menu {
 }
 
 body.high-contrast .moda-side-menu-header {
-  background: #000;
   border-bottom-color: rgba(255, 255, 255, 0.2);
+  background: #000;
 }
 
 body.high-contrast .moda-side-menu-close {
@@ -1341,8 +1339,8 @@ body.high-contrast .submenu-panel {
 }
 
 body.high-contrast .submenu-header {
-  background: #000 !important;
   border-bottom-color: rgba(255, 255, 255, 0.2) !important;
+  background: #000 !important;
 }
 
 body.high-contrast .submenu-back-btn {
@@ -1384,9 +1382,9 @@ body.high-contrast .submenu-expanded-content {
 }
 
 body.high-contrast .submenu-expanded-left {
-  background: #000 !important;
   border-right-color: rgba(255, 255, 255, 0.2) !important;
   border-bottom-color: rgba(255, 255, 255, 0.2) !important;
+  background: #000 !important;
 }
 
 body.high-contrast .submenu-expanded-right {
@@ -1420,9 +1418,9 @@ body.high-contrast .submenu-footer-cta {
 }
 
 body.high-contrast .submenu-footer-link {
-  color: #fff !important;
-  background: #1a1a1a !important;
   border-color: rgba(255, 255, 255, 0.3) !important;
+  background: #1a1a1a !important;
+  color: #fff !important;
 }
 
 /* Cards de Fragrância */
@@ -1454,9 +1452,9 @@ body.high-contrast .alta-perfumaria-panel {
 
 /* Menu expandido para Tratamento */
 .moda-side-menu.tratamento-expanded {
-  width: 650px!important;
-  max-width: 99vw;
   transition: width 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  width: 650px !important;
+  max-width: 99vw;
 }
 
 /* Layout do submenu expandido de Tratamento */
@@ -1468,27 +1466,27 @@ body.high-contrast .alta-perfumaria-panel {
 
 .tratamento-expanded-content {
   display: flex;
-  flex: 1;
-  overflow: hidden;
-  height: calc(100% - 80px);
   position: relative;
+  flex: 1;
+  height: calc(100% - 80px);
+  overflow: hidden;
 }
 
 /* Coluna esquerda - Links e Ícones */
 .tratamento-expanded-left {
-  width: 300px;
-  min-width: 280px;
-  padding: 0 2rem;
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
   border-right: 1px solid rgba(0, 0, 0, 0.06);
+  padding: 0 2rem;
+  width: 300px;
+  min-width: 280px;
+  overflow-y: auto;
 }
 
 /* Esconde scrollbar */
 .tratamento-expanded-left::-webkit-scrollbar {
-  width: 0;
   display: none;
+  width: 0;
 }
 
 .tratamento-expanded-left {
@@ -1503,29 +1501,29 @@ body.high-contrast .alta-perfumaria-panel {
 }
 
 .tratamento-icons-title {
-  font-family: "Hellix", sans-serif;
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  color: #888;
   margin: 0 0 1.2rem 0;
+  color: #888;
+  font-weight: 500;
+  font-size: 0.75rem;
+  font-family: "Hellix", sans-serif;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
 .tratamento-icons-grid {
   display: flex;
-  gap: 0.5rem;
   justify-content: space-between;
+  gap: 0.5rem;
 }
 
 .tratamento-icon-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-decoration: none;
   gap: 0.6rem;
-  width: 60px;
   transition: opacity 0.3s ease;
+  width: 60px;
+  text-decoration: none;
 }
 
 .tratamento-icon-item:hover {
@@ -1533,21 +1531,21 @@ body.high-contrast .alta-perfumaria-panel {
 }
 
 .tratamento-icon-item img {
-  width: 56px;
-  height: 56px;
-  object-fit: contain;
   border-radius: 10px;
   background: #e8e8e8;
   padding: 8px;
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
 }
 
 .tratamento-icon-item span {
-  font-family: "Hellix", sans-serif;
-  font-size: 0.7rem;
-  font-weight: 400;
   color: #333;
-  text-align: center;
+  font-weight: 400;
+  font-size: 0.7rem;
   line-height: 1.3;
+  font-family: "Hellix", sans-serif;
+  text-align: center;
 }
 
 /* Links de Tratamento */
@@ -1555,21 +1553,21 @@ body.high-contrast .alta-perfumaria-panel {
   display: flex;
   flex-direction: column;
   gap: 0;
-  padding: 1rem 0;
   border-top: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 1rem 0;
 }
 
 .tratamento-link {
-  font-family: "Hellix", sans-serif;
-  font-size: 0.95rem;
-  font-weight: 400;
-  color: #333;
-  text-decoration: none;
-  padding: 0.6rem 0;
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   transition: color 0.3s ease;
+  padding: 0.6rem 0;
+  color: #333;
+  font-weight: 400;
+  font-size: 0.95rem;
+  font-family: "Hellix", sans-serif;
+  text-decoration: none;
 }
 
 .tratamento-link:hover {
@@ -1577,9 +1575,9 @@ body.high-contrast .alta-perfumaria-panel {
 }
 
 .tratamento-link .arrow {
-  font-size: 1.2rem;
   color: #999;
   font-weight: 300;
+  font-size: 1.2rem;
 }
 
 .tratamento-link.has-arrow {
@@ -1591,14 +1589,14 @@ body.high-contrast .alta-perfumaria-panel {
   display: flex;
   flex-direction: column;
   gap: 0;
-  padding: 1rem 0;
   border-top: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 1rem 0;
 }
 
 /* Link destaque */
 .tratamento-expertise {
-  padding: 1rem 0;
   border-top: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 1rem 0;
 }
 
 .tratamento-link-bold {
@@ -1607,29 +1605,29 @@ body.high-contrast .alta-perfumaria-panel {
 
 /* Coluna direita - Cards/Imagens */
 .tratamento-expanded-right {
-  flex: 1;
-  padding: 0 0 0 0;
-  margin-left: 0;
   display: flex;
+  flex: 1;
   flex-direction: column;
   gap: 0.5rem;
-  overflow: hidden;
+  margin-left: 0;
   background: #f5f5f5;
+  padding: 0 0 0 0;
   height: 100%;
   max-height: 100%;
+  overflow: hidden;
 }
 
 /* Cards de tratamento */
 .tratamento-card {
-  position: relative;
-  overflow: hidden;
-  flex: 1;
-  min-height: 0;
-  cursor: pointer;
-  text-decoration: none;
   display: block;
-  border-radius: 5px;
+  position: relative;
+  flex: 1;
+  cursor: pointer;
   margin: 0 0.6rem 0 0.4rem;
+  border-radius: 5px;
+  min-height: 0;
+  overflow: hidden;
+  text-decoration: none;
 }
 
 .tratamento-card:first-child {
@@ -1641,10 +1639,10 @@ body.high-contrast .alta-perfumaria-panel {
 }
 
 .tratamento-card img {
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .tratamento-card:hover img {
@@ -1653,32 +1651,32 @@ body.high-contrast .alta-perfumaria-panel {
 
 .tratamento-card-overlay {
   position: absolute;
+  right: 0;
   bottom: 0;
   left: 0;
-  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.4) 0%, transparent 100%);
   padding: 1.25rem;
   text-align: center;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.4) 0%, transparent 100%);
 }
 
 .tratamento-card-title {
-  font-family: "Hellix", sans-serif;
-  font-size: 0.95rem;
-  font-weight: 400;
-  color: #fff;
   margin: 0 0 0.4rem 0;
+  color: #fff;
+  font-weight: 400;
+  font-size: 0.95rem;
+  font-family: "Hellix", sans-serif;
 }
 
 .tratamento-card-subtitle {
-  font-family: "Hellix", sans-serif;
-  font-size: 0.8rem;
-  font-weight: 400;
-  color: #fff;
-  margin: 0;
-  text-decoration: underline;
-  text-underline-offset: 3px;
   display: inline-block;
   position: relative;
+  margin: 0;
+  color: #fff;
+  font-weight: 400;
+  font-size: 0.8rem;
+  font-family: "Hellix", sans-serif;
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 /* ============================================================================
@@ -1698,32 +1696,32 @@ body.high-contrast .alta-perfumaria-panel {
   }
 
   .tratamento-expanded-left {
+    padding: 0 1.5rem 1rem 1.5rem;
     width: 100%;
     min-width: unset;
-    padding: 0 1.5rem 1rem 1.5rem;
   }
 
   .tratamento-expanded-right {
     flex: none;
-    height: auto;
-    padding: 0 1rem 1rem 1rem;
     gap: 0.75rem;
+    padding: 0 1rem 1rem 1rem;
+    height: auto;
   }
 
   .tratamento-card {
-    height: 200px;
     flex: none;
     margin: 0;
+    height: 200px;
   }
 
   .tratamento-icons-grid {
-    gap: 0.5rem;
     justify-content: space-between;
+    gap: 0.5rem;
   }
 
   .tratamento-icon-item {
-    width: auto;
     flex: 1;
+    width: auto;
     max-width: 70px;
   }
 }
@@ -1833,9 +1831,9 @@ body.high-contrast .alta-perfumaria-card-cta::after {
 }
 
 body.high-contrast .alta-perfumaria-footer-mobile .submenu-footer-link {
-  color: #fff !important;
-  background: #1a1a1a !important;
   border-color: rgba(255, 255, 255, 0.3) !important;
+  background: #1a1a1a !important;
+  color: #fff !important;
 }
 
 /* Spa Panel */
@@ -1852,8 +1850,8 @@ body.high-contrast .spa-location-link {
 }
 
 body.high-contrast .spa-location-link:hover {
-  color: #ccc !important;
   background: rgba(255, 255, 255, 0.1) !important;
+  color: #ccc !important;
 }
 
 body.high-contrast .spa-view-all {
@@ -1902,8 +1900,8 @@ body.high-contrast .moda-menu-accessibility {
 }
 
 body.high-contrast .moda-menu-checkbox {
-  background: #333 !important;
   border-color: #666 !important;
+  background: #333 !important;
 }
 
 body.high-contrast .moda-menu-checkbox:checked {
@@ -1924,14 +1922,14 @@ body.high-contrast .moda-menu-tabs {
 }
 
 body.high-contrast .moda-menu-tab {
-  background: #1a1a1a !important;
   border-color: #444 !important;
+  background: #1a1a1a !important;
   color: #fff !important;
 }
 
 body.high-contrast .moda-menu-tab-active {
-  background: #fff !important;
   border-color: #fff !important;
+  background: #fff !important;
   color: #000 !important;
 }
 

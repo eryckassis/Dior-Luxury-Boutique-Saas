@@ -73,7 +73,7 @@ export class PerfumeProductDetailContent extends HTMLElement {
         }" data-size="${size.size}">
           ${size.size}
         </button>
-      `
+      `,
       )
       .join("");
   }
@@ -93,7 +93,7 @@ export class PerfumeProductDetailContent extends HTMLElement {
           }</strong></p>
           <p class="review-author">Por ${review.author}</p>
         </div>
-      `
+      `,
       )
       .join("");
   }
@@ -141,9 +141,7 @@ export class PerfumeProductDetailContent extends HTMLElement {
           tabContents.forEach((content) => content.classList.remove("active"));
 
           button.classList.add("active");
-          const targetContent = this.querySelector(
-            `.tab-content[data-tab="${tabId}"]`
-          );
+          const targetContent = this.querySelector(`.tab-content[data-tab="${tabId}"]`);
           if (targetContent) {
             targetContent.classList.add("active");
           }
@@ -152,13 +150,9 @@ export class PerfumeProductDetailContent extends HTMLElement {
 
       // Image Reveal Animation
       if (window.gsap && window.ScrollTrigger) {
-        const imageRevealWrapper = this.querySelector(
-          ".image-reveal-wrapper-full"
-        );
+        const imageRevealWrapper = this.querySelector(".image-reveal-wrapper-full");
         if (imageRevealWrapper) {
-          const overlay = imageRevealWrapper.querySelector(
-            ".reveal-overlay-full"
-          );
+          const overlay = imageRevealWrapper.querySelector(".reveal-overlay-full");
           const image = imageRevealWrapper.querySelector(".reveal-image-full");
 
           const revealTl = window.gsap.timeline({
@@ -184,7 +178,7 @@ export class PerfumeProductDetailContent extends HTMLElement {
                 duration: 1.2,
                 ease: "power3.out",
               },
-              "-=1.2"
+              "-=1.2",
             );
         }
       }
@@ -236,9 +230,7 @@ export class PerfumeProductDetailContent extends HTMLElement {
           e.preventDefault();
 
           const formData = new FormData(reviewForm);
-          const rating = this.querySelectorAll(
-            ".star-rating-input.selected"
-          ).length;
+          const rating = this.querySelectorAll(".star-rating-input.selected").length;
           const reviewText = formData.get("review-text");
           const recommend = formData.get("recommend");
           const name = formData.get("reviewer-name");
@@ -291,9 +283,7 @@ export class PerfumeProductDetailContent extends HTMLElement {
                 <div class="stars">
                   ${this.generateStars(this.product.rating)}
                 </div>
-                <span class="rating-score">${this.product.rating.toFixed(
-                  1
-                )}</span>
+                <span class="rating-score">${this.product.rating.toFixed(1)}</span>
                 <a href="#reviews-section" class="rating-reviews">${
                   this.product.reviewCount
                 } avaliações</a>
@@ -355,9 +345,7 @@ export class PerfumeProductDetailContent extends HTMLElement {
           <div class="love-quote-container">
             <p class="quote-author">Com ${this.product.ambassador}</p>
             <h2 class="quote-title">${this.product.ambassadorQuote}*</h2>
-            <p class="quote-subtitle">*${
-              this.product.ambassadorQuoteTranslation
-            }</p>
+            <p class="quote-subtitle">*${this.product.ambassadorQuoteTranslation}</p>
           </div>
         </section>
 
@@ -382,8 +370,8 @@ export class PerfumeProductDetailContent extends HTMLElement {
           <div class="image-reveal-wrapper-full">
             <div class="reveal-overlay-full"></div>
             <img src="${this.product.galleryImage}" alt="${
-      this.product.name
-    }" class="reveal-image-full" />
+              this.product.name
+            }" class="reveal-image-full" />
           </div>
         </section>
 
@@ -408,9 +396,7 @@ export class PerfumeProductDetailContent extends HTMLElement {
                 <div class="reviews-stars-display">
                   ${this.generateReviewStars(Math.round(this.product.rating))}
                 </div>
-                <p class="reviews-count">${
-                  this.product.reviewCount
-                } avaliações</p>
+                <p class="reviews-count">${this.product.reviewCount} avaliações</p>
               </div>
 
               <div class="reviews-list">
@@ -420,7 +406,7 @@ export class PerfumeProductDetailContent extends HTMLElement {
               <div class="reviews-pagination">
                 <span class="pagination-info">1-${Math.min(
                   5,
-                  this.product.reviews.length
+                  this.product.reviews.length,
                 )} de ${this.product.reviewCount}</span>
                 <div class="pagination-arrows">
                   <button class="pagination-btn" aria-label="Anterior">‹</button>
@@ -502,7 +488,4 @@ export class PerfumeProductDetailContent extends HTMLElement {
   }
 }
 
-customElements.define(
-  "perfume-product-detail-content",
-  PerfumeProductDetailContent
-);
+customElements.define("perfume-product-detail-content", PerfumeProductDetailContent);

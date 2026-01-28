@@ -59,12 +59,8 @@ export class AuthService {
     }
 
     if (user.accountLockedUntil && user.accountLockedUntil > new Date()) {
-      const unlockTime = new Date(user.accountLockedUntil).toLocaleString(
-        "pt-BR",
-      );
-      throw new Error(
-        `Conta bloqueada até ${unlockTime} devido a múltiplas tentativas de login`,
-      );
+      const unlockTime = new Date(user.accountLockedUntil).toLocaleString("pt-BR");
+      throw new Error(`Conta bloqueada até ${unlockTime} devido a múltiplas tentativas de login`);
     }
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
@@ -84,9 +80,7 @@ export class AuthService {
           },
         });
 
-        throw new Error(
-          "Muitas tentativas de login. Conta bloqueada por 15 minutos.",
-        );
+        throw new Error("Muitas tentativas de login. Conta bloqueada por 15 minutos.");
       }
 
       await prisma.user.update({
@@ -145,9 +139,7 @@ export class AuthService {
 
     if (!user) {
       console.log("❌ Usuário não encontrado");
-      throw new Error(
-        "Refresh token inválido ou expirado. Por favor, faça login novamente.",
-      );
+      throw new Error("Refresh token inválido ou expirado. Por favor, faça login novamente.");
     }
 
     console.log("📊 Comparação de tokens:");
@@ -165,9 +157,7 @@ export class AuthService {
       console.log(
         "❌ Tokens não coincidem! Possível logout anterior ou login em outro dispositivo.",
       );
-      throw new Error(
-        "Refresh token inválido ou expirado. Por favor, faça login novamente.",
-      );
+      throw new Error("Refresh token inválido ou expirado. Por favor, faça login novamente.");
     }
 
     const newTokens = JwtUtil.generateTokenPair(user.id, user.email);
@@ -215,8 +205,7 @@ export class AuthService {
 
     if (!user) {
       return {
-        message:
-          "Se o e-mail existir, você receberá instruções para redefinir a senha.",
+        message: "Se o e-mail existir, você receberá instruções para redefinir a senha.",
       };
     }
 
@@ -233,8 +222,7 @@ export class AuthService {
     });
 
     return {
-      message:
-        "Se o e-mail existir, você receberá instruções para redefinir a senha.",
+      message: "Se o e-mail existir, você receberá instruções para redefinir a senha.",
     };
   }
 
@@ -252,10 +240,7 @@ export class AuthService {
       throw new Error("Token de recuperação inválido ou expirado.");
     }
 
-    const hashedPassword = await bcrypt.hash(
-      newPassword,
-      config.bcryptSaltRounds,
-    );
+    const hashedPassword = await bcrypt.hash(newPassword, config.bcryptSaltRounds);
     await prisma.user.update({
       where: { id: user.id },
       data: {

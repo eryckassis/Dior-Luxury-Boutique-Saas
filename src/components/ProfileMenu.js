@@ -515,10 +515,7 @@ export class ProfileMenu extends HTMLElement {
   }
 
   renderBagContent() {
-    const subtotal = this.cartItems.reduce(
-      (sum, item) => sum + item.price * item.quantity,
-      0,
-    );
+    const subtotal = this.cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
     return `
       <div class="profile-bag-header">
@@ -541,14 +538,10 @@ export class ProfileMenu extends HTMLElement {
             <div class="cart-item-info">
               <h3 class="cart-item-name">${item.name}</h3>
               <p class="cart-item-volume">Volume: ${item.volume}</p>
-              <button class="cart-item-remove" data-item-id="${
-                item.id
-              }">Remover</button>
+              <button class="cart-item-remove" data-item-id="${item.id}">Remover</button>
             </div>
             <div class="cart-item-right">
-              <p class="cart-item-price">R$ ${item.price
-                .toFixed(2)
-                .replace(".", ",")}</p>
+              <p class="cart-item-price">R$ ${item.price.toFixed(2).replace(".", ",")}</p>
               <div class="cart-item-quantity-wrapper">
                 <label class="quantity-label">Quantidade</label>
                 <select class="cart-item-quantity" data-item-id="${item.id}">
@@ -573,9 +566,7 @@ export class ProfileMenu extends HTMLElement {
       <div class="profile-bag-footer">
         <div class="bag-subtotal">
           <span class="subtotal-label">Subtotal:</span>
-          <span class="subtotal-value">R$ ${subtotal
-            .toFixed(2)
-            .replace(".", ",")}</span>
+          <span class="subtotal-value">R$ ${subtotal.toFixed(2).replace(".", ",")}</span>
         </div>
 
         <div class="bag-installment">
@@ -615,10 +606,7 @@ export class ProfileMenu extends HTMLElement {
   }
 
   renderLoggedInContent() {
-    const userName =
-      this.user?.user_metadata?.name ||
-      this.user?.email?.split("@")[0] ||
-      "Usuário";
+    const userName = this.user?.user_metadata?.name || this.user?.email?.split("@")[0] || "Usuário";
 
     return `
     <div class="profile-user-welcome">
@@ -712,11 +700,7 @@ export class ProfileMenu extends HTMLElement {
 
         <!-- Account Content -->
         <div class="profile-menu-content profile-account-content">
-          ${
-            this.isAuthenticated
-              ? this.renderLoggedInContent()
-              : this.renderLoginContent()
-          }
+          ${this.isAuthenticated ? this.renderLoggedInContent() : this.renderLoginContent()}
         </div>
 
         <!-- Bag Content -->

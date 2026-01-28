@@ -115,9 +115,7 @@ export class MissDiorEssencePage extends HTMLElement {
       const productCards = this.querySelectorAll(".essence-product-card");
 
       productCards.forEach((card, index) => {
-        const imageWrapper = card.querySelector(
-          ".essence-product-image-wrapper",
-        );
+        const imageWrapper = card.querySelector(".essence-product-image-wrapper");
         const image = card.querySelector(".essence-product-image");
         const overlay = card.querySelector(".essence-image-reveal-overlay");
         const productInfo = card.querySelector(".essence-product-info");

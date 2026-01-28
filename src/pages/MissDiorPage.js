@@ -83,7 +83,7 @@ export class MissDiorPage extends HTMLElement {
             duration: 1,
             ease: "power3.out",
           },
-          "-=0.8"
+          "-=0.8",
         )
         .from(
           ".video-controls",
@@ -93,7 +93,7 @@ export class MissDiorPage extends HTMLElement {
             duration: 0.8,
             ease: "power3.out",
           },
-          "-=0.6"
+          "-=0.6",
         );
 
       this.animations.push(heroTl);
@@ -127,7 +127,7 @@ export class MissDiorPage extends HTMLElement {
               duration: 1.2,
               ease: "power3.out",
             },
-            "-=1.2"
+            "-=1.2",
           );
 
         this.animations.push(revealTl);
@@ -151,9 +151,7 @@ export class MissDiorPage extends HTMLElement {
       }
 
       // Double Images Reveal Animation
-      const doubleImageReveals = this.querySelectorAll(
-        ".miss-dior-image-reveal-double"
-      );
+      const doubleImageReveals = this.querySelectorAll(".miss-dior-image-reveal-double");
       doubleImageReveals.forEach((imageReveal, index) => {
         const overlay = imageReveal.querySelector(".reveal-overlay");
         const image = imageReveal.querySelector(".reveal-image");
@@ -182,16 +180,14 @@ export class MissDiorPage extends HTMLElement {
               duration: 1.2,
               ease: "power3.out",
             },
-            "-=1.2"
+            "-=1.2",
           );
 
         this.animations.push(revealTl);
       });
 
       // Double section description animation
-      const doubleDescription = this.querySelector(
-        ".double-section-description"
-      );
+      const doubleDescription = this.querySelector(".double-section-description");
       if (doubleDescription) {
         const descAnim = window.gsap.from(doubleDescription, {
           scrollTrigger: {
@@ -236,7 +232,7 @@ export class MissDiorPage extends HTMLElement {
               duration: 1.2,
               ease: "power3.out",
             },
-            "-=1.2"
+            "-=1.2",
           );
 
         this.animations.push(frascoTl);

@@ -9,11 +9,8 @@ export class KeyholeSection extends HTMLElement {
 
   connectedCallback() {
     const image = this.getAttribute("image") || "/images/Image 2 Dior.jpg";
-    const subtitle =
-      this.getAttribute("subtitle") || "Dior Backstage Glow Maximizer Palette";
-    const title =
-      this.getAttribute("title") ||
-      "Uma nova visão da icônica paleta de iluminadores";
+    const subtitle = this.getAttribute("subtitle") || "Dior Backstage Glow Maximizer Palette";
+    const title = this.getAttribute("title") || "Uma nova visão da icônica paleta de iluminadores";
     const buttonText = this.getAttribute("button-text") || "Descubra";
 
     this.render(image, subtitle, title, buttonText);
@@ -68,12 +65,12 @@ export class KeyholeSection extends HTMLElement {
 
       const xTransformer = gsap.utils.pipe(
         gsap.utils.mapRange(0, width, 0, 100),
-        gsap.utils.clamp(0, 100)
+        gsap.utils.clamp(0, 100),
       );
 
       const yTransformer = gsap.utils.pipe(
         gsap.utils.mapRange(0, height, 0, 100),
-        gsap.utils.clamp(0, 100)
+        gsap.utils.clamp(0, 100),
       );
 
       return {

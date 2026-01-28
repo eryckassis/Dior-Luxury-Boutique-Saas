@@ -106,13 +106,9 @@ export class FilterSidebar extends HTMLElement {
     const filters = filterService.getActiveFilters();
 
     // Atualiza indicador de ordenação
-    const sortIndicator = this.querySelector(
-      '[data-panel="sort"] .filter-option-value'
-    );
+    const sortIndicator = this.querySelector('[data-panel="sort"] .filter-option-value');
     if (sortIndicator) {
-      const sortOption = FILTER_CONFIG.sortOptions.find(
-        (s) => s.id === filters.sort
-      );
+      const sortOption = FILTER_CONFIG.sortOptions.find((s) => s.id === filters.sort);
       sortIndicator.textContent = sortOption ? sortOption.label : "Recomendado";
     }
 
@@ -128,9 +124,7 @@ export class FilterSidebar extends HTMLElement {
    * Atualiza contador de um tipo de filtro
    */
   updateFilterCount(type, count) {
-    const indicator = this.querySelector(
-      `[data-panel="${type}"] .filter-count`
-    );
+    const indicator = this.querySelector(`[data-panel="${type}"] .filter-count`);
     if (indicator) {
       indicator.textContent = count > 0 ? `(${count})` : "";
       indicator.style.display = count > 0 ? "inline" : "none";
@@ -219,9 +213,7 @@ export class FilterSidebar extends HTMLElement {
    */
   renderMainPanel() {
     const filters = filterService.getActiveFilters();
-    const sortOption = FILTER_CONFIG.sortOptions.find(
-      (s) => s.id === filters.sort
-    );
+    const sortOption = FILTER_CONFIG.sortOptions.find((s) => s.id === filters.sort);
 
     return `
       <div class="filter-options-list">
@@ -305,11 +297,9 @@ export class FilterSidebar extends HTMLElement {
               ${currentSort === option.id ? "checked" : ""}
               class="filter-radio-input"
             />
-            <span class="filter-radio-custom ${
-              currentSort === option.id ? "checked" : ""
-            }"></span>
+            <span class="filter-radio-custom ${currentSort === option.id ? "checked" : ""}"></span>
           </label>
-        `
+        `,
           )
           .join("")}
       </div>
@@ -340,7 +330,7 @@ export class FilterSidebar extends HTMLElement {
               activeCategories.includes(category.id) ? "checked" : ""
             }"></span>
           </label>
-        `
+        `,
           )
           .join("")}
       </div>
@@ -371,7 +361,7 @@ export class FilterSidebar extends HTMLElement {
               activeLines.includes(line.id) ? "checked" : ""
             }"></span>
           </label>
-        `
+        `,
           )
           .join("")}
       </div>
@@ -407,7 +397,7 @@ export class FilterSidebar extends HTMLElement {
               activeColors.includes(color.id) ? "checked" : ""
             }"></span>
           </label>
-        `
+        `,
           )
           .join("")}
       </div>
@@ -438,7 +428,7 @@ export class FilterSidebar extends HTMLElement {
               activeMaterials.includes(material.id) ? "checked" : ""
             }"></span>
           </label>
-        `
+        `,
           )
           .join("")}
       </div>
@@ -482,12 +472,12 @@ export class FilterSidebar extends HTMLElement {
                     activeSizes.includes(size) ? "checked" : ""
                   }"></span>
                 </label>
-              `
+              `,
                 )
                 .join("")}
             </div>
           </div>
-        `
+        `,
           )
           .join("")}
       </div>
@@ -581,7 +571,7 @@ export class FilterSidebar extends HTMLElement {
         new CustomEvent("filters-applied", {
           bubbles: true,
           detail: filterService.getActiveFilters(),
-        })
+        }),
       );
     });
 
@@ -591,9 +581,7 @@ export class FilterSidebar extends HTMLElement {
 
   render() {
     const filters = filterService.getActiveFilters();
-    const sortOption = FILTER_CONFIG.sortOptions.find(
-      (s) => s.id === filters.sort
-    );
+    const sortOption = FILTER_CONFIG.sortOptions.find((s) => s.id === filters.sort);
 
     this.innerHTML = `
       <!-- Overlay -->
@@ -624,9 +612,7 @@ export class FilterSidebar extends HTMLElement {
         <!-- Footer -->
         <footer class="filter-footer">
           <button class="filter-clear-btn">apagar todos os filtros</button>
-          <button class="filter-view-btn">Ver os ${
-            this.productCount
-          } produto(s)</button>
+          <button class="filter-view-btn">Ver os ${this.productCount} produto(s)</button>
         </footer>
       </aside>
     `;

@@ -51,10 +51,7 @@ class UserService {
           .from("profiles")
           .insert({
             id: user.id,
-            name:
-              user.user_metadata?.name ||
-              user.email?.split("@")[0] ||
-              "Usuário",
+            name: user.user_metadata?.name || user.email?.split("@")[0] || "Usuário",
             is_email_verified: user.email_confirmed_at !== null,
           })
           .select()
@@ -123,10 +120,7 @@ class UserService {
 
       if (error) {
         // Erro de CPF duplicado
-        if (
-          error.message.includes("duplicate key") &&
-          error.message.includes("cpf")
-        ) {
+        if (error.message.includes("duplicate key") && error.message.includes("cpf")) {
           throw new Error("CPF já cadastrado em outra conta");
         }
         throw new Error(error.message);

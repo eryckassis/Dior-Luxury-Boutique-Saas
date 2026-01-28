@@ -19,8 +19,8 @@
 /* Para Ele Container - 2 produtos centralizados */
 .para-ele-container {
   grid-template-columns: repeat(2, 1fr) !important;
-  max-width: 1000px !important;
   justify-content: center;
+  max-width: 1000px !important;
 }
 
 @media (max-width: 768px) {
@@ -30,71 +30,71 @@
 }
 
 .dior-verao-main {
+  background: #f6f3f7;
   width: 100%;
   min-height: 100vh;
-  background: #f6f3f7;
 }
 
 /* Hero Section */
 .dior-verao-hero {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  margin-top: 80px;
   width: 100%;
   height: 20vh;
   min-height: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
   overflow: hidden;
-  margin-top: 80px;
 }
 
 .dior-verao-hero-content {
-  text-align: center;
   z-index: 1;
   padding: 0 20px;
+  text-align: center;
 }
 
 .dior-verao-title {
-  font-family: "MinhaFonte", sans-serif;
-  font-size: 90px;
-  font-weight: 600;
-  color: #000000;
   margin: 0 0 20px 0;
+  color: #000000;
+  font-weight: 600;
+  font-size: 90px;
+  font-family: "MinhaFonte", sans-serif;
   letter-spacing: -1px;
 }
 .dior-verao-title-second {
-  font-family: "MinhaFonte", sans-serif;
-  font-size: 4rem;
-  font-weight: 500;
-  color: #000000;
   margin: 0 0 10px 0;
+  color: #000000;
+  font-weight: 500;
+  font-size: 4rem;
+  font-family: "MinhaFonte", sans-serif;
   letter-spacing: -1px;
 }
 .dior-verao-title-sec {
-  font-family: "MinhaFonte", sans-serif;
-  font-weight: 500;
   color: #222;
+  font-weight: 500;
+  font-family: "MinhaFonte", sans-serif;
 }
 
 .dior-verao-subtitle {
-  font-family: "Hellix", sans-serif;
-  font-size: 30px;
-  font-weight: 400;
-  color: #666666;
   margin: 0;
+  color: #666666;
+  font-weight: 400;
+  font-size: 30px;
+  font-family: "Hellix", sans-serif;
   letter-spacing: 0.5px;
 }
 
 .miss-dior-main-title-second {
-  font-family: "MinhaFonte", sans-serif;
-  font-size: 5rem;
   font-weight: 500;
+  font-size: 5rem;
+  font-family: "MinhaFonte", sans-serif;
 }
 
 .miss-dior-main-description-second {
-  font-family: "Hellix", sans-serif;
-  font-size: 1.5rem;
   font-weight: 500;
+  font-size: 1.5rem;
+  font-family: "Hellix", sans-serif;
 }
 
 /* Override miss-dior-text-section padding for this page */
@@ -104,14 +104,14 @@ dior-verao-page .miss-dior-text-section {
 
 /* Content Section */
 .dior-verao-content {
-  padding: 80px 0;
   background: #ffffff;
+  padding: 80px 0;
 }
 
 .dior-verao-container {
-  max-width: 1400px;
   margin: 0 auto;
   padding: 0 40px;
+  max-width: 1400px;
 }
 
 /* Grid */
@@ -123,11 +123,13 @@ dior-verao-page .miss-dior-text-section {
 
 /* Card */
 .dior-verao-card {
-  background: #ffffff;
-  border-radius: 12px;
-  overflow: hidden;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 12px;
+  background: #ffffff;
+  overflow: hidden;
 }
 
 .dior-verao-card:hover {
@@ -136,17 +138,17 @@ dior-verao-page .miss-dior-text-section {
 }
 
 .dior-verao-card-image {
+  background: #f5f5f5;
   width: 100%;
   height: 300px;
   overflow: hidden;
-  background: #f5f5f5;
 }
 
 .dior-verao-card-image img {
+  transition: transform 0.5s ease;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
 }
 
 .dior-verao-card:hover .dior-verao-card-image img {
@@ -158,51 +160,53 @@ dior-verao-page .miss-dior-text-section {
 }
 
 .dior-verao-card-title {
-  font-family: "Manrope", sans-serif;
-  font-size: 22px;
-  font-weight: 600;
-  color: #000000;
   margin: 0 0 15px 0;
+  color: #000000;
+  font-weight: 600;
+  font-size: 22px;
+  font-family: "Manrope", sans-serif;
   letter-spacing: -0.5px;
 }
 
 .dior-verao-card-text {
-  font-family: "Manrope", sans-serif;
-  font-size: 15px;
-  font-weight: 400;
-  color: #666666;
-  line-height: 1.6;
   margin: 0 0 20px 0;
+  color: #666666;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.6;
+  font-family: "Manrope", sans-serif;
 }
 
 .dior-verao-card-link {
-  font-family: "Manrope", sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  color: #000000;
-  text-decoration: none;
+  display: inline-block;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease;
   border-bottom: 1px solid #000000;
   padding-bottom: 2px;
-  display: inline-block;
-  transition: color 0.2s ease, border-color 0.2s ease;
+  color: #000000;
+  font-weight: 500;
+  font-size: 14px;
+  font-family: "Manrope", sans-serif;
+  text-decoration: none;
 }
 
 .dior-verao-card-link:hover {
-  color: #b8860b;
   border-color: #b8860b;
+  color: #b8860b;
 }
 
 /* Featured Section */
 .dior-verao-featured {
-  padding: 100px 0;
   background: #f8f8f8;
+  padding: 100px 0;
 }
 
 .dior-verao-featured-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 80px;
   align-items: center;
+  gap: 80px;
 }
 
 .dior-verao-featured-text {
@@ -210,48 +214,50 @@ dior-verao-page .miss-dior-text-section {
 }
 
 .dior-verao-featured-title {
-  font-family: "Manrope", sans-serif;
-  font-size: 42px;
-  font-weight: 300;
-  color: #000000;
   margin: 0 0 30px 0;
-  letter-spacing: -1px;
+  color: #000000;
+  font-weight: 300;
+  font-size: 42px;
   line-height: 1.2;
+  font-family: "Manrope", sans-serif;
+  letter-spacing: -1px;
 }
 
 .dior-verao-featured-description {
-  font-family: "Manrope", sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  color: #666666;
-  line-height: 1.8;
   margin: 0 0 40px 0;
+  color: #666666;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.8;
+  font-family: "Manrope", sans-serif;
 }
 
 .dior-verao-featured-cta {
-  font-family: "Manrope", sans-serif;
-  font-size: 15px;
-  font-weight: 500;
-  color: #ffffff;
+  display: inline-block;
+  transition:
+    background 0.3s ease,
+    transform 0.2s ease;
+  border-radius: 30px;
   background: #000000;
   padding: 16px 40px;
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 15px;
+  font-family: "Manrope", sans-serif;
   text-decoration: none;
-  display: inline-block;
-  border-radius: 30px;
-  transition: background 0.3s ease, transform 0.2s ease;
 }
 
 .dior-verao-featured-cta:hover {
-  background: #b8860b;
   transform: translateY(-2px);
+  background: #b8860b;
 }
 
 .dior-verao-featured-image {
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
   width: 100%;
   height: 500px;
-  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
 }
 
 .dior-verao-featured-image img {
@@ -364,24 +370,24 @@ dior-verao-page .miss-dior-text-section {
    ============================================================================ */
 
 .verao-dior-section {
-  width: 100%;
   background-color: #ffffff;
   padding: 80px 20px;
+  width: 100%;
 }
 
 .verao-dior-container {
-  max-width: 1400px;
   margin: 0 auto;
+  max-width: 1400px;
 }
 
 .verao-dior-title {
-  font-family: "MinhaFonte", serif;
-  font-size: 48px;
-  font-weight: 400;
-  color: #000000;
-  text-align: center;
   margin: 0 0 60px 0;
+  color: #000000;
+  font-weight: 400;
+  font-size: 48px;
+  font-family: "MinhaFonte", serif;
   letter-spacing: 0;
+  text-align: center;
 }
 
 .verao-dior-grid {
@@ -398,31 +404,26 @@ dior-verao-page .miss-dior-text-section {
 
 .verao-dior-image {
   position: relative;
+  cursor: pointer;
+  margin-bottom: 32px;
+  border-radius: 8px;
   width: 100%;
   height: 600px;
   overflow: hidden;
-  margin-bottom: 32px;
-  border-radius: 8px;
-  cursor: pointer;
 }
 
 .verao-dior-image::after {
-  content: "";
   position: absolute;
   top: 0;
   left: 0;
+  opacity: 0;
+  z-index: 1;
+  transition: opacity 0.6s ease;
+  background: linear-gradient(180deg, transparent 0%, transparent 60%, rgba(0, 0, 0, 0.1) 100%);
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    180deg,
-    transparent 0%,
-    transparent 60%,
-    rgba(0, 0, 0, 0.1) 100%
-  );
-  opacity: 0;
-  transition: opacity 0.6s ease;
   pointer-events: none;
-  z-index: 1;
+  content: "";
 }
 
 .verao-dior-card:hover .verao-dior-image::after {
@@ -430,13 +431,13 @@ dior-verao-page .miss-dior-text-section {
 }
 
 .verao-dior-image img {
+  display: block;
+  transform: translateY(0);
+  transition: filter 0.6s ease;
+  will-change: transform;
   width: 100%;
   height: 130%;
   object-fit: cover;
-  display: block;
-  will-change: transform;
-  transform: translateY(0);
-  transition: filter 0.6s ease;
 }
 
 .verao-dior-card:hover .verao-dior-image img {
@@ -452,45 +453,45 @@ dior-verao-page .miss-dior-text-section {
 }
 
 .verao-dior-card-title {
-  font-family: "MinhaFonte", serif;
-  font-size: 24px;
-  font-weight: 400;
-  color: #000000;
   margin: 0;
-  line-height: 1.2;
   overflow: hidden;
+  color: #000000;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 1.2;
+  font-family: "MinhaFonte", serif;
 }
 
 .verao-dior-card-title span {
   display: inline-block;
-  opacity: 0;
   transform: translateY(100%);
+  opacity: 0;
 }
 
 /* Services Button - Reutilizando estilos existentes */
 .services-button {
-  font-family: "Manrope", sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  color: #000000;
-  text-decoration: none;
-  position: relative;
   display: inline-block;
-  padding-bottom: 4px;
-  transition: color 0.3s ease;
-  opacity: 0;
+  position: relative;
   transform: translateY(20px);
+  opacity: 0;
+  transition: color 0.3s ease;
+  padding-bottom: 4px;
+  color: #000000;
+  font-weight: 500;
+  font-size: 14px;
+  font-family: "Manrope", sans-serif;
+  text-decoration: none;
 }
 
 .services-button::after {
-  content: "";
   position: absolute;
   bottom: 0;
   left: 0;
+  transition: width 0.35s ease;
+  background-color: #000000;
   width: var(--underline-width, 100%);
   height: 1px;
-  background-color: #000000;
-  transition: width 0.35s ease;
+  content: "";
 }
 
 /* Responsive */
@@ -501,8 +502,8 @@ dior-verao-page .miss-dior-text-section {
   }
 
   .verao-dior-title {
-    font-size: 40px;
     margin-bottom: 50px;
+    font-size: 40px;
   }
 
   .verao-dior-image {
@@ -521,8 +522,8 @@ dior-verao-page .miss-dior-text-section {
   }
 
   .verao-dior-title {
-    font-size: 32px;
     margin-bottom: 40px;
+    font-size: 32px;
   }
 
   .verao-dior-card-title {

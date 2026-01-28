@@ -62,8 +62,7 @@ export class UserService {
     const updateData = {};
 
     if (data.name !== undefined) updateData.name = data.name;
-    if (data.lastName !== undefined)
-      updateData.last_name = data.lastName || null;
+    if (data.lastName !== undefined) updateData.last_name = data.lastName || null;
     if (data.cpf !== undefined) updateData.cpf = data.cpf || null;
     if (data.phone !== undefined) updateData.phone = data.phone || null;
     if (data.gender !== undefined) updateData.gender = data.gender || null;

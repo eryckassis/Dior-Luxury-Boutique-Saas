@@ -4,9 +4,9 @@
 
 /* Container Principal */
 .boutiques-page {
-  min-height: 100vh;
-  padding-top: 80px;
   background: #fff;
+  padding-top: 80px;
+  min-height: 100vh;
 }
 
 .boutiques-container {
@@ -20,31 +20,31 @@
    ============================================================================ */
 
 .boutiques-sidebar {
-  background: #fff;
-  border-right: 1px solid #e5e5e5;
   display: flex;
   flex-direction: column;
+  border-right: 1px solid #e5e5e5;
+  background: #fff;
   overflow: hidden;
 }
 
 /* Header com Botão Voltar */
 .boutiques-header {
-  padding: 20px 30px;
   border-bottom: 1px solid #f0f0f0;
+  padding: 20px 30px;
 }
 
 .boutiques-back-btn {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-family: "Hellix", sans-serif;
-  font-size: 13px;
-  color: #1a1a1a;
-  padding: 0;
   transition: opacity 0.3s ease;
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: 0;
+  color: #1a1a1a;
+  font-size: 13px;
+  font-family: "Hellix", sans-serif;
 }
 
 .boutiques-back-btn:hover {
@@ -58,21 +58,21 @@
 
 /* Campo de Busca */
 .boutiques-search {
-  padding: 20px 30px;
   display: flex;
   gap: 12px;
   border-bottom: 1px solid #f0f0f0;
+  padding: 20px 30px;
 }
 
 .boutiques-search-input {
   flex: 1;
-  padding: 14px 16px;
-  border: 1px solid #e5e5e5;
-  font-family: "Hellix", sans-serif;
-  font-size: 14px;
-  color: #1a1a1a;
-  outline: none;
   transition: border-color 0.3s ease;
+  outline: none;
+  border: 1px solid #e5e5e5;
+  padding: 14px 16px;
+  color: #1a1a1a;
+  font-size: 14px;
+  font-family: "Hellix", sans-serif;
 }
 
 .boutiques-search-input::placeholder {
@@ -84,20 +84,20 @@
 }
 
 .boutiques-location-btn {
-  width: 48px;
-  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
   border: 1px solid #e5e5e5;
   background: #fff;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
+  width: 48px;
+  height: 48px;
 }
 
 .boutiques-location-btn:hover {
-  background: #1a1a1a;
   border-color: #1a1a1a;
+  background: #1a1a1a;
 }
 
 .boutiques-location-btn:hover svg {
@@ -110,22 +110,22 @@
 
 /* Filtros */
 .boutiques-filters {
-  padding: 15px 30px;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 15px;
   border-bottom: 1px solid #f0f0f0;
+  padding: 15px 30px;
   overflow-x: auto;
-  flex-wrap: wrap;
 }
 
 .boutiques-filter-toggle {
-  background: none;
-  border: none;
-  font-family: "Hellix", sans-serif;
-  font-size: 13px;
-  color: #1a1a1a;
   cursor: pointer;
+  border: none;
+  background: none;
+  color: #1a1a1a;
+  font-size: 13px;
+  font-family: "Hellix", sans-serif;
   text-decoration: underline;
   text-underline-offset: 3px;
 }
@@ -136,23 +136,23 @@
 
 .boutiques-filter-tags {
   display: flex;
-  gap: 10px;
   flex-wrap: wrap;
+  gap: 10px;
 }
 
 .boutiques-filter-tag {
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 8px 14px;
-  background: #fff;
+  transition: all 0.3s ease;
+  cursor: pointer;
   border: 1px solid #e5e5e5;
   border-radius: 20px;
-  font-family: "Hellix", sans-serif;
-  font-size: 12px;
+  background: #fff;
+  padding: 8px 14px;
   color: #666;
-  cursor: pointer;
-  transition: all 0.3s ease;
+  font-size: 12px;
+  font-family: "Hellix", sans-serif;
   white-space: nowrap;
 }
 
@@ -162,41 +162,41 @@
 }
 
 .boutiques-filter-tag.active {
-  background: #1a1a1a;
   border-color: #1a1a1a;
+  background: #1a1a1a;
   color: #fff;
 }
 
 .boutiques-filter-tag .filter-icon {
-  font-size: 11px;
   font-weight: 600;
+  font-size: 11px;
 }
 
 /* Contador */
 .boutiques-count {
-  padding: 20px 30px;
-  font-family: "Hellix", sans-serif;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  color: #1a1a1a;
-  text-transform: uppercase;
   border-bottom: 1px solid #f0f0f0;
+  padding: 20px 30px;
+  color: #1a1a1a;
+  font-weight: 600;
+  font-size: 11px;
+  font-family: "Hellix", sans-serif;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
 
 /* Lista de Boutiques */
 .boutiques-list {
   flex: 1;
-  overflow-y: auto;
   padding: 0;
+  overflow-y: auto;
 }
 
 /* Card da Boutique */
 .boutique-card {
-  padding: 25px 30px;
-  border-bottom: 1px solid #f0f0f0;
-  cursor: pointer;
   transition: background 0.3s ease;
+  cursor: pointer;
+  border-bottom: 1px solid #f0f0f0;
+  padding: 25px 30px;
 }
 
 .boutique-card:hover {
@@ -221,36 +221,36 @@
 }
 
 .boutique-name {
-  font-family: "Hellix", sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  color: #1a1a1a;
   margin: 0;
+  color: #1a1a1a;
+  font-weight: 600;
+  font-size: 14px;
+  font-family: "Hellix", sans-serif;
 
   text-underline-offset: 3px;
 }
 
 .boutique-type {
-  font-family: "Hellix", sans-serif;
-  font-size: 13px;
   color: #666;
+  font-size: 13px;
+  font-family: "Hellix", sans-serif;
 }
 
 .boutique-status {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-family: "Hellix", sans-serif;
-  font-size: 12px;
   color: #666;
+  font-size: 12px;
+  font-family: "Hellix", sans-serif;
   white-space: nowrap;
 }
 
 .status-dot {
-  width: 6px;
-  height: 6px;
   border-radius: 50%;
   background: #4caf50;
+  width: 6px;
+  height: 6px;
 }
 
 .boutique-address {
@@ -258,37 +258,37 @@
 }
 
 .boutique-address p {
-  font-family: "Hellix", sans-serif;
-  font-size: 13px;
-  color: #1a1a1a;
   margin: 0;
+  color: #1a1a1a;
+  font-size: 13px;
   line-height: 1.5;
+  font-family: "Hellix", sans-serif;
 }
 
 .boutique-categories {
   display: flex;
-  align-items: center;
   flex-wrap: wrap;
+  align-items: center;
   gap: 4px;
 }
 
 .boutique-category {
-  font-family: "Hellix", sans-serif;
-  font-size: 13px;
   color: #666;
+  font-size: 13px;
+  font-family: "Hellix", sans-serif;
 }
 
 .category-separator {
-  color: #ccc;
   margin: 0 2px;
+  color: #ccc;
 }
 
 .boutique-more-link {
-  font-family: "Hellix", sans-serif;
-  font-size: 13px;
-  color: #1a1a1a;
-  text-decoration: underline;
   margin-left: 4px;
+  color: #1a1a1a;
+  font-size: 13px;
+  font-family: "Hellix", sans-serif;
+  text-decoration: underline;
 }
 
 /* Empty State */
@@ -298,10 +298,10 @@
 }
 
 .boutiques-empty p {
-  font-family: "Hellix", sans-serif;
-  font-size: 14px;
-  color: #666;
   margin: 0;
+  color: #666;
+  font-size: 14px;
+  font-family: "Hellix", sans-serif;
 }
 
 /* ============================================================================
@@ -320,23 +320,23 @@
 
 /* Loading do Mapa */
 .map-loading {
+  display: flex;
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
   flex-direction: column;
   align-items: center;
   gap: 15px;
+  transform: translate(-50%, -50%);
 }
 
 .map-loading-spinner {
-  width: 40px;
-  height: 40px;
+  animation: spin 1s linear infinite;
   border: 3px solid #e5e5e5;
   border-top-color: #1a1a1a;
   border-radius: 50%;
-  animation: spin 1s linear infinite;
+  width: 40px;
+  height: 40px;
 }
 
 @keyframes spin {
@@ -346,10 +346,10 @@
 }
 
 .map-loading p {
-  font-family: "Hellix", sans-serif;
-  font-size: 13px;
-  color: #666;
   margin: 0;
+  color: #666;
+  font-size: 13px;
+  font-family: "Hellix", sans-serif;
 }
 
 /* ============================================================================
@@ -380,8 +380,8 @@
 
 @media (max-width: 768px) {
   .boutiques-container {
-    grid-template-columns: 1fr;
     grid-template-rows: 1fr 50vh;
+    grid-template-columns: 1fr;
   }
 
   .boutiques-sidebar {
@@ -395,9 +395,9 @@
   }
 
   .boutiques-filter-tags {
-    overflow-x: auto;
     flex-wrap: nowrap;
     padding-bottom: 5px;
+    overflow-x: auto;
   }
 
   .boutiques-filter-tags::-webkit-scrollbar {

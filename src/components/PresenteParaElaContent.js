@@ -68,8 +68,7 @@ export class PresenteParaElaContent extends HTMLElement {
         const paddingRight = parseFloat(trackStyles.paddingRight) || 0;
 
         // Largura real do conteúdo
-        const contentWidth =
-          lastCard.right - firstCard.left + paddingLeft + paddingRight;
+        const contentWidth = lastCard.right - firstCard.left + paddingLeft + paddingRight;
 
         // MaxDrag: quanto precisa mover para ver o último card completamente
         const maxDrag = Math.min(0, -(contentWidth - containerWidth));
@@ -215,11 +214,9 @@ export class PresenteParaElaContent extends HTMLElement {
           });
 
           console.log(
-            `📐 Dimensões card ${
-              index + 1
-            }: ${wrapperWidth}x${wrapperHeight}, Track: ${
+            `📐 Dimensões card ${index + 1}: ${wrapperWidth}x${wrapperHeight}, Track: ${
               imageCount * wrapperWidth
-            }px`
+            }px`,
           );
         };
 
@@ -246,10 +243,7 @@ export class PresenteParaElaContent extends HTMLElement {
             progressContainer.appendChild(progressFill);
 
             // Inserir após o wrapper
-            wrapper.parentNode.insertBefore(
-              progressContainer,
-              wrapper.nextSibling
-            );
+            wrapper.parentNode.insertBefore(progressContainer, wrapper.nextSibling);
           }
           return progressContainer.querySelector(".product-progress-fill");
         };
@@ -276,10 +270,7 @@ export class PresenteParaElaContent extends HTMLElement {
           const slideWidth = getSlideWidth();
           const currentX = window.gsap.getProperty(track, "x") || 0;
           const currentSlide = Math.round(Math.abs(currentX) / slideWidth);
-          const targetSlide = Math.max(
-            0,
-            Math.min(currentSlide + direction, imageCount - 1)
-          );
+          const targetSlide = Math.max(0, Math.min(currentSlide + direction, imageCount - 1));
           const targetX = -targetSlide * slideWidth;
 
           window.gsap.to(track, {
@@ -356,9 +347,7 @@ export class PresenteParaElaContent extends HTMLElement {
         // Inicializar progresso
         updateProgress();
 
-        console.log(
-          `✅ Carrossel ${index + 1} inicializado com ${imageCount} imagens`
-        );
+        console.log(`✅ Carrossel ${index + 1} inicializado com ${imageCount} imagens`);
       });
 
       console.log("✅ Product carousels inicializados!");
@@ -559,14 +548,14 @@ export class PresenteParaElaContent extends HTMLElement {
             (img, i) =>
               `<img src="${img}" alt="${product.name} - Vista ${
                 i + 1
-              }" class="product-showcase-image" />`
+              }" class="product-showcase-image" />`,
           )
           .join("\n                  ");
 
         const colorsHtml = product.colors
           .map(
             (color) =>
-              `<button class="color-dot color-dot--${color.name}" data-color="${color.name}" aria-label="${color.label}"></button>`
+              `<button class="color-dot color-dot--${color.name}" data-color="${color.name}" aria-label="${color.label}"></button>`,
           )
           .join("\n                  ");
 

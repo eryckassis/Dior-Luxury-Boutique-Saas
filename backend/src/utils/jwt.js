@@ -56,9 +56,7 @@ export class JwtUtil {
       });
     } catch (error) {
       if (error.name === "TokenExpiredError") {
-        throw new Error(
-          "Refresh token expirado. Por favor, faça login novamente.",
-        );
+        throw new Error("Refresh token expirado. Por favor, faça login novamente.");
       }
       if (error.name === "JsonWebTokenError") {
         throw new Error("Refresh token inválido.");

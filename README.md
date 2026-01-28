@@ -5,7 +5,7 @@
 
 Uma solução completa de e-commerce para produtos de luxo, desenvolvida com tecnologias modernas e foco em experiência do usuário.
 
- • [Documentação da API](#documentação-da-api) • [Guia de Instalação](#instalação)
+• [Documentação da API](#documentação-da-api) • [Guia de Instalação](#instalação)
 
 ---
 
@@ -16,7 +16,6 @@ Uma solução completa de e-commerce para produtos de luxo, desenvolvida com tec
 <div align="center">
 
 ### Interface Principal
-
 
 <table>
   <tr>
@@ -29,7 +28,6 @@ Uma solução completa de e-commerce para produtos de luxo, desenvolvida com tec
 </table>
 
 ### Catálogo e Produtos
-
 
 <table>
   <tr>
@@ -64,8 +62,6 @@ Uma solução completa de e-commerce para produtos de luxo, desenvolvida com tec
 </table>
 
 ### Experiência de produto
-
-
 
 <table>
   <tr>
@@ -128,7 +124,7 @@ Uma solução completa de e-commerce para produtos de luxo, desenvolvida com tec
   </tr>
 </table>
 
-###  Dior Holiday
+### Dior Holiday
 
 <table>
   <tr>
@@ -157,7 +153,7 @@ Uma solução completa de e-commerce para produtos de luxo, desenvolvida com tec
   </tr>
 </table>
 
-###  Dior fragancias de verao
+### Dior fragancias de verao
 
 <table>
   <tr>
@@ -174,12 +170,7 @@ Uma solução completa de e-commerce para produtos de luxo, desenvolvida com tec
   </tr>
 </table>
 
-
 ### Características Visuais
-
-
-
-
 
 <table>
   <tr>
@@ -222,7 +213,7 @@ Uma solução completa de e-commerce para produtos de luxo, desenvolvida com tec
 
 ## Visão Geral
 
-O Dior Luxury Boutique SaaS é uma plataforma de e-commerce full stack especializada em produtos de luxo, oferecendo uma experiência de compra imersiva e segura.  O sistema integra frontend moderno com animações fluidas, backend robusto com autenticação JWT, e banco de dados PostgreSQL para garantir escalabilidade e confiabilidade. 
+O Dior Luxury Boutique SaaS é uma plataforma de e-commerce full stack especializada em produtos de luxo, oferecendo uma experiência de compra imersiva e segura. O sistema integra frontend moderno com animações fluidas, backend robusto com autenticação JWT, e banco de dados PostgreSQL para garantir escalabilidade e confiabilidade.
 
 ### Status do Projeto
 
@@ -254,8 +245,8 @@ Deploy:    ████████████████████  100% At
 
 | Tecnologia       | Versão | Finalidade                      |
 | ---------------- | ------ | ------------------------------- |
-| **Node. js**      | 18+    | Runtime JavaScript              |
-| **Express. js**   | 4.22.1 | Framework web RESTful           |
+| **Node. js**     | 18+    | Runtime JavaScript              |
+| **Express. js**  | 4.22.1 | Framework web RESTful           |
 | **Prisma ORM**   | 5.22.0 | Gerenciamento de banco de dados |
 | **PostgreSQL**   | 14+    | Banco de dados relacional       |
 | **Redis**        | 7+     | Cache e sessões                 |
@@ -364,7 +355,7 @@ Deploy:    ████████████████████  100% At
 <summary><strong>Validação de Dados</strong></summary>
 
 - Validação de email com regex
-- Requisitos de senha forte: 
+- Requisitos de senha forte:
   - Mínimo 8 caracteres
   - 1 letra maiúscula
   - 1 letra minúscula
@@ -485,9 +476,9 @@ Deploy:    ████████████████████  100% At
 
 ### 1. Autenticação Insegura
 
-**Problema**:  Sistemas tradicionais armazenam senhas em texto plano ou com hash fraco. 
+**Problema**: Sistemas tradicionais armazenam senhas em texto plano ou com hash fraco.
 
-**Solução**: 
+**Solução**:
 
 - Bcrypt com 12 salt rounds
 - JWT com refresh tokens
@@ -513,7 +504,7 @@ const accessToken = jwt.sign({ userId }, JWT_SECRET, { expiresIn: "15m" });
 
 ### 3. Gerenciamento de Estado
 
-**Problema**: Estado global complexo e difícil de manter. 
+**Problema**: Estado global complexo e difícil de manter.
 
 **Solução**:
 
@@ -524,9 +515,9 @@ const accessToken = jwt.sign({ userId }, JWT_SECRET, { expiresIn: "15m" });
 
 ### 4. Segurança de API
 
-**Problema**: APIs expostas a ataques DDoS e injeção. 
+**Problema**: APIs expostas a ataques DDoS e injeção.
 
-**Solução**: 
+**Solução**:
 
 - Rate limiting por IP
 - Validação com Joi schemas
@@ -537,7 +528,7 @@ const accessToken = jwt.sign({ userId }, JWT_SECRET, { expiresIn: "15m" });
 
 **Problema**: Performance degradada com aumento de dados.
 
-**Solução**: 
+**Solução**:
 
 - Prisma ORM com queries otimizadas
 - Índices no banco de dados
@@ -576,7 +567,7 @@ Authorization: Bearer {access_token}
 {
   "name": "João Silva",
   "email": "joao@example.com",
-  "password":  "Senha@123",
+  "password": "Senha@123",
   "confirmPassword": "Senha@123"
 }
 ```
@@ -586,8 +577,8 @@ Authorization: Bearer {access_token}
 ```json
 {
   "success": true,
-  "message":  "Usuário registrado com sucesso",
-  "data":  {
+  "message": "Usuário registrado com sucesso",
+  "data": {
     "user": {
       "id": "uuid-here",
       "name": "João Silva",
@@ -602,8 +593,8 @@ Authorization: Bearer {access_token}
 
 **Validações:**
 
-- Nome:  3-100 caracteres
-- Email:  formato válido e único
+- Nome: 3-100 caracteres
+- Email: formato válido e único
 - Senha: mínimo 8 caracteres, 1 maiúscula, 1 minúscula, 1 número, 1 especial
 - Rate Limit: 3 registros/hora por IP
 
@@ -631,7 +622,7 @@ Authorization: Bearer {access_token}
     "user": {
       "id": "uuid-here",
       "name": "João Silva",
-      "email":  "joao@example.com"
+      "email": "joao@example.com"
     },
     "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
     "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
@@ -664,8 +655,8 @@ Authorization: Bearer {access_token}
 {
   "success": true,
   "data": {
-    "accessToken":  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
-    "refreshToken":  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
   }
 }
 ```
@@ -757,7 +748,7 @@ Authorization: Bearer {access_token}
   "success": true,
   "message": "Pedido criado com sucesso",
   "data": {
-    "order":  {
+    "order": {
       "id": "uuid-here",
       "orderNumber": "DOR-2026-0001",
       "subtotal": 799.0,
@@ -826,7 +817,7 @@ Auth Login: 5 requisições por 15 minutos
 
 ### Schema do Banco de Dados (PostgreSQL)
 
-#### Tabela:  Users
+#### Tabela: Users
 
 ```sql
 CREATE TABLE users (
@@ -999,7 +990,7 @@ services:
 
   redis:
     image: redis:7-alpine
-    ports: 
+    ports:
       - "6379:6379"
 
   backend:
@@ -1088,7 +1079,7 @@ services:
 
 ### Auditoria de Segurança
 
-O projeto passa por auditorias regulares.  Consulte `AUDITORIA_TECNICA.md` para detalhes das vulnerabilidades corrigidas e melhorias implementadas.
+O projeto passa por auditorias regulares. Consulte `AUDITORIA_TECNICA.md` para detalhes das vulnerabilidades corrigidas e melhorias implementadas.
 
 ### OWASP Top 10 Compliance
 
@@ -1187,7 +1178,7 @@ Consulte `backend/POSTMAN_GUIDE.md` para instruções detalhadas.
 
 ## Contribuindo
 
-Contribuições são bem-vindas.  Por favor: 
+Contribuições são bem-vindas. Por favor:
 
 1. Fork o projeto
 2. Crie uma branch para sua feature (`git checkout -b feature/MinhaFeature`)

@@ -9,9 +9,7 @@ const supabaseServiceKey = config.supabase.serviceRoleKey;
 
 if (!supabaseUrl || !supabaseServiceKey) {
   console.error("❌ Supabase não configurado no backend!");
-  console.error(
-    "   Verifique SUPABASE_URL e SUPABASE_SERVICE_ROLE_KEY no .env",
-  );
+  console.error("   Verifique SUPABASE_URL e SUPABASE_SERVICE_ROLE_KEY no .env");
 }
 
 /**

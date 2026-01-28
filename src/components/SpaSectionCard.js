@@ -89,16 +89,10 @@ export class SpaSectionCard extends HTMLElement {
               scaleX: 0,
               duration: 1.2,
               ease: "power3.inOut",
-              transformOrigin:
-                this.imagePosition === "left" ? "right center" : "left center",
-            }
+              transformOrigin: this.imagePosition === "left" ? "right center" : "left center",
+            },
           )
-          .fromTo(
-            image,
-            { scale: 1.3 },
-            { scale: 1, duration: 1.4, ease: "power2.out" },
-            "-=0.8"
-          );
+          .fromTo(image, { scale: 1.3 }, { scale: 1, duration: 1.4, ease: "power2.out" }, "-=0.8");
 
         this.scrollTriggerInstance = revealTl.scrollTrigger;
       }
@@ -118,7 +112,7 @@ export class SpaSectionCard extends HTMLElement {
               start: "top 85%",
               toggleActions: "play none none reverse",
             },
-          }
+          },
         );
       }
 
@@ -131,15 +125,14 @@ export class SpaSectionCard extends HTMLElement {
           const ySet = window.gsap.quickSetter(flair, "yPercent");
 
           const getXY = (e) => {
-            const { left, top, width, height } =
-              filledButton.getBoundingClientRect();
+            const { left, top, width, height } = filledButton.getBoundingClientRect();
             const xTransformer = window.gsap.utils.pipe(
               window.gsap.utils.mapRange(0, width, 0, 100),
-              window.gsap.utils.clamp(0, 100)
+              window.gsap.utils.clamp(0, 100),
             );
             const yTransformer = window.gsap.utils.pipe(
               window.gsap.utils.mapRange(0, height, 0, 100),
-              window.gsap.utils.clamp(0, 100)
+              window.gsap.utils.clamp(0, 100),
             );
             return {
               x: xTransformer(e.clientX - left),
@@ -188,18 +181,14 @@ export class SpaSectionCard extends HTMLElement {
     const isLeft = this.imagePosition === "left";
 
     this.innerHTML = `
-      <section class="spa-section-card ${
-        isLeft ? "image-left" : "image-right"
-      }">
+      <section class="spa-section-card ${isLeft ? "image-left" : "image-right"}">
         <div class="spa-card-container">
           ${
             isLeft
               ? `
             <div class="spa-card-image-wrapper">
               <div class="spa-card-overlay"></div>
-              <img src="${this.image}" alt="${
-                  this.title
-                }" class="spa-card-image" />
+              <img src="${this.image}" alt="${this.title}" class="spa-card-image" />
             </div>
             <div class="spa-card-content">
               <h2 class="spa-card-title">${this.title}</h2>
@@ -215,9 +204,7 @@ export class SpaSectionCard extends HTMLElement {
             </div>
             <div class="spa-card-image-wrapper">
               <div class="spa-card-overlay"></div>
-              <img src="${this.image}" alt="${
-                  this.title
-                }" class="spa-card-image" />
+              <img src="${this.image}" alt="${this.title}" class="spa-card-image" />
             </div>
           `
           }

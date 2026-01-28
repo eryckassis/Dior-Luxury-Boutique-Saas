@@ -118,16 +118,14 @@ export class BoutiquesPage extends HTMLElement {
                     <span class="filter-icon">${filter.icon}</span>
                     <span>${filter.name}</span>
                   </button>
-                `
+                `,
                 ).join("")}
               </div>
             </div>
             
             <!-- Contador de Endereços -->
             <div class="boutiques-count">
-              <span id="boutiques-count-number">${
-                DIOR_BOUTIQUES.length
-              }</span> ENDEREÇOS PRÓXIMOS
+              <span id="boutiques-count-number">${DIOR_BOUTIQUES.length}</span> ENDEREÇOS PRÓXIMOS
             </div>
             
             <!-- Lista de Boutiques -->
@@ -173,9 +171,7 @@ export class BoutiquesPage extends HTMLElement {
           </div>
           <div class="boutique-status">
             <span class="status-dot"></span>
-            <span class="status-text">Aberto agora - Fecha às ${
-              boutique.hours.close
-            }</span>
+            <span class="status-text">Aberto agora - Fecha às ${boutique.hours.close}</span>
           </div>
         </div>
         
@@ -193,7 +189,7 @@ export class BoutiquesPage extends HTMLElement {
                 ? '<span class="category-separator">·</span>'
                 : ""
             }
-          `
+          `,
             )
             .join("")}
           ${
@@ -203,7 +199,7 @@ export class BoutiquesPage extends HTMLElement {
           }
         </div>
       </article>
-    `
+    `,
       )
       .join("");
   }
@@ -459,7 +455,7 @@ export class BoutiquesPage extends HTMLElement {
           b.name.toLowerCase().includes(this.searchQuery) ||
           b.address.toLowerCase().includes(this.searchQuery) ||
           b.city.toLowerCase().includes(this.searchQuery) ||
-          b.cep.includes(this.searchQuery)
+          b.cep.includes(this.searchQuery),
       );
     }
 
@@ -545,7 +541,7 @@ export class BoutiquesPage extends HTMLElement {
       (error) => {
         console.error("Erro ao obter localização:", error);
         alert("Não foi possível obter sua localização.");
-      }
+      },
     );
   }
 

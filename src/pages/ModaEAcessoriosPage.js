@@ -118,9 +118,7 @@ export class ModaEAcessoriosPage extends HTMLElement {
     requestAnimationFrame(() => {
       if (!window.gsap) return;
 
-      const buttons = this.querySelectorAll(
-        ".moda-discover-button, .moda-discover-button-second",
-      );
+      const buttons = this.querySelectorAll(".moda-discover-button, .moda-discover-button-second");
 
       buttons.forEach((button) => {
         // Mouseenter - linha diminui para 0
@@ -233,10 +231,7 @@ export class ModaEAcessoriosPage extends HTMLElement {
     requestAnimationFrame(() => {
       if (!window.gsap) return;
 
-      const buttons = this.querySelectorAll(
-        ".moda-card-button",
-        "moda-card-button-second",
-      );
+      const buttons = this.querySelectorAll(".moda-card-button", "moda-card-button-second");
 
       buttons.forEach((button) => {
         // Mouseenter - linha diminui para 0
@@ -372,8 +367,7 @@ export class ModaEAcessoriosPage extends HTMLElement {
         const contentWidth = lastCard.right - firstCard.left;
 
         // Adiciona padding extra para ver o último card completamente
-        const padding =
-          parseFloat(getComputedStyle(container).paddingLeft) || 0;
+        const padding = parseFloat(getComputedStyle(container).paddingLeft) || 0;
         const totalWidth = contentWidth + padding;
 
         // MaxDrag negativo para mover para esquerda

@@ -297,10 +297,7 @@ class CartService {
     if (this.userId) {
       // Salva no Supabase
       try {
-        const { error } = await supabase
-          .from("carts")
-          .update({ items })
-          .eq("user_id", this.userId);
+        const { error } = await supabase.from("carts").update({ items }).eq("user_id", this.userId);
 
         if (error) throw error;
       } catch (error) {
@@ -370,15 +367,10 @@ class CartService {
       const mergedItems = [...supabaseItems];
 
       for (const localItem of localItems) {
-        const existingItem = mergedItems.find(
-          (item) => item.id === localItem.id,
-        );
+        const existingItem = mergedItems.find((item) => item.id === localItem.id);
         if (existingItem) {
           // Se já existe, soma as quantidades (máximo 10)
-          existingItem.quantity = Math.min(
-            existingItem.quantity + localItem.quantity,
-            10,
-          );
+          existingItem.quantity = Math.min(existingItem.quantity + localItem.quantity, 10);
         } else {
           // Se não existe, adiciona
           mergedItems.push(localItem);
@@ -386,9 +378,7 @@ class CartService {
       }
 
       // Atualiza no Supabase
-      await supabase
-        .from("carts")
-        .upsert({ user_id: this.userId, items: mergedItems });
+      await supabase.from("carts").upsert({ user_id: this.userId, items: mergedItems });
 
       // Limpa localStorage após migração
       this.clearLocalItems();
@@ -408,10 +398,7 @@ class CartService {
    * @returns {number}
    */
   getTotal() {
-    return this.items.reduce(
-      (total, item) => total + item.price * item.quantity,
-      0,
-    );
+    return this.items.reduce((total, item) => total + item.price * item.quantity, 0);
   }
 
   /**

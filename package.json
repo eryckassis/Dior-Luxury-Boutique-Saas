@@ -6,9 +6,30 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "format:staged": "prettier --write",
+    "prepare": "husky",
+    "format:css": "prettier --write \"src/styles/**/*.css\"",
+    "lint:css": "prettier --check \"src/styles/**/*.css\"",
+    "remove-comments": "node scripts/remove-comments.js",
+    "remove-comments:safe": "node scripts/remove-comments.js && npm run format",
+    "backup-and-clean": "git add -A && git commit -m \"Backup before removing comments\" && npm run remove-comments:safe"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,html,css,json,md}": [
+      "prettier --write"
+    ]
   },
   "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
+    "postcss": "^8.4.35",
+    "postcss-strip-inline-comments": "^0.1.5",
+    "prettier": "^3.8.1",
+    "prettier-plugin-css-order": "^2.2.0",
+    "strip-json-comments": "^5.0.1",
     "vite": "^7.1.7"
   },
   "dependencies": {

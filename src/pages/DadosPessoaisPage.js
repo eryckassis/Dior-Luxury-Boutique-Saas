@@ -265,19 +265,13 @@ export class DadosPessoaisPage extends HTMLElement {
         <div class="dados-form-row">
           <div class="dados-field">
             <span class="dados-field-label">CPF</span>
-            <span class="dados-field-value ${
-              !this.userData?.cpf ? "empty" : ""
-            }">${
-              this.userData?.cpf
-                ? userService.formatCPF(this.userData.cpf)
-                : "Não informado"
+            <span class="dados-field-value ${!this.userData?.cpf ? "empty" : ""}">${
+              this.userData?.cpf ? userService.formatCPF(this.userData.cpf) : "Não informado"
             }</span>
           </div>
           <div class="dados-field">
             <span class="dados-field-label">Gênero</span>
-            <span class="dados-field-value ${
-              !this.userData?.gender ? "empty" : ""
-            }">${
+            <span class="dados-field-value ${!this.userData?.gender ? "empty" : ""}">${
               this.getGenderLabel(this.userData?.gender) || "Não informado"
             }</span>
           </div>
@@ -286,9 +280,7 @@ export class DadosPessoaisPage extends HTMLElement {
         <div class="dados-form-row">
           <div class="dados-field">
             <span class="dados-field-label">Data de nascimento</span>
-            <span class="dados-field-value ${
-              !this.userData?.birthDate ? "empty" : ""
-            }">${
+            <span class="dados-field-value ${!this.userData?.birthDate ? "empty" : ""}">${
               this.userData?.birthDate
                 ? userService.formatDate(this.userData.birthDate)
                 : "Não informado"
@@ -296,12 +288,8 @@ export class DadosPessoaisPage extends HTMLElement {
           </div>
           <div class="dados-field">
             <span class="dados-field-label">Telefone</span>
-            <span class="dados-field-value ${
-              !this.userData?.phone ? "empty" : ""
-            }">${
-              this.userData?.phone
-                ? userService.formatPhone(this.userData.phone)
-                : "Não informado"
+            <span class="dados-field-value ${!this.userData?.phone ? "empty" : ""}">${
+              this.userData?.phone ? userService.formatPhone(this.userData.phone) : "Não informado"
             }</span>
           </div>
         </div>
@@ -396,9 +384,7 @@ export class DadosPessoaisPage extends HTMLElement {
                 this.userData?.gender === "outro" ? "selected" : ""
               }>Outro</option>
               <option value="prefiro_nao_informar" ${
-                this.userData?.gender === "prefiro_nao_informar"
-                  ? "selected"
-                  : ""
+                this.userData?.gender === "prefiro_nao_informar" ? "selected" : ""
               }>Prefiro não informar</option>
             </select>
           </div>
@@ -434,9 +420,7 @@ export class DadosPessoaisPage extends HTMLElement {
     const content = this.querySelector(".dados-content");
     if (!content) return;
 
-    content.innerHTML = this.isEditMode
-      ? this.renderEditMode()
-      : this.renderViewMode();
+    content.innerHTML = this.isEditMode ? this.renderEditMode() : this.renderViewMode();
 
     this.initFormListeners();
 
